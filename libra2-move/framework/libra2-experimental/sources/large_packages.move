@@ -12,9 +12,9 @@
 /// SDK: [`aptos-python-sdk`](https://github.com/aptos-labs/aptos-python-sdk/blob/main/libra2_sdk/package_publisher.py).
 ///
 /// Libra2 CLI supports this as well with `--chunked-publish` flag:
-/// - `aptos move publish [OPTIONS] --chunked-publish`
-/// - `aptos move create-object-and-publish-package [OPTIONS] --address-name <ADDRESS_NAME> --chunked-publish`
-/// - `aptos move upgrade-object-package [OPTIONS] --address-name <ADDRESS_NAME> --chunked-publish`
+/// - `libra2 move publish [OPTIONS] --chunked-publish`
+/// - `libra2 move create-object-and-publish-package [OPTIONS] --address-name <ADDRESS_NAME> --chunked-publish`
+/// - `libra2 move upgrade-object-package [OPTIONS] --address-name <ADDRESS_NAME> --chunked-publish`
 ///
 /// # Usage
 ///

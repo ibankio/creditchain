@@ -5,20 +5,20 @@ documentation/tests.
 
 ```
 [dependencies]
-Pack2 = { aptos = "http://localhost:8080", address = "default" }
+Pack2 = { libra2= "http://localhost:8080", address = "default" }
 ```
 
 To see it working:
 
 ```shell
 # Start a node with an account
-aptos node run-local-testnet &
-aptos account create --account default --use-faucet 
+libra2 node run-local-testnet &
+libra2 account create --account default --use-faucet 
 # Compile and publish pack2
 cd pack2
-aptos move compile --named-addresses project=default     
-aptos move publish --named-addresses project=default
+libra2 move compile --named-addresses project=default     
+libra2 move publish --named-addresses project=default
 # Compile pack1 agains the published pack2
 cd ../pack1
-aptos move compile --named-addresses project=default     
+libra2 move compile --named-addresses project=default     
 ```

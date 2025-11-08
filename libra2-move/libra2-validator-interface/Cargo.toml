@@ -1,6 +1,6 @@
 [package]
 name = "libra2-validator-interface"
-description = "Defines interfaces between the aptos nodes and local move infrastructure"
+description = "Defines interfaces between the libra2 nodes and local move infrastructure"
 version = "0.1.1"
 
 # Workspace inherited keys

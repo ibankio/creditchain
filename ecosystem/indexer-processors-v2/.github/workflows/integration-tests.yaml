@@ -33,8 +33,8 @@ jobs:
       - name: Show Cargo.toml Before Update
         run: cat Cargo.toml
 
-      # Update aptos-system-utils dependency using toml-cli
-      - name: Update aptos-system-utils dependency
+      #update libra2-system-utils dependency using toml-cli
+      - name:update libra2-system-utils dependency
         if: ${{ github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch' }}
         run: |
           COMMIT_HASH=${{ github.event.client_payload.commit_hash || github.event.inputs.commit_hash }}

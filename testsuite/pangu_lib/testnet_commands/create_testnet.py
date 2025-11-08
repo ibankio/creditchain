@@ -61,7 +61,7 @@ class CreateArgs:
         str
     ]  # workspace to create the validator keys & genesis artifacts. Will use a tempfile if not provided
     framework_path: str  # path to the compiled move framework #TODO make this more customizable
-    libra2_cli_path: str  # path to aptos cli
+    libra2_cli_path: str  # path to libra2 CLI
     dry_run: bool  # whether it is a dry run or not
     name: str  # the namespace to create the testnet
 

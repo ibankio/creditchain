@@ -8,7 +8,7 @@ spec libra2_framework::consensus_config {
     /// Enforcement: Formally verified via [high-level-req-1](initialize).
     ///
     /// No.: 2
-    /// Requirement: Only aptos framework account is allowed to update the consensus configuration.
+    /// Requirement: Only libra2 framework account is allowed to update the consensus configuration.
     /// Criticality: Medium
     /// Implementation: The consensus_config::set function ensures that the signer is libra2_framework.
     /// Enforcement: Formally verified via [high-level-req-2](set).

@@ -134,8 +134,8 @@ Publishes the Version config.
     <a href="system_addresses.md#0x1_system_addresses_assert_libra2_framework">system_addresses::assert_libra2_framework</a>(libra2_framework);
 
     <b>move_to</b>(libra2_framework, <a href="version.md#0x1_version_Version">Version</a> { major: initial_version });
-    // Give aptos framework <a href="account.md#0x1_account">account</a> <a href="../../libra2-stdlib/doc/capability.md#0x1_capability">capability</a> <b>to</b> call set <a href="version.md#0x1_version">version</a>. This allows on chain governance <b>to</b> do it through
-    // control of the aptos framework <a href="account.md#0x1_account">account</a>.
+    // Give libra2 framework <a href="account.md#0x1_account">account</a> <a href="../../libra2-stdlib/doc/capability.md#0x1_capability">capability</a> <b>to</b> call set <a href="version.md#0x1_version">version</a>. This allows on chain governance <b>to</b> do it through
+    // control of the libra2 framework <a href="account.md#0x1_account">account</a>.
     <b>move_to</b>(libra2_framework, <a href="version.md#0x1_version_SetVersionCapability">SetVersionCapability</a> {});
 }
 </code></pre>
@@ -292,9 +292,9 @@ to update the version.
 
 <tr>
 <td>1</td>
-<td>During genesis, the Version resource should be initialized with the initial version and stored along with its capability under the aptos framework account.</td>
+<td>During genesis, the Version resource should be initialized with the initial version and stored along with its capability under the libra2 framework account.</td>
 <td>Medium</td>
-<td>The initialize function ensures that the signer is the aptos framework account and stores the Version and SetVersionCapability resources in it.</td>
+<td>The initialize function ensures that the signer is the libra2 framework account and stores the Version and SetVersionCapability resources in it.</td>
 <td>Formally verified via <a href="#high-level-req-1">initialize</a>.</td>
 </tr>
 

@@ -1078,7 +1078,7 @@ impl GenerateExecutionHash {
                     .canonicalize()
                     .map_err(|err| {
                         CliError::IO(
-                            format!("Failed to canonicalize aptos framework path: {:?}", path),
+                            format!("Failed to canonicalize libra2 framework path: {:?}", path),
                             err,
                         )
                     })?

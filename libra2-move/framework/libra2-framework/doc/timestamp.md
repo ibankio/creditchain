@@ -94,7 +94,7 @@ Conversion factor between seconds and microseconds
 
 ## Function `set_time_has_started`
 
-Marks that time has started. This can only be called from genesis and with the aptos framework account.
+Marks that time has started. This can only be called from genesis and with the libra2 framework account.
 
 
 <pre><code><b>public</b>(<b>friend</b>) <b>fun</b> <a href="timestamp.md#0x1_timestamp_set_time_has_started">set_time_has_started</a>(libra2_framework: &<a href="../../libra2-stdlib/../move-stdlib/doc/signer.md#0x1_signer">signer</a>)

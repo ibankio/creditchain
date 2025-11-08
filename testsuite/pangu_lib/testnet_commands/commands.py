@@ -42,7 +42,7 @@ import pangu_lib.util as util
 @click.option(
     "--libra2-cli-path",
     default="aptos",
-    help="Pass the path to the aptos CLI if it is not in your $PATH var.",
+    help="Pass the path to the libra2 CLI if it is not in your $PATH var.",
 )
 @click.option(
     "--dry-run",
@@ -71,7 +71,7 @@ def create(
         layout_path (str): path to the layout file
         workspace (str): path to the folder you would like the genesis files to be generated (default is a temp folder).
         framework_path (str): path to the compiled move framework
-        libra2_cli_path (str): path to aptos cli
+        libra2_cli_path (str): path to libra2 CLI
         dry_run (bool): whether to deploy to kubernetes, or save the deployment instructions to the workspace
         namespace (str): the namespace to create the testnet
     """

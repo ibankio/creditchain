@@ -2801,7 +2801,7 @@ impl AccountOrderedTransactionsWithProof {
     }
 }
 
-/// `Transaction` will be the transaction type used internally in the aptos node to represent the
+/// `Transaction` will be the transaction type used internally in the libra2 node to represent the
 /// transaction to be processed and persisted.
 ///
 /// We suppress the clippy warning here as we would expect most of the transaction to be user

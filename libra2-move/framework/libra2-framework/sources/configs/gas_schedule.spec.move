@@ -11,7 +11,7 @@ spec libra2_framework::gas_schedule {
     /// Requirement: Only the Libra2 framework account should be allowed to update the gas schedule resource.
     /// Criticality: Critical
     /// Implementation: The gas_schedule::set_gas_schedule function calls the assert_libra2_framework function to ensure
-    /// that the signer is the aptos framework account.
+    /// that the signer is the libra2 framework account.
     /// Enforcement: Formally verified via [high-level-req-2](set_gas_schedule).
     ///
     /// No.: 3

@@ -26,7 +26,7 @@ spec libra2_framework::genesis {
     /// the mint and burn capabilities for the LBT token.
     /// Criticality: Critical
     /// Implementation: Both mint and burn capabilities are wrapped inside the stake::Libra2CoinCapabilities and
-    /// transaction_fee::Libra2CoinCapabilities resources which are stored under the aptos framework account.
+    /// transaction_fee::Libra2CoinCapabilities resources which are stored under the libra2 framework account.
     /// Enforcement: Formally verified via [high-level-req-3](initialize_libra2_coin).
     ///
     /// No.: 4

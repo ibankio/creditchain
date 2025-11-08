@@ -64,7 +64,7 @@ module libra2_framework::genesis {
         join_during_genesis: bool,
     }
 
-    /// Genesis step 1: Initialize aptos framework account and core modules on chain.
+    /// Genesis step 1: Initialize libra2 framework account and core modules on chain.
     fun initialize(
         gas_schedule: vector<u8>,
         chain_id: u8,
@@ -80,11 +80,11 @@ module libra2_framework::genesis {
         rewards_rate_denominator: u64,
         voting_power_increase_limit: u64,
     ) {
-        // Initialize the aptos framework account. This is the account where system resources and modules will be
+        // Initialize the libra2 framework account. This is the account where system resources and modules will be
         // deployed to. This will be entirely managed by on-chain governance and no entities have the key or privileges
         // to use this account.
         let (libra2_framework_account, libra2_framework_signer_cap) = account::create_framework_reserved_account(@libra2_framework);
-        // Initialize account configs on aptos framework account.
+        // Initialize account configs on libra2 framework account.
         account::initialize(&libra2_framework_account);
 
         transaction_validation::initialize(
@@ -304,7 +304,7 @@ module libra2_framework::genesis {
             create_initialize_validator(libra2_framework, validator, use_staking_contract);
         });
 
-        // Destroy the aptos framework account's ability to mint coins now that we're done with setting up the initial
+        // Destroy the libra2 framework account's ability to mint coins now that we're done with setting up the initial
         // validators.
         libra2_coin::destroy_mint_cap(libra2_framework);
 

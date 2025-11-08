@@ -29,7 +29,7 @@ Follow our [contributing guidelines](CONTRIBUTING.md) and basic coding standards
 
 The documents above were created by the Move documentation generator for Libra2. It is available as part of the Libra2 CLI. To see its options, run:
 ```shell
-aptos move document --help
+libra2 move document --help
 ```
 
 The documentation process is also integrated into the framework building process and will be automatically triggered like other derived artifacts, via `cached-packages` or explicit release building.

@@ -24,28 +24,28 @@ All notable changes to the Libra2 CLI will be captured in this file. This projec
 - UTF-8 characters are now allowed in Move source code comments (and thus error codes).
 - Additional compiler warnings on inline functions based on their visibility.
 - Various compiler bug fixes.
-- Add flag `--file-path <FILE_PATH>...` to `aptos move fmt`, which allows to specify individual files to format.
-- Fixed bug where `aptos move fmt` would format current directory if invalid `--package-path` was provided.
+- Add flag `--file-path <FILE_PATH>...` to `libra2 move fmt`, which allows to specify individual files to format.
+- Fixed bug where `libra2 move fmt` would format current directory if invalid `--package-path` was provided.
 
 ## [7.3.0]
 
 - Update boogie from 3.2.4 to 3.5.1.
-- Change behavior of `aptos init` to first look and see if the account has an LBT balance rather than checking if the account exists
+- Change behavior of `libra2 init` to first look and see if the account has an LBT balance rather than checking if the account exists
 
 ## [7.2.0]
 
 - Add ability to retrieve fungible asset balances
-- Add `aptos key extract-public-key` which generates a public key or a proof of possession for the given key.
+- Add `libra2 key extract-public-key` which generates a public key or a proof of possession for the given key.
 
 ## [7.1.0]
 - Add CLI outputs and on-disk storage to be stored in AIP-80 format.  Will allow for legacy formats to be taken in as well
 
 ## [7.0.0]
 - Compiler v1 is now deprecated. It is now removed from the Libra2 CLI.
-- Added a new option `aptos move compile --fail-on-warning` which fails the compilation if any warnings are found.
+- Added a new option `libra2 move compile --fail-on-warning` which fails the compilation if any warnings are found.
 - We now default to running extended checks when compiling test code (this was previously only done with the option `--check-test-code`, but this is no longer available). However, these checks can be now be skipped with `--skip-checks-on-test-code`.
 - Add network to show profiles.
-- The new subcommand `aptos update move-mutation-test` will install/update the external binary `move-mutation-test`, which performs mutation testing on a Move project to find blind spots in Move unit tests.
+- The new subcommand `libra2 update move-mutation-test` will install/update the external binary `move-mutation-test`, which performs mutation testing on a Move project to find blind spots in Move unit tests.
 - Add beta simulate command to simulate any transaction from anyone
 
 ## [6.2.0]
@@ -53,7 +53,7 @@ All notable changes to the Libra2 CLI will be captured in this file. This projec
 - Remove support for OpenSSL 1.x.x and Ubuntu 20.04, add warning appropriately
 
 ## [6.1.1]
-- Added a new feature to `aptos workspace run`: The workspace server now listens for a "stop" command from
+- Added a new feature to `libra2 workspace run`: The workspace server now listens for a "stop" command from
 stdin, which triggers a graceful shutdown when received.
 
 ## [6.1.0]
@@ -65,7 +65,7 @@ stdin, which triggers a graceful shutdown when received.
 - Update the processors used by localnet to 1.26.
 
 ## [6.0.2] - 2025/01/24
-- Fix `aptos workspace run` so it does not panic when writing to closed stdout/stderr, allowing it to finish its graceful shutdown sequence when used as a child process.
+- Fix `libra2 workspace run` so it does not panic when writing to closed stdout/stderr, allowing it to finish its graceful shutdown sequence when used as a child process.
 
 ## [6.0.1] - 2025/01/17
 - Update Hasura metadata to include `entry_function_contract_address`, `entry_function_module_name`, and `entry_function_function_name` in `user_transactions` table.
@@ -73,9 +73,9 @@ stdin, which triggers a graceful shutdown when received.
 ## [6.0.0] - 2025/01/14
 - Set Compiler v2 as the default compiler and Move 2 as the default language version.
 - Add new `--move-1` flag to use Compiler v1 and Move 1.
-- Add flag `--benchmark` to `aptos move prove`, which allows to benchmark verification times of individual functions in a package.
-- Add flag `--only <name>` to `aptos move prove`, which allows to scope verification to a function.
-- Fix `aptos init` to show the explorer link for accounts when account is already created on chain instead of prompting to fund the account.
+- Add flag `--benchmark` to `libra2 move prove`, which allows to benchmark verification times of individual functions in a package.
+- Add flag `--only <name>` to `libra2 move prove`, which allows to scope verification to a function.
+- Fix `libra2 init` to show the explorer link for accounts when account is already created on chain instead of prompting to fund the account.
 - Set Compiler v2 as the default compiler and Move 2 as the default language version.
 - Add new `--move-1` flag to use Compiler v1 and Move 1.
 - Upgrade indexer processors for localnet from 51a34901b40d7f75767ac907b4d2478104d6a515 to 3064a075e1abc06c60363f3f2551cc41f5c091de. Upgrade Hasura metadata accordingly.
@@ -85,25 +85,25 @@ stdin, which triggers a graceful shutdown when received.
 - Downgrade bytecode version to v6 before calling the Revela decompiler, if possible, i.e. no enum types are used. This allows to continue to use Revela until the new decompiler is ready.
 
 ## [5.0.0] - 2024/12/11
-- [**Breaking Change**] `aptos init` and `aptos account fund-with-faucet` no longer work directly with testnet, you must now use the minting page at the [Libra2 dev docs](https://aptos.dev/network/faucet).
+- [**Breaking Change**] `libra2 init` and `libra2 account fund-with-faucet` no longer work directly with testnet, you must now use the minting page at the [Libra2 dev docs](https://aptos.dev/network/faucet).
 ## [4.7.0] - 2024/12/10
 - [`Fix`] CLI config should not always require a private key field to be present.
 
 ## [4.6.0] - 2024/11/29
-- Add `--node-api-key` flag to `aptos move replay` to allow for querying the fullnode with an API key.
+- Add `--node-api-key` flag to `libra2 move replay` to allow for querying the fullnode with an API key.
 - Add `--chunk-size` flag to allow configuring chunk size for chunked publish mode.
 - Lower the default chunk size for chunked publish mode (`CHUNK_SIZE_IN_BYTES`) from 60,000 to 55,000.
 
 ## [4.5.0] - 2024/11/15
 - Determine network from URL to make explorer links better for legacy users
 - Add support for AIP-80 compliant strings when importing using the CLI arguments or manual input.
-- Add option `--print-metadata-only` to `aptos move decompile` and `aptos move disassemble` to print out the metadata attached to the bytecode.
+- Add option `--print-metadata-only` to `libra2 move decompile` and `libra2 move disassemble` to print out the metadata attached to the bytecode.
 - Add `--existing-hasura-url` flag to localnet to tell it to use an existing Hasura instance instead of run Hasura itself. See https://github.com/libra2org/libra2-core/pull/15313.
 - Add `--skip-metadata-apply` flag to localnet, in which case we won't try to apply the Hasura metadata.
 - Upgrade Hasura image we use from 2.40.2 to 2.44.0.
 
 ## [4.4.0] - 2024/11/06
-- Fix typos in `aptos move compile` help text.
+- Fix typos in `libra2 move compile` help text.
 - Update the default version of `movefmt` to be installed from 1.0.5 to 1.0.6
 - Add `--host-postgres-host` flag: https://github.com/libra2org/libra2-core/pull/15216.
 
@@ -120,11 +120,11 @@ stdin, which triggers a graceful shutdown when received.
 ## [4.2.4] - 2024/10/21
 - Releasing Move 2.1, which adds compound assignments (`x += 1`) and loop labels to the language. See [Move 2 Release Notes](https://aptos.dev/en/build/smart-contracts/book/move-2).
 - multiple bug fixes in the Move 2 compilation chain.
-- `aptos move fmt` formats move files inside the `tests` and `examples` directory of a package.
-- Added `aptos update prover-dependencies`, which installs the dependency of Move prover, boogie, z3 and cvc5.
+- `libra2 move fmt` formats move files inside the `tests` and `examples` directory of a package.
+- Added `libra2 update prover-dependencies`, which installs the dependency of Move prover, boogie, z3 and cvc5.
 - Update the default version of `movefmt` to be installed from 1.0.4 to 1.0.5
 - Update the local-testnet logs to use `println` for regular output and reserve `eprintln` for errors.
-- Set compiler V2 as default when using `aptos move prove`.
+- Set compiler V2 as default when using `libra2 move prove`.
 
 ## [4.2.3] - 2024/09/20
 - Fix the broken indexer in localnet in 4.2.2, which migrates table info from sycn to async ways.
@@ -142,10 +142,10 @@ stdin, which triggers a graceful shutdown when received.
 ## [4.1.0] - 2024/08/30
 - Marks Move 2 and compiler v2 as stable.
 - Adds new `--move-2` flag to work with Move 2 without need for multiple other flags.
-- Adds `aptos move lint` to produce lint warnings for the current package. Only a few lint rules are implemented for now,
+- Adds `libra2 move lint` to produce lint warnings for the current package. Only a few lint rules are implemented for now,
   but more are coming.
-- Adds `aptos move fmt`, which runs the Move formatter, `movefmt`, on the current package. Also adds
-  `aptos update movefmt`. This installs / updates the `movefmt` binary.
+- Adds `libra2 move fmt`, which runs the Move formatter, `movefmt`, on the current package. Also adds
+  `libra2 update movefmt`. This installs / updates the `movefmt` binary.
 - Adds safe methods to delete a profile, to rename a profile, and to output the private key of a profile.
 
 ## [4.0.0] - 2024/08/13
@@ -194,14 +194,14 @@ stdin, which triggers a graceful shutdown when received.
 - Increased `max_connections` for postgres container created as part of localnet to address occasional startup failures due to overloaded DB.
 
 ## [3.0.1] - 2024/03/05
-- Fix bug in `aptos update revela` if default install directory doesn't exist.
+- Fix bug in `libra2 update revela` if default install directory doesn't exist.
 
 ## [3.0.0] - 2024/03/05
-- **Breaking Change**: `aptos update` is now `aptos update aptos`.
-- Added `aptos update revela`. This installs / updates the `revela` binary, which is needed for the new `aptos move decompile` subcommand.
-- Extended `aptos move download` with an option `--bytecode` to also download the bytecode of a module
-- Integrated the Revela decompiler which is now available via `aptos move decompile`
-- Extended `aptos move disassemble` and the new `aptos move decompile` to also work on entire packages instead of only single files
+- **Breaking Change**: `libra2 update` is now `libra2 update libra2`.
+- Added `libra2 update revela`. This installs / updates the `revela` binary, which is needed for the new `libra2 move decompile` subcommand.
+- Extended `libra2 move download` with an option `--bytecode` to also download the bytecode of a module
+- Integrated the Revela decompiler which is now available via `libra2 move decompile`
+- Extended `libra2 move disassemble` and the new `libra2 move decompile` to also work on entire packages instead of only single files
 
 ## [2.5.0] - 2024/02/27
 - Updated CLI source compilation to use rust toolchain version 1.75.0 (from 1.74.1).
@@ -243,33 +243,33 @@ stdin, which triggers a graceful shutdown when received.
 
 ## [2.2.1] - 2023/10/13
 ### Fixed
-- Fixed postgres data persistence between restarts when using `aptos node run-local-testnet --with-indexer-api`.
+- Fixed postgres data persistence between restarts when using `libra2 node run-local-testnet --with-indexer-api`.
 
 ## [2.2.0] - 2023/10/11
 ### Added
-- Added `--with-indexer-api` to `aptos node run-local-testnet`. With this flag you can run a full processor + indexer API stack as part of your localnet. You must have Docker installed to use this feature. For more information, see https://docs.libra2.org/nodes/local-testnet/local-testnet-index.
+- Added `--with-indexer-api` to `libra2 node run-local-testnet`. With this flag you can run a full processor + indexer API stack as part of your localnet. You must have Docker installed to use this feature. For more information, see https://docs.libra2.org/nodes/local-testnet/local-testnet-index.
 ### Updated
 - Updated CLI source compilation to use rust toolchain version 1.72.1 (from 1.71.1).
 
 ## [2.1.1] - 2023/09/27
 ### Added
-- Added an option `--print-metadata` to the command `aptos move download` to print out the metadata of the package to be downloaded.
-  - Example: `aptos move download  --account 0x1 --package Libra2Framework --url https://mainnet.libra2.org/v1 --print-metadata`
+- Added an option `--print-metadata` to the command `libra2 move download` to print out the metadata of the package to be downloaded.
+  - Example: `libra2 move download  --account 0x1 --package Libra2Framework --url https://mainnet.libra2.org/v1 --print-metadata`
 ### Updated
-- The `--with-faucet` flag has been removed from `aptos node run-local-testnet`, we now run a faucet by default. To disable the faucet use the `--no-faucet` flag.
-- **Breaking change**: When using `aptos node run-local-testnet` we now expose a transaction stream. Learn more about the transaction stream service here: https://aptos.dev/indexer/txn-stream/. Opt out of this with `--no-txn-stream`. This is marked as a breaking change since the CLI now uses a port (50051 by default) that it didn't used to. If you need this port, you can tell the CLI to use a different port with `--txn-stream-port`.
+- The `--with-faucet` flag has been removed from `libra2 node run-local-testnet`, we now run a faucet by default. To disable the faucet use the `--no-faucet` flag.
+- **Breaking change**: When using `libra2 node run-local-testnet` we now expose a transaction stream. Learn more about the transaction stream service here: https://aptos.dev/indexer/txn-stream/. Opt out of this with `--no-txn-stream`. This is marked as a breaking change since the CLI now uses a port (50051 by default) that it didn't used to. If you need this port, you can tell the CLI to use a different port with `--txn-stream-port`.
 
 ## [2.1.0] - 2023/08/24
 ### Updated
 - Updated CLI source compilation to use rust toolchain version 1.71.1 (from 1.71.0).
 ### Added
 - Added basic ledger support for CLI
-  - Example: `aptos init --ledger` to create a new profile from ledger. After this, you can use it the same way as other profiles.
+  - Example: `libra2 init --ledger` to create a new profile from ledger. After this, you can use it the same way as other profiles.
   - Note: `Ledger Nano s Plus` or `Ledger Nano X` is highly recommended.
 
 ## [2.0.3] - 2023/08/04
 ### Fixed
-- Fixed the following input arguments issue when running `aptos move view`
+- Fixed the following input arguments issue when running `libra2 move view`
   - #8513: Fixed issue where CLI does not work with big numbers
   - #8982: Fixed args issue when passing in u64/u128/u256 parameters
 ### Update
@@ -287,9 +287,9 @@ stdin, which triggers a graceful shutdown when received.
 - Set 2 seconds timeout for telemetry
 ### Removed
 - init command from config subcommand is removed. Please use init from the root command.
-  - Example: `aptos config init` -> `aptos init`
+  - Example: `libra2 config init` -> `libra2 init`
 ### Fixed
-- Panic issue when running `aptos move test` is fixed - GitHub issue #8516
+- Panic issue when running `libra2 move test` is fixed - GitHub issue #8516
 
 ## [2.0.1] - 2023/06/05
 ### Fixed
@@ -310,45 +310,45 @@ stdin, which triggers a graceful shutdown when received.
 
 ## [1.0.13] - 2023/04/27
 ### Fixed
-* Previously `--skip-fetch-latest-git-deps` would not actually do anything when used with `aptos move test`. This has been fixed.
+* Previously `--skip-fetch-latest-git-deps` would not actually do anything when used with `libra2 move test`. This has been fixed.
 * Fixed the issue of the hello_blockchain example where feature enable was missing
 
 ## [1.0.12] - 2023/04/25
 ### Added
 * Support for creating and interacting with multisig accounts v2. More details can be found at [AIP 12](https://github.com/aptos-foundation/AIPs/blob/main/aips/aip-12.md).
-* Added `disassemble` option to the CLI - This can be invoked using `aptos move disassemble` to disassemble the bytecode and save it to a file
-* Fixed handling of `vector<string>` as an entry function argument in `aptos move run`
+* Added `disassemble` option to the CLI - This can be invoked using `libra2 move disassemble` to disassemble the bytecode and save it to a file
+* Fixed handling of `vector<string>` as an entry function argument in `libra2 move run`
 
 ## [1.0.11] - 2023/04/14
 ### Fixed
-* Fixed creating a new test account with `aptos init` would fail if the account didn't already exist
+* Fixed creating a new test account with `libra2 init` would fail if the account didn't already exist
 
 ## [1.0.10] - 2023/04/13
 ### Fixed
-* If `aptos init` is run with a faucet URL specified (which happens by default when using the local, devnet, or testnet network options) and funding the account fails, the account creation is considered a failure and nothing is persisted. Previously it would report success despite the account not being created on chain.
+* If `libra2 init` is run with a faucet URL specified (which happens by default when using the local, devnet, or testnet network options) and funding the account fails, the account creation is considered a failure and nothing is persisted. Previously it would report success despite the account not being created on chain.
 * When specifying a profile where the `AuthenticationKey` has been rotated, now the `AccountAddress` is properly used from the config file
-* Update `aptos init` to fix an incorrect account address issue, when trying to init with a rotated private key. Right now it does an actual account lookup instead of deriving from public key
+* Update `libra2 init` to fix an incorrect account address issue, when trying to init with a rotated private key. Right now it does an actual account lookup instead of deriving from public key
 
 ### Added
 * Updates to prover and framework specs
 
 ## [1.0.9] - 2023/03/29
 ### Added
-* `aptos move show abi` allows for viewing the ABI of a compiled move package
+* `libra2 move show abi` allows for viewing the ABI of a compiled move package
 * Experimental gas profiler with the `--profile-gas` flag on any transaction submitting CLI command
 * Updates to the prover and framework specs
 
 ## [1.0.8] - 2023/03/16
 ### Added
-* Added an `aptos account derive-resource-account-address` command to add the ability to derive an address easily
+* Added an `libra2 account derive-resource-account-address` command to add the ability to derive an address easily
 * Added the ability for different input resource account seeds, to allow matching directly with onchain code
-* Added beta support for coverage via `aptos move coverage` and `aptos move test --coverage`
+* Added beta support for coverage via `libra2 move coverage` and `libra2 move test --coverage`
 * Added beta support for compiling with bytecode dependencies rather than source dependencies
 
 ### Fixed
 * All resource account commands can now use `string_seed` which will match the onchain representation of `b"string"` rather than always derive a different address
 * Tests that go over the bytecode size limit can now compile
-* `vector<string>` inputs to now work for both `aptos move view` and `aptos move run`
+* `vector<string>` inputs to now work for both `libra2 move view` and `libra2 move run`
 * Governance proposal listing will now not crash on the latest on-chain format
 * Move compiler will no longer use an environment variable to communicate between compiler and CLI for the bytecode version
 

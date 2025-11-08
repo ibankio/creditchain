@@ -1,11 +1,11 @@
 # Exercise 1
-aptos move test --dump
+libra2 move test --dump
 
 # Exercise 2
-aptos move test --coverage
+libra2 move test --coverage
 
 Followed by:
 
-aptos move coverage summary
-aptos move coverage summary --summarize-functions
-aptos move coverage source --module basic_coin
+libra2 move coverage summary
+libra2 move coverage summary --summarize-functions
+libra2 move coverage source --module basic_coin

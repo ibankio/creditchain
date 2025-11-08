@@ -46,7 +46,7 @@ pub fn metadata() -> Result<Metadata> {
     serde_json::from_slice(&output.stdout).map_err(Into::into)
 }
 
-/// Get the aptos node binary from the current working directory
+/// Get the libra2 node binary from the current working directory
 pub fn get_libra2_node_binary_from_worktree() -> Result<(String, PathBuf)> {
     let metadata = metadata()?;
     let mut revision = git_rev_parse(&metadata, "HEAD")?;

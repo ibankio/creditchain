@@ -21,7 +21,7 @@
 // We will use an admin account to set up the collection. All admin functions are restricted to the deployer's account.
 // ##### Setup #####
 // 1. Publish this contract
-// aptos move publish --named-addresses post_mint_reveal_nft=[address of your admin_account]
+// libra2 move publish --named-addresses post_mint_reveal_nft=[address of your admin_account]
 // 2. Use the admin_account to set up the collection's treasury address (where the minting fee will go)
 // set_treasury(&admin_account, signer::address_of(treasury_account));
 // 3. Set up the source and destination collection configs using the admin account. Note that here we are setting up both

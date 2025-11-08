@@ -64,7 +64,7 @@ spec libra2_framework::system_addresses {
     spec assert_framework_reserved(addr: address) {
         aborts_if !is_framework_reserved_address(addr);
     }
-    /// Specifies that a function aborts if the account does not have the aptos framework address.
+    /// Specifies that a function aborts if the account does not have the libra2 framework address.
     spec schema AbortsIfNotLibra2Framework {
         account: signer;
         /// [high-level-req-2]

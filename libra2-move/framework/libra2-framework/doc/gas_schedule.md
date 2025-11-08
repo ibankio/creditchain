@@ -455,7 +455,7 @@ Only used in reconfigurations to apply the pending <code><a href="gas_schedule.m
 <td>2</td>
 <td>Only the Libra2 framework account should be allowed to update the gas schedule resource.</td>
 <td>Critical</td>
-<td>The gas_schedule::set_gas_schedule function calls the assert_libra2_framework function to ensure that the signer is the aptos framework account.</td>
+<td>The gas_schedule::set_gas_schedule function calls the assert_libra2_framework function to ensure that the signer is the libra2 framework account.</td>
 <td>Formally verified via <a href="#high-level-req-2">set_gas_schedule</a>.</td>
 </tr>
 

@@ -21,9 +21,9 @@ The above logic is currently implemented in the Python
 SDK: [<code>aptos-python-sdk</code>](https://github.com/aptos-labs/aptos-python-sdk/blob/main/libra2_sdk/package_publisher.py).
 
 Libra2 CLI supports this as well with <code>--chunked-publish</code> flag:
-- <code>aptos <b>move</b> publish [OPTIONS] --chunked-publish</code>
-- <code>aptos <b>move</b> create-<a href="../../libra2-framework/doc/object.md#0x1_object">object</a>-and-publish-<b>package</b> [OPTIONS] --<b>address</b>-name &lt;ADDRESS_NAME&gt; --chunked-publish</code>
-- <code>aptos <b>move</b> upgrade-<a href="../../libra2-framework/doc/object.md#0x1_object">object</a>-<b>package</b> [OPTIONS] --<b>address</b>-name &lt;ADDRESS_NAME&gt; --chunked-publish</code>
+- <code>libra2 <b>move</b> publish [OPTIONS] --chunked-publish</code>
+- <code>libra2 <b>move</b> create-<a href="../../libra2-framework/doc/object.md#0x1_object">object</a>-and-publish-<b>package</b> [OPTIONS] --<b>address</b>-name &lt;ADDRESS_NAME&gt; --chunked-publish</code>
+- <code>libra2 <b>move</b> upgrade-<a href="../../libra2-framework/doc/object.md#0x1_object">object</a>-<b>package</b> [OPTIONS] --<b>address</b>-name &lt;ADDRESS_NAME&gt; --chunked-publish</code>
 
 
 <a id="@Usage_1"></a>

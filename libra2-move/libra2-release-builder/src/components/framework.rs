@@ -15,7 +15,7 @@ pub struct FrameworkReleaseConfig {
     /// Move bytecode version the framework release would be compiled to.
     pub bytecode_version: u32,
     /// Compile the framework release at a given git commit hash.
-    /// If set to None, we will use the aptos framework under current repo.
+    /// If set to None, we will use the libra2 framework under current repo.
     pub git_hash: Option<String>,
 }
 

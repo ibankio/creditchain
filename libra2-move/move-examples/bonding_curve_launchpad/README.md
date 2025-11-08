@@ -100,7 +100,7 @@ One style could encompass sublinear functions to reward early adopters more heav
 
 ## How to test:
 ```console
-aptos move test --dev
+libra2 move test --dev
 ```
 
 ## Example testnet deployments
@@ -121,6 +121,6 @@ From there, you can follow the [object code deployment](https://preview.libra2.d
 ### Testnet deployment
 Deploy the `bonding_curve_launchpad` to the testnet referencing the already-deployed `swap` smart contract:
 ```console
-aptos move publish --profile testnet_bonding_curve_launchpad \
+libra2 move publish --profile testnet_bonding_curve_launchpad \
 --named-addresses bonding_curve_launchpad={REPLACE_WITH_YOUR_ACCOUNT},swap=0xe26bbe169db47aaa32349d253891af42134e1f6b64fef63f60105ec9ab6b240f,deployer=0x4d51c99abff19bfb5ca3065f1e71dfc066c38e334def24dbac2b2a38bee8b946
 ```

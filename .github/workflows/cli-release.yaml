@@ -1,4 +1,4 @@
-# This defines a workflow to build and release a new version of the aptos CLI.
+# This defines a workflow to build and release a new version of the libra2 CLI.
 # In order to trigger it go to the Actions Tab of the Repo, click "Release CLI" and then "Run Workflow".
 
 name: "Release CLI"

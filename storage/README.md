@@ -286,7 +286,7 @@ libra2-node-bootstrap-db-from-backup 0.3.5
 Tool to bootstrap DB from backup
 
 USAGE:
-    aptos node bootstrap-db-from-backup [OPTIONS] --config-path <CONFIG_PATH> --target-db-dir <DB_DIR>
+    libra2 node bootstrap-db-from-backup [OPTIONS] --config-path <CONFIG_PATH> --target-db-dir <DB_DIR>
 
 OPTIONS:
         --concurrent-downloads <CONCURRENT_DOWNLOADS>

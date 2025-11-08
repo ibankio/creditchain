@@ -28,8 +28,8 @@ module libra2_framework::version {
         system_addresses::assert_libra2_framework(libra2_framework);
 
         move_to(libra2_framework, Version { major: initial_version });
-        // Give aptos framework account capability to call set version. This allows on chain governance to do it through
-        // control of the aptos framework account.
+        // Give libra2 framework account capability to call set version. This allows on chain governance to do it through
+        // control of the libra2 framework account.
         move_to(libra2_framework, SetVersionCapability {});
     }
 

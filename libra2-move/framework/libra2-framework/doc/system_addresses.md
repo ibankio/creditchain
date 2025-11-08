@@ -546,7 +546,7 @@ Return true if <code>addr</code> is either the VM address or an Libra2 Framework
 </code></pre>
 
 
-Specifies that a function aborts if the account does not have the aptos framework address.
+Specifies that a function aborts if the account does not have the libra2 framework address.
 
 
 <a id="0x1_system_addresses_AbortsIfNotLibra2Framework"></a>

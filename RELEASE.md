@@ -27,13 +27,13 @@ These are release branches based on Libra2 release planning timeline. They are c
 the `main` branch every 1-2 months.
 
 ### libra2-node-v*X.Y.Z* release tag
-The aptos node release tags are created for validator/fullnode deployment of the given release branch. The minor number *Z* will increment when a new hot-fix release is required on the release branch. Libra2 team will publish the matching tag docker images on [Libra2 Docker Hub](https://hub.docker.com/r/aptoslabs/validator/tags) when it's available.
+The libra2 node release tags are created for validator/fullnode deployment of the given release branch. The minor number *Z* will increment when a new hot-fix release is required on the release branch. Libra2 team will publish the matching tag docker images on [Libra2 Docker Hub](https://hub.docker.com/r/aptoslabs/validator/tags) when it's available.
 
 ### libra2-framework-v*X.Y.Z* release tag
-The aptos framework release tags are created to facilitate the on-chain framework upgrade of the given release branch. The minor number *Z* will increment when a new hot-fix release or a new  framework update is required on this release branch.
+The libra2 framework release tags are created to facilitate the on-chain framework upgrade of the given release branch. The minor number *Z* will increment when a new hot-fix release or a new  framework update is required on this release branch.
 
 ### libra2-cli-v*X.Y.Z* release tag
-The aptos cli release tags are created to track the CLI versions for community to use when developing on the Libra2 network. It's always recommended to upgrade your CLI when a new version is released, for the best user experience. Learn how to update to the [latest CLI version](https://aptos.dev/en/build/cli).
+The libra2 CLI release tags are created to track the CLI versions for community to use when developing on the Libra2 network. It's always recommended to upgrade your CLI when a new version is released, for the best user experience. Learn how to update to the [latest CLI version](https://aptos.dev/en/build/cli).
 
 ## Libra2 Release Lifecycle
 (The time length here is a rough estimate, it varies depends on each release.)

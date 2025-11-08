@@ -285,7 +285,7 @@
 
 ## Function `initialize`
 
-Genesis step 1: Initialize aptos framework account and core modules on chain.
+Genesis step 1: Initialize libra2 framework account and core modules on chain.
 
 
 <pre><code><b>fun</b> <a href="genesis.md#0x1_genesis_initialize">initialize</a>(<a href="gas_schedule.md#0x1_gas_schedule">gas_schedule</a>: <a href="../../libra2-stdlib/../move-stdlib/doc/vector.md#0x1_vector">vector</a>&lt;u8&gt;, <a href="chain_id.md#0x1_chain_id">chain_id</a>: u8, initial_version: u64, <a href="consensus_config.md#0x1_consensus_config">consensus_config</a>: <a href="../../libra2-stdlib/../move-stdlib/doc/vector.md#0x1_vector">vector</a>&lt;u8&gt;, <a href="execution_config.md#0x1_execution_config">execution_config</a>: <a href="../../libra2-stdlib/../move-stdlib/doc/vector.md#0x1_vector">vector</a>&lt;u8&gt;, epoch_interval_microsecs: u64, minimum_stake: u64, maximum_stake: u64, recurring_lockup_duration_secs: u64, allow_validator_set_change: bool, rewards_rate: u64, rewards_rate_denominator: u64, voting_power_increase_limit: u64)
@@ -312,11 +312,11 @@ Genesis step 1: Initialize aptos framework account and core modules on chain.
     rewards_rate_denominator: u64,
     voting_power_increase_limit: u64,
 ) {
-    // Initialize the aptos framework <a href="account.md#0x1_account">account</a>. This is the <a href="account.md#0x1_account">account</a> <b>where</b> system resources and modules will be
+    // Initialize the libra2 framework <a href="account.md#0x1_account">account</a>. This is the <a href="account.md#0x1_account">account</a> <b>where</b> system resources and modules will be
     // deployed <b>to</b>. This will be entirely managed by on-chain governance and no entities have the key or privileges
     // <b>to</b> <b>use</b> this <a href="account.md#0x1_account">account</a>.
     <b>let</b> (libra2_framework_account, libra2_framework_signer_cap) = <a href="account.md#0x1_account_create_framework_reserved_account">account::create_framework_reserved_account</a>(@libra2_framework);
-    // Initialize <a href="account.md#0x1_account">account</a> configs on aptos framework <a href="account.md#0x1_account">account</a>.
+    // Initialize <a href="account.md#0x1_account">account</a> configs on libra2 framework <a href="account.md#0x1_account">account</a>.
     <a href="account.md#0x1_account_initialize">account::initialize</a>(&libra2_framework_account);
 
     <a href="transaction_validation.md#0x1_transaction_validation_initialize">transaction_validation::initialize</a>(
@@ -656,7 +656,7 @@ If it exists, it just returns the signer.
         <a href="genesis.md#0x1_genesis_create_initialize_validator">create_initialize_validator</a>(libra2_framework, validator, use_staking_contract);
     });
 
-    // Destroy the aptos framework <a href="account.md#0x1_account">account</a>'s ability <b>to</b> mint coins now that we're done <b>with</b> setting up the initial
+    // Destroy the libra2 framework <a href="account.md#0x1_account">account</a>'s ability <b>to</b> mint coins now that we're done <b>with</b> setting up the initial
     // validators.
     <a href="libra2_coin.md#0x1_libra2_coin_destroy_mint_cap">libra2_coin::destroy_mint_cap</a>(libra2_framework);
 
@@ -868,7 +868,7 @@ The last step of genesis.
 <td>3</td>
 <td>The Libra2 coin should be initialized during genesis and only the Libra2 framework account should own the mint and burn capabilities for the LBT token.</td>
 <td>Critical</td>
-<td>Both mint and burn capabilities are wrapped inside the stake::Libra2CoinCapabilities and transaction_fee::Libra2CoinCapabilities resources which are stored under the aptos framework account.</td>
+<td>Both mint and burn capabilities are wrapped inside the stake::Libra2CoinCapabilities and transaction_fee::Libra2CoinCapabilities resources which are stored under the libra2 framework account.</td>
 <td>Formally verified via <a href="#high-level-req-3">initialize_libra2_coin</a>.</td>
 </tr>
 

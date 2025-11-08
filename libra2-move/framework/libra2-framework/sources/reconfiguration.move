@@ -65,7 +65,7 @@ module libra2_framework::reconfiguration {
     const EINVALID_GUID_FOR_EVENT: u64 = 5;
 
     /// Only called during genesis.
-    /// Publishes `Configuration` resource. Can only be invoked by aptos framework account, and only a single time in Genesis.
+    /// Publishes `Configuration` resource. Can only be invoked by libra2 framework account, and only a single time in Genesis.
     public(friend) fun initialize(libra2_framework: &signer) {
         system_addresses::assert_libra2_framework(libra2_framework);
 

@@ -106,10 +106,10 @@ Let us take a look at this function and what it is saying:
 * It creates a `Coin` with the given value and stores it under the
   `account` using the `move_to` operator.
 
-Let us make sure it builds! This can be done with the `aptos move compile` command from within the package directory ([`step_1/basic_coin`](./step_1/basic_coin/)):
+Let us make sure it builds! This can be done with the `libra2 move compile` command from within the package directory ([`step_1/basic_coin`](./step_1/basic_coin/)):
 
 ```bash
-aptos move compile
+libra2 move compile
 ```
 
 <details>
@@ -117,7 +117,7 @@ aptos move compile
 
 * You can create an empty Move package by calling:
     ```bash
-    aptos move init --name <pkg_name>
+    libra2 move init --name <pkg_name>
     ```
 * Move code can also live in a number of other places. See the [Move
   book](https://docs.libra2.org/move/book/packages) for more information on the
@@ -161,10 +161,10 @@ to [`step_2/basic_coin`](./step_2/basic_coin).  Unit tests in Move are similar t
 unit tests in Rust if you're familiar with them -- tests are annotated with
 `#[test]` and written like normal Move functions.
 
-You can run the tests with the `aptos move test` command:
+You can run the tests with the `libra2 move test` command:
 
 ```bash
-aptos move test
+libra2 move test
 ```
 
 Let's now take a look at the contents of the [`first_module.move`
@@ -201,7 +201,7 @@ assertion fails the unit test will fail.
 
 #### Exercises
 * Change the assertion to `11` so that the test fails. Find a flag that you can
-  pass to the `aptos move test` command that will dump the global state when
+  pass to the `libra2 move test` command that will dump the global state when
   the test fails. It should resemble:
   ```
   ┌── test_mint_10 ──────
@@ -223,7 +223,7 @@ assertion fails the unit test will fail.
   └──────────────────
   ```
 * Find a flag that allows you to gather test coverage information, and
-  then experiment with using the `aptos move coverage` command to examine
+  then experiment with using the `libra2 move coverage` command to examine
   coverage statistics and source coverage.
 
 </details>
@@ -315,7 +315,7 @@ implementation of the methods inside [`basic_coin.move`](./step_4/basic_coin/sou
 Let's first try building the code using this Move package by running the following command
 in the [`step_4/basic_coin`](./step_4/basic_coin) directory:
 ```bash
-aptos move compile
+libra2 move compile
 ```
 
 ### Implementation of methods
@@ -405,10 +405,10 @@ In this step we're going to take a look at all the different unit tests
 we've written to cover the code we wrote in step 4. We're also going to
 take a look at some tools we can use to help us write tests.
 
-To get started, run the `aptos move test` command in the [`step_5/basic_coin`](./step_5/basic_coin) directory:
+To get started, run the `libra2 move test` command in the [`step_5/basic_coin`](./step_5/basic_coin) directory:
 
 ```bash
-aptos move test
+libra2 move test
 ```
 
 You should see output resembling:
@@ -515,7 +515,7 @@ the [basic_coin.move](./step_7/basic_coin/sources/basic_coin.move):
 Informally speaking, the block `spec balance_of {...}` contains the property specification of the method `balance_of`. Let's first run the prover using the following command inside the [`basic_coin`](./step_7/basic_coin/) directory:
 
 ```bash
-aptos move prove
+libra2 move prove
 ```
 
 This outputs the following error information:
@@ -549,7 +549,7 @@ The Move Prover tells us we need to explicitly specify the condition under which
 ```
 After adding this condition, try running the `prove` command again to confirm that there are no verification errors:
 ```bash
-aptos move prove
+libra2 move prove
 ```
 
 ## Step 8: Write formal specifications for the `basic_coin` module

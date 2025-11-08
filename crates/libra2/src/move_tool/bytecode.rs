@@ -44,8 +44,8 @@ const DECOMPILER_EXTENSION: &str = "mv.move";
 /// of Move bytecode.
 ///
 /// For example, if you want to disassemble an on-chain package `PackName` at account `0x42`:
-/// 1. Download the package with `aptos move download --account 0x42 --package PackName --bytecode`
-/// 2. Disassemble the package bytecode with `aptos move disassemble --package-path PackName/bytecode_modules`
+/// 1. Download the package with `libra2 move download --account 0x42 --package PackName --bytecode`
+/// 2. Disassemble the package bytecode with `libra2 move disassemble --package-path PackName/bytecode_modules`
 #[derive(Debug, Parser)]
 pub struct Disassemble {
     #[clap(flatten)]
@@ -55,8 +55,8 @@ pub struct Disassemble {
 /// Decompile the Move bytecode pointed to into Move source code.
 ///
 /// For example, if you want to decompile an on-chain package `PackName` at account `0x42`:
-/// 1. Download the package with `aptos move download --account 0x42 --package PackName --bytecode`
-/// 2. Decompile the package bytecode with `aptos decompile --package-path PackName/bytecode_modules`
+/// 1. Download the package with `libra2 move download --account 0x42 --package PackName --bytecode`
+/// 2. Decompile the package bytecode with `libra2 decompile --package-path PackName/bytecode_modules`
 #[derive(Debug, Parser)]
 pub struct Decompile {
     #[clap(flatten)]

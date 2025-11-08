@@ -26,7 +26,7 @@ impl ShowTool {
 ///
 /// For example, this would show the function `transfer` in the module `coin`:
 ///
-/// aptos move show abi --modules coin --names transfer
+/// libra2 move show abi --modules coin --names transfer
 ///
 #[derive(Parser)]
 pub struct ShowAbi {

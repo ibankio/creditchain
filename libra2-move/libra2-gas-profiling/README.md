@@ -5,7 +5,7 @@ This crate implements a gas profiler that can be plugged into the Libra2 VM to g
 It also contains a module for visualizing the transaction gas log, in the form of a flamegraph.
 
 ## Running the Gas Profiler
-You can run the gas profiler by appending the `--profile-gas` option to the aptos cli's `move publish`, `move run` & `move run-script` commands. Here is an example:
+You can run the gas profiler by appending the `--profile-gas` option to the libra2 CLI's `move publish`, `move run` & `move run-script` commands. Here is an example:
 ```
 >> cargo run -p aptos -- move publish --profile-gas
     Finished dev [unoptimized + debuginfo] target(s) in 0.51s

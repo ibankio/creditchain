@@ -21,7 +21,7 @@ module libra2_framework::timestamp {
     /// An invalid timestamp was provided
     const EINVALID_TIMESTAMP: u64 = 2;
 
-    /// Marks that time has started. This can only be called from genesis and with the aptos framework account.
+    /// Marks that time has started. This can only be called from genesis and with the libra2 framework account.
     public(friend) fun set_time_has_started(libra2_framework: &signer) {
         system_addresses::assert_libra2_framework(libra2_framework);
         let timer = CurrentTimeMicroseconds { microseconds: 0 };
