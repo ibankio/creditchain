@@ -236,7 +236,7 @@ fn setup_data_streaming_service(
     Ok((streaming_service_client, streaming_service_runtime))
 }
 
-/// Sets up the aptos data client runtime
+/// Sets up the libra2 data client runtime
 fn setup_libra2_data_client(
     node_config: &NodeConfig,
     network_client: NetworkClient<StorageServiceMessage>,

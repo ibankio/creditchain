@@ -5,6 +5,6 @@ error: failed to parse manifest
 3 | version = "0.1.2"
 4 |
 5 | [dependencies]
-6 | a = { aptos = "mainnet" }
-  |     ^^^^^^^^^^^^^^^^^^^^^ missing field "address" for aptos dependency
+6 | a = { libra2 = "mainnet" }
+  |     ^^^^^^^^^^^^^^^^^^^^^ missing field "address" for libra2 dependency
   |

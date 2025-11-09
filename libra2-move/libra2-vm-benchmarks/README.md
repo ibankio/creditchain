@@ -46,7 +46,7 @@ cargo run --release PATTERN
 cd libra2-vm-benchmarks/samples
 mkdir proj-name
 cd proj-name
-cargo run -p aptos -- move init --name proj-name
+cargo run -p libra2 -- move init --name proj-name
 ```
 
 ## Examples

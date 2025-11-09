@@ -18,7 +18,7 @@ Additional components for libra2-nodes testnet
 | genesis.chain_id | string | `nil` | Libra2 Chain ID |
 | genesis.numValidators | string | `nil` | Number of validators deployed in this testnet |
 | genesis.username_prefix | string | `"libra2-node"` | Validator username prefix, used to get genesis secrets. This should be the fullname for the libra2-node helm release |
-| imageTag | string | `"devnet"` | Default image tag to use for all aptos images |
+| imageTag | string | `"devnet"` | Default image tag to use for all libra2 images |
 | ingress.acm_certificate | string | `nil` | The ACM certificate to install on the ingress |
 | ingress.cookieDurationSeconds | int | `86400` | If stickiness is enabled, how long the session cookie should last |
 | ingress.enableStickyness | bool | `true` | Whether to enable session stickiness on the underlying load balancer |

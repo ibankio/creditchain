@@ -110,14 +110,14 @@ for i in $(seq 0 $(($NUM_VALIDATORS - 1))); do
   echo "CUR_STAKE_AMOUNT=${CUR_STAKE_AMOUNT} for ${i} validator"
 
   if [[ -z "${RANDOM_SEED}" ]]; then
-    aptos genesis generate-keys --output-dir $user_dir
+    libra2 genesis generate-keys --output-dir $user_dir
   else
     seed=$(printf "%064x" "$((${RANDOM_SEED_IN_DECIMAL} + i))")
     echo "seed=$seed for ${i}th validator"
-    aptos genesis generate-keys --random-seed $seed --output-dir $user_dir
+    libra2 genesis generate-keys --random-seed $seed --output-dir $user_dir
   fi
 
-  aptos genesis set-validator-configuration --owner-public-identity-file $user_dir/public-keys.yaml --local-repository-dir $WORKSPACE \
+  libra2 genesis set-validator-configuration --owner-public-identity-file $user_dir/public-keys.yaml --local-repository-dir $WORKSPACE \
     --username $username \
     --validator-host $validator_host \
     --full-node-host $fullnode_host \
@@ -129,7 +129,7 @@ done
 cp $MOVE_FRAMEWORK_DIR/head.mrb ${WORKSPACE}/framework.mrb
 
 # run genesis
-aptos genesis generate-genesis --local-repository-dir ${WORKSPACE} --output-dir ${WORKSPACE}
+libra2 genesis generate-genesis --local-repository-dir ${WORKSPACE} --output-dir ${WORKSPACE}
 
 # delete all fullnode storage except for those from this era
 kubectl get pvc -o name | grep /fn- | grep -v "e${ERA}-" | xargs -r kubectl delete

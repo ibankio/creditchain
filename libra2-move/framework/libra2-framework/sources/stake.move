@@ -1962,7 +1962,7 @@ module libra2_framework::stake {
         features::change_feature_flags_for_testing(libra2_framework, vector[], vector[features::get_periodical_reward_rate_decrease_feature()]);
     }
 
-    // This function assumes the stake module already the capability to mint aptos coins.
+    // This function assumes the stake module already the capability to mint libra2 coins.
     #[test_only]
     public fun mint_coins(amount: u64): Coin<Libra2Coin> acquires Libra2CoinCapabilities {
         let mint_cap = &borrow_global<Libra2CoinCapabilities>(@libra2_framework).mint_cap;

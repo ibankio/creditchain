@@ -51,7 +51,7 @@
       "keepTime": true,
       "tags": ["libra2-core"],
       "targetBlank": true,
-      "title": "aptos core",
+      "title": "libra2 core",
       "tooltip": "",
       "type": "dashboards",
       "url": ""
@@ -4538,7 +4538,7 @@
     },
     {
       "datasource": { "type": "prometheus", "uid": "${Datasource}" },
-      "description": "number of times a aptos network send failed",
+      "description": "number of times a libra2 network send failed",
       "fieldConfig": {
         "defaults": {
           "color": { "mode": "palette-classic" },

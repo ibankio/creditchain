@@ -416,7 +416,7 @@ fn compile_libra2_packages(
         } else {
             Some(CompilerVersion::V1)
         };
-        // For simplicity, all packages including aptos token are stored under 0x1 in the map
+        // For simplicity, all packages including libra2 token are stored under 0x1 in the map
         let package_info = PackageInfo {
             address: AccountAddress::ONE,
             package_name: package.to_string(),

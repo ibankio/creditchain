@@ -100,7 +100,7 @@ impl MockNetwork {
         // Create a storage service client
         let storage_service_client = StorageServiceClient::new(network_client);
 
-        // Create an aptos data client
+        // Create an libra2 data client
         let mock_time = TimeService::mock();
         let base_config = base_config.unwrap_or_default();
         let data_client_config = data_client_config.unwrap_or_default();

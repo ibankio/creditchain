@@ -7,7 +7,7 @@ It also contains a module for visualizing the transaction gas log, in the form o
 ## Running the Gas Profiler
 You can run the gas profiler by appending the `--profile-gas` option to the libra2 CLI's `move publish`, `move run` & `move run-script` commands. Here is an example:
 ```
->> cargo run -p aptos -- move publish --profile-gas
+>> cargo run -p libra2 -- move publish --profile-gas
     Finished dev [unoptimized + debuginfo] target(s) in 0.51s
      Running `/home/vgao/libra2-core/target/debug/libra2 move publish --profile-gas`
 Compiling, may take a little while to download git dependencies...

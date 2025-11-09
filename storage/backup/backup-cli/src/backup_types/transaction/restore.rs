@@ -440,7 +440,7 @@ impl TransactionRestoreBatchController {
             >,
         >,
     > {
-        // get the next expected transaction version of the current aptos db from txn_info CF
+        // get the next expected transaction version of the current libra2 db from txn_info CF
         let next_expected_version = self
             .global_opt
             .run_mode

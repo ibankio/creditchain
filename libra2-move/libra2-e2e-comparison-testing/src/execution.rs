@@ -112,7 +112,7 @@ impl Execution {
     pub async fn execute_txns(&self, begin: Version, num_txns_to_execute: u64) -> Result<()> {
         let libra2_commons_path = self.input_path.join(LIBRA2_COMMONS);
         if !check_libra2_packages_availability(libra2_commons_path.clone()) {
-            return Err(anyhow::Error::msg("aptos packages are missing"));
+            return Err(anyhow::Error::msg("libra2 packages are missing"));
         }
 
         let mut compiled_cache = CompilationCache::default();

@@ -199,7 +199,7 @@ impl NetworkTask {
                     };
 
                     if let Err(e) = self.rpc_tx.push(peer_id, (peer_id, req)) {
-                        warn!(error = ?e, "aptos channel closed");
+                        warn!(error = ?e, "libra2 channel closed");
                     };
                 },
                 _ => {

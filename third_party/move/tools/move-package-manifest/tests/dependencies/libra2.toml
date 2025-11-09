@@ -3,4 +3,4 @@ name = "some_package_name"
 version = "0.1.2"
 
 [dependencies]
-a = { aptos = "mainnet" }
+a = { libra2 = "mainnet", address = "0x1" }

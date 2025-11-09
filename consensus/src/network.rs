@@ -781,7 +781,7 @@ impl NetworkTask {
                                 (peer_id, discriminant(&req_with_callback)),
                                 (peer_id, req_with_callback),
                             ) {
-                                warn!(error = ?e, "aptos channel closed");
+                                warn!(error = ?e, "libra2 channel closed");
                             };
                         },
                         ConsensusMsg::CommitDecisionMsg(commit_decision) => {
@@ -796,7 +796,7 @@ impl NetworkTask {
                                 (peer_id, discriminant(&req_with_callback)),
                                 (peer_id, req_with_callback),
                             ) {
-                                warn!(error = ?e, "aptos channel closed");
+                                warn!(error = ?e, "libra2 channel closed");
                             };
                         },
                         consensus_msg @ (ConsensusMsg::ProposalMsg(_)
@@ -852,7 +852,7 @@ impl NetworkTask {
                                 (peer_id, discriminant(&req_with_callback)),
                                 (peer_id, req_with_callback),
                             ) {
-                                warn!(error = ?e, "aptos channel closed");
+                                warn!(error = ?e, "libra2 channel closed");
                             };
                         },
                         _ => {
@@ -942,7 +942,7 @@ impl NetworkTask {
                         .rpc_tx
                         .push((peer_id, discriminant(&req)), (peer_id, req))
                     {
-                        warn!(error = ?e, "aptos channel closed");
+                        warn!(error = ?e, "libra2 channel closed");
                     };
                 },
             });

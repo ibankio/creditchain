@@ -160,7 +160,7 @@ async fn check_and_obtain_source_code(
                 m.clone(),
                 (
                     AccountAddress::ONE,
-                    target_package.name.clone(), // all aptos packages are stored under 0x1
+                    target_package.name.clone(), // all libra2 packages are stored under 0x1
                     HashMap::new(),
                 ),
             );
@@ -169,9 +169,9 @@ async fn check_and_obtain_source_code(
                 transaction.clone(),
                 Some((
                     AccountAddress::ONE,
-                    target_package.name, // all aptos packages are stored under 0x1
+                    target_package.name, // all libra2 packages are stored under 0x1
                     HashMap::new(),
-                )), // do not need to store the package registry for aptos packages
+                )), // do not need to store the package registry for libra2 packages
             ));
         } else if let Ok(()) = retrieve_dep_packages_with_src(
             client,

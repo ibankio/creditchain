@@ -332,7 +332,7 @@ async fn create_driver_for_tests(
     // Initialize the logger for tests
     libra2_logger::Logger::init_for_testing();
 
-    // Create test aptos database
+    // Create test libra2 database
     let db_path = libra2_temppath::TempPath::new();
     db_path.create_as_dir().unwrap();
     let (_, db_rw) = DbReaderWriter::wrap(Libra2DB::new_for_test(db_path.path()));
@@ -370,7 +370,7 @@ async fn create_driver_for_tests(
     // Create a streaming service client
     let (streaming_service_client, _) = new_streaming_service_client_listener_pair();
 
-    // Create a test aptos data client
+    // Create a test libra2 data client
     let time_service = TimeService::mock();
     let network_client = StorageServiceClient::new(NetworkClient::new(
         vec![],

@@ -79,7 +79,7 @@ redis-server --save 60 1 --loglevel warning
 
 Then run a localnet:
 ```
-cargo run -p aptos -- node run-local-testnet --force-restart --assume-yes
+cargo run -p libra2 -- node run-local-testnet --force-restart --assume-yes
 ```
 
 Run the tap with redis storage and a fake funder.
@@ -97,7 +97,7 @@ Keep doing so and eventually you'll get rejected. See also that if you induce a 
 ## Manually testing MintFunder
 Run a localnet:
 ```
-cargo run -p aptos -- node run-local-testnet --force-restart --assume-yes
+cargo run -p libra2 -- node run-local-testnet --force-restart --assume-yes
 ```
 
 Run the tap with in-memory storage and the mint funder. As above we use just the IpBlocklist checker:

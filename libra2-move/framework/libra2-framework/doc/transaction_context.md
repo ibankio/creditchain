@@ -70,7 +70,7 @@
 
 ## Struct `AUID`
 
-A wrapper denoting aptos unique identifer (AUID)
+A wrapper denoting libra2 unique identifer (AUID)
 for storing an address
 
 
@@ -289,7 +289,7 @@ from other ways of generating unique addresses.
 
 ## Function `generate_auid_address`
 
-Returns a aptos unique identifier. Internally calls
+Returns a libra2 unique identifier. Internally calls
 the private function <code>generate_unique_address</code>. This function is
 created for to feature gate the <code>generate_unique_address</code> function.
 

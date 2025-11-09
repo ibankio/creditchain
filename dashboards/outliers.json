@@ -24,7 +24,7 @@
       "keepTime": true,
       "tags": ["libra2-core"],
       "targetBlank": true,
-      "title": "aptos core",
+      "title": "libra2 core",
       "type": "dashboards"
     }
   ],

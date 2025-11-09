@@ -3485,7 +3485,7 @@ fn create_data_stream(
     // Create an advertised data
     let advertised_data = create_advertised_data();
 
-    // Create an aptos data client mock and notification generator
+    // Create an libra2 data client mock and notification generator
     let libra2_data_client = MockLibra2DataClient::new(data_client_config, true, false, true, false);
     let notification_generator = Arc::new(U64IdGenerator::new());
 

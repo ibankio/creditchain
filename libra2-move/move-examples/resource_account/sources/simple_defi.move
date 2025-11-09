@@ -112,14 +112,14 @@ module resource_account::simple_defi {
         let (libra2_coin_burn_cap, libra2_coin_mint_cap) = libra2_coin::initialize_for_test(&framework);
         set_up_test(&origin_account, &resource_account);
 
-        // exchange from 5 aptos coins to 5 chloe's coins & assert the results are expected
+        // exchange from 5 libra2 coins to 5 chloe's coins & assert the results are expected
         let five_a_coins = coin::mint(5, &libra2_coin_mint_cap);
         let c_coins = exchange_to(five_a_coins);
         assert!(coin::value(&c_coins) == 5, 0);
         assert!(coin::balance<Libra2Coin>(signer::address_of(&resource_account)) == 5, 1);
         assert!(coin::balance<ChloesCoin>(signer::address_of(&resource_account)) == 0, 2);
 
-        // exchange from 5 chloe's coins to 5 aptos coins & assert the results are expected
+        // exchange from 5 chloe's coins to 5 libra2 coins & assert the results are expected
         let a_coins = exchange_from(c_coins);
         assert!(coin::value(&a_coins) == 5, 0);
         assert!(coin::balance<Libra2Coin>(signer::address_of(&resource_account)) == 0, 3);

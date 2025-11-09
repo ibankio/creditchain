@@ -49,7 +49,7 @@ variable "num_fullnodes" {
 }
 
 variable "image_tag" {
-  description = "Docker image tag for aptos components. Overrides ecr_repo method."
+  description = "Docker image tag for libra2 components. Overrides ecr_repo method."
   type        = string
   default     = ""
 }

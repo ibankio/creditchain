@@ -181,7 +181,7 @@ impl Account {
         }
     }
 
-    /// Creates a new account representing the aptos root account in memory.
+    /// Creates a new account representing the libra2 root account in memory.
     ///
     /// The address will be [`libra2_test_root_address`][account_config::libra2_test_root_address], and
     /// the account will use [`GENESIS_KEYPAIR`][static@GENESIS_KEYPAIR] as its keypair.

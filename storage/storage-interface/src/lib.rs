@@ -395,7 +395,7 @@ pub trait DbReader: Send + Sync {
         /// [Libra2DB::get_account_state_with_proof_by_version]:
         /// ../libra2db/struct.Libra2DB.html#method.get_account_state_with_proof_by_version
         ///
-        /// This is used by aptos core (executor) internally.
+        /// This is used by libra2 core (executor) internally.
         fn get_state_value_with_proof_by_version_ext(
             &self,
             key_hash: &HashValue,

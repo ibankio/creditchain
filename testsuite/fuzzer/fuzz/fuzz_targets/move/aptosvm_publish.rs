@@ -42,7 +42,7 @@ fn run_case(mut input: RunnableState) -> Result<(), Corpus> {
     let deserializer_config = DeserializerConfig::default();
 
     for m in input.dep_modules.iter_mut() {
-        // m.metadata = vec![]; // we could optimize metadata to only contain aptos metadata
+        // m.metadata = vec![]; // we could optimize metadata to only contain libra2 metadata
         // m.version = VERSION_MAX;
 
         // reject bad modules fast lite

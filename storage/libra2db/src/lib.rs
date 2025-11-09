@@ -8,7 +8,7 @@
 //! structures.
 //!
 //! It relays read/write operations on the physical storage via `schemadb` to the underlying
-//! Key-Value storage system, and implements aptos data structures on top of it.
+//! Key-Value storage system, and implements libra2 data structures on top of it.
 
 pub use crate::db::Libra2DB;
 

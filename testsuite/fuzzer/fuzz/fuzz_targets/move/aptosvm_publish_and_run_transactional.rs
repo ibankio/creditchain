@@ -189,7 +189,7 @@ fn run_case(input: RunnableStateWithOperations) -> Result<(), Corpus> {
 
     tdbg!("verifying modules");
     for m in dep_modules.iter_mut() {
-        // m.metadata = vec![]; // we could optimize metadata to only contain aptos metadata
+        // m.metadata = vec![]; // we could optimize metadata to only contain libra2 metadata
         // m.version = VERSION_MAX;
 
         // reject bad modules fast

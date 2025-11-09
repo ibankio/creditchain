@@ -68,7 +68,7 @@ fn test_new_initialized_configs() {
     // Create a test streaming service client
     let (streaming_service_client, _) = new_streaming_service_client_listener_pair();
 
-    // Create a test aptos data client
+    // Create a test libra2 data client
     let network_client = StorageServiceClient::new(NetworkClient::new(
         vec![],
         vec![],

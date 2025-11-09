@@ -785,7 +785,7 @@ module libra2_std::bls12381 {
                 let (sk, pk) = generate_keys();
                 signing_keys.push_back(sk);
                 public_keys.push_back(pk);
-                let msg: vector<u8> = vector[104, 101, 108, 108, 111, 32, 97, 112, 116, 111, 115, 32, 117, 115, 101, 114, 32, 48+(i as u8)]; //"hello aptos user {i}"
+                let msg: vector<u8> = vector[104, 101, 108, 108, 111, 32, 108, 105, 98, 114, 97, 50, 32, 117, 115, 101, 114, 32, 48+(i as u8)]; // "hello libra2 user {i}"
                 messages.push_back(msg);
                 i += 1;
             };

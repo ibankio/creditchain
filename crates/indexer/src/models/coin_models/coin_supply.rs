@@ -26,7 +26,7 @@ pub struct CoinSupply {
 }
 
 impl CoinSupply {
-    /// Currently only supports libra2_coin. Aggregator table detail is in CoinInfo which for aptos coin appears during genesis.
+    /// Currently only supports libra2_coin. Aggregator table detail is in CoinInfo which for libra2 coin appears during genesis.
     /// We query for the aggregator table details (handle and key) once upon indexer initiation and use it to fetch supply.
     pub fn from_write_table_item(
         write_table_item: &APIWriteTableItem,
@@ -36,7 +36,7 @@ impl CoinSupply {
         txn_epoch: i64,
     ) -> anyhow::Result<Option<Self>> {
         if let Some(libra2_coin_info) = maybe_libra2_coin_info {
-            // Return early if we don't have the aptos aggregator table info
+            // Return early if we don't have the libra2 aggregator table info
             if libra2_coin_info.supply_aggregator_table_key.is_none()
                 || libra2_coin_info.supply_aggregator_table_handle.is_none()
             {
@@ -56,7 +56,7 @@ impl CoinSupply {
                 {
                     return Ok(None);
                 }
-                // Return early if not aptos coin aggregator key
+                // Return early if not libra2 coin aggregator key
                 let table_key = data
                     .key
                     .as_str()

@@ -3,7 +3,7 @@ Today if 2 structs/enums use `CryptoHasher` derive and share the same name,
 the current `CryptoHasher` implementation does not prevent hash input collision.
 This can be a potential vulnerability.
 
-The easiest way is to let aptos developers ensure unique symbol names.
+The easiest way is to let libra2 developers ensure unique symbol names.
 
 This script is a quick and dirty script to help find enum/structs in this repo that
 use `CryptoHasher` derive and share the same name.

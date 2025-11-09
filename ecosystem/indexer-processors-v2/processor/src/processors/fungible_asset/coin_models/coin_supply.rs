@@ -35,7 +35,7 @@ pub struct CoinSupply {
 }
 
 impl CoinSupply {
-    /// Currently only supports libra2_coin. Aggregator table detail is in CoinInfo which for aptos coin appears during genesis.
+    /// Currently only supports libra2_coin. Aggregator table detail is in CoinInfo which for libra2 coin appears during genesis.
     /// We query for the aggregator table details (handle and key) once upon indexer initiation and use it to fetch supply.
     pub fn from_write_table_item(
         write_table_item: &WriteTableItem,
@@ -64,7 +64,7 @@ impl CoinSupply {
                 PostgresTableItem::from(table_item)
             };
 
-            // Return early if not aptos coin aggregator key
+            // Return early if not libra2 coin aggregator key
             let table_key = table_item.decoded_key.as_str().unwrap();
             if table_key != LIBRA2_COIN_SUPPLY_TABLE_KEY {
                 return Ok(None);

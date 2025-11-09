@@ -1,5 +1,5 @@
 -- Your SQL goes here
--- coin supply, currently aptos coin only
+-- coin supply, currently libra2 coin only
 CREATE TABLE coin_supply (
   transaction_version BIGINT NOT NULL,
   -- Hash of the non-truncated coin type

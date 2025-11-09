@@ -12,7 +12,7 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-# aptos deps
+# libra2 deps
 libra2-cached-packages = { workspace = true }
 libra2-config = { workspace = true }
 libra2-faucet-core = { workspace = true }

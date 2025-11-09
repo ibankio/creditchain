@@ -1000,7 +1000,7 @@ fn compare_vectors_ignore_order<T: Clone + Debug + Ord>(
     assert_eq!(vector_1, vector_2);
 }
 
-/// Returns an aptos channel for testing
+/// Returns an libra2 channel for testing
 fn create_libra2_channel<K: Eq + Hash + Clone, T>(
 ) -> (libra2_channel::Sender<K, T>, libra2_channel::Receiver<K, T>) {
     libra2_channel::new(QueueStyle::FIFO, 10, None)

@@ -38,8 +38,8 @@ step_1 step_2 step_2_sol step_3 ...
 You also need a recent version of the [Libra2 CLI](https://docs.libra2.org/tools/libra2-cli/install-cli/). This tutorial is written using the following version:
 
 ```shell
-> aptos --version
-aptos 1.0.7
+> libra2 --version
+libra2 1.0.7
 ```
 
 If you want to use an IDE for working through the examples, we recommend CLion/IntelliJ, which has good support for Libra2 Move.

@@ -1,7 +1,7 @@
 # Cloud provider
 cloud: EKS
 
-# -- Default image tag to use for all aptos images
+# -- Default image tag to use for all libra2 images
 imageTag: devnet
 
 genesis:

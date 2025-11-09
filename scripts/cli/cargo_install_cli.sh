@@ -13,4 +13,4 @@ if ! echo "$VERSION" | grep -q "^[0-9]\+\.[0-9]\+\.[0-9]\+$"; then
     exit 1
 fi
 
-RUSTFLAGS="--cfg tokio_unstable" cargo install --locked --git https://github.com/libra2org/libra2-core.git --profile cli aptos --tag libra2-cli-v$VERSION
+RUSTFLAGS="--cfg tokio_unstable" cargo install --locked --git https://github.com/libra2org/libra2-core.git --profile cli libra2 --tag libra2-cli-v$VERSION

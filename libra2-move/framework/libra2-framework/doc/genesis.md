@@ -329,7 +329,7 @@ Genesis step 1: Initialize libra2 framework account and core modules on chain.
     // Give the decentralized on-chain governance control over the core framework <a href="account.md#0x1_account">account</a>.
     <a href="libra2_governance.md#0x1_libra2_governance_store_signer_cap">libra2_governance::store_signer_cap</a>(&libra2_framework_account, @libra2_framework, libra2_framework_signer_cap);
 
-    // put reserved framework reserved accounts under aptos governance
+    // put reserved framework reserved accounts under libra2 governance
     <b>let</b> framework_reserved_addresses = <a href="../../libra2-stdlib/../move-stdlib/doc/vector.md#0x1_vector">vector</a>&lt;<b>address</b>&gt;[@0x2, @0x3, @0x4, @0x5, @0x6, @0x7, @0x8, @0x9, @0xa];
     <b>while</b> (!<a href="../../libra2-stdlib/../move-stdlib/doc/vector.md#0x1_vector_is_empty">vector::is_empty</a>(&framework_reserved_addresses)) {
         <b>let</b> <b>address</b> = <a href="../../libra2-stdlib/../move-stdlib/doc/vector.md#0x1_vector_pop_back">vector::pop_back</a>&lt;<b>address</b>&gt;(&<b>mut</b> framework_reserved_addresses);
@@ -858,7 +858,7 @@ The last step of genesis.
 
 <tr>
 <td>2</td>
-<td>Addresses ranging from 0x0 - 0xa should be reserved for the framework and part of aptos governance.</td>
+<td>Addresses ranging from 0x0 - 0xa should be reserved for the framework and part of libra2 governance.</td>
 <td>Critical</td>
 <td>The function genesis::initialize calls account::create_framework_reserved_account for addresses 0x0, 0x2, 0x3, 0x4, ..., 0xa which creates an account and authentication_key for them. This should be formally verified by ensuring that at the beginning of the genesis::initialize function no Account resource exists for the reserved addresses, and at the end of the function, an Account resource exists.</td>
 <td>Formally verified via <a href="#high-level-req-2">initialize</a>.</td>

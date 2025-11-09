@@ -2,7 +2,7 @@
 # Copyright (c) Aptos
 # SPDX-License-Identifier: Apache-2.0
 
-# This script is to build and push aptos indexer processors v2 images.
+# This script is to build and push libra2 indexer processors v2 images.
 # You need to execute this from the repository root as working directory
 # E.g. scripts/build-and-push-images.sh
 # E.g. scripts/build-and-push-images.sh python

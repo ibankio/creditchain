@@ -521,7 +521,7 @@ pub fn create_and_fund_account_request(
 
 const CREATION_PARALLELISM: usize = 500;
 
-/// Copied from aptos crate, to not need to link it whole.
+/// Copied from libra2 crate, to not need to link it whole.
 /// Prompts for confirmation until a yes or no is given explicitly
 pub fn prompt_yes(prompt: &str) -> bool {
     let mut result: Result<bool, ()> = Err(());

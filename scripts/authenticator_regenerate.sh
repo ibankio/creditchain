@@ -23,7 +23,7 @@ cd $repodir
   echo
   echo "Regenerating serde-reflection to track type changes over time (in `pwd`)"
   cargo run -p generate-format -- --corpus api --record
-  cargo run -p generate-format -- --corpus aptos --record
+  cargo run -p generate-format -- --corpus libra2 --record
   cargo run -p generate-format -- --corpus consensus --record
   cargo run -p generate-format -- --corpus network --record
   cargo run -p generate-format -- --corpus move-abi --record

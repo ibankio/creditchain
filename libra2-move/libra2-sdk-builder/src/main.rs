@@ -32,7 +32,7 @@ struct Options {
     #[clap(long)]
     target_source_dir: Option<PathBuf>,
 
-    /// Also install the aptos types described by the given YAML file, along with the BCS runtime.
+    /// Also install the libra2 types described by the given YAML file, along with the BCS runtime.
     #[clap(long)]
     with_libra2_types: Option<PathBuf>,
 

@@ -397,13 +397,13 @@ impl Default for Libra2LatencyFilteringConfig {
 pub struct Libra2DataClientConfig {
     /// Whether transaction data v2 is enabled
     pub enable_transaction_data_v2: bool,
-    /// The aptos data poller config for the data client
+    /// The libra2 data poller config for the data client
     pub data_poller_config: Libra2DataPollerConfig,
-    /// The aptos data multi-fetch config for the data client
+    /// The libra2 data multi-fetch config for the data client
     pub data_multi_fetch_config: Libra2DataMultiFetchConfig,
     /// Whether or not to ignore peers with low peer scores
     pub ignore_low_score_peers: bool,
-    /// The aptos latency filtering config for the data client
+    /// The libra2 latency filtering config for the data client
     pub latency_filtering_config: Libra2LatencyFilteringConfig,
     /// The interval (milliseconds) at which to refresh the latency monitor
     pub latency_monitor_loop_interval_ms: u64,

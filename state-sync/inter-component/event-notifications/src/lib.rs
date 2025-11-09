@@ -402,7 +402,7 @@ impl OnChainConfigProvider for DbBackedOnChainConfig {
             .get_state_value_by_version(&StateKey::on_chain_config::<T>()?, self.version)?
             .ok_or_else(|| {
                 anyhow!(
-                    "no config {} found in aptos root account state",
+                    "no config {} found in libra2 root account state",
                     T::CONFIG_ID
                 )
             })?

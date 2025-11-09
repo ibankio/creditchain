@@ -64,7 +64,7 @@ pub struct ApiConnectionConfig {
 
     /// Path to the private key for creating test account and minting coins in
     /// the MintFunder case, or for transferring coins in the TransferFunder case.
-    /// To keep Testnet simple, we used one private key for aptos root account
+    /// To keep Testnet simple, we used one private key for libra2 root account
     /// To manually generate a keypair, use generate-key:
     /// `cargo run -p generate-keypair -- -o <output_file_path>`
     #[serde(default = "ApiConnectionConfig::default_mint_key_file_path")]

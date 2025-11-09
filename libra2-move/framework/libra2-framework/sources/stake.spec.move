@@ -763,10 +763,10 @@ spec libra2_framework::stake {
         aborts_if !exists<ValidatorSet>(@libra2_framework);
         aborts_if !exists<staking_config::StakingConfig>(@libra2_framework);
 
-        let aptos = @libra2_framework;
-        let pre_validator_set = global<ValidatorSet>(aptos);
-        let post validator_set = global<ValidatorSet>(aptos);
-        let staking_config = global<staking_config::StakingConfig>(aptos);
+        let libra2 = @libra2_framework;
+        let pre_validator_set = global<ValidatorSet>(libra2);
+        let post validator_set = global<ValidatorSet>(libra2);
+        let staking_config = global<staking_config::StakingConfig>(libra2);
         let voting_power_increase_limit = staking_config.voting_power_increase_limit;
         aborts_if pre_validator_set.total_joining_power + increase_amount > MAX_U128;
         aborts_if pre_validator_set.total_voting_power > 0 && pre_validator_set.total_voting_power * voting_power_increase_limit > MAX_U128;

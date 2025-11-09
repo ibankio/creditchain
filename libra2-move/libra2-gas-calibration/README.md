@@ -31,7 +31,7 @@ Create a Move project under `/samples` by running:
 ```bash
 mkdir MY-PROJECT
 cd MY-PROJECT
-cargo run -p aptos -- move init --name MY-PROJECT
+cargo run -p libra2 -- move init --name MY-PROJECT
 ```
 
 ## Writing Your First Calibration Function

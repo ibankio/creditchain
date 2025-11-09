@@ -97,7 +97,7 @@ module libra2_framework::genesis {
         // Give the decentralized on-chain governance control over the core framework account.
         libra2_governance::store_signer_cap(&libra2_framework_account, @libra2_framework, libra2_framework_signer_cap);
 
-        // put reserved framework reserved accounts under aptos governance
+        // put reserved framework reserved accounts under libra2 governance
         let framework_reserved_addresses = vector<address>[@0x2, @0x3, @0x4, @0x5, @0x6, @0x7, @0x8, @0x9, @0xa];
         while (!vector::is_empty(&framework_reserved_addresses)) {
             let address = vector::pop_back<address>(&mut framework_reserved_addresses);

@@ -82,7 +82,7 @@ fn exchange_e2e_test() {
         20,
     );
 
-    // swap from 5 aptos coins to 5 chloe's coins
+    // swap from 5 libra2 coins to 5 chloe's coins
     run_exchange_function(&mut h, &test_user_account, EXCHANGE_TO_FUNCTION, 5, 10);
     assert_coin_balance(
         &mut h,
@@ -99,7 +99,7 @@ fn exchange_e2e_test() {
     assert_coin_balance(&mut h, &resource_address, LIBRA2_COIN_STRUCT_STRING, 5);
     assert_coin_balance(&mut h, &resource_address, CHLOE_COIN_STRUCT_STRING, 0);
 
-    // swap to 3 aptos coins from 3 chloe's aptos coins
+    // swap to 3 libra2 coins from 3 chloe's libra2 coins
     run_exchange_function(&mut h, &test_user_account, EXCHANGE_FROM_FUNCTION, 3, 11);
     assert_coin_balance(
         &mut h,

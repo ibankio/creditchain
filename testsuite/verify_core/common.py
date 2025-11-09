@@ -58,7 +58,7 @@ def warm_cache_and_get_latest_backup_version(
         stdout=subprocess.PIPE,
     )
     if db_backup_result.stdout is None:
-        raise Exception("Failed to run aptos db tool backup. Cannot get stdout.")
+        raise Exception("Failed to run libra2 db tool backup. Cannot get stdout.")
     latest_version = find_latest_version_from_db_backup_output(db_backup_result.stdout)
     if latest_version < 0:
         raise Exception("Failed to find latest version")

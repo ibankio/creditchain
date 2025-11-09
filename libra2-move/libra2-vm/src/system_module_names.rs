@@ -28,7 +28,7 @@ pub const CREATE_ACCOUNT_IF_DOES_NOT_EXIST: &IdentStr =
 pub const AUTHENTICATE: &IdentStr = ident_str!("authenticate");
 
 // Data to resolve basic account and transaction flow functions and structs
-/// The ModuleId for the aptos block module
+/// The ModuleId for the libra2 block module
 pub static BLOCK_MODULE: Lazy<ModuleId> = Lazy::new(|| {
     ModuleId::new(
         account_config::CORE_CODE_ADDRESS,

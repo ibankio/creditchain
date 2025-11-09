@@ -145,7 +145,7 @@ pub struct Block {
     pub parent_block_identifier: BlockIdentifier,
     /// Timestamp in milliseconds to the block from the UNIX_EPOCH
     pub timestamp: u64,
-    /// Transactions associated with the version.  In aptos there should only be one transaction
+    /// Transactions associated with the version.  In libra2 there should only be one transaction
     pub transactions: Vec<Transaction>,
 }
 

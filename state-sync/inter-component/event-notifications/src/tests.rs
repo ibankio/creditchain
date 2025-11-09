@@ -557,7 +557,7 @@ fn create_database() -> Arc<RwLock<DbReaderWriter>> {
     // Generate a genesis change set
     let (genesis, _) = libra2_vm_genesis::test_genesis_change_set_and_validators(Some(1));
 
-    // Create test aptos database
+    // Create test libra2 database
     let db_path = libra2_temppath::TempPath::new();
     assert_ok!(db_path.create_as_dir());
     let (_, db_rw) = DbReaderWriter::wrap(Libra2DB::new_for_test(db_path.path()));

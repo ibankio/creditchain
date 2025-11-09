@@ -124,7 +124,7 @@ fn test_reconfiguration() {
         300000001,
     ));
 
-    // txn3 = set the aptos version for next epoch
+    // txn3 = set the libra2 version for next epoch
     let txn3 = get_test_signed_transaction(
         libra2_test_root_address(),
         /* sequence_number = */ 1,

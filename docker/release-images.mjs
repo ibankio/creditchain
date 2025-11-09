@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node
 
-// This script releases the main aptos docker images to docker hub.
+// This script releases the main libra2 docker images to docker hub.
 // It does so by copying the images from aptos GCP artifact registry to docker hub.
 // It also copies the release tags to GCP Artifact Registry and AWS ECR.
 //

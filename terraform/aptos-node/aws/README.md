@@ -102,7 +102,7 @@ This will download all the terraform dependencies for you, in the `.terraform` f
 10. Generate key pairs (node owner key, consensus key and networking key) in your working directory.
 
     ```
-    $ aptos genesis generate-keys --output-dir ~/$WORKSPACE
+    $ libra2 genesis generate-keys --output-dir ~/$WORKSPACE
     ```
 
     This will create three files: `private-keys.yaml`, `validator-identity.yaml`, `validator-full-node-identity.yaml` for you. Backup your key files somewhere safe, this is important for you to establish ownership of your node, and it will be used to claim your rewards later if eligible. Very important!!
@@ -110,7 +110,7 @@ This will download all the terraform dependencies for you, in the `.terraform` f
 11. Configure validator information.
 
     ```
-    $ aptos genesis set-validator-configuration --keys-dir ~/$WORKSPACE --local-repository-dir ~/$WORKSPACE --username <pick a username for your node> --validator-host $VALIDATOR_ADDRESS:6180 --full-node-host $FULLNODE_ADDRESS:6182
+    $ libra2 genesis set-validator-configuration --keys-dir ~/$WORKSPACE --local-repository-dir ~/$WORKSPACE --username <pick a username for your node> --validator-host $VALIDATOR_ADDRESS:6180 --full-node-host $FULLNODE_ADDRESS:6182
 
     ```
 
@@ -160,7 +160,7 @@ This will download all the terraform dependencies for you, in the `.terraform` f
 14. Compile genesis blob and waypoint
 
     ```
-    $ aptos genesis generate-genesis --local-repository-dir ~/$WORKSPACE --output-dir ~/$WORKSPACE
+    $ libra2 genesis generate-genesis --local-repository-dir ~/$WORKSPACE --output-dir ~/$WORKSPACE
     ```
 
     This should create two files in your working directory, `genesis.blob` and `waypoint.txt`
