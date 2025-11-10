@@ -209,7 +209,7 @@ pub(crate) mod miscellaneous {
                 aud: "407408718192.apps.googleusercontent.com".to_string(),
                 sub: "113990307082899718775".to_string(),
                 hd: "aptoslabs.com".to_string(),
-                email: "michael@aptoslabs.com".to_string(),
+                email: "info@aptoslabs.com".to_string(),
                 email_verified: true,
                 at_hash: "bxIESuI59IoZb5alCASqBg".to_string(),
                 name: "Michael Straka".to_string(),

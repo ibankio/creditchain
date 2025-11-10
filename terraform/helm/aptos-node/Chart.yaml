@@ -3,6 +3,6 @@ name: libra2-node
 version: 1.0.0
 appVersion: 1.0.0
 description: Libra2 blockchain node deployment
-home: https://aptoslabs.com/
+home: https://libra2.org/
 sources:
 - https://github.com/libra2org/libra2-core

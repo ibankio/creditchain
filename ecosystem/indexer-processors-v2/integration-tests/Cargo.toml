@@ -4,12 +4,12 @@ description = "Indexer GRPC processor integration tests."
 version = "1.0.0"
 
 # Workspace inherited keys
-authors = ["A-p-t-o-s Labs <opensource@aptoslabs.com>"]
+authors = ["Libra2 Research Labs <opensource@libra2.org>"]
 edition = "2021"
-homepage = "https://aptoslabs.com"
+homepage = "https://libra2.org"
 license = "Apache-2.0"
 publish = false
-repository = "https://github.com/aptos-labs/aptos-core"
+repository = "https://github.com/libra2org/libra2-core"
 rust-version = { workspace = true }
 
 [dependencies]

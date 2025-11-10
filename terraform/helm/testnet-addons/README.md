@@ -4,7 +4,7 @@
 
 Additional components for libra2-nodes testnet
 
-**Homepage:** <https://aptoslabs.com/>
+**Homepage:** <https://libra2.org/>
 
 ## Source Code
 

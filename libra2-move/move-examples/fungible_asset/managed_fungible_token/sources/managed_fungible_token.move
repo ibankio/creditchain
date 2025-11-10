@@ -21,14 +21,14 @@ module example_addr::managed_fungible_token {
             1,
             collection_name,
             option::none(),
-            utf8(b"http://aptoslabs.com/collection"),
+            utf8(b"http://libra2.org/collection"),
         );
         let constructor_ref = &create_named_token(admin,
             collection_name,
             utf8(b"test token description"),
             token_name,
             option::none(),
-            utf8(b"http://aptoslabs.com/token"),
+            utf8(b"http://libra2.org/token"),
         );
 
         managed_fungible_asset::initialize(

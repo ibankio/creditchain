@@ -1,12 +1,10 @@
-homepage: "https://aptos.dev"
+homepage: "https://docs.libra2.org"
 language: rust
-primary_contact: "gerardo@aptoslabs.com"
+primary_contact: "info@aptoslabs.com"
 main_repo: "https://github.com/libra2org/libra2-core"
 auto_ccs:
   - "oss-fuzz-notifications@aptoslabs.com"
   - "security@aptoslabs.com"
-  - "andrea.cappa@aptoslabs.com"
-  - "marco.ilardi@aptoslabs.com"
 sanitizers:
   - none
 fuzzing_engines:

@@ -3,6 +3,6 @@ name: testnet-addons
 version: "0.1"
 appVersion: 0.1.0
 description: Additional components for libra2-nodes testnet
-home: https://aptoslabs.com/
+home: https://libra2.org/
 sources:
   - https://github.com/libra2org/libra2-core

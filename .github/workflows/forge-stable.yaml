@@ -3,7 +3,7 @@ name: Continuous Forge Tests - Stable
 
 # We have various Forge Stable tests here, that test out different situations and workloads.
 #
-# Dashboard showing historical results: https://grafana.aptoslabs.com/d/bdnt45ggsg000f/forge-stable-performance?orgId=1
+# Dashboard showing historical results: https://grafana.libra2.org/d/bdnt45ggsg000f/forge-stable-performance?orgId=1
 
 # Tests are named based on how they are set up, some of the common flavors are:
 # * "realistic-env" - tests with "realistic-env" in their name try to have network and hardware environemnt

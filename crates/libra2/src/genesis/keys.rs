@@ -114,11 +114,11 @@ pub struct SetValidatorConfiguration {
     #[clap(long)]
     pub(crate) username: String,
 
-    /// Host and port pair for the validator e.g. 127.0.0.1:6180 or aptoslabs.com:6180
+    /// Host and port pair for the validator e.g. 127.0.0.1:6180 or libra2.org:6180
     #[clap(long)]
     pub(crate) validator_host: HostAndPort,
 
-    /// Host and port pair for the fullnode e.g. 127.0.0.1:6180 or aptoslabs.com:6180
+    /// Host and port pair for the fullnode e.g. 127.0.0.1:6180 or libra2.org:6180
     #[clap(long)]
     pub(crate) full_node_host: Option<HostAndPort>,
 

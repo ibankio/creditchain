@@ -1,12 +1,12 @@
 {
-  "name": "@aptos-labs/libra2-faucet-client",
+  "name": "@libra2-labs/libra2-faucet-client",
   "description": "Generated client for the Libra2 faucet",
   "license": "Apache 2.0",
   "engines": {
     "node": ">=11.0.0"
   },
   "main": "./dist/index.js",
-  "module": "./dist/aptos.esm.js",
+  "module": "./dist/libra2.esm.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "prepack": "tsup",
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/libra2org/libra2-core/issues"
   },
-  "author": "aptoslabs.com",
+  "author": "libra2.org",
   "keywords": [
     "Libra2",
     "Libra2 Labs"

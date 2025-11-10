@@ -4,7 +4,7 @@
 
 Libra2 blockchain automated genesis ceremony for testnets
 
-**Homepage:** <https://aptoslabs.com/>
+**Homepage:** <https://libra2.org/>
 
 ## Source Code
 

@@ -389,7 +389,7 @@ def get_cpu_profile_link(
     start_time: datetime | None = None,
     end_time: datetime | None = None,
 ) -> str:
-    base_url = "https://grafana.aptoslabs.com/a/grafana-pyroscope-app/profiles-explorer"
+    base_url = "https://grafana.libra2.org/a/grafana-pyroscope-app/profiles-explorer"
     start_timestamp = str(int(start_time.timestamp())) if start_time else "now-1h"
     end_timestamp = str(int(end_time.timestamp())) if end_time else "now"
 
