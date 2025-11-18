@@ -1,5 +1,6 @@
 // Copyright © A-p-t-o-s Foundation
 // SPDX-License-Identifier: Apache-2.0
+// Copyright © Libra2 Research
 
 use super::utils::{explorer_transaction_link, fund_account, strip_private_key_prefix};
 use crate::{
@@ -1920,9 +1921,22 @@ impl TransactionOptions {
         let now_usecs = now * US_IN_SECS;
 
         // Warn local user that clock is skewed behind the blockchain.
-        // There will always be a little lag from real time to blockchain time
-        if now_usecs < state.timestamp_usecs - ACCEPTED_CLOCK_SKEW_US {
-            eprintln!("Local clock is is skewed from blockchain clock.  Clock is more than {} seconds behind the blockchain {}", ACCEPTED_CLOCK_SKEW_US, state.timestamp_usecs / US_IN_SECS );
+        // There will always be a little lag from real time to blockchain time.
+        //
+        // NOTE: We use saturating subtraction here to avoid u64 underflow when the
+        // on-chain timestamp is very close to 0 (e.g., right after genesis).
+        if state
+            .timestamp_usecs
+            .saturating_sub(now_usecs)
+            > ACCEPTED_CLOCK_SKEW_US
+        {
+            let skew_secs = (state.timestamp_usecs.saturating_sub(now_usecs)) / US_IN_SECS;
+            eprintln!(
+                "Local clock is skewed from blockchain clock. Clock is more than {} seconds behind the blockchain (skew: {}s, chain_time: {}s)",
+                ACCEPTED_CLOCK_SKEW_US / US_IN_SECS,
+                skew_secs,
+                state.timestamp_usecs / US_IN_SECS,
+            );
         }
         let expiration_time_secs = now + self.gas_options.expiration_secs;
 
