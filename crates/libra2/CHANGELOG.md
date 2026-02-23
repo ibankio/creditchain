@@ -1,11 +1,11 @@
-# Libra2 CLI Changelog
+# CreditChain CLI Changelog
 
-All notable changes to the Libra2 CLI will be captured in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and the format set out by [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+All notable changes to the CreditChain CLI will be captured in this file. This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and the format set out by [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 # Unreleased
 
 ## [7.7.1]
-- change Libra2 to Libra2, start using Libra2 name for CLI
+- change CreditChain to CreditChain, start using CreditChain name for CLI
 - 
 ## [7.7.0]
 - Turn off sharding in the local testnet
@@ -30,7 +30,7 @@ All notable changes to the Libra2 CLI will be captured in this file. This projec
 ## [7.3.0]
 
 - Update boogie from 3.2.4 to 3.5.1.
-- Change behavior of `libra2 init` to first look and see if the account has an LBT balance rather than checking if the account exists
+- Change behavior of `libra2 init` to first look and see if the account has an CCC balance rather than checking if the account exists
 
 ## [7.2.0]
 
@@ -41,7 +41,7 @@ All notable changes to the Libra2 CLI will be captured in this file. This projec
 - Add CLI outputs and on-disk storage to be stored in AIP-80 format.  Will allow for legacy formats to be taken in as well
 
 ## [7.0.0]
-- Compiler v1 is now deprecated. It is now removed from the Libra2 CLI.
+- Compiler v1 is now deprecated. It is now removed from the CreditChain CLI.
 - Added a new option `libra2 move compile --fail-on-warning` which fails the compilation if any warnings are found.
 - We now default to running extended checks when compiling test code (this was previously only done with the option `--check-test-code`, but this is no longer available). However, these checks can be now be skipped with `--skip-checks-on-test-code`.
 - Add network to show profiles.
@@ -57,7 +57,7 @@ All notable changes to the Libra2 CLI will be captured in this file. This projec
 stdin, which triggers a graceful shutdown when received.
 
 ## [6.1.0]
-- Remove FFI support from Libra2 CLI.
+- Remove FFI support from CreditChain CLI.
 - Various compiler bug fixes.
 - Fix for coverage tool crash in the presence of inline functions.
 
@@ -85,7 +85,7 @@ stdin, which triggers a graceful shutdown when received.
 - Downgrade bytecode version to v6 before calling the Revela decompiler, if possible, i.e. no enum types are used. This allows to continue to use Revela until the new decompiler is ready.
 
 ## [5.0.0] - 2024/12/11
-- [**Breaking Change**] `libra2 init` and `libra2 account fund-with-faucet` no longer work directly with testnet, you must now use the minting page at the [Libra2 dev docs](https://aptos.dev/network/faucet).
+- [**Breaking Change**] `libra2 init` and `libra2 account fund-with-faucet` no longer work directly with testnet, you must now use the minting page at the [CreditChain dev docs](https://github.com/ibankio/creditchain/tree/main/docs).
 ## [4.7.0] - 2024/12/10
 - [`Fix`] CLI config should not always require a private key field to be present.
 
@@ -98,14 +98,14 @@ stdin, which triggers a graceful shutdown when received.
 - Determine network from URL to make explorer links better for legacy users
 - Add support for AIP-80 compliant strings when importing using the CLI arguments or manual input.
 - Add option `--print-metadata-only` to `libra2 move decompile` and `libra2 move disassemble` to print out the metadata attached to the bytecode.
-- Add `--existing-hasura-url` flag to localnet to tell it to use an existing Hasura instance instead of run Hasura itself. See https://github.com/libra2org/libra2-core/pull/15313.
+- Add `--existing-hasura-url` flag to localnet to tell it to use an existing Hasura instance instead of run Hasura itself. See https://github.com/ibankio/creditchain/pull/15313.
 - Add `--skip-metadata-apply` flag to localnet, in which case we won't try to apply the Hasura metadata.
 - Upgrade Hasura image we use from 2.40.2 to 2.44.0.
 
 ## [4.4.0] - 2024/11/06
 - Fix typos in `libra2 move compile` help text.
 - Update the default version of `movefmt` to be installed from 1.0.5 to 1.0.6
-- Add `--host-postgres-host` flag: https://github.com/libra2org/libra2-core/pull/15216.
+- Add `--host-postgres-host` flag: https://github.com/ibankio/creditchain/pull/15216.
 
 ## [4.3.0] - 2024/10/30
 - Allow for setting large-packages module for chunking publish mode with `--large-packages-module-address`
@@ -118,7 +118,7 @@ stdin, which triggers a graceful shutdown when received.
 - Bump to resolve issue with release version inconsistency.
 
 ## [4.2.4] - 2024/10/21
-- Releasing Move 2.1, which adds compound assignments (`x += 1`) and loop labels to the language. See [Move 2 Release Notes](https://aptos.dev/en/build/smart-contracts/book/move-2).
+- Releasing Move 2.1, which adds compound assignments (`x += 1`) and loop labels to the language. See [Move 2 Release Notes](https://github.com/ibankio/creditchain/tree/main/third_party/move/documentation/book).
 - multiple bug fixes in the Move 2 compilation chain.
 - `libra2 move fmt` formats move files inside the `tests` and `examples` directory of a package.
 - Added `libra2 update prover-dependencies`, which installs the dependency of Move prover, boogie, z3 and cvc5.
@@ -160,7 +160,7 @@ stdin, which triggers a graceful shutdown when received.
 - Fixes a bug in the Move compiler (both v1 and v2) which disallowed `match` as a name for a function or for a variable.
 
 ## [3.5.0] - 2024/07/06
-- Add balance command to easily get account balances for LBT currently
+- Add balance command to easily get account balances for CCC currently
 - Add network to config file
 - Add explorer links to initialized accounts, and transaction submissions
 - Alias some move commands as common misnomers (e.g. build -> compile, deploy -> publish)
@@ -179,7 +179,7 @@ stdin, which triggers a graceful shutdown when received.
 
 ## [3.3.0] - 2024/05/03
 - **Breaking Change** Update View functions to use BCS for submission.  Allows for all arguments to be supported in view functions.  Note some input arguments that were previously inputted as strings may be handled differently.
-- [Early beta release of the Move compiler v2](https://docs.libra2.org/move/compiler_v2/) is now accessible through the CLI. We now allow specifying the Move compiler version and the Move language version via the CLI.
+- [Early beta release of the Move compiler v2](https://github.com/ibankio/creditchain/tree/main/docs) is now accessible through the CLI. We now allow specifying the Move compiler version and the Move language version via the CLI.
 
 ## [3.2.0] - 2024/03/29
 - Renamed `run-local-testnet` to `run-localnet`. `run-local-testnet` is still supported for backwards compatibility.
@@ -213,7 +213,7 @@ stdin, which triggers a graceful shutdown when received.
 - Updated CLI source compilation to use rust toolchain version 1.74.1 (from 1.72.1).
 - Added `for` loop.
   - Syntax: `for (iter in lower_bound..upper_bound) { loop_body }` with integer bounds.
-  - Documentation: https://docs.libra2.org/move/book/loops
+  - Documentation: https://github.com/ibankio/creditchain/blob/main/third_party/move/documentation/book/src/loops.md
 - Upgraded indexer processors for localnet from 2d5cb211a89a8705674e9e1e741c841dd899c558 to 4801acae7aea30d7e96bbfbe5ec5b04056dfa4cf. Upgraded Hasura metadata accordingly.
 - Upgraded Hasura GraphQL engine image from 2.35.0 to 2.36.1.
 
@@ -222,7 +222,7 @@ stdin, which triggers a graceful shutdown when received.
 
 ## [2.3.1] - 2023/11/07
 ### Updated
-- Updated processor code from https://github.com/libra2org/libra2-indexer-processors for the localnet to 2d5cb211a89a8705674e9e1e741c841dd899c558.
+- Updated processor code from https://github.com/ibankio/creditchain/tree/main/ecosystem/indexer-processors-v2 for the localnet to 2d5cb211a89a8705674e9e1e741c841dd899c558.
 - Improved reliability of inter-container networking with localnet.
 
 ## [2.3.0] - 2023/10/25
@@ -231,7 +231,7 @@ stdin, which triggers a graceful shutdown when received.
 
 ### Updated
 - Made the localnet exit more quickly if a service fails to start.
-- Updated processor code from https://github.com/libra2org/libra2-indexer-processors for the localnet to bcba94c26c8a6372056d2b69ce411c5719f98965.
+- Updated processor code from https://github.com/ibankio/creditchain/tree/main/ecosystem/indexer-processors-v2 for the localnet to bcba94c26c8a6372056d2b69ce411c5719f98965.
 
 ### Fixed
 - Fixed an infrequent bug that caused startup failures for the localnet with `--force-restart` + `--with-indexer-api` by using a Docker volume rather than a bind mount for the postgres storage.
@@ -239,7 +239,7 @@ stdin, which triggers a graceful shutdown when received.
 
 ## [2.2.2] - 2023/10/16
 ### Updated
-- Updated processor code from https://github.com/libra2org/libra2-indexer-processors for the localnet to d6f55d4baba32960ea7be60878552e73ffbe8b7e.
+- Updated processor code from https://github.com/ibankio/creditchain/tree/main/ecosystem/indexer-processors-v2 for the localnet to d6f55d4baba32960ea7be60878552e73ffbe8b7e.
 
 ## [2.2.1] - 2023/10/13
 ### Fixed
@@ -247,17 +247,17 @@ stdin, which triggers a graceful shutdown when received.
 
 ## [2.2.0] - 2023/10/11
 ### Added
-- Added `--with-indexer-api` to `libra2 node run-local-testnet`. With this flag you can run a full processor + indexer API stack as part of your localnet. You must have Docker installed to use this feature. For more information, see https://docs.libra2.org/nodes/local-testnet/local-testnet-index.
+- Added `--with-indexer-api` to `libra2 node run-local-testnet`. With this flag you can run a full processor + indexer API stack as part of your localnet. You must have Docker installed to use this feature. For more information, see https://github.com/ibankio/creditchain/tree/main/docs.
 ### Updated
 - Updated CLI source compilation to use rust toolchain version 1.72.1 (from 1.71.1).
 
 ## [2.1.1] - 2023/09/27
 ### Added
 - Added an option `--print-metadata` to the command `libra2 move download` to print out the metadata of the package to be downloaded.
-  - Example: `libra2 move download  --account 0x1 --package Libra2Framework --url https://mainnet.libra2.org/v1 --print-metadata`
+  - Example: `libra2 move download  --account 0x1 --package Libra2Framework --url https://mainnet.creditchain.org/v1 --print-metadata`
 ### Updated
 - The `--with-faucet` flag has been removed from `libra2 node run-local-testnet`, we now run a faucet by default. To disable the faucet use the `--no-faucet` flag.
-- **Breaking change**: When using `libra2 node run-local-testnet` we now expose a transaction stream. Learn more about the transaction stream service here: https://aptos.dev/indexer/txn-stream/. Opt out of this with `--no-txn-stream`. This is marked as a breaking change since the CLI now uses a port (50051 by default) that it didn't used to. If you need this port, you can tell the CLI to use a different port with `--txn-stream-port`.
+- **Breaking change**: When using `libra2 node run-local-testnet` we now expose a transaction stream. Learn more about the transaction stream service here: https://github.com/ibankio/creditchain/tree/main/docs. Opt out of this with `--no-txn-stream`. This is marked as a breaking change since the CLI now uses a port (50051 by default) that it didn't used to. If you need this port, you can tell the CLI to use a different port with `--txn-stream-port`.
 
 ## [2.1.0] - 2023/08/24
 ### Updated
@@ -353,4 +353,4 @@ stdin, which triggers a graceful shutdown when received.
 * Move compiler will no longer use an environment variable to communicate between compiler and CLI for the bytecode version
 
 ## [1.0.7]
-* For logs earlier than 1.0.7, please check out the [releases on GitHub](https://github.com/libra2org/libra2-core/releases?q="Libra2+CLI+Release")
+* For logs earlier than 1.0.7, please check out the [releases on GitHub](https://github.com/ibankio/creditchain/releases?q="CreditChain+CLI+Release")

@@ -283,12 +283,12 @@ default-members = [
 # All workspace members should inherit these keys
 # for package declarations.
 [workspace.package]
-authors = ["Libra2 <info@libra2.org>"]
+authors = ["CreditChain Research Team"]
 edition = "2021"
-homepage = "https://libra2.org/"
+homepage = "https://github.com/ibankio/creditchain"
 license = "Apache-2.0"
 publish = false
-repository = "https://github.com/libra2org/libra2-core"
+repository = "https://github.com/ibankio/creditchain"
 rust-version = "1.80.1"
 
 [workspace.dependencies]

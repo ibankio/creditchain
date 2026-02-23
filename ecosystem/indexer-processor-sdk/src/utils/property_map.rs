@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::utils::convert::{convert_bcs_hex, convert_bcs_hex_new};

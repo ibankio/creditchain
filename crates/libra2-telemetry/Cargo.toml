@@ -1,6 +1,6 @@
 [package]
 name = "libra2-telemetry"
-description = "Libra2 utilities to collect observability data from a node and send it to a remote destination"
+description = "CreditChain utilities to collect observability data from a node and send it to a remote destination"
 version = "0.1.1"
 
 # Workspace inherited keys

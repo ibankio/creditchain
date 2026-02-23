@@ -9,7 +9,7 @@ runs:
   using: composite
   steps:
     # The source code must be checked out by the workflow that invokes this action.
-    - uses: libra2org/libra2-core/.github/actions/rust-setup@main
+    - uses: ibankio/creditchain/.github/actions/rust-setup@main
       with:
         GIT_CREDENTIALS: ${{ inputs.GIT_CREDENTIALS }}
 

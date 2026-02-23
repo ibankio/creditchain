@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 //! This module implements the Validate trait for BLS12-381 public keys, which enables library users

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright © A-p-t-o-s Foundation
+# Copyright © CreditChain Research Team
 # Parts of the project are originally copyright © Meta Platforms, Inc.
 # SPDX-License-Identifier: Apache-2.0
 
@@ -36,7 +36,7 @@ cd "$SCRIPT_PATH/.." || exit
 
 function usage {
   echo "Usage:"
-  echo "Installs or updates necessary dev tools for libra2/libra2-core."
+  echo "Installs or updates necessary dev tools for CreditChain."
   echo "-b batch mode, no user interactions and minimal output"
   echo "-p update ${HOME}/.profile"
   echo "-r install protoc and related tools"
@@ -51,7 +51,7 @@ function usage {
   echo "-n will target the /opt/ dir rather than the $HOME dir.  /opt/bin/, /opt/rustup/, and /opt/dotnet/ rather than $HOME/bin/, $HOME/.rustup/, and $HOME/.dotnet/"
   echo "-k skip pre-commit"
   echo "If no toolchain component is selected with -t, -o, -y, -d, or -p, the behavior is as if -t had been provided."
-  echo "This command must be called from the root folder of the Libra2-core project."
+  echo "This command must be called from the root folder of the CreditChain project."
 }
 
 function add_to_profile {
@@ -460,7 +460,7 @@ function install_toolchain {
 function install_rustup_components_and_nightly {
   echo "Updating rustup and installing the latest rustc, rustfmt & clippy"
   rustup update
-  rustup toolchain install stable # Install the latest toolchain to ensure that dependencies can always be built (even if libra2-core is behind)
+  rustup toolchain install stable # Install the latest toolchain to ensure dependencies can always be built (even if CreditChain is behind)
   rustup component add rustfmt
   rustup component add clippy
 
@@ -716,10 +716,10 @@ function install_libudev-dev {
 
 function welcome_message {
   cat <<EOF
-Welcome to Libra2!
+Welcome to CreditChain!
 
 This script will download and install the necessary dependencies needed to
-build, test and inspect Libra2 Core.
+build, test and inspect CreditChain Core.
 
 Based on your selection, these tools will be included:
 EOF
@@ -893,7 +893,7 @@ if [[ "$INSTALL_BUILD_TOOLS" == "false" ]] &&
 fi
 
 if [ ! -f rust-toolchain.toml ]; then
-  echo "Unknown location. Please run this from the libra2-core repository. Abort."
+  echo "Unknown location. Please run this from the CreditChain repository. Abort."
   exit 1
 fi
 

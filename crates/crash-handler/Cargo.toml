@@ -1,6 +1,6 @@
 [package]
 name = "libra2-crash-handler"
-description = "Libra2 crash handler"
+description = "CreditChain crash handler"
 version = "0.1.1"
 
 # Workspace inherited keys

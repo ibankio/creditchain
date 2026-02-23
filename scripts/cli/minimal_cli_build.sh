@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright © A-p-t-o-s Foundation
+# Copyright © CreditChain Research Team
 # Parts of the project are originally copyright © Meta Platforms, Inc.
 # SPDX-License-Identifier: Apache-2.0
 
@@ -7,7 +7,7 @@ has_command() {
   command -v "$1" > /dev/null 2>&1
 }
 
-# This script is used to set up a minimal environment for building the Libra2 CLI and other tools.
+# This script is used to set up a minimal environment for building the CreditChain CLI and other tools.
 # The `dev_setup.sh` script is way too complex, and too hard to figure out what is actually happening.  This script
 # simplifies the process
 if has_command wget; then
@@ -29,7 +29,7 @@ OS="$(uname)"
 case "$OS" in
   Linux)
     if has_command apt-get; then
-      # Ubuntu / Debian based LBT-GET
+      # Ubuntu / Debian based apt-get
       sudo apt-get update
       sh install_pkg.sh build-essential pkgconf libssl-dev git libudev-dev lld libdw-dev clang llvm cmake
     elif has_command dnf; then

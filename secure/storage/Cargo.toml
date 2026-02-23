@@ -1,6 +1,6 @@
 [package]
 name = "libra2-secure-storage"
-description = "Libra2's Persistent, Secure Storage"
+description = "CreditChain's Persistent, Secure Storage"
 version = "0.1.1"
 
 # Workspace inherited keys

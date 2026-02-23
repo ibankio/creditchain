@@ -1,6 +1,6 @@
 [package]
 name = "libra2-faucet-cli"
-description = "Libra2 Faucet CLI"
+description = "CreditChain Faucet CLI"
 version = "2.0.2"
 
 # Workspace inherited keys

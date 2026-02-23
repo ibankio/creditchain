@@ -1,6 +1,6 @@
 [package]
 name = "libra2-secure-net"
-description = "Libra2's Simple Network Substrate"
+description = "CreditChain's Simple Network Substrate"
 version = "0.1.1"
 
 # Workspace inherited keys

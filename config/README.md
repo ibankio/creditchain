@@ -1,4 +1,4 @@
-# Libra2 Configuration
+# CreditChain Configuration
 
 The configuration describes the operational details for a node
 (Validator or Full node) and provides the clients' information on how to
@@ -16,8 +16,7 @@ Clients are any service interested in learning about the state of the
 blockchain or performing transactions.
 
 For a more detailed summary of the differences between a Validator and a
-Fullnode, see this [blog
-post](https://aptos.dev/blog/2020/01/23/full-node-basics).
+Fullnode, see the architecture docs in this repository.
 
 ## Organization
 
@@ -38,7 +37,7 @@ configuration from many of the services.
 
 `config-builder` builds an entire configuration for a Validator or FullNode,
 including the genesis blob. It takes as one of its input parameters an index that
-specifies the specific node config to return. This can be used to create an Libra2
+specifies the specific node config to return. This can be used to create a CreditChain
 TestNet by constructing compatible configurations for the full set of Validators.
 Similarly the tool can be used to add Fullnodes to an existing network.  Finally,
 it enables generation of a mint/faucet client capable of performing mint

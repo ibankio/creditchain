@@ -1,6 +1,6 @@
 ## Implementation of: https://github.com/marketplace/actions/lychee-broken-link-checker
 
-name: Libra2 GitHub Links Checker
+name: CreditChain GitHub Links Checker
 
 on:
   repository_dispatch:

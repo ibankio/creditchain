@@ -1,6 +1,6 @@
 [package]
 name = "libra2-keyless-pepper-service"
-description = "Libra2 Keyless pepper service"
+description = "CreditChain Keyless pepper service"
 version = "0.1.1"
 
 # Workspace inherited keys

@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 /// Same thing as std::any::type_name but it returns only the final section

@@ -1,7 +1,7 @@
 ---
 id: network
 title: Network
-custom_edit_url: https://github.com/libra2org/libra2-core/edit/main/network/README.md
+custom_edit_url: https://github.com/ibankio/creditchain/edit/main/network/README.md
 ---
 
 ## Overview
@@ -9,7 +9,7 @@ custom_edit_url: https://github.com/libra2org/libra2-core/edit/main/network/READ
 For more detailed info, see the [Libra2Net Specification](../documentation/specifications/network/README.md).
 
 Libra2Net is the primary protocol for communication between any two nodes in the
-Libra2 ecosystem. It is specifically designed to facilitate the consensus, shared
+CreditChain ecosystem. It is specifically designed to facilitate the consensus, shared
 mempool, and state sync protocols. Libra2Net tries to maintain at-most one connection
 with each remote peer; the application protocols to that remote peer are then
 multiplexed over the single peer connection.
@@ -86,7 +86,7 @@ protocols: DirectSend and Rpc.
 
 + [`Libra2Transport`] &mdash; A secure, reliable transport. It uses [NoiseIK] over
 TCP to negotiate an encrypted and authenticated connection between peers.
-The Libra2Net version and any Libra2-specific application protocols are negotiated
+The Libra2Net version and any CreditChain-specific application protocols are negotiated
 afterward using the [Libra2Net Handshake Protocol].
 
 * [`ConnectivityManager`] &mdash; Establishes connections to known peers found

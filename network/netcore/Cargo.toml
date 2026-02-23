@@ -1,6 +1,6 @@
 [package]
 name = "libra2-netcore"
-description = "Libra2 netcore"
+description = "CreditChain netcore"
 version = "0.1.1"
 
 # Workspace inherited keys

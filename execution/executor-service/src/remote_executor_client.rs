@@ -1,5 +1,5 @@
-// Copyright © A-p-t-o-s Foundation
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 use crate::{
     remote_state_view_service::RemoteStateViewService, ExecuteBlockCommand, RemoteExecutionRequest,

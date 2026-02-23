@@ -1,6 +1,6 @@
 [package]
 name = "libra2-infallible"
-description = "Libra2 utilities for infallible types"
+description = "CreditChain utilities for infallible types"
 version = "0.1.1"
 
 # Workspace inherited keys

@@ -1,4 +1,4 @@
-# Libra2 Indexer GRPC Table Info on Fullnode
+# CreditChain Indexer GRPC Table Info on Fullnode
 
 This indexes and parses table info mapping on fullnode.
 

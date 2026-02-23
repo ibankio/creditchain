@@ -1,6 +1,6 @@
 #![forbid(unsafe_code)]
 
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use libra2_telemetry_service::Libra2TelemetryServiceArgs;

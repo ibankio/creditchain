@@ -1,6 +1,6 @@
 [package]
 name = "libra2-api-test-context"
-description = "Libra2 API test context"
+description = "CreditChain API test context"
 version = "0.2.0"
 
 # Workspace inherited keys

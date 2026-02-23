@@ -1,6 +1,6 @@
-name: "Get latest Libra2 CLI"
+name: "Get latest CreditChain CLI"
 description: |
-  Fetches the latest released Libra2 CLI.
+  Fetches the latest released CreditChain CLI.
 inputs:
   destination_directory:
     description: "Directory to install the CLI in"
@@ -9,13 +9,12 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Setup python
-      uses: actions/setup-python@v4
-    - name: Get installation script
+    - name: Setup Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+    - name: Install CLI from CreditChain repository
       shell: bash
       run: |
-        curl -fsSL "https://aptos.dev/scripts/install_cli.py" > install_cli.py
-    - name: Run installation script
-      shell: bash
-      run: |
-        python3 install_cli.py --bin-dir ${{ inputs.destination_directory }}
+        mkdir -p "${{ inputs.destination_directory }}"
+        RUSTFLAGS="--cfg tokio_unstable" cargo install --locked --git https://github.com/ibankio/creditchain.git --profile cli libra2
+        cp "$HOME/.cargo/bin/libra2" "${{ inputs.destination_directory }}/creditchain"
+        chmod +x "${{ inputs.destination_directory }}/creditchain"

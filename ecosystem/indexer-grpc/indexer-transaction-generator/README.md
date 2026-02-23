@@ -4,7 +4,7 @@ This tool is to generate transactions for testing purposes.
 
 ## Usage
 
-Under the root folder, i.e., `libra2-core`, run the follow command. This will default to importing transactions for all networks.
+Under the root folder, i.e., `creditchain`, run the follow command. This will default to importing transactions for all networks.
 
 ```bash
 cargo run -p libra2-indexer-transaction-generator -- --testing-folder ecosystem/indexer-grpc/indexer-transaction-generator/imported_transactions --output-folder ecosystem/indexer-grpc/indexer-test-transactions/src
@@ -44,8 +44,8 @@ Your testing folder should contain:
     ```yaml
     testnet:
       # Transaction Stream endpoint address.
-      transaction_stream_endpoint: https://grpc.testnet.libra2.org:443
-      # (Optional) The key to use with developers.libra2.org
+      transaction_stream_endpoint: https://grpc.testnet.creditchain.org:443
+      # (Optional) The key to use with developers.creditchain.org
       api_key: YOUR_KEY_HERE
       # A map from versions to dump and their output names.
       versions_to_import:
@@ -72,7 +72,7 @@ the actual account address will be allocated by the account manager.
 The accounts in `testing_accounts.yaml` will be used to run scripted transactions. 
 They are persisted in the config so each scripted transaction's generated output stays consistent between 
 `libra2-indexer-transaction-generator` runs. You can generate more testing accounts using 
-Libra2 CLI by running `libra2 init --profile local`. 
+CreditChain CLI by running `libra2 init --profile local`. 
 
 TODO: account manager handles address as script argument.
 

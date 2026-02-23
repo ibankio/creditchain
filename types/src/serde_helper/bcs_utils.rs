@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 pub use move_binary_format::file_format_common::{bcs_size_of_byte_array, size_u32_as_uleb128};

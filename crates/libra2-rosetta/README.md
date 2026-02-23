@@ -1,4 +1,4 @@
-# Libra2 Rosetta Implementation
+# CreditChain Rosetta Implementation
 
 This implementation is built for running a local proxy against
 a local fullnode.  However, for testing purposes, this can be used
@@ -6,14 +6,14 @@ against an external REST endpoint.
 
 ## Architecture
 
-[Rosetta](https://en.wikipedia.org/wiki/Rosetta_(software)) works as a sidecar to an Libra2 fullnode.  Rosetta then proxies the Rosetta standard
-API calls to underlying Libra2 REST API calls and builds the appropriate data.  
+[Rosetta](https://en.wikipedia.org/wiki/Rosetta_(software)) works as a sidecar to an CreditChain fullnode.  Rosetta then proxies the Rosetta standard
+API calls to underlying CreditChain REST API calls and builds the appropriate data.  
 
 
 ## Running Rosetta
 
 The `libra2-rosetta` binary can run in three modes:
-1. `online` -> This runs a local fullnode and blocks the Libra2 REST API from outside access, using it only as a local proxy for Rosetta APIs.
+1. `online` -> This runs a local fullnode and blocks the CreditChain REST API from outside access, using it only as a local proxy for Rosetta APIs.
 2. `offline` -> This runs a Rosetta server that is not connected to the blockchain.  Only commands listed as `offline` work with this mode.
 3. `online-remote` -> This runs a Rosetta instance that connects to a remote fullnode e.g. a public fullnode.  Please keep in mind that since this proxies APIs, it can fail due to throttling and network errors between the servers.
 
@@ -21,7 +21,7 @@ The `libra2-rosetta` binary can run in three modes:
 ## Features supported
 
 ### Balances
-* Only the native `LBT` is supported.
+* Only the native `CCC` is supported.
 * Staking balances are also supported, with the sub-account with the name of `stake`, and only with `0x1::staking_contract` stake pools.
 * Balances are loaded from the live API `get_account_resources`; and if the `block` has been pruned, it will error out.
 * All balances are provided the balance at the end of a `block`.
@@ -67,7 +67,7 @@ provided in the `ConstructinoPreProcessRequest`.
 
 #### Transfers
 * Transfers occur as a combination of a `withdraw` and a `deposit`.  This has the side effect of creating the receiver if it doesn't exist.
-* Transfers support only LBT at this moment.
+* Transfers support only CCC at this moment.
 
 #### Set Operator
 * A staking contract stake pool can change its operator.

@@ -28,15 +28,15 @@
 ## Which Components or Systems Does This Change Impact?
 - [ ] Validator Node
 - [ ] Full Node (API, Indexer, etc.)
-- [ ] Move/Libra2 Virtual Machine
-- [ ] Libra2 Framework
-- [ ] Libra2 CLI/SDK
+- [ ] Move Virtual Machine
+- [ ] CreditChain Framework
+- [ ] CreditChain CLI/SDK
 - [ ] Developer Infrastructure
 - [ ] Move Compiler
 - [ ] Other (specify)
 
 ## Checklist
-- [ ] I have read and followed the [CONTRIBUTING](https://github.com/libra2org/libra2-core/blob/main/CONTRIBUTING.md) doc
+- [ ] I have read and followed the [CONTRIBUTING](https://github.com/ibankio/creditchain/blob/main/CONTRIBUTING.md) doc
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] I identified and added all stakeholders and component owners affected by this change as reviewers

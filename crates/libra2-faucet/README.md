@@ -1,6 +1,6 @@
-# Libra2 Faucet
+# CreditChain Faucet
 
-The Libra2 Faucet is a service that runs alongside a test network and mints coins for users to test and develop on Libra2.
+The CreditChain Faucet is a service that runs alongside a test network and mints coins for users to test and develop on CreditChain.
 
 ## Subdirectories
 This is a brief overview of the subdirectories to help you find what you seek. For more information on each of these subdirectories, see the README in that subdirectory.
@@ -56,7 +56,7 @@ cd libra2-move/move-examples/scripts/minter
 libra2 move compile
 ```
 
-If you have issues with this, try deleting `~/.move`, updating your Libra2 CLI, and changing the Libra2Framework version.
+If you have issues with this, try deleting `~/.move`, updating your CreditChain CLI, and changing the Libra2Framework version.
 
 Then build the faucet as normal (from the root of the repo):
 ```

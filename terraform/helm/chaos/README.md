@@ -2,7 +2,7 @@
 
 ![Version: 2.5.2+aptos0](https://img.shields.io/badge/Version-2.5.2+aptos0-informational?style=flat-square)
 
-Chaos Mesh for Libra2
+Chaos Mesh for CreditChain
 
 ## Requirements
 

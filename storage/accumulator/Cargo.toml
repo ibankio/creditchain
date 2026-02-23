@@ -1,6 +1,6 @@
 [package]
 name = "libra2-accumulator"
-description = "Libra2 merkle tree accumulator"
+description = "CreditChain merkle tree accumulator"
 version = "0.1.1"
 
 # Workspace inherited keys

@@ -1,7 +1,7 @@
 ---
 id: secure_storage
 title: Secure Storage
-custom_edit_url: https://github.com/libra2org/libra2-core/edit/main/secure/storage/README.md
+custom_edit_url: https://github.com/ibankio/creditchain/edit/main/secure/storage/README.md
 ---
 # Secure Storage
 

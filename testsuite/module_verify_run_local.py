@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright © A-p-t-o-s Foundation
+# Copyright © CreditChain Research Team
 # SPDX-License-Identifier: Apache-2.0
 
 # Test replay-verify by running it on a public testnet backup

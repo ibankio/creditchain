@@ -1,6 +1,6 @@
 ---
 id: docker_compose
-title: Libra2 Docker-Compose Configuration
+title: CreditChain Docker-Compose Configuration
 custom_edit_url: https://github.com/aptos/aptos/edit/main/docker/compose/README.md
 ---
 

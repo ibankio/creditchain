@@ -7,6 +7,6 @@ This crate provides a Postgres implementation for the integration layer between 
 1. Install Postgres and Diesel CLI
 2. Add the `libra2-indexer-processor-sdk` crate with the `postgres_full` feature in the `[dependencies]` section of your `Config.toml`:
 ```
-libra2-indexer-processor-sdk = { git = "https://github.com/libra2org/libra2-indexer-processor-sdk.git", rev = "{COMMIT_HASH}", features = ["postgres_full"] }
+libra2-indexer-processor-sdk = { git = "https://github.com/ibankio/creditchain.git", rev = "{COMMIT_HASH}", features = ["postgres_full"] }
 ```
 3. Copy the `src/db` folder into where you are managing your Diesel migrations.

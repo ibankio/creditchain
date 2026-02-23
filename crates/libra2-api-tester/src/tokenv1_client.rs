@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 // TODO: this should be part of the SDK

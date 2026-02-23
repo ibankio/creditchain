@@ -1,6 +1,6 @@
 ---
 name: "🛰️ Developer Portal Issue"
-about: Report a Bug or Feature request for developers.libra2.org and api.libra2.org
+about: Report a bug or feature request for CreditChain developer portal and API surfaces
 title: "[Dev Portal] "
 labels: api-gateway
 assignees: '@geekflyer,@dport,@blakezimmerman'
@@ -10,7 +10,6 @@ assignees: '@geekflyer,@dport,@blakezimmerman'
 
 ## Context for reproduction
 
-<!-- Include context which UI page (link) or API call you encountered the issue (e.g. api.mainnet.libra2.org/v1 /v1/graphql, grpc.mainnet.libra2.org) and what client (e.g. node.js, browser, etc.) you used.>
+<!-- Include context for the UI page (link) or API call you encountered (e.g. /v1, /v1/graphql, or gRPC endpoint) and what client (e.g. node.js, browser, etc.) you used. -->
 
 <!-- Include links to relevant RFCs, issues, and discussions. -->
-

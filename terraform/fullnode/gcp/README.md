@@ -1,4 +1,4 @@
-Libra2 Fullnodes GCP Deployment
+CreditChain Fullnodes GCP Deployment
 ==============================
 
 This directory contains Terraform configs to deploy a public fullnode on Google Cloud.
@@ -18,11 +18,11 @@ These instructions assume that you have a functioning GCP project.  If you do no
          $ gcloud auth login --update-adc
 
 
-2. Clone the libra2-core repo and go to the terraform gcp folder.
+2. Clone the creditchain repo and go to the terraform gcp folder.
 
-         $ git clone https://github.com/libra2org/libra2-core.git
+         $ git clone https://github.com/ibankio/creditchain.git
 
-         $ cd libra2-core/terraform/fullnode/gcp
+         $ cd creditchain/terraform/fullnode/gcp
 
 3. Create a working directory for your configuration.  Copy the files you will change so it does not interfere with the cloned repo:
 
@@ -51,12 +51,12 @@ These instructions assume that you have a functioning GCP project.  If you do no
 
         $ terraform workspace new $WORKSPACE
 
-8. Copy `terraform.tfvars` to `~/$WORKSPACE/terraform.tfvars` and edit to set your region, zone and project name.  If you are having trouble connecting to the devnet and need to add upstream seed peers, uncomment the "fullnode_helm_values" JSON stanza.  For more detail on upstream seed peers, see the documention: https://docs.libra2.org/tutorials/run-a-fullnode/#add-upstream-seed-peers
+8. Copy `terraform.tfvars` to `~/$WORKSPACE/terraform.tfvars` and edit to set your region, zone and project name.  If you are having trouble connecting to the devnet and need to add upstream seed peers, uncomment the "fullnode_helm_values" JSON stanza.  For more detail on upstream seed peers, see the documention: https://github.com/ibankio/creditchain/tree/main/docs
 
        $ cp terraform.tfvars ~/$WORKSPACE/terraform.tfvars
        $ vi ~/$WORKSPACE/terraform.tfvars
 
-9. Apply the configuration.  Note that you should be in the libra2-core/terraform/fullnode/gcp folder when you run this command.  It will use the  config files that you modified in the ~/$WORKSPACE folder plus the cloned terraform files.
+9. Apply the configuration.  Note that you should be in the creditchain/terraform/fullnode/gcp folder when you run this command.  It will use the  config files that you modified in the ~/$WORKSPACE folder plus the cloned terraform files.
 
        $ terraform apply -var-file ~/$WORKSPACE/terraform.tfvars
 
@@ -78,9 +78,9 @@ These instructions assume that you have a functioning GCP project.  If you do no
 
         $ curl http://<IP>
 
-14. To verify the correctness of your FullNode, as outlined in the documentation (https://libra2.dev/tutorials/run-a-fullnode/#verify-the-correctness-of-your-fullnode), you will need to set up a port-forwarding mechanism directly to the libra2 pod in one ssh terminal and test it in another ssh terminal
+14. To verify the correctness of your FullNode, as outlined in the documentation (https://github.com/ibankio/creditchain/tree/main/docs), you will need to set up a port-forwarding mechanism directly to the fullnode pod in one ssh terminal and test it in another ssh terminal
 
-   * Set up the port-forwarding to the libra2-fullnode pod.  Use `kubectl get pods -n libra2` to get the name of the pod
+   * Set up port-forwarding to the fullnode pod (resource names may still use the legacy `libra2` prefix).  Use `kubectl get pods -n libra2` to get the name of the pod
 
          $ kubectl port-forward -n libra2 <pod-name> 9101:9101
 
@@ -91,5 +91,4 @@ These instructions assume that you have a functioning GCP project.  If you do no
          $ curl -v http://0:9101/metrics 2> /dev/null | grep "libra2_connections{direction=\"outbound\""
 
    * Exit port-forwarding when you are done by entering control-c in the terminal
-
 

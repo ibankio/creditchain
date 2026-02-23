@@ -2,13 +2,13 @@
 
 ![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
-Libra2 blockchain node deployment
+CreditChain blockchain node deployment
 
-**Homepage:** <https://libra2.org/>
+**Homepage:** <https://github.com/ibankio/creditchain>
 
 ## Source Code
 
-* <https://github.com/libra2org/libra2-core>
+* <https://github.com/ibankio/creditchain>
 
 ## Values
 
@@ -20,7 +20,7 @@ Libra2 blockchain node deployment
 | cluster_name | string | `"unknown"` |  |
 | enablePrivilegedMode | bool | `false` | TEST ONLY: Enable running as root for profiling |
 | fullnode.affinity | object | `{}` |  |
-| fullnode.config | object | `{"full_node_networks":[{"network_id":"public"}]}` | Fullnode configuration. See NodeConfig https://github.com/libra2org/libra2-core/blob/main/config/src/config/mod.rs |
+| fullnode.config | object | `{"full_node_networks":[{"network_id":"public"}]}` | Fullnode configuration. See NodeConfig https://github.com/ibankio/creditchain/blob/main/config/src/config/mod.rs |
 | fullnode.force_enable_telemetry | bool | `false` | Flag to force enable telemetry service (useful for forge tests) |
 | fullnode.groups | list | `[{"dns_name":"vfn","name":"fullnode","replicas":1}]` | Specify fullnode groups by `name` and number of `replicas` |
 | fullnode.nodeSelector | object | `{}` |  |
@@ -82,7 +82,7 @@ Libra2 blockchain node deployment
 | serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
 | serviceAccount.name | string | `nil` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
 | validator.affinity | object | `{}` |  |
-| validator.config | object | `{}` | Validator configuration. See NodeConfig https://github.com/libra2org/libra2-core/blob/main/config/src/config/mod.rs |
+| validator.config | object | `{}` | Validator configuration. See NodeConfig https://github.com/ibankio/creditchain/blob/main/config/src/config/mod.rs |
 | validator.enableNetworkPolicy | bool | `false` | Lock down network ingress and egress with Kubernetes NetworkPolicy |
 | validator.force_enable_telemetry | bool | `false` | Flag to force enable telemetry service (useful for forge tests) |
 | validator.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy to use for validator images |

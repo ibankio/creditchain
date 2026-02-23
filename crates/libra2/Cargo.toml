@@ -1,6 +1,6 @@
 [package]
 name = "libra2"
-description = "Libra2 tool for management of nodes and interacting with the blockchain"
+description = "CreditChain tool for management of nodes and interacting with the blockchain"
 version = "7.7.1"
 
 # Workspace inherited keys

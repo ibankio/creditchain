@@ -1,6 +1,6 @@
 # libra2-ledger
 
-Provides a set of commands and methods to communicate with Libra2 app on Ledger
+Provides a set of commands and methods to communicate with CreditChain app on Ledger
 
 The methods supported by the libra2-ledger are:
 
@@ -11,11 +11,11 @@ The methods supported by the libra2-ledger are:
 - get_public_key()
 - sign_txn()
 
-NOTE: All methods and commands requires the user to have Libra2 ledger app unlocked and open
+NOTE: All methods and commands requires the user to have CreditChain ledger app unlocked and open
 
 ## Examples
 
-### Get Public Key from your Libra2 account on Ledger
+### Get Public Key from your CreditChain account on Ledger
 
 ```rust
 use libra2_ledger::get_public_key;

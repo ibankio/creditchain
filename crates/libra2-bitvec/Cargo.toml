@@ -1,6 +1,6 @@
 [package]
 name = "libra2-bitvec"
-description = "Libra2 safe bitvec implementation"
+description = "CreditChain safe bitvec implementation"
 version = "0.1.1"
 
 # Workspace inherited keys

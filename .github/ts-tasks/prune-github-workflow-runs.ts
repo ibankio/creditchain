@@ -8,7 +8,7 @@ import * as url from "url";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 const owner = "libra2org";
-const repo = "libra2-core";
+const repo = "creditchain";
 
 export async function pruneGithubWorkflowRuns() {
   const githubToken = process.env.GITHUB_TOKEN;

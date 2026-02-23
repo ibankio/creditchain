@@ -1,6 +1,6 @@
 [package]
 name = "libra2-executor-benchmark"
-description = "Libra2 executor benchmark"
+description = "CreditChain executor benchmark"
 version = "0.1.1"
 
 # Workspace inherited keys

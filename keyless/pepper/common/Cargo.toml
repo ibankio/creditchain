@@ -1,6 +1,6 @@
 [package]
 name = "libra2-keyless-pepper-common"
-description = "Libra2 Keyless pepper library"
+description = "CreditChain Keyless pepper library"
 version = "0.1.1"
 
 # Workspace inherited keys

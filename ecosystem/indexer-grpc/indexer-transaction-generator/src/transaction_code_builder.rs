@@ -1,4 +1,4 @@
-// Copyright (c) A-p-t-o-s Foundation
+// Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use std::{fs, path::Path};
@@ -93,7 +93,7 @@ impl TransactionCodeBuilder {
     pub fn add_license_in_comments(mut self) -> Self {
         self.transactions_code.push_str(
             r#"
-                    // Copyright (c) A-p-t-o-s Foundation
+                    // Copyright (c) CreditChain Research Team
                     // SPDX-License-Identifier: Apache-2.0
                     #![allow(dead_code)]
                     #![allow(unused_variables)]

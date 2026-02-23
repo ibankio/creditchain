@@ -1,6 +1,6 @@
 [package]
 name = "libra2-testcases"
-description = "Libra2 compatibility tests"
+description = "CreditChain compatibility tests"
 version = "0.0.1"
 
 # Workspace inherited keys

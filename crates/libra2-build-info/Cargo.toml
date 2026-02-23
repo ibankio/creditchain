@@ -1,6 +1,6 @@
 [package]
 name = "libra2-build-info"
-description = "Libra2 build information provider"
+description = "CreditChain build information provider"
 version = "0.1.1"
 
 # Workspace inherited keys

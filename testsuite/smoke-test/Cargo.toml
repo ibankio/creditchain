@@ -1,6 +1,6 @@
 [package]
 name = "smoke-test"
-description = "Libra2 end to end tests"
+description = "CreditChain end to end tests"
 version = "0.1.1"
 
 # Workspace inherited keys

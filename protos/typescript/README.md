@@ -1,6 +1,6 @@
-# Libra2 Protos
+# CreditChain Protos
 
-This repository contains the protobuf definitions for the Libra2 tech stack.
+This repository contains the protobuf definitions for the CreditChain tech stack.
 
 ## Usage
 Import the generated code like this:

@@ -1,4 +1,4 @@
-# Typescript k6 load test for Libra2 services
+# Typescript k6 load test for CreditChain services
 
 See https://github.com/grafana/k6-template-typescript
 

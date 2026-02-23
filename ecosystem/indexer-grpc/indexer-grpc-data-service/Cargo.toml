@@ -1,6 +1,6 @@
 [package]
 name = "libra2-indexer-grpc-data-service"
-description = "Libra2 Indexer gRPC data service to serve the data from cache and file store."
+description = "CreditChain Indexer gRPC data service to serve the data from cache and file store."
 version = "1.0.0"
 
 # Workspace inherited keys

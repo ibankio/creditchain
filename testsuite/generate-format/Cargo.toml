@@ -1,6 +1,6 @@
 [package]
 name = "generate-format"
-description = "Libra2 core type checker to ensure compatibility"
+description = "CreditChain core type checker to ensure compatibility"
 version = "0.1.0"
 
 # Workspace inherited keys

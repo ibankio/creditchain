@@ -1,6 +1,6 @@
-# Libra2 Node API
+# CreditChain Node API
 
-This module provides a REST API for client applications to query the Libra2 blockchain.
+This module provides a REST API for client applications to query the CreditChain blockchain.
 
 See spec source:
 - [YAML in doc/spec.yaml](doc/spec.yaml).
@@ -13,12 +13,12 @@ With our API setup, the spec files (`api/doc/spec.yaml` / `api/doc/spec.json`) a
 ![API + spec + TS SDK generation diagram](doc/api_spec_ts_sdk_diagram.png)
 
 This process updates the docs at:
-- https://fullnode.devnet.libra2.org/v1/spec#/ (and testnet / mainnet, based on the API rollout schedule)
+- https://fullnode.devnet.creditchain.org/v1/spec#/ (and testnet / mainnet, based on the API rollout schedule)
 
-All commands here are relative to the root of `libra2-core`.
+All commands here are relative to the root of `creditchain`.
 
 1. Make your changes to the API code, i.e. the code in `api/src/`.
-2. Regenerate the API spec `.yaml` and `.json` files by running these commands from the root of `libra2-core`:
+2. Regenerate the API spec `.yaml` and `.json` files by running these commands from the root of `creditchain`:
 ```
 cargo run -p libra2-openapi-spec-generator -- -f yaml -o api/doc/spec.yaml
 cargo run -p libra2-openapi-spec-generator -- -f json -o api/doc/spec.json

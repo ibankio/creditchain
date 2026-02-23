@@ -8,9 +8,9 @@ Pangu is a testnet creation and management CLI, which deploys on top of existing
 
 ## What is Pangu CLI?
 
-Ever had to wait for the Libra2 devnet/testnet releases to test a new feature? Or, create a PR to launch testnets through Forge? Well, these will be a thing of the past with Pangu.
+Ever had to wait for the CreditChain devnet/testnet releases to test a new feature? Or, create a PR to launch testnets through Forge? Well, these will be a thing of the past with Pangu.
 
-Pangu is a modular, customizable, and next-gen Libra2 testnet creation-management CLI tool written in Python. Pangu allows you to create, and manage testnets on demand, and blazingly fast 🚀🚀🚀 
+Pangu is a modular, customizable, and next-gen CreditChain testnet creation-management CLI tool written in Python. Pangu allows you to create, and manage testnets on demand, and blazingly fast 🚀🚀🚀 
 
 Pangu is inherently faster than its predecessors (Forge testnet creation) because:
 
@@ -69,11 +69,11 @@ CREATE OPTIONS:
 
 1. **`-pangu-node-configs-path`**:
     - The Pangu node configs (yaml)
-    - Default: The default node config in aptos-core/testsuite/pangu_lib/template_testnet_files
+    - Default: The default node config in creditchain/testsuite/pangu_lib/template_testnet_files
     - Example: **`-pangu-node-configs-path /path/to/node/configs.yaml`**
 2. **`-layout-path`**:
     - The path to the layout file (yaml).
-    - Default: The default layout in aptos-core/testsuite/pangu_lib/template_testnet_files
+    - Default: The default layout in creditchain/testsuite/pangu_lib/template_testnet_files
     - Example: **`-layout-path /path/to/layout.yaml`**
 3. **`-framework-path`**:
     - The compiled move framework (head.mrb, or framework.mrb) file. Defaults to the default framework in the pangu_lib.
@@ -91,7 +91,7 @@ CREATE OPTIONS:
     - Default: **`False`**
     - Example: **`-dry-run true`**
 1. **`-libra2-cli-path`**:
-    - The path to the Libra2 CLI if it is not in your $PATH variable.
+    - The path to the CreditChain CLI if it is not in your $PATH variable.
     - Default: **`aptos`**
     - Example: **`-libra2-cli-path /path/to/aptos`**
 2. **`-name`**:
@@ -101,7 +101,7 @@ CREATE OPTIONS:
 
 ## Pangu Node Config (Customizability)
 
-[Pangu config template](https://github.com/libra2org/libra2-core/blob/main/testsuite/pangu_lib/template_testnet_files/pangu_node_config.yaml)
+[Pangu config template](https://github.com/ibankio/creditchain/blob/main/testsuite/pangu_lib/template_testnet_files/pangu_node_config.yaml)
 
 ```yaml
 blueprints:
@@ -143,7 +143,7 @@ Pangu allows you to use a default template to create n number of nodes without m
 
 To create a testnet with a custom topology, create a new pangu config file and pass it with the option "--pangu-node-configs-path" 
 
-- [**See the default config here**](https://github.com/libra2org/libra2-core/blob/main/testsuite/pangu_lib/template_testnet_files/pangu_node_config.yaml)
+- [**See the default config here**](https://github.com/ibankio/creditchain/blob/main/testsuite/pangu_lib/template_testnet_files/pangu_node_config.yaml)
     - The config yaml should start with “blueprints:”
     - A blueprint describes the validator config, the validator image, the vfn config, the vfn image, stake_amount for the validator, and the number of validator/vfn pairs you would like to create with this specific blueprint.
     - The name of the blueprint will dictate the names of the pods (validators, vfns) created using it.
@@ -153,7 +153,7 @@ To create a testnet with a custom topology, create a new pangu config file and p
 
 ## How to Use Pangu
 
-**1-** Have aptos-core installed locally, and navigate to the testsuite directory. 
+**1-** Have creditchain installed locally, and navigate to the testsuite directory. 
 
 **2-** The entrypoint for all python operations is `[poetry](https://python-poetry.org/)`:
 
@@ -172,22 +172,22 @@ alias pangu="poetry run python pangu.py"
 
 ## Codebase
 
-Pangu lives in aptos-core/testsuite. Tips for navigating the codebase:
+Pangu lives in creditchain/testsuite. Tips for navigating the codebase:
 
-- [**aptos-core/testsuite/pangu.py**](https://github.com/libra2org/libra2-core/blob/main/testsuite/pangu.py)
+- [**creditchain/testsuite/pangu.py**](https://github.com/ibankio/creditchain/blob/main/testsuite/pangu.py)
     - This is the entry point to the Pangu CLI. Use poetry run python pangu.py to run.
-- [**aptos-core/testsuite/test_framework**](https://github.com/libra2org/libra2-core/tree/main/testsuite/test_framework)
+- [**creditchain/testsuite/test_framework**](https://github.com/ibankio/creditchain/tree/main/testsuite/test_framework)
     - Includes the system abstractions for testing.
     - The Kubernetes abstraction might need to be updated to add new Kubernetes features.
-- [**aptos-core/testsuite/pangu_lib/node_commands**](https://github.com/libra2org/libra2-core/tree/main/testsuite/pangu_lib/node_commands)
+- [**creditchain/testsuite/pangu_lib/node_commands**](https://github.com/ibankio/creditchain/tree/main/testsuite/pangu_lib/node_commands)
     - Includes the commands for the pangu node {COMMAND} commands
     - Each command has its own .py file, which are then aggregated in the commands.py file to be exported to pangu.py
-- [a**ptos-core/testsuite/pangu_lib/testnet_commands**](https://github.com/libra2org/libra2-core/tree/main/testsuite/pangu_lib/testnet_commands)
+- [a**ptos-core/testsuite/pangu_lib/testnet_commands**](https://github.com/ibankio/creditchain/tree/main/testsuite/pangu_lib/testnet_commands)
     - Includes the commands for the pangu testnet {COMMAND} commands
     - Each command has its own .py file, which are then aggregated in the commands.py file to be exported to pangu.py
-- [**aptos-core/testsuite/pangu_lib/tests**](https://github.com/libra2org/libra2-core/tree/main/testsuite/pangu_lib/tests)
+- [**creditchain/testsuite/pangu_lib/tests**](https://github.com/ibankio/creditchain/tree/main/testsuite/pangu_lib/tests)
     - Includes the unit tests
-- [**aptos-core/testsuite/pangu-sdk**](https://github.com/libra2org/libra2-core/tree/main/testsuite/pangu-sdk)
+- [**creditchain/testsuite/pangu-sdk**](https://github.com/ibankio/creditchain/tree/main/testsuite/pangu-sdk)
     - The Pangu Rust SDK is a light Rust wrapper around the Pangu CLI. It allows rust code to be able to run Pangu commands by passing structs, without having to generate the Pangu Config Yaml files. It is not feature complete, but should be a good starting point for the Pangu-Forge integrations.
 
 ## Metrics

@@ -1,6 +1,6 @@
 [package]
 name = "libra2-rocksdb-options"
-description = "Libra2 RocksDb Options"
+description = "CreditChain RocksDb Options"
 version = "0.1.1"
 
 # Workspace inherited keys

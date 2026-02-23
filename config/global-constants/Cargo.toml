@@ -1,6 +1,6 @@
 [package]
 name = "libra2-global-constants"
-description = "Libra2's global constant crate: the source of truth for constant definitions that span multiple crates"
+description = "CreditChain's global constant crate: the source of truth for constant definitions that span multiple crates"
 version = "0.1.1"
 
 # Workspace inherited keys

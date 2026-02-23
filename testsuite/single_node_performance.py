@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright © A-p-t-o-s Foundation
+# Copyright © CreditChain Research Team
 # SPDX-License-Identifier: Apache-2.0
 
 import re

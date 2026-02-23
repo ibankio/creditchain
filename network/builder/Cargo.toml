@@ -1,6 +1,6 @@
 [package]
 name = "libra2-network-builder"
-description = "Libra2 network builder for constructing a network"
+description = "CreditChain network builder for constructing a network"
 version = "0.1.1"
 
 # Workspace inherited keys

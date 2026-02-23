@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright © A-p-t-o-s Foundation
+# Copyright © CreditChain Research Team
 # SPDX-License-Identifier: Apache-2.0
 
 ###########################################
@@ -12,7 +12,7 @@
 # build_cli_release.sh macOS 1.0.0 true
 #
 
-# Note: This must be run from the root of the libra2-core repository
+# Note: This must be run from the root of the CreditChain repository
 
 set -e
 
@@ -43,7 +43,7 @@ if [[ "$SKIP_CHECKS" != "true" ]]; then
   fi
 
   # Check that the release doesn't already exist
-  if curl -s --stderr /dev/null --output /dev/null --head -f "https://github.com/libra2org/libra2-core/releases/download/libra2-cli-v$EXPECTED_VERSION/libra2-cli-$EXPECTED_VERSION-Ubuntu-22.04-x86_64.zip"; then
+  if curl -s --stderr /dev/null --output /dev/null --head -f "https://github.com/ibankio/creditchain/releases/download/libra2-cli-v$EXPECTED_VERSION/libra2-cli-$EXPECTED_VERSION-Ubuntu-22.04-x86_64.zip"; then
     echo "$EXPECTED_VERSION already released"
     exit 3
   fi

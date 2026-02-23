@@ -31,7 +31,7 @@ on:
         required: false
         default: false
         type: boolean
-        description: By default, FA LBT is exclusively used. If set Coin LBT is used instead.
+        description: By default, FA CCC is exclusively used. If set, legacy Coin (LBT path) is used instead.
       SOURCE:
         required: false
         default: CI
@@ -92,7 +92,7 @@ on:
         required: false
         default: false
         type: boolean
-        description: By default, FA LBT is exclusively used. If set Coin LBT is used instead.
+        description: By default, FA CCC is exclusively used. If set, legacy Coin (LBT path) is used instead.
       IGNORE_TARGET_DETERMINATION:
         required: false
         default: true
@@ -128,7 +128,7 @@ jobs:
           ref: ${{ inputs.GIT_SHA }}
         if: ${{ inputs.IGNORE_TARGET_DETERMINATION || needs.test-target-determinator.outputs.run_execution_performance_test == 'true' }}
 
-      - uses: libra2org/libra2-core/.github/actions/rust-setup@main
+      - uses: ibankio/creditchain/.github/actions/rust-setup@main
         with:
           GIT_CREDENTIALS: ${{ secrets.GIT_CREDENTIALS }}
         if: ${{ inputs.IGNORE_TARGET_DETERMINATION || needs.test-target-determinator.outputs.run_execution_performance_test == 'true' }}

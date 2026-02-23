@@ -13,7 +13,7 @@ cd $repodir
 (
   echo
   echo "Regenerating protobufs (in `pwd`)"
-  echo "See https://github.com/libra2org/libra2-core-private/tree/main/protos/README.md if you're having troubles"
+  echo "See https://github.com/ibankio/creditchain/tree/main/protos/README.md if you're having troubles"
   cd protos/
   ./scripts/build_protos.sh
 )
@@ -31,15 +31,15 @@ cd $repodir
 
 (
   echo
-  echo "Regenerating Libra2 Node APIs (in `pwd`)"
-  # Libra2 Node API
+  echo "Regenerating CreditChain Node APIs (in `pwd`)"
+  # CreditChain Node API
   cargo run -p libra2-openapi-spec-generator -- -f yaml -o api/doc/spec.yaml
   cargo run -p libra2-openapi-spec-generator -- -f json -o api/doc/spec.json
 )
 
 echo
 echo "WARNING: If you are adding a new transaction authenticator..."
-echo " 1. Check out https://github.com/libra2org/libra2-core/blob/main/testsuite/generate-format/README.md"
+echo " 1. Check out https://github.com/ibankio/creditchain/blob/main/testsuite/generate-format/README.md"
 echo "    * In particular, be sure to edit the *.yaml files in testsuite/generate-format/tests/staged"
 echo " 2. ecosystem/indexer-grpc/indexer-grpc-fullnode/src/convert.rs must be manually updated"
 echo

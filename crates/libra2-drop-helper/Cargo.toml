@@ -1,6 +1,6 @@
 [package]
 name = "libra2-drop-helper"
-description = "Libra2 Drop Helper"
+description = "CreditChain Drop Helper"
 version = "0.1.1"
 
 # Workspace inherited keys

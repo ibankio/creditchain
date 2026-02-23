@@ -1,6 +1,6 @@
-# Libra2 Protos Changelog
+# CreditChain Protos Changelog
 
-All notable changes to the Libra2 Protos will be captured in this file. This changelog is written by hand for now.
+All notable changes to the CreditChain Protos will be captured in this file. This changelog is written by hand for now.
 
 ## Unreleased
 

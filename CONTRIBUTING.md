@@ -1,36 +1,35 @@
 ---
 id: contributing
-title: Contributing to Libra2 Core
+title: Contributing to CreditChain Core
 ---
 
 # Contributing
 
-Our goal is to make contributing to Libra2 Core easy and transparent. See [Libra2 Community](https://docs.libra2.org/community) for full details. This page describes [our development process](#our-development-process).
+This guide applies to authorized CreditChain contributors. See [CreditChain docs](https://github.com/ibankio/creditchain/tree/main/docs) for engineering standards and internal process references.
 
-## Libra2 Core
+## CreditChain Core
 
-To contribute to the Libra2 Core implementation, first start with the proper development copy.
-You may want to use the GitHub interface to fork [libra2-core](https://github.com/libra2org/libra2-core) and check out your fork.
-For development environment setup and first build, see [Building Libra2 From Source](https://docs.libra2.org/guides/building-from-source)
+To contribute to the CreditChain Core implementation, start from an approved development copy with authorized repository access.
+For development environment setup and first build, see [Building CreditChain From Source](https://github.com/ibankio/creditchain/tree/main/docs)
 
 ## Our Development Process
 
 ### Code Style, Hints, and Testing
 
-Refer to our Coding Guidelines for the [Move](https://docs.libra2.org/move/book/coding-conventions/) and [Rust](./RUST_CODING_STYLE.md) programming languages for detailed guidance about how to contribute to the project.
+Refer to our Coding Guidelines for [Move](https://github.com/ibankio/creditchain/blob/main/third_party/move/documentation/book/src/coding-conventions.md) and [Rust](./RUST_CODING_STYLE.md) for detailed guidance about how to contribute to the project.
 
-Also, please ensure you follow our [Secure Coding Guidelines](./RUST_SECURE_CODING.md) to contribute to Libra2 securely. 
+Also, please ensure you follow our [Secure Coding Guidelines](./RUST_SECURE_CODING.md) to contribute to CreditChain securely. 
 
 
 ### Documentation
 
-Libra2 Core's developer website is also open source (the code can be found in this [repository](https://github.com/libra2org/libra2-docs).  It is built using [Docusaurus](https://docusaurus.io/):
+CreditChain documentation is maintained by the CreditChain Research Team under [`docs/`](https://github.com/ibankio/creditchain/tree/main/docs). It is built using [Docusaurus](https://docusaurus.io/):
 
 If you know Markdown, you can already contribute!
 
 ## Developer Workflow
 
-Changes to the project are proposed through pull requests. The general pull request workflow is as follows:
+Changes to the project are proposed through pull requests by authorized contributors. The general workflow is as follows:
 
 * If you have added code that should be tested, add unit tests.
 * If you have changed APIs, update the documentation. Make sure the documentation builds.
@@ -106,4 +105,4 @@ It is important that the project history is bisect-able so that when regressions
 
 ## Issues
 
-Libra2 Core uses [GitHub issues](https://github.com/libra2org/libra2-core/issues) to track bugs. Please include necessary information and instructions to reproduce your issue.
+CreditChain Core uses [GitHub issues](https://github.com/ibankio/creditchain/issues) to track bugs. Please include necessary information and instructions to reproduce your issue.

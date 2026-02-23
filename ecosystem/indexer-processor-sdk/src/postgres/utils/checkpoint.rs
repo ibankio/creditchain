@@ -1,4 +1,4 @@
-// Copyright (c) A-p-t-o-s Foundation
+// Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use super::database::{execute_with_better_error, execute_with_better_error_conn, ArcDbPool};

@@ -1,4 +1,4 @@
-# Libra2 Indexer GRPC on Fullnode
+# CreditChain Indexer GRPC on Fullnode
 
 This opens a GRPC endpoint on the indexer. A client (e.g. worker) connects to the endpoint and makes a request. The GRPC endpoint would maintain a stream and sends transactions back to the client on a batch basis. Note that transactions within a batch may be out of order. 
 
@@ -26,4 +26,4 @@ Follow instructions on how to run a fullnode against an existing network.
 
 ### 2) Test with GCURL
 * Install grpcurl (https://github.com/fullstorydev/grpcurl#installation)
-* From the libra2-core (base folder), test with grpcurl: `grpcurl  -max-msg-sz 10000000 -d '{ "starting_version": 0 }' -import-path crates/libra2-protos/proto -proto libra2/internal/fullnode/v1/fullnode_data.proto  -plaintext 127.0.0.1:50051 libra2.internal.fullnode.v1.FullnodeData/GetTransactionsFromNode`
+* From the creditchain (base folder), test with grpcurl: `grpcurl  -max-msg-sz 10000000 -d '{ "starting_version": 0 }' -import-path crates/libra2-protos/proto -proto libra2/internal/fullnode/v1/fullnode_data.proto  -plaintext 127.0.0.1:50051 libra2.internal.fullnode.v1.FullnodeData/GetTransactionsFromNode`

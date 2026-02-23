@@ -2,8 +2,8 @@
 name = "libra2-cli-e2e-tests"
 package-mode = false
 version = "0.1.0"
-description = "Libra2 CLI E2E tests"
-authors = ["Libra2 Team <info@libra2.org>"]
+description = "CreditChain CLI E2E tests"
+authors = ["CreditChain Research Team"]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]

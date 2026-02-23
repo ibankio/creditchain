@@ -1,6 +1,6 @@
 [package]
 name = "libra2-reliable-broadcast"
-description = "Libra2 Reliable Broadcast Implementation"
+description = "CreditChain Reliable Broadcast Implementation"
 version = "0.1.1"
 
 # Workspace inherited keys

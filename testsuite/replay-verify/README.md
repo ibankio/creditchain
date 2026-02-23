@@ -1,6 +1,6 @@
 # Replay Verification Tools
 
-This folder contains tools for managing and provisioning archive storage used in replay verifying for the Libra2 blockchain networks.
+This folder contains tools for managing and provisioning archive storage used in replay verifying for the CreditChain blockchain networks.
 
 ## Files
 

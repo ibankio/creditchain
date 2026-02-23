@@ -1,6 +1,6 @@
 [package]
 name = "libra2-metrics-core"
-description = "Libra2 metrics shortcuts"
+description = "CreditChain metrics shortcuts"
 version = "0.1.0"
 
 # Workspace inherited keys

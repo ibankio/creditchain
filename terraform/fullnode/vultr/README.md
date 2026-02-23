@@ -1,4 +1,4 @@
-Libra2 Fullnodes VULTR (https://www.vultr.com/) Deployment
+CreditChain Fullnodes VULTR (https://www.vultr.com/) Deployment
 ==============================
 
 This directory contains Terraform configs to deploy a public fullnode on VULTR.
@@ -17,11 +17,11 @@ The default configuration will create a single node cluster with 4CPU/8GB and a 
    Configure the Access Control to whitelist the IP of the machine where you will run Terraform from.
 
 
-2. Clone the libra2-core repo and go to the terraform vultr folder.
+2. Clone the creditchain repo and go to the terraform vultr folder.
 
-         $ git clone https://github.com/libra2org/libra2-core.git
+         $ git clone https://github.com/ibankio/creditchain.git
 
-         $ cd libra2-core/terraform/fullnode/vultr
+         $ cd creditchain/terraform/fullnode/vultr
 
 3. Create a working directory for your configuration.  Copy the files you will change so it does not interfere with the cloned repo:
 
@@ -62,9 +62,9 @@ The default configuration will create a single node cluster with 4CPU/8GB and a 
 
         $ curl http://<IP>
 
-11. To verify the correctness of your FullNode, as outlined in the documentation (https://docs.libra2.org/tutorials/run-a-fullnode/#verify-the-correctness-of-your-fullnode), you will need to set up a port-forwarding mechanism directly to the libra2 pod in one ssh terminal and test it in another ssh terminal
+11. To verify the correctness of your FullNode, as outlined in the documentation (https://github.com/ibankio/creditchain/tree/main/docs), you will need to set up a port-forwarding mechanism directly to the fullnode pod in one ssh terminal and test it in another ssh terminal
 
-   * Set up the port-forwarding to the libra2-fullnode pod.  Use `kubectl get pods -n libra2` to get the name of the pod
+   * Set up port-forwarding to the fullnode pod (resource names may still use the legacy `libra2` prefix).  Use `kubectl get pods -n libra2` to get the name of the pod
 
          $ kubectl port-forward -n libra2 <pod-name> 9101:9101
 

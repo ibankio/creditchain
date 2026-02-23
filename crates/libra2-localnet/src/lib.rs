@@ -1,4 +1,4 @@
-// Copyright (c) A-p-t-o-s Foundation
+// Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 //! This is a library that provides functionalities required for running a local Libra2 network,

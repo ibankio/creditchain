@@ -1,7 +1,7 @@
 # Fuzz Test Suite
 
 ## Introduction
-This directory contains tools and scripts essential for fuzz testing on Libra2 Core. Fuzz targets run continuously on daily versions of `main` on Google's OSS-Fuzz infrastructure.
+This directory contains tools and scripts essential for fuzz testing on CreditChain Core. Fuzz targets run continuously on daily versions of `main` on Google's OSS-Fuzz infrastructure.
 
 ## `fuzz.sh`
 `fuzz.sh` is the main script to perform common fuzzing-related operations.
@@ -73,7 +73,7 @@ The script includes several functions to manage and execute fuzz tests:
 ## Writing Fuzz Targets
 
 ### Setting Up Fuzz Targets
-To set up a fuzz harness in Libra2-core using `cargo-fuzz`:
+To set up a fuzz harness in CreditChain-core using `cargo-fuzz`:
 #### Initialize Fuzz Target
 Run the following command to initialize the fuzzing target. This creates and edits all the necessary files.
 ```bash
@@ -133,7 +133,7 @@ When building in the OSS-Fuzz environment, `fuzz.sh` will place the corpus archi
 
 ## Generate Corpora
 Some fuzzers operate better if a good initial corpus is provided. In order to generate the corpus, utilities are available via `./fuzz.sh block-builder`. Once a corpus is obtained, to feed it to fuzzers running on OSS-Fuzz, building a ZIP archive with a specific name is required: `$FUZZERNAME_seed_corpus.zip`. Upload it to a publicly accessible cloud, e.g., GCP Bucket or S3; avoid GDrive. Obtain a public link and add it to the `CORPUS_ZIPS` array in `fuzz.sh`. It will automatically be downloaded and used inside Google's infrastructure.
-### Libra2-VM Publish & Run
+### CreditChain-VM Publish & Run
 `./fuzz.sh block-builder generate_runnable_state /tmp/modules.csv /tmp/Modules`
 The CSV file is structured as follows:  
 - Column 1: Module name  
@@ -155,13 +155,13 @@ Use `./fuzz.sh block-builder generate_runnable_states_recursive data/0x1/ fuzz/c
 #### Steps (internal)
 The following steps apply to wathever seed we might want to make available, remember to add the public link at the begin of `fuzz.sh`.
 1. `gcloud auth login`
-2. `gcloud storage cp gs://aptos-core-corpora/move_aptosvm_publish_and_run_seed_corpus.zip move_aptosvm_publish_and_run_seed_corpus.zip`
+2. `gcloud storage cp gs://creditchain-corpora/move_aptosvm_publish_and_run_seed_corpus.zip move_aptosvm_publish_and_run_seed_corpus.zip`
 3. `unzip move_aptosvm_publish_and_run_seed_corpus.zip -d move_aptosvm_publish_and_run_seed_corpus`
 4. `./fuzz.sh block-builder generate_runnable_states_recursive data/0x1/ move_aptosvm_publish_and_run_seed_corpus`
 5. Normally we would run cmin but we assume that manually created inputs are fine and serve a specific purse.
 6. `zip -r move_aptosvm_publish_and_run_seed_corpus.zip move_aptosvm_publish_and_run_seed_corpus`
-7. `gsutil storage cp move_aptosvm_publish_and_run_seed_corpus.zip gs://aptos-core-corpora/move_aptosvm_publish_and_run_seed_corpus.zip`
-8. We need to restore ACL (public URL remain the same): `gsutil storage acl ch -u AllUsers:R gs://aptos-core-corpora/move_aptosvm_publish_and_run_seed_corpus.zip`
+7. `gsutil storage cp move_aptosvm_publish_and_run_seed_corpus.zip gs://creditchain-corpora/move_aptosvm_publish_and_run_seed_corpus.zip`
+8. We need to restore ACL (public URL remain the same): `gsutil storage acl ch -u AllUsers:R gs://creditchain-corpora/move_aptosvm_publish_and_run_seed_corpus.zip`
 
 ## Debug Crashes
 Flamegraph and GDB are integrated into fuzz.sh for advanced metrics and debugging. A more rudimentary option is also available: since we have symbolized binaries, we can directly use the stack trace produced by the fuzzer. However, for INVARIANT_VIOLATIONS, the stack trace is incorrect. To obtain the correct stack trace, you can use the following command:
@@ -174,7 +174,7 @@ This command is selective, so only the specified, comma-separated statuses will 
 - [Rust Fuzz Book](https://rust-fuzz.github.io/book/)
 - [Google OSS-Fuzz](https://google.github.io/oss-fuzz/)
 - [Arbitrary](https://docs.rs/arbitrary/latest/arbitrary/)
-- [Native Functions](https://aptos.dev/en/build/smart-contracts/move-reference?branch=mainnet&page=move-stdlib%2Fdoc%2Fmem.md)
+- [Native Functions](https://github.com/ibankio/creditchain/blob/main/third_party/move/move-stdlib/docs/mem.md)
 
 ## Contribute
 Contributions to enhance the `fuzz.sh` script and the fuzz testing suite are welcome.

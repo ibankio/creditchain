@@ -1,4 +1,4 @@
-// Copyright (c) A-p-t-o-s Foundation
+// Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 

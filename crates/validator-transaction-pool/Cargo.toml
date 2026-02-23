@@ -1,6 +1,6 @@
 [package]
 name = "libra2-validator-transaction-pool"
-description = "Libra2 Validator Transaction Pool"
+description = "CreditChain Validator Transaction Pool"
 version = "0.1.1"
 
 # Workspace inherited keys

@@ -6,7 +6,7 @@ labels: DevEx
 assignees: ''
 ---
 
-<!-- See an example RFC here: https://github.com/libra2org/libra2-core/issues/6171 -->
+<!-- See an example RFC here: https://github.com/ibankio/creditchain/issues/6171 -->
 
 ## Context
 

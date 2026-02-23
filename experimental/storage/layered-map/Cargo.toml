@@ -1,6 +1,6 @@
 [package]
 name = "libra2-experimental-layered-map"
-description = "Libra2 LayeredMap"
+description = "CreditChain LayeredMap"
 version = "0.1.1"
 
 # Workspace inherited keys

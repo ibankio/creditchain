@@ -1,11 +1,11 @@
-# Copyright © A-p-t-o-s Foundation
+# Copyright © CreditChain Research Team
 # SPDX-License-Identifier: Apache-2.0
 
 ###########################################
 # Build and package a release for the CLI #
 ###########################################
 
-# Note: This must be run from the root of the libra2-core repository.
+# Note: This must be run from the root of the CreditChain repository.
 
 # Set up basic variables.
 $NAME="libra2-cli"
@@ -32,4 +32,3 @@ cargo build -p $CRATE_NAME --profile cli
 $ZIP_NAME="$NAME-$VERSION-Windows-x86_64.zip"
 echo "Compressing CLI to $ZIP_NAME"
 Compress-Archive -Path target\cli\$CRATE_NAME.exe -DestinationPath $ZIP_NAME
-

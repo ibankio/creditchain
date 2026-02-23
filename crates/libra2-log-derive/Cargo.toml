@@ -1,6 +1,6 @@
 [package]
 name = "libra2-log-derive"
-description = "Libra2 structured log type macros"
+description = "CreditChain structured log type macros"
 version = "0.1.1"
 
 # Workspace inherited keys

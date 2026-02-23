@@ -1,6 +1,6 @@
 [package]
 name = "libra2-network-discovery"
-description = "Libra2 Network Peer Discovery"
+description = "CreditChain Network Peer Discovery"
 version = "0.1.1"
 
 # Workspace inherited keys

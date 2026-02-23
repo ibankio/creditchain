@@ -1,4 +1,4 @@
-// Copyright (c) A-p-t-o-s Foundation
+// Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::metrics::{BIG_QUERY_REQUEST_FAILURES_TOTAL, BIG_QUERY_REQUEST_TOTAL};

@@ -1,5 +1,12 @@
-# A-p-t-o-s Foundation Bounty Program
+# CreditChain Security Policy
 
-The A-p-t-o-s Foundation welcomes feedback from security researchers and the general public to help improve the security of the Libra2 Network, and, at its sole discretion, offers bounty rewards for security reports that identify previously unknown, in-scope security vulnerabilities.
+The CreditChain Research Team welcomes responsible security disclosures to help keep CreditChain safe and reliable.
 
-To learn more visit the [A-p-t-o-s Foundation Bounty Program](https://hackenproof.com/aptos) page.
+To report a vulnerability:
+
+1. Open a private GitHub security advisory: <https://github.com/ibankio/creditchain/security/advisories/new>
+2. If advisories are unavailable, open an issue in the repository and mark it as a security concern.
+
+Please include clear reproduction steps, impact, and affected components.
+
+Copyright (c) CreditChain Research Team.

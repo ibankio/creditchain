@@ -1,1 +1,1 @@
-# Libra2 Node Testnet
+# CreditChain Node Testnet

@@ -1,2 +1,2 @@
-Copyright (c) 2025 Libra2 Contributors
+Copyright (c) 2025 CreditChain Contributors
 SPDX-License-Identifier: Apache-2.0

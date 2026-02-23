@@ -1,7 +1,7 @@
-// Copyright (c) A-p-t-o-s Foundation
+// Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 
 use crate::{
     instrumented_channel::channel_metrics::init_channel_metrics_registry,

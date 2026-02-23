@@ -1,6 +1,6 @@
 [package]
 name = "libra2-vault-client"
-description = "Libra2's Restful Vault Client"
+description = "CreditChain's Restful Vault Client"
 version = "0.1.1"
 
 # Workspace inherited keys

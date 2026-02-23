@@ -1,6 +1,6 @@
 [package]
 name = "libra2-storage-interface"
-description = "Libra2 storage interface"
+description = "CreditChain storage interface"
 version = "0.1.1"
 
 # Workspace inherited keys

@@ -1,7 +1,7 @@
 ---
 id: mempool
 title: Mempool
-custom_edit_url: https://github.com/libra2org/libra2-core/edit/main/mempool/README.md
+custom_edit_url: https://github.com/ibankio/creditchain/edit/main/mempool/README.md
 ---
 
 Mempool is a memory-buffer that holds the transactions that are waiting to be executed.

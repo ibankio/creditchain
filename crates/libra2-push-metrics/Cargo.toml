@@ -1,6 +1,6 @@
 [package]
 name = "libra2-push-metrics"
-description = "Libra2 push metrics"
+description = "CreditChain push metrics"
 version = "0.1.1"
 
 # Workspace inherited keys

@@ -1,6 +1,6 @@
 [package]
 name = "libra2-network-benchmark"
-description = "Libra2 network benchmark"
+description = "CreditChain network benchmark"
 version = "0.1.1"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

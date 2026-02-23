@@ -1,6 +1,6 @@
 [package]
 name = "libra2-forge"
-description = "Libra2 end to end test framework"
+description = "CreditChain end to end test framework"
 version = "0.0.0"
 
 # Workspace inherited keys

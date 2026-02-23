@@ -2,7 +2,7 @@
 name = "replay-verify"
 version = "0.1.0"
 description = "replay verify on archive"
-authors = ["Libra2 Team <info@libra2.org>"]
+authors = ["CreditChain Research Team"]
 readme = "README.md"
 
 [tool.poetry.dependencies]

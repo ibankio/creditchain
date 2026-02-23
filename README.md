@@ -1,24 +1,32 @@
-<a href="https://libra2.org">
-	<img width="100%" src="./.assets/libra2_banner.png" alt="Libra2 Banner" />
+<a href="https://github.com/ibankio/creditchain">
+  <img width="100%" src="./.assets/creditchain_github_banner.svg" alt="CreditChain GitHub Homepage Banner" />
 </a>
 
 ---
 
-[![License](https://img.shields.io/badge/license-Apache-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-proprietary-red.svg)](https://github.com/ibankio/creditchain)
 
-Libra2 is an AI driven layer 1 blockchain built to support the future digital asset, crypto market, AI agent & virtual world.
+CreditChain is enterprise banking and financial infrastructure: the crypto banking barebone Layer 1 foundation for next-generation financial rails.
 
-Libra2 inherits Libra, Diem, and Libra2 technologies.
+CreditChain is built as the future crypto banking infrastructure and designed to become a pillar for stablecoins, digital assets, crypto finance, and crypto capital markets.
+
+CreditChain follows a Libra2-derived path with Aptos lineage. The native token symbol is `CCC`.
+
+## Why CreditChain
+
+* **Banking-grade base layer:** deterministic execution, verifiable state, and infrastructure-first design.
+* **Stablecoin and digital asset rails:** issuance, settlement, and programmable asset workflows.
+* **Crypto finance and capital market readiness:** primitives for market infrastructure, integration, and scale.
 
 ## Getting Started
 
-* [Libra2 Foundation](https://libra2.org/)
-* [Libra2 Developer Network](https://docs.libra2.org/)
-* [Tutorials](https://https://libra2.org/tutorials)
-* Join us on the [Libra2 Discord](https://discord.gg/XXUf99QJ)
+* [CreditChain Repository](https://github.com/ibankio/creditchain)
+* [Contributing Guide](https://github.com/ibankio/creditchain/blob/main/CONTRIBUTING.md)
+* [Code of Conduct](https://github.com/ibankio/creditchain/blob/main/CODE_OF_CONDUCT.md)
+* [Security Policy](https://github.com/ibankio/creditchain/blob/main/SECURITY.md)
 
-## Contributing
+## Proprietary Notice
 
-You can learn more about contributing to the Libra2 project by reading our [Contribution Guide](https://github.com/libra2org/libra2-core/blob/main/CONTRIBUTING.md) and by viewing our [Code of Conduct](https://github.com/libra2org/libra2-core/blob/main/CODE_OF_CONDUCT.md).
+CreditChain is proprietary enterprise banking and financial infrastructure maintained by the CreditChain Research Team.
 
-Libra2 Core is licensed under [Apache 2.0](https://github.com/libra2org/libra2-core/blob/main/LICENSE).
+Copyright (c) CreditChain Research Team.

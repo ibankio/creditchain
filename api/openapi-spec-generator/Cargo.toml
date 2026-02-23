@@ -1,6 +1,6 @@
 [package]
 name = "libra2-openapi-spec-generator"
-description = "Libra2 API OpenAPI Spec Generator"
+description = "CreditChain API OpenAPI Spec Generator"
 version = "0.1.0"
 
 # Workspace inherited keys

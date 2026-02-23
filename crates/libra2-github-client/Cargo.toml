@@ -1,6 +1,6 @@
 [package]
 name = "libra2-github-client"
-description = "Libra2's Restful GitHub Client"
+description = "CreditChain's Restful GitHub Client"
 version = "0.1.1"
 
 # Workspace inherited keys

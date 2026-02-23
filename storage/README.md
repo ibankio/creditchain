@@ -1,32 +1,32 @@
 ---
 id: storage
 title: Storage
-custom_edit_url: https://github.com/libra2org/libra2-core/edit/main/storage/README.md
+custom_edit_url: https://github.com/ibankio/creditchain/edit/main/storage/README.md
 ---
 
 ## Overview
 
 The storage modules implement:
 * the Libra2DB which holds the authenticated blockchain data structure within a
-Libra2 Node. It serves the current "state" readable by Move contracts being
+CreditChain Node. It serves the current "state" readable by Move contracts being
 executed, as well as a configurable length of the blockchain history to fellow
-Libra2 Nodes and the Rest API. It takes in new data from either the consensus or
+CreditChain Nodes and the Rest API. It takes in new data from either the consensus or
 the state sync components to grow the history.
 * the backup system which persists the entire history of transactions. The
 backups are not required for running the blockchain in normal situations, but
 can be critical when emergency happens were an Libra2DB needs to be recreated
-a. without the help of widely available healthy running Libra2 Nodes b. to
+a. without the help of widely available healthy running CreditChain Nodes b. to
 recover a historical state back in time. c. specifically, to do b. in order to
 create an alternative ledger and redistribute the result to overcome
 unforeseeable catastrophic situations (to hard fork)
 
 More to read:
 * To understand the authenticated blockchain data structure, see
-https://github.com/libra2org/libra2-core/tree/main/documentation/specifications/common
+https://github.com/ibankio/creditchain/tree/main/documentation/specifications/common
 * To know more about the state authentication data structure, see
-https://github.com/libra2org/libra2-core/developer-docs-site/static/papers/jellyfish-merkle-tree/2021-01-14.pdf
+https://github.com/ibankio/creditchain/developer-docs-site/static/papers/jellyfish-merkle-tree/2021-01-14.pdf
 * To learn more about the backup system including the backup data format, see
-https://github.com/libra2org/libra2-core/blob/main/documentation/specifications/db_backup/spec.md
+https://github.com/ibankio/creditchain/blob/main/documentation/specifications/db_backup/spec.md
 
 ## System Architecture
 
@@ -38,7 +38,7 @@ Notice that the whole "Execution" block is outside of this folder but highly rel
 
 ##  Configs
 
-As part of the Libra2 Node config, these are specific for the storage components.
+As part of the CreditChain Node config, these are specific for the storage components.
 Notice that to use the default configs one doesn't need to put in anything in
 the config file. Only when one needs to overwrite a certain config value she
 needs put in something. For example, to enable the internal indexer, one can
@@ -51,12 +51,12 @@ storage:
 
 Now here's the full set of configs, with their default values and explanations.
 The default values should work in most cases and generally speaking don't need
-to be changed. Another reason to not overriding them is the developers of Libra2
+to be changed. Another reason to not overriding them is the developers of CreditChain
 can tune the default configs with new software releases and a override will
 make your node miss it.
 If you do have a reason to change them, probably read the more
 detailed comments in
-https://github.com/libra2org/libra2-core/blob/main/config/src/config/storage_config.rs
+https://github.com/ibankio/creditchain/blob/main/config/src/config/storage_config.rs
 to understand it better.
 
 ```yaml
@@ -183,18 +183,18 @@ The DB backup is a concise format to preserve the raw data of the blockchain. It
 to batch process the blockchain data off chain. But it's not the preferred way
 to boot up a Libra2DB instance on an empty disk. Use State Sync (it's Fast Sync
 mode). Read more about state sync here:
-https://github.com/libra2org/libra2-core/blob/main/state-sync/README.md
+https://github.com/ibankio/creditchain/blob/main/state-sync/README.md
 
 
 ### Continuously backing up to a cloud storage
 
 The backup coordinator runs continuously, talks to the backup service embedded
-inside a Libra2 Node and writes backup data automatically to a configured cloud
+inside a CreditChain Node and writes backup data automatically to a configured cloud
 storage.
 
 One can make a config file for a specific cloud storage position by updating
 one of the examples here
-https://github.com/libra2org/libra2-core/tree/main/storage/backup/backup-cli/src/storage/command_adapter/sample_configs/
+https://github.com/ibankio/creditchain/tree/main/storage/backup/backup-cli/src/storage/command_adapter/sample_configs/
 
 
 ```bash
@@ -202,14 +202,14 @@ $ cargo run -p libra2-debugger libra2-db backup continuously --help
     Finished dev [unoptimized + debuginfo] target(s) in 1.06s
      Running `target/debug/libra2-debugger libra2-db backup continuously --help`
 libra2-db-tool-backup-continuously 0.1.0
-Run the backup coordinator which backs up blockchain data continuously off a Libra2 Node.
+Run the backup coordinator which backs up blockchain data continuously off a CreditChain Node.
 
 USAGE:
     libra2-debugger libra2-db backup continuously [OPTIONS] <--local-fs-dir <LOCAL_FS_DIR>|--command-adapter-config <COMMAND_ADAPTER_CONFIG>>
 
 OPTIONS:
         --backup-service-address <ADDRESS>
-            Backup service address. By default a Libra2 Node runs the backup service serving on tcp
+            Backup service address. By default a CreditChain Node runs the backup service serving on tcp
             port 6186 to localhost only. [default: http://localhost:6186]
 
         --command-adapter-config <COMMAND_ADAPTER_CONFIG>
@@ -275,9 +275,9 @@ and can mess up with the backup storage, use only at your own risk.
 
 ### Creating an Libra2DB with minimal data at the latest epoch ending in a backup
 
-It's part of the Libra2 API functionality to bootstrap a Libra2DB with a backup.
+It's part of the CreditChain API functionality to bootstrap a Libra2DB with a backup.
 When emergency happens and the need to do the somewhat manual bootstrapping is
-high, Libra2 will provide a backup source in the form of a yaml config file. Otherwise
+high, CreditChain will provide a backup source in the form of a yaml config file. Otherwise
 one can play with a config created by herself (probably the same one used in the
 backup process described in the previous section.).
 
@@ -312,7 +312,7 @@ OPTIONS:
 
         --target-db-dir <DB_DIR>
             Target dir where the tool recreates a Libra2DB with snapshots and transactions provided
-            in the backup. The data folder can later be used to start an Libra2 node. e.g. /opt/
+            in the backup. The data folder can later be used to start an CreditChain node. e.g. /opt/
             aptos/data/db
 
     -V, --version

@@ -3,7 +3,7 @@ pub mod account_transactions_model;
 pub mod account_transactions_processor;
 pub mod account_transactions_storer;
 
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::processors::account_transactions::account_transactions_model::AccountTransaction;

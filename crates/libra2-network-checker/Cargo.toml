@@ -1,6 +1,6 @@
 [package]
 name = "libra2-network-checker"
-description = "Libra2 network checker"
+description = "CreditChain network checker"
 version = "0.0.1"
 
 # Workspace inherited keys

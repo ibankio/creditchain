@@ -1,6 +1,6 @@
 [package]
 name = "libra2-proxy"
-description = "Libra2 proxy"
+description = "CreditChain proxy"
 version = "0.1.0"
 
 # Workspace inherited keys

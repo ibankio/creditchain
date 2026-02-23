@@ -2,7 +2,7 @@
 
 ![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square)
 
-Libra2 Forge test framework
+CreditChain Forge test framework
 
 ## Values
 

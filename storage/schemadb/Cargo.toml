@@ -1,6 +1,6 @@
 [package]
 name = "libra2-schemadb"
-description = "Libra2 schemadb"
+description = "CreditChain schemadb"
 version = "0.1.1"
 
 # Workspace inherited keys

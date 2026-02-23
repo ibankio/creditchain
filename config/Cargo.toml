@@ -1,6 +1,6 @@
 [package]
 name = "libra2-config"
-description = "Libra2 config"
+description = "CreditChain config"
 version = "0.1.0"
 
 # Workspace inherited keys

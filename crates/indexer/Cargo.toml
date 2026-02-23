@@ -1,6 +1,6 @@
 [package]
 name = "libra2-indexer"
-description = "Libra2 Indexer"
+description = "CreditChain Indexer"
 version = "0.0.2"
 
 # Workspace inherited keys

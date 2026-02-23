@@ -1,6 +1,6 @@
 [package]
 name = "libra2-speculative-state-helper"
-description = "Libra2 utils for speculative events & state (due to speculative txn execution)"
+description = "CreditChain utils for speculative events & state (due to speculative txn execution)"
 version = "0.1.0"
 
 # Workspace inherited keys

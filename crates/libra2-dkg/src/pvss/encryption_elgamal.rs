@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 /// Implements public parameters $(h, g) \in G$ for an ElGamal encryption scheme where $h$

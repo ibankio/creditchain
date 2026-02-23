@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use super::fungible_asset_models::v2_fungible_asset_activities::StoreAddressToDeletedFungibleAssetStoreEvent;

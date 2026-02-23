@@ -1,6 +1,6 @@
 ---
 name: "\U0001F41B Bug report"
-about: Create a bug report to help improve Libra2 Core
+about: Create a bug report to help improve CreditChain Core
 title: "[Bug]"
 labels: bug
 assignees: ''
@@ -10,7 +10,7 @@ assignees: ''
 # 🐛 Bug
 
 A clear and concise description of what the bug is.
-To report a security issue, please email security@libra2.org.
+For security issues, please use the Security Policy flow in `SECURITY.md`.
 
 ## To reproduce
 
@@ -32,7 +32,7 @@ A clear and concise description of what you expected to happen.
 ## System information
 
 **Please complete the following information:**
-- Libra2 Core Version
+- CreditChain Core Version
 - Rust Version
 - Computer OS
 

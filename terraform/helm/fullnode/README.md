@@ -7,7 +7,7 @@
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| libra2_chains | object | `{"devnet":{"genesis_blob_url":"https://devnet.libra2.org/genesis.blob","waypoint_txt_url":"https://devnet.libra2.org/waypoint.txt"},"mainnet":{"genesis_blob_url":"https://github.com/libra2org/libra2-networks/main/mainnet/genesis.blob","waypoint_txt_url":"https://github.com/libra2org/libra2-networks/main/mainnet/waypoint.txt"},"testnet":{"genesis_blob_url":"https://github.com/libra2org/libra2-networks/main/testnet/genesis.blob","waypoint_txt_url":"https://github.com/libra2org/libra2-networks/main/testnet/genesis_waypoint.txt"}}` | For each supported chain, specify the URLs from which to download the genesis.blob and waypoint.txt |
+| libra2_chains | object | `{"devnet":{"genesis_blob_url":"https://devnet.creditchain.org/genesis.blob","waypoint_txt_url":"https://devnet.creditchain.org/waypoint.txt"},"mainnet":{"genesis_blob_url":"https://github.com/ibankio/creditchain/main/mainnet/genesis.blob","waypoint_txt_url":"https://github.com/ibankio/creditchain/main/mainnet/waypoint.txt"},"testnet":{"genesis_blob_url":"https://github.com/ibankio/creditchain/main/testnet/genesis.blob","waypoint_txt_url":"https://github.com/ibankio/creditchain/main/testnet/genesis_waypoint.txt"}}` | For each supported chain, specify the URLs from which to download the genesis.blob and waypoint.txt |
 | backup.affinity | object | `{}` |  |
 | backup.config.azure.account | string | `nil` |  |
 | backup.config.azure.container | string | `nil` |  |
@@ -52,7 +52,7 @@
 | chain.genesisSecret | string | `nil` | Kubernetes Secret from which to load the genesis.blob and waypoint.txt |
 | chain.label | string | `nil` | The value of the `chain_name` label. If empty, defaults to `.Values.chain.name` |
 | chain.name | string | `"devnet"` | Name of the testnet to connect to. There must be a corresponding entry in .Values.libra2_chains |
-| fullnode.config | object | `{"full_node_networks":[{"identity":{},"inbound_rate_limit_config":null,"network_id":"public","outbound_rate_limit_config":null}]}` | Fullnode configuration. See NodeConfig https://github.com/libra2org/libra2-core/blob/main/config/src/config/mod.rs |
+| fullnode.config | object | `{"full_node_networks":[{"identity":{},"inbound_rate_limit_config":null,"network_id":"public","outbound_rate_limit_config":null}]}` | Fullnode configuration. See NodeConfig https://github.com/ibankio/creditchain/blob/main/config/src/config/mod.rs |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy to use for fullnode images |
 | image.repo | string | `"aptoslabs/validator"` | Image repo to use for fullnode images. Fullnodes and validators use the same image |
 | image.tag | string | `nil` | Image tag to use for fullnode images. If set, overrides `imageTag` |
@@ -111,8 +111,8 @@
 Configuration
 -------------
 
-This Helm chart deploys a public fullnode for the Libra2 blockchain network. The
-fullnode connects to Libra2 validators and synchronises the blockchain state to
+This Helm chart deploys a public fullnode for the CreditChain blockchain network. The
+fullnode connects to CreditChain validators and synchronises the blockchain state to
 a persistent volume. It provides a [REST API][] for interacting with
 the blockchain.
 
@@ -121,7 +121,7 @@ See [values.yaml][] for the full list of options you can configure.
 Connecting to Testnet
 -------------
 
-To connect to the Libra2 devnet, you must have the correct genesis blob and waypoint. The source of truth for these are hosted here: https://github.com/aptos-labs/libra2-genesis-waypoint
+To connect to the CreditChain devnet, you must have the correct genesis blob and waypoint. The source of truth for these are hosted here: https://github.com/aptos-labs/libra2-genesis-waypoint
 
 The waypoint and genesis blobs are download at runtime, and their URLs are specified in `.Values.libra2_chains`.
 
@@ -134,6 +134,6 @@ Deployment
 
        $ helm install fullnode --set storage.class=gp2 .
 
-[REST API]: https://github.com/libra2org/libra2-core/blob/main/api/doc/v0/openapi.yaml
+[REST API]: https://github.com/ibankio/creditchain/blob/main/api/doc/v0/openapi.yaml
 [values.yaml]: values.yaml
-[Libra2 dockerhub]: https://hub.docker.com/r/aptoslabs/validator/tags?page=1&ordering=last_updated
+[CreditChain dockerhub]: https://hub.docker.com/r/aptoslabs/validator/tags?page=1&ordering=last_updated

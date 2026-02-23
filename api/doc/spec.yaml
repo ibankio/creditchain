@@ -4,7 +4,7 @@ info:
   description: The Libra2 Node API is a RESTful API for client applications to interact with the Libra2 blockchain.
   version: 1.2.0
   contact:
-    name: Libra2 Labs
+    name: CreditChain Research Team
     url: https://github.com/libra2org/libra2-core
   license:
     name: Apache 2.0

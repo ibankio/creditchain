@@ -1,6 +1,6 @@
 [package]
 name = "libra2-safety-rules"
-description = "Libra2 safety rules"
+description = "CreditChain safety rules"
 version = "0.1.0"
 
 # Workspace inherited keys

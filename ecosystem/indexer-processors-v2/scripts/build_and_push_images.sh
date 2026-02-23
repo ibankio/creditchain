@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) Aptos
+# Copyright (c) CreditChain Research Team
 # SPDX-License-Identifier: Apache-2.0
 
 # This script is to build and push libra2 indexer processors v2 images.

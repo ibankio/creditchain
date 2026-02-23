@@ -1,6 +1,6 @@
-# Generated TS client for Libra2 Node Health Checker
+# Generated TS client for CreditChain Node Health Checker
 
-[![Discord][discord-image]][discord-url]
+[![Community][community-image]][community-url]
 [![NPM Package Version][npm-image-version]][npm-url]
 [![NPM Package Downloads][npm-image-downloads]][npm-url]
 
@@ -88,9 +88,9 @@ pnpm test
 
 ## References
 
-[repo]: https://github.com/libra2org/libra2-core
-[npm-image-version]: https://img.shields.io/npm/v/aptos.svg
-[npm-image-downloads]: https://img.shields.io/npm/dm/aptos.svg
+[repo]: https://github.com/ibankio/creditchain
+[npm-image-version]: https://img.shields.io/npm/v/libra2-node-checker-client.svg
+[npm-image-downloads]: https://img.shields.io/npm/dm/libra2-node-checker-client.svg
 [npm-url]: https://npmjs.org/package/libra2-node-checker-client
-[discord-image]: https://img.shields.io/discord/945856774056083548?label=Discord&logo=discord&style=flat~~~~
-[discord-url]: https://discord.gg/aptosnetwork
+[community-image]: https://img.shields.io/badge/community-discussions-blue
+[community-url]: https://github.com/ibankio/creditchain/discussions

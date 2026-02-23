@@ -1,18 +1,18 @@
-# Libra2 Release Process
+# CreditChain Release Process
 
 ## Naming Conventions for Branches and Tags
 
 ```
 ========================================= main branch ==========================================>
                            \                                  \                         \
-                            \___libra2-node-v1.2.0 tag          \                         \
+                            \___creditchain-node-v1.2.0 tag      \                         \
                              \                                  \                         \
-                              \      libra2-framework-v1.3.0 tag__\                     devnet branch
-   libra2-framework-v1.2.0 tag__\                                  \                     
-                                \___libra2-node-v1.2.4 tag          \___libra2-node-v1.3.0 tag
+                              \      creditchain-framework-v1.3.0 tag__\               devnet branch
+   creditchain-framework-v1.2.0 tag__\                              \                     
+                                \___creditchain-node-v1.2.4 tag      \___creditchain-node-v1.3.0 tag
                                  \                                  \
                                   \                                  \
-                             aptos-release-v1.2 branch         aptos-release-v1.3 branch
+                        creditchain-release-v1.2 branch  creditchain-release-v1.3 branch
 
 ```
 
@@ -20,40 +20,40 @@
 All current development occurs on the `main` branch. All new feature developments have a feature flag to gate it off during development. Feature flags are turned on *after* the development is complete and passes Governance.
 
 ### devnet branch
-The `devnet` branch is created on the `main` branch every week. It is used to deploy devnet and allows the Libra2 Community to explore the most recent changes to the Libra2 node binary and Libra2 framework. Follow along in our [#devnet-release](https://discord.com/channels/945856774056083548/956692649430093904) channel on [Discord](https://discord.gg/aptosnetwork).
+The `devnet` branch is created on the `main` branch every week. It is used to deploy devnet and allows authorized operators and internal teams to evaluate the latest CreditChain node binary and framework changes. Follow release updates in [CreditChain Discussions](https://github.com/ibankio/creditchain/discussions).
 
-### aptos-release-v*X.Y* release branches
-These are release branches based on Libra2 release planning timeline. They are created off
+### creditchain-release-v*X.Y* release branches
+These are release branches based on CreditChain release planning timeline. They are created off
 the `main` branch every 1-2 months.
 
-### libra2-node-v*X.Y.Z* release tag
-The libra2 node release tags are created for validator/fullnode deployment of the given release branch. The minor number *Z* will increment when a new hot-fix release is required on the release branch. Libra2 team will publish the matching tag docker images on [Libra2 Docker Hub](https://hub.docker.com/r/aptoslabs/validator/tags) when it's available.
+### creditchain-node-v*X.Y.Z* release tag
+The CreditChain node release tags are created for validator/fullnode deployment of the given release branch. The minor number *Z* will increment when a new hot-fix release is required on the release branch. The matching container images are published in [CreditChain packages](https://github.com/ibankio/creditchain/pkgs/container).
 
-### libra2-framework-v*X.Y.Z* release tag
-The libra2 framework release tags are created to facilitate the on-chain framework upgrade of the given release branch. The minor number *Z* will increment when a new hot-fix release or a new  framework update is required on this release branch.
+### creditchain-framework-v*X.Y.Z* release tag
+The CreditChain framework release tags are created to facilitate the on-chain framework upgrade of the given release branch. The minor number *Z* will increment when a new hot-fix release or a new framework update is required on this release branch.
 
-### libra2-cli-v*X.Y.Z* release tag
-The libra2 CLI release tags are created to track the CLI versions for community to use when developing on the Libra2 network. It's always recommended to upgrade your CLI when a new version is released, for the best user experience. Learn how to update to the [latest CLI version](https://aptos.dev/en/build/cli).
+### creditchain-cli-v*X.Y.Z* release tag
+The CreditChain CLI release tags are created to track CLI versions for the community when developing on the CreditChain network. It is recommended to upgrade your CLI when a new version is released for the best user experience. Learn how to update to the [latest CLI version](https://github.com/ibankio/creditchain/tree/main/docs).
 
-## Libra2 Release Lifecycle
+## CreditChain Release Lifecycle
 (The time length here is a rough estimate, it varies depends on each release.)
-* [day 0] A release branch `aptos-release-vx.y` will be created, with a commit hash `abcde`. The full test suite will be triggered for the commit hash for validation.
+* [day 0] A release branch `creditchain-release-vx.y` will be created, with a commit hash `abcde`. The full test suite will be triggered for the commit hash for validation.
 * [day 1] The release will be deployed to **devnet**.
-* [day 7] Once the release passed devnet test, a release tag `libra2-node-vx.y.z.rc` will be created, and get deployed to **testnet**.
+* [day 7] Once the release passed devnet test, a release tag `creditchain-node-vx.y.z.rc` will be created and deployed to **testnet**.
 * [day 10] After the binary release stabilized on testnet, testnet framework will be upgraded.
 * Hot-fixes release will be created as needed when a release version is soaking in testnet, and we will only promote a release from testnet to Mainnet after confirming a release version is stable.
-* [day 14] Once confirmed that both binary upgrade and framework upgrade stabilized on testnet, a release tag `libra2-node-vx.y.z` will be created, the release version will be deployed to 1% of the stake on **Mainnet**.
-* [day 16] Wider announcement will be made for the community to upgrade the binary, `libra2-node-vx.y.z` will be updated with "[Mainnet]" in the release page, Mainnet validators will be slowly upgrading.
+* [day 14] Once confirmed that both binary upgrade and framework upgrade stabilized on testnet, a release tag `creditchain-node-vx.y.z` will be created and deployed to 1% of the stake on **Mainnet**.
+* [day 16] Wider operator announcement will be made for binary upgrades, `creditchain-node-vx.y.z` will be updated with "[Mainnet]" in the release page, and Mainnet validators will slowly upgrade.
 * [day 17] A list of framework upgrade proposals will be submitted to Mainnet for voting.
 * [day 24] Proposals executed on-chain if passed voting.
 
 ## Release Announcement
-* Each of the network release will be announced on Libra2 Network [Discord](https://discord.gg/aptosnetwork). Follow mainnet-release, testnet-release, devnet-release channel to get updates.
-* When a release is ready to deploy, a [Github release page](https://github.com/libra2org/libra2-core/releases) will be created in this repo as well. You can search for the most recent release version titled with "[Mainnet]" for production usage.
+* Each network release will be announced on [CreditChain Discussions](https://github.com/ibankio/creditchain/discussions) and in release notes.
+* When a release is ready to deploy, a [Github release page](https://github.com/ibankio/creditchain/releases) will be created in this repo as well. You can search for the most recent release version titled with "[Mainnet]" for production usage.
 
-## How we test each release at Libra2
+## How we test each release at CreditChain
 ### Blockchain
-* We write and maintain high quality unit tests to verify code behavior and according to the specifications. Check out our [Codecov](https://app.codecov.io/gh/libra2org/libra2-core)!
+* We write and maintain high quality unit tests to verify code behavior and according to the specifications. Check out our [Codecov](https://app.codecov.io/gh/ibankio/creditchain)!
 * Integration tests run on each PR verifying each component’s correctness.
 * For large-scale and chaos testing, we use a custom test harness called Forge. Forge orchestrates a cluster of nodes based on the recommended production configuration to simulate different deployment scenarios, and can then submit a variety of different client traffic patterns. It can also inject chaos such as latency, bandwidth, network partitions, and simulate real-world scenarios. It runs on every PR and continuously on main and release branches.
 * Performance tests run sequential and parallel execution benchmarks on an isolated machine. We verify the TPS (transactions per second) is within the target threshold range and watch for performance regressions.

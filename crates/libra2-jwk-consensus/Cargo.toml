@@ -1,6 +1,6 @@
 [package]
 name = "libra2-jwk-consensus"
-description = "Libra2 JWK consensus"
+description = "CreditChain JWK consensus"
 version = "0.1.1"
 
 # Workspace inherited keys

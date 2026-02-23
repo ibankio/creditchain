@@ -1,6 +1,6 @@
 [package]
 name = "libra2-warp-webserver"
-description = "Libra2 warp based webserver API"
+description = "CreditChain warp based webserver API"
 version = "0.1.1"
 
 # Workspace inherited keys

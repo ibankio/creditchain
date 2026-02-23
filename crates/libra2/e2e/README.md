@@ -26,7 +26,7 @@ poetry run python main.py --base-network mainnet --test-cli-tag nightly
 
 Using the CLI from a local path:
 ```
-poetry run python main.py -d --base-network mainnet --test-cli-path ~/libra2-core/target/debug/libra2
+poetry run python main.py -d --base-network mainnet --test-cli-path ~/creditchain/target/debug/libra2
 ```
 
 ## Debugging
@@ -39,7 +39,7 @@ docker: no matching manifest for linux/arm64/v8 in the manifest list entries.
 
 Try running the poetry command with this env var:
 ```
-DOCKER_DEFAULT_PLATFORM=linux/amd64 poetry run python main.py --base-network testnet --test-cli-path ~/libra2-core/target/debug/libra2
+DOCKER_DEFAULT_PLATFORM=linux/amd64 poetry run python main.py --base-network testnet --test-cli-path ~/creditchain/target/debug/libra2
 ```
 This makes the docker commands use the x86_64 images since we don't publish images for ARM.
 

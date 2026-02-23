@@ -1,10 +1,10 @@
 [package]
 name = "libra2-protos"
 version = "1.3.2"
-authors = ["Libra2 Team <info@libra2.org>"]
+authors = ["CreditChain Research Team"]
 description = "Code generated from Libra2 protobuf definitions"
-repository = "https://github.com/libra2org/libra2-core"
-homepage = "https://libra2.org"
+repository = "https://github.com/ibankio/creditchain"
+homepage = "https://github.com/ibankio/creditchain"
 license = "Apache-2.0"
 publish = true
 edition = "2021"

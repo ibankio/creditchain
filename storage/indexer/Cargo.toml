@@ -1,6 +1,6 @@
 [package]
 name = "libra2-db-indexer"
-description = "Libra2DB Internal Indexer"
+description = "CreditChainDB Internal Indexer"
 version = "0.1.1"
 
 # Workspace inherited keys

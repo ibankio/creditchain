@@ -7,5 +7,5 @@ jobs:
     runs-on: runs-on,cpu=64,family=c7,disk=large,image=aptos-ubuntu-x64,run-id=${{ github.run_id }}
     steps:
       - uses: actions/checkout@v4
-      - uses: libra2org/libra2-core/.github/actions/rust-setup@main
+      - uses: ibankio/creditchain/.github/actions/rust-setup@main
       - run: scripts/find-packages-with-undeclared-feature-dependencies.sh

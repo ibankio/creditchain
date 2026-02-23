@@ -1,6 +1,6 @@
 name: "Faucet Integration Tests"
 description: |
-  Runs the tests for the Libra2 faucet against a local testnet built from a particular release branch
+  Runs the tests for the CreditChain faucet against a local testnet built from a particular release branch
 inputs:
   NETWORK:
     description: "The network branch for running the local testnet: devnet, testnet, or custom for a specific tag."
@@ -28,7 +28,7 @@ runs:
 
     # Set up Rust for running the integration tests.
     - name: Set up Rust
-      uses: libra2org/libra2-core/.github/actions/rust-setup@main
+      uses: ibankio/creditchain/.github/actions/rust-setup@main
 
     - uses: ./.github/actions/python-setup
       with:

@@ -1,6 +1,6 @@
-# Libra2 CLI Development Guide
+# CreditChain CLI Development Guide
 
-This is a list of design decisions and guidelines for adding commands to the Libra2 CLI.
+This is a list of design decisions and guidelines for adding commands to the CreditChain CLI.
 
 ## Command Groups
 
@@ -42,7 +42,7 @@ pub enum AccountTool {
 Then it must also be added to the top level command structure:
 
 ```rust
-/// Command Line Interface (CLI) for developing and interacting with the Libra2 blockchain
+/// Command Line Interface (CLI) for developing and interacting with the CreditChain blockchain
 #[derive(Parser)]
 #[clap(name = "libra2", author, version, propagate_version = true, styles = libra2_cli_common::libra2_cli_style())]
 pub enum Tool {

@@ -1,4 +1,4 @@
-# Libra2 Protos
+# CreditChain Protos
 
 ## Changelog
 To update the changelog do the following:

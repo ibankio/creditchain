@@ -1,6 +1,6 @@
 [package]
 name = "libra2-executor-test-helpers"
-description = "Libra2 executor test helpers"
+description = "CreditChain executor test helpers"
 version = "0.1.1"
 
 # Workspace inherited keys

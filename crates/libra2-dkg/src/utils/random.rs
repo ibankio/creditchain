@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 /// TODO(Security): This file is a workaround for the `rand_core_hell` issue, briefly described below.

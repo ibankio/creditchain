@@ -2,14 +2,14 @@
 
 # This script ensures that libra2-cached-packages has been built correctly.
 #
-# If you want to run this from anywhere in libra2-core, try adding the wrapper
+# If you want to run this from anywhere in CreditChain, try adding the wrapper
 # script to your path:
 # https://gist.github.com/banool/e6a2b85e2fff067d3a215cbfaf808032
 
 # Make sure we're in the root of the repo.
 if [ ! -d ".github" ]
 then
-    echo "Please run this from the root of libra2-core!"
+    echo "Please run this from the root of CreditChain!"
     exit 1
 fi
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright © A-p-t-o-s Foundation
+# Copyright © CreditChain Research Team
 # SPDX-License-Identifier: Apache-2.0
 
 # This script is a utility script used by some rust tests such as libra2-core/secure/storage/src/tests/vault.rs .

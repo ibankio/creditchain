@@ -1,6 +1,6 @@
 [package]
 name = "libra2-api"
-description = "Libra2 REST API"
+description = "CreditChain REST API"
 version = "0.2.1"
 
 # Workspace inherited keys

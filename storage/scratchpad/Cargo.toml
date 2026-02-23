@@ -1,6 +1,6 @@
 [package]
 name = "libra2-scratchpad"
-description = "Libra2 scratchpad"
+description = "CreditChain scratchpad"
 version = "0.1.0"
 
 # Workspace inherited keys

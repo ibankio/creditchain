@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -152,7 +152,7 @@ pub fn get_api_service(
     let license =
         LicenseObject::new("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0.html");
     let contact = ContactObject::new()
-        .name("Libra2 Labs")
+        .name("CreditChain Research Team")
         .url("https://github.com/libra2org/libra2-core");
 
     OpenApiService::new(apis, "Libra2 Node API", version.trim())

@@ -1,6 +1,6 @@
 [package]
 name = "libra2-node"
-description = "Libra2 node"
+description = "CreditChain node"
 version = "0.0.0-main"
 
 # Workspace inherited keys

@@ -1,6 +1,6 @@
 [package]
 name = "libra2-executor-types"
-description = "Libra2 executor interface types"
+description = "CreditChain executor interface types"
 version = "0.1.1"
 
 # Workspace inherited keys

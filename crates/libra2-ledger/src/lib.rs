@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 //! # libra2-ledger
@@ -30,7 +30,7 @@ use thiserror::Error;
 /// 637 is the key for Libra2
 /// To allow Libra2 app (with CLA 0x5C) to coexist with the Libra2 app (with CLA 0x5B) on
 /// the same Ledger device, you must update both the Ledger firmware and your Rust code
-/// if Both Libra2 and A-p-t-o-s app in same ledger, need differ CLA value like ox5C.
+/// if Both CreditChain and legacy app in same ledger, need differ CLA value like ox5C.
 pub const DERIVATION_PATH: &str = "m/44'/637'/{index}'/0'/0'";
 
 const CLA_LIBRA2: u8 = 0x5B; // Libra2 CLA Instruction class - same as A-PTOS for now

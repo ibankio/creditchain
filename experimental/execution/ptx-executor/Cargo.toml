@@ -1,6 +1,6 @@
 [package]
 name = "libra2-experimental-ptx-executor"
-description = "Libra2 P-Transaction Executor"
+description = "CreditChain P-Transaction Executor"
 version = "0.1.1"
 
 # Workspace inherited keys

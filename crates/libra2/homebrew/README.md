@@ -1,17 +1,17 @@
-# Homebrew Libra2
+# Homebrew CreditChain
 
 Homebrew is a package manager that works for MacOS Silicon and Intel chips as well as Linux distributions like Debian
 and Ubuntu.
 
-The [Libra2 command line interface (CLI)](https://docs.libra2.org/tools/libra2-cli/install-cli/) may be installed
-via [Homebrew](https://brew.sh/) for simplicity. This is an in-depth overview of Homebrew and the Libra2 formula. In this
+The [CreditChain command line interface (CLI)](https://github.com/ibankio/creditchain/tree/main/docs) may be installed
+via [Homebrew](https://brew.sh/) for simplicity. This is an in-depth overview of Homebrew and the CreditChain formula. In this
 guide, we go over each section of the Homebrew formula and steps to implement changes in the future.
 
 ## Quick guide
 
 - [Formula in Homebrew GitHub](https://github.com/Homebrew/homebrew-core/blob/master/Formula/libra2.rb)
-- [Libra2 1.0.3 New Formula PR for GitHub](https://github.com/Homebrew/homebrew-core/pull/119832)
-- [Libra2 Formula Fix PR to use build_cli_release.sh](https://github.com/Homebrew/homebrew-core/pull/120051)
+- [CreditChain 1.0.3 New Formula PR for GitHub](https://github.com/Homebrew/homebrew-core/pull/119832)
+- [CreditChain Formula Fix PR to use build_cli_release.sh](https://github.com/Homebrew/homebrew-core/pull/120051)
 
 ## Getting started
 
@@ -38,14 +38,14 @@ libra2 --help
 # This should return something like
 
 # libra2 1.0.5
-# Libra2 Team <info@libra2.org>
-# Command Line Interface (CLI) for developing and interacting with the Libra2 blockchain
+# CreditChain Research Team
+# Command Line Interface (CLI) for developing and interacting with the CreditChain blockchain
 # ...
 ```
 
 ## Change guide
 
-Note: This guide is for developers who are trying to update the Libra2 homebrew formula.
+Note: This guide is for developers who are trying to update the CreditChain homebrew formula.
 
 You can get the latest formula here: https://github.com/Homebrew/homebrew-core/blob/master/Formula/a/libra2.rb
 
@@ -82,20 +82,20 @@ brew livecheck --debug libra2
 
 Once you have audited and tested your brew formula using the commands above, make sure you:
 
-1. Commit your changes to `libra2-core` in `crates/libra2/homebrew`.
+1. Commit your changes to `creditchain` in `crates/libra2/homebrew`.
 2. Fork the Homebrew Core repository
    per [How to Open a Homebrew Pull Request](https://docs.brew.sh/How-To-Open-a-Homebrew-Pull-Request#formulae-related-pull-request).
 3. Create a PR on the [Homebrew Core](https://github.com/Homebrew/homebrew-core/pulls) repo with your changes.
 
-## Libra2.rb structure overview
+## CreditChain.rb structure overview
 
 ### Header
 
 ```ruby
-class Libra2 < Formula
+class CreditChain < Formula
   desc "Layer 1 blockchain built to support fair access to decentralized assets for all"
-  homepage "https://libra2.org/"
-  url "https://github.com/libra2org/libra2-core/archive/refs/tags/libra2-cli-v1.0.3.tar.gz"
+  homepage "https://github.com/ibankio/creditchain"
+  url "https://github.com/ibankio/creditchain/archive/refs/tags/libra2-cli-v1.0.3.tar.gz"
   sha256 "670bb6cb841cb8a65294878af9a4f03d4cba2a598ab4550061fed3a4b1fe4e98"
   license "Apache-2.0"
   ...
@@ -129,7 +129,7 @@ compile from source every time.
 ### Livecheck
 
 [Brew livecheck](https://docs.brew.sh/Brew-Livecheck) uses strategies to find the newest version of a formula or cask’s
-software by checking upstream. The strategy used below checks for all `libra2-cli-v<SEMVER>` tags for `libra2-core`. The
+software by checking upstream. The strategy used below checks for all `libra2-cli-v<SEMVER>` tags for `creditchain`. The
 regex ensures that releases for other, non-CLI builds are not factored into livecheck.
 
 Livecheck is run on a schedule with BrewTestBot and will update the bottles automatically on a schedule to ensure
@@ -164,9 +164,9 @@ brew livecheck --debug libra2
   going forward, we would modify the formula slightly. See the comments below for more details.
 
 ```ruby
-  # Installs listed homebrew dependencies before Libra2 installation
-  # Dependencies needed: https://docs.libra2.org/cli-tools/build-libra2-cli
-  # See scripts/dev_setup.sh in libra2-core for more info
+  # Installs listed homebrew dependencies before CreditChain installation
+  # Dependencies needed: https://github.com/ibankio/creditchain/tree/main/docs
+  # See scripts/dev_setup.sh in creditchain for more info
   depends_on "cmake" => :build
   depends_on "rustup-init" => :build
   uses_from_macos "llvm" => :build
@@ -179,7 +179,7 @@ brew livecheck --debug libra2
   end
 
   # Currently must compile with the same rustc version specified in the
-  # root Cargo.toml file of libra2-core (currently it is pegged to Rust 
+  # root Cargo.toml file of creditchain (currently it is pegged to Rust 
   # v1.64). In the future if it becomes compatible with the latest Rust
   # toolchain, we can remove the use of rustup-init, replacing it with a 
   # depends_on "rust" => :build
@@ -206,7 +206,7 @@ To conduct tests, run:
 brew test libra2
 ```
 
-The current test generates a new key via the Libra2 CLI and ensures the shell output matches the filename(s) for that
+The current test generates a new key via the CreditChain CLI and ensures the shell output matches the filename(s) for that
 key.
 
 ```ruby

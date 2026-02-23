@@ -1,6 +1,6 @@
-# Libra2 Protos
+# CreditChain Protos
 
-This repository contains the protobuf definitions for Libra2.
+This repository contains the protobuf definitions for CreditChain.
 
 ## Usage
 Import generated structs like this:

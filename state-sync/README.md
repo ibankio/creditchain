@@ -1,19 +1,19 @@
 ---
 id: state sync
 title: State Sync
-custom_edit_url: https://github.com/libra2org/libra2-core/edit/main/state-sync/README.md
+custom_edit_url: https://github.com/ibankio/creditchain/edit/main/state-sync/README.md
 ---
 
 # State Synchronization (State Sync)
 
-State sync is a component that runs within each Libra2 node and is responsible
+State sync is a component that runs within each CreditChain node and is responsible
 for synchronizing the node to the latest blockchain state. It is required by
 both validators and fullnodes to ensure that they do not fall behind the rest
 of the network. To achieve this, state sync identifies and fetches new
 blockchain data from peers, validates the data and persists it to local
 storage.
 
-To read more about state sync and node configurations, see the [state sync developer documentation](https://docs.libra2.org/guides/state-sync/).
+To read more about state sync and node configurations, see the [state sync developer documentation](https://github.com/ibankio/creditchain/tree/main/docs).
 
 ## State sync architecture
 
@@ -29,7 +29,7 @@ new data chunks from peers, without having to worry about which peers have the
 data or how to manage data requests. For example, the client can request all
 transactions since version `5` and the data streaming service will provide
 this.
-3. **Libra2 Data Client**: The data client is responsible for handling data
+3. **CreditChain Data Client**: The data client is responsible for handling data
 requests from the data streaming service. For the data streaming service to
 stream all transactions, it must make multiple requests (each request for a
 batch of transactions) and send those requests to peers (e.g., transactions
@@ -43,13 +43,13 @@ a batch of transactions.
 ### Code structure
 
 The state sync code structure matches the architecture outlined above:
-- **Driver:** [https://github.com/libra2org/libra2-core/tree/main/state-sync/state-sync-driver](https://github.com/libra2org/libra2-core/tree/main/state-sync/state-sync-driver)
-- **Data Streaming Service:** [https://github.com/libra2org/libra2-core/tree/main/state-sync/data-streaming-service](https://github.com/libra2org/libra2-core/tree/main/state-sync/data-streaming-service)
-- **Libra2 Data Client**: [https://github.com/libra2org/libra2-core/tree/main/state-sync/libra2-data-client](https://github.com/libra2org/libra2-core/tree/main/state-sync/libra2-data-client)
-- **Storage Service:** [https://github.com/libra2org/libra2-core/tree/main/state-sync/storage-service](https://github.com/libra2org/libra2-core/tree/main/state-sync/storage-service)
+- **Driver:** [https://github.com/ibankio/creditchain/tree/main/state-sync/state-sync-driver](https://github.com/ibankio/creditchain/tree/main/state-sync/state-sync-driver)
+- **Data Streaming Service:** [https://github.com/ibankio/creditchain/tree/main/state-sync/data-streaming-service](https://github.com/ibankio/creditchain/tree/main/state-sync/data-streaming-service)
+- **CreditChain Data Client**: [https://github.com/ibankio/creditchain/tree/main/state-sync/libra2-data-client](https://github.com/ibankio/creditchain/tree/main/state-sync/libra2-data-client)
+- **Storage Service:** [https://github.com/ibankio/creditchain/tree/main/state-sync/storage-service](https://github.com/ibankio/creditchain/tree/main/state-sync/storage-service)
 
 In addition, there is also a directory containing the code for
-**inter-component** communication: [https://github.com/libra2org/libra2-core/tree/main/state-sync/inter-component](https://github.com/libra2org/libra2-core/tree/main/state-sync/inter-component).
+**inter-component** communication: [https://github.com/ibankio/creditchain/tree/main/state-sync/inter-component](https://github.com/ibankio/creditchain/tree/main/state-sync/inter-component).
 This is required so that:
    - State sync can handle notifications from consensus (e.g., to catch up after falling behind)
    - State sync can notify mempool when transactions are committed (i.e., so they can be removed from mempool)

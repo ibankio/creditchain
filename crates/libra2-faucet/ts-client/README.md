@@ -1,4 +1,4 @@
-# Generated TS client for the Libra2 Faucet
+# Generated TS client for the CreditChain Faucet
 
 ## Quickstart
 ```bash

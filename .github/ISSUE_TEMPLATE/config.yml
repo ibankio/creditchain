@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Questions and Help (on Libra2 Developer Discussions)
-    url: (https://github.com/aptos-labs/aptos-developer-discussions/discussions
-    about: Support and other Questions are handled by the team and the community on Libra2 Developer Discussions.
-  - name: Questions, Help and Chat (on Discord)
-    url: https://discord.gg/aptosnetwork
-    about: Contact the development team, contributors and community on Discord
+  - name: Questions and Help (on CreditChain Developer Discussions)
+    url: https://github.com/ibankio/creditchain/discussions
+    about: Support and other Questions are handled by the team and the community on CreditChain Developer Discussions.
+  - name: Security Reporting
+    url: https://github.com/ibankio/creditchain/security
+    about: Report security issues via the repository security workflow.

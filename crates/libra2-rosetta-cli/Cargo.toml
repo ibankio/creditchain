@@ -1,6 +1,6 @@
 [package]
 name = "libra2-rosetta-cli"
-description = "Libra2 Rosetta CLI for testing"
+description = "CreditChain Rosetta CLI for testing"
 version = "0.0.2"
 
 # Workspace inherited keys

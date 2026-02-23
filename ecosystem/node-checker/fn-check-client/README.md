@@ -37,5 +37,5 @@ This is automatically built into the tools image.
 ## Helpful stuff
 This command will show you the validator set on chain using the CLI:
 ```
-libra2 node show-validator-set --url https://fullnode.devnet.libra2.org
+libra2 node show-validator-set --url https://fullnode.devnet.creditchain.org
 ```

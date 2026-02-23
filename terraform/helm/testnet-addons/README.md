@@ -4,18 +4,18 @@
 
 Additional components for libra2-nodes testnet
 
-**Homepage:** <https://libra2.org/>
+**Homepage:** <https://github.com/ibankio/creditchain>
 
 ## Source Code
 
-* <https://github.com/libra2org/libra2-core>
+* <https://github.com/ibankio/creditchain>
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | cloud | string | `"EKS"` |  |
-| genesis.chain_id | string | `nil` | Libra2 Chain ID |
+| genesis.chain_id | string | `nil` | CreditChain Chain ID |
 | genesis.numValidators | string | `nil` | Number of validators deployed in this testnet |
 | genesis.username_prefix | string | `"libra2-node"` | Validator username prefix, used to get genesis secrets. This should be the fullname for the libra2-node helm release |
 | imageTag | string | `"devnet"` | Default image tag to use for all libra2 images |

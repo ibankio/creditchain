@@ -1,6 +1,6 @@
 [package]
 name = "libra2-jellyfish-merkle"
-description = "Libra2 jellyfish merkle"
+description = "CreditChain jellyfish merkle"
 version = "0.1.1"
 
 # Workspace inherited keys

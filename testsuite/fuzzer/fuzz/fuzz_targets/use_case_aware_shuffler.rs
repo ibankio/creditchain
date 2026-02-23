@@ -1,5 +1,5 @@
 #![no_main]
-// Copyright (c) A-p-t-o-s Foundation
+// Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use libra2_consensus::transaction_shuffler_fuzzing::use_case_aware::{Config, UseCaseAwareShuffler};

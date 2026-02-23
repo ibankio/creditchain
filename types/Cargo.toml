@@ -1,6 +1,6 @@
 [package]
 name = "libra2-types"
-description = "Libra2 core types"
+description = "CreditChain core types"
 version = "0.0.4"
 
 # Workspace inherited keys

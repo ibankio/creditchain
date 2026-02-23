@@ -1,9 +1,9 @@
 name: "Fullnode Sync"
 description: |
-  Runs a fullnode from libra2-core, assuming it is already checked out in the current working directory.
+  Runs a fullnode from CreditChain, assuming it is already checked out in the current working directory.
 inputs:
   GIT_REF:
-    description: "The libra2-core git ref (branch or commit hash) to switch to before running the fullnode."
+    description: "The CreditChain git ref (branch or commit hash) to switch to before running the fullnode."
     required: true
   NETWORK:
     description: "The network to connect the fullnode to: devnet, testnet, or mainnet."

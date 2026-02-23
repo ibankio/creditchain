@@ -1,6 +1,6 @@
 [package]
 name = "libra2-mempool"
-description = "Libra2 mempool for consuming incoming transactions"
+description = "CreditChain mempool for consuming incoming transactions"
 version = "0.1.1"
 
 # Workspace inherited keys

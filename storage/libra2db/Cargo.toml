@@ -1,6 +1,6 @@
 [package]
 name = "libra2-db"
-description = "Libra2 database"
+description = "CreditChain database"
 version = "0.1.1"
 
 # Workspace inherited keys

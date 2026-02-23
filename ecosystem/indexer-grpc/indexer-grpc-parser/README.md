@@ -1,4 +1,4 @@
-# All processors are migrated to [processor repo](https://github.com/libra2org/libra2-indexer-processors)
+# All processors are migrated to [processor repo](https://github.com/ibankio/creditchain/tree/main/ecosystem/indexer-processors-v2)
 
 # Indexer GRPC Parser
 
@@ -8,7 +8,7 @@ Indexer GRPC parser is to indexer data processor that leverages the indexer grpc
 
 ## Tutorial
 ### Prerequisite
-* A running PostgreSQL instance, with a valid database. More tutorial can be found [here](https://github.com/libra2org/libra2-core/tree/main/crates/indexer#postgres)
+* A running PostgreSQL instance, with a valid database. More tutorial can be found [here](https://github.com/ibankio/creditchain/tree/main/crates/indexer#postgres)
 
 * A config YAML file
   * For exmaple, `config.yaml`
@@ -46,4 +46,4 @@ Indexer GRPC parser is to indexer data processor that leverages the indexer grpc
 
 
 ### Use a custom parser
-* Check our [indexer processors](https://github.com/libra2org/libra2-indexer-processors)! 
+* Check our [indexer processors](https://github.com/ibankio/creditchain/tree/main/ecosystem/indexer-processors-v2)!

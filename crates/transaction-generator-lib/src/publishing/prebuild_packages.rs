@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{anyhow, bail};
@@ -112,7 +112,7 @@ pub fn create_prebuilt_packages_bundle(
 
     // Step 2: generate implementation to access prebuilt packages.
     let code = r#"
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 // This file was generated. Do not modify!

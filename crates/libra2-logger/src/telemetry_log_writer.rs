@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::counters::{LIBRA2_LOG_INGEST_WRITER_DISCONNECTED, LIBRA2_LOG_INGEST_WRITER_FULL};

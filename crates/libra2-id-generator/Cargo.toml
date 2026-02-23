@@ -1,6 +1,6 @@
 [package]
 name = "libra2-id-generator"
-description = "Libra2 id-generator. A common id generator for Libra2"
+description = "CreditChain id-generator. A common id generator for Libra2"
 version = "0.1.1"
 
 # Workspace inherited keys

@@ -1,4 +1,4 @@
-# Libra2 Protos
+# CreditChain Protos
 
 ## Regenerating code
 Note: This is only for debugging. For normal uses, just use scripts/build_protos.sh in the parent directory.

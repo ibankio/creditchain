@@ -1,6 +1,6 @@
 [package]
 name = "libra2-experimental-hexy"
-description = "Libra2 Hexy"
+description = "CreditChain Hexy"
 version = "0.1.1"
 
 # Workspace inherited keys

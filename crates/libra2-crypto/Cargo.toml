@@ -1,6 +1,6 @@
 [package]
 name = "libra2-crypto"
-description = "Libra2 crypto"
+description = "CreditChain crypto"
 version = "0.0.4"
 
 # Workspace inherited keys
