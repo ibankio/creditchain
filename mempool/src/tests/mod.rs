@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // Command to run all the mempool tests:
-//      cargo test --package libra2-mempool --lib -- tests --show-output
+//      cargo test --package creditchain-mempool --lib -- tests --show-output
 
 #[cfg(test)]
 mod common;

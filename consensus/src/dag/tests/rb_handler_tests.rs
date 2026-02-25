@@ -15,8 +15,8 @@ use crate::dag::{
     types::NodeCertificate,
     NodeId, RpcHandler, Vote,
 };
-use libra2_config::config::DagPayloadConfig;
-use libra2_types::{
+use creditchain_config::config::DagPayloadConfig;
+use creditchain_types::{
     aggregate_signature::PartialSignatures,
     epoch_state::EpochState,
     on_chain_config::{OnChainJWKConsensusConfig, OnChainRandomnessConfig, ValidatorTxnConfig},

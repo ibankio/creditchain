@@ -8,11 +8,11 @@
 //      * 100 reads per second for large load -  1 MB per txn for 10 clients   - memory-(de)allocation, ~10 Gbps.
 //      * 100 reads per second for small load -  2 KB per txn for 1000 clients - contended reads, ~2 Gbps.
 
-use libra2_indexer_grpc_utils::{
+use creditchain_indexer_grpc_utils::{
     compression_util::{CacheEntry, StorageFormat},
     in_memory_cache::{InMemoryCache, InMemoryCacheConfig, MAX_REDIS_FETCH_BATCH_SIZE},
 };
-use libra2_protos::transaction::v1::{Transaction, TransactionInfo};
+use creditchain_protos::transaction::v1::{Transaction, TransactionInfo};
 use lazy_static::lazy_static;
 use once_cell::sync::OnceCell;
 use redis_test::{MockCmd, MockRedisConnection};

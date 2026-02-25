@@ -3,8 +3,8 @@
 
 use crate::v2::types::{PrePartitionedTxnIdx, ShardedTxnIndexV2};
 #[cfg(test)]
-use libra2_types::state_store::state_key::StateKey;
-use libra2_types::{
+use creditchain_types::state_store::state_key::StateKey;
+use creditchain_types::{
     block_executor::partitioner::{RoundId, ShardId},
     transaction::analyzed_transaction::StorageLocation,
 };

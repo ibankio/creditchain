@@ -1,0 +1,7 @@
+[package]
+name = "TestSmartDataStructures"
+version = "0.0.0"
+
+[dependencies]
+CreditChainFramework = { local = "../../../../framework/creditchain-framework" }
+CreditChainStdlib = { local = "../../../../framework/creditchain-stdlib" }

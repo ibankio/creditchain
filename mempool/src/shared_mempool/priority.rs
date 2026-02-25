@@ -3,14 +3,14 @@
 
 use super::types::MempoolSenderBucket;
 use crate::{counters, network::BroadcastPeerPriority};
-use libra2_config::{
+use creditchain_config::{
     config::{MempoolConfig, NodeType},
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_infallible::RwLock;
-use libra2_logger::prelude::*;
-use libra2_peer_monitoring_service_types::PeerMonitoringMetadata;
-use libra2_time_service::{TimeService, TimeServiceTrait};
+use creditchain_infallible::RwLock;
+use creditchain_logger::prelude::*;
+use creditchain_peer_monitoring_service_types::PeerMonitoringMetadata;
+use creditchain_time_service::{TimeService, TimeServiceTrait};
 use itertools::Itertools;
 use std::{
     cmp::{max, min, Ordering},
@@ -560,14 +560,14 @@ fn compare_validator_distance(
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_config::{
+    use creditchain_config::{
         config::{MempoolConfig, NodeType},
         network_id::{NetworkId, PeerNetworkId},
     };
-    use libra2_peer_monitoring_service_types::{
+    use creditchain_peer_monitoring_service_types::{
         response::NetworkInformationResponse, PeerMonitoringMetadata,
     };
-    use libra2_types::PeerId;
+    use creditchain_types::PeerId;
     use core::cmp::Ordering;
     use std::collections::BTreeMap;
 

@@ -4,7 +4,7 @@
 
 //! This crate implements wrappers around our [Noise][noise] implementation.
 //! Noise is a protocol framework to encrypt and authentication connections.
-//! We use Noise to secure connections between peers in Libra2.
+//! We use Noise to secure connections between peers in CreditChain.
 //! Specifically, we use the [Noise IK][ik] handshake which is a one round-trip protocol
 //! (the client sends one message, then the server responds).
 //! For more information about Noise and our implementation, refer to the [crypto] crate.
@@ -12,17 +12,17 @@
 //! Usage example:
 //!
 //! ```
-//! use libra2_network::noise::{AntiReplayTimestamps, HandshakeAuthMode, NoiseUpgrader};
+//! use creditchain_network::noise::{AntiReplayTimestamps, HandshakeAuthMode, NoiseUpgrader};
 //! use futures::{executor, future, io::{AsyncReadExt, AsyncWriteExt}};
-//! use libra2_memsocket::MemorySocket;
-//! use libra2_config::{config::{Peer, PeerRole}, network_id::{NetworkContext, NetworkId}};
-//! use libra2_crypto::{x25519, ed25519, Uniform, PrivateKey, test_utils::TEST_SEED};
-//! use libra2_infallible::RwLock;
+//! use creditchain_memsocket::MemorySocket;
+//! use creditchain_config::{config::{Peer, PeerRole}, network_id::{NetworkContext, NetworkId}};
+//! use creditchain_crypto::{x25519, ed25519, Uniform, PrivateKey, test_utils::TEST_SEED};
+//! use creditchain_infallible::RwLock;
 //! use rand::{rngs::StdRng, SeedableRng};
-//! use libra2_types::PeerId;
+//! use creditchain_types::PeerId;
 //! use std::{collections::{HashSet, HashMap}, io, sync::Arc};
-//! use libra2_config::config::RoleType;
-//! use libra2_network::application::storage::PeersAndMetadata;
+//! use creditchain_config::config::RoleType;
+//! use creditchain_network::application::storage::PeersAndMetadata;
 //!
 //! fn example() -> io::Result<()> {
 //! // create client and server NoiseUpgrader
@@ -100,7 +100,7 @@
 //!
 //! [noise]: http://noiseprotocol.org/
 //! [ik]: https://noiseexplorer.com/patterns/IK
-//! [crypto]: ../libra2_crypto/noise/index.html
+//! [crypto]: ../creditchain_crypto/noise/index.html
 
 pub mod error;
 pub mod handshake;

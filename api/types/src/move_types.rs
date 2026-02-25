@@ -4,10 +4,10 @@
 
 use crate::{Address, Bytecode, IdentifierWrapper, VerifyInput, VerifyInputWithRecursion};
 use anyhow::{bail, format_err};
-use libra2_resource_viewer::{
+use creditchain_resource_viewer::{
     AnnotatedMoveClosure, AnnotatedMoveStruct, AnnotatedMoveValue, RawMoveStruct,
 };
-use libra2_types::{account_config::CORE_CODE_ADDRESS, event::EventKey, transaction::Module};
+use creditchain_types::{account_config::CORE_CODE_ADDRESS, event::EventKey, transaction::Module};
 use move_binary_format::{
     access::ModuleAccess,
     file_format::{CompiledModule, CompiledScript, StructTypeParameter, Visibility},
@@ -1375,7 +1375,7 @@ pub fn verify_identifier(identifier: &str) -> anyhow::Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use libra2_types::account_address::AccountAddress;
+    use creditchain_types::account_address::AccountAddress;
     use move_core_types::{
         ability::AbilitySet,
         identifier::Identifier,
@@ -1491,9 +1491,9 @@ mod tests {
         test_serialize_deserialize(
             MoveModuleId {
                 address: "0x1".parse().unwrap(),
-                name: "Libra2".parse().unwrap(),
+                name: "CreditChain".parse().unwrap(),
             },
-            json!("0x1::Libra2"),
+            json!("0x1::CreditChain"),
         );
     }
 
@@ -1520,16 +1520,16 @@ mod tests {
                 .to_string()
         );
         assert_eq!(
-            "Invalid Move module ID: Libra2::Libra2",
-            "Libra2::Libra2"
+            "Invalid Move module ID: CreditChain::CreditChain",
+            "CreditChain::CreditChain"
                 .parse::<MoveModuleId>()
                 .err()
                 .unwrap()
                 .to_string()
         );
         assert_eq!(
-            "Invalid Move module ID: 0x1::Libra2::Libra2",
-            "0x1::Libra2::Libra2"
+            "Invalid Move module ID: 0x1::CreditChain::CreditChain",
+            "0x1::CreditChain::CreditChain"
                 .parse::<MoveModuleId>()
                 .err()
                 .unwrap()
@@ -1543,11 +1543,11 @@ mod tests {
             EntryFunctionId {
                 module: MoveModuleId {
                     address: "0x1".parse().unwrap(),
-                    name: "Libra2".parse().unwrap(),
+                    name: "CreditChain".parse().unwrap(),
                 },
                 name: "Add".parse().unwrap(),
             },
-            json!("0x1::Libra2::Add"),
+            json!("0x1::CreditChain::Add"),
         );
     }
 
@@ -1578,24 +1578,24 @@ mod tests {
                 .to_string()
         );
         assert_eq!(
-            "Invalid entry function ID Libra2::Libra2",
-            "Libra2::Libra2"
+            "Invalid entry function ID CreditChain::CreditChain",
+            "CreditChain::CreditChain"
                 .parse::<EntryFunctionId>()
                 .err()
                 .unwrap()
                 .to_string()
         );
         assert_eq!(
-            "Invalid entry function ID Libra2::Libra2::??",
-            "Libra2::Libra2::??"
+            "Invalid entry function ID CreditChain::CreditChain::??",
+            "CreditChain::CreditChain::??"
                 .parse::<EntryFunctionId>()
                 .err()
                 .unwrap()
                 .to_string()
         );
         assert_eq!(
-            "Invalid entry function ID 0x1::Libra2::Libra2::Libra2",
-            "0x1::Libra2::Libra2::Libra2"
+            "Invalid entry function ID 0x1::CreditChain::CreditChain::CreditChain",
+            "0x1::CreditChain::CreditChain::CreditChain"
                 .parse::<EntryFunctionId>()
                 .err()
                 .unwrap()

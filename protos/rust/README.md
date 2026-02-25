@@ -5,7 +5,7 @@ This repository contains the protobuf definitions for CreditChain.
 ## Usage
 Import generated structs like this:
 ```rust
-use libra2_protos::transaction::v1::Transaction;
+use creditchain_protos::transaction::v1::Transaction;
 ```
 
 Then use them like this:

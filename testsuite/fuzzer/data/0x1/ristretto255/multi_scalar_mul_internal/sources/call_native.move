@@ -1,5 +1,5 @@
 module poc::multi_scalar_mul_internal {
-    use libra2_std::ristretto255;
+    use creditchain_std::ristretto255;
     use std::vector;
 
     public entry fun main(_owner:&signer) {

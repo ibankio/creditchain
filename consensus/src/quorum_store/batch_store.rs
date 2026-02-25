@@ -12,12 +12,12 @@ use crate::{
     },
 };
 use anyhow::bail;
-use libra2_consensus_types::proof_of_store::{BatchInfo, SignedBatchInfo};
-use libra2_crypto::{CryptoMaterialError, HashValue};
-use libra2_executor_types::{ExecutorError, ExecutorResult};
-use libra2_infallible::Mutex;
-use libra2_logger::prelude::*;
-use libra2_types::{transaction::SignedTransaction, validator_signer::ValidatorSigner, PeerId};
+use creditchain_consensus_types::proof_of_store::{BatchInfo, SignedBatchInfo};
+use creditchain_crypto::{CryptoMaterialError, HashValue};
+use creditchain_executor_types::{ExecutorError, ExecutorResult};
+use creditchain_infallible::Mutex;
+use creditchain_logger::prelude::*;
+use creditchain_types::{transaction::SignedTransaction, validator_signer::ValidatorSigner, PeerId};
 use dashmap::{
     mapref::entry::Entry::{Occupied, Vacant},
     DashMap,
@@ -386,7 +386,7 @@ impl BatchStore {
             Ok(SignedBatchInfo::new_with_signature(
                 batch_info.clone(),
                 self.validator_signer.author(),
-                libra2_crypto::bls12381::Signature::dummy_signature(),
+                creditchain_crypto::bls12381::Signature::dummy_signature(),
             ))
         });
         SignedBatchInfo::new(batch_info, &self.validator_signer)

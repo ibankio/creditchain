@@ -11,13 +11,13 @@ use crate::{
         create_vec_signed_transactions_with_gas,
     },
 };
-use libra2_config::config::QuorumStoreConfig;
-use libra2_consensus_types::{
+use creditchain_config::config::QuorumStoreConfig;
+use creditchain_consensus_types::{
     common::{TransactionInProgress, TransactionSummary},
     proof_of_store::SignedBatchInfo,
 };
-use libra2_mempool::{QuorumStoreRequest, QuorumStoreResponse};
-use libra2_types::{quorum_store::BatchId, transaction::SignedTransaction};
+use creditchain_mempool::{QuorumStoreRequest, QuorumStoreResponse};
+use creditchain_types::{quorum_store::BatchId, transaction::SignedTransaction};
 use futures::{
     channel::mpsc::{channel, Receiver},
     StreamExt,

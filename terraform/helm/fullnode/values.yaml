@@ -7,7 +7,7 @@ manageImages: true
 chain:
   # -- Bump this number to wipe the underlying storage
   era: 1
-  # -- Name of the testnet to connect to. There must be a corresponding entry in .Values.libra2_chains
+  # -- Name of the testnet to connect to. There must be a corresponding entry in .Values.creditchain_chains
   name: devnet
   # -- The value of the `chain_name` label. If empty, defaults to `.Values.chain.name`
   label:
@@ -17,19 +17,19 @@ chain:
   genesisSecret:
 
 # -- For each supported chain, specify the URLs from which to download the genesis.blob and waypoint.txt
-libra2_chains:
+creditchain_chains:
   devnet:
-    waypoint_txt_url: https://devnet.libra2.org/waypoint.txt
-    genesis_blob_url: https://devnet.libra2.org/genesis.blob
+    waypoint_txt_url: https://devnet.creditchain.org/waypoint.txt
+    genesis_blob_url: https://devnet.creditchain.org/genesis.blob
   testnet:
-    waypoint_txt_url: https://github.com/libra2org/libra2-networks/main/testnet/genesis_waypoint.txt
-    genesis_blob_url: https://github.com/libra2org/libra2-networks/main/testnet/genesis.blob
+    waypoint_txt_url: https://github.com/creditchainorg/creditchain-networks/main/testnet/genesis_waypoint.txt
+    genesis_blob_url: https://github.com/creditchainorg/creditchain-networks/main/testnet/genesis.blob
   mainnet:
-    waypoint_txt_url: https://github.com/libra2org/libra2-networks/main/mainnet/waypoint.txt
-    genesis_blob_url: https://github.com/libra2org/libra2-networks/main/mainnet/genesis.blob
+    waypoint_txt_url: https://github.com/creditchainorg/creditchain-networks/main/mainnet/waypoint.txt
+    genesis_blob_url: https://github.com/creditchainorg/creditchain-networks/main/mainnet/genesis.blob
 
 fullnode:
-  # -- Fullnode configuration. See NodeConfig https://github.com/libra2org/libra2-core/blob/main/config/src/config/mod.rs
+  # -- Fullnode configuration. See NodeConfig https://github.com/creditchainorg/creditchain-core/blob/main/config/src/config/mod.rs
   config:
     full_node_networks:
       # The first item in the array `full_node_networks` must always refer to the public fullnode network

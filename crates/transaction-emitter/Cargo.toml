@@ -1,5 +1,5 @@
 [package]
-name = "libra2-transaction-emitter"
+name = "creditchain-transaction-emitter"
 description = "CreditChain transaction emitter for testing"
 version = "0.0.1"
 
@@ -14,11 +14,11 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-transaction-emitter-lib = { workspace = true }
-libra2-transaction-workloads-lib = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-transaction-emitter-lib = { workspace = true }
+creditchain-transaction-workloads-lib = { workspace = true }
 clap = { workspace = true }
 futures = { workspace = true }
 rand = { workspace = true }

@@ -3,26 +3,26 @@
 
 use crate::smoke_test_environment::SwarmBuilder;
 use anyhow::anyhow;
-use libra2::{
+use creditchain::{
     account::create::DEFAULT_FUNDED_COINS,
     common::types::GasOptions,
     test::{CliTestFramework, INVALID_ACCOUNT},
 };
-use libra2_cached_packages::libra2_stdlib;
-use libra2_config::{config::ApiConfig, utils::get_available_port};
-use libra2_crypto::{
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_config::{config::ApiConfig, utils::get_available_port};
+use creditchain_crypto::{
     ed25519::{Ed25519PrivateKey, Ed25519Signature},
     HashValue, PrivateKey,
 };
-use libra2_forge::{Libra2PublicInfo, LocalSwarm, Node, NodeExt, Swarm};
-use libra2_gas_schedule::{Libra2GasParameters, FromOnChainGasSchedule};
-use libra2_genesis::builder::InitConfigFn;
-use libra2_global_constants::GAS_UNIT_PRICE;
-use libra2_rest_client::{
-    libra2_api_types::{TransactionOnChainData, UserTransaction},
+use creditchain_forge::{CreditChainPublicInfo, LocalSwarm, Node, NodeExt, Swarm};
+use creditchain_gas_schedule::{CreditChainGasParameters, FromOnChainGasSchedule};
+use creditchain_genesis::builder::InitConfigFn;
+use creditchain_global_constants::GAS_UNIT_PRICE;
+use creditchain_rest_client::{
+    creditchain_api_types::{TransactionOnChainData, UserTransaction},
     Response, Transaction,
 };
-use libra2_rosetta::{
+use creditchain_rosetta::{
     client::RosettaClient,
     common::{native_coin, BlockHash, BLOCKCHAIN, Y2K_MS},
     types::{
@@ -33,8 +33,8 @@ use libra2_rosetta::{
     },
     ROSETTA_VERSION,
 };
-use libra2_sdk::{transaction_builder::TransactionFactory, types::LocalAccount};
-use libra2_types::{
+use creditchain_sdk::{transaction_builder::TransactionFactory, types::LocalAccount};
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::CORE_CODE_ADDRESS,
     chain_id::ChainId,
@@ -113,10 +113,10 @@ async fn setup_test(
     };
 
     // Start the server
-    let _rosetta = libra2_rosetta::bootstrap_async(
+    let _rosetta = creditchain_rosetta::bootstrap_async(
         swarm.chain_id(),
         api_config,
-        Some(libra2_rest_client::Client::new(
+        Some(creditchain_rest_client::Client::new(
             validator.rest_api_endpoint(),
         )),
         HashSet::new(),
@@ -255,12 +255,12 @@ async fn test_account_balance() {
     let account_3 = cli.account_id(2);
     let chain_id = swarm.chain_id();
     swarm
-        .libra2_public_info()
+        .creditchain_public_info()
         .sync_root_account_sequence_number()
         .await;
 
     let mut account_4 = swarm
-        .libra2_public_info()
+        .creditchain_public_info()
         .create_and_fund_user_account(10_000_000_000)
         .await
         .unwrap();
@@ -400,7 +400,7 @@ async fn test_account_balance() {
     .expect_err("Original staking contract is not supported");
 
     create_staking_contract(
-        &swarm.libra2_public_info(),
+        &swarm.creditchain_public_info(),
         &mut account_4,
         account_1,
         account_2,
@@ -431,7 +431,7 @@ async fn test_account_balance() {
     .unwrap();
 
     unlock_stake(
-        &swarm.libra2_public_info(),
+        &swarm.creditchain_public_info(),
         &mut account_4,
         account_1,
         1_000,
@@ -473,7 +473,7 @@ async fn test_account_balance() {
 }
 
 async fn create_staking_contract(
-    info: &Libra2PublicInfo,
+    info: &CreditChainPublicInfo,
     account: &mut LocalAccount,
     operator: AccountAddress,
     voter: AccountAddress,
@@ -483,7 +483,7 @@ async fn create_staking_contract(
 ) -> Response<Transaction> {
     let staking_contract_creation = info
         .transaction_factory()
-        .payload(libra2_stdlib::staking_contract_create_staking_contract(
+        .payload(creditchain_stdlib::staking_contract_create_staking_contract(
             operator,
             voter,
             amount,
@@ -497,7 +497,7 @@ async fn create_staking_contract(
 }
 
 async fn unlock_stake(
-    info: &Libra2PublicInfo,
+    info: &CreditChainPublicInfo,
     account: &mut LocalAccount,
     operator: AccountAddress,
     amount: u64,
@@ -505,7 +505,7 @@ async fn unlock_stake(
 ) -> Response<Transaction> {
     let unlock_stake = info
         .transaction_factory()
-        .payload(libra2_stdlib::staking_contract_unlock_stake(
+        .payload(creditchain_stdlib::staking_contract_unlock_stake(
             operator, amount,
         ))
         .sequence_number(sequence_number);
@@ -515,14 +515,14 @@ async fn unlock_stake(
 }
 
 async fn create_delegation_pool(
-    info: &Libra2PublicInfo,
+    info: &CreditChainPublicInfo,
     account: &mut LocalAccount,
     commission_percentage: u64,
     sequence_number: u64,
 ) -> Response<Transaction> {
     let delegation_pool_creation = info
         .transaction_factory()
-        .payload(libra2_stdlib::delegation_pool_initialize_delegation_pool(
+        .payload(creditchain_stdlib::delegation_pool_initialize_delegation_pool(
             commission_percentage,
             vec![],
         ))
@@ -595,7 +595,7 @@ async fn wait_for_rosetta_block(node_clients: &NodeClients<'_>, block_height: u6
 async fn test_transfer() {
     let (swarm, cli, _faucet, rosetta_client) = setup_simple_test(1).await;
     let chain_id = swarm.chain_id();
-    let client = swarm.libra2_public_info().client().clone();
+    let client = swarm.creditchain_public_info().client().clone();
     let sender = cli.account_id(0);
     let receiver = AccountAddress::from_hex_literal("0xBEEF").unwrap();
     let sender_private_key = cli.private_key(0);
@@ -629,7 +629,7 @@ async fn test_transfer() {
         // config/global-constants/src/lib.rs
         .with_gas_unit_price(GAS_UNIT_PRICE)
         .with_max_gas_amount(1000);
-    let txn_payload = libra2_stdlib::libra2_account_transfer(receiver, 100);
+    let txn_payload = creditchain_stdlib::creditchain_account_transfer(receiver, 100);
     let unsigned_transaction = transaction_factory
         .payload(txn_payload)
         .sender(sender)
@@ -724,7 +724,7 @@ async fn test_block() {
         .unwrap()
         .into_inner();
     let feature_version = gas_schedule.feature_version;
-    let gas_params = Libra2GasParameters::from_on_chain_gas_schedule(
+    let gas_params = CreditChainGasParameters::from_on_chain_gas_schedule(
         &gas_schedule.into_btree_map(),
         feature_version,
     )
@@ -1020,7 +1020,7 @@ async fn test_block() {
 
 /// Parse the transactions in each block
 async fn parse_block_transactions(
-    block: &libra2_rosetta::types::Block,
+    block: &creditchain_rosetta::types::Block,
     balances: &mut BTreeMap<AccountAddress, BTreeMap<u64, i128>>,
     actual_txns: &[TransactionOnChainData],
     current_version: &mut u64,
@@ -1071,13 +1071,13 @@ async fn parse_block_transactions(
                 assert_eq!(0, cur_version);
                 assert!(matches!(
                     actual_txn.transaction,
-                    libra2_types::transaction::Transaction::GenesisTransaction(_)
+                    creditchain_types::transaction::Transaction::GenesisTransaction(_)
                 ));
             },
             TransactionType::User => {
                 assert!(matches!(
                     actual_txn.transaction,
-                    libra2_types::transaction::Transaction::UserTransaction(_)
+                    creditchain_types::transaction::Transaction::UserTransaction(_)
                 ));
                 // Must have a gas fee
                 assert!(!transaction.operations.is_empty());
@@ -1085,35 +1085,35 @@ async fn parse_block_transactions(
             TransactionType::BlockMetadata => {
                 assert!(matches!(
                     actual_txn.transaction,
-                    libra2_types::transaction::Transaction::BlockMetadata(_)
+                    creditchain_types::transaction::Transaction::BlockMetadata(_)
                 ));
                 assert!(transaction.operations.is_empty());
             },
             TransactionType::BlockMetadataExt => {
                 assert!(matches!(
                     actual_txn.transaction,
-                    libra2_types::transaction::Transaction::BlockMetadataExt(_)
+                    creditchain_types::transaction::Transaction::BlockMetadataExt(_)
                 ));
                 assert!(transaction.operations.is_empty());
             },
             TransactionType::StateCheckpoint => {
                 assert!(matches!(
                     actual_txn.transaction,
-                    libra2_types::transaction::Transaction::StateCheckpoint(_)
+                    creditchain_types::transaction::Transaction::StateCheckpoint(_)
                 ));
                 assert!(transaction.operations.is_empty());
             },
             TransactionType::BlockEpilogue => {
                 assert!(matches!(
                     actual_txn.transaction,
-                    libra2_types::transaction::Transaction::BlockEpilogue(_)
+                    creditchain_types::transaction::Transaction::BlockEpilogue(_)
                 ));
                 assert!(transaction.operations.is_empty());
             },
             TransactionType::Validator => {
                 assert!(matches!(
                     actual_txn.transaction,
-                    libra2_types::transaction::Transaction::ValidatorTransaction(_)
+                    creditchain_types::transaction::Transaction::ValidatorTransaction(_)
                 ));
                 assert!(transaction.operations.is_empty());
             },
@@ -1142,7 +1142,7 @@ async fn parse_block_transactions(
 async fn parse_operations(
     block_height: u64,
     balances: &mut BTreeMap<AccountAddress, BTreeMap<u64, i128>>,
-    transaction: &libra2_rosetta::types::Transaction,
+    transaction: &creditchain_rosetta::types::Transaction,
     actual_txn: &TransactionOnChainData,
 ) {
     // If there are no operations, then there is no gas operation
@@ -1290,10 +1290,10 @@ async fn parse_operations(
                 }
 
                 // Check that operator was set the same
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1340,10 +1340,10 @@ async fn parse_operations(
                 }
 
                 // Check that voter was set the same
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1382,7 +1382,7 @@ async fn parse_operations(
                 let new_balance = *latest_balance + delta;
                 account_balances.insert(block_height, new_balance);
                 match actual_txn.transaction {
-                    libra2_types::transaction::Transaction::UserTransaction(ref txn) => {
+                    creditchain_types::transaction::Transaction::UserTransaction(ref txn) => {
                         assert_eq!(
                             actual_txn
                                 .info
@@ -1413,10 +1413,10 @@ async fn parse_operations(
                 }
 
                 // Check that reset lockup was set the same
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1447,10 +1447,10 @@ async fn parse_operations(
                 }
 
                 // Check that update commmission was set the same
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1501,10 +1501,10 @@ async fn parse_operations(
                 }
 
                 // Check that reset lockup was set the same
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1550,10 +1550,10 @@ async fn parse_operations(
                 }
 
                 // Check that unlock stake was set the same
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1589,10 +1589,10 @@ async fn parse_operations(
                 }
 
                 // Check that distribute was set the same
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1628,10 +1628,10 @@ async fn parse_operations(
                 }
 
                 // Check that add stake was set the same
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1686,10 +1686,10 @@ async fn parse_operations(
                 }
 
                 // Check that unlock stake was set the same
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1742,10 +1742,10 @@ async fn parse_operations(
                         "Failed transaction should have failed distribute operation"
                     );
                 }
-                if let libra2_types::transaction::Transaction::UserTransaction(ref txn) =
+                if let creditchain_types::transaction::Transaction::UserTransaction(ref txn) =
                     actual_txn.transaction
                 {
-                    if let libra2_types::transaction::TransactionPayload::EntryFunction(
+                    if let creditchain_types::transaction::TransactionPayload::EntryFunction(
                         ref payload,
                     ) = txn.payload()
                     {
@@ -1915,7 +1915,7 @@ fn assert_failed_transfer_transaction(
     receiver: AccountAddress,
     transfer_amount: u64,
     actual_txn: &UserTransaction,
-    rosetta_txn: &libra2_rosetta::types::Transaction,
+    rosetta_txn: &creditchain_rosetta::types::Transaction,
 ) {
     // Check the transaction
     assert_eq!(
@@ -2076,7 +2076,7 @@ where
 
 struct NodeClients<'a> {
     pub rosetta_client: &'a RosettaClient,
-    pub rest_client: &'a libra2_rest_client::Client,
+    pub rest_client: &'a creditchain_rest_client::Client,
     pub network: &'a NetworkIdentifier,
 }
 
@@ -2337,7 +2337,7 @@ async fn submit_transaction<
     Fut: Future<Output = anyhow::Result<TransactionIdentifier>>,
     F: FnOnce(u64) -> Fut,
 >(
-    rest_client: &libra2_rest_client::Client,
+    rest_client: &creditchain_rest_client::Client,
     txn_expiry_duration: Duration,
     transaction_builder: F,
 ) -> Result<UserTransaction, ErrorWrapper> {
@@ -2353,7 +2353,7 @@ async fn submit_transaction<
 }
 
 async fn wait_for_transaction(
-    rest_client: &libra2_rest_client::Client,
+    rest_client: &creditchain_rest_client::Client,
     expiry_time: Duration,
     txn_hash: String,
 ) -> Result<UserTransaction, UserTransaction> {
@@ -2398,7 +2398,7 @@ fn expiry_time(txn_expiry_duration: Duration) -> Duration {
 
 async fn add_delegated_stake_and_wait(
     rosetta_client: &RosettaClient,
-    rest_client: &libra2_rest_client::Client,
+    rest_client: &creditchain_rest_client::Client,
     network_identifier: &NetworkIdentifier,
     sender_key: &Ed25519PrivateKey,
     pool_address: AccountAddress,
@@ -2431,7 +2431,7 @@ async fn add_delegated_stake_and_wait(
 
 async fn unlock_delegated_stake_and_wait(
     rosetta_client: &RosettaClient,
-    rest_client: &libra2_rest_client::Client,
+    rest_client: &creditchain_rest_client::Client,
     network_identifier: &NetworkIdentifier,
     sender_key: &Ed25519PrivateKey,
     pool_address: AccountAddress,
@@ -2463,7 +2463,7 @@ async fn unlock_delegated_stake_and_wait(
 
 async fn withdraw_undelegated_stake_and_wait(
     rosetta_client: &RosettaClient,
-    rest_client: &libra2_rest_client::Client,
+    rest_client: &creditchain_rest_client::Client,
     network_identifier: &NetworkIdentifier,
     sender_key: &Ed25519PrivateKey,
     pool_address: AccountAddress,
@@ -2519,9 +2519,9 @@ async fn test_delegation_pool_operations() {
     };
     let network_identifier = chain_id.into();
 
-    let root_address = swarm.libra2_public_info().root_account().address();
+    let root_address = swarm.creditchain_public_info().root_account().address();
     let root_sequence_number = swarm
-        .libra2_public_info()
+        .creditchain_public_info()
         .client()
         .get_account_bcs(root_address)
         .await
@@ -2530,18 +2530,18 @@ async fn test_delegation_pool_operations() {
         .sequence_number();
 
     swarm
-        .libra2_public_info()
+        .creditchain_public_info()
         .root_account()
         .set_sequence_number(root_sequence_number);
 
     let mut delegation_pool_creator_account = swarm
-        .libra2_public_info()
+        .creditchain_public_info()
         .create_and_fund_user_account(1_000_000_000_000_000)
         .await
         .unwrap();
 
     let res = create_delegation_pool(
-        &swarm.libra2_public_info(),
+        &swarm.creditchain_public_info(),
         &mut delegation_pool_creator_account,
         10,
         1,

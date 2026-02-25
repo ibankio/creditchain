@@ -3,24 +3,24 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Result;
-use libra2_logger::info;
-use libra2_storage_interface::{
+use creditchain_logger::info;
+use creditchain_storage_interface::{
     state_store::state_view::{
         cached_state_view::CachedDbStateView,
         db_state_view::{DbStateView, LatestDbStateCheckpointView},
     },
     DbReader,
 };
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::AccountResource,
     state_store::{state_key::StateKey, MoveResourceExt, StateView},
     transaction::{SignedTransaction, VMValidatorResult},
-    vm::modules::Libra2ModuleExtension,
+    vm::modules::CreditChainModuleExtension,
 };
-use libra2_vm::Libra2VM;
-use libra2_vm_environment::environment::Libra2Environment;
-use libra2_vm_logging::log_schema::AdapterLogSchema;
+use creditchain_vm::CreditChainVM;
+use creditchain_vm_environment::environment::CreditChainEnvironment;
+use creditchain_vm_logging::log_schema::AdapterLogSchema;
 use fail::fail_point;
 use move_binary_format::{
     errors::{Location, PartialVMError, VMResult},
@@ -40,7 +40,7 @@ use std::sync::{Arc, Mutex};
 mod vm_validator_test;
 
 pub trait TransactionValidation: Send + Sync + Clone {
-    type ValidationInstance: libra2_vm::VMValidator;
+    type ValidationInstance: creditchain_vm::VMValidator;
 
     /// Validate a txn from client
     fn validate_transaction(&self, _txn: SignedTransaction) -> Result<VMValidatorResult>;
@@ -59,11 +59,11 @@ struct ValidationState<S> {
     /// The raw snapshot of the state used for validation.
     state_view: S,
     /// Stores configs needed for execution.
-    environment: Libra2Environment,
+    environment: CreditChainEnvironment,
     /// Versioned cache for deserialized and verified Move modules. The versioning allows to detect
     /// when the version of the code is no longer up-to-date (a newer version has been committed to
     /// the state view) and update the cache accordingly.
-    module_cache: UnsyncModuleCache<ModuleId, CompiledModule, Module, Libra2ModuleExtension, usize>,
+    module_cache: UnsyncModuleCache<ModuleId, CompiledModule, Module, CreditChainModuleExtension, usize>,
 }
 
 impl<S: StateView> ValidationState<S> {
@@ -74,7 +74,7 @@ impl<S: StateView> ValidationState<S> {
             AdapterLogSchema::new(state_view.id(), 0),
             "Validation environment and module cache created"
         );
-        let environment = Libra2Environment::new(&state_view);
+        let environment = CreditChainEnvironment::new(&state_view);
         Self {
             state_view,
             environment,
@@ -92,7 +92,7 @@ impl<S: StateView> ValidationState<S> {
     /// state view snapshot.
     fn reset_all(&mut self, state_view: S) {
         self.state_view = state_view;
-        self.environment = Libra2Environment::new(&self.state_view);
+        self.environment = CreditChainEnvironment::new(&self.state_view);
         self.module_cache = UnsyncModuleCache::empty();
     }
 }
@@ -105,7 +105,7 @@ impl<S> WithRuntimeEnvironment for ValidationState<S> {
 
 impl<S: StateView> ModuleCache for ValidationState<S> {
     type Deserialized = CompiledModule;
-    type Extension = Libra2ModuleExtension;
+    type Extension = CreditChainModuleExtension;
     type Key = ModuleId;
     type Verified = Module;
     type Version = usize;
@@ -184,7 +184,7 @@ impl<S: StateView> ModuleCache for ValidationState<S> {
                 .environment
                 .runtime_environment()
                 .deserialize_into_compiled_module(state_value.bytes())?;
-            let extension = Arc::new(Libra2ModuleExtension::new(state_value));
+            let extension = Arc::new(CreditChainModuleExtension::new(state_value));
 
             let new_version = version + 1;
             let new_module_code = self.module_cache.insert_deserialized_module(
@@ -204,7 +204,7 @@ impl<S: StateView> ModuleCache for ValidationState<S> {
 
 impl<S: StateView> ModuleCodeBuilder for ValidationState<S> {
     type Deserialized = CompiledModule;
-    type Extension = Libra2ModuleExtension;
+    type Extension = CreditChainModuleExtension;
     type Key = ModuleId;
     type Verified = Module;
 
@@ -223,7 +223,7 @@ impl<S: StateView> ModuleCodeBuilder for ValidationState<S> {
         let compiled_module = self
             .runtime_environment()
             .deserialize_into_compiled_module(state_value.bytes())?;
-        let extension = Arc::new(Libra2ModuleExtension::new(state_value));
+        let extension = Arc::new(CreditChainModuleExtension::new(state_value));
         let module = ModuleCode::from_deserialized(compiled_module, extension);
         Ok(Some(module))
     }
@@ -313,7 +313,7 @@ impl PooledVMValidator {
 }
 
 impl TransactionValidation for PooledVMValidator {
-    type ValidationInstance = Libra2VM;
+    type ValidationInstance = CreditChainVM;
 
     fn validate_transaction(&self, txn: SignedTransaction) -> Result<VMValidatorResult> {
         let vm_validator = self.get_next_vm();
@@ -326,8 +326,8 @@ impl TransactionValidation for PooledVMValidator {
 
         let vm_validator_locked = vm_validator.lock().unwrap();
 
-        use libra2_vm::VMValidator;
-        let vm = Libra2VM::new(
+        use creditchain_vm::VMValidator;
+        let vm = CreditChainVM::new(
             &vm_validator_locked.state.environment,
             &vm_validator_locked.state.state_view,
         );
@@ -355,7 +355,7 @@ impl TransactionValidation for PooledVMValidator {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use libra2_types::state_store::{state_value::StateValue, MockStateView};
+    use creditchain_types::state_store::{state_value::StateValue, MockStateView};
     use move_binary_format::file_format::empty_module_with_dependencies_and_friends;
     use move_core_types::ident_str;
     use move_vm_runtime::ModuleStorage;

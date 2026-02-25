@@ -7,11 +7,11 @@ use crate::{
     network::{BroadcastPeerPriority, MempoolSyncMsg},
 };
 use anyhow::{format_err, Result};
-use libra2_compression::client::CompressionClient;
-use libra2_config::config::{NodeConfig, MAX_APPLICATION_MESSAGE_SIZE};
-use libra2_consensus_types::common::{TransactionInProgress, TransactionSummary};
-use libra2_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, Uniform};
-use libra2_types::{
+use creditchain_compression::client::CompressionClient;
+use creditchain_config::config::{NodeConfig, MAX_APPLICATION_MESSAGE_SIZE};
+use creditchain_consensus_types::common::{TransactionInProgress, TransactionSummary};
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, Uniform};
+use creditchain_types::{
     account_address::AccountAddress,
     chain_id::ChainId,
     mempool_status::MempoolStatusCode,
@@ -269,7 +269,7 @@ impl ConsensusMock {
 /// Decompresses and deserializes the raw message bytes into a message struct
 pub fn decompress_and_deserialize(message_bytes: &Vec<u8>) -> MempoolSyncMsg {
     bcs::from_bytes(
-        &libra2_compression::decompress(
+        &creditchain_compression::decompress(
             message_bytes,
             CompressionClient::Mempool,
             MAX_APPLICATION_MESSAGE_SIZE,

@@ -3,7 +3,7 @@ use crate::processors::objects::{
     v2_objects_models::{PostgresCurrentObject, PostgresObject},
 };
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::Transaction,
+   creditchain_protos::transaction::v1::Transaction,
     postgres::utils::database::{ArcDbPool, DbContext},
     traits::{async_step::AsyncRunType, AsyncStep, NamedStep, Processable},
     types::transaction_context::TransactionContext,

@@ -1,5 +1,5 @@
 module poc::native_format {
-   use libra2_std::string_utils;
+   use creditchain_std::string_utils;
    use std::vector;
    use std::signer;
 

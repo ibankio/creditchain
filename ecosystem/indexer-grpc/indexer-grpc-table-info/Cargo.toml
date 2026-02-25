@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-grpc-table-info"
+name = "creditchain-indexer-grpc-table-info"
 version = "1.0.1"
 
 # Workspace inherited keys
@@ -13,18 +13,18 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-api = { workspace = true }
-libra2-api-types = { workspace = true }
-libra2-config = { workspace = true }
-libra2-db-indexer  = { workspace = true }
-libra2-indexer-grpc-fullnode = { workspace = true }
-libra2-indexer-grpc-utils = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-mempool = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-api = { workspace = true }
+creditchain-api-types = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-db-indexer  = { workspace = true }
+creditchain-indexer-grpc-fullnode = { workspace = true }
+creditchain-indexer-grpc-utils = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-mempool = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
 flate2 = { workspace = true }
 futures = { workspace = true }
 google-cloud-storage = { workspace = true }

@@ -7,12 +7,12 @@ use crate::{
     logging::{self, LogEntry, LogEvent},
     Error,
 };
-use libra2_consensus_types::{common::Author, safety_data::SafetyData};
-use libra2_crypto::{bls12381, PrivateKey};
-use libra2_global_constants::{CONSENSUS_KEY, OWNER_ACCOUNT, SAFETY_DATA, WAYPOINT};
-use libra2_logger::prelude::*;
-use libra2_secure_storage::{KVStorage, Storage};
-use libra2_types::waypoint::Waypoint;
+use creditchain_consensus_types::{common::Author, safety_data::SafetyData};
+use creditchain_crypto::{bls12381, PrivateKey};
+use creditchain_global_constants::{CONSENSUS_KEY, OWNER_ACCOUNT, SAFETY_DATA, WAYPOINT};
+use creditchain_logger::prelude::*;
+use creditchain_secure_storage::{KVStorage, Storage};
+use creditchain_types::waypoint::Waypoint;
 
 /// SafetyRules needs an abstract storage interface to act as a common utility for storing
 /// persistent data to local disk, cloud, secrets managers, or even memory (for tests)
@@ -72,7 +72,7 @@ impl PersistentSafetyStorage {
         // inconsistencies or why they did not reset storage between rounds. Do not repeat the
         // checks again below, because it is just too strange to have a partially configured
         // storage.
-        if let Err(libra2_secure_storage::Error::KeyAlreadyExists(_)) = result {
+        if let Err(creditchain_secure_storage::Error::KeyAlreadyExists(_)) = result {
             warn!("Attempted to re-initialize existing storage");
             return Ok(());
         }
@@ -98,7 +98,7 @@ impl PersistentSafetyStorage {
 
     pub fn default_consensus_sk(
         &self,
-    ) -> Result<bls12381::PrivateKey, libra2_secure_storage::Error> {
+    ) -> Result<bls12381::PrivateKey, creditchain_secure_storage::Error> {
         self.internal_store
             .get::<bls12381::PrivateKey>(CONSENSUS_KEY)
             .map(|v| v.value)
@@ -194,9 +194,9 @@ impl PersistentSafetyStorage {
 mod tests {
     use super::*;
     use crate::counters;
-    use libra2_crypto::hash::HashValue;
-    use libra2_secure_storage::InMemoryStorage;
-    use libra2_types::{
+    use creditchain_crypto::hash::HashValue;
+    use creditchain_secure_storage::InMemoryStorage;
+    use creditchain_types::{
         block_info::BlockInfo, epoch_state::EpochState, ledger_info::LedgerInfo,
         transaction::Version, validator_signer::ValidatorSigner, waypoint::Waypoint,
     };

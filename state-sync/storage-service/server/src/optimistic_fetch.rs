@@ -11,13 +11,13 @@ use crate::{
     subscription::SubscriptionStreamRequests,
     utils, LogEntry, LogSchema,
 };
-use libra2_config::{
+use creditchain_config::{
     config::StorageServiceConfig,
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_infallible::Mutex;
-use libra2_logger::{error, warn};
-use libra2_storage_service_types::{
+use creditchain_infallible::Mutex;
+use creditchain_logger::{error, warn};
+use creditchain_storage_service_types::{
     requests::{
         DataRequest, GetTransactionDataWithProofRequest, StorageServiceRequest,
         TransactionDataRequestType, TransactionOutputsWithProofRequest,
@@ -25,8 +25,8 @@ use libra2_storage_service_types::{
     },
     responses::{StorageServerSummary, StorageServiceResponse},
 };
-use libra2_time_service::{TimeService, TimeServiceTrait};
-use libra2_types::ledger_info::LedgerInfoWithSignatures;
+use creditchain_time_service::{TimeService, TimeServiceTrait};
+use creditchain_types::ledger_info::LedgerInfoWithSignatures;
 use arc_swap::ArcSwap;
 use dashmap::DashMap;
 use futures::future::join_all;
@@ -62,7 +62,7 @@ impl OptimisticFetchRequest {
         &self,
         config: StorageServiceConfig,
         target_ledger_info: &LedgerInfoWithSignatures,
-    ) -> libra2_storage_service_types::Result<StorageServiceRequest, Error> {
+    ) -> creditchain_storage_service_types::Result<StorageServiceRequest, Error> {
         // Verify that the target version is higher than the highest known version
         let known_version = self.highest_known_version();
         let target_version = target_ledger_info.ledger_info().version();
@@ -346,7 +346,7 @@ pub(crate) async fn get_peers_with_ready_optimistic_fetches<T: StorageReaderInte
     storage: T,
     subscriptions: Arc<DashMap<PeerNetworkId, SubscriptionStreamRequests>>,
     time_service: TimeService,
-) -> libra2_storage_service_types::Result<Vec<(PeerNetworkId, LedgerInfoWithSignatures)>, Error> {
+) -> creditchain_storage_service_types::Result<Vec<(PeerNetworkId, LedgerInfoWithSignatures)>, Error> {
     // Fetch the latest storage summary and highest synced version
     let latest_storage_summary = cached_storage_server_summary.load().clone();
     let highest_synced_ledger_info = match &latest_storage_summary.data_summary.synced_ledger_info {

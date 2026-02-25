@@ -6,11 +6,11 @@ custom_edit_url: https://github.com/ibankio/creditchain/edit/main/network/README
 
 ## Overview
 
-For more detailed info, see the [Libra2Net Specification](../documentation/specifications/network/README.md).
+For more detailed info, see the [CreditChainNet Specification](../documentation/specifications/network/README.md).
 
-Libra2Net is the primary protocol for communication between any two nodes in the
+CreditChainNet is the primary protocol for communication between any two nodes in the
 CreditChain ecosystem. It is specifically designed to facilitate the consensus, shared
-mempool, and state sync protocols. Libra2Net tries to maintain at-most one connection
+mempool, and state sync protocols. CreditChainNet tries to maintain at-most one connection
 with each remote peer; the application protocols to that remote peer are then
 multiplexed over the single peer connection.
 
@@ -61,7 +61,7 @@ partial membership views, sophisticated failure detectors, or network overlays.
                       +----------------------+--------------------+   +---------------------+
                       |        Peer(s)       |                    |
                       +----------------------+                    |
-                      |                Libra2Transport             |
+                      |                CreditChainTransport             |
                       +-------------------------------------------+
 ```
 
@@ -72,7 +72,7 @@ independent "tasks." The [tokio](https://tokio.rs/) framework is used as the tas
 runtime. The primary subcomponents in the network module are:
 
 * [`Network Interface`] &mdash; The interface provided to application modules
-using Libra2Net.
+using CreditChainNet.
 
 * [`PeerManager`] &mdash; Listens for incoming connections, and dials outbound
 connections to other peers. Demultiplexes and forwards inbound messages from
@@ -84,10 +84,10 @@ components of new or closed connections. Optionally can be connected to
 writes [`NetworkMessage`]es from/to the wire. Currently, it implements the two
 protocols: DirectSend and Rpc.
 
-+ [`Libra2Transport`] &mdash; A secure, reliable transport. It uses [NoiseIK] over
++ [`CreditChainTransport`] &mdash; A secure, reliable transport. It uses [NoiseIK] over
 TCP to negotiate an encrypted and authenticated connection between peers.
-The Libra2Net version and any CreditChain-specific application protocols are negotiated
-afterward using the [Libra2Net Handshake Protocol].
+The CreditChainNet version and any CreditChain-specific application protocols are negotiated
+afterward using the [CreditChainNet Handshake Protocol].
 
 * [`ConnectivityManager`] &mdash; Establishes connections to known peers found
 via Discovery. Notifies [`PeerManager`] to make outbound dials, or disconnects based
@@ -126,15 +126,15 @@ configurable static timeout.
         │   ├── direct_send        # Protocol for fire-and-forget style message delivery
         │   ├── health_checker     # Protocol for health probing
         │   ├── rpc                # Protocol for remote procedure calls
-        │   └── wire               # Protocol for Libra2Net handshakes and messaging
+        │   └── wire               # Protocol for CreditChainNet handshakes and messaging
         ├── transport              # The base transport layer for dialing/listening
         └── noise                  # Noise handshaking and wire integration
 
 [`NetworkConfig`]:../config/src/config/network_config.rs
 [`ConnectivityManager`]: ./src/connectivity_manager/mod.rs
-[`Libra2Net Handshake Protocol`]: ../specifications/network/handshake-v1.md
+[`CreditChainNet Handshake Protocol`]: ../specifications/network/handshake-v1.md
 [`ValidatorSet`]: ../types/src/on_chain_config/validator_set.rs
-[`Libra2Transport`]: ./src/transport/mod.rs
+[`CreditChainTransport`]: ./src/transport/mod.rs
 [`HealthChecker`]: ./src/protocols/health_checker/mod.rs
 [`Network Interface`]: ./src/protocols/network/mod.rs
 [`NetworkMessage`]: ./src/protocols/wire/messaging/v1/mod.rs

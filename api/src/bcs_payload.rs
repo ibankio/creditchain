@@ -7,7 +7,7 @@
 // Previously the Bcs payload type took a T, not Vec<u8>. For more information
 // about that effort, see https://github.com/libra2org/libra2-core/issues/2277.
 
-use libra2_api_types::mime_types::BCS;
+use creditchain_api_types::mime_types::BCS;
 use poem::{http::header, FromRequest, IntoResponse, Request, RequestBody, Response, Result};
 use poem_openapi::{
     impl_apirequest_for_payload,

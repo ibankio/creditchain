@@ -7,7 +7,7 @@ fn main() {
     let matches = Command::new("Fuzz CLI")
         .version("0.1")
         .author("Security Team @ CreditChain Research Team")
-        .about("This CLI is used to help craft and maintain fuzz targets for the Core components of the Libra2 Blockchain.")
+        .about("This CLI is used to help craft and maintain fuzz targets for the Core components of the CreditChain Blockchain.")
         .subcommand(
             Command::new("compile_federated_jwk")
                 .about("Compiles a module from source and dumps serialized metadata and code to be used as static initializers in fuzz targets.")

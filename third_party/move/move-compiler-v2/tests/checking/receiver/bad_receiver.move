@@ -1,4 +1,4 @@
-module libra2_std::ordered_map {
+module creditchain_std::ordered_map {
     const EITER_OUT_OF_BOUNDS: u64 = 3;
 
     struct Entry<K, V> has drop, copy, store {

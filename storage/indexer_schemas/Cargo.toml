@@ -1,5 +1,5 @@
 [package]
-name = "libra2-db-indexer-schemas"
+name = "creditchain-db-indexer-schemas"
 description = "CreditChainDB Internal Indexer DB schemas"
 version = "0.1.1"
 
@@ -14,10 +14,10 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-schemadb = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-schemadb = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
 bcs = { workspace = true }
 byteorder = { workspace = true }
 proptest = { workspace = true, optional = true }
@@ -25,13 +25,13 @@ proptest-derive = { workspace = true, optional = true }
 serde = { workspace = true }
 
 [dev-dependencies]
-libra2-proptest-helpers = { workspace = true }
-libra2-schemadb = { workspace = true, features = ["fuzzing"] }
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-proptest-helpers = { workspace = true }
+creditchain-schemadb = { workspace = true, features = ["fuzzing"] }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 proptest = { workspace = true }
 proptest-derive = { workspace = true }
 rand = { workspace = true }
 
 [features]
 default = []
-fuzzing = ["proptest", "proptest-derive", "libra2-types/fuzzing", "libra2-schemadb/fuzzing"]
+fuzzing = ["proptest", "proptest-derive", "creditchain-types/fuzzing", "creditchain-schemadb/fuzzing"]

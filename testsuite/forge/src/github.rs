@@ -50,7 +50,7 @@ impl GitHub {
         })?;
         let request = self.client.get(url);
         let response = request
-            .header(USER_AGENT, "libra2-forge")
+            .header(USER_AGENT, "creditchain-forge")
             .send()
             .map_err(|e| format_err!("Failed to query github: {:?}", e))?;
         let response: Vec<CommitInfo> = response

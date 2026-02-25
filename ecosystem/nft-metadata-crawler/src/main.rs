@@ -1,8 +1,8 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_indexer_grpc_server_framework::ServerArgs;
-use libra2_nft_metadata_crawler::config::NFTMetadataCrawlerConfig;
+use creditchain_indexer_grpc_server_framework::ServerArgs;
+use creditchain_nft_metadata_crawler::config::NFTMetadataCrawlerConfig;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {

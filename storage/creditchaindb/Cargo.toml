@@ -1,0 +1,78 @@
+[package]
+name = "creditchain-db"
+description = "CreditChain database"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+anyhow = { workspace = true }
+creditchain-accumulator = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-db-indexer = { workspace = true }
+creditchain-db-indexer-schemas = { workspace = true, features = ["fuzzing"] }
+creditchain-executor-types = { workspace = true }
+creditchain-experimental-runtimes = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-jellyfish-merkle = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-proptest-helpers = { workspace = true, optional = true }
+creditchain-resource-viewer = { workspace = true }
+creditchain-rocksdb-options = { workspace = true }
+creditchain-schemadb = { workspace = true }
+creditchain-scratchpad = { workspace = true }
+creditchain-storage-interface = { workspace = true, features = ["fuzzing"] }
+creditchain-temppath = { workspace = true, optional = true }
+creditchain-types = { workspace = true }
+arc-swap = { workspace = true }
+arr_macro = { workspace = true }
+bcs = { workspace = true }
+byteorder = { workspace = true }
+claims = { workspace = true }
+clap = { workspace = true, optional = true }
+crossbeam-channel = { workspace = true, optional = true }
+dashmap = { workspace = true }
+either = { workspace = true }
+hex = { workspace = true }
+indicatif = { workspace = true, optional = true }
+itertools = { workspace = true }
+lru = { workspace = true }
+move-core-types = { workspace = true }
+once_cell = { workspace = true }
+owo-colors = { workspace = true, optional = true }
+proptest = { workspace = true, optional = true }
+proptest-derive = { workspace = true, optional = true }
+rayon = { workspace = true }
+serde = { workspace = true }
+static_assertions = { workspace = true }
+status-line = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+creditchain-block-executor = { workspace = true }
+creditchain-executor-types = { workspace = true }
+creditchain-jellyfish-merkle = { workspace = true, features = ["fuzzing"] }
+creditchain-proptest-helpers = { workspace = true }
+creditchain-schemadb = { workspace = true, features = ["fuzzing"] }
+creditchain-scratchpad = { workspace = true, features = ["fuzzing"] }
+creditchain-temppath = { workspace = true }
+creditchain-types = { workspace = true }
+ouroboros = { workspace = true }
+proptest = { workspace = true }
+proptest-derive = { workspace = true }
+rand = { workspace = true }
+
+[features]
+default = []
+fuzzing = ["proptest", "proptest-derive", "creditchain-proptest-helpers", "creditchain-temppath", "creditchain-crypto/fuzzing", "creditchain-jellyfish-merkle/fuzzing", "creditchain-types/fuzzing", "creditchain-executor-types/fuzzing", "creditchain-schemadb/fuzzing", "creditchain-scratchpad/fuzzing"]
+consensus-only-perf-test = []
+db-debugger = ["creditchain-temppath", "clap", "crossbeam-channel", "owo-colors", "indicatif"]

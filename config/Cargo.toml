@@ -1,5 +1,5 @@
 [package]
-name = "libra2-config"
+name = "creditchain-config"
 description = "CreditChain config"
 version = "0.1.0"
 
@@ -14,14 +14,14 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-secure-storage = { workspace = true }
-libra2-short-hex-str = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-transaction-filters = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-secure-storage = { workspace = true }
+creditchain-short-hex-str = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-transaction-filters = { workspace = true }
+creditchain-types = { workspace = true }
 arr_macro = { workspace = true }
 bcs = { workspace = true }
 byteorder = { workspace = true }
@@ -41,14 +41,14 @@ thiserror = { workspace = true }
 url = { workspace = true }
 
 [dev-dependencies]
-libra2-crypto = { workspace = true }
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-crypto = { workspace = true }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 tempfile = { workspace = true }
 
 [features]
 default = []
 failpoints = []
-fuzzing = ["libra2-crypto/fuzzing", "libra2-types/fuzzing"]
+fuzzing = ["creditchain-crypto/fuzzing", "creditchain-types/fuzzing"]
 smoke-test = []
 testing = []
 tokio-console = []

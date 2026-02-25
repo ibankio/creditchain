@@ -1,0 +1,12 @@
+[package]
+name = "NFTDAO"
+version = "0.0.0"
+upgrade_policy = "immutable"
+
+[addresses]
+dao_platform = "_"
+creditchain_framework = "0x1"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }
+CreditChainToken = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-token", rev = "mainnet" }

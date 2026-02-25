@@ -7,8 +7,8 @@ use crate::{
     protocols::{direct_send::Message, rpc::OutboundRpcRequest},
     transport::{Connection, ConnectionMetadata},
 };
-use libra2_config::network_id::NetworkId;
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_config::network_id::NetworkId;
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use futures::channel::oneshot;
 use serde::Serialize;
 use std::fmt;

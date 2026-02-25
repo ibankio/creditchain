@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::tests::new_test_context_with_orderless_flags;
-use libra2_api_test_context::{current_function_name, pretty, TestContext};
-use libra2_crypto::ed25519::Ed25519Signature;
-use libra2_types::{
+use creditchain_api_test_context::{current_function_name, pretty, TestContext};
+use creditchain_crypto::ed25519::Ed25519Signature;
+use creditchain_types::{
     account_address::AccountAddress,
     transaction::{
         authenticator::{AccountAuthenticator, TransactionAuthenticator},
@@ -16,7 +16,7 @@ use rstest::rstest;
 use serde_json::json;
 use std::path::PathBuf;
 
-async fn simulate_libra2_transfer(
+async fn simulate_creditchain_transfer(
     context: &mut TestContext,
     use_valid_signature: bool,
     transfer_amount: u64,
@@ -47,7 +47,7 @@ async fn simulate_libra2_transfer(
             "expiration_timestamp_secs": txn.expiration_timestamp_secs().to_string(),
             "payload": {
                 "type": "entry_function_payload",
-                "function": "0x1::libra2_account::transfer",
+                "function": "0x1::creditchain_account::transfer",
                 "type_arguments": [],
                 "arguments": [
                     bob.address().to_standard_string(), transfer_amount.to_string(),
@@ -77,7 +77,7 @@ async fn simulate_libra2_transfer(
         if assert_gas_used {
             assert!(
                 resp.headers()
-                    .get("X-Libra2-Gas-Used")
+                    .get("X-CreditChain-Gas-Used")
                     .unwrap()
                     .to_str()
                     .unwrap()
@@ -92,7 +92,7 @@ async fn simulate_libra2_transfer(
     }
 }
 
-async fn simulate_libra2_transfer_bcs(
+async fn simulate_creditchain_transfer_bcs(
     context: &mut TestContext,
     use_valid_signature: bool,
     transfer_amount: u64,
@@ -159,7 +159,7 @@ async fn test_simulate_transaction_with_valid_signature(
         use_txn_payload_v2_format,
         use_orderless_transactions,
     );
-    let resp = simulate_libra2_transfer(&mut context, true, SMALL_TRANSFER_AMOUNT, 400, false).await;
+    let resp = simulate_creditchain_transfer(&mut context, true, SMALL_TRANSFER_AMOUNT, 400, false).await;
     context.check_golden_output(resp);
 }
 
@@ -181,7 +181,7 @@ async fn test_simulate_transaction_with_valid_signature_bcs(
         use_orderless_transactions,
     );
     let resp =
-        simulate_libra2_transfer_bcs(&mut context, true, SMALL_TRANSFER_AMOUNT, 400, false).await;
+        simulate_creditchain_transfer_bcs(&mut context, true, SMALL_TRANSFER_AMOUNT, 400, false).await;
     context.check_golden_output(resp);
 }
 
@@ -203,10 +203,10 @@ async fn test_simulate_transaction_with_not_valid_signature(
         use_orderless_transactions,
     );
     let resp =
-        simulate_libra2_transfer_bcs(&mut context, false, SMALL_TRANSFER_AMOUNT, 200, true).await;
+        simulate_creditchain_transfer_bcs(&mut context, false, SMALL_TRANSFER_AMOUNT, 200, true).await;
     assert!(resp[0]["success"].as_bool().is_some_and(|v| v));
 
-    let resp = simulate_libra2_transfer(&mut context, false, SMALL_TRANSFER_AMOUNT, 200, true).await;
+    let resp = simulate_creditchain_transfer(&mut context, false, SMALL_TRANSFER_AMOUNT, 200, true).await;
     assert!(resp[0]["success"].as_bool().is_some_and(|v| v));
 }
 
@@ -228,10 +228,10 @@ async fn test_simulate_transaction_with_insufficient_balance(
         use_orderless_transactions,
     );
     let resp =
-        simulate_libra2_transfer_bcs(&mut context, false, LARGE_TRANSFER_AMOUNT, 200, true).await;
+        simulate_creditchain_transfer_bcs(&mut context, false, LARGE_TRANSFER_AMOUNT, 200, true).await;
     assert!(!resp[0]["success"].as_bool().is_some_and(|v| v));
 
-    let resp = simulate_libra2_transfer(&mut context, false, LARGE_TRANSFER_AMOUNT, 200, true).await;
+    let resp = simulate_creditchain_transfer(&mut context, false, LARGE_TRANSFER_AMOUNT, 200, true).await;
     assert!(!resp[0]["success"].as_bool().is_some_and(|v| v));
 }
 
@@ -248,7 +248,7 @@ async fn test_bcs_simulate_fee_payer_transaction_without_gas_fee_check_with_aa_d
         false,
     );
     context
-        .disable_feature(libra2_types::on_chain_config::FeatureFlag::ACCOUNT_ABSTRACTION as u64)
+        .disable_feature(creditchain_types::on_chain_config::FeatureFlag::ACCOUNT_ABSTRACTION as u64)
         .await;
     bcs_simulate_fee_payer_transaction_without_gas_fee_check(&mut context).await;
 }
@@ -264,7 +264,7 @@ async fn test_bcs_simulate_fee_payer_transaction_without_gas_fee_check(
         false,
     );
     context
-        .disable_feature(libra2_types::on_chain_config::FeatureFlag::ACCOUNT_ABSTRACTION as u64)
+        .disable_feature(creditchain_types::on_chain_config::FeatureFlag::ACCOUNT_ABSTRACTION as u64)
         .await;
     bcs_simulate_fee_payer_transaction_without_gas_fee_check(&mut context).await;
 }
@@ -552,7 +552,7 @@ async fn test_bcs_simulate_automated_account_creation(
     if !context.use_orderless_transactions
         && !context
             .is_feature_enabled(
-                libra2_types::on_chain_config::FeatureFlag::ORDERLESS_TRANSACTIONS as u64,
+                creditchain_types::on_chain_config::FeatureFlag::ORDERLESS_TRANSACTIONS as u64,
             )
             .await
     {

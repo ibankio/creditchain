@@ -9,13 +9,13 @@ use crate::{
     quorum_cert::QuorumCert,
     vote_data::VoteData,
 };
-use libra2_bitvec::BitVec;
-use libra2_crypto::{
+use creditchain_bitvec::BitVec;
+use creditchain_crypto::{
     hash::{CryptoHash, CryptoHasher},
     HashValue,
 };
-use libra2_crypto_derive::CryptoHasher;
-use libra2_types::{
+use creditchain_crypto_derive::CryptoHasher;
+use creditchain_types::{
     aggregate_signature::AggregateSignature,
     block_info::BlockInfo,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},
@@ -427,7 +427,7 @@ impl BlockData {
 
 #[test]
 fn test_reconfiguration_suffix() {
-    use libra2_types::{
+    use creditchain_types::{
         account_address::AccountAddress, epoch_state::EpochState, on_chain_config::ValidatorSet,
     };
 

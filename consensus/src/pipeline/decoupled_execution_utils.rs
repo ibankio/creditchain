@@ -14,11 +14,11 @@ use crate::{
         signing_phase::{CommitSignerProvider, SigningPhase, SigningRequest, SigningResponse},
     },
 };
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_channels::libra2_channel::Receiver;
-use libra2_config::config::ConsensusObserverConfig;
-use libra2_consensus_types::common::Author;
-use libra2_types::{account_address::AccountAddress, epoch_state::EpochState};
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_channels::creditchain_channel::Receiver;
+use creditchain_config::config::ConsensusObserverConfig;
+use creditchain_consensus_types::common::Author;
+use creditchain_types::{account_address::AccountAddress, epoch_state::EpochState};
 use futures::channel::mpsc::UnboundedReceiver;
 use std::sync::{
     atomic::{AtomicBool, AtomicU64},

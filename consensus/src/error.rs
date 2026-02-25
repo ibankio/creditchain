@@ -12,8 +12,8 @@ pub struct DbError {
     inner: anyhow::Error,
 }
 
-impl From<libra2_storage_interface::Libra2DbError> for DbError {
-    fn from(e: libra2_storage_interface::Libra2DbError) -> Self {
+impl From<creditchain_storage_interface::CreditChainDbError> for DbError {
+    fn from(e: creditchain_storage_interface::CreditChainDbError) -> Self {
         DbError { inner: e.into() }
     }
 }
@@ -31,8 +31,8 @@ impl From<pipeline::errors::Error> for StateSyncError {
     }
 }
 
-impl From<libra2_executor_types::ExecutorError> for StateSyncError {
-    fn from(e: libra2_executor_types::ExecutorError) -> Self {
+impl From<creditchain_executor_types::ExecutorError> for StateSyncError {
+    fn from(e: creditchain_executor_types::ExecutorError) -> Self {
         StateSyncError { inner: e.into() }
     }
 }
@@ -59,14 +59,14 @@ pub struct VerifyError {
 }
 
 pub fn error_kind(e: &anyhow::Error) -> &'static str {
-    if e.downcast_ref::<libra2_executor_types::ExecutorError>()
+    if e.downcast_ref::<creditchain_executor_types::ExecutorError>()
         .is_some()
     {
         return "Execution";
     }
     if let Some(e) = e.downcast_ref::<StateSyncError>() {
         if e.inner
-            .downcast_ref::<libra2_executor_types::ExecutorError>()
+            .downcast_ref::<creditchain_executor_types::ExecutorError>()
             .is_some()
         {
             return "Execution";
@@ -82,7 +82,7 @@ pub fn error_kind(e: &anyhow::Error) -> &'static str {
     if e.downcast_ref::<DbError>().is_some() {
         return "ConsensusDb";
     }
-    if e.downcast_ref::<libra2_safety_rules::Error>().is_some() {
+    if e.downcast_ref::<creditchain_safety_rules::Error>().is_some() {
         return "SafetyRules";
     }
     if e.downcast_ref::<VerifyError>().is_some() {
@@ -98,7 +98,7 @@ mod tests {
 
     #[test]
     fn conversion_and_downcast() {
-        let error = libra2_executor_types::ExecutorError::InternalError {
+        let error = creditchain_executor_types::ExecutorError::InternalError {
             error: "lalala".to_string(),
         };
         let typed_error: StateSyncError = error.into();

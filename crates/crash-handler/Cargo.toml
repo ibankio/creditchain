@@ -1,5 +1,5 @@
 [package]
-name = "libra2-crash-handler"
+name = "creditchain-crash-handler"
 description = "CreditChain crash handler"
 version = "0.1.1"
 
@@ -13,7 +13,7 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-logger = { workspace = true }
+creditchain-logger = { workspace = true }
 backtrace = { workspace = true }
 move-core-types = { workspace = true }
 serde = { workspace = true }

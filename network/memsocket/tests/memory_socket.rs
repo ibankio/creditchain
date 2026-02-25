@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_memsocket::MemorySocket;
+use creditchain_memsocket::MemorySocket;
 use futures::{
     executor::block_on,
     io::{AsyncReadExt, AsyncWriteExt},

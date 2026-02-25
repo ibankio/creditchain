@@ -1,6 +1,6 @@
 [package]
-name = "libra2-transaction-generator-lib"
-description = "Library for Libra2 transaction generator"
+name = "creditchain-transaction-generator-lib"
+description = "Library for CreditChain transaction generator"
 version = "0.0.1"
 
 # Workspace inherited keys
@@ -14,10 +14,10 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-framework = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-sdk = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-sdk = { workspace = true }
 async-trait = { workspace = true }
 clap = { workspace = true }
 log = { workspace = true }

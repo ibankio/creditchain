@@ -2,10 +2,10 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use crate::Libra2PublicInfo;
+use crate::CreditChainPublicInfo;
 use anyhow::Result;
-use libra2_rest_client::Client as RestClient;
-use libra2_sdk::{
+use creditchain_rest_client::Client as RestClient;
+use creditchain_sdk::{
     transaction_builder::TransactionFactory,
     types::{chain_id::ChainId, LocalAccount},
 };
@@ -63,8 +63,8 @@ impl ChainInfo {
         TransactionFactory::new(self.chain_id())
     }
 
-    pub fn into_libra2_public_info(self) -> Libra2PublicInfo {
-        Libra2PublicInfo::new(
+    pub fn into_creditchain_public_info(self) -> CreditChainPublicInfo {
+        CreditChainPublicInfo::new(
             self.chain_id,
             self.inspection_service_url.clone(),
             self.rest_api_url.clone(),

@@ -4,7 +4,7 @@
 
 #![allow(clippy::arc_with_non_send_sync)]
 
-use libra2_crypto::{
+use creditchain_crypto::{
     traits::{CryptoMaterialError, ValidCryptoMaterialStringExt},
     x25519,
 };
@@ -28,7 +28,7 @@ const MAX_DNS_NAME_SIZE: usize = 255;
 
 /// ## Overview
 ///
-/// Libra2 `NetworkAddress` is a compact, efficient, self-describing and
+/// CreditChain `NetworkAddress` is a compact, efficient, self-describing and
 /// future-proof network address represented as a stack of protocols. Essentially
 /// libp2p's [multiaddr] but using [`bcs`] to describe the binary format.
 ///
@@ -43,7 +43,7 @@ const MAX_DNS_NAME_SIZE: usize = 255;
 /// 3. Perform a Noise IK handshake and assume the peer's static pubkey is
 ///    `<x25519-pubkey>`. After this step, we will have a secure, authenticated
 ///    connection with the peer.
-/// 4. Perform a Libra2Net version negotiation handshake (version 1).
+/// 4. Perform a CreditChainNet version negotiation handshake (version 1).
 ///
 /// ## Self-describing, Upgradable
 ///
@@ -65,7 +65,7 @@ const MAX_DNS_NAME_SIZE: usize = 255;
 ///
 /// ## Transport
 ///
-/// In addition, `NetworkAddress` is integrated with the Libra2Net concept of a
+/// In addition, `NetworkAddress` is integrated with the CreditChainNet concept of a
 /// [`Transport`], which takes a `NetworkAddress` when dialing and peels off
 /// [`Protocol`]s to establish a connection and perform initial handshakes.
 /// Similarly, the [`Transport`] takes `NetworkAddress` to listen on, which tells
@@ -91,7 +91,7 @@ const MAX_DNS_NAME_SIZE: usize = 255;
 /// //               \  '-- uvarint number of protocols
 /// //                '-- length of encoded network address
 ///
-/// use libra2_types::network_address::NetworkAddress;
+/// use creditchain_types::network_address::NetworkAddress;
 /// use bcs;
 /// use std::{str::FromStr, convert::TryFrom};
 ///
@@ -325,8 +325,8 @@ impl NetworkAddress {
     /// ### Example
     ///
     /// ```rust
-    /// use libra2_crypto::{traits::ValidCryptoMaterialStringExt, x25519};
-    /// use libra2_types::network_address::NetworkAddress;
+    /// use creditchain_crypto::{traits::ValidCryptoMaterialStringExt, x25519};
+    /// use creditchain_types::network_address::NetworkAddress;
     /// use std::str::FromStr;
     ///
     /// let pubkey_str = "080e287879c918794170e258bfaddd75acac5b3e350419044655e4983a487120";
@@ -348,10 +348,10 @@ impl NetworkAddress {
             .push(Protocol::Handshake(handshake_version))
     }
 
-    /// Check that a `NetworkAddress` looks like a typical Libra2Net address with
+    /// Check that a `NetworkAddress` looks like a typical CreditChainNet address with
     /// associated protocols.
     ///
-    /// "typical" Libra2Net addresses begin with a transport protocol:
+    /// "typical" CreditChainNet addresses begin with a transport protocol:
     ///
     /// `"/ip4/<addr>/tcp/<port>"` or
     /// `"/ip6/<addr>/tcp/<port>"` or
@@ -367,7 +367,7 @@ impl NetworkAddress {
     /// ### Example
     ///
     /// ```rust
-    /// use libra2_types::network_address::NetworkAddress;
+    /// use creditchain_types::network_address::NetworkAddress;
     /// use std::str::FromStr;
     ///
     /// let addr_str = "/ip4/1.2.3.4/tcp/6180/noise-ik/080e287879c918794170e258bfaddd75acac5b3e350419044655e4983a487120/handshake/0";

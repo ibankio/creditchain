@@ -217,8 +217,8 @@ class WorkerPod:
         ] = self.get_claim_name()
         pod_manifest["spec"]["containers"][0]["name"] = self.get_claim_name()
         pod_manifest["spec"]["containers"][0]["command"] = [
-            "libra2-debugger",
-            "libra2-db",
+            "creditchain-debugger",
+            "creditchain-db",
             "replay-on-archive",
             "--start-version",
             str(self.start_version),

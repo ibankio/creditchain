@@ -7,12 +7,12 @@ use crate::{
     round_manager::round_manager_tests::NodeSetup,
     test_utils::{consensus_runtime, create_vec_signed_transactions, timed_block_on},
 };
-use libra2_config::config::ConsensusConfig;
-use libra2_consensus_types::{
+use creditchain_config::config::ConsensusConfig;
+use creditchain_consensus_types::{
     block::{block_test_utils::certificate_for_genesis, Block},
     common::Payload,
 };
-use libra2_types::{
+use creditchain_types::{
     dkg::{real_dkg::RealDKG, DKGSessionMetadata, DKGTrait, DKGTranscript},
     jwks::QuorumCertifiedUpdate,
     on_chain_config::{

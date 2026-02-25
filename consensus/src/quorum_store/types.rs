@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::ensure;
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::{BatchPayload, TxnSummaryWithExpiration},
     proof_of_store::BatchInfo,
 };
-use libra2_crypto::{hash::CryptoHash, HashValue};
-use libra2_types::{
+use creditchain_crypto::{hash::CryptoHash, HashValue};
+use creditchain_types::{
     ledger_info::LedgerInfoWithSignatures, quorum_store::BatchId, transaction::SignedTransaction,
     PeerId,
 };
@@ -110,7 +110,7 @@ impl TryFrom<PersistedValue> for Batch {
 
 #[cfg(test)]
 mod tests {
-    use libra2_config::config;
+    use creditchain_config::config;
 
     #[test]
     fn test_batch_payload_padding() {

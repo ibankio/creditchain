@@ -9,7 +9,7 @@ use crate::{
     },
     utils,
 };
-use libra2_types::{account_address::AccountAddress, chain_id::ChainId};
+use creditchain_types::{account_address::AccountAddress, chain_id::ChainId};
 use serde::{Deserialize, Serialize};
 use std::net::SocketAddr;
 

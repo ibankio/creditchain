@@ -6,7 +6,7 @@
 # metrics port for example, we'll only run metrics checks.
 ---
 node_address:
-  url: "https://fullnode.testnet.libra2.org/"
+  url: "https://fullnode.testnet.creditchain.org/"
   api_port: 443
 configuration_id: testnet_fullnode
 configuration_name: "Testnet Fullnode"

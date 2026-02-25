@@ -1,5 +1,5 @@
 [package]
-name = "libra2-consensus-notifications"
+name = "creditchain-consensus-notifications"
 description = "The notification interface between state sync and consensus"
 version = "0.1.1"
 
@@ -13,9 +13,9 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-crypto = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-types = { workspace = true }
 async-trait = { workspace = true }
 futures = { workspace = true }
 serde = { workspace = true }

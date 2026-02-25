@@ -7,8 +7,8 @@ use crate::transaction_shuffler::use_case_aware::{
     tests::{Account, Contract},
     Config,
 };
-use libra2_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
-use libra2_types::{
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
+use creditchain_types::{
     account_address::AccountAddress,
     chain_id::ChainId,
     transaction::{
@@ -305,10 +305,10 @@ fn test_different_transaction_types() {
     transactions.push(signed_txn);
 
     // Multisig transaction with Payload
-    let multisig_payload = TransactionPayload::Multisig(libra2_types::transaction::Multisig {
+    let multisig_payload = TransactionPayload::Multisig(creditchain_types::transaction::Multisig {
         multisig_address: AccountAddress::from_str("0x4").unwrap(),
         transaction_payload: Some(
-            libra2_types::transaction::MultisigTransactionPayload::EntryFunction(
+            creditchain_types::transaction::MultisigTransactionPayload::EntryFunction(
                 EntryFunction::new(
                     ModuleId::new(
                         AccountAddress::from_str("0x1").unwrap(),
@@ -458,10 +458,10 @@ fn test_different_transaction_types() {
     transactions.push(signed_txn);
 
     // Multisig transaction
-    let multisig_payload = TransactionPayload::Multisig(libra2_types::transaction::Multisig {
+    let multisig_payload = TransactionPayload::Multisig(creditchain_types::transaction::Multisig {
         multisig_address: AccountAddress::from_str("0x4").unwrap(),
         transaction_payload: Some(
-            libra2_types::transaction::MultisigTransactionPayload::EntryFunction(
+            creditchain_types::transaction::MultisigTransactionPayload::EntryFunction(
                 EntryFunction::new(
                     ModuleId::new(
                         AccountAddress::from_str("0x1").unwrap(),
@@ -488,10 +488,10 @@ fn test_different_transaction_types() {
     transactions.push(signed_txn);
 
     // Add another transaction for sender 4 with Payload multisig
-    let multisig_payload = TransactionPayload::Multisig(libra2_types::transaction::Multisig {
+    let multisig_payload = TransactionPayload::Multisig(creditchain_types::transaction::Multisig {
         multisig_address: AccountAddress::from_str("0x4").unwrap(),
         transaction_payload: Some(
-            libra2_types::transaction::MultisigTransactionPayload::EntryFunction(
+            creditchain_types::transaction::MultisigTransactionPayload::EntryFunction(
                 EntryFunction::new(
                     ModuleId::new(
                         AccountAddress::from_str("0x1").unwrap(),

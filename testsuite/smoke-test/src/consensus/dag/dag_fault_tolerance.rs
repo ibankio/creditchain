@@ -5,14 +5,14 @@ use crate::{
     consensus::consensus_fault_tolerance::{start_traffic, ActiveTrafficGuard},
     smoke_test_environment::SwarmBuilder,
 };
-use libra2_config::config::DagFetcherConfig;
-use libra2_forge::{
+use creditchain_config::config::DagFetcherConfig;
+use creditchain_forge::{
     test_utils::consensus_utils::{
         no_failure_injection, test_consensus_fault_tolerance, FailPointFailureInjection, NodeState,
     },
     LocalSwarm, Swarm, SwarmExt,
 };
-use libra2_types::on_chain_config::{
+use creditchain_types::on_chain_config::{
     ConsensusAlgorithmConfig, DagConsensusConfigV1, OnChainConsensusConfig, ValidatorTxnConfig,
     DEFAULT_WINDOW_SIZE,
 };
@@ -67,7 +67,7 @@ async fn test_no_failures() {
     let (validator_clients, public_info) = {
         (
             swarm.get_validator_clients_with_names(),
-            swarm.libra2_public_info(),
+            swarm.creditchain_public_info(),
         )
     };
     test_consensus_fault_tolerance(
@@ -120,7 +120,7 @@ async fn run_dag_fail_point_test(
     let (validator_clients, public_info) = {
         (
             swarm.get_validator_clients_with_names(),
-            swarm.libra2_public_info(),
+            swarm.creditchain_public_info(),
         )
     };
     test_consensus_fault_tolerance(

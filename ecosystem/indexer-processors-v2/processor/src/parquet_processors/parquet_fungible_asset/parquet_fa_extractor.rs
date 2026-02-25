@@ -19,7 +19,7 @@ use crate::{
 };
 use ahash::AHashMap;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::Transaction,
+   creditchain_protos::transaction::v1::Transaction,
     postgres::utils::database::ArcDbPool,
     traits::{async_step::AsyncRunType, AsyncStep, NamedStep, Processable},
     types::transaction_context::TransactionContext,

@@ -4,25 +4,25 @@
 
 #![forbid(unsafe_code)]
 
-use libra2_cached_packages::libra2_stdlib;
-use libra2_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, Uniform};
-use libra2_db::Libra2DB;
-use libra2_executor::{
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, Uniform};
+use creditchain_db::CreditChainDB;
+use creditchain_executor::{
     block_executor::BlockExecutor,
     db_bootstrapper::{generate_waypoint, maybe_bootstrap},
 };
-use libra2_executor_test_helpers::{
+use creditchain_executor_test_helpers::{
     bootstrap_genesis, gen_ledger_info_with_sigs, get_test_signed_transaction,
 };
-use libra2_executor_types::BlockExecutorTrait;
-use libra2_storage_interface::{
+use creditchain_executor_types::BlockExecutorTrait;
+use creditchain_storage_interface::{
     state_store::state_view::db_state_view::LatestDbStateCheckpointView, DbReaderWriter,
 };
-use libra2_temppath::TempPath;
-use libra2_types::{
+use creditchain_temppath::TempPath;
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::{
-        libra2_test_root_address, new_block_event_key, primary_apt_store, FungibleStoreResource,
+        creditchain_test_root_address, new_block_event_key, primary_apt_store, FungibleStoreResource,
         NewBlockEvent, ObjectGroupResource, NEW_EPOCH_EVENT_V2_MOVE_TYPE_TAG,
     },
     contract_event::ContractEvent,
@@ -35,17 +35,17 @@ use libra2_types::{
     waypoint::Waypoint,
     write_set::{WriteOp, WriteSetMut},
 };
-use libra2_vm::libra2_vm::Libra2VMBlockExecutor;
+use creditchain_vm::creditchain_vm::CreditChainVMBlockExecutor;
 use move_core_types::{language_storage::TypeTag, move_resource::MoveStructType};
 use rand::SeedableRng;
 use std::sync::Arc;
 
 #[test]
 fn test_empty_db() {
-    let genesis = libra2_vm_genesis::test_genesis_change_set_and_validators(Some(1));
+    let genesis = creditchain_vm_genesis::test_genesis_change_set_and_validators(Some(1));
     let genesis_txn = Transaction::GenesisTransaction(WriteSetPayload::Direct(genesis.0));
     let tmp_dir = TempPath::new();
-    let db_rw = DbReaderWriter::new(Libra2DB::new_for_test(&tmp_dir));
+    let db_rw = DbReaderWriter::new(CreditChainDB::new_for_test(&tmp_dir));
 
     assert!(db_rw
         .reader
@@ -55,8 +55,8 @@ fn test_empty_db() {
 
     // Bootstrap empty DB.
     let waypoint =
-        generate_waypoint::<Libra2VMBlockExecutor>(&db_rw, &genesis_txn).expect("Should not fail.");
-    maybe_bootstrap::<Libra2VMBlockExecutor>(&db_rw, &genesis_txn, waypoint).unwrap();
+        generate_waypoint::<CreditChainVMBlockExecutor>(&db_rw, &genesis_txn).expect("Should not fail.");
+    maybe_bootstrap::<CreditChainVMBlockExecutor>(&db_rw, &genesis_txn, waypoint).unwrap();
     let ledger_info = db_rw.reader.get_latest_ledger_info().unwrap();
     assert_eq!(
         Waypoint::new_epoch_boundary(ledger_info.ledger_info()).unwrap(),
@@ -73,7 +73,7 @@ fn test_empty_db() {
 
     // `maybe_bootstrap()` does nothing on non-empty DB.
     assert!(
-        maybe_bootstrap::<Libra2VMBlockExecutor>(&db_rw, &genesis_txn, waypoint)
+        maybe_bootstrap::<CreditChainVMBlockExecutor>(&db_rw, &genesis_txn, waypoint)
             .unwrap()
             .is_none()
     );
@@ -85,7 +85,7 @@ fn execute_and_commit(txns: Vec<Transaction>, db: &DbReaderWriter, signer: &Vali
     let version = li.ledger_info().version();
     let epoch = li.ledger_info().next_block_epoch();
     let target_version = version + txns.len() as u64 + 1; // Due to StateCheckpoint txn
-    let executor = BlockExecutor::<Libra2VMBlockExecutor>::new(db.clone());
+    let executor = BlockExecutor::<CreditChainVMBlockExecutor>::new(db.clone());
     let output = executor
         .execute_block(
             (block_id, block(txns)).into(),
@@ -124,37 +124,37 @@ fn get_demo_accounts() -> (
     (account1, privkey1, account2, privkey2)
 }
 
-fn get_libra2_coin_mint_transaction(
-    libra2_root_key: &Ed25519PrivateKey,
-    libra2_root_seq_num: u64,
+fn get_creditchain_coin_mint_transaction(
+    creditchain_root_key: &Ed25519PrivateKey,
+    creditchain_root_seq_num: u64,
     account: &AccountAddress,
     amount: u64,
 ) -> Transaction {
     get_test_signed_transaction(
-        libra2_test_root_address(),
-        /* sequence_number = */ libra2_root_seq_num,
-        libra2_root_key.clone(),
-        libra2_root_key.public_key(),
-        Some(libra2_stdlib::libra2_coin_mint(*account, amount)),
+        creditchain_test_root_address(),
+        /* sequence_number = */ creditchain_root_seq_num,
+        creditchain_root_key.clone(),
+        creditchain_root_key.public_key(),
+        Some(creditchain_stdlib::creditchain_coin_mint(*account, amount)),
     )
 }
 
 fn get_account_transaction(
-    libra2_root_key: &Ed25519PrivateKey,
-    libra2_root_seq_num: u64,
+    creditchain_root_key: &Ed25519PrivateKey,
+    creditchain_root_seq_num: u64,
     account: &AccountAddress,
     _account_key: &Ed25519PrivateKey,
 ) -> Transaction {
     get_test_signed_transaction(
-        libra2_test_root_address(),
-        /* sequence_number = */ libra2_root_seq_num,
-        libra2_root_key.clone(),
-        libra2_root_key.public_key(),
-        Some(libra2_stdlib::libra2_account_create_account(*account)),
+        creditchain_test_root_address(),
+        /* sequence_number = */ creditchain_root_seq_num,
+        creditchain_root_key.clone(),
+        creditchain_root_key.public_key(),
+        Some(creditchain_stdlib::creditchain_account_create_account(*account)),
     )
 }
 
-fn get_libra2_coin_transfer_transaction(
+fn get_creditchain_coin_transfer_transaction(
     sender: AccountAddress,
     sender_seq_number: u64,
     sender_key: &Ed25519PrivateKey,
@@ -166,7 +166,7 @@ fn get_libra2_coin_transfer_transaction(
         sender_seq_number,
         sender_key.clone(),
         sender_key.public_key(),
-        Some(libra2_stdlib::libra2_coin_transfer(recipient, amount)),
+        Some(creditchain_stdlib::creditchain_coin_transfer(recipient, amount)),
     )
 }
 
@@ -190,13 +190,13 @@ fn get_configuration(db: &DbReaderWriter) -> ConfigurationResource {
 #[test]
 #[cfg_attr(feature = "consensus-only-perf-test", ignore)]
 fn test_new_genesis() {
-    let genesis = libra2_vm_genesis::test_genesis_change_set_and_validators(Some(1));
-    let genesis_key = &libra2_vm_genesis::GENESIS_KEYPAIR.0;
+    let genesis = creditchain_vm_genesis::test_genesis_change_set_and_validators(Some(1));
+    let genesis_key = &creditchain_vm_genesis::GENESIS_KEYPAIR.0;
     let genesis_txn = Transaction::GenesisTransaction(WriteSetPayload::Direct(genesis.0));
     // Create bootstrapped DB.
     let tmp_dir = TempPath::new();
-    let db = DbReaderWriter::new(Libra2DB::new_for_test(&tmp_dir));
-    let waypoint = bootstrap_genesis::<Libra2VMBlockExecutor>(&db, &genesis_txn).unwrap();
+    let db = DbReaderWriter::new(CreditChainDB::new_for_test(&tmp_dir));
+    let waypoint = bootstrap_genesis::<CreditChainVMBlockExecutor>(&db, &genesis_txn).unwrap();
     let signer = ValidatorSigner::new(
         genesis.1[0].data.owner_address,
         Arc::new(genesis.1[0].consensus_key.clone()),
@@ -206,8 +206,8 @@ fn test_new_genesis() {
     let (account1, account1_key, account2, account2_key) = get_demo_accounts();
     let txn1 = get_account_transaction(genesis_key, 0, &account1, &account1_key);
     let txn2 = get_account_transaction(genesis_key, 1, &account2, &account2_key);
-    let txn3 = get_libra2_coin_mint_transaction(genesis_key, 2, &account1, 200_000_000);
-    let txn4 = get_libra2_coin_mint_transaction(genesis_key, 3, &account2, 200_000_000);
+    let txn3 = get_creditchain_coin_mint_transaction(genesis_key, 2, &account1, 200_000_000);
+    let txn4 = get_creditchain_coin_mint_transaction(genesis_key, 3, &account2, 200_000_000);
     execute_and_commit(vec![txn1, txn2, txn3, txn4], &db, &signer);
     assert_eq!(get_balance(&account1, &db), 200_000_000);
     assert_eq!(get_balance(&account2, &db), 200_000_000);
@@ -241,7 +241,7 @@ fn test_new_genesis() {
                     &ObjectGroupResource::struct_tag(),
                 ),
                 WriteOp::legacy_modification(
-                    libra2_transaction_simulation::FungibleStore::new(
+                    creditchain_transaction_simulation::FungibleStore::new(
                         account1,
                         AccountAddress::TEN,
                         100_000_000,
@@ -268,9 +268,9 @@ fn test_new_genesis() {
     )));
 
     // Bootstrap DB into new genesis.
-    let waypoint = generate_waypoint::<Libra2VMBlockExecutor>(&db, &genesis_txn).unwrap();
+    let waypoint = generate_waypoint::<CreditChainVMBlockExecutor>(&db, &genesis_txn).unwrap();
     assert!(
-        maybe_bootstrap::<Libra2VMBlockExecutor>(&db, &genesis_txn, waypoint)
+        maybe_bootstrap::<CreditChainVMBlockExecutor>(&db, &genesis_txn, waypoint)
             .unwrap()
             .is_some()
     );
@@ -291,7 +291,7 @@ fn test_new_genesis() {
 
     println!("FINAL TRANSFER");
     // Transfer some money.
-    let txn = get_libra2_coin_transfer_transaction(account1, 0, &account1_key, account2, 50_000_000);
+    let txn = get_creditchain_coin_transfer_transaction(account1, 0, &account1_key, account2, 50_000_000);
     execute_and_commit(vec![txn], &db, &signer);
 
     // And verify.

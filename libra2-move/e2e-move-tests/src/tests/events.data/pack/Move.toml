@@ -1,6 +1,0 @@
-[package]
-name = "events"
-version = "0.0.0"
-
-[dependencies]
-Libra2Framework = { local = "../../../../../framework/libra2-framework" }

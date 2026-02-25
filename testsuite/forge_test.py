@@ -187,7 +187,7 @@ class ForgeRunnerTests(unittest.TestCase):
                 "run",
                 "--cargo-arg",
                 "-p",
-                "libra2-forge-cli",
+                "creditchain-forge-cli",
                 "--",
                 "--suite",
                 "banana",
@@ -699,12 +699,12 @@ class ForgeMainTests(unittest.TestCase, AssertFixtureMixin):
                 ),
                 FakeCommand(
                     "aws eks list-clusters",
-                    RunResult(0, b'{ "clusters": [ "libra2-forge-big-1" ] }'),
+                    RunResult(0, b'{ "clusters": [ "creditchain-forge-big-1" ] }'),
                 ),
                 FakeCommand(
                     # NOTE: with multi-cloud support, we set the kubeconfig to ensure auth before continuing
-                    # See changes in: https://github.com/libra2org/libra2-core/pull/6166
-                    "aws eks update-kubeconfig --name libra2-forge-big-1 --kubeconfig temp1",
+                    # See changes in: https://github.com/libra2org/creditchain-core/pull/6166
+                    "aws eks update-kubeconfig --name creditchain-forge-big-1 --kubeconfig temp1",
                     RunResult(0, b""),
                 ),
                 FakeCommand("git rev-parse HEAD~0", RunResult(0, b"banana")),
@@ -803,8 +803,8 @@ class ForgeMainTests(unittest.TestCase, AssertFixtureMixin):
                     "S3ForgeConfigBackend",
                     lambda *_: FakeConfigBackend(
                         {
-                            "enabled_clusters": ["libra2-forge-big-1"],
-                            "all_clusters": ["libra2-forge-big-1", "banana"],
+                            "enabled_clusters": ["creditchain-forge-big-1"],
+                            "all_clusters": ["creditchain-forge-big-1", "banana"],
                             "test_suites": {},
                         }
                     ),
@@ -823,7 +823,7 @@ class ForgeMainTests(unittest.TestCase, AssertFixtureMixin):
                     "--no-log-metadata",
                     "test",
                     "--forge-cluster-name",
-                    "libra2-forge-big-1",
+                    "creditchain-forge-big-1",
                     "--forge-report",
                     "temp-report",
                     "--forge-pre-comment",
@@ -866,8 +866,8 @@ class TestListClusters(unittest.TestCase):
             AwsListClusterResult(
                 clusters=[
                     "banana-fake-1",
-                    "libra2-forge-banana-1",
-                    "libra2-forge-potato-2",
+                    "creditchain-forge-banana-1",
+                    "creditchain-forge-potato-2",
                 ]
             ),
         )
@@ -879,7 +879,7 @@ class TestListClusters(unittest.TestCase):
             ]
         )
         clusters = list(list_eks_clusters(shell).keys())
-        self.assertEqual(clusters, ["libra2-forge-banana-1", "libra2-forge-potato-2"])
+        self.assertEqual(clusters, ["creditchain-forge-banana-1", "creditchain-forge-potato-2"])
         shell.assert_commands(self)
 
     def testListClustersFails(self) -> None:
@@ -904,7 +904,7 @@ class GetForgeJobsTests(unittest.IsolatedAsyncioTestCase):
     maxDiff = None
 
     async def testGetAllForgeJobs(self) -> None:
-        fake_clusters = ["libra2-forge-banana", "libra2-forge-apple-2"]
+        fake_clusters = ["creditchain-forge-banana", "creditchain-forge-apple-2"]
 
         # The first set of test runner pods and their test pods
         fake_first_pods = GetPodsResult(
@@ -922,22 +922,22 @@ class GetForgeJobsTests(unittest.IsolatedAsyncioTestCase):
         )
         fake_forge_first_first_cluster_pods = GetPodsResult(
             items=[
-                fake_pod_item("libra2-node-0-validator", "Running"),
-                fake_pod_item("libra2-node-1-validator", "Running"),
+                fake_pod_item("creditchain-node-0-validator", "Running"),
+                fake_pod_item("creditchain-node-1-validator", "Running"),
             ]
         )
         fake_forge_first_failed_cluster_pods = GetPodsResult(
             items=[
-                fake_pod_item("libra2-node-0-validator", "Running"),
-                fake_pod_item("libra2-node-1-validator", "Running"),
-                fake_pod_item("libra2-node-0-fullnode", "Running"),
-                fake_pod_item("libra2-node-1-fullnode", "Running"),
+                fake_pod_item("creditchain-node-0-validator", "Running"),
+                fake_pod_item("creditchain-node-1-validator", "Running"),
+                fake_pod_item("creditchain-node-0-fullnode", "Running"),
+                fake_pod_item("creditchain-node-1-fullnode", "Running"),
             ]
         )
         fake_forge_first_ignore_me_cluster_pods = GetPodsResult(
             items=[
-                fake_pod_item("libra2-node-0-validator", "Failed"),
-                fake_pod_item("libra2-node-1-validator", "Running"),
+                fake_pod_item("creditchain-node-0-validator", "Failed"),
+                fake_pod_item("creditchain-node-1-validator", "Running"),
             ]
         )
 
@@ -959,8 +959,8 @@ class GetForgeJobsTests(unittest.IsolatedAsyncioTestCase):
         )
         fake_forge_second_second_cluster_pods = GetPodsResult(
             items=[
-                fake_pod_item("libra2-node-0-validator", "Running"),
-                fake_pod_item("libra2-node-1-fullnode", "Running"),
+                fake_pod_item("creditchain-node-0-validator", "Running"),
+                fake_pod_item("creditchain-node-1-fullnode", "Running"),
             ]
         )
         fake_forge_second_succeeded_cluster_pods = GetPodsResult(
@@ -972,7 +972,7 @@ class GetForgeJobsTests(unittest.IsolatedAsyncioTestCase):
         shell = SpyShell(
             [
                 FakeCommand(
-                    "aws eks update-kubeconfig --name libra2-forge-banana --kubeconfig temp1",
+                    "aws eks update-kubeconfig --name creditchain-forge-banana --kubeconfig temp1",
                     RunResult(0, b""),
                 ),
                 FakeCommand(
@@ -998,7 +998,7 @@ class GetForgeJobsTests(unittest.IsolatedAsyncioTestCase):
                     ),
                 ),
                 FakeCommand(
-                    "aws eks update-kubeconfig --name libra2-forge-apple-2 --kubeconfig temp2",
+                    "aws eks update-kubeconfig --name creditchain-forge-apple-2 --kubeconfig temp2",
                     RunResult(0, b""),
                 ),
                 FakeCommand(
@@ -1035,7 +1035,7 @@ class GetForgeJobsTests(unittest.IsolatedAsyncioTestCase):
                 name="forge-first",
                 phase="Running",
                 cluster=ForgeCluster(
-                    name="libra2-forge-banana",
+                    name="creditchain-forge-banana",
                     kubeconf="temp1",
                 ),
                 num_validators=2,
@@ -1044,7 +1044,7 @@ class GetForgeJobsTests(unittest.IsolatedAsyncioTestCase):
                 name="forge-failed",
                 phase="Failed",
                 cluster=ForgeCluster(
-                    name="libra2-forge-banana",
+                    name="creditchain-forge-banana",
                     kubeconf="temp1",
                 ),
                 num_validators=2,
@@ -1054,7 +1054,7 @@ class GetForgeJobsTests(unittest.IsolatedAsyncioTestCase):
                 name="forge-second",
                 phase="Running",
                 cluster=ForgeCluster(
-                    name="libra2-forge-apple-2",
+                    name="creditchain-forge-apple-2",
                     kubeconf="temp2",
                 ),
                 num_validators=1,
@@ -1064,7 +1064,7 @@ class GetForgeJobsTests(unittest.IsolatedAsyncioTestCase):
                 name="forge-succeeded",
                 phase="Succeeded",
                 cluster=ForgeCluster(
-                    name="libra2-forge-apple-2",
+                    name="creditchain-forge-apple-2",
                     kubeconf="temp2",
                 ),
             ),
@@ -1120,8 +1120,8 @@ class ForgeConfigTests(unittest.TestCase):
                     "enabled_clusters": ["banana"],
                     "all_clusters": ["banana", "apple"],
                     "default_helm_values": {
-                        "libra2-node": {"image": {"tag": "banana"}},
-                        "libra2-genesis": {"image": {"tag": "banana"}},
+                        "creditchain-node": {"image": {"tag": "banana"}},
+                        "creditchain-genesis": {"image": {"tag": "banana"}},
                     },
                 }
             ),
@@ -1163,15 +1163,15 @@ class ForgeConfigTests(unittest.TestCase):
             "enabled_clusters": ["banana"],
             "all_clusters": ["banana", "apple"],
             "default_helm_values": {
-                "libra2-node": {"apple": "enabled", "banana": {"enabled": "true"}}
+                "creditchain-node": {"apple": "enabled", "banana": {"enabled": "true"}}
             },
         }
         helm_after_complete = {
             "enabled_clusters": ["banana"],
             "all_clusters": ["banana", "apple"],
             "default_helm_values": {
-                "libra2-node": {"apple": "enabled", "banana": {"enabled": "true"}},
-                "libra2-genesis": {"apple": "enabled", "banana": {"enabled": "true"}},
+                "creditchain-node": {"apple": "enabled", "banana": {"enabled": "true"}},
+                "creditchain-genesis": {"apple": "enabled", "banana": {"enabled": "true"}},
             },
         }
         runner = CliRunner()
@@ -1210,17 +1210,17 @@ class ForgeConfigTests(unittest.TestCase):
             )
             result_helm_config_not_present: Result = runner.invoke(
                 main,
-                ["--no-log-metadata", "config", "helm", "get", "libra2-node"],
+                ["--no-log-metadata", "config", "helm", "get", "creditchain-node"],
                 catch_exceptions=True,
             )
             result_helm_config_present_missing = runner.invoke(
                 main,
-                ["--no-log-metadata", "config", "helm", "get", "libra2-genesis"],
+                ["--no-log-metadata", "config", "helm", "get", "creditchain-genesis"],
                 catch_exceptions=True,
             )
             result_helm_config_present_complete = runner.invoke(
                 main,
-                ["--no-log-metadata", "config", "helm", "get", "libra2-node"],
+                ["--no-log-metadata", "config", "helm", "get", "creditchain-node"],
                 catch_exceptions=True,
             )
             # assert all commands and filesystem calls are correct
@@ -1241,17 +1241,17 @@ class ForgeConfigTests(unittest.TestCase):
             self.assertIsNotNone(result_helm_config_present_missing.exception)
             self.assertEqual(
                 result_helm_config_present_missing.exception.args,  # type: ignore
-                Exception("No helm values found for chart libra2-genesis").args,
+                Exception("No helm values found for chart creditchain-genesis").args,
             )
 
             # we successfully get the config
             self.assertEqual(result_helm_config_present_complete.exit_code, 0)
             self.assertIsNotNone(helm_after_complete.get("default_helm_values"))
-            self.assertIsNotNone(helm_after_complete.get("default_helm_values").get("libra2-node"))  # type: ignore
+            self.assertIsNotNone(helm_after_complete.get("default_helm_values").get("creditchain-node"))  # type: ignore
             # the output config is printed with an extra newline
             self.assertEqual(
                 result_helm_config_present_complete.stdout_bytes,
-                f'{json.dumps(helm_after_complete.get("default_helm_values").get("libra2-node"), indent=2)}\n'.encode(),  # type: ignore
+                f'{json.dumps(helm_after_complete.get("default_helm_values").get("creditchain-node"), indent=2)}\n'.encode(),  # type: ignore
             )
 
     def testHelmSetConfig(self) -> None:
@@ -1274,13 +1274,13 @@ class ForgeConfigTests(unittest.TestCase):
             "enabled_clusters": ["banana"],
             "all_clusters": ["banana", "apple"],
             "default_helm_values": {
-                "libra2-node": {"apple": "enabled", "banana": {"enabled": "false"}}
+                "creditchain-node": {"apple": "enabled", "banana": {"enabled": "false"}}
             },
         }
         config_after = {
             **config_before,
             "default_helm_values": {
-                "libra2-node": {"apple": "enabled", "banana": {"enabled": "true"}}
+                "creditchain-node": {"apple": "enabled", "banana": {"enabled": "true"}}
             },
         }
         filesystem = SpyFilesystem(
@@ -1293,7 +1293,7 @@ class ForgeConfigTests(unittest.TestCase):
                 "temp1": json.dumps(config_before).encode(),
                 # read the new *helm* config from disk
                 "temp2": json.dumps(
-                    config_after["default_helm_values"]["libra2-node"]
+                    config_after["default_helm_values"]["creditchain-node"]
                 ).encode(),
             },
         )
@@ -1304,7 +1304,7 @@ class ForgeConfigTests(unittest.TestCase):
             )
             ret = runner.invoke(
                 main,
-                ["config", "helm", "set", "libra2-node", "--config", "temp2", "-y"],
+                ["config", "helm", "set", "creditchain-node", "--config", "temp2", "-y"],
                 catch_exceptions=True,
             )
             shell.assert_commands(self)
@@ -1335,7 +1335,7 @@ class ForgeConfigTests(unittest.TestCase):
         config_after = {
             **config_before,
             "default_helm_values": {
-                "libra2-node": {"apple": "enabled", "banana": {"enabled": "true"}}
+                "creditchain-node": {"apple": "enabled", "banana": {"enabled": "true"}}
             },
         }
         filesystem = SpyFilesystem(
@@ -1348,7 +1348,7 @@ class ForgeConfigTests(unittest.TestCase):
                 "temp1": json.dumps(config_before).encode(),
                 # read the new *helm* config from disk
                 "temp2": json.dumps(
-                    config_after["default_helm_values"]["libra2-node"]
+                    config_after["default_helm_values"]["creditchain-node"]
                 ).encode(),
             },
         )
@@ -1359,7 +1359,7 @@ class ForgeConfigTests(unittest.TestCase):
             )
             ret = runner.invoke(
                 main,
-                ["config", "helm", "set", "libra2-node", "--config", "temp2", "-y"],
+                ["config", "helm", "set", "creditchain-node", "--config", "temp2", "-y"],
                 catch_exceptions=True,
             )
             shell.assert_commands(self)
@@ -1390,7 +1390,7 @@ class ForgeConfigTests(unittest.TestCase):
         )
         config_applied = json.loads(config_fixture_after.read_bytes().decode())[
             "default_helm_values"
-        ]["libra2-node"]
+        ]["creditchain-node"]
         config_fixture_preview = get_fixture_path(
             "forge-default-helm-values-preview.fixture"
         )
@@ -1415,7 +1415,7 @@ class ForgeConfigTests(unittest.TestCase):
                     "config",
                     "helm",
                     "set",
-                    "libra2-node",
+                    "creditchain-node",
                     "--config",
                     "temp2",
                     "-y",

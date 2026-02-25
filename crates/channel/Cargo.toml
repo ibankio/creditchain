@@ -1,5 +1,5 @@
 [package]
-name = "libra2-channels"
+name = "creditchain-channels"
 description = "An implementation of a channel with configurable QoS"
 version = "0.1.1"
 
@@ -14,10 +14,10 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-metrics-core = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-metrics-core = { workspace = true }
 futures = { workspace = true }
 
 [dev-dependencies]
-libra2-types = { workspace = true }
+creditchain-types = { workspace = true }
 tokio = { workspace = true }

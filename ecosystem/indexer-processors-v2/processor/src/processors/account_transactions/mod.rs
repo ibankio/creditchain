@@ -9,7 +9,7 @@ pub mod account_transactions_storer;
 use crate::processors::account_transactions::account_transactions_model::AccountTransaction;
 use libra2_indexer_processor_sdk::{
     libra2_indexer_transaction_stream::utils::time::parse_timestamp,
-   libra2_protos::transaction::v1::Transaction,
+   creditchain_protos::transaction::v1::Transaction,
 };
 use rayon::prelude::*;
 

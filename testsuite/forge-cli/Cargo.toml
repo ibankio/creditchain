@@ -1,5 +1,5 @@
 [package]
-name = "libra2-forge-cli"
+name = "creditchain-forge-cli"
 description = "CreditChain end to end test framework CLI"
 version = "0.0.1"
 
@@ -14,14 +14,14 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-cached-packages = { workspace = true }
-libra2-config = { workspace = true }
-libra2-forge = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-rest-client = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-testcases = { workspace = true }
+creditchain-cached-packages = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-forge = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-testcases = { workspace = true }
 async-trait = { workspace = true }
 chrono = { workspace = true }
 clap = { workspace = true }

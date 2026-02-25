@@ -7,18 +7,18 @@ use crate::{
     SwarmExt, Validator, Version,
 };
 use anyhow::{anyhow, bail, Result};
-use libra2_config::{
+use creditchain_config::{
     config::{NetworkConfig, NodeConfig, OverrideNodeConfig, PersistableConfig},
     keys::ConfigKey,
     network_id::NetworkId,
 };
-use libra2_framework::ReleaseBundle;
-use libra2_genesis::builder::{
+use creditchain_framework::ReleaseBundle;
+use creditchain_genesis::builder::{
     FullnodeNodeConfig, InitConfigFn, InitGenesisConfigFn, InitGenesisStakeFn,
 };
-use libra2_infallible::Mutex;
-use libra2_logger::{info, warn};
-use libra2_sdk::{
+use creditchain_infallible::Mutex;
+use creditchain_logger::{info, warn};
+use creditchain_sdk::{
     crypto::{ed25519::Ed25519PrivateKey, encoding_type::EncodingType},
     types::{
         chain_id::ChainId, transaction::Transaction, waypoint::Waypoint, AccountKey, LocalAccount,
@@ -133,10 +133,10 @@ impl LocalSwarm {
         };
 
         let (root_key, genesis, genesis_waypoint, validators) =
-            libra2_genesis::builder::Builder::new(
+            creditchain_genesis::builder::Builder::new(
                 &dir_actual,
                 genesis_framework
-                    .unwrap_or_else(|| libra2_cached_packages::head_release_bundle().clone()),
+                    .unwrap_or_else(|| creditchain_cached_packages::head_release_bundle().clone()),
             )?
             .with_num_validators(number_of_validators)
             .with_init_config(Some(Arc::new(move |index, config, base| {
@@ -241,7 +241,7 @@ impl LocalSwarm {
 
         let root_key = ConfigKey::new(root_key);
         let root_account = LocalAccount::new(
-            libra2_sdk::types::account_config::libra2_test_root_address(),
+            creditchain_sdk::types::account_config::creditchain_test_root_address(),
             AccountKey::from_private_key(root_key.private_key()),
             0,
         );

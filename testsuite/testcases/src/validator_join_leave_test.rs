@@ -2,14 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{LoadDestination, NetworkLoadTest};
-use libra2::{account::create::DEFAULT_FUNDED_COINS, test::CliTestFramework};
-use libra2_forge::{
+use creditchain::{account::create::DEFAULT_FUNDED_COINS, test::CliTestFramework};
+use creditchain_forge::{
     reconfig, NetworkContext, NetworkContextSynchronizer, NetworkTest, NodeExt, Result, Swarm,
     SwarmExt, Test, TestReport, FORGE_KEY_SEED,
 };
-use libra2_keygen::KeyGen;
-use libra2_sdk::crypto::{ed25519::Ed25519PrivateKey, PrivateKey};
-use libra2_types::{account_address::AccountAddress, transaction::authenticator::AuthenticationKey};
+use creditchain_keygen::KeyGen;
+use creditchain_sdk::crypto::{ed25519::Ed25519PrivateKey, PrivateKey};
+use creditchain_types::{account_address::AccountAddress, transaction::authenticator::AuthenticationKey};
 use async_trait::async_trait;
 use log::info;
 use std::{sync::Arc, time::Duration};
@@ -64,7 +64,7 @@ impl NetworkLoadTest for ValidatorJoinLeaveTest {
         )
         .await;
 
-        let mut public_info = { swarm.read().await.chain_info().into_libra2_public_info() };
+        let mut public_info = { swarm.read().await.chain_info().into_creditchain_public_info() };
 
         let mut validator_cli_indices = Vec::new();
 

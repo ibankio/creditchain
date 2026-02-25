@@ -3,8 +3,8 @@
 
 #![allow(clippy::unwrap_used)]
 
-use libra2_consensus_types::block::Block;
-use libra2_metrics_core::{
+use creditchain_consensus_types::block::Block;
+use creditchain_metrics_core::{
     exponential_buckets, op_counters::DurationHistogram, register_avg_counter, register_histogram,
     register_histogram_vec, register_int_counter, register_int_counter_vec, Histogram,
     HistogramVec, IntCounter, IntCounterVec,
@@ -788,7 +788,7 @@ pub static SENT_BATCH_REQUEST_RETRY_COUNT: Lazy<IntCounter> = Lazy::new(|| {
 /// Counters(queued,dequeued,dropped) related to batch retrieval per epoch task
 pub static BATCH_RETRIEVAL_TASK_MSGS: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_quorum_store_batch_retrieval_task_msgs_count",
+        "creditchain_quorum_store_batch_retrieval_task_msgs_count",
         "Counters(queued,dequeued,dropped) related to batch retrieval task",
         &["state"]
     )

@@ -1,0 +1,15 @@
+[package]
+name = "creditchain-vm-benchmarks"
+version = "0.1.1"
+edition = "2021"
+license = { workspace = true }
+
+[dependencies]
+creditchain-cached-packages = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-language-e2e-tests = { workspace = true }
+creditchain-types = { workspace = true }
+bcs = { workspace = true }
+clap = { workspace = true }
+move-binary-format = { workspace = true }
+move-core-types = { workspace = true }

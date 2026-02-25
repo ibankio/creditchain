@@ -5,9 +5,9 @@ use crate::{
     block_storage::block_store::sync_manager::TargetBlockRetrieval,
     counters::BLOCK_RETRIEVAL_LOCAL_FULFILL_COUNT,
 };
-use libra2_consensus_types::{block::Block, common::Round};
-use libra2_crypto::HashValue;
-use libra2_logger::info;
+use creditchain_consensus_types::{block::Block, common::Round};
+use creditchain_crypto::HashValue;
+use creditchain_logger::info;
 use futures_channel::oneshot;
 use std::collections::{BTreeMap, HashMap};
 

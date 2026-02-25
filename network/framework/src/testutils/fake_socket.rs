@@ -8,7 +8,7 @@
 //! - ReadWriteTestSocket: a similar wrapper but around MemorySocket to retrieve handshake messages being sent as well.
 //!
 
-use libra2_memsocket::MemorySocket;
+use creditchain_memsocket::MemorySocket;
 use futures::{
     io::{AsyncRead, AsyncWrite},
     ready,

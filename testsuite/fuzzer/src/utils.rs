@@ -9,8 +9,8 @@ pub mod cli {
         Authenticator, ExecVariant, FundAmount, RunnableState, RunnableStateWithOperations,
         UserAccount,
     };
-    use libra2_framework::{BuildOptions, BuiltPackage};
-    use libra2_types::{
+    use creditchain_framework::{BuildOptions, BuiltPackage};
+    use creditchain_types::{
         account_address::AccountAddress,
         transaction::{EntryFunction, Script, TransactionPayload},
     };
@@ -705,8 +705,8 @@ pub mod cli {
 
         // Process Move projects recursively from common test directories
         let move_test_dirs = vec![
-            //"../../libra2-move/move-examples",
-            //"../../libra2-move/e2e-move-tests",
+            //"../../creditchain-move/move-examples",
+            //"../../creditchain-move/e2e-move-tests",
         ];
 
         for test_dir in move_test_dirs {

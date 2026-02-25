@@ -39,8 +39,8 @@ def main():
     os.mkdir("local")
     subprocess.run(
         [
-            "target/release/libra2-debugger",
-            "libra2-db",
+            "target/release/creditchain-debugger",
+            "creditchain-db",
             "backup",
             "verify",
             "--validate-modules",

@@ -1,9 +1,9 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 use crate::{ObjectPool, TransactionGenerator, TransactionGeneratorCreator};
-use libra2_sdk::{
+use creditchain_sdk::{
     move_types::account_address::AccountAddress,
-    transaction_builder::{libra2_stdlib, TransactionFactory},
+    transaction_builder::{creditchain_stdlib, TransactionFactory},
     types::{chain_id::ChainId, transaction::SignedTransaction, LocalAccount},
 };
 use rand::{
@@ -182,11 +182,11 @@ impl P2PTransactionGenerator {
     ) -> SignedTransaction {
         from.sign_with_transaction_builder(
             if self.use_fa_transfer {
-                txn_factory.payload(libra2_stdlib::libra2_account_fungible_transfer_only(
+                txn_factory.payload(creditchain_stdlib::creditchain_account_fungible_transfer_only(
                     *to, num_coins,
                 ))
             } else {
-                txn_factory.payload(libra2_stdlib::libra2_coin_transfer(*to, num_coins))
+                txn_factory.payload(creditchain_stdlib::creditchain_coin_transfer(*to, num_coins))
             },
         )
     }

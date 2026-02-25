@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{LoadDestination, NetworkLoadTest};
-use libra2_forge::{
+use creditchain_forge::{
     GroupNetworkBandwidth, GroupNetworkDelay, NetworkContext, NetworkContextSynchronizer,
     NetworkTest, SwarmChaos, SwarmNetworkBandwidth, SwarmNetworkDelay, Test,
 };
-use libra2_types::account_address::AccountAddress;
+use creditchain_types::account_address::AccountAddress;
 use async_trait::async_trait;
 use log::info;
 

@@ -28,7 +28,7 @@ import pangu_lib.util as util
 @click.option(
     "--framework-path",
     required=True,
-    help="Pass in the path to the compiled move framework (head.mrb, or framework.mrb) file. To compile it, run: $ cargo run --locked --package libra2-framework -- release",
+    help="Pass in the path to the compiled move framework (head.mrb, or framework.mrb) file. To compile it, run: $ cargo run --locked --package creditchain-framework -- release",
 )
 @click.option(
     "--num-of-validators",
@@ -40,7 +40,7 @@ import pangu_lib.util as util
     help="Pass the path to the folder you would like the genesis files to be generated (default is a temp folder).",
 )
 @click.option(
-    "--libra2-cli-path",
+    "--creditchain-cli-path",
     default="aptos",
     help="Pass the path to the libra2 CLI if it is not in your $PATH var.",
 )
@@ -59,7 +59,7 @@ def create(
     layout_path: Optional[str],
     workspace: Optional[str],
     framework_path: str,
-    libra2_cli_path: str,
+    creditchain_cli_path: str,
     dry_run: bool,
     name: Optional[str],
 ):
@@ -71,7 +71,7 @@ def create(
         layout_path (str): path to the layout file
         workspace (str): path to the folder you would like the genesis files to be generated (default is a temp folder).
         framework_path (str): path to the compiled move framework
-        libra2_cli_path (str): path to libra2 CLI
+        creditchain_cli_path (str): path to libra2 CLI
         dry_run (bool): whether to deploy to kubernetes, or save the deployment instructions to the workspace
         namespace (str): the namespace to create the testnet
     """
@@ -105,7 +105,7 @@ def create(
                 layout_path=layout_path,
                 workspace=workspace,
                 framework_path=framework_path,
-                libra2_cli_path=libra2_cli_path,
+                creditchain_cli_path=creditchain_cli_path,
                 dry_run=dry_run,
                 name=testnet_name,
             ),

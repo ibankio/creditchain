@@ -21,15 +21,15 @@ use crate::{
     },
     PeerState,
 };
-use libra2_config::{
+use creditchain_config::{
     config::{NodeConfig, PeerMonitoringServiceConfig, PeerRole},
     network_id::NetworkId,
 };
-use libra2_peer_monitoring_service_types::{
+use creditchain_peer_monitoring_service_types::{
     request::PeerMonitoringServiceRequest,
     response::{LatencyPingResponse, PeerMonitoringServiceResponse},
 };
-use libra2_time_service::TimeServiceTrait;
+use creditchain_time_service::TimeServiceTrait;
 use std::sync::Arc;
 use tokio::sync::RwLock;
 

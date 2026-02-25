@@ -3,13 +3,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{
-    libra2_cli::validator::generate_blob, smoke_test_environment::SwarmBuilder,
+    creditchain_cli::validator::generate_blob, smoke_test_environment::SwarmBuilder,
     utils::get_current_version,
 };
-use libra2::test::CliTestFramework;
-use libra2_forge::{NodeExt, Swarm, SwarmExt};
-use libra2_rest_client::Client;
-use libra2_types::on_chain_config::{
+use creditchain::test::CliTestFramework;
+use creditchain_forge::{NodeExt, Swarm, SwarmExt};
+use creditchain_rest_client::Client;
+use creditchain_types::on_chain_config::{
     BlockGasLimitType, ExecutionConfigV4, OnChainExecutionConfig, TransactionDeduperType,
     TransactionShufflerType,
 };
@@ -37,7 +37,7 @@ async fn fallback_test() {
 
     client
         .set_failpoint(
-            "libra2_vm::vm_wrapper::execute_transaction".to_string(),
+            "creditchain_vm::vm_wrapper::execute_transaction".to_string(),
             "100%return".to_string(),
         )
         .await
@@ -53,7 +53,7 @@ async fn fallback_test() {
 
     client
         .set_failpoint(
-            "libra2_vm::vm_wrapper::execute_transaction".to_string(),
+            "creditchain_vm::vm_wrapper::execute_transaction".to_string(),
             "0%return".to_string(),
         )
         .await
@@ -78,13 +78,13 @@ async fn update_execution_config(
     let update_execution_config_script = format!(
         r#"
     script {{
-        use libra2_framework::libra2_governance;
-        use libra2_framework::execution_config;
+        use creditchain_framework::creditchain_governance;
+        use creditchain_framework::execution_config;
         fun main(core_resources: &signer) {{
-            let framework_signer = libra2_governance::get_signer_testnet_only(core_resources, @0000000000000000000000000000000000000000000000000000000000000001);
+            let framework_signer = creditchain_governance::get_signer_testnet_only(core_resources, @0000000000000000000000000000000000000000000000000000000000000001);
             let config_bytes = {};
             execution_config::set_for_next_epoch(&framework_signer, config_bytes);
-            libra2_governance::force_end_epoch(&framework_signer);
+            creditchain_governance::force_end_epoch(&framework_signer);
         }}
     }}
     "#,

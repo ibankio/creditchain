@@ -1,0 +1,59 @@
+[package]
+name = "creditchain-data-client"
+description = "The CreditChain data client"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-id-generator = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-netcore = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-storage-service-client = { workspace = true }
+creditchain-storage-service-types = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-types = { workspace = true }
+arc-swap = { workspace = true }
+async-trait = { workspace = true }
+dashmap = { workspace = true }
+futures = { workspace = true }
+itertools = { workspace = true }
+maplit = { workspace = true }
+ordered-float = { workspace = true }
+# Note: we cannot rely on the workspace version of rand because it's out-of-date
+# and does not provide the necessary interfaces for weighted sampling. Similarly,
+# it's not trivial to update rand on the workspace because of several dependency
+# issues (e.g., other outdated crate versions). This is why we fix the version here.
+# Eventually we'll need to update the workspace to use the latest version of rand.
+# See also https://github.com/libra2org/libra2-core/issues/13031
+rand = "0.8.5"
+serde = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+anyhow = { workspace = true }
+creditchain-channels = { workspace = true }
+creditchain-network = { workspace = true, features = ["fuzzing"] }
+creditchain-peer-monitoring-service-types = { workspace = true }
+creditchain-storage-service-server = { workspace = true }
+creditchain-time-service = { workspace = true, features = ["async", "testing"] }
+async-trait = { workspace = true }
+bcs = { workspace = true }
+claims = { workspace = true }
+maplit = { workspace = true }
+mockall = { workspace = true }
+tokio = { workspace = true }

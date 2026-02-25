@@ -9,7 +9,7 @@ use crate::{
     move_utils::as_move_value::AsMoveValue,
 };
 use anyhow::anyhow;
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 use move_core_types::value::{MoveStruct, MoveValue};
 use poem_openapi_derive::Union;
 use serde::{Deserialize, Serialize};

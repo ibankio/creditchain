@@ -8,7 +8,7 @@ use crate::{
     response::{BasicResponse, BasicResponseStatus, BasicResult},
     ApiTags,
 };
-use libra2_api_types::{IndexResponse, IndexResponseBcs};
+use creditchain_api_types::{IndexResponse, IndexResponseBcs};
 use poem_openapi::OpenApi;
 use std::sync::Arc;
 
@@ -40,7 +40,7 @@ impl IndexApi {
                 let index_response = IndexResponse::new(
                     ledger_info.clone(),
                     node_role,
-                    Some(libra2_build_info::get_git_hash()),
+                    Some(creditchain_build_info::get_git_hash()),
                 );
                 BasicResponse::try_from_json((
                     index_response,

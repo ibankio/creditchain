@@ -5,11 +5,11 @@
 use super::ungrouped::{
     mixed_emit_job, PROGRESS_THRESHOLD_20_6, RELIABLE_REAL_ENV_PROGRESS_THRESHOLD,
 };
-use libra2_forge::{
+use creditchain_forge::{
     args::TransactionTypeArg, success_criteria::SuccessCriteria, EmitJobMode, EmitJobRequest,
     EntryPoints, ForgeConfig, TransactionType, WorkflowProgress,
 };
-use libra2_testcases::{
+use creditchain_testcases::{
     load_vs_perf_benchmark::{LoadVsPerfBenchmark, TransactionWorkload, Workloads},
     modifiers::CpuChaosTest,
     multi_region_network_test::MultiRegionNetworkEmulationTest,

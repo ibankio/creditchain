@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_types::transaction::Version;
+use creditchain_types::transaction::Version;
 use futures::channel::{mpsc::SendError, oneshot::Canceled};
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
@@ -82,14 +82,14 @@ impl From<Canceled> for Error {
     }
 }
 
-impl From<libra2_data_streaming_service::error::Error> for Error {
-    fn from(error: libra2_data_streaming_service::error::Error) -> Self {
+impl From<creditchain_data_streaming_service::error::Error> for Error {
+    fn from(error: creditchain_data_streaming_service::error::Error) -> Self {
         Error::UnexpectedError(error.to_string())
     }
 }
 
-impl From<libra2_event_notifications::Error> for Error {
-    fn from(error: libra2_event_notifications::Error) -> Self {
+impl From<creditchain_event_notifications::Error> for Error {
+    fn from(error: creditchain_event_notifications::Error) -> Self {
         Error::EventNotificationError(error.to_string())
     }
 }

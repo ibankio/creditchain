@@ -1,5 +1,5 @@
 [package]
-name = "libra2-short-hex-str"
+name = "creditchain-short-hex-str"
 description = "Short hex string encoding"
 version = "0.1.1"
 

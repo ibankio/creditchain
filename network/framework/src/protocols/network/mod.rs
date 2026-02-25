@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-//! Convenience Network API for Libra2
+//! Convenience Network API for CreditChain
 
 pub use crate::protocols::rpc::error::RpcError;
 use crate::{
@@ -12,11 +12,11 @@ use crate::{
     protocols::wire::messaging::v1::{IncomingRequest, NetworkMessage},
     ProtocolId,
 };
-use libra2_channels::libra2_channel;
-use libra2_config::network_id::PeerNetworkId;
-use libra2_logger::prelude::*;
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_channels::creditchain_channel;
+use creditchain_config::network_id::PeerNetworkId;
+use creditchain_logger::prelude::*;
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use bytes::Bytes;
 use futures::{
     channel::oneshot,
@@ -67,7 +67,7 @@ impl<TMessage: PartialEq> PartialEq for Event<TMessage> {
     }
 }
 
-/// Configuration needed for the client side of Libra2Net applications
+/// Configuration needed for the client side of CreditChainNet applications
 #[derive(Clone)]
 pub struct NetworkClientConfig {
     /// Direct send protocols for the application (sorted by preference, highest to lowest)
@@ -88,7 +88,7 @@ impl NetworkClientConfig {
     }
 }
 
-/// Configuration needed for the service side of Libra2Net applications
+/// Configuration needed for the service side of CreditChainNet applications
 #[derive(Clone)]
 pub struct NetworkServiceConfig {
     /// Direct send protocols for the application (sorted by preference, highest to lowest)
@@ -96,14 +96,14 @@ pub struct NetworkServiceConfig {
     /// RPC protocols for the application (sorted by preference, highest to lowest)
     pub rpc_protocols_and_preferences: Vec<ProtocolId>,
     /// The inbound queue config (from the network to the application)
-    pub inbound_queue_config: libra2_channel::Config,
+    pub inbound_queue_config: creditchain_channel::Config,
 }
 
 impl NetworkServiceConfig {
     pub fn new(
         direct_send_protocols_and_preferences: Vec<ProtocolId>,
         rpc_protocols_and_preferences: Vec<ProtocolId>,
-        inbound_queue_config: libra2_channel::Config,
+        inbound_queue_config: creditchain_channel::Config,
     ) -> Self {
         Self {
             direct_send_protocols_and_preferences,
@@ -113,7 +113,7 @@ impl NetworkServiceConfig {
     }
 }
 
-/// Configuration needed for Libra2Net applications to register with the network
+/// Configuration needed for CreditChainNet applications to register with the network
 /// builder. Supports client and service side.
 #[derive(Clone)]
 pub struct NetworkApplicationConfig {
@@ -200,7 +200,7 @@ pub struct NetworkEvents<TMessage> {
 /// Trait specifying the signature for `new()` `NetworkEvents`
 pub trait NewNetworkEvents {
     fn new(
-        peer_mgr_notifs_rx: libra2_channel::Receiver<(PeerId, ProtocolId), ReceivedMessage>,
+        peer_mgr_notifs_rx: creditchain_channel::Receiver<(PeerId, ProtocolId), ReceivedMessage>,
         max_parallel_deserialization_tasks: Option<usize>,
         allow_out_of_order_delivery: bool,
     ) -> Self;
@@ -208,7 +208,7 @@ pub trait NewNetworkEvents {
 
 impl<TMessage: Message + Send + Sync + 'static> NewNetworkEvents for NetworkEvents<TMessage> {
     fn new(
-        peer_mgr_notifs_rx: libra2_channel::Receiver<(PeerId, ProtocolId), ReceivedMessage>,
+        peer_mgr_notifs_rx: creditchain_channel::Receiver<(PeerId, ProtocolId), ReceivedMessage>,
         max_parallel_deserialization_tasks: Option<usize>,
         allow_out_of_order_delivery: bool,
     ) -> Self {
@@ -334,7 +334,7 @@ impl<TMessage> FusedStream for NetworkEvents<TMessage> {
 /// keys.
 ///
 /// `NetworkSender` is in fact a thin wrapper around a `PeerManagerRequestSender`, which in turn is
-/// a thin wrapper on `libra2_channel::Sender<(PeerId, ProtocolId), PeerManagerRequest>`,
+/// a thin wrapper on `creditchain_channel::Sender<(PeerId, ProtocolId), PeerManagerRequest>`,
 /// mostly focused on providing a more ergonomic API. However, network applications will usually
 /// provide their own thin wrapper around `NetworkSender` that narrows the API to the specific
 /// interface they need.

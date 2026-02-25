@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{metrics, stream_engine::StreamEngine};
-use libra2_config::config::{DataStreamingServiceConfig, DynamicPrefetchingConfig};
-use libra2_time_service::{TimeService, TimeServiceTrait};
+use creditchain_config::config::{DataStreamingServiceConfig, DynamicPrefetchingConfig};
+use creditchain_time_service::{TimeService, TimeServiceTrait};
 use std::{
     cmp::{max, min},
     time::{Duration, Instant},
@@ -156,7 +156,7 @@ mod test {
     use crate::streaming_client::{
         GetAllStatesRequest, GetAllTransactionsOrOutputsRequest, StreamRequest,
     };
-    use libra2_data_client::global_summary::AdvertisedData;
+    use creditchain_data_client::global_summary::AdvertisedData;
 
     #[test]
     fn test_initialize_prefetching_state() {

@@ -4,8 +4,8 @@
 
 //! TCP Transport
 use crate::transport::Transport;
-use libra2_proxy::Proxy;
-use libra2_types::{
+use creditchain_proxy::Proxy;
+use creditchain_types::{
     network_address::{parse_dns_tcp, parse_ip_tcp, parse_tcp, IpFilter, NetworkAddress},
     PeerId,
 };
@@ -150,7 +150,7 @@ impl Transport for TcpTransport {
         let proxy = Proxy::new();
 
         let proxy_addr = {
-            use libra2_types::network_address::Protocol::*;
+            use creditchain_types::network_address::Protocol::*;
 
             let addr = match protos.first() {
                 Some(Ip4(ip)) => proxy.https(&ip.to_string()),
@@ -411,7 +411,7 @@ impl AsyncWrite for TcpSocket {
 mod test {
     use super::*;
     use crate::transport::{ConnectionOrigin, Transport, TransportExt};
-    use libra2_types::PeerId;
+    use creditchain_types::PeerId;
     use futures::{
         future::{join, FutureExt},
         io::{AsyncReadExt, AsyncWriteExt},

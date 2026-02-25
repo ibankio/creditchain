@@ -1,5 +1,5 @@
 module poc::scalar_reduced_from_32_bytes_internal {
-    use libra2_std::ristretto255::{Self};
+    use creditchain_std::ristretto255::{Self};
     use std::option::{Self};
 
     public entry fun main(_owner: &signer) {

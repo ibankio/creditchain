@@ -8,17 +8,17 @@ use crate::{
     metrics::NUM_TXNS,
     OverallMeasurement, TransactionCommitter, TransactionExecutor,
 };
-use libra2_block_partitioner::v2::config::PartitionerV2Config;
-use libra2_crypto::HashValue;
-use libra2_executor::block_executor::BlockExecutor;
-use libra2_executor_types::{state_compute_result::StateComputeResult, BlockExecutorTrait};
-use libra2_infallible::Mutex;
-use libra2_logger::info;
-use libra2_types::{
+use creditchain_block_partitioner::v2::config::PartitionerV2Config;
+use creditchain_crypto::HashValue;
+use creditchain_executor::block_executor::BlockExecutor;
+use creditchain_executor_types::{state_compute_result::StateComputeResult, BlockExecutorTrait};
+use creditchain_infallible::Mutex;
+use creditchain_logger::info;
+use creditchain_types::{
     block_executor::partitioner::ExecutableBlock,
     transaction::{Transaction, TransactionPayload, Version},
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use derivative::Derivative;
 use move_core_types::language_storage::StructTag;
 use std::{

@@ -1,0 +1,13 @@
+[package]
+name = "vector_pushback"
+version = "1.0.0"
+authors = []
+
+[addresses]
+
+[dev-addresses]
+
+[dependencies.CreditChainFramework]
+local = "../../framework/creditchain-framework/"
+
+[dev-dependencies]

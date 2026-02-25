@@ -1,6 +1,6 @@
 module poc::type_of {
-   use libra2_std::type_info;
-   use libra2_std::table::Table;
+   use creditchain_std::type_info;
+   use creditchain_std::table::Table;
 
 
    struct TestStruct has copy, drop, store {

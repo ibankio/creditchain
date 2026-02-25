@@ -1,0 +1,9 @@
+[package]
+name = "CreditChainExperimental"
+version = "1.0.0"
+
+[addresses]
+creditchain_experimental = "0x7"
+
+[dependencies]
+CreditChainFramework = { local = "../creditchain-framework" }

@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::streaming_client::Epoch;
-use libra2_data_client::interface::{Response, ResponsePayload};
-use libra2_types::{
+use creditchain_data_client::interface::{Response, ResponsePayload};
+use creditchain_types::{
     ledger_info::LedgerInfoWithSignatures,
     state_store::state_value::StateValueChunkWithProof,
     transaction::{TransactionListWithProofV2, TransactionOutputListWithProofV2, Version},
@@ -51,7 +51,7 @@ pub enum DataPayload {
     TransactionsWithProof(TransactionListWithProofV2),
 }
 
-/// A request that has been sent to the Libra2 data client.
+/// A request that has been sent to the CreditChain data client.
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum DataClientRequest {
     EpochEndingLedgerInfos(EpochEndingLedgerInfosRequest),
@@ -223,7 +223,7 @@ pub struct TransactionsOrOutputsWithProofRequest {
 /// network and will be available in `client_response` when received.
 pub struct PendingClientResponse {
     pub client_request: DataClientRequest,
-    pub client_response: Option<Result<Response<ResponsePayload>, libra2_data_client::error::Error>>,
+    pub client_response: Option<Result<Response<ResponsePayload>, creditchain_data_client::error::Error>>,
 }
 
 impl PendingClientResponse {
@@ -238,7 +238,7 @@ impl PendingClientResponse {
     /// Creates a new pending client response with a response already available
     pub fn new_with_response(
         client_request: DataClientRequest,
-        client_response: Result<Response<ResponsePayload>, libra2_data_client::error::Error>,
+        client_response: Result<Response<ResponsePayload>, creditchain_data_client::error::Error>,
     ) -> Self {
         Self {
             client_request,

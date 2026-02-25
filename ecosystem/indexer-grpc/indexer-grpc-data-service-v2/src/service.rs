@@ -3,8 +3,8 @@
 
 use crate::{config::LIVE_DATA_SERVICE, connection_manager::ConnectionManager};
 use anyhow::Result;
-use libra2_indexer_grpc_utils::timestamp_now_proto;
-use libra2_protos::indexer::v1::{
+use creditchain_indexer_grpc_utils::timestamp_now_proto;
+use creditchain_protos::indexer::v1::{
     data_service_server::DataService, ping_data_service_response::Info, raw_data_server::RawData,
     GetTransactionsRequest, HistoricalDataServiceInfo, LiveDataServiceInfo, PingDataServiceRequest,
     PingDataServiceResponse, StreamInfo, TransactionsResponse,

@@ -9,7 +9,7 @@ use crate::{
     },
     transaction::Version,
 };
-use libra2_crypto::HashValue;
+use creditchain_crypto::HashValue;
 use bytes::Bytes;
 use move_core_types::{language_storage::StructTag, move_resource::MoveResource};
 #[cfg(any(test, feature = "testing"))]

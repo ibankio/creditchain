@@ -10,9 +10,9 @@ use crate::{
     Swarm, SwarmExt, TestReport,
 };
 use anyhow::{bail, Context};
-use libra2::node::analyze::{analyze_validators::AnalyzeValidators, fetch_metadata::FetchMetadata};
-use libra2_logger::info as libra2_logger_info;
-use libra2_transaction_emitter_lib::{TxnStats, TxnStatsRate};
+use creditchain::node::analyze::{analyze_validators::AnalyzeValidators, fetch_metadata::FetchMetadata};
+use creditchain_logger::info as creditchain_logger_info;
+use creditchain_transaction_emitter_lib::{TxnStats, TxnStatsRate};
 use log::info;
 use prometheus_http_query::response::Sample;
 use serde_json::json;
@@ -578,7 +578,7 @@ impl SuccessCriteriaChecker {
             chain_progress_threshold.max_epoch_no_progress_secs,
         );
 
-        libra2_logger_info!(
+        creditchain_logger_info!(
             max_non_epoch_round_gap = gap_info.non_epoch_round_gap.max_gap,
             max_epoch_round_gap = gap_info.epoch_round_gap.max_gap,
             max_non_epoch_time_gap = gap_info.non_epoch_time_gap.max_gap,

@@ -12,7 +12,7 @@ use crate::{
     },
     utils::counters::PROCESSOR_UNKNOWN_TYPE_COUNT,
 };
-use libra2_indexer_processor_sdk::libra2_protos::transaction::v1::{
+use libra2_indexer_processor_sdk::creditchain_protos::transaction::v1::{
     transaction::TxnData, Transaction,
 };
 

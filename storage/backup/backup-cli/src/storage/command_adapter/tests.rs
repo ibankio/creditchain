@@ -10,7 +10,7 @@ use crate::storage::{
         test_write_and_read_impl,
     },
 };
-use libra2_temppath::TempPath;
+use creditchain_temppath::TempPath;
 use futures::Future;
 use proptest::prelude::*;
 use std::str::FromStr;

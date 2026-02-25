@@ -1,4 +1,4 @@
-# libra2-node
+# creditchain-node
 
 ![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
@@ -33,7 +33,7 @@ CreditChain blockchain node deployment
 | fullnode.storage.class | string | `nil` | Kubernetes storage class to use for fullnode persistent storage |
 | fullnode.storage.size | string | `"2048Gi"` | Size of fullnode persistent storage |
 | fullnode.tolerations | list | `[]` |  |
-| genesis_blob_upload_url | string | `"https://us-west1-libra2-forge-gcp-0.cloudfunctions.net/signed-url?cluster_name=unknown&era=1"` |  |
+| genesis_blob_upload_url | string | `"https://us-west1-creditchain-forge-gcp-0.cloudfunctions.net/signed-url?cluster_name=unknown&era=1"` |  |
 | haproxy.affinity | object | `{}` |  |
 | haproxy.config.send_proxy_protocol | bool | `false` | Whether to send Proxy Protocol v2 |
 | haproxy.config.user | string | `"nobody"` | System user to run HA |
@@ -109,19 +109,19 @@ The resources created by this helm chart will be prefixed with the helm release 
 the `<RELEASE_NAME>` prefix.
 
 StatefulSets:
-* `<RELEASE_NAME>-libra2-node-0-validator` - The validator StatefulSet
-* `<RELEASE_NAME>-libra2-node-0-fullnode-e<ERA>` - The fullnode StatefulSet
+* `<RELEASE_NAME>-creditchain-node-0-validator` - The validator StatefulSet
+* `<RELEASE_NAME>-creditchain-node-0-fullnode-e<ERA>` - The fullnode StatefulSet
 
 Deployments:
-* `<RELEASE_NAME>-libra2-node-0-validator` - The HAProxy deployment
+* `<RELEASE_NAME>-creditchain-node-0-validator` - The HAProxy deployment
 
 PersistentVolumeClaim:
 * `<RELEASE_NAME>-0-validator-e<ERA>` - The validator PersistentVolumeClaim
 * `fn-<RELEASE_NAME>-0-fullnode-e<ERA>-0` - The fullnode PersistentVolumeClaim. Note the difference in naming scheme between valdiator and fullnode PVC, which is due to the fact that you can spin up multiple fullnodes, but only a single validator.
 
 Services:
-* `<RELEASE_NAME>-libra2-node-0-validator-lb` - Inbound load balancer service that routes to the validator
-* `<RELEASE_NAME>-libra2-node-0-fullnode-lb` - Inbound load balancer service that routes to the fullnode
+* `<RELEASE_NAME>-creditchain-node-0-validator-lb` - Inbound load balancer service that routes to the validator
+* `<RELEASE_NAME>-creditchain-node-0-fullnode-lb` - Inbound load balancer service that routes to the fullnode
 
 ConfigMaps:
 * `<RELEASE_NAME>-0` - The validator and fullnode NodeConfigs
@@ -181,7 +181,7 @@ kubectl scale statefulset <STS_NAME> --replicas=0
 
 ### Testnet Mode (Multiple Validators and Fullnodes)
 
-For testing purposes, you may deploy multiple validators into the same cluster via `.Values.numValidators`. The naming convention is `<RELEASE_NAME>-libra2-node-<INDEX>-validator`, where `<INDEX>` is the index of the validator. Note that for each validator, you must provide genesis ConfigMaps for each, of the name: `<RELEASE_NAME>-<INDEX>-genesis-e<ERA>`.
+For testing purposes, you may deploy multiple validators into the same cluster via `.Values.numValidators`. The naming convention is `<RELEASE_NAME>-creditchain-node-<INDEX>-validator`, where `<INDEX>` is the index of the validator. Note that for each validator, you must provide genesis ConfigMaps for each, of the name: `<RELEASE_NAME>-<INDEX>-genesis-e<ERA>`.
 You may also deploy multiple fullnodes into the cluster via `.Values.numFullnodeGroups` and `.Values.fullnode.groups`. Each validator can have multiple fullnode groups, each with multiple replicas. The total number of fullnode groups can be limited via `.Values.numFullnodeGroups`.
 
 ### Era

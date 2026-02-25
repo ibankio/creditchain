@@ -2,13 +2,13 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_config::network_id::{NetworkId, PeerNetworkId};
-use libra2_network::{
+use creditchain_config::network_id::{NetworkId, PeerNetworkId};
+use creditchain_network::{
     application::interface::NetworkServiceEvents,
     protocols::network::{Event, RpcError},
     ProtocolId,
 };
-use libra2_storage_service_types::{
+use creditchain_storage_service_types::{
     requests::StorageServiceRequest, responses::StorageServiceResponse, Result,
     StorageServiceMessage,
 };

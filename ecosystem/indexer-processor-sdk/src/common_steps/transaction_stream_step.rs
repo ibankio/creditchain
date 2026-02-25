@@ -10,7 +10,7 @@ use anyhow::Result;
 use libra2_indexer_transaction_stream::{
     TransactionStream as TransactionStreamInternal, TransactionStreamConfig,
 };
-use libra2_protos::transaction::v1::Transaction;
+use creditchain_protos::transaction::v1::Transaction;
 use async_trait::async_trait;
 use mockall::mock;
 use std::time::Duration;

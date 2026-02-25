@@ -2,12 +2,12 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_crypto::{
+use creditchain_crypto::{
     traits::Uniform,
     x25519::{PrivateKey, PublicKey},
 };
-use libra2_network::protocols::wire::{handshake, messaging};
-use libra2_types::network_address as address;
+use creditchain_network::protocols::wire::{handshake, messaging};
+use creditchain_types::network_address as address;
 use rand::{rngs::StdRng, SeedableRng};
 use serde_reflection::{Registry, Result, Samples, Tracer, TracerConfig};
 use std::str::FromStr;
@@ -50,7 +50,7 @@ pub fn get_registry() -> Result<Registry> {
     tracer.trace_type::<messaging::v1::NotSupportedType>(&samples)?;
     tracer.trace_type::<handshake::v1::ProtocolId>(&samples)?;
     tracer.trace_type::<address::Protocol>(&samples)?;
-    tracer.trace_type::<libra2_config::network_id::NetworkId>(&samples)?;
+    tracer.trace_type::<creditchain_config::network_id::NetworkId>(&samples)?;
 
     tracer.registry()
 }

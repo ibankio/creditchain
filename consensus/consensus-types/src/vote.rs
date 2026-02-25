@@ -6,9 +6,9 @@ use crate::{
     common::Author, quorum_cert::QuorumCert, timeout_2chain::TwoChainTimeout, vote_data::VoteData,
 };
 use anyhow::{ensure, Context};
-use libra2_crypto::{bls12381, hash::CryptoHash, CryptoMaterialError};
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_types::{
+use creditchain_crypto::{bls12381, hash::CryptoHash, CryptoMaterialError};
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_types::{
     ledger_info::{LedgerInfo, SignatureWithStatus},
     validator_signer::ValidatorSigner,
     validator_verifier::ValidatorVerifier,

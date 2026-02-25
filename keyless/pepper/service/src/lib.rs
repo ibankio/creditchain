@@ -9,26 +9,26 @@ use crate::{
     vuf_keys::VUF_SK,
     ProcessingFailure::{BadRequest, InternalError},
 };
-use libra2_crypto::{
+use creditchain_crypto::{
     asymmetric_encryption::{
         elgamal_curve25519_aes256_gcm::ElGamalCurve25519Aes256Gcm, AsymmetricEncryption,
     },
     ed25519::Ed25519PublicKey,
 };
-use libra2_infallible::duration_since_epoch;
-use libra2_keyless_pepper_common::{
+use creditchain_infallible::duration_since_epoch;
+use creditchain_keyless_pepper_common::{
     account_recovery_db::AccountRecoveryDbEntry,
     jwt::Claims,
     vuf::{
         self,
         bls12381_g1_bls::PinkasPepper,
-        slip_10::{get_libra2_derivation_path, ExtendedPepper},
+        slip_10::{get_creditchain_derivation_path, ExtendedPepper},
         VUF,
     },
     PepperInput, PepperRequest, PepperResponse, SignatureResponse, VerifyRequest, VerifyResponse,
 };
-use libra2_logger::{info, warn};
-use libra2_types::{
+use creditchain_logger::{info, warn};
+use creditchain_types::{
     account_address::AccountAddress,
     keyless::{
         get_public_inputs_hash, Configuration, EphemeralCertificate, Groth16ProofAndStatement,
@@ -197,10 +197,10 @@ impl HandlerTrait<VerifyRequest, VerifyResponse> for V0VerifyHandler {
             let training_wheels_pk = match &config.training_wheels_pubkey {
                 None => None,
                 // This takes ~4.4 microseconds, so we are not too concerned about speed here.
-                // (Run `cargo bench -- ed25519/pk_deserialize` in `crates/libra2-crypto`.)
+                // (Run `cargo bench -- ed25519/pk_deserialize` in `crates/creditchain-crypto`.)
                 Some(bytes) => Some(EphemeralPublicKey::ed25519(
                     Ed25519PublicKey::try_from(bytes.as_slice()).map_err(|_| {
-                        // println!("[libra2-vm][groth16] On chain TW PK is invalid");
+                        // println!("[creditchain-vm][groth16] On chain TW PK is invalid");
                         invalid_signature!("The training wheels PK set on chain is not a valid PK")
                     })?,
                 )),
@@ -208,14 +208,14 @@ impl HandlerTrait<VerifyRequest, VerifyResponse> for V0VerifyHandler {
             match cert {
                 EphemeralCertificate::ZeroKnowledgeSig(zksig) => {
                     if zksig.exp_horizon_secs > config.max_exp_horizon_secs {
-                        // println!("[libra2-vm][groth16] Expiration horizon is too long");
+                        // println!("[creditchain-vm][groth16] Expiration horizon is too long");
                         return Err(invalid_signature!("The expiration horizon is too long"));
                     }
                     if zksig.override_aud_val.is_some() {
                         config
                             .is_allowed_override_aud(zksig.override_aud_val.as_ref().unwrap())
                             .map_err(|_| {
-                                // println!("[libra2-vm][groth16] PIH computation failed");
+                                // println!("[creditchain-vm][groth16] PIH computation failed");
                                 invalid_signature!("Could not compute public inputs hash")
                             })?;
                     }
@@ -225,7 +225,7 @@ impl HandlerTrait<VerifyRequest, VerifyResponse> for V0VerifyHandler {
                             let public_inputs_hash =
                                 get_public_inputs_hash(signature, public_key, &jwk, &config)
                                     .map_err(|_| {
-                                        // println!("[libra2-vm][groth16] PIH computation failed");
+                                        // println!("[creditchain-vm][groth16] PIH computation failed");
                                         invalid_signature!("Could not compute public inputs hash")
                                     })?;
                             // println!("Public inputs hash time: {:?}", start.elapsed());
@@ -243,14 +243,14 @@ impl HandlerTrait<VerifyRequest, VerifyResponse> for V0VerifyHandler {
                                                 training_wheels_pk.as_ref().unwrap(),
                                             )
                                             .map_err(|_| {
-                                                // println!("[libra2-vm][groth16] TW sig verification failed");
+                                                // println!("[creditchain-vm][groth16] TW sig verification failed");
                                                 invalid_signature!(
                                                     "Could not verify training wheels signature"
                                                 )
                                             })?;
                                     },
                                     None => {
-                                        // println!("[libra2-vm][groth16] Expected TW sig to be set");
+                                        // println!("[creditchain-vm][groth16] Expected TW sig to be set");
                                         return Err(invalid_signature!(
                                             "Training wheels signature expected but it is missing"
                                         ));
@@ -268,15 +268,15 @@ impl HandlerTrait<VerifyRequest, VerifyResponse> for V0VerifyHandler {
                             let result =
                                 zksig.verify_groth16_proof(public_inputs_hash, &ark_groth16_pvk);
                             result.map_err(|_| {
-                                // println!("[libra2-vm][groth16] ZKP verification failed");
-                                // println!("[libra2-vm][groth16] PIH: {}", public_inputs_hash);
+                                // println!("[creditchain-vm][groth16] ZKP verification failed");
+                                // println!("[creditchain-vm][groth16] PIH: {}", public_inputs_hash);
                                 // match zksig.proof {
                                 //     ZKP::Groth16(proof) => {
-                                //         println!("[libra2-vm][groth16] ZKP: {}", proof.hash());
+                                //         println!("[creditchain-vm][groth16] ZKP: {}", proof.hash());
                                 //     },
                                 // }
                                 // println!(
-                                //     "[libra2-vm][groth16] PVK: {}",
+                                //     "[creditchain-vm][groth16] PVK: {}",
                                 //     Groth16VerificationKey::from(pvk).hash()
                                 // );
                                 invalid_signature!("Proof verification failed")
@@ -316,7 +316,7 @@ async fn process_common(
         DEFAULT_DERIVATION_PATH.to_owned()
     };
     let checked_derivation_path =
-        get_libra2_derivation_path(&derivation_path).map_err(|e| BadRequest(e.to_string()))?;
+        get_creditchain_derivation_path(&derivation_path).map_err(|e| BadRequest(e.to_string()))?;
 
     let curve25519_pk_point = match &epk {
         EphemeralPublicKey::Ed25519 { public_key } => public_key
@@ -328,7 +328,7 @@ async fn process_common(
         },
     };
 
-    let claims = libra2_keyless_pepper_common::jwt::parse(jwt.as_str())
+    let claims = creditchain_keyless_pepper_common::jwt::parse(jwt.as_str())
         .map_err(|e| BadRequest(format!("JWT decoding error: {e}")))?;
     let now_secs = SystemTime::now()
         .duration_since(UNIX_EPOCH)

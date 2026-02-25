@@ -401,7 +401,7 @@ impl OnChainConfig for OnChainConsensusConfig {
 
     /// The Move resource is
     /// ```ignore
-    /// struct Libra2ConsensusConfig has copy, drop, store {
+    /// struct CreditChainConsensusConfig has copy, drop, store {
     ///    config: vector<u8>,
     /// }
     /// ```

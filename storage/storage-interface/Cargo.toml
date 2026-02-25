@@ -1,5 +1,5 @@
 [package]
-name = "libra2-storage-interface"
+name = "creditchain-storage-interface"
 description = "CreditChain storage interface"
 version = "0.1.1"
 
@@ -14,13 +14,13 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-experimental-layered-map = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-scratchpad = { workspace = true }
-libra2-secure-net = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-experimental-layered-map = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-scratchpad = { workspace = true }
+creditchain-secure-net = { workspace = true }
+creditchain-types = { workspace = true }
 arr_macro = { workspace = true }
 bcs = { workspace = true }
 dashmap = { workspace = true }
@@ -36,12 +36,12 @@ serde = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 lru = { workspace = true }
 
 [features]
 default = []
-fuzzing = ["libra2-types/fuzzing"]
+fuzzing = ["creditchain-types/fuzzing"]
 
 [package.metadata.cargo-machete]
 ignored = ["proptest"]

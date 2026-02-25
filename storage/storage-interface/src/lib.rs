@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::state_store::state_view::hot_state_view::HotStateView;
-use libra2_crypto::HashValue;
-pub use libra2_types::indexer::indexer_db_reader::Order;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+pub use creditchain_types::indexer::indexer_db_reader::Order;
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::NewBlockEvent,
     contract_event::{ContractEvent, EventWithVersion},
@@ -48,12 +48,12 @@ use crate::{
     chunk_to_commit::ChunkToCommit,
     state_store::{state::State, state_summary::StateSummary},
 };
-pub use libra2_types::block_info::BlockHeight;
-use libra2_types::state_store::state_key::prefix::StateKeyPrefix;
-pub use errors::Libra2DbError;
+pub use creditchain_types::block_info::BlockHeight;
+use creditchain_types::state_store::state_key::prefix::StateKeyPrefix;
+pub use errors::CreditChainDbError;
 pub use ledger_summary::LedgerSummary;
 
-pub type Result<T, E = Libra2DbError> = std::result::Result<T, E>;
+pub type Result<T, E = CreditChainDbError> = std::result::Result<T, E>;
 // This is last line of defense against large queries slipping through external facing interfaces,
 // like the API and State Sync, etc.
 pub const MAX_REQUEST_LIMIT: u64 = 20_000;
@@ -89,8 +89,8 @@ impl From<bcs::Error> for Error {
     }
 }
 
-impl From<libra2_secure_net::Error> for Error {
-    fn from(error: libra2_secure_net::Error) -> Self {
+impl From<creditchain_secure_net::Error> for Error {
+    fn from(error: creditchain_secure_net::Error) -> Self {
         Self::ServiceError {
             error: format!("{}", error),
         }
@@ -112,7 +112,7 @@ macro_rules! delegate_read {
 }
 
 /// Trait that is implemented by a DB that supports certain public (to client) read APIs
-/// expected of an Libra2 DB
+/// expected of an CreditChain DB
 #[allow(unused_variables)]
 pub trait DbReader: Send + Sync {
     fn get_read_delegatee(&self) -> &dyn DbReader {
@@ -120,19 +120,19 @@ pub trait DbReader: Send + Sync {
     }
 
     delegate_read!(
-        /// See [Libra2DB::get_epoch_ending_ledger_infos].
+        /// See [CreditChainDB::get_epoch_ending_ledger_infos].
         ///
-        /// [Libra2DB::get_epoch_ending_ledger_infos]:
-        /// ../libra2db/struct.Libra2DB.html#method.get_epoch_ending_ledger_infos
+        /// [CreditChainDB::get_epoch_ending_ledger_infos]:
+        /// ../creditchaindb/struct.CreditChainDB.html#method.get_epoch_ending_ledger_infos
         fn get_epoch_ending_ledger_infos(
             &self,
             start_epoch: u64,
             end_epoch: u64,
         ) -> Result<EpochChangeProof>;
 
-        /// See [Libra2DB::get_transactions].
+        /// See [CreditChainDB::get_transactions].
         ///
-        /// [Libra2DB::get_transactions]: ../libra2db/struct.Libra2DB.html#method.get_transactions
+        /// [CreditChainDB::get_transactions]: ../creditchaindb/struct.CreditChainDB.html#method.get_transactions
         fn get_transactions(
             &self,
             start_version: Version,
@@ -141,9 +141,9 @@ pub trait DbReader: Send + Sync {
             fetch_events: bool,
         ) -> Result<TransactionListWithProofV2>;
 
-        /// See [Libra2DB::get_transaction_by_hash].
+        /// See [CreditChainDB::get_transaction_by_hash].
         ///
-        /// [Libra2DB::get_transaction_by_hash]: ../libra2db/struct.Libra2DB.html#method.get_transaction_by_hash
+        /// [CreditChainDB::get_transaction_by_hash]: ../creditchaindb/struct.CreditChainDB.html#method.get_transaction_by_hash
         fn get_transaction_by_hash(
             &self,
             hash: HashValue,
@@ -151,9 +151,9 @@ pub trait DbReader: Send + Sync {
             fetch_events: bool,
         ) -> Result<Option<TransactionWithProof>>;
 
-        /// See [Libra2DB::get_transaction_by_version].
+        /// See [CreditChainDB::get_transaction_by_version].
         ///
-        /// [Libra2DB::get_transaction_by_version]: ../libra2db/struct.Libra2DB.html#method.get_transaction_by_version
+        /// [CreditChainDB::get_transaction_by_version]: ../creditchaindb/struct.CreditChainDB.html#method.get_transaction_by_version
         fn get_transaction_by_version(
             &self,
             version: Version,
@@ -166,33 +166,33 @@ pub trait DbReader: Send + Sync {
             version: Version,
         ) -> Result<Option<TransactionAuxiliaryData>>;
 
-        /// See [Libra2DB::get_persisted_auxiliary_info_iterator].
+        /// See [CreditChainDB::get_persisted_auxiliary_info_iterator].
         ///
-        /// [Libra2DB::get_persisted_auxiliary_info_iterator]: ../libra2db/struct.Libra2DB.html#method.get_persisted_auxiliary_info_iterator
+        /// [CreditChainDB::get_persisted_auxiliary_info_iterator]: ../creditchaindb/struct.CreditChainDB.html#method.get_persisted_auxiliary_info_iterator
         fn get_persisted_auxiliary_info_iterator(
             &self,
             start_version: Version,
             num_persisted_auxiliary_info: usize,
         ) -> Result<Box<dyn Iterator<Item = Result<PersistedAuxiliaryInfo>> + '_>>;
 
-        /// See [Libra2DB::get_first_txn_version].
+        /// See [CreditChainDB::get_first_txn_version].
         ///
-        /// [Libra2DB::get_first_txn_version]: ../libra2db/struct.Libra2DB.html#method.get_first_txn_version
+        /// [CreditChainDB::get_first_txn_version]: ../creditchaindb/struct.CreditChainDB.html#method.get_first_txn_version
         fn get_first_txn_version(&self) -> Result<Option<Version>>;
 
-        /// See [Libra2DB::get_first_viable_block].
+        /// See [CreditChainDB::get_first_viable_block].
         ///
-        /// [Libra2DB::get_first_viable_block]: ../libra2db/struct.Libra2DB.html#method.get_first_viable_block
+        /// [CreditChainDB::get_first_viable_block]: ../creditchaindb/struct.CreditChainDB.html#method.get_first_viable_block
         fn get_first_viable_block(&self) -> Result<(Version, BlockHeight)>;
 
-        /// See [Libra2DB::get_first_write_set_version].
+        /// See [CreditChainDB::get_first_write_set_version].
         ///
-        /// [Libra2DB::get_first_write_set_version]: ../libra2db/struct.Libra2DB.html#method.get_first_write_set_version
+        /// [CreditChainDB::get_first_write_set_version]: ../creditchaindb/struct.CreditChainDB.html#method.get_first_write_set_version
         fn get_first_write_set_version(&self) -> Result<Option<Version>>;
 
-        /// See [Libra2DB::get_transaction_outputs].
+        /// See [CreditChainDB::get_transaction_outputs].
         ///
-        /// [Libra2DB::get_transaction_outputs]: ../libra2db/struct.Libra2DB.html#method.get_transaction_outputs
+        /// [CreditChainDB::get_transaction_outputs]: ../creditchaindb/struct.CreditChainDB.html#method.get_transaction_outputs
         fn get_transaction_outputs(
             &self,
             start_version: Version,
@@ -241,13 +241,13 @@ pub trait DbReader: Send + Sync {
             ledger_version: Version,
         ) -> Result<TransactionAccumulatorRangeProof>;
 
-        /// See [Libra2DB::get_block_timestamp].
+        /// See [CreditChainDB::get_block_timestamp].
         ///
-        /// [Libra2DB::get_block_timestamp]:
-        /// ../libra2db/struct.Libra2DB.html#method.get_block_timestamp
+        /// [CreditChainDB::get_block_timestamp]:
+        /// ../creditchaindb/struct.CreditChainDB.html#method.get_block_timestamp
         fn get_block_timestamp(&self, version: Version) -> Result<u64>;
 
-        /// See `Libra2DB::get_latest_block_events`.
+        /// See `CreditChainDB::get_latest_block_events`.
         fn get_latest_block_events(&self, num_events: usize) -> Result<Vec<EventWithVersion>>;
 
         /// Returns the start_version, end_version and NewBlockEvent of the block containing the input
@@ -358,10 +358,10 @@ pub trait DbReader: Send + Sync {
         fn get_state_proof(&self, known_version: u64) -> Result<StateProof>;
 
         /// Gets the state value by state key at version.
-        /// See [Libra2DB::get_state_value_by_version].
+        /// See [CreditChainDB::get_state_value_by_version].
         ///
-        /// [Libra2DB::get_state_value_by_version]:
-        /// ../libra2db/struct.Libra2DB.html#method.get_state_value_by_version
+        /// [CreditChainDB::get_state_value_by_version]:
+        /// ../creditchaindb/struct.CreditChainDB.html#method.get_state_value_by_version
         fn get_state_value_by_version(
             &self,
             state_key: &StateKey,
@@ -370,10 +370,10 @@ pub trait DbReader: Send + Sync {
 
         /// Get the latest state value and its corresponding version when it's of the given key up
         /// to the given version.
-        /// See [Libra2DB::get_state_value_with_version_by_version].
+        /// See [CreditChainDB::get_state_value_with_version_by_version].
         ///
-        /// [Libra2DB::get_state_value_with_version_by_version]:
-        /// ../libra2db/struct.Libra2DB.html#method.get_state_value_with_version_by_version
+        /// [CreditChainDB::get_state_value_with_version_by_version]:
+        /// ../creditchaindb/struct.CreditChainDB.html#method.get_state_value_with_version_by_version
         fn get_state_value_with_version_by_version(
             &self,
             state_key: &StateKey,
@@ -390,10 +390,10 @@ pub trait DbReader: Send + Sync {
 
         /// Gets a state value by state key along with the proof, out of the ledger state indicated by the state
         /// Merkle tree root with a sparse merkle proof proving state tree root.
-        /// See [Libra2DB::get_account_state_with_proof_by_version].
+        /// See [CreditChainDB::get_account_state_with_proof_by_version].
         ///
-        /// [Libra2DB::get_account_state_with_proof_by_version]:
-        /// ../libra2db/struct.Libra2DB.html#method.get_account_state_with_proof_by_version
+        /// [CreditChainDB::get_account_state_with_proof_by_version]:
+        /// ../creditchaindb/struct.CreditChainDB.html#method.get_account_state_with_proof_by_version
         ///
         /// This is used by libra2 core (executor) internally.
         fn get_state_value_with_proof_by_version_ext(
@@ -492,7 +492,7 @@ pub trait DbReader: Send + Sync {
     /// Returns the latest ledger info.
     fn get_latest_ledger_info(&self) -> Result<LedgerInfoWithSignatures> {
         self.get_latest_ledger_info_option().and_then(|opt| {
-            opt.ok_or_else(|| Libra2DbError::Other("Latest LedgerInfo not found.".to_string()))
+            opt.ok_or_else(|| CreditChainDbError::Other("Latest LedgerInfo not found.".to_string()))
         })
     }
 
@@ -521,7 +521,7 @@ pub trait DbReader: Send + Sync {
 
     fn ensure_synced_version(&self) -> Result<Version> {
         self.get_synced_version()?
-            .ok_or_else(|| Libra2DbError::NotFound("Synced version not found.".to_string()))
+            .ok_or_else(|| CreditChainDbError::NotFound("Synced version not found.".to_string()))
     }
 
     fn expect_synced_version(&self) -> Version {
@@ -531,12 +531,12 @@ pub trait DbReader: Send + Sync {
 
     fn ensure_pre_committed_version(&self) -> Result<Version> {
         self.get_pre_committed_version()?
-            .ok_or_else(|| Libra2DbError::NotFound("Pre-committed version not found.".to_string()))
+            .ok_or_else(|| CreditChainDbError::NotFound("Pre-committed version not found.".to_string()))
     }
 }
 
 /// Trait that is implemented by a DB that supports certain public (to client) write APIs
-/// expected of an Libra2 DB. This adds write APIs to DbReader.
+/// expected of an CreditChain DB. This adds write APIs to DbReader.
 #[allow(unused_variables)]
 pub trait DbWriter: Send + Sync {
     /// Get a (stateful) state snapshot receiver.
@@ -697,21 +697,21 @@ pub fn jmt_update_refs<K>(
 #[macro_export]
 macro_rules! db_anyhow {
     ($($arg:tt)*) => {
-        Libra2DbError::Other(format!($($arg)*))
+        CreditChainDbError::Other(format!($($arg)*))
     };
 }
 
 #[macro_export]
 macro_rules! db_not_found_bail {
     ($($arg:tt)*) => {
-        return Err(Libra2DbError::NotFound(format!($($arg)*)))
+        return Err(CreditChainDbError::NotFound(format!($($arg)*)))
     };
 }
 
 #[macro_export]
 macro_rules! db_other_bail {
     ($($arg:tt)*) => {
-        return Err(Libra2DbError::Other(format!($($arg)*)))
+        return Err(CreditChainDbError::Other(format!($($arg)*)))
     };
 }
 
@@ -719,7 +719,7 @@ macro_rules! db_other_bail {
 macro_rules! db_ensure {
     ($cond:expr, $($arg:tt)*) => {
         if !$cond {
-            return Err(Libra2DbError::Other(format!($($arg)*)));
+            return Err(CreditChainDbError::Other(format!($($arg)*)));
         }
     };
 }

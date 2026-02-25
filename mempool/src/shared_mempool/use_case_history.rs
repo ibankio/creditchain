@@ -1,9 +1,9 @@
 // Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_logger::info;
-use libra2_mempool_notifications::CommittedTransaction;
-use libra2_types::transaction::use_case::UseCaseKey;
+use creditchain_logger::info;
+use creditchain_mempool_notifications::CommittedTransaction;
+use creditchain_types::transaction::use_case::UseCaseKey;
 use std::{
     cmp::Ordering,
     collections::{BinaryHeap, HashMap, VecDeque},
@@ -119,7 +119,7 @@ impl PartialOrd for UseCaseByCount {
 
 #[test]
 fn test_use_case_history() {
-    use libra2_types::{account_address::AccountAddress, transaction::ReplayProtector};
+    use creditchain_types::{account_address::AccountAddress, transaction::ReplayProtector};
     let ct = |use_case: UseCaseKey| -> CommittedTransaction {
         CommittedTransaction {
             sender: AccountAddress::ONE,

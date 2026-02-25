@@ -10,10 +10,10 @@ use crate::{
         utils,
     },
 };
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::config::StorageServiceConfig;
-use libra2_storage_service_notifications::StorageServiceNotificationSender;
-use libra2_storage_service_types::{
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::config::StorageServiceConfig;
+use creditchain_storage_service_notifications::StorageServiceNotificationSender;
+use creditchain_storage_service_types::{
     requests::DataRequest,
     responses::{
         CompleteDataRange, DataResponse, DataSummary, ProtocolMetadata, StorageServerSummary,
@@ -21,7 +21,7 @@ use libra2_storage_service_types::{
     },
     StorageServiceError,
 };
-use libra2_types::{ledger_info::LedgerInfoWithSignatures, transaction::Version};
+use creditchain_types::{ledger_info::LedgerInfoWithSignatures, transaction::Version};
 use arc_swap::ArcSwap;
 use futures::StreamExt;
 use std::{ops::Deref, sync::Arc, time::Duration};
@@ -55,7 +55,7 @@ async fn test_refresh_cached_storage_summary() {
 
     // Create the cached summary update notifier
     let (cached_summary_update_notifier, mut cached_summary_update_listener) =
-        libra2_channel::new(QueueStyle::FIFO, 1, None);
+        creditchain_channel::new(QueueStyle::FIFO, 1, None);
 
     // Refresh the storage summary cache
     refresh_cached_storage_summary(

@@ -1,5 +1,5 @@
 [package]
-name = "libra2-api-test-context"
+name = "creditchain-api-test-context"
 description = "CreditChain API test context"
 version = "0.2.0"
 
@@ -13,26 +13,26 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-api = { workspace = true }
-libra2-api-types = { workspace = true }
-libra2-cached-packages = { workspace = true }
-libra2-config = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-db = { workspace = true, features = ["fuzzing"] }
-libra2-executor = { workspace = true }
-libra2-executor-types = { workspace = true }
-libra2-framework = { workspace = true }
-libra2-genesis = { workspace = true }
-libra2-indexer-grpc-table-info = { workspace = true }
-libra2-mempool = { workspace = true, features = ["fuzzing"] }
-libra2-mempool-notifications = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
-libra2-vm-logging = { workspace = true }
-libra2-vm-validator = { workspace = true }
+creditchain-api = { workspace = true }
+creditchain-api-types = { workspace = true }
+creditchain-cached-packages = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-db = { workspace = true, features = ["fuzzing"] }
+creditchain-executor = { workspace = true }
+creditchain-executor-types = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-genesis = { workspace = true }
+creditchain-indexer-grpc-table-info = { workspace = true }
+creditchain-mempool = { workspace = true, features = ["fuzzing"] }
+creditchain-mempool-notifications = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
+creditchain-vm-logging = { workspace = true }
+creditchain-vm-validator = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
 goldenfile = { workspace = true }

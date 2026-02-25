@@ -9,15 +9,15 @@ import pathlib
 ROOT = pathlib.Path(__file__).absolute().parents[2]
 
 # Specifies directories for regular packages.
-# Paths are relative to the root of the libra2-core repository.
+# Paths are relative to the root of the creditchain-core repository.
 PACKAGES = [
     "testsuite/benchmark-workloads/packages",
-    "libra2-move/move-examples/token_objects/ambassador",
-    "libra2-move/move-examples/aggregator_examples",
-    "libra2-move/move-examples/bcs-stream"
+    "creditchain-move/move-examples/token_objects/ambassador",
+    "creditchain-move/move-examples/aggregator_examples",
+    "creditchain-move/move-examples/bcs-stream"
 ]
 # Specifies directories for experimental packages (will be compiled with latest, possibly unstable) language version.
-# Paths are relative to the root of the libra2-core repository.
+# Paths are relative to the root of the creditchain-core repository.
 EXPERIMENTAL_PACKAGES = [
     "testsuite/benchmark-workloads/packages-experimental/experimental_usecases",
 ]

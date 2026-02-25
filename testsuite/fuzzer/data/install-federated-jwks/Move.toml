@@ -8,9 +8,9 @@ named_addr = "0xFED"
 
 [dev-addresses]
 
-[dependencies.Libra2Framework]
-git = "https://github.com/libra2org/libra2-core.git"
+[dependencies.CreditChainFramework]
+git = "https://github.com/creditchainorg/creditchain-core.git"
 rev = "mainnet"
-subdir = "libra2-move/framework/libra2-framework"
+subdir = "creditchain-move/framework/creditchain-framework"
 
 [dev-dependencies]

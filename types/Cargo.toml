@@ -1,5 +1,5 @@
 [package]
-name = "libra2-types"
+name = "creditchain-types"
 description = "CreditChain core types"
 version = "0.0.4"
 
@@ -14,11 +14,11 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-bitvec = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-crypto-derive = { workspace = true }
-libra2-dkg = { workspace = true }
-libra2-infallible = { workspace = true }
+creditchain-bitvec = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-crypto-derive = { workspace = true }
+creditchain-dkg = { workspace = true }
+creditchain-infallible = { workspace = true }
 arbitrary = { workspace = true, features = ["derive"], optional = true }
 ark-bn254 = { workspace = true }
 ark-ec = { workspace = true }
@@ -75,8 +75,8 @@ tracing = { workspace = true }
 
 [dev-dependencies]
 ahash = { workspace = true }
-libra2-crypto = { workspace = true, features = ["fuzzing", "testing"] }
-libra2-proptest-helpers = { workspace = true }
+creditchain-crypto = { workspace = true, features = ["fuzzing", "testing"] }
+creditchain-proptest-helpers = { workspace = true }
 async-trait = { workspace = true }
 ciborium = { workspace = true }
 claims = { workspace = true }
@@ -96,8 +96,8 @@ url = { workspace = true }
 
 [features]
 default = []
-testing = ["libra2-crypto/fuzzing"]
-fuzzing = ["proptest", "proptest-derive", "libra2-crypto/fuzzing", "move-core-types/fuzzing", "arbitrary"]
+testing = ["creditchain-crypto/fuzzing"]
+fuzzing = ["proptest", "proptest-derive", "creditchain-crypto/fuzzing", "move-core-types/fuzzing", "arbitrary"]
 
 [[bench]]
 name = "keyless"

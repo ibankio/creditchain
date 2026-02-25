@@ -4,7 +4,7 @@
 // This is required because a diesel macro makes clippy sad
 #![allow(clippy::extra_unused_lifetimes)]
 
-use libra2_indexer_processor_sdk::libra2_protos::transaction::v1::{
+use libra2_indexer_processor_sdk::creditchain_protos::transaction::v1::{
     transaction::TxnData, Transaction,
 };
 use hex;

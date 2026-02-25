@@ -3,8 +3,8 @@
 
 use super::publish_util::Package;
 use crate::publishing::prebuild_packages::PrebuiltPackagesBundle;
-use libra2_framework::natives::code::PackageMetadata;
-use libra2_sdk::{
+use creditchain_framework::natives::code::PackageMetadata;
+use creditchain_sdk::{
     move_types::{
         account_address::AccountAddress, identifier::Identifier, language_storage::ModuleId,
     },

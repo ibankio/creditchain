@@ -11,7 +11,7 @@ use crate::{
     models::processor_statuses::ProcessorStatusModel,
     schema,
 };
-use libra2_api_types::Transaction;
+use creditchain_api_types::Transaction;
 use async_trait::async_trait;
 use diesel::{pg::upsert::excluded, prelude::*};
 use field_count::FieldCount;
@@ -52,7 +52,7 @@ pub trait TransactionProcessor: Send + Sync + Debug {
                 },
                 Err(err) => {
                     UNABLE_TO_GET_CONNECTION.inc();
-                    libra2_logger::error!(
+                    creditchain_logger::error!(
                         "Could not get DB connection from pool, will retry in {:?}. Err: {:?}",
                         pool.connection_timeout(),
                         err
@@ -92,7 +92,7 @@ pub trait TransactionProcessor: Send + Sync + Debug {
 
     /// Writes that a version has been started for this `TransactionProcessor` to the DB
     fn mark_versions_started(&self, start_version: u64, end_version: u64) {
-        libra2_logger::debug!(
+        creditchain_logger::debug!(
             "[{}] Marking processing versions started from versions {} to {}",
             self.name(),
             start_version,
@@ -110,7 +110,7 @@ pub trait TransactionProcessor: Send + Sync + Debug {
 
     /// Writes that a version has been completed successfully for this `TransactionProcessor` to the DB
     fn update_status_success(&self, processing_result: &ProcessingResult) {
-        libra2_logger::debug!(
+        creditchain_logger::debug!(
             "[{}] Marking processing version OK from versions {} to {}",
             self.name(),
             processing_result.start_version,
@@ -132,7 +132,7 @@ pub trait TransactionProcessor: Send + Sync + Debug {
 
     /// Writes that a version has errored for this `TransactionProcessor` to the DB
     fn update_status_err(&self, tpe: &TransactionProcessingError) {
-        libra2_logger::debug!(
+        creditchain_logger::debug!(
             "[{}] Marking processing version Err: {:?}",
             self.name(),
             tpe

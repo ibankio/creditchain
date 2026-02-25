@@ -8,11 +8,11 @@ use crate::{
     DbBackedOnChainConfig, Error, EventNotificationListener, EventNotificationSender,
     EventSubscriptionService, ReconfigNotificationListener,
 };
-use libra2_db::Libra2DB;
-use libra2_executor_test_helpers::bootstrap_genesis;
-use libra2_infallible::RwLock;
-use libra2_storage_interface::DbReaderWriter;
-use libra2_types::{
+use creditchain_db::CreditChainDB;
+use creditchain_executor_test_helpers::bootstrap_genesis;
+use creditchain_infallible::RwLock;
+use creditchain_storage_interface::DbReaderWriter;
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::NEW_EPOCH_EVENT_V2_MOVE_TYPE_TAG,
     contract_event::ContractEvent,
@@ -21,7 +21,7 @@ use libra2_types::{
     on_chain_config::OnChainConfig,
     transaction::{Transaction, Version, WriteSetPayload},
 };
-use libra2_vm::libra2_vm::Libra2VMBlockExecutor;
+use creditchain_vm::creditchain_vm::CreditChainVMBlockExecutor;
 use claims::{assert_lt, assert_matches, assert_ok};
 use futures::{FutureExt, StreamExt};
 use move_core_types::language_storage::TypeTag;
@@ -555,16 +555,16 @@ fn create_event_subscription_service() -> EventSubscriptionService {
 
 fn create_database() -> Arc<RwLock<DbReaderWriter>> {
     // Generate a genesis change set
-    let (genesis, _) = libra2_vm_genesis::test_genesis_change_set_and_validators(Some(1));
+    let (genesis, _) = creditchain_vm_genesis::test_genesis_change_set_and_validators(Some(1));
 
     // Create test libra2 database
-    let db_path = libra2_temppath::TempPath::new();
+    let db_path = creditchain_temppath::TempPath::new();
     assert_ok!(db_path.create_as_dir());
-    let (_, db_rw) = DbReaderWriter::wrap(Libra2DB::new_for_test(db_path.path()));
+    let (_, db_rw) = DbReaderWriter::wrap(CreditChainDB::new_for_test(db_path.path()));
 
     // Bootstrap the genesis transaction
     let genesis_txn = Transaction::GenesisTransaction(WriteSetPayload::Direct(genesis));
-    assert_ok!(bootstrap_genesis::<Libra2VMBlockExecutor>(
+    assert_ok!(bootstrap_genesis::<CreditChainVMBlockExecutor>(
         &db_rw,
         &genesis_txn
     ));

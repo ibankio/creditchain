@@ -1,6 +1,6 @@
 module poc::sqr_internal {
-    use libra2_std::crypto_algebra::{Self, Element};
-    use libra2_std::bls12381_algebra::{Fr};
+    use creditchain_std::crypto_algebra::{Self, Element};
+    use creditchain_std::bls12381_algebra::{Fr};
 
     public entry fun main(_owner: &signer) {
         let fr_element: Element<Fr> = crypto_algebra::from_u64<Fr>(3u64);

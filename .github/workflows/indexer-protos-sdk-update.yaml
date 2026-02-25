@@ -99,7 +99,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v3.0.0
         with:
           token: ${{ steps.secrets.outputs.token }}
-          repository: 'libra2org/libra2-indexer-processor-sdk'
+          repository: 'creditchainorg/creditchain-indexer-processor-sdk'
           event-type: 'proto-dependency-update'
           client-payload: '{"commit_hash": "${{ github.sha }}", "branch_name": "${{ steps.commit_hash.outputs.branch_name }}"}'
       - name: Poll for Workflow Run and Wait for Job Completion
@@ -107,7 +107,7 @@ jobs:
           . scripts/indexer_proto_update_status_poll.sh
         env:
           PAT_TOKEN: ${{ steps.secrets.outputs.token }}
-          TARGET_BRANCH: ${{ steps.commit_hash.outputs.branch_name }}-update-libra2-protos-update-sdk
+          TARGET_BRANCH: ${{ steps.commit_hash.outputs.branch_name }}-update-creditchain-protos-update-sdk
       # TOOD: enable this once the forge test is stable.
       # - name: Run Forge Tests
       #   uses: ./.github/workflows/workflow-run-forge

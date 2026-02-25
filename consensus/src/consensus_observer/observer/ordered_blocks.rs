@@ -9,10 +9,10 @@ use crate::consensus_observer::{
     network::observer_message::{CommitDecision, OrderedBlock},
     observer::execution_pool::ObservedOrderedBlock,
 };
-use libra2_config::config::ConsensusObserverConfig;
-use libra2_consensus_types::{common::Round, pipelined_block::PipelinedBlock};
-use libra2_logger::{debug, warn};
-use libra2_types::ledger_info::LedgerInfoWithSignatures;
+use creditchain_config::config::ConsensusObserverConfig;
+use creditchain_consensus_types::{common::Round, pipelined_block::PipelinedBlock};
+use creditchain_logger::{debug, warn};
+use creditchain_types::ledger_info::LedgerInfoWithSignatures;
 use std::{collections::BTreeMap, sync::Arc};
 
 /// A simple struct to store ordered blocks
@@ -218,14 +218,14 @@ impl OrderedBlockStore {
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_consensus_types::{
+    use creditchain_consensus_types::{
         block::Block,
         block_data::{BlockData, BlockType},
         pipelined_block::{OrderedBlockWindow, PipelinedBlock},
         quorum_cert::QuorumCert,
     };
-    use libra2_crypto::HashValue;
-    use libra2_types::{
+    use creditchain_crypto::HashValue;
+    use creditchain_types::{
         aggregate_signature::AggregateSignature, block_info::BlockInfo, ledger_info::LedgerInfo,
         transaction::Version,
     };
@@ -710,7 +710,7 @@ mod test {
             // Create a new block info
             let block_info = BlockInfo::new(
                 epoch,
-                i as libra2_types::block_info::Round,
+                i as creditchain_types::block_info::Round,
                 HashValue::random(),
                 HashValue::random(),
                 i as Version,

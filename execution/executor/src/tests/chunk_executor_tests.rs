@@ -13,11 +13,11 @@ use crate::{
         mock_vm::{encode_mint_transaction, MockVM},
     },
 };
-use libra2_crypto::HashValue;
-use libra2_db::Libra2DB;
-use libra2_executor_types::{BlockExecutorTrait, ChunkExecutorTrait};
-use libra2_storage_interface::DbReaderWriter;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_db::CreditChainDB;
+use creditchain_executor_types::{BlockExecutorTrait, ChunkExecutorTrait};
+use creditchain_storage_interface::DbReaderWriter;
+use creditchain_types::{
     ledger_info::LedgerInfoWithSignatures,
     test_helpers::transaction_test_helpers::{block, TEST_BLOCK_EXECUTOR_ONCHAIN_CONFIG},
     transaction::{TransactionListWithProofV2, Version},
@@ -25,17 +25,17 @@ use libra2_types::{
 use rand::Rng;
 
 pub struct TestExecutor {
-    _path: libra2_temppath::TempPath,
+    _path: creditchain_temppath::TempPath,
     pub db: DbReaderWriter,
     pub executor: ChunkExecutor<MockVM>,
 }
 
 impl TestExecutor {
     pub fn new() -> TestExecutor {
-        let path = libra2_temppath::TempPath::new();
+        let path = creditchain_temppath::TempPath::new();
         path.create_as_dir().unwrap();
-        let db = DbReaderWriter::new(Libra2DB::new_for_test(path.path()));
-        let genesis = libra2_vm_genesis::test_genesis_transaction();
+        let db = DbReaderWriter::new(CreditChainDB::new_for_test(path.path()));
+        let genesis = creditchain_vm_genesis::test_genesis_transaction();
         let waypoint = generate_waypoint::<MockVM>(&db, &genesis).unwrap();
         maybe_bootstrap::<MockVM>(&db, &genesis, waypoint).unwrap();
         let executor = ChunkExecutor::new(db.clone());
@@ -261,7 +261,7 @@ fn test_executor_execute_and_commit_chunk_local_result_mismatch() {
 #[cfg(feature = "consensus-only-perf-test")]
 #[test]
 fn test_executor_execute_and_commit_chunk_without_verify() {
-    use libra2_types::block_executor::config::BlockExecutorConfigFromOnchain;
+    use creditchain_types::block_executor::config::BlockExecutorConfigFromOnchain;
 
     let first_batch_size = 10;
     let second_batch_size = 10;

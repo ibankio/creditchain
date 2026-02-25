@@ -1,0 +1,13 @@
+[package]
+name = "creditchain-abstract-gas-usage"
+version = "0.1.1"
+edition = "2021"
+license = { workspace = true }
+
+[dependencies]
+anyhow = { workspace = true }
+creditchain-gas-algebra = { workspace = true }
+creditchain-gas-meter = { workspace = true }
+creditchain-gas-schedule = { workspace = true }
+creditchain-vm-types = { workspace = true }
+move-binary-format = { workspace = true }

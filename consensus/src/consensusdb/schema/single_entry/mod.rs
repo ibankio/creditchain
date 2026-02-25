@@ -16,7 +16,7 @@
 use super::ensure_slice_len_eq;
 use crate::define_schema;
 use anyhow::{format_err, Result};
-use libra2_schemadb::{
+use creditchain_schemadb::{
     schema::{KeyCodec, ValueCodec},
     ColumnFamilyName,
 };

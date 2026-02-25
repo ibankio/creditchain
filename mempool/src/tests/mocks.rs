@@ -9,15 +9,15 @@ use crate::{
     MempoolClientSender, QuorumStoreRequest,
 };
 use anyhow::{format_err, Result};
-use libra2_channels::{self, libra2_channel, message_queues::QueueStyle};
-use libra2_config::{
+use creditchain_channels::{self, creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::{
     config::{NetworkConfig, NodeConfig},
     network_id::NetworkId,
 };
-use libra2_event_notifications::{ReconfigNotification, ReconfigNotificationListener};
-use libra2_infallible::{Mutex, RwLock};
-use libra2_mempool_notifications::{self, MempoolNotifier};
-use libra2_network::{
+use creditchain_event_notifications::{ReconfigNotification, ReconfigNotificationListener};
+use creditchain_infallible::{Mutex, RwLock};
+use creditchain_mempool_notifications::{self, MempoolNotifier};
+use creditchain_network::{
     application::{
         interface::{NetworkClient, NetworkServiceEvents},
         storage::PeersAndMetadata,
@@ -28,13 +28,13 @@ use libra2_network::{
         wire::handshake::v1::ProtocolId::MempoolDirectSend,
     },
 };
-use libra2_storage_interface::{mock::MockDbReaderWriter, DbReaderWriter};
-use libra2_types::{
+use creditchain_storage_interface::{mock::MockDbReaderWriter, DbReaderWriter};
+use creditchain_types::{
     mempool_status::MempoolStatusCode,
     on_chain_config::{InMemoryOnChainConfig, OnChainConfigPayload},
     transaction::{ReplayProtector, SignedTransaction},
 };
-use libra2_vm_validator::{
+use creditchain_vm_validator::{
     mocks::mock_vm_validator::MockVMValidator, vm_validator::TransactionValidation,
 };
 use futures::channel::mpsc;
@@ -79,7 +79,7 @@ impl MockSharedMempool {
     /// Creates a mock shared mempool and runtime
     pub fn new_with_runtime() -> Self {
         // Create a runtime
-        let runtime = libra2_runtimes::spawn_named_runtime("shared-mem".into(), None);
+        let runtime = creditchain_runtimes::spawn_named_runtime("shared-mem".into(), None);
         let _entered_runtime = runtime.enter();
 
         // Create and return the shared mempool
@@ -119,9 +119,9 @@ impl MockSharedMempool {
         config.validator_network = Some(NetworkConfig::network_with_id(NetworkId::Validator));
 
         let mempool = Arc::new(Mutex::new(CoreMempool::new(&config)));
-        let (network_reqs_tx, _network_reqs_rx) = libra2_channel::new(QueueStyle::FIFO, 8, None);
-        let (connection_reqs_tx, _) = libra2_channel::new(QueueStyle::FIFO, 8, None);
-        let (_network_notifs_tx, network_notifs_rx) = libra2_channel::new(QueueStyle::FIFO, 8, None);
+        let (network_reqs_tx, _network_reqs_rx) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
+        let (connection_reqs_tx, _) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
+        let (_network_notifs_tx, network_notifs_rx) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
         let network_sender = NetworkSender::new(
             PeerManagerRequestSender::new(network_reqs_tx),
             ConnectionRequestSender::new(connection_reqs_tx),
@@ -130,8 +130,8 @@ impl MockSharedMempool {
         let (ac_client, client_events) = mpsc::channel(1_024);
         let (quorum_store_sender, quorum_store_receiver) = mpsc::channel(1_024);
         let (mempool_notifier, mempool_listener) =
-            libra2_mempool_notifications::new_mempool_notifier_listener_pair(100);
-        let (reconfig_sender, reconfig_events) = libra2_channel::new(QueueStyle::LIFO, 1, None);
+            creditchain_mempool_notifications::new_mempool_notifier_listener_pair(100);
+        let (reconfig_sender, reconfig_events) = creditchain_channel::new(QueueStyle::LIFO, 1, None);
         let reconfig_event_subscriber = ReconfigNotificationListener {
             notification_receiver: reconfig_events,
         };

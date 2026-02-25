@@ -12,7 +12,7 @@ use crate::{
     CheckSummary,
 };
 use anyhow::Result;
-use libra2_logger::{error, info, warn};
+use creditchain_logger::{error, info, warn};
 use async_trait::async_trait;
 use futures::future::try_join_all;
 use serde::{Deserialize, Serialize};

@@ -4,13 +4,13 @@
 
 #![forbid(unsafe_code)]
 use anyhow::{anyhow, Result};
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_id_generator::{IdGenerator, U64IdGenerator};
-use libra2_infallible::RwLock;
-use libra2_storage_interface::{
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_id_generator::{IdGenerator, U64IdGenerator};
+use creditchain_infallible::RwLock;
+use creditchain_storage_interface::{
     state_store::state_view::db_state_view::DbStateViewAtVersion, DbReader, DbReaderWriter,
 };
-use libra2_types::{
+use creditchain_types::{
     contract_event::ContractEvent,
     event::EventKey,
     on_chain_config::{
@@ -118,7 +118,7 @@ impl EventSubscriptionService {
         }
 
         let (notification_sender, notification_receiver) =
-            libra2_channel::new(QueueStyle::KLAST, EVENT_NOTIFICATION_CHANNEL_SIZE, None);
+            creditchain_channel::new(QueueStyle::KLAST, EVENT_NOTIFICATION_CHANNEL_SIZE, None);
 
         // Create a new event subscription
         let subscription_id = self.get_new_subscription_id();
@@ -173,7 +173,7 @@ impl EventSubscriptionService {
         &mut self,
     ) -> Result<ReconfigNotificationListener<DbBackedOnChainConfig>, Error> {
         let (notification_sender, notification_receiver) =
-            libra2_channel::new(QueueStyle::KLAST, RECONFIG_NOTIFICATION_CHANNEL_SIZE, None);
+            creditchain_channel::new(QueueStyle::KLAST, RECONFIG_NOTIFICATION_CHANNEL_SIZE, None);
 
         // Create a new reconfiguration subscription
         let subscription_id = self.get_new_subscription_id();
@@ -339,7 +339,7 @@ type SubscriptionId = u64;
 #[derive(Debug)]
 struct EventSubscription {
     pub event_buffer: Vec<ContractEvent>,
-    pub notification_sender: libra2_channels::libra2_channel::Sender<(), EventNotification>,
+    pub notification_sender: creditchain_channels::creditchain_channel::Sender<(), EventNotification>,
 }
 
 impl EventSubscription {
@@ -363,7 +363,7 @@ impl EventSubscription {
 /// corresponding notifications.
 struct ReconfigSubscription {
     pub notification_sender:
-        libra2_channels::libra2_channel::Sender<(), ReconfigNotification<DbBackedOnChainConfig>>,
+        creditchain_channels::creditchain_channel::Sender<(), ReconfigNotification<DbBackedOnChainConfig>>,
 }
 
 impl ReconfigSubscription {
@@ -442,7 +442,7 @@ pub type ReconfigNotificationListener<P> = NotificationListener<ReconfigNotifica
 /// The component responsible for listening to subscription notifications.
 #[derive(Debug)]
 pub struct NotificationListener<T> {
-    pub notification_receiver: libra2_channels::libra2_channel::Receiver<(), T>,
+    pub notification_receiver: creditchain_channels::creditchain_channel::Receiver<(), T>,
 }
 
 impl<T> Stream for NotificationListener<T> {

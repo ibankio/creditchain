@@ -1,6 +1,6 @@
 [package]
-name = "libra2-transaction-emitter-lib"
-description = "Library for Libra2 transaction emitter"
+name = "creditchain-transaction-emitter-lib"
+description = "Library for CreditChain transaction emitter"
 version = "0.0.1"
 
 # Workspace inherited keys
@@ -15,15 +15,15 @@ rust-version = { workspace = true }
 [dependencies]
 again = { workspace = true }
 anyhow = { workspace = true }
-libra2-config = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-rest-client = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-transaction-generator-lib = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-transaction-generator-lib = { workspace = true }
+creditchain-types = { workspace = true }
 async-trait = { workspace = true }
 base64 = { workspace = true }
 clap = { workspace = true }

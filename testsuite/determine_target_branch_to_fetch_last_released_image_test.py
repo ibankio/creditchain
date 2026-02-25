@@ -30,7 +30,7 @@ class TestDetermineTargetBranch(unittest.TestCase):
         self.assertEqual(result, "aptos-release-v1.19")
 
     @patch("determine_target_branch_to_fetch_last_released_image.git")
-    def test_determine_target_branch_to_fetch_last_released_image_libra2_release(
+    def test_determine_target_branch_to_fetch_last_released_image_creditchain_release(
         self, mock_git
     ):
         """Test case for determining target branch when the base branch is an aptos-release-vX.Y branch."""

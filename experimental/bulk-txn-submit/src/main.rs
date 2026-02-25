@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{Context, Result};
-use libra2_experimental_bulk_txn_submit::{
+use creditchain_experimental_bulk_txn_submit::{
     coordinator::{
         create_sample_addresses, execute_return_worker_funds, execute_submit,
         CreateSampleAddresses, SanitizeAddresses, SubmitArgs,
@@ -12,9 +12,9 @@ use libra2_experimental_bulk_txn_submit::{
         TransferAptSignedTransactionBuilder,
     },
 };
-use libra2_logger::{Level, Logger};
-use libra2_sdk::move_types::account_address::AccountAddress;
-use libra2_transaction_emitter_lib::Cluster;
+use creditchain_logger::{Level, Logger};
+use creditchain_sdk::move_types::account_address::AccountAddress;
+use creditchain_transaction_emitter_lib::Cluster;
 use clap::{Parser, Subcommand};
 use rand::{seq::SliceRandom, thread_rng};
 use std::collections::HashSet;
@@ -46,9 +46,9 @@ pub struct Submit {
 
 #[derive(Subcommand, Debug)]
 pub enum WorkTypeSubcommand {
-    /// Executes coin::transfer<Libra2Coin> with given file providing list of destinations
+    /// Executes coin::transfer<CreditChainCoin> with given file providing list of destinations
     TransferApt(TransferArg),
-    /// Executes libra2_account::transfer with given file providing list of destinations
+    /// Executes creditchain_account::transfer with given file providing list of destinations
     CreateAndTransferApt(TransferArg),
     /// Returns all leftover funds on the workers to the main source account
     ReturnWorkerFunds,

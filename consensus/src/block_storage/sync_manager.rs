@@ -25,7 +25,7 @@ use crate::{
     util::calculate_window_start_round,
 };
 use anyhow::{anyhow, bail, ensure, Context};
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block::Block,
     block_retrieval::{
         BlockRetrievalRequest, BlockRetrievalRequestV1, BlockRetrievalRequestV2,
@@ -37,10 +37,10 @@ use libra2_consensus_types::{
     sync_info::SyncInfo,
     wrapped_ledger_info::WrappedLedgerInfo,
 };
-use libra2_crypto::HashValue;
-use libra2_infallible::Mutex;
-use libra2_logger::prelude::*;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_infallible::Mutex;
+use creditchain_logger::prelude::*;
+use creditchain_types::{
     account_address::AccountAddress, epoch_change::EpochChangeProof,
     ledger_info::LedgerInfoWithSignatures,
 };

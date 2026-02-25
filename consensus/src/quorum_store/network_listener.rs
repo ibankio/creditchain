@@ -9,14 +9,14 @@ use crate::{
     },
     round_manager::VerifiedEvent,
 };
-use libra2_channels::libra2_channel;
-use libra2_logger::prelude::*;
-use libra2_types::PeerId;
+use creditchain_channels::creditchain_channel;
+use creditchain_logger::prelude::*;
+use creditchain_types::PeerId;
 use futures::StreamExt;
 use tokio::sync::mpsc::Sender;
 
 pub(crate) struct NetworkListener {
-    network_msg_rx: libra2_channel::Receiver<PeerId, (PeerId, VerifiedEvent)>,
+    network_msg_rx: creditchain_channel::Receiver<PeerId, (PeerId, VerifiedEvent)>,
     proof_coordinator_tx: Sender<ProofCoordinatorCommand>,
     remote_batch_coordinator_tx: Vec<Sender<BatchCoordinatorCommand>>,
     proof_manager_tx: Sender<ProofManagerCommand>,
@@ -24,7 +24,7 @@ pub(crate) struct NetworkListener {
 
 impl NetworkListener {
     pub(crate) fn new(
-        network_msg_rx: libra2_channel::Receiver<PeerId, (PeerId, VerifiedEvent)>,
+        network_msg_rx: creditchain_channel::Receiver<PeerId, (PeerId, VerifiedEvent)>,
         proof_coordinator_tx: Sender<ProofCoordinatorCommand>,
         remote_batch_coordinator_tx: Vec<Sender<BatchCoordinatorCommand>>,
         proof_manager_tx: Sender<ProofManagerCommand>,

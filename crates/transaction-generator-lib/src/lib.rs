@@ -4,11 +4,11 @@
 #![forbid(unsafe_code)]
 
 use anyhow::Result;
-use libra2_infallible::{RwLock, RwLockWriteGuard};
-use libra2_logger::{sample, sample::SampleRate};
-use libra2_sdk::{
+use creditchain_infallible::{RwLock, RwLockWriteGuard};
+use creditchain_logger::{sample, sample::SampleRate};
+use creditchain_sdk::{
     move_types::account_address::AccountAddress,
-    transaction_builder::{libra2_stdlib, TransactionFactory},
+    transaction_builder::{creditchain_stdlib, TransactionFactory},
     types::{transaction::SignedTransaction, LocalAccount},
 };
 use async_trait::async_trait;
@@ -554,9 +554,9 @@ pub fn create_account_transaction(
 ) -> SignedTransaction {
     from.sign_with_transaction_builder(txn_factory.payload(
         if creation_balance > 0 {
-            libra2_stdlib::libra2_account_transfer(to, creation_balance)
+            creditchain_stdlib::creditchain_account_transfer(to, creation_balance)
         } else {
-            libra2_stdlib::libra2_account_create_account(to)
+            creditchain_stdlib::creditchain_account_create_account(to)
         },
     ))
 }

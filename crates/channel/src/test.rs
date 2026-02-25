@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate as channel;
-use libra2_metrics_core::IntGauge;
+use creditchain_metrics_core::IntGauge;
 use futures::{
     executor::block_on,
     task::{noop_waker, Context, Poll},

@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_api_types::{
+use creditchain_api_types::{
     transaction::ValidatorTransaction as ApiValidatorTransactionEnum, AccountSignature,
     DeleteModule, DeleteResource, Ed25519Signature, EntryFunctionId, EntryFunctionPayload, Event,
     GenesisPayload, MoveAbility, MoveFunction, MoveFunctionGenericTypeParam,
@@ -11,9 +11,9 @@ use libra2_api_types::{
     SingleKeySignature, Transaction, TransactionInfo, TransactionPayload, TransactionSignature,
     WriteSet, WriteSetChange,
 };
-use libra2_bitvec::BitVec;
-use libra2_logger::warn;
-use libra2_protos::{
+use creditchain_bitvec::BitVec;
+use creditchain_logger::warn;
+use creditchain_protos::{
     transaction::v1::{
         self as transaction, any_signature,
         validator_transaction::{
@@ -27,7 +27,7 @@ use libra2_protos::{
     },
     util::timestamp,
 };
-use libra2_types::jwks::jwk::JWK;
+use creditchain_types::jwks::jwk::JWK;
 use hex;
 use move_core_types::ability::Ability;
 use std::time::Duration;
@@ -525,7 +525,7 @@ pub fn convert_multisig_payload(
 }
 
 pub fn convert_event(event: &Event) -> transaction::Event {
-    let event_key: libra2_types::event::EventKey = event.guid.into();
+    let event_key: creditchain_types::event::EventKey = event.guid.into();
     transaction::Event {
         key: Some(transaction::EventKey {
             creation_number: event_key.get_creation_number(),
@@ -922,7 +922,7 @@ pub fn convert_transaction(
 }
 
 fn convert_validator_transaction(
-    api_validator_txn: &libra2_api_types::transaction::ValidatorTransaction,
+    api_validator_txn: &creditchain_api_types::transaction::ValidatorTransaction,
 ) -> transaction::transaction::TxnData {
     transaction::transaction::TxnData::Validator(transaction::ValidatorTransaction {
         validator_transaction_type: match api_validator_txn {
@@ -982,7 +982,7 @@ fn convert_validator_transaction(
                                             }).collect(),
                                         }
                                     ),
-                                    multi_sig: Some(libra2_protos::transaction::v1::validator_transaction::observed_jwk_update::ExportedAggregateSignature {
+                                    multi_sig: Some(creditchain_protos::transaction::v1::validator_transaction::observed_jwk_update::ExportedAggregateSignature {
                                         signer_indices: observed_jwk_update.quorum_certified_update.multi_sig.signer_indices.clone().into_iter().map(|i| i as u64).collect(),
                                         sig: match &observed_jwk_update.quorum_certified_update.multi_sig.sig {
                                             Some(sig) =>  sig.0.clone(),

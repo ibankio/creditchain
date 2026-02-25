@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{smoke_test_environment::SwarmBuilder, txn_emitter::generate_traffic};
-use libra2_api_types::ViewFunction;
-use libra2_forge::{args::TransactionTypeArg, NodeExt};
-use libra2_types::on_chain_config::{
+use creditchain_api_types::ViewFunction;
+use creditchain_forge::{args::TransactionTypeArg, NodeExt};
+use creditchain_types::on_chain_config::{
     BlockGasLimitType, ExecutionConfigV4, OnChainExecutionConfig, TransactionDeduperType,
     TransactionShufflerType,
 };

@@ -3,7 +3,7 @@
 
 use crate::{create_emitter_and_request, LoadDestination, NetworkLoadTest};
 use anyhow::Context;
-use libra2_forge::{
+use creditchain_forge::{
     args::TransactionTypeArg,
     emitter::NumAccountsMode,
     prometheus_metrics::{LatencyBreakdown, LatencyBreakdownSlice, MetricSamples},
@@ -383,8 +383,8 @@ impl NetworkTest for LoadVsPerfBenchmark {
             }
 
             // Note: uncomment below to perform reconfig during a test
-            // let mut libra2_info = ctx.swarm().libra2_public_info();
-            // runtime.block_on(libra2_info.reconfig());
+            // let mut creditchain_info = ctx.swarm().creditchain_public_info();
+            // runtime.block_on(creditchain_info.reconfig());
         }
 
         let table = to_table(self.workloads.type_name(), &results);

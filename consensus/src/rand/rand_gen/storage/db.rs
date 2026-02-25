@@ -15,8 +15,8 @@ use crate::{
     },
 };
 use anyhow::Result;
-use libra2_logger::info;
-use libra2_schemadb::{batch::SchemaBatch, schema::Schema, Options, DB};
+use creditchain_logger::info;
+use creditchain_schemadb::{batch::SchemaBatch, schema::Schema, Options, DB};
 use std::{path::Path, sync::Arc, time::Instant};
 
 pub struct RandDb {

@@ -11,15 +11,15 @@ use crate::{
         utils::{MempoolProxy, TimeExpirations},
     },
 };
-use libra2_config::config::QuorumStoreConfig;
-use libra2_consensus_types::{
+use creditchain_config::config::QuorumStoreConfig;
+use creditchain_consensus_types::{
     common::{TransactionInProgress, TransactionSummary},
     proof_of_store::BatchInfo,
 };
-use libra2_experimental_runtimes::thread_manager::optimal_min_len;
-use libra2_logger::prelude::*;
-use libra2_mempool::QuorumStoreRequest;
-use libra2_types::{quorum_store::BatchId, transaction::SignedTransaction, PeerId};
+use creditchain_experimental_runtimes::thread_manager::optimal_min_len;
+use creditchain_logger::prelude::*;
+use creditchain_mempool::QuorumStoreRequest;
+use creditchain_types::{quorum_store::BatchId, transaction::SignedTransaction, PeerId};
 use futures_channel::mpsc::Sender;
 use rayon::prelude::*;
 use std::{
@@ -92,7 +92,7 @@ impl BatchGenerator {
             id.increment();
             id
         } else {
-            BatchId::new(libra2_infallible::duration_since_epoch().as_micros() as u64)
+            BatchId::new(creditchain_infallible::duration_since_epoch().as_micros() as u64)
         };
         debug!("Initialized with batch_id of {}", batch_id);
         let mut incremented_batch_id = batch_id;
@@ -363,7 +363,7 @@ impl BatchGenerator {
         counters::BATCH_CREATION_DURATION.observe_duration(self.last_end_batch_time.elapsed());
 
         let bucket_compute_start = Instant::now();
-        let expiry_time = libra2_infallible::duration_since_epoch().as_micros() as u64
+        let expiry_time = creditchain_infallible::duration_since_epoch().as_micros() as u64
             + self.config.batch_expiry_gap_when_init_usecs;
         let batches = self.bucket_into_batches(&mut pulled_txns, expiry_time);
         self.last_end_batch_time = Instant::now();
@@ -378,7 +378,7 @@ impl BatchGenerator {
         batch_id: BatchId,
         txns: Vec<SignedTransaction>,
     ) {
-        let expiry_time_usecs = libra2_infallible::duration_since_epoch().as_micros() as u64
+        let expiry_time_usecs = creditchain_infallible::duration_since_epoch().as_micros() as u64
             + self.config.remote_batch_expiry_gap_when_init_usecs;
         self.insert_batch(author, batch_id, txns, expiry_time_usecs);
     }

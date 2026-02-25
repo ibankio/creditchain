@@ -16,13 +16,13 @@
  **************************************************************************************/
 
 use super::new_test_context;
-use libra2_api_test_context::{current_function_name, TestContext};
-use libra2_crypto::{
+use creditchain_api_test_context::{current_function_name, TestContext};
+use creditchain_crypto::{
     ed25519::{Ed25519PrivateKey, Ed25519PublicKey},
     SigningKey, Uniform,
 };
-use libra2_proptest_helpers::ValueGenerator;
-use libra2_types::{
+use creditchain_proptest_helpers::ValueGenerator;
+use creditchain_types::{
     account_address::AccountAddress,
     chain_id::ChainId,
     transaction::{EntryFunction, RawTransaction, Script, SignedTransaction, TransactionArgument},

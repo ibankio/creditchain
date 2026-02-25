@@ -1,0 +1,9 @@
+[package]
+name = 'tic-tac-toe'
+version = '1.0.0'
+
+[addresses]
+tic_tac_toe = "_"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }

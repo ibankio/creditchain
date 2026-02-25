@@ -9,11 +9,11 @@ use crate::consensus_observer::{
     },
     network::observer_message::{BlockPayload, OrderedBlock},
 };
-use libra2_config::config::ConsensusObserverConfig;
-use libra2_consensus_types::{common::Round, pipelined_block::PipelinedBlock};
-use libra2_infallible::Mutex;
-use libra2_logger::{error, warn};
-use libra2_types::epoch_state::EpochState;
+use creditchain_config::config::ConsensusObserverConfig;
+use creditchain_consensus_types::{common::Round, pipelined_block::PipelinedBlock};
+use creditchain_infallible::Mutex;
+use creditchain_logger::{error, warn};
+use creditchain_types::epoch_state::EpochState;
 use std::{
     collections::{btree_map::Entry, BTreeMap},
     sync::Arc,
@@ -278,8 +278,8 @@ impl BlockPayloadStore {
 mod test {
     use super::*;
     use crate::consensus_observer::network::observer_message::BlockTransactionPayload;
-    use libra2_bitvec::BitVec;
-    use libra2_consensus_types::{
+    use creditchain_bitvec::BitVec;
+    use creditchain_consensus_types::{
         block::Block,
         block_data::{BlockData, BlockType},
         common::{Author, Payload, ProofWithData},
@@ -287,8 +287,8 @@ mod test {
         proof_of_store::{BatchInfo, ProofOfStore},
         quorum_cert::QuorumCert,
     };
-    use libra2_crypto::HashValue;
-    use libra2_types::{
+    use creditchain_crypto::HashValue;
+    use creditchain_types::{
         aggregate_signature::AggregateSignature,
         block_info::{BlockInfo, Round},
         ledger_info::{LedgerInfo, LedgerInfoWithSignatures},

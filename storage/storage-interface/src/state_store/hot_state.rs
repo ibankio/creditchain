@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::state_store::state_view::hot_state_view::HotStateView;
-use libra2_experimental_layered_map::LayeredMap;
-use libra2_types::state_store::{
+use creditchain_experimental_layered_map::LayeredMap;
+use creditchain_types::state_store::{
     hot_state::THotStateSlot, state_key::StateKey, state_slot::StateSlot,
 };
 use std::{collections::HashMap, sync::Arc};
@@ -197,8 +197,8 @@ impl<'a, 'b> Iterator for Iter<'a, 'b> {
 mod tests {
     use super::HotStateLRU;
     use crate::state_store::state_view::hot_state_view::HotStateView;
-    use libra2_experimental_layered_map::{LayeredMap, MapLayer};
-    use libra2_types::{
+    use creditchain_experimental_layered_map::{LayeredMap, MapLayer};
+    use creditchain_types::{
         state_store::{
             hot_state::LRUEntry, state_key::StateKey, state_slot::StateSlot,
             state_value::StateValue,

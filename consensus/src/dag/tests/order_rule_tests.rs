@@ -13,9 +13,9 @@ use crate::dag::{
     types::NodeMetadata,
     CertifiedNode,
 };
-use libra2_consensus_types::common::{Author, Round};
-use libra2_infallible::Mutex;
-use libra2_types::{epoch_state::EpochState, validator_verifier::random_validator_verifier};
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_infallible::Mutex;
+use creditchain_types::{epoch_state::EpochState, validator_verifier::random_validator_verifier};
 use async_trait::async_trait;
 use futures_channel::mpsc::{unbounded, UnboundedReceiver, UnboundedSender};
 use proptest::prelude::*;

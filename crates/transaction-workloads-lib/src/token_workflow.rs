@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::EntryPoints;
-use libra2_sdk::transaction_builder::TransactionFactory;
-use libra2_transaction_generator_lib::{
+use creditchain_sdk::transaction_builder::TransactionFactory;
+use creditchain_transaction_generator_lib::{
     call_custom_modules::{
         CustomModulesDelegationGeneratorCreator, UserModuleTransactionGenerator,
     },

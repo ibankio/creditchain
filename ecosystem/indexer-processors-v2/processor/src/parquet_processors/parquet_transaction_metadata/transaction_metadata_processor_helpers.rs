@@ -3,7 +3,7 @@
 
 use crate::parquet_processors::parquet_transaction_metadata::transaction_metadata_models::write_set_size_info::ParquetWriteSetSize;
 use libra2_indexer_processor_sdk::libra2_indexer_transaction_stream::utils::time::parse_timestamp;
-use libra2_indexer_processor_sdk::libra2_protos::transaction::v1::Transaction;
+use libra2_indexer_processor_sdk::creditchain_protos::transaction::v1::Transaction;
 use tracing::warn;
 
 pub fn process_transactions(transactions: Vec<Transaction>) -> Vec<ParquetWriteSetSize> {

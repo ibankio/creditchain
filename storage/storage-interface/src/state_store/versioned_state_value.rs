@@ -1,8 +1,8 @@
 // Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_crypto::{hash::CryptoHash, HashValue};
-use libra2_types::{
+use creditchain_crypto::{hash::CryptoHash, HashValue};
+use creditchain_types::{
     state_store::{hot_state::LRUEntry, state_slot::StateSlot},
     transaction::Version,
     write_set::BaseStateOp,

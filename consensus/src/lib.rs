@@ -4,9 +4,9 @@
 
 #![forbid(unsafe_code)]
 
-//! Consensus for the Libra2 Core blockchain
+//! Consensus for the CreditChain Core blockchain
 //!
-//! The consensus protocol implemented is Libra2BFT (based on
+//! The consensus protocol implemented is CreditChainBFT (based on
 //! [DiemBFT](https://developers.diem.com/papers/diem-consensus-state-machine-replication-in-the-diem-blockchain/2021-08-17.pdf)).
 
 #![cfg_attr(feature = "fuzzing", allow(dead_code))]
@@ -50,11 +50,11 @@ pub mod util;
 
 mod block_preparer;
 pub mod consensus_observer;
-/// Libra2BFT implementation
+/// CreditChainBFT implementation
 pub mod consensus_provider;
 /// Required by the telemetry service
 pub mod counters;
-/// Libra2Net interface.
+/// CreditChainNet interface.
 pub mod network_interface;
 mod payload_manager;
 mod transaction_deduper;
@@ -63,7 +63,7 @@ mod transaction_shuffler;
 pub use transaction_shuffler::transaction_shuffler_fuzzing;
 mod txn_hash_and_authenticator_deduper;
 
-use libra2_metrics_core::IntGauge;
+use creditchain_metrics_core::IntGauge;
 pub use consensusdb::create_checkpoint;
 /// Required by the smoke tests
 pub use consensusdb::CONSENSUS_DB_NAME;

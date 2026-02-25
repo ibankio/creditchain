@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Result;
-use libra2_backup_cli::{
+use creditchain_backup_cli::{
     backup_types::{
         epoch_ending::restore::{EpochEndingRestoreController, EpochEndingRestoreOpt},
         state_snapshot::restore::{StateSnapshotRestoreController, StateSnapshotRestoreOpt},
@@ -12,7 +12,7 @@ use libra2_backup_cli::{
     storage::DBToolStorageOpt,
     utils::GlobalRestoreOpt,
 };
-use libra2_executor_types::VerifyExecutionMode;
+use creditchain_executor_types::VerifyExecutionMode;
 use clap::{Parser, Subcommand};
 
 /// Restore the database using either a one-time or continuous backup.

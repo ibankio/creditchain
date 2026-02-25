@@ -6,9 +6,9 @@ use crate::{
     smoke_test_environment::SwarmBuilder,
     utils::get_on_chain_resource,
 };
-use libra2_forge::{NodeExt, SwarmExt};
-use libra2_logger::info;
-use libra2_types::{dkg::DKGState, on_chain_config::OnChainRandomnessConfig};
+use creditchain_forge::{NodeExt, SwarmExt};
+use creditchain_logger::info;
+use creditchain_types::{dkg::DKGState, on_chain_config::OnChainRandomnessConfig};
 use std::{sync::Arc, time::Duration};
 
 /// Verify the correctness of DKG transcript and block-level randomness seed.

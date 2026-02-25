@@ -3,7 +3,7 @@
 
 //! This file is where we apply a number of traits that allow us to use these
 //! traits with Poem. For more information on how these macros work, see the
-//! documentation within `crates/libra2-openapi`.
+//! documentation within `crates/creditchain-openapi`.
 //!
 //! In some cases we use these derives because the underlying types are not
 //! expressible via OpenAPI, e.g. Address. In other cases, we use them because
@@ -23,7 +23,7 @@ use crate::{
     Address, AssetType, EntryFunctionId, HashValue, HexEncodedBytes, IdentifierWrapper,
     MoveModuleId, MoveStructTag, MoveType, StateKeyWrapper, U128, U256, U64,
 };
-use libra2_openapi::{impl_poem_parameter, impl_poem_type};
+use creditchain_openapi::{impl_poem_parameter, impl_poem_type};
 use indoc::indoc;
 use serde_json::json;
 
@@ -36,7 +36,7 @@ impl_poem_type!(
         )),
         format = Some("hex"),
         description = Some(indoc! {"
-            A hex encoded 32 byte Libra2 account address.
+            A hex encoded 32 byte CreditChain account address.
 
             This is represented in a string as a 64 character hex string, sometimes
             shortened by stripping leading 0s, and adding a 0x.
@@ -51,11 +51,11 @@ impl_poem_type!(
     "string",
     (
         example = Some(serde_json::Value::String(
-            "0x1::libra2_coin::Libra2Coin".to_string()
+            "0x1::creditchain_coin::CreditChainCoin".to_string()
         )),
         format = Some("hex"),
         description = Some(indoc! {"
-            A hex encoded 32 byte Libra2 account address or a struct tag.
+            A hex encoded 32 byte CreditChain account address or a struct tag.
 
             This is represented in a string as a 64 character hex string, sometimes
             shortened by stripping leading 0s, and adding a 0x or
@@ -69,7 +69,7 @@ impl_poem_type!(
     "string",
     (
         example = Some(serde_json::Value::String(
-            "0x1::libra2_coin::transfer".to_string()
+            "0x1::creditchain_coin::transfer".to_string()
         )),
         description = Some(indoc! {"
           Entry function id is string representation of a entry function defined on-chain.
@@ -108,7 +108,7 @@ impl_poem_type!(
     MoveModuleId,
     "string",
     (
-        example = Some(serde_json::Value::String("0x1::libra2_coin".to_string())),
+        example = Some(serde_json::Value::String("0x1::creditchain_coin".to_string())),
         description = Some(indoc! {"
           Move module id is a string representation of Move module.
 
@@ -126,7 +126,7 @@ impl_poem_type!(
     "string",
     (
         example = Some(serde_json::Value::String(
-            "0x1::coin::CoinStore<0x1::libra2_coin::Libra2Coin>".to_string()
+            "0x1::coin::CoinStore<0x1::creditchain_coin::CreditChainCoin>".to_string()
         )),
         pattern = Some("^0x[0-9a-zA-Z:_<>]+$".to_string()),
         description = Some(indoc! {"
@@ -138,14 +138,14 @@ impl_poem_type!(
           2. `struct generic type parameters` joined by `, `
 
         Examples:
-          * `0x1::coin::CoinStore<0x1::libra2_coin::Libra2Coin>`
+          * `0x1::coin::CoinStore<0x1::creditchain_coin::CreditChainCoin>`
           * `0x1::account::Account`
 
         Note:
           1. Empty chars should be ignored when comparing 2 struct tag ids.
           2. When used in an URL path, should be encoded by url-encoding (AKA percent-encoding).
 
-        See [doc](https://docs.libra2.org/concepts/accounts) for more details.
+        See [doc](https://docs.creditchain.io/concepts/accounts) for more details.
       "})
     )
 );
@@ -181,7 +181,7 @@ impl_poem_type!(
 
             Move `u64`, `u128` and `u256` type value is serialized into `string`.
 
-            Move `address` type value (32 byte Libra2 account address) is serialized into a HexEncodedBytes string.
+            Move `address` type value (32 byte CreditChain account address) is serialized into a HexEncodedBytes string.
             For example:
               - `0x1`
               - `0x1668f6be25668c1a17cd8caf6b8d2f25`
@@ -236,10 +236,10 @@ impl_poem_type!(
                 Vector type value examples:
                   - `vector<u8>`
                   - `vector<vector<u64>>`
-                  - `vector<0x1::coin::CoinStore<0x1::libra2_coin::Libra2Coin>>`
+                  - `vector<0x1::coin::CoinStore<0x1::creditchain_coin::CreditChainCoin>>`
 
                 Struct type value examples:
-                  - `0x1::coin::CoinStore<0x1::libra2_coin::Libra2Coin>
+                  - `0x1::coin::CoinStore<0x1::creditchain_coin::CreditChainCoin>
                   - `0x1::account::Account`
 
                 Note:

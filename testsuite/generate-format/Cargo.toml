@@ -13,14 +13,14 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-api-types = { workspace = true }
-libra2-config = { workspace = true }
-libra2-consensus = { workspace = true, features = ["fuzzing"] }
-libra2-consensus-types = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-crypto-derive = { workspace = true }
-libra2-network = { workspace = true }
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-api-types = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-consensus = { workspace = true, features = ["fuzzing"] }
+creditchain-consensus-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-crypto-derive = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 bcs = { workspace = true }
 clap = { workspace = true }
 move-core-types = { workspace = true, features = ["fuzzing"] }

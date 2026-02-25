@@ -159,7 +159,7 @@ The node configuration contains several modules:
   that defines the Move standard library and the initial Validator set.
 - MempoolConfig - Parameters for configuring uncommitted transaction storage
 - MetricsConfig - Local storage for metrics
-- NetworkConfig - Libra2Net configuration file that specifies peers with keys,
+- NetworkConfig - CreditChainNet configuration file that specifies peers with keys,
   seed addresses to connect to upstream peers, the local peers network keys,
 and other network configuration parameters
 - NodeConfig - Hosts all configuration files for a node
@@ -167,7 +167,7 @@ and other network configuration parameters
   Rules
 - StateSyncConfig - Specifies parameters around state sycnhronization and the
   set of peers that provide the data
-- StorageConfig - Where the Libra2DB is stored and its gRPC service endpoints
+- StorageConfig - Where the CreditChainDB is stored and its gRPC service endpoints
 
 ### External Component Configurations
 Outside of each node, external components can also be configured:

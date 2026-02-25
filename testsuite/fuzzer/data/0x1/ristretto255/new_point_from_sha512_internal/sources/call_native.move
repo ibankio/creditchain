@@ -1,5 +1,5 @@
 module poc::new_point_from_sha512_internal {
-    use libra2_std::ristretto255::{Self, RistrettoPoint};
+    use creditchain_std::ristretto255::{Self, RistrettoPoint};
 
     public entry fun main(_owner: &signer) {
         let input_bytes = b"some input data";

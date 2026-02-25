@@ -6,7 +6,7 @@ use crate::transaction::{
     signature_verified_transaction::SignatureVerifiedTransaction,
     AuxiliaryInfo, Transaction,
 };
-use libra2_crypto::HashValue;
+use creditchain_crypto::HashValue;
 use serde::{Deserialize, Serialize};
 use std::{
     cmp::Ordering,

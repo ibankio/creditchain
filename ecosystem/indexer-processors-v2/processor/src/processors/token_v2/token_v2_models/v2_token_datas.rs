@@ -22,7 +22,7 @@ use crate::{
 use allocative_derive::Allocative;
 use anyhow::Context;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{DeleteResource, WriteResource, WriteTableItem},
+   creditchain_protos::transaction::v1::{DeleteResource, WriteResource, WriteTableItem},
     utils::convert::standardize_address,
 };
 use bigdecimal::BigDecimal;

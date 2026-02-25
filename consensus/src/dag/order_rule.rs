@@ -14,10 +14,10 @@ use crate::dag::{
     types::NodeMetadata,
     CertifiedNode,
 };
-use libra2_consensus_types::common::Round;
-use libra2_infallible::Mutex;
-use libra2_logger::debug;
-use libra2_types::epoch_state::EpochState;
+use creditchain_consensus_types::common::Round;
+use creditchain_infallible::Mutex;
+use creditchain_logger::debug;
+use creditchain_types::epoch_state::EpochState;
 use std::sync::Arc;
 
 pub trait TOrderRule: Send + Sync {

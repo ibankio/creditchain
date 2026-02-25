@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{network::NetworkSender, pipeline::pipeline_phase::StatelessPipeline};
-use libra2_consensus_types::{common::Round, pipelined_block::PipelinedBlock};
-use libra2_executor_types::ExecutorResult;
-use libra2_types::{epoch_change::EpochChangeProof, ledger_info::LedgerInfoWithSignatures};
+use creditchain_consensus_types::{common::Round, pipelined_block::PipelinedBlock};
+use creditchain_executor_types::ExecutorResult;
+use creditchain_types::{epoch_change::EpochChangeProof, ledger_info::LedgerInfoWithSignatures};
 use async_trait::async_trait;
 use std::{
     fmt::{Debug, Display, Formatter},

@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_metrics_core::IntCounterVec;
+use creditchain_metrics_core::IntCounterVec;
 use std::{
     collections::{HashMap, VecDeque},
     fmt::{Debug, Formatter, Result},

@@ -1,6 +1,6 @@
 module poc::from_u64_internal {
-    use libra2_std::crypto_algebra::{Self};
-    use libra2_std::bls12381_algebra::{Fr};
+    use creditchain_std::crypto_algebra::{Self};
+    use creditchain_std::bls12381_algebra::{Fr};
 
     public entry fun main(_owner: &signer) {
         let val1_u64: u64 = 12345;

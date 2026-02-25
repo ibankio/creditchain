@@ -12,8 +12,8 @@ use crate::{
     },
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_logger::prelude::*;
-use libra2_types::{ledger_info::LedgerInfoWithSignatures, waypoint::Waypoint};
+use creditchain_logger::prelude::*;
+use creditchain_types::{ledger_info::LedgerInfoWithSignatures, waypoint::Waypoint};
 use clap::Parser;
 use once_cell::sync::Lazy;
 use std::{convert::TryInto, str::FromStr, sync::Arc};

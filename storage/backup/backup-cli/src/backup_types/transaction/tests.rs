@@ -15,11 +15,11 @@ use crate::{
         RocksdbOpt, TrustedWaypointOpt,
     },
 };
-use libra2_db::Libra2DB;
-use libra2_executor_types::VerifyExecutionMode;
-use libra2_storage_interface::DbReader;
-use libra2_temppath::TempPath;
-use libra2_types::transaction::Version;
+use creditchain_db::CreditChainDB;
+use creditchain_executor_types::VerifyExecutionMode;
+use creditchain_storage_interface::DbReader;
+use creditchain_temppath::TempPath;
+use creditchain_types::transaction::Version;
 use itertools::zip_eq;
 use std::{convert::TryInto, mem::size_of, sync::Arc};
 use tokio::time::Duration;
@@ -125,7 +125,7 @@ fn end_to_end() {
     // We don't write down any ledger infos when recovering transactions. State-sync needs to take
     // care of it before running consensus. The latest transactions are deemed "synced" instead of
     // "committed" most likely.
-    let tgt_db = Libra2DB::new_readonly_for_test(&tgt_db_dir);
+    let tgt_db = CreditChainDB::new_readonly_for_test(&tgt_db_dir);
     let ouptputlist = tgt_db
         .get_transaction_outputs(0, target_version, target_version)
         .unwrap()

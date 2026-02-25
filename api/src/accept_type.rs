@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_api_types::mime_types::{BCS, JSON};
+use creditchain_api_types::mime_types::{BCS, JSON};
 use poem::{web::Accept, FromRequest, Request, RequestBody, Result};
 
 /// Accept types from input headers

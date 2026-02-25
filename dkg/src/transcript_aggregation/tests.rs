@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::transcript_aggregation::TranscriptAggregationState;
-use libra2_crypto::{bls12381::bls12381_keys, Uniform};
-use libra2_infallible::duration_since_epoch;
-use libra2_reliable_broadcast::BroadcastStatus;
-use libra2_types::{
+use creditchain_crypto::{bls12381::bls12381_keys, Uniform};
+use creditchain_infallible::duration_since_epoch;
+use creditchain_reliable_broadcast::BroadcastStatus;
+use creditchain_types::{
     dkg::{real_dkg::RealDKG, DKGSessionMetadata, DKGTrait, DKGTranscript, DKGTranscriptMetadata},
     epoch_state::EpochState,
     on_chain_config::OnChainRandomnessConfig,

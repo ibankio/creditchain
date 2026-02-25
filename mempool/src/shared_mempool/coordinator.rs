@@ -19,25 +19,25 @@ use crate::{
     },
     MempoolEventsReceiver, QuorumStoreRequest,
 };
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_config::network_id::{NetworkId, PeerNetworkId};
-use libra2_event_notifications::ReconfigNotificationListener;
-use libra2_infallible::{Mutex, RwLock};
-use libra2_logger::prelude::*;
-use libra2_mempool_notifications::{MempoolCommitNotification, MempoolNotificationListener};
-use libra2_network::{
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_config::network_id::{NetworkId, PeerNetworkId};
+use creditchain_event_notifications::ReconfigNotificationListener;
+use creditchain_infallible::{Mutex, RwLock};
+use creditchain_logger::prelude::*;
+use creditchain_mempool_notifications::{MempoolCommitNotification, MempoolNotificationListener};
+use creditchain_network::{
     application::{
         interface::{NetworkClientInterface, NetworkServiceEvents},
         storage::PeersAndMetadata,
     },
     protocols::network::Event,
 };
-use libra2_types::{
+use creditchain_types::{
     on_chain_config::{OnChainConfigPayload, OnChainConfigProvider},
     transaction::SignedTransaction,
     PeerId,
 };
-use libra2_vm_validator::vm_validator::TransactionValidation;
+use creditchain_vm_validator::vm_validator::TransactionValidation;
 use futures::{
     channel::mpsc,
     stream::{select_all, FuturesUnordered},

@@ -11,10 +11,10 @@ use crate::{
     },
     pipeline::execution_client::TExecutionClient,
 };
-use libra2_config::config::ConsensusObserverConfig;
-use libra2_logger::{error, info};
-use libra2_reliable_broadcast::DropGuard;
-use libra2_types::ledger_info::LedgerInfoWithSignatures;
+use creditchain_config::config::ConsensusObserverConfig;
+use creditchain_logger::{error, info};
+use creditchain_reliable_broadcast::DropGuard;
+use creditchain_types::ledger_info::LedgerInfoWithSignatures;
 use futures::future::{AbortHandle, Abortable};
 use std::{sync::Arc, time::Duration};
 use tokio::sync::mpsc::UnboundedSender;
@@ -262,7 +262,7 @@ impl StateSyncManager {
 mod test {
     use super::*;
     use crate::pipeline::execution_client::DummyExecutionClient;
-    use libra2_types::{aggregate_signature::AggregateSignature, ledger_info::LedgerInfo};
+    use creditchain_types::{aggregate_signature::AggregateSignature, ledger_info::LedgerInfo};
 
     #[tokio::test]
     async fn test_clear_active_sync() {

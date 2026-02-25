@@ -50,11 +50,11 @@ const COMPLEXITY_BUDGET: usize = 200000000;
 
 /// The keys used to identify the metadata in the metadata section of the module bytecode.
 /// This is more or less arbitrary, besides we should use some unique key to identify
-/// Libra2 specific metadata (`libra2::` here).
-pub static LIBRA2_METADATA_KEY: &[u8] = "libra2::metadata_v0".as_bytes();
-pub static LIBRA2_METADATA_KEY_V1: &[u8] = "libra2::metadata_v1".as_bytes();
+/// CreditChain specific metadata (`libra2::` here).
+pub static CREDITCHAIN_METADATA_KEY: &[u8] = "libra2::metadata_v0".as_bytes();
+pub static CREDITCHAIN_METADATA_KEY_V1: &[u8] = "libra2::metadata_v1".as_bytes();
 
-/// Libra2 specific metadata attached to the metadata section of file_format.
+/// CreditChain specific metadata attached to the metadata section of file_format.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RuntimeModuleMetadata {
     /// The error map containing the description of error reasons as grabbed from the source.
@@ -62,7 +62,7 @@ pub struct RuntimeModuleMetadata {
     pub error_map: BTreeMap<u64, ErrorDescription>,
 }
 
-/// V1 of Libra2 specific metadata attached to the metadata section of file_format.
+/// V1 of CreditChain specific metadata attached to the metadata section of file_format.
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct RuntimeModuleMetadataV1 {
     /// The error map containing the description of error reasons as grabbed from the source.
@@ -197,7 +197,7 @@ thread_local! {
 
 /// Extract metadata from the VM, upgrading V0 to V1 representation as needed
 pub fn get_metadata(md: &[Metadata]) -> Option<Arc<RuntimeModuleMetadataV1>> {
-    if let Some(data) = find_metadata(md, LIBRA2_METADATA_KEY_V1) {
+    if let Some(data) = find_metadata(md, CREDITCHAIN_METADATA_KEY_V1) {
         V1_METADATA_CACHE.with(|ref_cell| {
             let mut cache = ref_cell.borrow_mut();
             if let Some(meta) = cache.get(&data.value) {
@@ -210,7 +210,7 @@ pub fn get_metadata(md: &[Metadata]) -> Option<Arc<RuntimeModuleMetadataV1>> {
                 meta
             }
         })
-    } else if let Some(data) = find_metadata(md, LIBRA2_METADATA_KEY) {
+    } else if let Some(data) = find_metadata(md, CREDITCHAIN_METADATA_KEY) {
         V0_METADATA_CACHE.with(|ref_cell| {
             let mut cache = ref_cell.borrow_mut();
             if let Some(meta) = cache.get(&data.value) {
@@ -254,16 +254,16 @@ fn check_metadata_format(module: &CompiledModule) -> Result<(), MalformedError> 
     let mut exist = false;
     let mut compilation_key_exist = false;
     for data in module.metadata.iter() {
-        if data.key == *LIBRA2_METADATA_KEY || data.key == *LIBRA2_METADATA_KEY_V1 {
+        if data.key == *CREDITCHAIN_METADATA_KEY || data.key == *CREDITCHAIN_METADATA_KEY_V1 {
             if exist {
                 return Err(MalformedError::DuplicateKey);
             }
             exist = true;
 
-            if data.key == *LIBRA2_METADATA_KEY {
+            if data.key == *CREDITCHAIN_METADATA_KEY {
                 bcs::from_bytes::<RuntimeModuleMetadata>(&data.value)
                     .map_err(|e| MalformedError::DeserializedError(data.key.clone(), e))?;
-            } else if data.key == *LIBRA2_METADATA_KEY_V1 {
+            } else if data.key == *CREDITCHAIN_METADATA_KEY_V1 {
                 bcs::from_bytes::<RuntimeModuleMetadataV1>(&data.value)
                     .map_err(|e| MalformedError::DeserializedError(data.key.clone(), e))?;
             }
@@ -287,7 +287,7 @@ fn check_metadata_format(module: &CompiledModule) -> Result<(), MalformedError> 
 pub fn get_metadata_from_compiled_code(
     code: &impl CompiledCodeMetadata,
 ) -> Option<RuntimeModuleMetadataV1> {
-    if let Some(data) = find_metadata(code.metadata(), LIBRA2_METADATA_KEY_V1) {
+    if let Some(data) = find_metadata(code.metadata(), CREDITCHAIN_METADATA_KEY_V1) {
         let mut metadata = bcs::from_bytes::<RuntimeModuleMetadataV1>(&data.value).ok();
         // Clear out metadata for v5, since it shouldn't have existed in the first place and isn't
         // being used. Note, this should have been gated in the verify module metadata.
@@ -298,7 +298,7 @@ pub fn get_metadata_from_compiled_code(
             }
         }
         metadata
-    } else if let Some(data) = find_metadata(code.metadata(), LIBRA2_METADATA_KEY) {
+    } else if let Some(data) = find_metadata(code.metadata(), CREDITCHAIN_METADATA_KEY) {
         // Old format available, upgrade to new one on the fly
         let data_v0 = bcs::from_bytes::<RuntimeModuleMetadata>(&data.value).ok()?;
         Some(data_v0.upgrade())

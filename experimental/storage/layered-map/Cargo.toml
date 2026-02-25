@@ -1,5 +1,5 @@
 [package]
-name = "libra2-experimental-layered-map"
+name = "creditchain-experimental-layered-map"
 description = "CreditChain LayeredMap"
 version = "0.1.1"
 
@@ -14,18 +14,18 @@ rust-version = { workspace = true }
 
 [dependencies]
 ahash = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-drop-helper = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-metrics-core = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-drop-helper = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-metrics-core = { workspace = true }
 bitvec = "1.0.1"
 itertools = { workspace = true }
 once_cell = { workspace = true }
 
 [dev-dependencies]
 anyhow = { workspace = true }
-libra2-schemadb = { workspace = true }
-libra2-temppath = { workspace = true }
+creditchain-schemadb = { workspace = true }
+creditchain-temppath = { workspace = true }
 criterion = { workspace = true }
 itertools = { workspace = true }
 proptest = { workspace = true }

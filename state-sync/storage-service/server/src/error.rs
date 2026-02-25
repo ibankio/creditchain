@@ -28,8 +28,8 @@ impl Error {
     }
 }
 
-impl From<libra2_storage_service_types::responses::Error> for Error {
-    fn from(error: libra2_storage_service_types::responses::Error) -> Self {
+impl From<creditchain_storage_service_types::responses::Error> for Error {
+    fn from(error: creditchain_storage_service_types::responses::Error) -> Self {
         Error::UnexpectedErrorEncountered(error.to_string())
     }
 }
@@ -40,8 +40,8 @@ impl From<anyhow::Error> for Error {
     }
 }
 
-impl From<libra2_storage_interface::Libra2DbError> for Error {
-    fn from(error: libra2_storage_interface::Libra2DbError) -> Self {
+impl From<creditchain_storage_interface::CreditChainDbError> for Error {
+    fn from(error: creditchain_storage_interface::CreditChainDbError) -> Self {
         Error::StorageErrorEncountered(error.to_string())
     }
 }

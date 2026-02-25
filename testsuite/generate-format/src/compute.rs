@@ -8,11 +8,11 @@ use std::{fs::File, io::Write};
 
 #[derive(Debug, Parser)]
 #[clap(
-    name = "Libra2 format generator",
-    about = "Trace serde (de)serialization to generate format descriptions for Libra2 types"
+    name = "CreditChain format generator",
+    about = "Trace serde (de)serialization to generate format descriptions for CreditChain types"
 )]
 struct Options {
-    #[clap(long, value_enum, default_value_t = Corpus::Libra2, ignore_case = true)]
+    #[clap(long, value_enum, default_value_t = Corpus::CreditChain, ignore_case = true)]
     corpus: Corpus,
 
     #[clap(long)]

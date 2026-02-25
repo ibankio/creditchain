@@ -1,10 +1,10 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_crypto_derive::CryptoHasher;
-use libra2_enum_conversion_derive::EnumConversion;
-use libra2_reliable_broadcast::RBMessage;
-pub use libra2_types::dkg::DKGTranscript;
+use creditchain_crypto_derive::CryptoHasher;
+use creditchain_enum_conversion_derive::EnumConversion;
+use creditchain_reliable_broadcast::RBMessage;
+pub use creditchain_types::dkg::DKGTranscript;
 use serde::{Deserialize, Serialize};
 
 /// Once DKG starts, a validator should send this message to peers in order to collect DKG transcripts from peers.

@@ -6,8 +6,8 @@ use crate::config::{
     config_optimizer::ConfigOptimizer, config_sanitizer::ConfigSanitizer,
     node_config_loader::NodeType, Error, NodeConfig, MAX_APPLICATION_MESSAGE_SIZE,
 };
-use libra2_global_constants::DEFAULT_BUCKETS;
-use libra2_types::chain_id::ChainId;
+use creditchain_global_constants::DEFAULT_BUCKETS;
+use creditchain_types::chain_id::ChainId;
 use serde::{Deserialize, Serialize};
 use serde_yaml::Value;
 

@@ -8,7 +8,7 @@ use crate::{
     },
     util::mock_time_service::SimulatedTimeService,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::Round,
     quorum_cert::QuorumCert,
     round_timeout::RoundTimeoutReason,
@@ -16,8 +16,8 @@ use libra2_consensus_types::{
     timeout_2chain::{TwoChainTimeout, TwoChainTimeoutCertificate},
     vote_data::VoteData,
 };
-use libra2_crypto::HashValue;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_types::{
     aggregate_signature::AggregateSignature,
     block_info::BlockInfo,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},
@@ -86,10 +86,10 @@ fn test_round_event_generation() {
     );
 }
 
-fn make_round_state() -> (RoundState, libra2_channels::Receiver<Round>) {
+fn make_round_state() -> (RoundState, creditchain_channels::Receiver<Round>) {
     let time_interval = Box::new(ExponentialTimeInterval::fixed(Duration::from_millis(2)));
     let simulated_time = SimulatedTimeService::auto_advance_until(Duration::from_millis(4));
-    let (timeout_tx, timeout_rx) = libra2_channels::new_test(1_024);
+    let (timeout_tx, timeout_rx) = creditchain_channels::new_test(1_024);
     (
         RoundState::new(time_interval, Arc::new(simulated_time), timeout_tx),
         timeout_rx,

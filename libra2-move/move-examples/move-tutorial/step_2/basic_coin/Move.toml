@@ -1,8 +1,0 @@
-[package]
-name = "basic_coin"
-version = "0.0.0"
-
-[dependencies.Libra2Stdlib]
-git = 'https://github.com/libra2org/libra2-framework.git'
-rev = 'main'
-subdir = 'libra2-stdlib'

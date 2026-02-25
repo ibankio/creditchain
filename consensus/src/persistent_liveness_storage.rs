@@ -7,15 +7,15 @@ use crate::{
     util::calculate_window_start_round,
 };
 use anyhow::{bail, format_err, Context, Result};
-use libra2_config::config::NodeConfig;
-use libra2_consensus_types::{
+use creditchain_config::config::NodeConfig;
+use creditchain_consensus_types::{
     block::Block, quorum_cert::QuorumCert, timeout_2chain::TwoChainTimeoutCertificate, vote::Vote,
     vote_data::VoteData, wrapped_ledger_info::WrappedLedgerInfo,
 };
-use libra2_crypto::HashValue;
-use libra2_logger::prelude::*;
-use libra2_storage_interface::DbReader;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_logger::prelude::*;
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{
     block_info::Round, epoch_change::EpochChangeProof, ledger_info::LedgerInfoWithSignatures,
     proof::TransactionAccumulatorSummary, transaction::Version,
 };
@@ -58,8 +58,8 @@ pub trait PersistentLivenessStorage: Send + Sync {
     /// ValidatorVerifier.
     fn retrieve_epoch_change_proof(&self, version: u64) -> Result<EpochChangeProof>;
 
-    /// Returns a handle of the libra2db.
-    fn libra2_db(&self) -> Arc<dyn DbReader>;
+    /// Returns a handle of the creditchaindb.
+    fn creditchain_db(&self) -> Arc<dyn DbReader>;
 
     // Returns a handle of the consensus db
     fn consensus_db(&self) -> Arc<ConsensusDB>;
@@ -311,7 +311,7 @@ impl RootMetadata {
     #[cfg(any(test, feature = "fuzzing"))]
     pub fn new_empty() -> Self {
         Self {
-            accu_hash: *libra2_crypto::hash::ACCUMULATOR_PLACEHOLDER_HASH,
+            accu_hash: *creditchain_crypto::hash::ACCUMULATOR_PLACEHOLDER_HASH,
             frozen_root_hashes: vec![],
             num_leaves: 0,
         }
@@ -480,13 +480,13 @@ impl RecoveryData {
 /// The proxy we use to persist data in db storage service via grpc.
 pub struct StorageWriteProxy {
     db: Arc<ConsensusDB>,
-    libra2_db: Arc<dyn DbReader>,
+    creditchain_db: Arc<dyn DbReader>,
 }
 
 impl StorageWriteProxy {
-    pub fn new(config: &NodeConfig, libra2_db: Arc<dyn DbReader>) -> Self {
+    pub fn new(config: &NodeConfig, creditchain_db: Arc<dyn DbReader>) -> Self {
         let db = Arc::new(ConsensusDB::new(config.storage.dir()));
-        StorageWriteProxy { db, libra2_db }
+        StorageWriteProxy { db, creditchain_db }
     }
 }
 
@@ -511,7 +511,7 @@ impl PersistentLivenessStorage for StorageWriteProxy {
 
     fn recover_from_ledger(&self) -> LedgerRecoveryData {
         let latest_ledger_info = self
-            .libra2_db
+            .creditchain_db
             .get_latest_ledger_info()
             .expect("Failed to get latest ledger info.");
         LedgerRecoveryData::new(latest_ledger_info)
@@ -548,11 +548,11 @@ impl PersistentLivenessStorage for StorageWriteProxy {
         );
         // find the block corresponding to storage latest ledger info
         let latest_ledger_info = self
-            .libra2_db
+            .creditchain_db
             .get_latest_ledger_info()
             .expect("Failed to get latest ledger info.");
         let accumulator_summary = self
-            .libra2_db
+            .creditchain_db
             .get_accumulator_summary(latest_ledger_info.ledger_info().version())
             .expect("Failed to get accumulator summary.");
         let ledger_recovery_data = LedgerRecoveryData::new(latest_ledger_info);
@@ -607,15 +607,15 @@ impl PersistentLivenessStorage for StorageWriteProxy {
 
     fn retrieve_epoch_change_proof(&self, version: u64) -> Result<EpochChangeProof> {
         let (_, proofs) = self
-            .libra2_db
+            .creditchain_db
             .get_state_proof(version)
             .map_err(DbError::from)?
             .into_inner();
         Ok(proofs)
     }
 
-    fn libra2_db(&self) -> Arc<dyn DbReader> {
-        self.libra2_db.clone()
+    fn creditchain_db(&self) -> Arc<dyn DbReader> {
+        self.creditchain_db.clone()
     }
 
     fn consensus_db(&self) -> Arc<ConsensusDB> {

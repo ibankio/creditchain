@@ -32,17 +32,17 @@ on: # build on main branch OR when a PR is labeled with `CICD:build-images`
       - devnet
       - testnet
       - mainnet
-      - libra2-node-v*
+      - creditchain-node-v*
       - aptos-release-v*
       # experimental branches
       - performance_benchmark
       - preview
       - preview-networking
       # grpc release branches
-      - libra2-indexer-grpc-devnet
-      - libra2-indexer-grpc-testnet
-      - libra2-indexer-grpc-mainnet
-      - libra2-indexer-grpc-v*
+      - creditchain-indexer-grpc-devnet
+      - creditchain-indexer-grpc-testnet
+      - creditchain-indexer-grpc-mainnet
+      - creditchain-indexer-grpc-v*
 
 # cancel redundant builds
 concurrency:

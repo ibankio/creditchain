@@ -68,7 +68,7 @@ mod tests {
     use libra2_indexer_processor_sdk::testing_framework::{
         cli_parser::get_test_config, database::TestDatabase,
     };
-    use libra2_indexer_test_transactions::json_transactions::generated_transactions::{
+    use creditchain_indexer_test_transactions::json_transactions::generated_transactions::{
         IMPORTED_MAINNET_TXNS_1056780409_ANS_CURRENT_ANS_PRIMARY_NAME_V2,
         IMPORTED_MAINNET_TXNS_2080538_ANS_LOOKUP_V1, IMPORTED_MAINNET_TXNS_303690531_ANS_LOOKUP_V2,
         IMPORTED_MAINNET_TXNS_438536688_ANS_CURRENT_ANS_LOOKUP_V2,

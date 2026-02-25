@@ -3,7 +3,7 @@
 
 use crate::file_store_operator_v2::common::{BatchMetadata, FileMetadata};
 use anyhow::{ensure, Result};
-use libra2_protos::transaction::v1::Transaction;
+use creditchain_protos::transaction::v1::Transaction;
 use prost::Message;
 use tokio::sync::mpsc::Sender;
 

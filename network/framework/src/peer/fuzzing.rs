@@ -12,13 +12,13 @@ use crate::{
     testutils::fake_socket::ReadOnlyTestSocketVec,
     transport::{Connection, ConnectionId, ConnectionMetadata},
 };
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::{config::PeerRole, network_id::NetworkContext};
-use libra2_memsocket::MemorySocket;
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_proptest_helpers::ValueGenerator;
-use libra2_time_service::TimeService;
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::{config::PeerRole, network_id::NetworkContext};
+use creditchain_memsocket::MemorySocket;
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_proptest_helpers::ValueGenerator;
+use creditchain_time_service::TimeService;
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use futures::{executor::block_on, future, io::AsyncReadExt, sink::SinkExt, stream::StreamExt};
 use proptest::{arbitrary::any, collection::vec};
 use std::{collections::HashMap, sync::Arc, time::Duration};
@@ -88,10 +88,10 @@ pub fn fuzz(data: &[u8]) {
     );
     let connection = Connection { socket, metadata };
 
-    let (connection_notifs_tx, connection_notifs_rx) = libra2_channels::new_test(8);
+    let (connection_notifs_tx, connection_notifs_rx) = creditchain_channels::new_test(8);
     let channel_size = 8;
 
-    let (peer_reqs_tx, peer_reqs_rx) = libra2_channel::new(QueueStyle::FIFO, channel_size, None);
+    let (peer_reqs_tx, peer_reqs_rx) = creditchain_channel::new(QueueStyle::FIFO, channel_size, None);
     let upstream_handlers = Arc::new(HashMap::new());
 
     // Spin up a new `Peer` actor

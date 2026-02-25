@@ -14,7 +14,7 @@ use crate::{
     },
     Sender,
 };
-use libra2_types::{
+use creditchain_types::{
     block_executor::partitioner::{
         CrossShardDependencies, RoundId, ShardId, ShardedTxnIndex, SubBlock,
         TransactionWithDependencies,

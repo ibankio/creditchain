@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::thread_manager::{ThreadManager, MAX_THREAD_POOL_SIZE};
-use libra2_runtimes::spawn_rayon_thread_pool;
+use creditchain_runtimes::spawn_rayon_thread_pool;
 use rayon::ThreadPool;
 use std::cmp::min;
 

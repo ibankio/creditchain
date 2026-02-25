@@ -10,19 +10,19 @@ use crate::{
         wire::handshake::v1::{HandshakeMsg, MessagingProtocolVersion, ProtocolIdSet},
     },
 };
-use libra2_config::{
+use creditchain_config::{
     config::{PeerRole, HANDSHAKE_VERSION},
     network_id::{NetworkContext, NetworkId},
 };
-use libra2_crypto::x25519;
-use libra2_id_generator::{IdGenerator, U32IdGenerator};
-use libra2_logger::prelude::*;
-// Re-exposed for libra2-network-checker
-pub use libra2_netcore::transport::tcp::{resolve_and_connect, TCPBufferCfg, TcpSocket};
-use libra2_netcore::transport::{proxy_protocol, tcp, ConnectionOrigin, Transport};
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_time_service::{timeout, TimeService, TimeServiceTrait};
-use libra2_types::{
+use creditchain_crypto::x25519;
+use creditchain_id_generator::{IdGenerator, U32IdGenerator};
+use creditchain_logger::prelude::*;
+// Re-exposed for creditchain-network-checker
+pub use creditchain_netcore::transport::tcp::{resolve_and_connect, TCPBufferCfg, TcpSocket};
+use creditchain_netcore::transport::{proxy_protocol, tcp, ConnectionOrigin, Transport};
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_time_service::{timeout, TimeService, TimeServiceTrait};
+use creditchain_types::{
     chain_id::ChainId,
     network_address::{parse_dns_tcp, parse_ip_tcp, parse_memory, NetworkAddress},
     PeerId,
@@ -48,11 +48,11 @@ pub const SUPPORTED_MESSAGING_PROTOCOL: MessagingProtocolVersion = MessagingProt
 /// Global connection-id generator.
 static CONNECTION_ID_GENERATOR: ConnectionIdGenerator = ConnectionIdGenerator::new();
 
-/// tcp::Transport with Libra2-specific configuration applied.
-pub const LIBRA2_TCP_TRANSPORT: tcp::TcpTransport = tcp::TcpTransport {
+/// tcp::Transport with CreditChain-specific configuration applied.
+pub const CREDITCHAIN_TCP_TRANSPORT: tcp::TcpTransport = tcp::TcpTransport {
     // Use default options.
     ttl: None,
-    // Use TCP_NODELAY for Libra2 tcp connections.
+    // Use TCP_NODELAY for CreditChain tcp connections.
     nodelay: Some(true),
     // Use default TCP setting, overridden by Network config
     tcp_buff_cfg: tcp::TCPBufferCfg::new(),
@@ -411,7 +411,7 @@ pub async fn upgrade_outbound<T: TSocket>(
     })
 }
 
-/// The common Libra2Net Transport.
+/// The common CreditChainNet Transport.
 ///
 /// The base transport layer is pluggable, so long as it provides a reliable,
 /// ordered, connection-oriented, byte-stream abstraction (e.g., TCP). We currently
@@ -423,7 +423,7 @@ pub async fn upgrade_outbound<T: TSocket>(
 /// the `Handshake` protocol.
 // TODO(philiphayes): rework Transport trait, possibly include Upgrade trait.
 // ideas in this PR thread: https://github.com/libra2org/libra2-core/pull/3478#issuecomment-617385633
-pub struct Libra2NetTransport<TTransport> {
+pub struct CreditChainNetTransport<TTransport> {
     base_transport: TTransport,
     ctxt: Arc<UpgradeContext>,
     time_service: TimeService,
@@ -431,7 +431,7 @@ pub struct Libra2NetTransport<TTransport> {
     enable_proxy_protocol: bool,
 }
 
-impl<TTransport> Libra2NetTransport<TTransport>
+impl<TTransport> CreditChainNetTransport<TTransport>
 where
     TTransport: Transport<Error = io::Error>,
     TTransport::Output: TSocket,
@@ -476,7 +476,7 @@ where
     fn parse_dial_addr(
         addr: &NetworkAddress,
     ) -> io::Result<(NetworkAddress, x25519::PublicKey, u8)> {
-        use libra2_types::network_address::Protocol::*;
+        use creditchain_types::network_address::Protocol::*;
 
         let protos = addr.as_slice();
 
@@ -631,14 +631,14 @@ where
     }
 }
 
-// If using `Libra2NetTransport` as a `Transport` trait, then all upgrade futures
+// If using `CreditChainNetTransport` as a `Transport` trait, then all upgrade futures
 // and listening streams must be boxed, since `upgrade_inbound` and `upgrade_outbound`
 // are async fns (and therefore unnamed types).
 //
 // TODO(philiphayes): We can change these `Pin<Box<dyn Future<..>>> to `impl Future<..>`
 // when/if this rust feature is stabilized: https://github.com/rust-lang/rust/issues/63063
 
-impl<TTransport: Transport> Transport for Libra2NetTransport<TTransport>
+impl<TTransport: Transport> Transport for CreditChainNetTransport<TTransport>
 where
     TTransport: Transport<Error = io::Error> + Send + 'static,
     TTransport::Output: TSocket,

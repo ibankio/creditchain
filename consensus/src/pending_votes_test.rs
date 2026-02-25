@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::pending_votes::TwoChainTimeoutVotes;
-use libra2_bitvec::BitVec;
-use libra2_consensus_types::{
+use creditchain_bitvec::BitVec;
+use creditchain_consensus_types::{
     quorum_cert::QuorumCert, round_timeout::RoundTimeoutReason, timeout_2chain::TwoChainTimeout,
 };
-use libra2_types::validator_verifier::{
+use creditchain_types::validator_verifier::{
     random_validator_verifier, random_validator_verifier_with_voting_power,
 };
 use itertools::Itertools;

@@ -11,9 +11,9 @@ use crate::{
     },
 };
 use anyhow::{bail, Result};
-use libra2_consensus_types::{block::Block, common::Payload};
-use libra2_crypto::HashValue;
-use libra2_types::transaction::{SignedTransaction, Transaction};
+use creditchain_consensus_types::{block::Block, common::Payload};
+use creditchain_crypto::HashValue;
+use creditchain_types::transaction::{SignedTransaction, Transaction};
 use clap::Parser;
 use std::{collections::HashMap, path::PathBuf};
 

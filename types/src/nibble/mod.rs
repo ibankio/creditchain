@@ -8,7 +8,7 @@
 
 pub mod nibble_path;
 
-use libra2_crypto::HashValue;
+use creditchain_crypto::HashValue;
 #[cfg(any(test, feature = "fuzzing"))]
 use proptest::prelude::*;
 use serde::{Deserialize, Serialize};

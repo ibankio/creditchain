@@ -16,15 +16,15 @@ use crate::{
     logging::NetworkSchema,
     noise::{error::NoiseHandshakeError, stream::NoiseStream},
 };
-use libra2_config::{
+use creditchain_config::{
     config::{Peer, PeerRole},
     network_id::{NetworkContext, NetworkId},
 };
-use libra2_crypto::{noise, x25519};
-use libra2_infallible::{duration_since_epoch, RwLock};
-use libra2_logger::{error, trace};
-use libra2_short_hex_str::{AsShortHexStr, ShortHexStr};
-use libra2_types::PeerId;
+use creditchain_crypto::{noise, x25519};
+use creditchain_infallible::{duration_since_epoch, RwLock};
+use creditchain_logger::{error, trace};
+use creditchain_short_hex_str::{AsShortHexStr, ShortHexStr};
+use creditchain_types::PeerId;
 use futures::io::{AsyncRead, AsyncReadExt, AsyncWrite, AsyncWriteExt};
 use std::{collections::HashMap, convert::TryFrom as _, fmt::Debug, sync::Arc};
 
@@ -79,7 +79,7 @@ pub enum HandshakeAuthMode {
     /// In `Mutual` mode, both sides will authenticate each other with their
     /// `trusted_peers` set. We also include replay attack mitigation in this mode.
     ///
-    /// For example, in the Libra2 validator network, validator peers will only
+    /// For example, in the CreditChain validator network, validator peers will only
     /// allow connections from other validator peers. They will use this mode to
     /// check that inbound connections authenticate to a network public key
     /// actually contained in the current validator set.
@@ -393,7 +393,7 @@ impl NoiseUpgrader {
                         // The peer is not in the trusted peer set. Verify that the Peer ID is
                         // constructed correctly from the public key.
                         let derived_remote_peer_id =
-                            libra2_types::account_address::from_identity_public_key(
+                            creditchain_types::account_address::from_identity_public_key(
                                 remote_public_key,
                             );
                         if derived_remote_peer_id != remote_peer_id {
@@ -510,14 +510,14 @@ impl NoiseUpgrader {
 mod test {
     use super::*;
     use crate::{testutils, testutils::fake_socket::ReadWriteTestSocket};
-    use libra2_config::config::{Peer, PeerRole, RoleType};
-    use libra2_crypto::{
+    use creditchain_config::config::{Peer, PeerRole, RoleType};
+    use creditchain_crypto::{
         test_utils::TEST_SEED,
         traits::Uniform as _,
         x25519::{PrivateKey, PublicKey},
     };
-    use libra2_memsocket::MemorySocket;
-    use libra2_types::account_address::AccountAddress;
+    use creditchain_memsocket::MemorySocket;
+    use creditchain_types::account_address::AccountAddress;
     use futures::{executor::block_on, future::join};
     use rand::{prelude::StdRng, SeedableRng as _};
 
@@ -773,7 +773,7 @@ mod test {
 
     #[test]
     fn test_handshake_client_peerid_mismatch_fails_server_only_auth() {
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         let ((mut client, _), (server, server_public_key)) = build_peers(false, None);
         client.network_context = NetworkContext::mock_with_peer_id(PeerId::random());
@@ -814,7 +814,7 @@ mod test {
     #[test]
     fn test_handshake_peer_roles_pfn_dials_vfn() {
         // Initialize the logger
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         // Create a peers and metadata struct
         let network_ids = vec![NetworkId::Vfn, NetworkId::Public];
@@ -878,7 +878,7 @@ mod test {
     #[test]
     fn test_handshake_peer_roles_validator_dials_validator() {
         // Initialize the logger
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         // Create a client and server with mutual auth enabled
         let ((client, _), (server, server_public_key)) = build_peers(true, None);
@@ -916,7 +916,7 @@ mod test {
     #[test]
     fn test_handshake_peer_roles_vfn_dials_validator() {
         // Initialize the logger
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         // Create a peers and metadata struct with no trusted peers
         let network_ids = vec![NetworkId::Validator, NetworkId::Vfn];
@@ -980,7 +980,7 @@ mod test {
     #[test]
     fn test_handshake_peer_roles_vfn_dials_vfn() {
         // Initialize the logger
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         // Create a peers and metadata struct with no trusted peers
         let network_ids = vec![NetworkId::Vfn, NetworkId::Public];

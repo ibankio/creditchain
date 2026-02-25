@@ -16,10 +16,10 @@ use crate::{
     },
     network_id::NetworkId,
 };
-use libra2_crypto::x25519;
-use libra2_logger::info;
-use libra2_temppath::TempPath;
-use libra2_types::account_address::AccountAddress as PeerId;
+use creditchain_crypto::x25519;
+use creditchain_logger::info;
+use creditchain_temppath::TempPath;
+use creditchain_types::account_address::AccountAddress as PeerId;
 use rand::{prelude::StdRng, SeedableRng};
 use serde::{Deserialize, Serialize};
 use std::{
@@ -28,7 +28,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-/// The node configuration defines the configuration for a single Libra2
+/// The node configuration defines the configuration for a single CreditChain
 /// node (i.e., validator or fullnode). It is composed of module
 /// configurations for each of the modules that the node uses (e.g.,
 /// the API, indexer, mempool, state sync, etc.).

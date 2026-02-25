@@ -6,8 +6,8 @@
 
 use crate::types::partial_state_compute_result::PartialStateComputeResult;
 use anyhow::Result;
-use libra2_executor_types::execution_output::ExecutionOutput;
-use libra2_storage_interface::{
+use creditchain_executor_types::execution_output::ExecutionOutput;
+use creditchain_storage_interface::{
     state_store::state_summary::ProvableStateSummary, DbReader, LedgerSummary,
 };
 use do_ledger_update::DoLedgerUpdate;

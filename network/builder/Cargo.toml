@@ -1,5 +1,5 @@
 [package]
-name = "libra2-network-builder"
+name = "creditchain-network-builder"
 description = "CreditChain network builder for constructing a network"
 version = "0.1.1"
 
@@ -13,16 +13,16 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-channels = { workspace = true }
-libra2-config = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-event-notifications = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-netcore = { workspace = true }
-libra2-network = { workspace = true }
-libra2-network-discovery = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-channels = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-event-notifications = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-netcore = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-network-discovery = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-types = { workspace = true }
 bcs = { workspace = true }
 futures = { workspace = true }
 maplit = { workspace = true }

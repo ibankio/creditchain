@@ -2,7 +2,7 @@ apiVersion: v2
 name: testnet-addons
 version: "0.1"
 appVersion: 0.1.0
-description: Additional components for libra2-nodes testnet
-home: https://libra2.org/
+description: Additional components for creditchain-nodes testnet
+home: https://creditchain.org/
 sources:
-  - https://github.com/libra2org/libra2-core
+  - https://github.com/creditchainorg/creditchain-core

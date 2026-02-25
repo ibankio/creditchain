@@ -18,11 +18,11 @@ use crate::{
     util::time_service::TimeService,
 };
 use anyhow::{bail, ensure, format_err, Context};
-use libra2_config::config::{
+use creditchain_config::config::{
     ChainHealthBackoffValues, ExecutionBackpressureConfig, ExecutionBackpressureMetric,
     PipelineBackpressureValues,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block::Block,
     block_data::BlockData,
     common::{Author, Payload, PayloadFilter, Round},
@@ -32,13 +32,13 @@ use libra2_consensus_types::{
     quorum_cert::QuorumCert,
     utils::PayloadTxnsSize,
 };
-use libra2_crypto::{hash::CryptoHash, HashValue};
-use libra2_infallible::Mutex;
-use libra2_logger::{error, sample, sample::SampleRate, warn};
-use libra2_types::{
+use creditchain_crypto::{hash::CryptoHash, HashValue};
+use creditchain_infallible::Mutex;
+use creditchain_logger::{error, sample, sample::SampleRate, warn};
+use creditchain_types::{
     block_info::BlockInfo, on_chain_config::ValidatorTxnConfig, validator_txn::ValidatorTransaction,
 };
-use libra2_validator_transaction_pool as vtxn_pool;
+use creditchain_validator_transaction_pool as vtxn_pool;
 use itertools::Itertools;
 use std::{
     collections::{BTreeMap, HashSet},

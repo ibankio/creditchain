@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Result;
-use libra2_indexer_grpc_server_framework::ServerArgs;
-use libra2_indexer_grpc_v2_file_store_backfiller::IndexerGrpcV2FileStoreBackfillerConfig;
+use creditchain_indexer_grpc_server_framework::ServerArgs;
+use creditchain_indexer_grpc_v2_file_store_backfiller::IndexerGrpcV2FileStoreBackfillerConfig;
 use clap::Parser;
 
 #[cfg(unix)]

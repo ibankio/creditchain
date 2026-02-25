@@ -5,10 +5,10 @@ use crate::{
     remote_state_view_service::RemoteStateViewService, ExecuteBlockCommand, RemoteExecutionRequest,
     RemoteExecutionResult,
 };
-use libra2_logger::{info, trace};
-use libra2_secure_net::network_controller::{Message, NetworkController};
-use libra2_storage_interface::state_store::state_view::cached_state_view::CachedStateView;
-use libra2_types::{
+use creditchain_logger::{info, trace};
+use creditchain_secure_net::network_controller::{Message, NetworkController};
+use creditchain_storage_interface::state_store::state_view::cached_state_view::CachedStateView;
+use creditchain_types::{
     block_executor::{
         config::BlockExecutorConfigFromOnchain, partitioner::PartitionedTransactions,
     },
@@ -16,7 +16,7 @@ use libra2_types::{
     transaction::TransactionOutput,
     vm_status::VMStatus,
 };
-use libra2_vm::sharded_block_executor::{
+use creditchain_vm::sharded_block_executor::{
     executor_client::{ExecutorClient, ShardedExecutionOutput},
     ShardedBlockExecutor,
 };
@@ -57,13 +57,13 @@ pub fn get_coordinator_address() -> SocketAddr {
 
 pub static REMOTE_SHARDED_BLOCK_EXECUTOR: Lazy<
     Arc<
-        libra2_infallible::Mutex<
+        creditchain_infallible::Mutex<
             ShardedBlockExecutor<CachedStateView, RemoteExecutorClient<CachedStateView>>,
         >,
     >,
 > = Lazy::new(|| {
     info!("REMOTE_SHARDED_BLOCK_EXECUTOR created");
-    Arc::new(libra2_infallible::Mutex::new(
+    Arc::new(creditchain_infallible::Mutex::new(
         RemoteExecutorClient::create_remote_sharded_block_executor(
             get_coordinator_address(),
             get_remote_addresses(),

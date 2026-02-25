@@ -1,5 +1,5 @@
 [package]
-name = "libra2-rocksdb-options"
+name = "creditchain-rocksdb-options"
 description = "CreditChain RocksDb Options"
 version = "0.1.1"
 
@@ -13,5 +13,5 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-config = { workspace = true }
+creditchain-config = { workspace = true }
 rocksdb = { workspace = true }

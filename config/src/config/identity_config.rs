@@ -3,13 +3,13 @@
 
 use crate::{config::SecureBackend, keys::ConfigKey};
 use anyhow::anyhow;
-use libra2_crypto::{
+use creditchain_crypto::{
     bls12381,
     ed25519::Ed25519PrivateKey,
     x25519::{self, PRIVATE_KEY_SIZE},
     ValidCryptoMaterial,
 };
-use libra2_types::{
+use creditchain_types::{
     account_address::{from_identity_public_key, AccountAddress, AccountAddress as PeerId},
     dkg::{real_dkg::maybe_dk_from_bls_sk, DKGTrait, DefaultDKG},
 };

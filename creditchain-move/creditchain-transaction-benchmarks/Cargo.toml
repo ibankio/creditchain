@@ -1,0 +1,37 @@
+[package]
+name = "creditchain-transaction-benchmarks"
+description = "CreditChain transaction benchmarks"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+creditchain-bitvec = { workspace = true }
+creditchain-block-executor = { workspace = true }
+creditchain-block-partitioner = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-language-e2e-tests = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-node-resource-metrics = { workspace = true }
+creditchain-push-metrics =  { workspace = true }
+creditchain-transaction-simulation = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
+creditchain-vm-logging = { workspace = true }
+clap = { workspace = true }
+criterion = { workspace = true, features = ["html_reports"] }
+criterion-cpu-time = { workspace = true }
+num_cpus = { workspace = true }
+proptest = { workspace = true }
+
+[[bench]]
+name = "transaction_benches"
+harness = false

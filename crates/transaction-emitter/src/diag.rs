@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{bail, format_err, Result};
-use libra2_sdk::transaction_builder::TransactionFactory;
-use libra2_transaction_emitter_lib::{query_sequence_number, Cluster, TxnEmitter};
+use creditchain_sdk::transaction_builder::TransactionFactory;
+use creditchain_transaction_emitter_lib::{query_sequence_number, Cluster, TxnEmitter};
 use futures::future::join_all;
 use rand::{rngs::StdRng, SeedableRng};
 use std::{
@@ -17,7 +17,7 @@ pub async fn diag(cluster: &Cluster) -> Result<()> {
     let mut coin_source_account = cluster.load_coin_source_account(&client).await?;
     let emitter = TxnEmitter::new(
         TransactionFactory::new(cluster.chain_id)
-            .with_gas_unit_price(libra2_global_constants::GAS_UNIT_PRICE),
+            .with_gas_unit_price(creditchain_global_constants::GAS_UNIT_PRICE),
         StdRng::from_entropy(),
         client,
     );

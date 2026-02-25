@@ -11,8 +11,8 @@ use crate::{
         test_get_with_proof, test_get_with_proof_with_distinct_last_nibble, ValueBlob,
     },
 };
-use libra2_crypto::{hash::SPARSE_MERKLE_PLACEHOLDER_HASH, HashValue};
-use libra2_types::nibble::Nibble;
+use creditchain_crypto::{hash::SPARSE_MERKLE_PLACEHOLDER_HASH, HashValue};
+use creditchain_types::nibble::Nibble;
 use mock_tree_store::MockTreeStore;
 use proptest::{collection::hash_set, prelude::*};
 use rand::{rngs::StdRng, Rng, SeedableRng};
@@ -611,7 +611,7 @@ fn test_missing_root() {
     let db = MockTreeStore::<ValueBlob>::default();
     let tree = JellyfishMerkleTree::new(&db);
     let err = tree.get_with_proof(HashValue::random(), 0).err().unwrap();
-    if let Libra2DbError::MissingRootError(version) = err {
+    if let CreditChainDbError::MissingRootError(version) = err {
         assert_eq!(version, 0);
     } else {
         panic!("Unexpected error: {:?}", err);

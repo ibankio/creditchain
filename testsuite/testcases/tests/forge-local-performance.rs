@@ -2,16 +2,16 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_forge::{
+use creditchain_forge::{
     forge_main,
     success_criteria::{StateProgressThreshold, SuccessCriteria},
     EmitJobMode, EmitJobRequest, ForgeConfig, InitialVersion, LocalFactory, Options, Result,
 };
-use libra2_testcases::performance_test::PerformanceBenchmark;
+use creditchain_testcases::performance_test::PerformanceBenchmark;
 use std::num::NonZeroUsize;
 
 fn main() -> Result<()> {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
 
     let tests = ForgeConfig::default()
         .with_initial_validator_count(NonZeroUsize::new(2).unwrap())
@@ -20,7 +20,7 @@ fn main() -> Result<()> {
         .with_emit_job(
             EmitJobRequest::default()
                 .mode(EmitJobMode::ConstTps { tps: 30 })
-                .gas_price(libra2_global_constants::GAS_UNIT_PRICE),
+                .gas_price(creditchain_global_constants::GAS_UNIT_PRICE),
         )
         .with_success_criteria(SuccessCriteria::new(20).add_chain_progress(
             StateProgressThreshold {

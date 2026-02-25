@@ -3,15 +3,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{
-    Libra2PublicInfo, ChainInfo, FullNode, NodeExt, Result, SwarmChaos, Validator, Version,
+    CreditChainPublicInfo, ChainInfo, FullNode, NodeExt, Result, SwarmChaos, Validator, Version,
 };
 use anyhow::{anyhow, bail};
-use libra2_config::{
+use creditchain_config::{
     config::{NodeConfig, OverrideNodeConfig},
     network_id::NetworkId,
 };
-use libra2_rest_client::Client as RestClient;
-use libra2_sdk::types::PeerId;
+use creditchain_rest_client::Client as RestClient;
+use creditchain_sdk::types::PeerId;
 use futures::future::{join_all, try_join_all};
 use log::info;
 use prometheus_http_query::response::{PromqlResult, Sample};
@@ -94,14 +94,14 @@ pub trait Swarm: Sync + Send {
         timeout: Option<i64>,
     ) -> Result<Vec<Sample>>;
 
-    fn libra2_public_info(&self) -> Libra2PublicInfo {
-        self.chain_info().into_libra2_public_info()
+    fn creditchain_public_info(&self) -> CreditChainPublicInfo {
+        self.chain_info().into_creditchain_public_info()
     }
 
     fn chain_info_for_node(&mut self, idx: usize) -> ChainInfo;
 
-    fn libra2_public_info_for_node(&mut self, idx: usize) -> Libra2PublicInfo {
-        self.chain_info_for_node(idx).into_libra2_public_info()
+    fn creditchain_public_info_for_node(&mut self, idx: usize) -> CreditChainPublicInfo {
+        self.chain_info_for_node(idx).into_creditchain_public_info()
     }
 
     fn get_default_pfn_node_config(&self) -> NodeConfig;

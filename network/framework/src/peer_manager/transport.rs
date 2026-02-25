@@ -8,13 +8,13 @@ use crate::{
     transport::Connection,
 };
 use anyhow::format_err;
-use libra2_channels::{self};
-use libra2_config::network_id::NetworkContext;
-use libra2_logger::prelude::*;
-use libra2_netcore::transport::{ConnectionOrigin, Transport};
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_time_service::{TimeService, TimeServiceTrait};
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_channels::{self};
+use creditchain_config::network_id::NetworkContext;
+use creditchain_logger::prelude::*;
+use creditchain_netcore::transport::{ConnectionOrigin, Transport};
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_time_service::{TimeService, TimeServiceTrait};
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use futures::{
     channel::oneshot,
     future::{BoxFuture, FutureExt},
@@ -44,8 +44,8 @@ where
     /// [`Transport`] that is used to establish connections
     transport: TTransport,
     listener: Fuse<TTransport::Listener>,
-    transport_reqs_rx: libra2_channels::Receiver<TransportRequest>,
-    transport_notifs_tx: libra2_channels::Sender<TransportNotification<TSocket>>,
+    transport_reqs_rx: creditchain_channels::Receiver<TransportRequest>,
+    transport_notifs_tx: creditchain_channels::Sender<TransportNotification<TSocket>>,
 }
 
 impl<TTransport, TSocket> TransportHandler<TTransport, TSocket>
@@ -61,8 +61,8 @@ where
         time_service: TimeService,
         transport: TTransport,
         listen_addr: NetworkAddress,
-        transport_reqs_rx: libra2_channels::Receiver<TransportRequest>,
-        transport_notifs_tx: libra2_channels::Sender<TransportNotification<TSocket>>,
+        transport_reqs_rx: creditchain_channels::Receiver<TransportRequest>,
+        transport_notifs_tx: creditchain_channels::Sender<TransportNotification<TSocket>>,
     ) -> (Self, NetworkAddress) {
         let addr_string = format!("{}", listen_addr);
         let (listener, listen_addr) = transport

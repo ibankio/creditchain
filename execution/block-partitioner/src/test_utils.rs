@@ -4,33 +4,33 @@
 #[cfg(test)]
 use crate::{BlockPartitioner, Sender};
 #[cfg(test)]
-use libra2_crypto::hash::CryptoHash;
+use creditchain_crypto::hash::CryptoHash;
 #[cfg(test)]
-use libra2_crypto::hash::TestOnlyHash;
+use creditchain_crypto::hash::TestOnlyHash;
 #[cfg(test)]
-use libra2_crypto::HashValue;
-use libra2_crypto::{ed25519::ed25519_keys::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
+use creditchain_crypto::HashValue;
+use creditchain_crypto::{ed25519::ed25519_keys::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
 #[cfg(test)]
-use libra2_types::block_executor::partitioner::PartitionedTransactions;
+use creditchain_types::block_executor::partitioner::PartitionedTransactions;
 #[cfg(test)]
-use libra2_types::block_executor::partitioner::RoundId;
+use creditchain_types::block_executor::partitioner::RoundId;
 #[cfg(test)]
-use libra2_types::block_executor::partitioner::ShardId;
+use creditchain_types::block_executor::partitioner::ShardId;
 #[cfg(test)]
-use libra2_types::block_executor::partitioner::TransactionWithDependencies;
+use creditchain_types::block_executor::partitioner::TransactionWithDependencies;
 #[cfg(test)]
-use libra2_types::block_executor::partitioner::GLOBAL_ROUND_ID;
+use creditchain_types::block_executor::partitioner::GLOBAL_ROUND_ID;
 #[cfg(test)]
-use libra2_types::block_executor::partitioner::GLOBAL_SHARD_ID;
+use creditchain_types::block_executor::partitioner::GLOBAL_SHARD_ID;
 #[cfg(test)]
-use libra2_types::state_store::state_key::StateKey;
-use libra2_types::{
+use creditchain_types::state_store::state_key::StateKey;
+use creditchain_types::{
     chain_id::ChainId,
     transaction::{
         analyzed_transaction::AnalyzedTransaction, EntryFunction, RawTransaction,
         SignedTransaction, Transaction, TransactionPayload,
     },
-    Libra2CoinType, CoinType,
+    CreditChainCoinType, CoinType,
 };
 use move_core_types::{
     account_address::AccountAddress, identifier::Identifier, language_storage::ModuleId,
@@ -85,7 +85,7 @@ pub fn create_signed_p2p_transaction(
         let transaction_payload = TransactionPayload::EntryFunction(EntryFunction::new(
             ModuleId::new(AccountAddress::ONE, Identifier::new("coin").unwrap()),
             Identifier::new("transfer").unwrap(),
-            vec![Libra2CoinType::type_tag()],
+            vec![CreditChainCoinType::type_tag()],
             vec![
                 bcs::to_bytes(&receiver.account_address).unwrap(),
                 bcs::to_bytes(&1u64).unwrap(),

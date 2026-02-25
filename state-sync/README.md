@@ -45,7 +45,7 @@ a batch of transactions.
 The state sync code structure matches the architecture outlined above:
 - **Driver:** [https://github.com/ibankio/creditchain/tree/main/state-sync/state-sync-driver](https://github.com/ibankio/creditchain/tree/main/state-sync/state-sync-driver)
 - **Data Streaming Service:** [https://github.com/ibankio/creditchain/tree/main/state-sync/data-streaming-service](https://github.com/ibankio/creditchain/tree/main/state-sync/data-streaming-service)
-- **CreditChain Data Client**: [https://github.com/ibankio/creditchain/tree/main/state-sync/libra2-data-client](https://github.com/ibankio/creditchain/tree/main/state-sync/libra2-data-client)
+- **CreditChain Data Client**: [https://github.com/ibankio/creditchain/tree/main/state-sync/creditchain-data-client](https://github.com/ibankio/creditchain/tree/main/state-sync/creditchain-data-client)
 - **Storage Service:** [https://github.com/ibankio/creditchain/tree/main/state-sync/storage-service](https://github.com/ibankio/creditchain/tree/main/state-sync/storage-service)
 
 In addition, there is also a directory containing the code for

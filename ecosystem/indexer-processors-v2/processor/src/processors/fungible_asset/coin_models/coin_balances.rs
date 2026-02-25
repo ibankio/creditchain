@@ -12,7 +12,7 @@ use crate::{
 };
 use ahash::AHashMap;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::WriteResource, utils::convert::standardize_address,
+   creditchain_protos::transaction::v1::WriteResource, utils::convert::standardize_address,
 };
 use bigdecimal::BigDecimal;
 use field_count::FieldCount;

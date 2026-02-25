@@ -4,12 +4,12 @@
 #![allow(dead_code)]
 
 use crate::tdbg;
-use libra2_cached_packages::libra2_stdlib::code_publish_package_txn;
-use libra2_framework::natives::code::{
+use creditchain_cached_packages::creditchain_stdlib::code_publish_package_txn;
+use creditchain_framework::natives::code::{
     ModuleMetadata, MoveOption, PackageDep, PackageMetadata, UpgradePolicy,
 };
-use libra2_language_e2e_tests::{account::Account, executor::FakeExecutor};
-use libra2_types::transaction::{ExecutionStatus, TransactionPayload, TransactionStatus};
+use creditchain_language_e2e_tests::{account::Account, executor::FakeExecutor};
+use creditchain_types::transaction::{ExecutionStatus, TransactionPayload, TransactionStatus};
 use arbitrary::Arbitrary;
 use fuzzer::UserAccount;
 use libfuzzer_sys::Corpus;

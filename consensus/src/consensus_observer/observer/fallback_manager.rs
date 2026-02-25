@@ -5,11 +5,11 @@ use crate::consensus_observer::common::{
     error::Error,
     logging::{LogEntry, LogSchema},
 };
-use libra2_config::config::ConsensusObserverConfig;
-use libra2_logger::warn;
-use libra2_storage_interface::DbReader;
-use libra2_time_service::{TimeService, TimeServiceTrait};
-use libra2_types::{ledger_info::LedgerInfoWithSignatures, transaction::Version};
+use creditchain_config::config::ConsensusObserverConfig;
+use creditchain_logger::warn;
+use creditchain_storage_interface::DbReader;
+use creditchain_time_service::{TimeService, TimeServiceTrait};
+use creditchain_types::{ledger_info::LedgerInfoWithSignatures, transaction::Version};
 use std::{
     sync::Arc,
     time::{Duration, Instant},
@@ -167,9 +167,9 @@ impl ObserverFallbackManager {
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_crypto::HashValue;
-    use libra2_storage_interface::Result;
-    use libra2_types::{
+    use creditchain_crypto::HashValue;
+    use creditchain_storage_interface::Result;
+    use creditchain_types::{
         aggregate_signature::AggregateSignature, block_info::BlockInfo, ledger_info::LedgerInfo,
         transaction::Version,
     };

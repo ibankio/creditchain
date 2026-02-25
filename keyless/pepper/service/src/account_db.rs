@@ -1,7 +1,7 @@
 // Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_logger::warn;
+use creditchain_logger::warn;
 use firestore::{FirestoreDb, FirestoreDbOptions, FirestoreResult};
 use once_cell::sync::Lazy;
 use tokio::sync::OnceCell;

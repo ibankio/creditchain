@@ -11,8 +11,8 @@ use crate::{
     },
     ProtocolId,
 };
-use libra2_channels::{self, libra2_channel};
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_channels::{self, creditchain_channel};
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use bytes::Bytes;
 use futures::channel::oneshot;
 use std::time::Duration;
@@ -21,19 +21,19 @@ use std::time::Duration;
 /// from PeerManager.
 #[derive(Clone, Debug)]
 pub struct PeerManagerRequestSender {
-    inner: libra2_channel::Sender<(PeerId, ProtocolId), PeerManagerRequest>,
+    inner: creditchain_channel::Sender<(PeerId, ProtocolId), PeerManagerRequest>,
 }
 
 /// Convenience wrapper which makes it easy to issue connection requests and await the responses
 /// from PeerManager.
 #[derive(Clone, Debug)]
 pub struct ConnectionRequestSender {
-    inner: libra2_channel::Sender<PeerId, ConnectionRequest>,
+    inner: creditchain_channel::Sender<PeerId, ConnectionRequest>,
 }
 
 impl PeerManagerRequestSender {
     /// Construct a new PeerManagerRequestSender with a raw channel::Sender
-    pub fn new(inner: libra2_channel::Sender<(PeerId, ProtocolId), PeerManagerRequest>) -> Self {
+    pub fn new(inner: creditchain_channel::Sender<(PeerId, ProtocolId), PeerManagerRequest>) -> Self {
         Self { inner }
     }
 
@@ -110,8 +110,8 @@ impl PeerManagerRequestSender {
 }
 
 impl ConnectionRequestSender {
-    /// Construct a new ConnectionRequestSender with a raw libra2_channel::Sender
-    pub fn new(inner: libra2_channel::Sender<PeerId, ConnectionRequest>) -> Self {
+    /// Construct a new ConnectionRequestSender with a raw creditchain_channel::Sender
+    pub fn new(inner: creditchain_channel::Sender<PeerId, ConnectionRequest>) -> Self {
         Self { inner }
     }
 

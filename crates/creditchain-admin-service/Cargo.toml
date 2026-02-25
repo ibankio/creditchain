@@ -1,0 +1,33 @@
+[package]
+name = "creditchain-admin-service"
+description = "The Admin Service"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+anyhow = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-consensus = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-mempool = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-system-utils = { workspace = true }
+creditchain-types = { workspace = true }
+bcs = { workspace = true }
+futures-channel = { workspace = true }
+http = { workspace = true }
+hyper = { workspace = true }
+sha256 = { workspace = true }
+tokio = { workspace = true }
+url = { workspace = true }

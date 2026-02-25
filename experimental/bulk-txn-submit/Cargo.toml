@@ -1,5 +1,5 @@
 [package]
-name = "libra2-experimental-bulk-txn-submit"
+name = "creditchain-experimental-bulk-txn-submit"
 description = ""
 version = "0.0.1"
 
@@ -14,11 +14,11 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-config = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-transaction-emitter-lib = { workspace = true }
-libra2-transaction-generator-lib = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-transaction-emitter-lib = { workspace = true }
+creditchain-transaction-generator-lib = { workspace = true }
 bcs = { workspace = true }
 chrono = { workspace = true }
 clap = { workspace = true }

@@ -1,5 +1,5 @@
 [package]
-name = "libra2-experimental-ptx-executor"
+name = "creditchain-experimental-ptx-executor"
 description = "CreditChain P-Transaction Executor"
 version = "0.1.1"
 
@@ -13,16 +13,16 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-block-executor = { workspace = true }
-libra2-experimental-runtimes = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
-libra2-vm-environment = { workspace = true }
-libra2-vm-logging = { workspace = true }
-libra2-vm-types = { workspace = true }
+creditchain-block-executor = { workspace = true }
+creditchain-experimental-runtimes = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
+creditchain-vm-environment = { workspace = true }
+creditchain-vm-logging = { workspace = true }
+creditchain-vm-types = { workspace = true }
 move-core-types = { workspace = true }
 once_cell = { workspace = true }
 rayon = { workspace = true }

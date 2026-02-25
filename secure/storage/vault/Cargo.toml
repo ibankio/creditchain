@@ -1,5 +1,5 @@
 [package]
-name = "libra2-vault-client"
+name = "creditchain-vault-client"
 description = "CreditChain's Restful Vault Client"
 version = "0.1.1"
 
@@ -13,8 +13,8 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-crypto = { workspace = true }
-libra2-types = { workspace = true, optional = true }
+creditchain-crypto = { workspace = true }
+creditchain-types = { workspace = true, optional = true }
 base64 = { workspace = true }
 chrono = { workspace = true }
 native-tls = { workspace = true }
@@ -26,9 +26,9 @@ thiserror = { workspace = true }
 ureq = { workspace = true }
 
 [dev-dependencies]
-libra2-proptest-helpers = { workspace = true }
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-proptest-helpers = { workspace = true }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 proptest = { workspace = true }
 
 [features]
-fuzzing = ["proptest", "libra2-types", "libra2-types/fuzzing"]
+fuzzing = ["proptest", "creditchain-types", "creditchain-types/fuzzing"]

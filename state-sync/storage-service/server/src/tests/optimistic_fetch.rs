@@ -9,11 +9,11 @@ use crate::{
     storage::StorageReader,
     tests::{mock, utils},
 };
-use libra2_config::{
-    config::{Libra2DataClientConfig, StorageServiceConfig},
+use creditchain_config::{
+    config::{CreditChainDataClientConfig, StorageServiceConfig},
     network_id::PeerNetworkId,
 };
-use libra2_storage_service_types::{
+use creditchain_storage_service_types::{
     requests::{
         DataRequest, NewTransactionOutputsWithProofRequest,
         NewTransactionsOrOutputsWithProofRequest, NewTransactionsWithProofRequest,
@@ -21,8 +21,8 @@ use libra2_storage_service_types::{
     },
     responses::StorageServerSummary,
 };
-use libra2_time_service::TimeService;
-use libra2_types::epoch_change::EpochChangeProof;
+use creditchain_time_service::TimeService;
+use creditchain_types::epoch_change::EpochChangeProof;
 use arc_swap::ArcSwap;
 use dashmap::DashMap;
 use futures::channel::oneshot;
@@ -75,7 +75,7 @@ async fn test_peers_with_ready_optimistic_fetches() {
             Arc::new(ArcSwap::from(Arc::new(StorageServerSummary::default())));
         let lru_response_cache = Cache::new(0);
         let request_moderator = Arc::new(RequestModerator::new(
-            Libra2DataClientConfig::default(),
+            CreditChainDataClientConfig::default(),
             cached_storage_server_summary.clone(),
             mock::create_peers_and_metadata(vec![]),
             storage_service_config,
@@ -187,7 +187,7 @@ async fn test_peers_with_ready_optimistic_fetches_update() {
             Arc::new(ArcSwap::from(Arc::new(StorageServerSummary::default())));
         let lru_response_cache = Cache::new(0);
         let request_moderator = Arc::new(RequestModerator::new(
-            Libra2DataClientConfig::default(),
+            CreditChainDataClientConfig::default(),
             cached_storage_server_summary.clone(),
             mock::create_peers_and_metadata(vec![]),
             storage_service_config,
@@ -301,7 +301,7 @@ async fn test_remove_expired_optimistic_fetches() {
             Arc::new(ArcSwap::from(Arc::new(StorageServerSummary::default())));
         let lru_response_cache = Cache::new(0);
         let request_moderator = Arc::new(RequestModerator::new(
-            Libra2DataClientConfig::default(),
+            CreditChainDataClientConfig::default(),
             cached_storage_server_summary.clone(),
             mock::create_peers_and_metadata(vec![]),
             storage_service_config,

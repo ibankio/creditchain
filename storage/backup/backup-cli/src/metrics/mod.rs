@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_push_metrics::{exponential_buckets, register_histogram_vec, HistogramVec};
+use creditchain_push_metrics::{exponential_buckets, register_histogram_vec, HistogramVec};
 use once_cell::sync::Lazy;
 
 pub mod backup;
@@ -13,7 +13,7 @@ pub mod verify;
 pub static OTHER_TIMERS_SECONDS: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
         // metric name
-        "libra2_backup_cli_other_timers_seconds",
+        "creditchain_backup_cli_other_timers_seconds",
         // metric description
         "Various timers for performance analysis.",
         // metric labels (dimensions)

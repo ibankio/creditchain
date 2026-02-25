@@ -6,15 +6,15 @@ use crate::{
     monitor,
     quorum_store::{batch_generator::BackPressure, batch_proof_queue::BatchProofQueue, counters},
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::{Payload, PayloadFilter, ProofWithData, TxnSummaryWithExpiration},
     payload::{OptQuorumStorePayload, PayloadExecutionLimit},
     proof_of_store::{BatchInfo, ProofOfStore, ProofOfStoreMsg},
     request_response::{GetPayloadCommand, GetPayloadResponse},
     utils::PayloadTxnsSize,
 };
-use libra2_logger::prelude::*;
-use libra2_types::PeerId;
+use creditchain_logger::prelude::*;
+use creditchain_types::PeerId;
 use futures::StreamExt;
 use futures_channel::mpsc::Receiver;
 use std::{cmp::min, collections::HashSet, sync::Arc, time::Duration};

@@ -9,13 +9,13 @@ use crate::{
     },
 };
 use anyhow::Result;
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block::Block, quorum_cert::QuorumCert, timeout_2chain::TwoChainTimeoutCertificate, vote::Vote,
 };
-use libra2_crypto::HashValue;
-use libra2_infallible::Mutex;
-use libra2_storage_interface::DbReader;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_infallible::Mutex;
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{
     aggregate_signature::AggregateSignature,
     epoch_change::EpochChangeProof,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},
@@ -240,7 +240,7 @@ impl PersistentLivenessStorage for MockStorage {
         Ok(EpochChangeProof::new(vec![lis], false))
     }
 
-    fn libra2_db(&self) -> Arc<dyn DbReader> {
+    fn creditchain_db(&self) -> Arc<dyn DbReader> {
         unimplemented!()
     }
 
@@ -314,7 +314,7 @@ impl PersistentLivenessStorage for EmptyStorage {
         Ok(EpochChangeProof::new(vec![], false))
     }
 
-    fn libra2_db(&self) -> Arc<dyn DbReader> {
+    fn creditchain_db(&self) -> Arc<dyn DbReader> {
         unimplemented!()
     }
 

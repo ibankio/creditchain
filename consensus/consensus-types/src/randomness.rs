@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::block::Block;
-use libra2_types::randomness::FullRandMetadata;
+use creditchain_types::randomness::FullRandMetadata;
 
 impl From<&Block> for FullRandMetadata {
     fn from(block: &Block) -> Self {

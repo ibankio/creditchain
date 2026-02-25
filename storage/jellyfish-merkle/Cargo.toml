@@ -1,5 +1,5 @@
 [package]
-name = "libra2-jellyfish-merkle"
+name = "creditchain-jellyfish-merkle"
 description = "CreditChain jellyfish merkle"
 version = "0.1.1"
 
@@ -14,14 +14,14 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-crypto-derive = { workspace = true }
-libra2-experimental-runtimes = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-crypto-derive = { workspace = true }
+creditchain-experimental-runtimes = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
 arr_macro = { workspace = true }
 bcs = { workspace = true }
 byteorder = { workspace = true }
@@ -36,13 +36,13 @@ serde = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-crypto = { workspace = true }
-libra2-db = { workspace = true }
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-crypto = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 proptest = { workspace = true }
 proptest-derive = { workspace = true }
 rand = { workspace = true }
 
 [features]
 default = []
-fuzzing = ["proptest", "proptest-derive", "libra2-crypto/fuzzing", "libra2-types/fuzzing"]
+fuzzing = ["proptest", "proptest-derive", "creditchain-crypto/fuzzing", "creditchain-types/fuzzing"]

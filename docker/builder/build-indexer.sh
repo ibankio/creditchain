@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) Libra2
+# Copyright (c) CreditChain
 # SPDX-License-Identifier: Apache-2.0
 set -e
 
@@ -12,24 +12,24 @@ echo "CARGO_TARGET_DIR: $CARGO_TARGET_DIR"
 
 # Build all the rust binaries
 cargo build --locked --profile=$PROFILE \
-    -p libra2-indexer-grpc-cache-worker \
-    -p libra2-indexer-grpc-file-store \
-    -p libra2-indexer-grpc-data-service \
-    -p libra2-nft-metadata-crawler \
-    -p libra2-indexer-grpc-file-checker \
-    -p libra2-indexer-grpc-data-service-v2 \
-    -p libra2-indexer-grpc-manager \
+    -p creditchain-indexer-grpc-cache-worker \
+    -p creditchain-indexer-grpc-file-store \
+    -p creditchain-indexer-grpc-data-service \
+    -p creditchain-nft-metadata-crawler \
+    -p creditchain-indexer-grpc-file-checker \
+    -p creditchain-indexer-grpc-data-service-v2 \
+    -p creditchain-indexer-grpc-manager \
     "$@"
 
 # After building, copy the binaries we need to `dist` since the `target` directory is used as docker cache mount and only available during the RUN step
 BINS=(
-    libra2-indexer-grpc-cache-worker
-    libra2-indexer-grpc-file-store
-    libra2-indexer-grpc-data-service
-    libra2-nft-metadata-crawler
-    libra2-indexer-grpc-file-checker
-    libra2-indexer-grpc-data-service-v2
-    libra2-indexer-grpc-manager
+    creditchain-indexer-grpc-cache-worker
+    creditchain-indexer-grpc-file-store
+    creditchain-indexer-grpc-data-service
+    creditchain-nft-metadata-crawler
+    creditchain-indexer-grpc-file-checker
+    creditchain-indexer-grpc-data-service-v2
+    creditchain-indexer-grpc-manager
 )
 
 mkdir dist

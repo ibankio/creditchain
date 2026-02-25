@@ -18,19 +18,19 @@ use crate::emitter::{
 };
 use again::RetryPolicy;
 use anyhow::{ensure, format_err, Result};
-use libra2_config::config::DEFAULT_MAX_SUBMIT_TRANSACTION_BATCH_SIZE;
-use libra2_crypto::ed25519::Ed25519PrivateKey;
-use libra2_logger::{sample, sample::SampleRate};
-use libra2_rest_client::{libra2_api_types::Libra2ErrorCode, error::RestError, Client as RestClient};
-use libra2_sdk::{
+use creditchain_config::config::DEFAULT_MAX_SUBMIT_TRANSACTION_BATCH_SIZE;
+use creditchain_crypto::ed25519::Ed25519PrivateKey;
+use creditchain_logger::{sample, sample::SampleRate};
+use creditchain_rest_client::{creditchain_api_types::CreditChainErrorCode, error::RestError, Client as RestClient};
+use creditchain_sdk::{
     move_types::account_address::AccountAddress,
-    transaction_builder::{libra2_stdlib, TransactionFactory},
+    transaction_builder::{creditchain_stdlib, TransactionFactory},
     types::{transaction::SignedTransaction, AccountKey, LocalAccount},
 };
-use libra2_transaction_generator_lib::{
+use creditchain_transaction_generator_lib::{
     create_txn_generator_creator, AccountType, TransactionType, SEND_AMOUNT,
 };
-use libra2_types::account_config::libra2_test_root_address;
+use creditchain_types::account_config::creditchain_test_root_address;
 use futures::future::{try_join_all, FutureExt};
 use log::{error, info, warn};
 use once_cell::sync::Lazy;
@@ -212,8 +212,8 @@ impl Default for EmitJobRequest {
                 mempool_backlog: 3000,
             },
             transaction_mix_per_phase: vec![vec![(TransactionType::default(), 1)]],
-            max_gas_per_txn: libra2_global_constants::MAX_GAS_AMOUNT,
-            gas_price: libra2_global_constants::GAS_UNIT_PRICE,
+            max_gas_per_txn: creditchain_global_constants::MAX_GAS_AMOUNT,
+            gas_price: creditchain_global_constants::GAS_UNIT_PRICE,
             init_max_gas_per_txn: None,
             init_gas_price_multiplier: 2,
             mint_to_root: false,
@@ -1064,7 +1064,7 @@ async fn wait_for_accounts_sequence(
             },
         }
 
-        if libra2_infallible::duration_since_epoch().as_secs() >= txn_expiration_ts_secs + 240 {
+        if creditchain_infallible::duration_since_epoch().as_secs() >= txn_expiration_ts_secs + 240 {
             sample!(
                 SampleRate::Duration(Duration::from_secs(15)),
                 error!(
@@ -1131,7 +1131,7 @@ pub async fn get_account_seq_num(
         Err(e) => {
             // if account is not present, that is equivalent to sequence_number = 0
             if let RestError::Api(api_error) = e {
-                if let Libra2ErrorCode::AccountNotFound = api_error.error.error_code {
+                if let CreditChainErrorCode::AccountNotFound = api_error.error.error_code {
                     return Ok((
                         0,
                         Duration::from_micros(api_error.state.as_ref().unwrap().timestamp_usecs)
@@ -1151,7 +1151,7 @@ pub async fn load_specific_account(
     client: &RestClient,
 ) -> Result<LocalAccount> {
     let address = if is_root {
-        libra2_test_root_address()
+        creditchain_test_root_address()
     } else {
         account_key.authentication_key().account_address()
     };
@@ -1174,7 +1174,7 @@ pub fn gen_transfer_txn_request(
     txn_factory: &TransactionFactory,
 ) -> SignedTransaction {
     sender.sign_with_transaction_builder(
-        txn_factory.payload(libra2_stdlib::libra2_coin_transfer(*receiver, num_coins)),
+        txn_factory.payload(creditchain_stdlib::creditchain_coin_transfer(*receiver, num_coins)),
     )
 }
 

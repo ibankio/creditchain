@@ -1,5 +1,5 @@
 [package]
-name = "libra2-experimental-hexy"
+name = "creditchain-experimental-hexy"
 description = "CreditChain Hexy"
 version = "0.1.1"
 
@@ -14,15 +14,15 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-experimental-layered-map = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-metrics-core = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-experimental-layered-map = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-metrics-core = { workspace = true }
 itertools = { workspace = true }
 once_cell = { workspace = true }
 
 [dev-dependencies]
-libra2-crypto = { workspace = true, features = ["fuzzing"] }
+creditchain-crypto = { workspace = true, features = ["fuzzing"] }
 criterion = { workspace = true }
 proptest = { workspace = true }
 rand = { workspace = true }

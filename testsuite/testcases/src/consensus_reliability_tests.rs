@@ -3,7 +3,7 @@
 
 use crate::{LoadDestination, NetworkLoadTest};
 use anyhow::{anyhow, bail, Context};
-use libra2_forge::{
+use creditchain_forge::{
     test_utils::consensus_utils::{
         test_consensus_fault_tolerance, FailPointFailureInjection, NodeState,
     },
@@ -92,7 +92,7 @@ impl NetworkLoadTest for ChangingWorkingQuorumTest {
             let swarm = swarm.read().await;
             (
                 swarm.get_validator_clients_with_names(),
-                swarm.libra2_public_info(),
+                swarm.creditchain_public_info(),
             )
         };
         // Function that returns set of down nodes in a given cycle.
@@ -135,7 +135,7 @@ impl NetworkLoadTest for ChangingWorkingQuorumTest {
 
                 validator
                     .set_failpoint(
-                        "libra2_vm::execution::block_metadata".to_string(),
+                        "creditchain_vm::execution::block_metadata".to_string(),
                         format!("sleep({})", sleep_time),
                     )
                     .await
@@ -294,7 +294,7 @@ impl NetworkLoadTest for ChangingWorkingQuorumTest {
 
                 validator
                     .set_failpoint(
-                        "libra2_vm::execution::block_metadata".to_string(),
+                        "creditchain_vm::execution::block_metadata".to_string(),
                         "off".to_string(),
                     )
                     .await

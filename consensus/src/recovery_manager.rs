@@ -13,13 +13,13 @@ use crate::{
     round_manager::VerifiedEvent,
 };
 use anyhow::{anyhow, ensure, Context, Result};
-use libra2_channels::libra2_channel;
-use libra2_consensus_types::{
+use creditchain_channels::creditchain_channel;
+use creditchain_consensus_types::{
     common::Author, proposal_msg::ProposalMsg, sync_info::SyncInfo, vote_msg::VoteMsg,
 };
-use libra2_infallible::Mutex;
-use libra2_logger::prelude::*;
-use libra2_types::{block_info::Round, epoch_state::EpochState};
+use creditchain_infallible::Mutex;
+use creditchain_logger::prelude::*;
+use creditchain_types::{block_info::Round, epoch_state::EpochState};
 use futures::{FutureExt, StreamExt};
 use futures_channel::oneshot;
 use std::{mem::Discriminant, process, sync::Arc};
@@ -118,7 +118,7 @@ impl RecoveryManager {
 
     pub async fn start(
         mut self,
-        mut event_rx: libra2_channel::Receiver<
+        mut event_rx: creditchain_channel::Receiver<
             (Author, Discriminant<VerifiedEvent>),
             (Author, VerifiedEvent),
         >,

@@ -10,11 +10,11 @@ use crate::{
     subscription::{SubscriptionRequest, SubscriptionStreamRequests},
     tests::{mock, mock::MockClient, utils},
 };
-use libra2_config::{
-    config::{Libra2DataClientConfig, StorageServiceConfig},
+use creditchain_config::{
+    config::{CreditChainDataClientConfig, StorageServiceConfig},
     network_id::PeerNetworkId,
 };
-use libra2_storage_service_types::{
+use creditchain_storage_service_types::{
     requests::{
         DataRequest, StorageServiceRequest, SubscribeTransactionOutputsWithProofRequest,
         SubscribeTransactionsOrOutputsWithProofRequest, SubscribeTransactionsWithProofRequest,
@@ -23,8 +23,8 @@ use libra2_storage_service_types::{
     responses::StorageServerSummary,
     StorageServiceError,
 };
-use libra2_time_service::TimeService;
-use libra2_types::epoch_change::EpochChangeProof;
+use creditchain_time_service::TimeService;
+use creditchain_types::epoch_change::EpochChangeProof;
 use arc_swap::ArcSwap;
 use claims::assert_matches;
 use dashmap::DashMap;
@@ -81,7 +81,7 @@ async fn test_peers_with_ready_subscriptions() {
         let optimistic_fetches = Arc::new(DashMap::new());
         let lru_response_cache = Cache::new(0);
         let request_moderator = Arc::new(RequestModerator::new(
-            Libra2DataClientConfig::default(),
+            CreditChainDataClientConfig::default(),
             cached_storage_server_summary.clone(),
             mock::create_peers_and_metadata(vec![]),
             StorageServiceConfig::default(),
@@ -203,7 +203,7 @@ async fn test_remove_expired_subscriptions_no_new_data() {
         let optimistic_fetches = Arc::new(DashMap::new());
         let lru_response_cache = Cache::new(0);
         let request_moderator = Arc::new(RequestModerator::new(
-            Libra2DataClientConfig::default(),
+            CreditChainDataClientConfig::default(),
             cached_storage_server_summary.clone(),
             mock::create_peers_and_metadata(vec![]),
             StorageServiceConfig::default(),
@@ -350,7 +350,7 @@ async fn test_remove_expired_subscriptions_blocked_stream() {
         let optimistic_fetches = Arc::new(DashMap::new());
         let lru_response_cache = Cache::new(0);
         let request_moderator = Arc::new(RequestModerator::new(
-            Libra2DataClientConfig::default(),
+            CreditChainDataClientConfig::default(),
             cached_storage_server_summary.clone(),
             mock::create_peers_and_metadata(vec![]),
             StorageServiceConfig::default(),
@@ -460,7 +460,7 @@ async fn test_remove_expired_subscriptions_blocked_stream_index() {
         let optimistic_fetches = Arc::new(DashMap::new());
         let lru_response_cache = Cache::new(0);
         let request_moderator = Arc::new(RequestModerator::new(
-            Libra2DataClientConfig::default(),
+            CreditChainDataClientConfig::default(),
             cached_storage_server_summary.clone(),
             mock::create_peers_and_metadata(vec![]),
             StorageServiceConfig::default(),

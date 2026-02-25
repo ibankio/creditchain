@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-transaction-generator"
+name = "creditchain-indexer-transaction-generator"
 description = "Indexer integration testing framework."
 version = "1.0.1"
 
@@ -15,11 +15,11 @@ rust-version = { workspace = true }
 [dependencies]
 anyhow = { workspace = true }
 # used for localnode.
-libra2 = { workspace = true }
-libra2-config = { workspace = true }
-libra2-faucet-core = { workspace = true }
-libra2-indexer-grpc-utils = { workspace = true }
-libra2-protos ={ workspace = true }
+creditchain = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-faucet-core = { workspace = true }
+creditchain-indexer-grpc-utils = { workspace = true }
+creditchain-protos ={ workspace = true }
 clap = { workspace = true }
 futures = { workspace = true }
 rand = { workspace = true }

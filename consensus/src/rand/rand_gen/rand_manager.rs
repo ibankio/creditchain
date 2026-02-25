@@ -18,16 +18,16 @@ use crate::{
         types::{FastShare, PathType, RandConfig, RequestShare, TAugmentedData, TShare},
     },
 };
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_channels::libra2_channel;
-use libra2_config::config::ReliableBroadcastConfig;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_infallible::Mutex;
-use libra2_logger::{error, info, spawn_named, trace, warn};
-use libra2_network::{protocols::network::RpcError, ProtocolId};
-use libra2_reliable_broadcast::{DropGuard, ReliableBroadcast};
-use libra2_time_service::TimeService;
-use libra2_types::{
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_channels::creditchain_channel;
+use creditchain_config::config::ReliableBroadcastConfig;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_infallible::Mutex;
+use creditchain_logger::{error, info, spawn_named, trace, warn};
+use creditchain_network::{protocols::network::RpcError, ProtocolId};
+use creditchain_reliable_broadcast::{DropGuard, ReliableBroadcast};
+use creditchain_time_service::TimeService;
+use creditchain_types::{
     epoch_state::EpochState,
     randomness::{FullRandMetadata, RandMetadata, Randomness},
     validator_signer::ValidatorSigner,
@@ -222,7 +222,7 @@ impl<S: TShare, D: TAugmentedData> RandManager<S, D> {
 
     async fn verification_task(
         epoch_state: Arc<EpochState>,
-        mut incoming_rpc_request: libra2_channel::Receiver<Author, IncomingRandGenRequest>,
+        mut incoming_rpc_request: creditchain_channel::Receiver<Author, IncomingRandGenRequest>,
         verified_msg_tx: UnboundedSender<RpcRequest<S, D>>,
         rand_config: RandConfig,
         fast_rand_config: Option<RandConfig>,
@@ -350,7 +350,7 @@ impl<S: TShare, D: TAugmentedData> RandManager<S, D> {
     pub async fn start(
         mut self,
         mut incoming_blocks: Receiver<OrderedBlocks>,
-        incoming_rpc_request: libra2_channel::Receiver<Author, IncomingRandGenRequest>,
+        incoming_rpc_request: creditchain_channel::Receiver<Author, IncomingRandGenRequest>,
         mut reset_rx: Receiver<ResetRequest>,
         bounded_executor: BoundedExecutor,
         highest_known_round: Round,

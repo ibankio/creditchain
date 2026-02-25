@@ -13,7 +13,7 @@ use crate::{
 };
 use ahash::AHashMap;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::WriteTableItem, postgres::utils::database::DbPoolConnection,
+   creditchain_protos::transaction::v1::WriteTableItem, postgres::utils::database::DbPoolConnection,
     utils::convert::standardize_address,
 };
 use diesel::prelude::*;

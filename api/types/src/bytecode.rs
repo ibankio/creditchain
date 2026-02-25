@@ -9,8 +9,8 @@ use crate::{
     },
     MoveFunction, MoveStructTag, MoveType,
 };
-use libra2_types::vm::module_metadata::prelude::*;
-use libra2_vm::determine_is_view;
+use creditchain_types::vm::module_metadata::prelude::*;
+use creditchain_vm::determine_is_view;
 use move_binary_format::{
     access::{ModuleAccess, ScriptAccess},
     file_format::{

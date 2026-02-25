@@ -8,12 +8,12 @@ use crate::{
     types::DKGTranscriptRequest,
     DKGMessage,
 };
-use libra2_crypto::{
+use creditchain_crypto::{
     bls12381::{PrivateKey, PublicKey},
     Uniform,
 };
-use libra2_infallible::RwLock;
-use libra2_types::{
+use creditchain_infallible::RwLock;
+use creditchain_types::{
     dkg::{
         dummy_dkg::DummyDKG, DKGSessionMetadata, DKGStartEvent, DKGTrait, DKGTranscript,
         DKGTranscriptMetadata,
@@ -25,7 +25,7 @@ use libra2_types::{
         ValidatorConsensusInfo, ValidatorConsensusInfoMoveStruct, ValidatorVerifier,
     },
 };
-use libra2_validator_transaction_pool::{TransactionFilter, VTxnPoolState};
+use creditchain_validator_transaction_pool::{TransactionFilter, VTxnPoolState};
 use move_core_types::account_address::AccountAddress;
 use std::{
     sync::Arc,

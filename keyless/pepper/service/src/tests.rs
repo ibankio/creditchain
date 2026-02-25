@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{process_common, ProcessingFailure};
-use libra2_crypto::ed25519::Ed25519PublicKey;
-use libra2_types::{
+use creditchain_crypto::ed25519::Ed25519PublicKey;
+use creditchain_types::{
     keyless::{
         circuit_testcases::{
             sample_jwt_payload_json_overrides, SAMPLE_EXP_DATE, SAMPLE_JWT_EXTRA_FIELD,

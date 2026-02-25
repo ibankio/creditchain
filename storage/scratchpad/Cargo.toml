@@ -1,5 +1,5 @@
 [package]
-name = "libra2-scratchpad"
+name = "creditchain-scratchpad"
 description = "CreditChain scratchpad"
 version = "0.1.0"
 
@@ -13,12 +13,12 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-crypto = { workspace = true }
-libra2-drop-helper = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-drop-helper = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
 bitvec = { workspace = true }
 criterion = { workspace = true, optional = true }
 dashmap = { workspace = true }
@@ -29,7 +29,7 @@ rayon = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 bitvec = { workspace = true }
 once_cell = { workspace = true }
 proptest = { workspace = true }
@@ -42,7 +42,7 @@ jemallocator = { version = "0.5.0", features = [
 ] }
 
 [features]
-fuzzing = ["libra2-types/fuzzing", "proptest"]
+fuzzing = ["creditchain-types/fuzzing", "proptest"]
 bench = ["proptest", "criterion"]
 
 [[bench]]

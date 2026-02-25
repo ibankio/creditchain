@@ -7,19 +7,19 @@ use crate::{
     workloads::SignedTransactionBuilder,
 };
 use anyhow::{bail, Result};
-use libra2_config::config::DEFAULT_MAX_SUBMIT_TRANSACTION_BATCH_SIZE;
-use libra2_logger::{error, info, sample, sample::SampleRate, warn};
-use libra2_sdk::{
+use creditchain_config::config::DEFAULT_MAX_SUBMIT_TRANSACTION_BATCH_SIZE;
+use creditchain_logger::{error, info, sample, sample::SampleRate, warn};
+use creditchain_sdk::{
     move_types::account_address::AccountAddress,
     rest_client::{
-        libra2_api_types::{Libra2Error, Libra2ErrorCode, TransactionOnChainData},
-        error::{Libra2ErrorResponse, RestError},
+        creditchain_api_types::{CreditChainError, CreditChainErrorCode, TransactionOnChainData},
+        error::{CreditChainErrorResponse, RestError},
         Client,
     },
-    transaction_builder::{libra2_stdlib, TransactionFactory},
+    transaction_builder::{creditchain_stdlib, TransactionFactory},
     types::LocalAccount,
 };
-use libra2_transaction_emitter_lib::{
+use creditchain_transaction_emitter_lib::{
     emitter::{
         account_minter::{bulk_create_accounts, prompt_yes, BulkAccountCreationConfig},
         get_account_seq_num, get_needed_balance_per_account,
@@ -30,7 +30,7 @@ use libra2_transaction_emitter_lib::{
     },
     Cluster, ClusterArgs,
 };
-use libra2_transaction_generator_lib::ReliableTransactionSubmitter;
+use creditchain_transaction_generator_lib::ReliableTransactionSubmitter;
 use clap::Parser;
 use futures::{future::join_all, StreamExt};
 use rand::{rngs::StdRng, seq::SliceRandom, Rng, SeedableRng};
@@ -241,7 +241,7 @@ pub async fn execute_return_worker_funds(
             if balance > txn_factory_ref.get_max_gas_amount() * txn_factory_ref.get_gas_unit_price()
             {
                 let txn = account.sign_with_transaction_builder(txn_factory_ref.payload(
-                    libra2_stdlib::libra2_coin_transfer(
+                    creditchain_stdlib::creditchain_coin_transfer(
                         coin_source_account.address(),
                         balance
                             - txn_factory_ref.get_max_gas_amount()
@@ -653,10 +653,10 @@ async fn submit_work_txns<T, B: SignedTransactionBuilder<T>>(
                                         warn!("Rollback txn status: {:?}", res.into_inner())
                                     );
                                 },
-                                Err(RestError::Api(Libra2ErrorResponse {
+                                Err(RestError::Api(CreditChainErrorResponse {
                                     error:
-                                        Libra2Error {
-                                            error_code: Libra2ErrorCode::TransactionNotFound,
+                                        CreditChainError {
+                                            error_code: CreditChainErrorCode::TransactionNotFound,
                                             ..
                                         },
                                     ..

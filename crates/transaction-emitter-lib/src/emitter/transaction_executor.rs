@@ -3,12 +3,12 @@
 
 use super::FETCH_ACCOUNT_RETRY_POLICY;
 use anyhow::{Context, Result};
-use libra2_logger::{sample, sample::SampleRate};
-use libra2_rest_client::{libra2_api_types::Libra2ErrorCode, error::RestError, Client as RestClient};
-use libra2_sdk::{
+use creditchain_logger::{sample, sample::SampleRate};
+use creditchain_rest_client::{creditchain_api_types::CreditChainErrorCode, error::RestError, Client as RestClient};
+use creditchain_sdk::{
     move_types::account_address::AccountAddress, types::transaction::SignedTransaction,
 };
-use libra2_transaction_generator_lib::{CounterState, ReliableTransactionSubmitter};
+use creditchain_transaction_generator_lib::{CounterState, ReliableTransactionSubmitter};
 use async_trait::async_trait;
 use futures::future::join_all;
 use log::{debug, info, warn};
@@ -75,7 +75,7 @@ impl RestApiReliableTransactionSubmitter {
                 txn.sender().to_vec(),
             ]
             .concat();
-            let mut seeded_rng = StdRng::from_seed(*libra2_crypto::HashValue::sha3_256_of(&seed));
+            let mut seeded_rng = StdRng::from_seed(*creditchain_crypto::HashValue::sha3_256_of(&seed));
             let rest_client = self.random_rest_client_from_rng(&mut seeded_rng);
             let mut failed_submit = false;
             let mut failed_wait = false;
@@ -163,7 +163,7 @@ async fn warn_detailed_error(
     call_name: &str,
     rest_client: &RestClient,
     txn: &SignedTransaction,
-    err: Result<&libra2_types::transaction::TransactionInfo, &RestError>,
+    err: Result<&creditchain_types::transaction::TransactionInfo, &RestError>,
 ) {
     let sender = txn.sender();
     let payload = txn.payload().payload_type();
@@ -291,7 +291,7 @@ pub async fn query_sequence_number_with_client(
 
 fn is_account_not_found(error: &RestError) -> bool {
     match error {
-        RestError::Api(error) => matches!(error.error.error_code, Libra2ErrorCode::AccountNotFound),
+        RestError::Api(error) => matches!(error.error.error_code, CreditChainErrorCode::AccountNotFound),
         _ => false,
     }
 }
@@ -308,7 +308,7 @@ impl ReliableTransactionSubmitter for RestApiReliableTransactionSubmitter {
                 |error: &RestError| match error {
                     RestError::Api(error) => !matches!(
                         error.error.error_code,
-                        Libra2ErrorCode::AccountNotFound | Libra2ErrorCode::InvalidInput
+                        CreditChainErrorCode::AccountNotFound | CreditChainErrorCode::InvalidInput
                     ),
                     RestError::Unknown(_) => false,
                     _ => true,

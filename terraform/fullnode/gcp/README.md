@@ -62,9 +62,9 @@ These instructions assume that you have a functioning GCP project.  If you do no
 
 10. Configure your Kubernetes client:
 
-        $ gcloud container clusters get-credentials libra2-$WORKSPACE --zone <region_zone_name> --project <project_name>
+        $ gcloud container clusters get-credentials creditchain-$WORKSPACE --zone <region_zone_name> --project <project_name>
         # for example:
-        $ gcloud container clusters get-credentials libra2-$WORKSPACE --zone us-central1-a --project libra2-fullnode
+        $ gcloud container clusters get-credentials creditchain-$WORKSPACE --zone us-central1-a --project creditchain-fullnode
 
 11. Check that your fullnode pods are now running (this may take a few minutes):
 
@@ -86,9 +86,9 @@ These instructions assume that you have a functioning GCP project.  If you do no
 
    * Open a new ssh terminal.  Execute the following curl calls to verify the correctness
 
-         $ curl -v http://0:9101/metrics 2> /dev/null | grep "libra2_state_sync_version{type=\"synced\"}"
+         $ curl -v http://0:9101/metrics 2> /dev/null | grep "creditchain_state_sync_version{type=\"synced\"}"
 
-         $ curl -v http://0:9101/metrics 2> /dev/null | grep "libra2_connections{direction=\"outbound\""
+         $ curl -v http://0:9101/metrics 2> /dev/null | grep "creditchain_connections{direction=\"outbound\""
 
    * Exit port-forwarding when you are done by entering control-c in the terminal
 

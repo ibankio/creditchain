@@ -5,11 +5,11 @@ use crate::{
     genesis::enable_sync_only_mode, smoke_test_environment::SwarmBuilder,
     utils::get_on_chain_resource,
 };
-use libra2::common::types::GasOptions;
-use libra2_config::config::{OverrideNodeConfig, PersistableConfig};
-use libra2_forge::{NodeExt, Swarm, SwarmExt};
-use libra2_logger::{debug, info};
-use libra2_types::{on_chain_config::OnChainRandomnessConfig, randomness::PerBlockRandomness};
+use creditchain::common::types::GasOptions;
+use creditchain_config::config::{OverrideNodeConfig, PersistableConfig};
+use creditchain_forge::{NodeExt, Swarm, SwarmExt};
+use creditchain_logger::{debug, info};
+use creditchain_types::{on_chain_config::OnChainRandomnessConfig, randomness::PerBlockRandomness};
 use std::{
     ops::Add,
     sync::Arc,
@@ -112,13 +112,13 @@ async fn randomness_stall_recovery() {
     info!("Bump on-chain conig seqnum to re-enable randomness.");
     let script = r#"
 script {
-    use libra2_framework::libra2_governance;
-    use libra2_framework::randomness_config_seqnum;
+    use creditchain_framework::creditchain_governance;
+    use creditchain_framework::randomness_config_seqnum;
 
     fun main(core_resources: &signer) {
-        let framework_signer = libra2_governance::get_signer_testnet_only(core_resources, @0x1);
+        let framework_signer = creditchain_governance::get_signer_testnet_only(core_resources, @0x1);
         randomness_config_seqnum::set_for_next_epoch(&framework_signer, 2);
-        libra2_governance::force_end_epoch(&framework_signer); // reconfigure() won't work at the moment.
+        creditchain_governance::force_end_epoch(&framework_signer); // reconfigure() won't work at the moment.
     }
 }
     "#;

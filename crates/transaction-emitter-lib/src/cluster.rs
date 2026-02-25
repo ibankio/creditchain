@@ -3,12 +3,12 @@
 
 use crate::{emitter::load_specific_account, instance::Instance, ClusterArgs};
 use anyhow::{anyhow, bail, format_err, Result};
-use libra2_crypto::{
+use creditchain_crypto::{
     ed25519::{Ed25519PrivateKey, Ed25519PublicKey},
     test_utils::KeyPair,
 };
-use libra2_rest_client::{Client as RestClient, State};
-use libra2_sdk::types::{chain_id::ChainId, AccountKey, LocalAccount};
+use creditchain_rest_client::{Client as RestClient, State};
+use creditchain_sdk::types::{chain_id::ChainId, AccountKey, LocalAccount};
 use futures::{stream::FuturesUnordered, StreamExt};
 use log::{info, warn};
 use rand::seq::SliceRandom;
@@ -42,7 +42,7 @@ impl Cluster {
 
         let mut instance_states = Vec::new();
         let mut errors = Vec::new();
-        let fetch_timestamp = libra2_infallible::duration_since_epoch().as_secs();
+        let fetch_timestamp = creditchain_infallible::duration_since_epoch().as_secs();
         let futures = FuturesUnordered::new();
         for url in &peers {
             let instance = Instance::new(
@@ -176,7 +176,7 @@ impl Cluster {
         for url in &urls {
             if url.host_str().unwrap().starts_with("api.") {
                 if args.node_api_key.is_none() {
-                    println!("URL {} starts with api.* but no API key was provided. Hint: generate one at https://developers.libra2.org", url);
+                    println!("URL {} starts with api.* but no API key was provided. Hint: generate one at https://developers.creditchain.io", url);
                 }
             } else if args.node_api_key.is_some() {
                 println!(
@@ -248,7 +248,7 @@ fn get_chain_id_from_instances(instance_states: Vec<(Instance, State)>) -> Resul
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_sdk::types::chain_id::ChainId;
+    use creditchain_sdk::types::chain_id::ChainId;
 
     fn create_dummy_rest_api_state(chain_id: u8) -> State {
         State {

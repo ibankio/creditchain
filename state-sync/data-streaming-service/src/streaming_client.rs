@@ -7,7 +7,7 @@ use crate::{
     data_stream::{DataStreamId, DataStreamListener},
     error::Error,
 };
-use libra2_types::{ledger_info::LedgerInfoWithSignatures, transaction::Version};
+use creditchain_types::{ledger_info::LedgerInfoWithSignatures, transaction::Version};
 use async_trait::async_trait;
 use futures::{
     channel::{mpsc, oneshot},
@@ -21,7 +21,7 @@ use std::{
 
 pub type Epoch = u64;
 
-/// The streaming client used by state sync to fetch data from the Libra2 network
+/// The streaming client used by state sync to fetch data from the CreditChain network
 /// to synchronize local state.
 ///
 /// Notes:

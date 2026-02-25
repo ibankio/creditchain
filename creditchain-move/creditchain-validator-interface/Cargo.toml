@@ -1,0 +1,29 @@
+[package]
+name = "creditchain-validator-interface"
+description = "Defines interfaces between the creditchain nodes and local move infrastructure"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+anyhow = { workspace = true }
+creditchain-api-types = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
+async-recursion = { workspace = true }
+async-trait = { workspace = true }
+bcs = { workspace = true }
+lru = { workspace = true }
+move-core-types = { workspace = true }
+tokio = { workspace = true }

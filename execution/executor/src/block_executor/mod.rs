@@ -18,21 +18,21 @@ use crate::{
     },
 };
 use anyhow::Result;
-use libra2_crypto::HashValue;
-use libra2_executor_types::{
+use creditchain_crypto::HashValue;
+use creditchain_executor_types::{
     state_compute_result::StateComputeResult, BlockExecutorTrait, ExecutorError, ExecutorResult,
 };
-use libra2_experimental_runtimes::thread_manager::THREAD_MANAGER;
-use libra2_infallible::RwLock;
-use libra2_logger::prelude::*;
-use libra2_metrics_core::{IntGaugeHelper, TimerHelper};
-use libra2_storage_interface::{
+use creditchain_experimental_runtimes::thread_manager::THREAD_MANAGER;
+use creditchain_infallible::RwLock;
+use creditchain_logger::prelude::*;
+use creditchain_metrics_core::{IntGaugeHelper, TimerHelper};
+use creditchain_storage_interface::{
     state_store::{
         state_summary::ProvableStateSummary, state_view::cached_state_view::CachedStateView,
     },
     DbReaderWriter,
 };
-use libra2_types::{
+use creditchain_types::{
     block_executor::{
         config::BlockExecutorConfigFromOnchain, partitioner::ExecutableBlock,
         transaction_slice_metadata::TransactionSliceMetadata,
@@ -40,7 +40,7 @@ use libra2_types::{
     ledger_info::LedgerInfoWithSignatures,
     state_store::StateViewId,
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use block_tree::BlockTree;
 use fail::fail_point;
 use std::sync::Arc;

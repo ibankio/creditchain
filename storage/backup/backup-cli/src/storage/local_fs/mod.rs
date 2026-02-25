@@ -11,7 +11,7 @@ use crate::{
     utils::{error_notes::ErrorNotes, path_exists, PathToString},
 };
 use anyhow::{bail, format_err, Result};
-use libra2_logger::info;
+use creditchain_logger::info;
 use async_trait::async_trait;
 use clap::Parser;
 use serde::{Deserialize, Serialize};

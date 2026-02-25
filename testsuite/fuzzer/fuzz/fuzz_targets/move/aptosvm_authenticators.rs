@@ -3,14 +3,14 @@
 #![no_main]
 #![allow(unused_imports)]
 
-use libra2_cached_packages::libra2_stdlib;
-use libra2_crypto::{
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_crypto::{
     ed25519::{Ed25519PrivateKey, Ed25519PublicKey},
     PrivateKey, SigningKey, Uniform,
 };
-use libra2_language_e2e_tests::{account::Account, executor::FakeExecutor};
-use libra2_transaction_simulation::GENESIS_CHANGE_SET_HEAD;
-use libra2_types::{
+use creditchain_language_e2e_tests::{account::Account, executor::FakeExecutor};
+use creditchain_transaction_simulation::GENESIS_CHANGE_SET_HEAD;
+use creditchain_types::{
     chain_id::ChainId,
     jwks::{secure_test_rsa_jwk, AllProvidersJWKs, PatchedJWKs, ProviderJWKs},
     keyless::{
@@ -29,7 +29,7 @@ use libra2_types::{
     },
     write_set::WriteSet,
 };
-use libra2_vm::Libra2VM;
+use creditchain_vm::CreditChainVM;
 use libfuzzer_sys::{fuzz_target, Corpus};
 use move_core_types::{
     account_address::AccountAddress,
@@ -64,7 +64,7 @@ static TP: Lazy<Arc<rayon::ThreadPool>> = Lazy::new(|| {
 fn run_case(input: TransactionState) -> Result<(), Corpus> {
     tdbg!(&input);
 
-    Libra2VM::set_concurrency_level_once(FUZZER_CONCURRENCY_LEVEL);
+    CreditChainVM::set_concurrency_level_once(FUZZER_CONCURRENCY_LEVEL);
     let mut vm = FakeExecutor::from_genesis_with_existing_thread_pool(
         &VM,
         ChainId::mainnet(),
@@ -86,7 +86,7 @@ fn run_case(input: TransactionState) -> Result<(), Corpus> {
     // build tx
     let tx = sender_acc
         .transaction()
-        .payload(libra2_stdlib::libra2_coin_transfer(*receiver.address(), 1))
+        .payload(creditchain_stdlib::creditchain_coin_transfer(*receiver.address(), 1))
         .sequence_number(0)
         .gas_unit_price(100)
         .max_gas_amount(1000);

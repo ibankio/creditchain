@@ -3,5 +3,5 @@ name = "some_package_name"
 version = "0.1.2"
 
 [dependencies]
-a = { local = "../a", libra2 = "mainnet" }
+a = { local = "../a", creditchain = "mainnet" }
 

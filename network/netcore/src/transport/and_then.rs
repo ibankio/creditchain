@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::transport::{ConnectionOrigin, Transport};
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use futures::{future::Future, stream::Stream};
 use pin_project::pin_project;
 use std::{

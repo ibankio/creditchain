@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{EntryFunctionId, MoveType};
-use libra2_types::serde_helper::vec_bytes;
+use creditchain_types::serde_helper::vec_bytes;
 use move_core_types::{
     identifier::Identifier,
     language_storage::{ModuleId, TypeTag},

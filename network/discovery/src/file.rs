@@ -3,10 +3,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::DiscoveryError;
-use libra2_config::config::PeerSet;
+use creditchain_config::config::PeerSet;
 #[cfg(test)]
-use libra2_logger::spawn_named;
-use libra2_time_service::{Interval, TimeService, TimeServiceTrait};
+use creditchain_logger::spawn_named;
+use creditchain_time_service::{Interval, TimeService, TimeServiceTrait};
 use futures::Stream;
 use std::{
     path::{Path, PathBuf},
@@ -57,15 +57,15 @@ fn load_file(path: &Path) -> Result<PeerSet, DiscoveryError> {
 mod tests {
     use super::*;
     use crate::DiscoveryChangeListener;
-    use libra2_channels::Receiver;
-    use libra2_config::{
+    use creditchain_channels::Receiver;
+    use creditchain_config::{
         config::{Peer, PeerRole},
         network_id::NetworkContext,
     };
-    use libra2_event_notifications::DbBackedOnChainConfig;
-    use libra2_network::connectivity_manager::{ConnectivityRequest, DiscoverySource};
-    use libra2_temppath::TempPath;
-    use libra2_types::{network_address::NetworkAddress, PeerId};
+    use creditchain_event_notifications::DbBackedOnChainConfig;
+    use creditchain_network::connectivity_manager::{ConnectivityRequest, DiscoverySource};
+    use creditchain_temppath::TempPath;
+    use creditchain_types::{network_address::NetworkAddress, PeerId};
     use futures::StreamExt;
     use std::{collections::HashSet, str::FromStr, sync::Arc};
     use tokio::time::sleep;
@@ -74,9 +74,9 @@ mod tests {
         let check_interval = Duration::from_millis(5);
         // TODO: Figure out why mock time doesn't work right
         let time_service = TimeService::real();
-        let (conn_mgr_reqs_tx, conn_mgr_reqs_rx) = libra2_channels::new(
+        let (conn_mgr_reqs_tx, conn_mgr_reqs_rx) = creditchain_channels::new(
             1,
-            &libra2_network::counters::PENDING_CONNECTIVITY_MANAGER_REQUESTS,
+            &creditchain_network::counters::PENDING_CONNECTIVITY_MANAGER_REQUESTS,
         );
         let listener_task = async move {
             let listener = DiscoveryChangeListener::<DbBackedOnChainConfig>::file(

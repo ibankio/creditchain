@@ -4,13 +4,13 @@
 
 use crate::{HashReader, MerkleAccumulator, MerkleAccumulatorView};
 use anyhow::{ensure, format_err, Result};
-use libra2_crypto::hash::{HashValue, TestOnlyHasher, ACCUMULATOR_PLACEHOLDER_HASH};
-use libra2_types::proof::{definition::LeafCount, position::Position};
+use creditchain_crypto::hash::{HashValue, TestOnlyHasher, ACCUMULATOR_PLACEHOLDER_HASH};
+use creditchain_types::proof::{definition::LeafCount, position::Position};
 use proptest::{collection::vec, prelude::*};
 use std::collections::HashMap;
 
 pub(crate) type InMemoryAccumulator =
-    libra2_types::proof::accumulator::InMemoryAccumulator<TestOnlyHasher>;
+    creditchain_types::proof::accumulator::InMemoryAccumulator<TestOnlyHasher>;
 pub(crate) type TestAccumulator = MerkleAccumulator<MockHashStore, TestOnlyHasher>;
 
 pub(crate) struct MockHashStore {

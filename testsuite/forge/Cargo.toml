@@ -1,5 +1,5 @@
 [package]
-name = "libra2-forge"
+name = "creditchain-forge"
 description = "CreditChain end to end test framework"
 version = "0.0.0"
 
@@ -15,26 +15,26 @@ rust-version = { workspace = true }
 [dependencies]
 again = { workspace = true }
 anyhow = { workspace = true, features = ["backtrace"] }
-libra2 = { workspace = true }
-libra2-cached-packages = { workspace = true }
-libra2-cli-common = { workspace = true }
-libra2-config = { workspace = true }
-libra2-db = { workspace = true }
-libra2-framework = { workspace = true }
-libra2-genesis = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-inspection-service = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-rest-client = { workspace = true }
-libra2-retrier = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-short-hex-str = { workspace = true }
-libra2-state-sync-driver = { workspace = true }
-libra2-transaction-emitter-lib = { workspace = true }
-libra2-transaction-generator-lib = { workspace = true }
-libra2-transaction-workloads-lib = { workspace = true }
+creditchain = { workspace = true }
+creditchain-cached-packages = { workspace = true }
+creditchain-cli-common = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-genesis = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-inspection-service = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-retrier = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-short-hex-str = { workspace = true }
+creditchain-state-sync-driver = { workspace = true }
+creditchain-transaction-emitter-lib = { workspace = true }
+creditchain-transaction-generator-lib = { workspace = true }
+creditchain-transaction-workloads-lib = { workspace = true }
 async-trait = { workspace = true }
 chrono = { workspace = true }
 clap = { workspace = true, features = ["env", "unstable-styles"] }
@@ -72,4 +72,4 @@ serde_merge = { workspace = true }
 
 [features]
 default = []
-testing = ["libra2-global-constants/testing"]
+testing = ["creditchain-global-constants/testing"]

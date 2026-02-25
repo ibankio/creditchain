@@ -5,8 +5,8 @@ use crate::{
     in_mem::{base::HexyBase, view::HexyView},
     NodePosition,
 };
-use libra2_crypto::HashValue;
-use libra2_experimental_layered_map::MapLayer;
+use creditchain_crypto::HashValue;
+use creditchain_experimental_layered_map::MapLayer;
 use std::sync::Arc;
 
 #[derive(Clone)]

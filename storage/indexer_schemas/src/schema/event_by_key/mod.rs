@@ -13,11 +13,11 @@
 
 use crate::{schema::EVENT_BY_KEY_CF_NAME, utils::ensure_slice_len_eq};
 use anyhow::Result;
-use libra2_schemadb::{
+use creditchain_schemadb::{
     define_pub_schema,
     schema::{KeyCodec, ValueCodec},
 };
-use libra2_types::{event::EventKey, transaction::Version};
+use creditchain_types::{event::EventKey, transaction::Version};
 use byteorder::{BigEndian, ReadBytesExt, WriteBytesExt};
 use std::mem::size_of;
 

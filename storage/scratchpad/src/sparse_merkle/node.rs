@@ -22,11 +22,11 @@
 //! corresponding account content. The difference is that a `LeafNode` does not always have the
 //! value, in the case when the leaf was loaded into memory as part of a non-inclusion proof.
 
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{CryptoHash, SPARSE_MERKLE_PLACEHOLDER_HASH},
     HashValue,
 };
-use libra2_types::proof::{SparseMerkleInternalNode, SparseMerkleLeafNode};
+use creditchain_types::proof::{SparseMerkleInternalNode, SparseMerkleLeafNode};
 use std::sync::{Arc, Weak};
 
 #[derive(Clone, Debug)]

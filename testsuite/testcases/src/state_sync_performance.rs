@@ -4,11 +4,11 @@
 
 use crate::generate_traffic;
 use anyhow::bail;
-use libra2_forge::{
+use creditchain_forge::{
     get_highest_synced_epoch, get_highest_synced_version, NetworkContext,
     NetworkContextSynchronizer, NetworkTest, Result, SwarmExt, Test,
 };
-use libra2_sdk::move_types::account_address::AccountAddress;
+use creditchain_sdk::move_types::account_address::AccountAddress;
 use async_trait::async_trait;
 use log::info;
 use std::{ops::DerefMut, time::Instant};
@@ -16,7 +16,7 @@ use tokio::{runtime::Runtime, time::Duration};
 
 const MAX_EPOCH_CHANGE_SECS: u64 = 300; // Max amount of time (in seconds) to wait for an epoch change
 const MAX_NODE_LAG_SECS: u64 = 30; // Max amount of lag (in seconds) that nodes should adhere to
-const NUM_STATE_VALUE_COUNTER_NAME: &str = "libra2_jellyfish_leaf_count"; // The metric to fetch for the number of state values
+const NUM_STATE_VALUE_COUNTER_NAME: &str = "creditchain_jellyfish_leaf_count"; // The metric to fetch for the number of state values
 
 /// A state sync performance test that measures fullnode sync performance.
 /// In the test, all fullnodes are wiped, restarted and timed to synchronize.

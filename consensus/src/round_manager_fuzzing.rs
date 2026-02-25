@@ -26,20 +26,20 @@ use crate::{
     },
     util::{mock_time_service::SimulatedTimeService, time_service::TimeService},
 };
-use libra2_channels::{self, libra2_channel, message_queues::QueueStyle};
-use libra2_config::{
+use creditchain_channels::{self, creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::{
     config::{BlockTransactionFilterConfig, ConsensusConfig},
     network_id::NetworkId,
 };
-use libra2_consensus_types::{proposal_msg::ProposalMsg, utils::PayloadTxnsSize};
-use libra2_infallible::Mutex;
-use libra2_network::{
+use creditchain_consensus_types::{proposal_msg::ProposalMsg, utils::PayloadTxnsSize};
+use creditchain_infallible::Mutex;
+use creditchain_network::{
     application::{interface::NetworkClient, storage::PeersAndMetadata},
     peer_manager::{ConnectionRequestSender, PeerManagerRequestSender},
     protocols::{network, network::NewNetworkSender},
 };
-use libra2_safety_rules::{test_utils, SafetyRules, TSafetyRules};
-use libra2_types::{
+use creditchain_safety_rules::{test_utils, SafetyRules, TSafetyRules};
+use creditchain_types::{
     aggregate_signature::AggregateSignature,
     epoch_change::EpochChangeProof,
     epoch_state::EpochState,
@@ -116,7 +116,7 @@ fn make_initial_epoch_change_proof(signer: &ValidatorSigner) -> EpochChangeProof
 fn create_round_state() -> RoundState {
     let base_timeout = std::time::Duration::new(60, 0);
     let time_interval = Box::new(ExponentialTimeInterval::fixed(base_timeout));
-    let (round_timeout_sender, _) = libra2_channels::new_test(1_024);
+    let (round_timeout_sender, _) = creditchain_channels::new_test(1_024);
     let time_service = Arc::new(SimulatedTimeService::new());
 
     RoundState::new(time_interval, time_service, round_timeout_sender)
@@ -140,8 +140,8 @@ fn create_node_for_fuzzing() -> RoundManager {
     safety_rules.initialize(&proof).unwrap();
 
     // TODO: mock channels
-    let (network_reqs_tx, _network_reqs_rx) = libra2_channel::new(QueueStyle::FIFO, 8, None);
-    let (connection_reqs_tx, _) = libra2_channel::new(QueueStyle::FIFO, 8, None);
+    let (network_reqs_tx, _network_reqs_rx) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
+    let (connection_reqs_tx, _) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
     let network_sender = network::NetworkSender::new(
         PeerManagerRequestSender::new(network_reqs_tx),
         ConnectionRequestSender::new(connection_reqs_tx),
@@ -154,7 +154,7 @@ fn create_node_for_fuzzing() -> RoundManager {
     );
     let consensus_network_client = ConsensusNetworkClient::new(network_client);
 
-    let (self_sender, _self_receiver) = libra2_channels::new_unbounded_test();
+    let (self_sender, _self_receiver) = creditchain_channels::new_unbounded_test();
 
     let epoch_state = Arc::new(EpochState::new(1, storage.get_validator_set().into()));
     let network = Arc::new(NetworkSender::new(
@@ -198,10 +198,10 @@ fn create_node_for_fuzzing() -> RoundManager {
     // TODO: have two different nodes, one for proposing, one for accepting a proposal
     let proposer_election = Arc::new(RotatingProposer::new(vec![signer.author()], 1));
 
-    let (round_manager_tx, _) = libra2_channel::new(QueueStyle::LIFO, 1, None);
+    let (round_manager_tx, _) = creditchain_channel::new(QueueStyle::LIFO, 1, None);
 
     let (opt_proposal_loopback_tx, _) =
-        libra2_channels::new_unbounded(&counters::OP_COUNTERS.gauge("opt_proposal_loopback_queue"));
+        creditchain_channels::new_unbounded(&counters::OP_COUNTERS.gauge("opt_proposal_loopback_queue"));
 
     // event processor
     RoundManager::new(

@@ -23,7 +23,7 @@ use crate::{
     },
     write_set::WriteSet,
 };
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{
         CryptoHash, TestOnlyHash, TestOnlyHasher, ACCUMULATOR_PLACEHOLDER_HASH, GENESIS_BLOCK_ID,
         SPARSE_MERKLE_PLACEHOLDER_HASH,

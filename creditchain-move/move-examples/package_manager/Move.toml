@@ -1,0 +1,11 @@
+[package]
+name = "package_manager"
+version = "1.0.0"
+upgrade_policy = "compatible"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }
+
+[addresses]
+deployer = "_"
+package = "_"

@@ -6,15 +6,15 @@ use crate::{
     peer_states::{key_value::StateValueInterface, request_tracker::RequestTracker},
     Error, LogEntry, LogEvent, LogSchema,
 };
-use libra2_config::{config::LatencyMonitoringConfig, network_id::PeerNetworkId};
-use libra2_infallible::RwLock;
-use libra2_logger::{error, warn};
-use libra2_network::application::metadata::PeerMetadata;
-use libra2_peer_monitoring_service_types::{
+use creditchain_config::{config::LatencyMonitoringConfig, network_id::PeerNetworkId};
+use creditchain_infallible::RwLock;
+use creditchain_logger::{error, warn};
+use creditchain_network::application::metadata::PeerMetadata;
+use creditchain_peer_monitoring_service_types::{
     request::{LatencyPingRequest, PeerMonitoringServiceRequest},
     response::PeerMonitoringServiceResponse,
 };
-use libra2_time_service::TimeService;
+use creditchain_time_service::TimeService;
 use std::{
     collections::BTreeMap,
     fmt,
@@ -235,22 +235,22 @@ impl Display for LatencyInfoState {
 #[cfg(test)]
 mod test {
     use crate::peer_states::{key_value::StateValueInterface, latency_info::LatencyInfoState};
-    use libra2_config::{
+    use creditchain_config::{
         config::{LatencyMonitoringConfig, PeerRole},
         network_id::{NetworkId, PeerNetworkId},
     };
-    use libra2_netcore::transport::ConnectionOrigin;
-    use libra2_network::{
+    use creditchain_netcore::transport::ConnectionOrigin;
+    use creditchain_network::{
         application::metadata::PeerMetadata,
         protocols::wire::handshake::v1::{MessagingProtocolVersion, ProtocolIdSet},
         transport::{ConnectionId, ConnectionMetadata},
     };
-    use libra2_peer_monitoring_service_types::{
+    use creditchain_peer_monitoring_service_types::{
         request::{LatencyPingRequest, PeerMonitoringServiceRequest},
         response::{LatencyPingResponse, PeerMonitoringServiceResponse},
     };
-    use libra2_time_service::TimeService;
-    use libra2_types::{network_address::NetworkAddress, PeerId};
+    use creditchain_time_service::TimeService;
+    use creditchain_types::{network_address::NetworkAddress, PeerId};
     use rand::{rngs::OsRng, Rng};
     use std::{cmp::min, str::FromStr};
 

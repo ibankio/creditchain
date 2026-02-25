@@ -3,14 +3,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::smoke_test_environment::new_local_swarm_with_libra2;
-use libra2_cached_packages::libra2_stdlib;
-use libra2_forge::Swarm;
-use libra2_keygen::KeyGen;
-use libra2_rest_client::{
-    libra2_api_types::{EntryFunctionPayload, TransactionPayload},
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_forge::Swarm;
+use creditchain_keygen::KeyGen;
+use creditchain_rest_client::{
+    creditchain_api_types::{EntryFunctionPayload, TransactionPayload},
     Transaction,
 };
-use libra2_sdk::{
+use creditchain_sdk::{
     crypto::{PrivateKey, SigningKey},
     types::transaction::{authenticator::AuthenticationKey, SignedTransaction},
 };
@@ -20,7 +20,7 @@ use libra2_sdk::{
 #[tokio::test]
 async fn test_external_transaction_signer() {
     let swarm = new_local_swarm_with_libra2(1).await;
-    let mut info = swarm.libra2_public_info();
+    let mut info = swarm.creditchain_public_info();
 
     // generate key pair
     let mut key_gen = KeyGen::from_os_rng();
@@ -57,7 +57,7 @@ async fn test_external_transaction_signer() {
 
     let unsigned_txn = info
         .transaction_factory()
-        .payload(libra2_stdlib::libra2_coin_transfer(
+        .payload(creditchain_stdlib::creditchain_coin_transfer(
             receiver.address(),
             amount,
         ))

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::models::property_map::{PropertyMap, TokenObjectPropertyMap};
-use libra2_api_types::Address;
+use creditchain_api_types::Address;
 use bigdecimal::{BigDecimal, Signed, ToPrimitive, Zero};
 use serde::{Deserialize, Deserializer};
 use serde_json::Value;
@@ -243,8 +243,8 @@ mod tests {
         };
         let val = serde_json::to_string(&test_struct).unwrap();
         let d: TypeInfoMock = serde_json::from_str(val.as_str()).unwrap();
-        assert_eq!(d.module_name.as_str(), "libra2_coin");
-        assert_eq!(d.struct_name.as_str(), "Libra2Coin");
+        assert_eq!(d.module_name.as_str(), "creditchain_coin");
+        assert_eq!(d.struct_name.as_str(), "CreditChainCoin");
     }
 
     #[test]

@@ -5,11 +5,11 @@ use crate::{
     fullnode_data_service::FullnodeDataService, localnet_data_service::LocalnetDataService,
     ServiceContext,
 };
-use libra2_api::context::Context;
-use libra2_config::config::NodeConfig;
-use libra2_logger::info;
-use libra2_mempool::MempoolClientSender;
-use libra2_protos::{
+use creditchain_api::context::Context;
+use creditchain_config::config::NodeConfig;
+use creditchain_logger::info;
+use creditchain_mempool::MempoolClientSender;
+use creditchain_protos::{
     indexer::v1::{
         raw_data_server::RawDataServer, FILE_DESCRIPTOR_SET as INDEXER_V1_FILE_DESCRIPTOR_SET,
     },
@@ -17,8 +17,8 @@ use libra2_protos::{
     transaction::v1::FILE_DESCRIPTOR_SET as TRANSACTION_V1_TESTING_FILE_DESCRIPTOR_SET,
     util::timestamp::FILE_DESCRIPTOR_SET as UTIL_TIMESTAMP_FILE_DESCRIPTOR_SET,
 };
-use libra2_storage_interface::DbReader;
-use libra2_types::{chain_id::ChainId, indexer::indexer_db_reader::IndexerReader};
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{chain_id::ChainId, indexer::indexer_db_reader::IndexerReader};
 use futures::channel::oneshot;
 use std::sync::Arc;
 use tokio::{net::TcpListener, runtime::Runtime};
@@ -45,7 +45,7 @@ pub fn bootstrap(
         return None;
     }
 
-    let runtime = libra2_runtimes::spawn_named_runtime("indexer-grpc".to_string(), None);
+    let runtime = creditchain_runtimes::spawn_named_runtime("indexer-grpc".to_string(), None);
 
     let node_config = config.clone();
 

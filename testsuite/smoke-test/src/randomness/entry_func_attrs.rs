@@ -10,13 +10,13 @@ use crate::{
     },
     smoke_test_environment::SwarmBuilder,
 };
-use libra2::{
+use creditchain::{
     common::types::{CliError, CliTypedResult, GasOptions, TransactionSummary},
     move_tool::MemberId,
 };
-use libra2_forge::{Swarm, SwarmExt};
-use libra2_logger::info;
-use libra2_types::on_chain_config::OnChainRandomnessConfig;
+use creditchain_forge::{Swarm, SwarmExt};
+use creditchain_logger::info;
+use creditchain_types::on_chain_config::OnChainRandomnessConfig;
 use std::{str::FromStr, sync::Arc, time::Duration};
 
 #[derive(Clone, Copy, Debug)]
@@ -177,17 +177,17 @@ async fn common(params: TestParams) {
     let script = format!(
         r#"
 script {{
-    use libra2_framework::libra2_governance;
-    use libra2_framework::randomness_api_v0_config;
+    use creditchain_framework::creditchain_governance;
+    use creditchain_framework::randomness_api_v0_config;
     use std::option;
 
     fun main(core_resources: &signer) {{
-        let framework_signer = libra2_governance::get_signer_testnet_only(core_resources, @0x1);
+        let framework_signer = creditchain_governance::get_signer_testnet_only(core_resources, @0x1);
         let required_gas = if ({}) {{ option::some(10000) }} else {{ option::none() }};
         randomness_api_v0_config::set_for_next_epoch(&framework_signer, required_gas);
         let allow_custom_max_gas = {};
         randomness_api_v0_config::set_allow_max_gas_flag_for_next_epoch(&framework_signer, allow_custom_max_gas);
-        libra2_governance::reconfigure(&framework_signer);
+        creditchain_governance::reconfigure(&framework_signer);
     }}
 }}
 "#,

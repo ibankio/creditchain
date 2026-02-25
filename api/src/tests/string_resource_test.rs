@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::new_test_context_with_orderless_flags;
-use libra2_api_test_context::{current_function_name, TestContext};
+use creditchain_api_test_context::{current_function_name, TestContext};
 use rstest::rstest;
 use serde_json::json;
 use std::path::PathBuf;

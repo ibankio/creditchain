@@ -3,10 +3,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::counters;
-use libra2_consensus_types::{common::Author, order_vote::OrderVote, quorum_cert::QuorumCert};
-use libra2_crypto::{hash::CryptoHash, HashValue};
-use libra2_logger::prelude::*;
-use libra2_types::{
+use creditchain_consensus_types::{common::Author, order_vote::OrderVote, quorum_cert::QuorumCert};
+use creditchain_crypto::{hash::CryptoHash, HashValue};
+use creditchain_logger::prelude::*;
+use creditchain_types::{
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures, SignatureAggregator},
     validator_verifier::{ValidatorVerifier, VerifyError},
 };
@@ -183,9 +183,9 @@ impl PendingOrderVotes {
 #[cfg(test)]
 mod tests {
     use super::{OrderVoteReceptionResult, OrderVoteStatus, PendingOrderVotes};
-    use libra2_consensus_types::{order_vote::OrderVote, quorum_cert::QuorumCert};
-    use libra2_crypto::{bls12381, hash::CryptoHash, HashValue};
-    use libra2_types::{
+    use creditchain_consensus_types::{order_vote::OrderVote, quorum_cert::QuorumCert};
+    use creditchain_crypto::{bls12381, hash::CryptoHash, HashValue};
+    use creditchain_types::{
         aggregate_signature::PartialSignatures, block_info::BlockInfo, ledger_info::LedgerInfo,
         validator_verifier::random_validator_verifier,
     };
@@ -200,7 +200,7 @@ mod tests {
 
     #[test]
     fn order_vote_aggregation() {
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
         // set up 4 validators
         let (signers, verifier) = random_validator_verifier(4, Some(2), false);
 
@@ -273,7 +273,7 @@ mod tests {
 
     #[test]
     fn order_vote_aggregation_with_unverified_votes() {
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         let (signers, verifier) = random_validator_verifier(5, Some(3), false);
         let mut pending_order_votes = PendingOrderVotes::new();

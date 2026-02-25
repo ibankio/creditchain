@@ -2,14 +2,14 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_config::network_id::{NetworkId, PeerNetworkId};
-use libra2_metrics_core::{
+use creditchain_config::network_id::{NetworkId, PeerNetworkId};
+use creditchain_metrics_core::{
     exponential_buckets, histogram_opts, op_counters::DurationHistogram, register_histogram,
     register_histogram_vec, register_int_counter, register_int_counter_vec, register_int_gauge,
     register_int_gauge_vec, Histogram, HistogramTimer, HistogramVec, IntCounter, IntCounterVec,
     IntGauge, IntGaugeVec,
 };
-use libra2_short_hex_str::AsShortHexStr;
+use creditchain_short_hex_str::AsShortHexStr;
 use once_cell::sync::Lazy;
 use std::time::Duration;
 
@@ -130,7 +130,7 @@ static TXN_COUNT_BUCKETS: Lazy<Vec<f64>> = Lazy::new(|| {
 /// Counter tracking size of various indices in core mempool
 pub static CORE_MEMPOOL_INDEX_SIZE: Lazy<IntGaugeVec> = Lazy::new(|| {
     register_int_gauge_vec!(
-        "libra2_core_mempool_index_size",
+        "creditchain_core_mempool_index_size",
         "Size of a core mempool index",
         &["index"]
     )
@@ -145,7 +145,7 @@ pub fn core_mempool_index_size(label: &'static str, size: usize) {
 
 pub static SENDER_BUCKET_FREQUENCIES: Lazy<IntGaugeVec> = Lazy::new(|| {
     register_int_gauge_vec!(
-        "libra2_core_mempool_sender_bucket_frequencies",
+        "creditchain_core_mempool_sender_bucket_frequencies",
         "Frequency of each sender bucket in core mempool",
         &["sender_bucket"]
     )
@@ -155,7 +155,7 @@ pub static SENDER_BUCKET_FREQUENCIES: Lazy<IntGaugeVec> = Lazy::new(|| {
 /// Counter tracking size of each bucket in timeline index
 static CORE_MEMPOOL_TIMELINE_INDEX_SIZE: Lazy<IntGaugeVec> = Lazy::new(|| {
     register_int_gauge_vec!(
-        "libra2_core_mempool_timeline_index_size",
+        "creditchain_core_mempool_timeline_index_size",
         "Size of each bucket in core mempool timeline index",
         &["bucket"]
     )
@@ -173,7 +173,7 @@ pub fn core_mempool_timeline_index_size(bucket_min_size_pairs: Vec<(String, usiz
 /// Counter tracking number of txns removed from core mempool
 pub static CORE_MEMPOOL_REMOVED_TXNS: Lazy<IntCounter> = Lazy::new(|| {
     register_int_counter!(
-        "libra2_core_mempool_removed_txns_count",
+        "creditchain_core_mempool_removed_txns_count",
         "Number of txns removed from core mempool"
     )
     .unwrap()
@@ -182,7 +182,7 @@ pub static CORE_MEMPOOL_REMOVED_TXNS: Lazy<IntCounter> = Lazy::new(|| {
 /// Counter tracking number of txns received that are idempotent duplicates
 pub static CORE_MEMPOOL_IDEMPOTENT_TXNS: Lazy<IntCounter> = Lazy::new(|| {
     register_int_counter!(
-        "libra2_core_mempool_idempotent_txns_count",
+        "creditchain_core_mempool_idempotent_txns_count",
         "Number of txns received that are idempotent duplicates"
     )
     .unwrap()
@@ -191,7 +191,7 @@ pub static CORE_MEMPOOL_IDEMPOTENT_TXNS: Lazy<IntCounter> = Lazy::new(|| {
 /// Counter tracking number of txns received that are gas upgraded for the same sequence number
 pub static CORE_MEMPOOL_GAS_UPGRADED_TXNS: Lazy<IntCounter> = Lazy::new(|| {
     register_int_counter!(
-        "libra2_core_mempool_gas_upgraded_txns_count",
+        "creditchain_core_mempool_gas_upgraded_txns_count",
         "Number of txns received that are gas upgraded for the same sequence number"
     )
     .unwrap()
@@ -217,7 +217,7 @@ pub fn core_mempool_txn_commit_latency(
 /// (e.g. time from txn entering core mempool to being pulled in consensus block)
 static CORE_MEMPOOL_TXN_COMMIT_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_core_mempool_txn_commit_latency",
+        "creditchain_core_mempool_txn_commit_latency",
         "Latency of txn reaching various stages in core mempool after insertion",
         &["stage", "submitted_by", "bucket"],
         MEMPOOL_LATENCY_BUCKETS.to_vec()
@@ -229,7 +229,7 @@ static CORE_MEMPOOL_TXN_COMMIT_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
 /// (e.g. time from txn entering core mempool to being pulled in consensus block)
 static CORE_MEMPOOL_TXN_LATENCIES: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_core_mempool_txn_latencies",
+        "creditchain_core_mempool_txn_latencies",
         "Latency of txn reaching various stages in mempool",
         &["stage", "submitted_by", "bucket", "priority"],
         MEMPOOL_LATENCY_BUCKETS.to_vec()
@@ -239,7 +239,7 @@ static CORE_MEMPOOL_TXN_LATENCIES: Lazy<HistogramVec> = Lazy::new(|| {
 
 pub static TXN_E2E_USE_CASE_COMMIT_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_txn_e2e_use_case_commit_latency",
+        "creditchain_txn_e2e_use_case_commit_latency",
         "Latency of txn commit_accept, by use_case",
         &["use_case", "submitted_by", "bucket"],
         MEMPOOL_LATENCY_BUCKETS.to_vec()
@@ -263,7 +263,7 @@ pub fn core_mempool_txn_ranking_score(
 
 static CORE_MEMPOOL_TXN_RANKING_BUCKET: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_core_mempool_txn_ranking_bucket",
+        "creditchain_core_mempool_txn_ranking_bucket",
         "Ranking bucket of txn reaching various stages in core mempool",
         &["stage", "status", "bucket"]
     )
@@ -272,7 +272,7 @@ static CORE_MEMPOOL_TXN_RANKING_BUCKET: Lazy<IntCounterVec> = Lazy::new(|| {
 
 static CORE_MEMPOOL_TXN_RANKING_SCORE: Lazy<HistogramVec> = Lazy::new(|| {
     let histogram_opts = histogram_opts!(
-        "libra2_core_mempool_txn_ranking_score",
+        "creditchain_core_mempool_txn_ranking_score",
         "Ranking score of txn reaching various stages in core mempool",
         RANKING_SCORE_BUCKETS.to_vec()
     );
@@ -283,7 +283,7 @@ static CORE_MEMPOOL_TXN_RANKING_SCORE: Lazy<HistogramVec> = Lazy::new(|| {
 /// how many txns were actually cleaned up in this GC event
 pub static CORE_MEMPOOL_GC_EVENT_COUNT: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_core_mempool_gc_event_count",
+        "creditchain_core_mempool_gc_event_count",
         "Number of times the periodic garbage-collection event occurs, regardless of how many txns were actually removed",
         &["type"])
         .unwrap()
@@ -293,7 +293,7 @@ pub static CORE_MEMPOOL_GC_EVENT_COUNT: Lazy<IntCounterVec> = Lazy::new(|| {
 /// expiration, regardless of how many txns were actually cleaned up in this GC event
 pub static CORE_MEMPOOL_GC_EAGER_EXPIRE_EVENT_COUNT: Lazy<IntCounter> = Lazy::new(|| {
     register_int_counter!(
-        "libra2_core_mempool_gc_eager_expire_event_count",
+        "creditchain_core_mempool_gc_eager_expire_event_count",
         "Number of times the periodic garbage-collection event triggers eager expiration, regardless of how many txns were actually removed")
         .unwrap()
 });
@@ -301,7 +301,7 @@ pub static CORE_MEMPOOL_GC_EAGER_EXPIRE_EVENT_COUNT: Lazy<IntCounter> = Lazy::ne
 /// Counter tracking time for how long a transaction stayed in core-mempool before being garbage-collected
 pub static CORE_MEMPOOL_GC_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_core_mempool_gc_latency",
+        "creditchain_core_mempool_gc_latency",
         "How long a transaction stayed in core mempool before garbage-collected",
         &["type", "status"]
     )
@@ -310,7 +310,7 @@ pub static CORE_MEMPOOL_GC_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
 
 pub static CORE_MEMPOOL_TXN_CONSENSUS_PULLED_BY_BUCKET: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_core_mempool_txn_consensus_pulled_by_bucket",
+        "creditchain_core_mempool_txn_consensus_pulled_by_bucket",
         "Number of times a txn was pulled from core mempool by consensus",
         &["bucket"],
         TXN_CONSENSUS_PULLED_BUCKETS.to_vec()
@@ -320,7 +320,7 @@ pub static CORE_MEMPOOL_TXN_CONSENSUS_PULLED_BY_BUCKET: Lazy<HistogramVec> = Laz
 
 pub static CORE_MEMPOOL_PARKING_LOT_EVICTED_COUNT: Lazy<Histogram> = Lazy::new(|| {
     register_histogram!(
-        "libra2_core_mempool_parking_lot_evicted_count",
+        "creditchain_core_mempool_parking_lot_evicted_count",
         "Number of txns evicted from parking lot",
         TXN_COUNT_BUCKETS.clone()
     )
@@ -329,7 +329,7 @@ pub static CORE_MEMPOOL_PARKING_LOT_EVICTED_COUNT: Lazy<Histogram> = Lazy::new(|
 
 pub static CORE_MEMPOOL_PARKING_LOT_EVICTED_BYTES: Lazy<Histogram> = Lazy::new(|| {
     register_histogram!(
-        "libra2_core_mempool_parking_lot_evicted_bytes",
+        "creditchain_core_mempool_parking_lot_evicted_bytes",
         "Bytes of txns evicted from parking lot",
         exponential_buckets(/*start=*/ 500.0, /*factor=*/ 1.4, /*count=*/ 32).unwrap()
     )
@@ -338,7 +338,7 @@ pub static CORE_MEMPOOL_PARKING_LOT_EVICTED_BYTES: Lazy<Histogram> = Lazy::new(|
 
 pub static CORE_MEMPOOL_PARKING_LOT_EVICTED_LATENCY: Lazy<Histogram> = Lazy::new(|| {
     register_histogram!(
-        "libra2_core_mempool_parking_lot_evicted_latency",
+        "creditchain_core_mempool_parking_lot_evicted_latency",
         "Latency of evicting for each transaction from parking lot",
         MEMPOOL_LATENCY_BUCKETS.to_vec()
     )
@@ -348,7 +348,7 @@ pub static CORE_MEMPOOL_PARKING_LOT_EVICTED_LATENCY: Lazy<Histogram> = Lazy::new
 /// Counter of pending network events to Mempool
 pub static PENDING_MEMPOOL_NETWORK_EVENTS: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_mempool_pending_network_events",
+        "creditchain_mempool_pending_network_events",
         "Counters(queued,dequeued,dropped) related to pending network notifications to Mempool",
         &["state"]
     )
@@ -359,7 +359,7 @@ pub static PENDING_MEMPOOL_NETWORK_EVENTS: Lazy<IntCounterVec> = Lazy::new(|| {
 /// (e.g. # txns in block pulled by consensus, # txns committed from state sync)
 static MEMPOOL_SERVICE_TXNS: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_mempool_service_transactions",
+        "creditchain_mempool_service_transactions",
         "Number of transactions handled in one request/response between mempool and consensus/state sync",
         &["type"],
         TXN_COUNT_BUCKETS.clone()
@@ -376,7 +376,7 @@ pub fn mempool_service_transactions(label: &'static str, num: usize) {
 /// Histogram for the byte size of transactions processed in get_block
 pub static MEMPOOL_SERVICE_BYTES_GET_BLOCK: Lazy<Histogram> = Lazy::new(|| {
     register_histogram!(
-        "libra2_mempool_service_bytes_get_block",
+        "creditchain_mempool_service_bytes_get_block",
         "Histogram for the number of txns per (mempool returned for proposal) blocks."
     )
     .unwrap()
@@ -386,7 +386,7 @@ pub static MEMPOOL_SERVICE_BYTES_GET_BLOCK: Lazy<Histogram> = Lazy::new(|| {
 /// A 'fail' result means the mempool's callback response to consensus/state sync failed.
 static MEMPOOL_SERVICE_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_mempool_service_latency_ms",
+        "creditchain_mempool_service_latency_ms",
         "Latency of mempool processing request from consensus/state sync",
         &["type", "result"]
     )
@@ -408,7 +408,7 @@ pub fn mempool_service_start_latency_timer(label: &'static str, result: &str) ->
 /// Counter for types of network messages received by shared mempool
 static SHARED_MEMPOOL_EVENTS: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_shared_mempool_events",
+        "creditchain_shared_mempool_events",
         "Number of network events received by shared mempool",
         &["event"] // type of event: "new_peer", "lost_peer", "message"
     )
@@ -422,7 +422,7 @@ pub fn shared_mempool_event_inc(event: &'static str) {
 /// Counter for tracking e2e latency for mempool to process txn submission requests from clients and peers
 static PROCESS_TXN_SUBMISSION_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_shared_mempool_request_latency",
+        "creditchain_shared_mempool_request_latency",
         "Latency of mempool processing txn submission requests",
         &["network"]
     )
@@ -444,7 +444,7 @@ pub fn process_txn_submit_latency_timer_client() -> HistogramTimer {
 /// Counter for tracking e2e latency for mempool to process get txn by hash requests from clients and peers
 static PROCESS_GET_TXN_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_shared_mempool_get_txn_request_latency",
+        "creditchain_shared_mempool_get_txn_request_latency",
         "Latency of mempool processing get txn by hash requests",
         &["network"]
     )
@@ -460,7 +460,7 @@ pub fn process_get_txn_latency_timer_client() -> HistogramTimer {
 /// Tracks latency of different stages of txn processing (e.g. vm validation, storage read)
 pub static PROCESS_TXN_BREAKDOWN_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_mempool_process_txn_breakdown_latency",
+        "creditchain_mempool_process_txn_breakdown_latency",
         "Latency of different stages of processing txns in mempool",
         &["portion"]
     )
@@ -470,7 +470,7 @@ pub static PROCESS_TXN_BREAKDOWN_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
 /// Counter for tracking latency for mempool to broadcast to a peer
 static SHARED_MEMPOOL_BROADCAST_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_mempool_broadcast_latency",
+        "creditchain_mempool_broadcast_latency",
         "Latency of mempool executing broadcast to another peer",
         &["network"]
     )
@@ -486,7 +486,7 @@ pub fn shared_mempool_broadcast_latency(network_id: NetworkId, latency: Duration
 /// Counter for tracking roundtrip-time from sending a broadcast to receiving ACK for that broadcast
 pub static SHARED_MEMPOOL_BROADCAST_RTT: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_shared_mempool_broadcast_roundtrip_latency",
+        "creditchain_shared_mempool_broadcast_roundtrip_latency",
         "Time elapsed between sending a broadcast and receiving an ACK for that broadcast",
         &["network"]
     )
@@ -496,7 +496,7 @@ pub static SHARED_MEMPOOL_BROADCAST_RTT: Lazy<HistogramVec> = Lazy::new(|| {
 /// Counter tracking number of mempool broadcasts that have not been ACK'ed for
 static SHARED_MEMPOOL_PENDING_BROADCASTS_COUNT: Lazy<IntGaugeVec> = Lazy::new(|| {
     register_int_gauge_vec!(
-        "libra2_shared_mempool_pending_broadcasts_count",
+        "creditchain_shared_mempool_pending_broadcasts_count",
         "Number of mempool broadcasts not ACK'ed for yet",
         &["network", "recipient"]
     )
@@ -513,7 +513,7 @@ pub fn shared_mempool_pending_broadcasts(peer: &PeerNetworkId) -> IntGauge {
 /// Counter tracking the number of peers that changed priority in shared mempool
 pub static SHARED_MEMPOOL_PRIORITY_CHANGE_COUNT: Lazy<IntGauge> = Lazy::new(|| {
     register_int_gauge!(
-        "libra2_shared_mempool_priority_change_count",
+        "creditchain_shared_mempool_priority_change_count",
         "Number of peers that changed priority in shared mempool",
     )
     .unwrap()
@@ -525,7 +525,7 @@ pub fn shared_mempool_priority_change_count(change_count: i64) {
 
 static SHARED_MEMPOOL_TRANSACTIONS_PROCESSED: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_shared_mempool_transactions_processed",
+        "creditchain_shared_mempool_transactions_processed",
         "Number of transactions received and handled by shared mempool",
         &[
             "status", // state of transaction processing: "received", "success", status code from failed txn processing
@@ -544,7 +544,7 @@ pub fn shared_mempool_transactions_processed_inc(status: &str, network: &str) {
 /// Counter for number of transactions in each mempool broadcast sent
 static SHARED_MEMPOOL_TRANSACTION_BROADCAST_SIZE: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_shared_mempool_transaction_broadcast",
+        "creditchain_shared_mempool_transaction_broadcast",
         "Number of transactions in each mempool broadcast sent",
         &["network"]
     )
@@ -559,7 +559,7 @@ pub fn shared_mempool_broadcast_size(network_id: NetworkId, num_txns: usize) {
 
 static SHARED_MEMPOOL_BROADCAST_TYPE_COUNT: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_shared_mempool_rebroadcast_count",
+        "creditchain_shared_mempool_rebroadcast_count",
         "Number of various types of broadcasts executed by shared mempool",
         &["network", "type"]
     )
@@ -574,7 +574,7 @@ pub fn shared_mempool_broadcast_type_inc(network_id: NetworkId, label: &str) {
 
 static SHARED_MEMPOOL_ACK_TYPE_COUNT: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_shared_mempool_ack_count",
+        "creditchain_shared_mempool_ack_count",
         "Number of various types of ACKs sent/received by shared mempool",
         &["network", "direction", "type"]
     )
@@ -589,7 +589,7 @@ pub fn shared_mempool_ack_inc(network_id: NetworkId, direction: &str, label: &'s
 
 static TASK_SPAWN_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_mempool_bounded_executor_spawn_latency",
+        "creditchain_mempool_bounded_executor_spawn_latency",
         "Time it takes for mempool's coordinator to spawn async tasks",
         &["task", "stage"]
     )
@@ -604,7 +604,7 @@ pub fn task_spawn_latency_timer(task: &'static str, stage: &'static str) -> Hist
 
 pub static CORE_MEMPOOL_INVARIANT_VIOLATION_COUNT: Lazy<IntCounter> = Lazy::new(|| {
     register_int_counter!(
-        "libra2_mempool_core_mempool_invariant_violated_count",
+        "creditchain_mempool_core_mempool_invariant_violated_count",
         "Number of times a core mempool invariant was violated"
     )
     .unwrap()
@@ -612,7 +612,7 @@ pub static CORE_MEMPOOL_INVARIANT_VIOLATION_COUNT: Lazy<IntCounter> = Lazy::new(
 
 pub static VM_RECONFIG_UPDATE_FAIL_COUNT: Lazy<IntCounter> = Lazy::new(|| {
     register_int_counter!(
-        "libra2_mempool_vm_reconfig_update_fail_count",
+        "creditchain_mempool_vm_reconfig_update_fail_count",
         "Number of times mempool's VM reconfig update failed"
     )
     .unwrap()
@@ -621,7 +621,7 @@ pub static VM_RECONFIG_UPDATE_FAIL_COUNT: Lazy<IntCounter> = Lazy::new(|| {
 /// Counter for failed network sends
 static NETWORK_SEND_FAIL: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_mempool_network_send_fail_count",
+        "creditchain_mempool_network_send_fail_count",
         "Number of times mempool network send failure occurs",
         &["type"]
     )
@@ -634,7 +634,7 @@ pub fn network_send_fail_inc(label: &'static str) {
 
 static UNEXPECTED_NETWORK_MSG_COUNT: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_mempool_unexpected_network_count",
+        "creditchain_mempool_unexpected_network_count",
         "Number of unexpected network msgs received",
         &["network"]
     )
@@ -650,7 +650,7 @@ pub fn unexpected_msg_count_inc(network_id: &NetworkId) {
 /// Counter for failed callback response to JSON RPC
 pub static CLIENT_CALLBACK_FAIL: Lazy<IntCounter> = Lazy::new(|| {
     register_int_counter!(
-        "libra2_mempool_json_rpc_callback_fail_count",
+        "creditchain_mempool_json_rpc_callback_fail_count",
         "Number of times callback to JSON RPC failed in mempool"
     )
     .unwrap()
@@ -660,7 +660,7 @@ pub static CLIENT_CALLBACK_FAIL: Lazy<IntCounter> = Lazy::new(|| {
 /// did not send
 static INVALID_ACK_RECEIVED_COUNT: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_mempool_unrecognized_ack_received_count",
+        "creditchain_mempool_unrecognized_ack_received_count",
         "Number of ACK messages received with an invalid request_id that this node's mempool did not send",
         &["network", "type"]
     )
@@ -676,7 +676,7 @@ pub fn invalid_ack_inc(network_id: NetworkId, label: &'static str) {
 /// Counter for number of times a DB read resulted in error
 pub static DB_ERROR: Lazy<IntCounter> = Lazy::new(|| {
     register_int_counter!(
-        "libra2_mempool_db_error_count",
+        "creditchain_mempool_db_error_count",
         "Number of times a DB read error was encountered in mempool"
     )
     .unwrap()
@@ -686,7 +686,7 @@ pub static DB_ERROR: Lazy<IntCounter> = Lazy::new(|| {
 /// broadcast to, summed across each of its networks
 static ACTIVE_UPSTREAM_PEERS_COUNT: Lazy<IntGaugeVec> = Lazy::new(|| {
     register_int_gauge_vec!(
-        "libra2_mempool_active_upstream_peers_count",
+        "creditchain_mempool_active_upstream_peers_count",
         "Number of active upstream peers for the node of this mempool",
         &["network"]
     )
@@ -701,7 +701,7 @@ pub fn active_upstream_peers(network_id: &NetworkId) -> IntGauge {
 pub static MAIN_LOOP: Lazy<DurationHistogram> = Lazy::new(|| {
     DurationHistogram::new(
         register_histogram!(
-            "libra2_mempool_main_loop",
+            "creditchain_mempool_main_loop",
             "Duration of the each run of the event loop"
         )
         .unwrap(),

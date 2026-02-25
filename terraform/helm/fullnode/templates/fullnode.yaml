@@ -42,33 +42,33 @@ spec:
         - -c
         - |-
           set -euxo pipefail
-          # cleanup libra2db
-          if [ -f /opt/libra2/data/restore-failed ] || \
-              [ ! -f /opt/libra2/data/restore-uid ] || \
-              [ "$(cat /opt/libra2/data/restore-uid)" != "{{ .config.restore_epoch }}" ]; then
-            rm -rf /opt/libra2/data/db /opt/libra2/data/restore-{complete,failed}
-            echo "{{ .config.restore_epoch }}" > /opt/libra2/data/restore-uid
+          # cleanup creditchaindb
+          if [ -f /opt/creditchain/data/restore-failed ] || \
+              [ ! -f /opt/creditchain/data/restore-uid ] || \
+              [ "$(cat /opt/creditchain/data/restore-uid)" != "{{ .config.restore_epoch }}" ]; then
+            rm -rf /opt/creditchain/data/db /opt/creditchain/data/restore-{complete,failed}
+            echo "{{ .config.restore_epoch }}" > /opt/creditchain/data/restore-uid
           fi
 
-          [ -f /opt/libra2/data/restore-complete ] && exit 0
+          [ -f /opt/creditchain/data/restore-complete ] && exit 0
           # start restore process
-          /usr/local/bin/libra2-debugger libra2-db restore bootstrap-db \
+          /usr/local/bin/creditchain-debugger creditchain-db restore bootstrap-db \
             --concurrent-downloads {{ .config.concurrent_downloads }} \
             {{ range .config.trusted_waypoints }} --trust-waypoint {{ . }}{{ end }} \
-            --target-db-dir /opt/libra2/data/db \
-            --metadata-cache-dir /opt/libra2/data/aptos-restore-metadata \
+            --target-db-dir /opt/creditchain/data/db \
+            --metadata-cache-dir /opt/creditchain/data/aptos-restore-metadata \
             --ledger-history-start-version {{ .config.start_version }} \
             {{- if .config.target_version }} --target-version {{- .config.target_version }}{{- end }}
-            --command-adapter-config /opt/libra2/etc/{{ .config.location }}.yaml
+            --command-adapter-config /opt/creditchain/etc/{{ .config.location }}.yaml
 
           if [ $? -gt 0 ]; then
             # mark restore as failed
-            touch /opt/libra2/data/restore-failed
+            touch /opt/creditchain/data/restore-failed
             exit 1
           else
             # success, remove the marker
-            rm -f /opt/libra2/data/restore-failed
-            touch /opt/libra2/data/restore-complete
+            rm -f /opt/creditchain/data/restore-failed
+            touch /opt/creditchain/data/restore-complete
           fi
         env:
         - name: RUST_LOG
@@ -90,9 +90,9 @@ spec:
         {{- include "backup.backupEnvironment" (dict "config" .config "era" (default $.Values.chain.era .config.restore_era)) | nindent 8 }}
         volumeMounts:
         - name: backup-config
-          mountPath: /opt/libra2/etc
-        - name: libra2-data
-          mountPath: /opt/libra2/data
+          mountPath: /opt/creditchain/etc
+        - name: creditchain-data
+          mountPath: /opt/creditchain/data
         - name: tmp
           mountPath: /tmp
         securityContext:
@@ -116,19 +116,19 @@ spec:
         - -c
         - |-
           set -euxo pipefail
-          if [[ -f /opt/libra2/data/wipe-db ]]; then
+          if [[ -f /opt/creditchain/data/wipe-db ]]; then
             # Wipe DB
-            rm -rf /opt/libra2/data/db
+            rm -rf /opt/creditchain/data/db
             # Delete the command file so we only wipe the DB once
-            rm -vf /opt/libra2/data/wipe-db
+            rm -vf /opt/creditchain/data/wipe-db
           fi
           {{- if and (not .Values.chain.genesisConfigmap) (not .Values.chain.genesisSecret) }}
           # Download genesis and waypoint if necessary
-          curl -o /opt/libra2/genesis/waypoint.txt {{ (get .Values.libra2_chains .Values.chain.name).waypoint_txt_url }}
-          curl -o /opt/libra2/genesis/genesis.blob {{ (get .Values.libra2_chains .Values.chain.name).genesis_blob_url }}
+          curl -o /opt/creditchain/genesis/waypoint.txt {{ (get .Values.creditchain_chains .Values.chain.name).waypoint_txt_url }}
+          curl -o /opt/creditchain/genesis/genesis.blob {{ (get .Values.creditchain_chains .Values.chain.name).genesis_blob_url }}
           {{- end }}
           # Start the node
-          exec /usr/local/bin/libra2-node -f /opt/libra2/etc/fullnode.yaml
+          exec /usr/local/bin/creditchain-node -f /opt/creditchain/etc/fullnode.yaml
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
         env:
@@ -141,12 +141,12 @@ spec:
         - name: RUST_BACKTRACE
           value: "0"
         volumeMounts:
-        - name: libra2-config
-          mountPath: /opt/libra2/etc
-        - name: libra2-genesis
-          mountPath: /opt/libra2/genesis
-        - name: libra2-data
-          mountPath: /opt/libra2/data
+        - name: creditchain-config
+          mountPath: /opt/creditchain/etc
+        - name: creditchain-genesis
+          mountPath: /opt/creditchain/genesis
+        - name: creditchain-data
+          mountPath: /opt/creditchain/data
         - name: tmp
           mountPath: /tmp
         ports:
@@ -213,10 +213,10 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       volumes:
-      - name: libra2-config
+      - name: creditchain-config
         configMap:
           name: {{ include "aptos-fullnode.fullname" . }}
-      - name: libra2-genesis
+      - name: creditchain-genesis
       {{- if .Values.chain.genesisConfigmap }}
         configMap:
           name: {{ .Values.chain.genesisConfigmap }}
@@ -226,7 +226,7 @@ spec:
       {{- else }}
         emptyDir: {}
       {{- end }}
-      - name: libra2-data
+      - name: creditchain-data
         persistentVolumeClaim:
           claimName: {{ include "aptos-fullnode.fullname" . }}-e{{ .Values.chain.era }}
       - name: backup-config

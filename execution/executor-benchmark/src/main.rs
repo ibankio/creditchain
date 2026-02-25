@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_block_partitioner::{
+use creditchain_block_partitioner::{
     pre_partition::{
         connected_component::config::ConnectedComponentPartitionerConfig,
         default_pre_partitioner_config, uniform_partitioner::config::UniformPartitionerConfig,
@@ -10,13 +10,13 @@ use libra2_block_partitioner::{
     },
     v2::config::PartitionerV2Config,
 };
-use libra2_config::config::{
+use creditchain_config::config::{
     EpochSnapshotPrunerConfig, LedgerPrunerConfig, PrunerConfig, StateMerklePrunerConfig,
 };
-use libra2_executor_benchmark::{
+use creditchain_executor_benchmark::{
     default_benchmark_features,
     native::{
-        libra2_vm_uncoordinated::Libra2VMParallelUncoordinatedBlockExecutor,
+        creditchain_vm_uncoordinated::CreditChainVMParallelUncoordinatedBlockExecutor,
         native_config::NativeConfig,
         native_vm::NativeVMBlockExecutor,
         parallel_uncoordinated_block_executor::{
@@ -27,18 +27,18 @@ use libra2_executor_benchmark::{
     pipeline::PipelineConfig,
     BenchmarkWorkload,
 };
-use libra2_executor_service::remote_executor_client;
-use libra2_experimental_ptx_executor::PtxBlockExecutor;
+use creditchain_executor_service::remote_executor_client;
+use creditchain_experimental_ptx_executor::PtxBlockExecutor;
 #[cfg(target_os = "linux")]
-use libra2_experimental_runtimes::thread_manager::{ThreadConfigStrategy, ThreadManagerBuilder};
-use libra2_metrics_core::{register_int_gauge, IntGauge};
-use libra2_profiler::{ProfilerConfig, ProfilerHandler};
-use libra2_push_metrics::MetricsPusher;
-use libra2_transaction_generator_lib::WorkflowProgress;
-use libra2_transaction_workloads_lib::args::TransactionTypeArg;
-use libra2_types::on_chain_config::{FeatureFlag, Features};
-use libra2_vm::{libra2_vm::Libra2VMBlockExecutor, Libra2VM, VMBlockExecutor};
-use libra2_vm_environment::prod_configs::set_paranoid_type_checks;
+use creditchain_experimental_runtimes::thread_manager::{ThreadConfigStrategy, ThreadManagerBuilder};
+use creditchain_metrics_core::{register_int_gauge, IntGauge};
+use creditchain_profiler::{ProfilerConfig, ProfilerHandler};
+use creditchain_push_metrics::MetricsPusher;
+use creditchain_transaction_generator_lib::WorkflowProgress;
+use creditchain_transaction_workloads_lib::args::TransactionTypeArg;
+use creditchain_types::on_chain_config::{FeatureFlag, Features};
+use creditchain_vm::{creditchain_vm::CreditChainVMBlockExecutor, CreditChainVM, VMBlockExecutor};
+use creditchain_vm_environment::prod_configs::set_paranoid_type_checks;
 use clap::{Parser, Subcommand, ValueEnum};
 use once_cell::sync::Lazy;
 use std::{
@@ -241,19 +241,19 @@ struct ProfilerOpt {
 
 #[derive(Parser, Debug, ValueEnum, Clone, Default)]
 enum BlockExecutorTypeOpt {
-    /// Transaction execution: Libra2VM
+    /// Transaction execution: CreditChainVM
     /// Executing conflicts: in the input order, via BlockSTM,
     /// State: BlockSTM-provided MVHashMap-based view with caching
     #[default]
-    Libra2VMWithBlockSTM,
+    CreditChainVMWithBlockSTM,
     /// Transaction execution: NativeVM - a simplified rust implemtation to create VMChangeSet,
     /// Executing conflicts: in the input order, via BlockSTM
     /// State: BlockSTM-provided MVHashMap-based view with caching
     NativeVMWithBlockSTM,
-    /// Transaction execution: Libra2VM
+    /// Transaction execution: CreditChainVM
     /// Executing conflicts: All transactions execute on the state at the beginning of the block
     /// State: Raw CachedStateView
-    Libra2VMParallelUncoordinated,
+    CreditChainVMParallelUncoordinated,
     /// Transaction execution: Native rust code producing WriteSet
     /// Executing conflicts: All transactions execute on the state at the beginning of the block
     /// State: Raw CachedStateView
@@ -465,7 +465,7 @@ where
             enable_feature,
             disable_feature,
         } => {
-            libra2_executor_benchmark::db_generator::create_db_with_accounts::<E>(
+            creditchain_executor_benchmark::db_generator::create_db_with_accounts::<E>(
                 num_accounts,
                 init_account_balance,
                 opt.block_size,
@@ -491,8 +491,8 @@ where
             enable_feature,
             disable_feature,
         } => {
-            // libra2_types::on_chain_config::hack_enable_default_features_for_genesis(enable_feature);
-            // libra2_types::on_chain_config::hack_disable_default_features_for_genesis(
+            // creditchain_types::on_chain_config::hack_enable_default_features_for_genesis(enable_feature);
+            // creditchain_types::on_chain_config::hack_disable_default_features_for_genesis(
             //     disable_feature,
             // );
 
@@ -523,7 +523,7 @@ where
                 }
             }
 
-            libra2_executor_benchmark::run_benchmark::<E>(
+            creditchain_executor_benchmark::run_benchmark::<E>(
                 opt.block_size,
                 blocks,
                 workload,
@@ -546,7 +546,7 @@ where
             num_new_accounts,
             init_account_balance,
         } => {
-            libra2_executor_benchmark::add_accounts::<E>(
+            creditchain_executor_benchmark::add_accounts::<E>(
                 num_new_accounts,
                 init_account_balance,
                 opt.block_size,
@@ -565,7 +565,7 @@ where
 
 fn main() {
     let opt = Opt::parse();
-    libra2_logger::Logger::new().init();
+    creditchain_logger::Logger::new().init();
     START_TIME.set(
         SystemTime::now()
             .duration_since(UNIX_EPOCH)
@@ -577,7 +577,7 @@ fn main() {
         .build_global()
         .expect("Failed to build rayon global thread pool.");
 
-    libra2_node_resource_metrics::register_node_metrics_collector(None);
+    creditchain_node_resource_metrics::register_node_metrics_collector(None);
     let _mp = MetricsPusher::start_for_local_run("executor-benchmark");
 
     let execution_threads = opt.execution_threads();
@@ -624,10 +624,10 @@ fn main() {
     if opt.skip_paranoid_checks {
         set_paranoid_type_checks(false);
     }
-    Libra2VM::set_num_shards_once(execution_shards);
-    Libra2VM::set_concurrency_level_once(execution_threads_per_shard);
+    CreditChainVM::set_num_shards_once(execution_shards);
+    CreditChainVM::set_concurrency_level_once(execution_threads_per_shard);
     NativeConfig::set_concurrency_level_once(execution_threads_per_shard);
-    Libra2VM::set_processed_transactions_detailed_counters();
+    CreditChainVM::set_processed_transactions_detailed_counters();
 
     let config = ProfilerConfig::new_with_defaults();
     let handler = ProfilerHandler::new(config);
@@ -646,14 +646,14 @@ fn main() {
     }
 
     match opt.block_executor_type {
-        BlockExecutorTypeOpt::Libra2VMWithBlockSTM => {
-            run::<Libra2VMBlockExecutor>(opt);
+        BlockExecutorTypeOpt::CreditChainVMWithBlockSTM => {
+            run::<CreditChainVMBlockExecutor>(opt);
         },
         BlockExecutorTypeOpt::NativeVMWithBlockSTM => {
             run::<NativeVMBlockExecutor>(opt);
         },
-        BlockExecutorTypeOpt::Libra2VMParallelUncoordinated => {
-            run::<Libra2VMParallelUncoordinatedBlockExecutor>(opt);
+        BlockExecutorTypeOpt::CreditChainVMParallelUncoordinated => {
+            run::<CreditChainVMParallelUncoordinatedBlockExecutor>(opt);
         },
         BlockExecutorTypeOpt::NativeParallelUncoordinated => {
             run::<NativeParallelUncoordinatedBlockExecutor<NativeRawTransactionExecutor>>(opt);
@@ -681,7 +681,7 @@ fn main() {
         let _cpu_end = cpu_profiler.end_profiling("");
     }
     if memory_profiling {
-        let _mem_end = memory_profiler.end_profiling("./target/release/libra2-executor-benchmark");
+        let _mem_end = memory_profiler.end_profiling("./target/release/creditchain-executor-benchmark");
     }
 }
 

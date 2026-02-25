@@ -9,22 +9,22 @@ use crate::{
     shared_mempool::use_case_history::UseCaseHistory,
 };
 use anyhow::Result;
-use libra2_config::{
+use creditchain_config::{
     config::{MempoolConfig, NodeType, TransactionFilterConfig},
     network_id::PeerNetworkId,
 };
-use libra2_consensus_types::common::{
+use creditchain_consensus_types::common::{
     RejectedTransactionSummary, TransactionInProgress, TransactionSummary,
 };
-use libra2_crypto::HashValue;
-use libra2_infallible::{Mutex, RwLock};
-use libra2_network::application::interface::NetworkClientInterface;
-use libra2_storage_interface::DbReader;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_infallible::{Mutex, RwLock};
+use creditchain_network::application::interface::NetworkClientInterface;
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{
     account_address::AccountAddress, mempool_status::MempoolStatus, transaction::SignedTransaction,
     vm_status::DiscardedVMStatus,
 };
-use libra2_vm_validator::vm_validator::TransactionValidation;
+use creditchain_vm_validator::vm_validator::TransactionValidation;
 use futures::{
     channel::{mpsc, mpsc::UnboundedSender, oneshot},
     future::Future,

@@ -1,5 +1,5 @@
 module poc::fetch_and_increment_txn_counter {
-    use libra2_framework::randomness;
+    use creditchain_framework::randomness;
 
 
     #[lint::allow_unsafe_randomness]

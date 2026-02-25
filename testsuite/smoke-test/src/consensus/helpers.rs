@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::txn_emitter::generate_traffic;
-use libra2_forge::{NodeExt, Swarm, TransactionType};
-use libra2_types::PeerId;
+use creditchain_forge::{NodeExt, Swarm, TransactionType};
+use creditchain_types::PeerId;
 use std::time::Duration;
 
 pub async fn generate_traffic_and_assert_committed(

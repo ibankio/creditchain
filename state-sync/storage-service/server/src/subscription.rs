@@ -11,13 +11,13 @@ use crate::{
     storage::StorageReaderInterface,
     utils, LogEntry, LogSchema,
 };
-use libra2_config::{
+use creditchain_config::{
     config::StorageServiceConfig,
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_infallible::Mutex;
-use libra2_logger::{error, warn};
-use libra2_storage_service_types::{
+use creditchain_infallible::Mutex;
+use creditchain_logger::{error, warn};
+use creditchain_storage_service_types::{
     requests::{
         DataRequest, GetTransactionDataWithProofRequest, StorageServiceRequest,
         SubscriptionStreamMetadata, TransactionDataRequestType, TransactionOutputsWithProofRequest,
@@ -27,8 +27,8 @@ use libra2_storage_service_types::{
         DataResponse, StorageServerSummary, StorageServiceResponse, TransactionDataResponseType,
     },
 };
-use libra2_time_service::{TimeService, TimeServiceTrait};
-use libra2_types::{ledger_info::LedgerInfoWithSignatures, transaction::Version};
+use creditchain_time_service::{TimeService, TimeServiceTrait};
+use creditchain_types::{ledger_info::LedgerInfoWithSignatures, transaction::Version};
 use arc_swap::ArcSwap;
 use dashmap::DashMap;
 use futures::future::join_all;
@@ -70,7 +70,7 @@ impl SubscriptionRequest {
         config: StorageServiceConfig,
         known_version: u64,
         target_ledger_info: &LedgerInfoWithSignatures,
-    ) -> libra2_storage_service_types::Result<StorageServiceRequest, Error> {
+    ) -> creditchain_storage_service_types::Result<StorageServiceRequest, Error> {
         // Calculate the number of versions to fetch
         let target_version = target_ledger_info.ledger_info().version();
         let mut num_versions_to_fetch =
@@ -757,7 +757,7 @@ pub(crate) async fn get_peers_with_ready_subscriptions<T: StorageReaderInterface
     storage: T,
     subscriptions: Arc<DashMap<PeerNetworkId, SubscriptionStreamRequests>>,
     time_service: TimeService,
-) -> libra2_storage_service_types::Result<Vec<(PeerNetworkId, LedgerInfoWithSignatures)>, Error> {
+) -> creditchain_storage_service_types::Result<Vec<(PeerNetworkId, LedgerInfoWithSignatures)>, Error> {
     // Fetch the latest storage summary and highest synced version
     let latest_storage_summary = cached_storage_server_summary.load().clone();
     let highest_synced_ledger_info = match &latest_storage_summary.data_summary.synced_ledger_info {

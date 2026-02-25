@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{tests::suite, OnDiskStorage, Storage};
-use libra2_temppath::TempPath;
+use creditchain_temppath::TempPath;
 
 #[test]
 fn on_disk() {

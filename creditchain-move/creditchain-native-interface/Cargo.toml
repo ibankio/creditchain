@@ -1,0 +1,22 @@
+[package]
+name = "creditchain-native-interface"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+creditchain-gas-algebra = { workspace = true }
+creditchain-gas-schedule = { workspace = true }
+creditchain-types = { workspace = true }
+move-binary-format = { workspace = true }
+move-core-types = { workspace = true }
+move-vm-runtime = { workspace = true }
+move-vm-types = { workspace = true }
+smallvec = { workspace = true }

@@ -3,11 +3,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::sparse_merkle::utils::partition;
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{CryptoHash, SPARSE_MERKLE_PLACEHOLDER_HASH},
     HashValue,
 };
-use libra2_types::proof::{
+use creditchain_types::proof::{
     definition::NodeInProof, SparseMerkleInternalNode, SparseMerkleLeafNode, SparseMerkleProofExt,
 };
 use bitvec::prelude::*;

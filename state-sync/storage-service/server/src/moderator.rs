@@ -2,16 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{error::Error, logging::LogEntry, metrics, utils, LogSchema};
-use libra2_config::{
-    config::{Libra2DataClientConfig, StorageServiceConfig},
+use creditchain_config::{
+    config::{CreditChainDataClientConfig, StorageServiceConfig},
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_logger::warn;
-use libra2_network::application::storage::PeersAndMetadata;
-use libra2_storage_service_types::{
+use creditchain_logger::warn;
+use creditchain_network::application::storage::PeersAndMetadata;
+use creditchain_storage_service_types::{
     requests::StorageServiceRequest, responses::StorageServerSummary,
 };
-use libra2_time_service::{TimeService, TimeServiceTrait};
+use creditchain_time_service::{TimeService, TimeServiceTrait};
 use arc_swap::ArcSwap;
 use dashmap::DashMap;
 use std::{
@@ -103,7 +103,7 @@ impl UnhealthyPeerState {
 /// If a peer sends too many invalid requests, the moderator will mark the peer as
 /// "unhealthy" and will ignore requests from that peer for some time.
 pub struct RequestModerator {
-    libra2_data_client_config: Libra2DataClientConfig,
+    creditchain_data_client_config: CreditChainDataClientConfig,
     cached_storage_server_summary: Arc<ArcSwap<StorageServerSummary>>,
     peers_and_metadata: Arc<PeersAndMetadata>,
     storage_service_config: StorageServiceConfig,
@@ -113,14 +113,14 @@ pub struct RequestModerator {
 
 impl RequestModerator {
     pub fn new(
-        libra2_data_client_config: Libra2DataClientConfig,
+        creditchain_data_client_config: CreditChainDataClientConfig,
         cached_storage_server_summary: Arc<ArcSwap<StorageServerSummary>>,
         peers_and_metadata: Arc<PeersAndMetadata>,
         storage_service_config: StorageServiceConfig,
         time_service: TimeService,
     ) -> Self {
         Self {
-            libra2_data_client_config,
+            creditchain_data_client_config,
             cached_storage_server_summary,
             unhealthy_peer_states: Arc::new(DashMap::new()),
             peers_and_metadata,
@@ -153,7 +153,7 @@ impl RequestModerator {
 
             // Verify the request is serviceable using the current storage server summary
             if !storage_server_summary.can_service(
-                &self.libra2_data_client_config,
+                &self.creditchain_data_client_config,
                 self.time_service.clone(),
                 request,
             ) {
@@ -249,7 +249,7 @@ impl RequestModerator {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use libra2_types::PeerId;
+    use creditchain_types::PeerId;
 
     #[test]
     fn test_unhealthy_peer_ignored() {

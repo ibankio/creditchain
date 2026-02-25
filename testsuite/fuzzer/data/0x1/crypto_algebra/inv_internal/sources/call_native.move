@@ -1,7 +1,7 @@
 module poc::inv_internal {
     use std::option::{Self};
-    use libra2_std::crypto_algebra::{Self};
-    use libra2_std::bls12381_algebra::{Fr};
+    use creditchain_std::crypto_algebra::{Self};
+    use creditchain_std::bls12381_algebra::{Fr};
 
     public entry fun main(_owner: &signer) {
         let one = crypto_algebra::one<Fr>();

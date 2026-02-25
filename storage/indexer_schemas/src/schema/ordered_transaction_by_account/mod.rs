@@ -13,11 +13,11 @@
 
 use crate::{schema::ORDERED_TRANSACTION_BY_ACCOUNT_CF_NAME, utils::ensure_slice_len_eq};
 use anyhow::Result;
-use libra2_schemadb::{
+use creditchain_schemadb::{
     define_pub_schema,
     schema::{KeyCodec, ValueCodec},
 };
-use libra2_types::{account_address::AccountAddress, transaction::Version};
+use creditchain_types::{account_address::AccountAddress, transaction::Version};
 use byteorder::{BigEndian, ReadBytesExt, WriteBytesExt};
 use std::{convert::TryFrom, mem::size_of};
 

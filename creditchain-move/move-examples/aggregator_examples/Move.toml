@@ -1,0 +1,10 @@
+[package]
+name = "aggregator_examples"
+version = "0.0.0"
+
+[addresses]
+aggregator_examples = "0xCAFE"
+
+[dependencies]
+CreditChainStdlib = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-stdlib", rev = "mainnet" }
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }

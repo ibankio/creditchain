@@ -6,7 +6,7 @@ use crate::transaction_shuffler::use_case_aware::{
     types::{InputIdx, OutputIdx},
     Config,
 };
-use libra2_types::transaction::use_case::UseCaseAwareTransaction;
+use creditchain_types::transaction::use_case::UseCaseAwareTransaction;
 use std::{collections::VecDeque, fmt::Debug};
 
 #[derive(Debug)]

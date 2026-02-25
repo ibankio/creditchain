@@ -12,7 +12,7 @@ use crate::{
     runner::{Runner, SyncRunner},
 };
 use anyhow::{bail, Context, Result};
-use libra2_logger::info;
+use creditchain_logger::info;
 use std::{collections::HashMap, path::PathBuf, sync::Arc};
 
 /// This struct is a wrapper to help with all the different baseline

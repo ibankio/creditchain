@@ -1,7 +1,7 @@
 [package]
 name = "move-decompiler"
 version = "0.1.0"
-authors = ["Libra2 Labs"]
+authors = ["CreditChain Labs"]
 description = "Move Decompiler"
 repository = "https://github.com/libra2org/libra2-core"
 homepage = "https://aptosfoundation.org/"

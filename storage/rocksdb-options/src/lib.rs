@@ -1,11 +1,11 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_config::config::RocksdbConfig;
+use creditchain_config::config::RocksdbConfig;
 use rocksdb::Options;
 
 // TODO: Clean this up. It is currently separated into its own crate
-// to avoid circular dependencies, because it depends on libra2-config (which
+// to avoid circular dependencies, because it depends on creditchain-config (which
 // is widely used).
 
 pub fn gen_rocksdb_options(config: &RocksdbConfig, readonly: bool) -> Options {

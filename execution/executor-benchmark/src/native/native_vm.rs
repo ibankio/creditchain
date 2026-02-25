@@ -9,21 +9,21 @@ use crate::{
         native_transaction::{compute_deltas_for_batch, NativeTransaction},
     },
 };
-use libra2_aggregator::{
+use creditchain_aggregator::{
     bounded_math::SignedU128,
     delayed_change::{DelayedApplyChange, DelayedChange},
     delta_change_set::{DeltaOp, DeltaWithMax},
     delta_math::DeltaHistory,
 };
-use libra2_block_executor::{
-    code_cache_global_manager::Libra2ModuleCacheManager,
+use creditchain_block_executor::{
+    code_cache_global_manager::CreditChainModuleCacheManager,
     task::{ExecutionStatus, ExecutorTask},
     txn_commit_hook::NoOpTransactionCommitHook,
     txn_provider::default::DefaultTxnProvider,
 };
-use libra2_logger::error;
-use libra2_mvhashmap::types::TxnIndex;
-use libra2_types::{
+use creditchain_logger::error;
+use creditchain_mvhashmap::types::TxnIndex;
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::{
         primary_apt_store, AccountResource, CoinInfoResource, CoinRegister, CoinStoreResource,
@@ -44,14 +44,14 @@ use libra2_types::{
         TransactionOutput, TransactionStatus, WriteSetPayload,
     },
     write_set::WriteOp,
-    Libra2CoinType,
+    CreditChainCoinType,
 };
-use libra2_vm::{
-    block_executor::{Libra2BlockExecutorWrapper, Libra2TransactionOutput},
+use creditchain_vm::{
+    block_executor::{CreditChainBlockExecutorWrapper, CreditChainTransactionOutput},
     VMBlockExecutor,
 };
-use libra2_vm_environment::environment::Libra2Environment;
-use libra2_vm_types::{
+use creditchain_vm_environment::environment::CreditChainEnvironment;
+use creditchain_vm_types::{
     abstract_write_op::{
         AbstractResourceWriteOp, GroupWrite, ResourceGroupInPlaceDelayedFieldChangeOp,
     },
@@ -91,15 +91,15 @@ impl VMBlockExecutor for NativeVMBlockExecutor {
         onchain_config: BlockExecutorConfigFromOnchain,
         transaction_slice_metadata: TransactionSliceMetadata,
     ) -> Result<BlockOutput<StateKey, TransactionOutput>, VMStatus> {
-        Libra2BlockExecutorWrapper::<NativeVMExecutorTask>::execute_block_on_thread_pool::<
+        CreditChainBlockExecutorWrapper::<NativeVMExecutorTask>::execute_block_on_thread_pool::<
             _,
-            NoOpTransactionCommitHook<Libra2TransactionOutput, VMStatus>,
+            NoOpTransactionCommitHook<CreditChainTransactionOutput, VMStatus>,
             _,
         >(
             Arc::clone(&NATIVE_EXECUTOR_POOL),
             txn_provider,
             state_view,
-            &Libra2ModuleCacheManager::new(),
+            &CreditChainModuleCacheManager::new(),
             BlockExecutorConfig {
                 local: BlockExecutorLocalConfig::default_with_concurrency_level(
                     NativeConfig::get_concurrency_level(),
@@ -119,10 +119,10 @@ pub(crate) struct NativeVMExecutorTask {
 
 impl ExecutorTask for NativeVMExecutorTask {
     type Error = VMStatus;
-    type Output = Libra2TransactionOutput;
+    type Output = CreditChainTransactionOutput;
     type Txn = SignatureVerifiedTransaction;
 
-    fn init(env: &Libra2Environment, _state_view: &impl StateView) -> Self {
+    fn init(env: &CreditChainEnvironment, _state_view: &impl StateView) -> Self {
         let fa_migration_complete = env
             .features()
             .is_enabled(FeatureFlag::OPERATIONS_DEFAULT_TO_FA_LBT_STORE);
@@ -148,18 +148,18 @@ impl ExecutorTask for NativeVMExecutorTask {
         executor_with_group_view: &(impl ExecutorView + ResourceGroupView),
         txn: &SignatureVerifiedTransaction,
         _txn_idx: TxnIndex,
-    ) -> ExecutionStatus<Libra2TransactionOutput, VMStatus> {
+    ) -> ExecutionStatus<CreditChainTransactionOutput, VMStatus> {
         match self.execute_transaction_impl(
             executor_with_group_view,
             txn,
             self.fa_migration_complete,
         ) {
             Ok((change_set, gas_units)) => {
-                ExecutionStatus::Success(Libra2TransactionOutput::new(VMOutput::new(
+                ExecutionStatus::Success(CreditChainTransactionOutput::new(VMOutput::new(
                     change_set,
                     ModuleWriteSet::empty(),
                     FeeStatement::new(gas_units, gas_units, 0, 0, 0),
-                    TransactionStatus::Keep(libra2_types::transaction::ExecutionStatus::Success),
+                    TransactionStatus::Keep(creditchain_types::transaction::ExecutionStatus::Success),
                 )))
             },
             Err(_) => ExecutionStatus::SpeculativeExecutionAbortError("something".to_string()),
@@ -575,7 +575,7 @@ impl NativeVMExecutorTask {
         view: &(impl ExecutorView + ResourceGroupView),
         aggregator_v1_delta_set: &mut BTreeMap<StateKey, DeltaOp>,
     ) -> Result<(), ()> {
-        let (sender_coin_store, _metadata) = Self::get_value::<CoinInfoResource<Libra2CoinType>>(
+        let (sender_coin_store, _metadata) = Self::get_value::<CoinInfoResource<CreditChainCoinType>>(
             &self.db_util.common.apt_coin_info_resource,
             view,
         )?
@@ -683,10 +683,10 @@ impl NativeVMExecutorTask {
         resource_write_set: &mut BTreeMap<StateKey, AbstractResourceWriteOp>,
         events: &mut Vec<(ContractEvent, Option<MoveTypeLayout>)>,
     ) -> Result<(), ()> {
-        let sender_coin_store_key = self.db_util.new_state_key_libra2_coin(&sender_address);
+        let sender_coin_store_key = self.db_util.new_state_key_creditchain_coin(&sender_address);
 
         let sender_coin_store_opt =
-            Self::get_value::<CoinStoreResource<Libra2CoinType>>(&sender_coin_store_key, view)?;
+            Self::get_value::<CoinStoreResource<CreditChainCoinType>>(&sender_coin_store_key, view)?;
 
         let (mut sender_coin_store, metadata) = match sender_coin_store_opt {
             None => {
@@ -832,9 +832,9 @@ impl NativeVMExecutorTask {
         resource_write_set: &mut BTreeMap<StateKey, AbstractResourceWriteOp>,
         events: &mut Vec<(ContractEvent, Option<MoveTypeLayout>)>,
     ) -> Result<bool, ()> {
-        let recipient_coin_store_key = self.db_util.new_state_key_libra2_coin(&recipient_address);
+        let recipient_coin_store_key = self.db_util.new_state_key_creditchain_coin(&recipient_address);
         let (mut recipient_coin_store, recipient_coin_store_metadata, existed) =
-            match Self::get_value::<CoinStoreResource<Libra2CoinType>>(
+            match Self::get_value::<CoinStoreResource<CreditChainCoinType>>(
                 &recipient_coin_store_key,
                 view,
             )? {
@@ -845,7 +845,7 @@ impl NativeVMExecutorTask {
                     events.push((
                         CoinRegister {
                             account: AccountAddress::ONE,
-                            type_info: DbAccessUtil::new_type_info_resource::<Libra2CoinType>()
+                            type_info: DbAccessUtil::new_type_info_resource::<CreditChainCoinType>()
                                 .map_err(hide_error)?,
                         }
                         .create_event_v2()

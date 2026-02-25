@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{config::GRPC_MANAGER, data_manager::DataManager};
-use libra2_indexer_grpc_utils::status_page::{get_throughput_from_samples, render_status_page, Tab};
-use libra2_protos::{
+use creditchain_indexer_grpc_utils::status_page::{get_throughput_from_samples, render_status_page, Tab};
+use creditchain_protos::{
     indexer::v1::{FullnodeInfo, HistoricalDataServiceInfo, LiveDataServiceInfo, StreamInfo},
     util::timestamp::Timestamp,
 };

@@ -48,9 +48,9 @@ spec:
         imagePullPolicy: {{ .Values.backup.image.pullPolicy }}
         resources:
           {{- toYaml .Values.backup.resources | nindent 10 }}
-        command: ["/usr/local/bin/libra2-debugger"]
+        command: ["/usr/local/bin/creditchain-debugger"]
         args:
-        - "libra2-db"
+        - "creditchain-db"
         - "backup"
         - "continuously"
         - "--metadata-cache-dir"
@@ -67,7 +67,7 @@ spec:
         - "{{ int .config.concurrent_data_requests }}"
         {{- end }}
         - "--command-adapter-config"
-        - "/opt/libra2/etc/{{ .config.location }}.yaml"
+        - "/opt/creditchain/etc/{{ .config.location }}.yaml"
         env:
         - name: RUST_LOG
           value: "info"
@@ -84,7 +84,7 @@ spec:
         {{- include "backup.backupEnvironment" (dict "config" .config "era" $.Values.chain.era) | nindent 8 }}
         volumeMounts:
         - name: backup-config
-          mountPath: /opt/libra2/etc
+          mountPath: /opt/creditchain/etc
         - name: tmp
           mountPath: /tmp
         securityContext:

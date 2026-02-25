@@ -16,7 +16,7 @@ use crate::{
 use allocative_derive::Allocative;
 use anyhow::Context;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{
+   creditchain_protos::transaction::v1::{
         write_set_change::{Change as WriteSetChangeEnum, Type as WriteSetChangeTypeEnum},
         WriteSetChange as WriteSetChangePB,
     },

@@ -8,13 +8,13 @@ use crate::{
     },
     EmitModeParams,
 };
-use libra2_logger::{sample, sample::SampleRate};
-use libra2_rest_client::Client as RestClient;
-use libra2_sdk::{
+use creditchain_logger::{sample, sample::SampleRate};
+use creditchain_rest_client::Client as RestClient;
+use creditchain_sdk::{
     move_types::account_address::AccountAddress,
     types::{transaction::SignedTransaction, vm_status::StatusCode, LocalAccount},
 };
-use libra2_transaction_generator_lib::TransactionGenerator;
+use creditchain_transaction_generator_lib::TransactionGenerator;
 use core::{
     cmp::{max, min},
     result::Result::{Err, Ok},

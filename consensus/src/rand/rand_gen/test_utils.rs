@@ -5,16 +5,16 @@ use crate::{
     pipeline::buffer_manager::OrderedBlocks,
     rand::rand_gen::types::{MockShare, RandShare},
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block::Block,
     block_data::{BlockData, BlockType},
     common::{Author, Round},
     pipelined_block::PipelinedBlock,
     quorum_cert::QuorumCert,
 };
-use libra2_crypto::HashValue;
-use libra2_executor_types::state_compute_result::StateComputeResult;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_executor_types::state_compute_result::StateComputeResult;
+use creditchain_types::{
     aggregate_signature::AggregateSignature,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},
     randomness::RandMetadata,

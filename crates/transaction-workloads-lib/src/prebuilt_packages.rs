@@ -6,8 +6,8 @@
 //
 // To update this code, run `testsuite/benchmark-workloads/generate.py`.
 
-use libra2_sdk::bcs;
-use libra2_transaction_generator_lib::{
+use creditchain_sdk::bcs;
+use creditchain_transaction_generator_lib::{
     entry_point_trait::PreBuiltPackages, publishing::prebuild_packages::PrebuiltPackagesBundle,
 };
 use once_cell::sync::Lazy;

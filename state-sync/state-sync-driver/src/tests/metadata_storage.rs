@@ -8,8 +8,8 @@ use crate::{
     },
     tests::utils::{create_epoch_ending_ledger_info, create_ledger_info_at_version},
 };
-use libra2_schemadb::schema::fuzzing::assert_encode_decode;
-use libra2_temppath::TempPath;
+use creditchain_schemadb::schema::fuzzing::assert_encode_decode;
+use creditchain_temppath::TempPath;
 use claims::{assert_err, assert_none};
 
 #[test]

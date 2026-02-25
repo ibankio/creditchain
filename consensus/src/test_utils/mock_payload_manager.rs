@@ -6,16 +6,16 @@ use crate::{
     payload_client::{user::quorum_store_client::QuorumStoreClient, PayloadClient},
 };
 use anyhow::Result;
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block::block_test_utils::random_payload, common::Payload,
     payload_pull_params::PayloadPullParameters, request_response::GetPayloadCommand,
 };
-use libra2_types::{
+use creditchain_types::{
     transaction::{ExecutionStatus, TransactionStatus},
     validator_txn::ValidatorTransaction,
     vm_status::StatusCode,
 };
-use libra2_validator_transaction_pool as vtxn_pool;
+use creditchain_validator_transaction_pool as vtxn_pool;
 use futures::channel::mpsc;
 use rand::Rng;
 

@@ -10,10 +10,10 @@ use crate::{
     DbReader,
 };
 use anyhow::Result;
-use libra2_crypto::{hash::CORRUPTION_SENTINEL, HashValue};
-use libra2_metrics_core::TimerHelper;
-use libra2_scratchpad::{ProofRead, SparseMerkleTree};
-use libra2_types::{proof::SparseMerkleProofExt, transaction::Version};
+use creditchain_crypto::{hash::CORRUPTION_SENTINEL, HashValue};
+use creditchain_metrics_core::TimerHelper;
+use creditchain_scratchpad::{ProofRead, SparseMerkleTree};
+use creditchain_types::{proof::SparseMerkleProofExt, transaction::Version};
 use derive_more::Deref;
 use itertools::Itertools;
 use rayon::prelude::*;

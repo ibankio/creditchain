@@ -3,7 +3,7 @@ This guide assumes you already have AWS account setup.
 
 Install pre-requisites if needed:
 
-   * CreditChain CLI: https://github.com/ibankio/creditchain/releases/tag/libra2-cli-v0.1.0-alpha
+   * CreditChain CLI: https://github.com/ibankio/creditchain/releases/tag/creditchain-cli-v0.1.0-alpha
    * Terraform 1.1.7: https://www.terraform.io/downloads.html
    * Kubernetes CLI: https://kubernetes.io/docs/tasks/tools/
    * AWS CLI: https://aws.amazon.com/cli/
@@ -42,8 +42,8 @@ Install pre-requisites if needed:
   terraform {
     required_version = "~> 1.2.0"
     backend "s3" {
-      bucket = "terraform.libra2-node"
-      key    = "state/libra2-node"
+      bucket = "terraform.creditchain-node"
+      key    = "state/creditchain-node"
       region = var.region
     }
   }
@@ -52,9 +52,9 @@ Install pre-requisites if needed:
     region = var.region
   }
 
-  module "libra2-node" {
+  module "creditchain-node" {
     # download Terraform module from ibankio/creditchain repo
-    source        = "github.com/ibankio/creditchain.git//terraform/libra2-node/aws?ref=main"
+    source        = "github.com/ibankio/creditchain.git//terraform/creditchain-node/aws?ref=main"
     region        = var.region  # Specify the region
     # zone_id     = "<Route53 zone id>"  # zone id for Route53 if you want to use DNS
     era           = 1              # bump era number to wipe the chain
@@ -64,7 +64,7 @@ Install pre-requisites if needed:
   }
   ```
 
-For the full customization options, see the variables file [here](https://github.com/ibankio/creditchain/blob/main/terraform/libra2-node/aws/variables.tf), and the [helm values](https://github.com/ibankio/creditchain/blob/main/terraform/helm/libra2-node/values.yaml).
+For the full customization options, see the variables file [here](https://github.com/ibankio/creditchain/blob/main/terraform/creditchain-node/aws/variables.tf), and the [helm values](https://github.com/ibankio/creditchain/blob/main/terraform/helm/creditchain-node/values.yaml).
 
 5. Initialize Terraform in the same directory of your `main.tf` file
   ```
@@ -94,9 +94,9 @@ This will download all the terraform dependencies for you, in the `.terraform` f
 9. Get your node IP info:
 
     ```
-    $ export VALIDATOR_ADDRESS="$(kubectl get svc ${WORKSPACE}-libra2-node-validator-lb --output jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
+    $ export VALIDATOR_ADDRESS="$(kubectl get svc ${WORKSPACE}-creditchain-node-validator-lb --output jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
 
-    $ export FULLNODE_ADDRESS="$(kubectl get svc ${WORKSPACE}-libra2-node-fullnode-lb --output jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
+    $ export FULLNODE_ADDRESS="$(kubectl get svc ${WORKSPACE}-creditchain-node-fullnode-lb --output jsonpath='{.status.loadBalancer.ingress[0].hostname}')"
     ```
 
 10. Generate key pairs (node owner key, consensus key and networking key) in your working directory.
@@ -147,9 +147,9 @@ This will download all the terraform dependencies for you, in the `.terraform` f
     chain_id: 5
     ```
 
-13. Download Libra2Framework Move bytecodes into a folder named `framework`.
+13. Download CreditChainFramework Move bytecodes into a folder named `framework`.
 
-    Download the CreditChain Framework from the release page: https://github.com/ibankio/creditchain/releases/tag/libra2-framework-v0.1.0
+    Download the CreditChain Framework from the release page: https://github.com/ibankio/creditchain/releases/tag/creditchain-framework-v0.1.0
 
     ```
     $ unzip framework.zip
@@ -171,14 +171,14 @@ This will download all the terraform dependencies for you, in the `.terraform` f
     - `validator-full-node-identity.yaml` Private keys for setting validator full node identity
     - `<username>.yaml` Node info for both validator / fullnode
     - `layout.yaml` layout file to define root key, validator user, and chain ID
-    - `framework` folder which contains all the move bytecode for Libra2Framework.
+    - `framework` folder which contains all the move bytecode for CreditChainFramework.
     - `waypoint.txt` waypoint for genesis transaction
     - `genesis.blob` genesis binary contains all the info about framework, validatorSet and more.
 
 16. Insert `genesis.blob`, `waypoint.txt` and the identity files as secret into k8s cluster.
 
     ```
-    $ kubectl create secret generic ${WORKSPACE}-libra2-node-genesis-e1 \
+    $ kubectl create secret generic ${WORKSPACE}-creditchain-node-genesis-e1 \
         --from-file=genesis.blob=genesis.blob \
         --from-file=waypoint.txt=waypoint.txt \
         --from-file=validator-identity.yaml=validator-identity.yaml \
@@ -193,7 +193,7 @@ This will download all the terraform dependencies for you, in the `.terraform` f
     $ kubectl get pods
 
     NAME                                        READY   STATUS    RESTARTS   AGE
-    node1-libra2-node-fullnode-e9-0              1/1     Running   0          4h31m
-    node1-libra2-node-haproxy-7cc4c5f74c-l4l6n   1/1     Running   0          4h40m
-    node1-libra2-node-validator-0                1/1     Running   0          4h30m
+    node1-creditchain-node-fullnode-e9-0              1/1     Running   0          4h31m
+    node1-creditchain-node-haproxy-7cc4c5f74c-l4l6n   1/1     Running   0          4h40m
+    node1-creditchain-node-validator-0                1/1     Running   0          4h30m
     ```

@@ -6,7 +6,7 @@ use crate::dkg::real_dkg::rounding::{
     DKGRoundingProfile, DEFAULT_FAST_PATH_SECRECY_THRESHOLD, DEFAULT_RECONSTRUCT_THRESHOLD,
     DEFAULT_SECRECY_THRESHOLD,
 };
-use libra2_dkg::pvss::WeightedConfig;
+use creditchain_dkg::pvss::WeightedConfig;
 use claims::assert_le;
 use fixed::types::U64F64;
 use rand::{thread_rng, Rng};

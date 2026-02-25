@@ -4,10 +4,10 @@
 
 use crate::{Factory, GenesisConfig, GenesisConfigFn, NodeConfigFn, Result, Swarm, Version};
 use anyhow::{bail, Context};
-use libra2_config::config::{NodeConfig, OverrideNodeConfig};
-use libra2_framework::ReleaseBundle;
-use libra2_genesis::builder::{InitConfigFn, InitGenesisConfigFn, InitGenesisStakeFn};
-use libra2_infallible::Mutex;
+use creditchain_config::config::{NodeConfig, OverrideNodeConfig};
+use creditchain_framework::ReleaseBundle;
+use creditchain_genesis::builder::{InitConfigFn, InitGenesisConfigFn, InitGenesisStakeFn};
+use creditchain_infallible::Mutex;
 use rand::rngs::StdRng;
 use std::{
     collections::HashMap,
@@ -60,7 +60,7 @@ impl LocalFactory {
 
     pub fn from_workspace(swarm_dir: Option<String>) -> Result<Self> {
         let mut versions = HashMap::new();
-        let new_version = cargo::get_libra2_node_binary_from_worktree().map(|(revision, bin)| {
+        let new_version = cargo::get_creditchain_node_binary_from_worktree().map(|(revision, bin)| {
             let version = Version::new(usize::MAX, revision);
             LocalVersion { bin, version }
         })?;
@@ -72,7 +72,7 @@ impl LocalFactory {
     pub fn from_revision(revision: &str) -> Result<Self> {
         let mut versions = HashMap::new();
         let new_version =
-            cargo::get_libra2_node_binary_at_revision(revision).map(|(revision, bin)| {
+            cargo::get_creditchain_node_binary_at_revision(revision).map(|(revision, bin)| {
                 let version = Version::new(usize::MAX, revision);
                 LocalVersion { bin, version }
             })?;
@@ -82,12 +82,12 @@ impl LocalFactory {
     }
 
     pub fn with_revision_and_workspace(revision: &str) -> Result<Self> {
-        let workspace = cargo::get_libra2_node_binary_from_worktree().map(|(revision, bin)| {
+        let workspace = cargo::get_creditchain_node_binary_from_worktree().map(|(revision, bin)| {
             let version = Version::new(usize::MAX, revision);
             LocalVersion { bin, version }
         })?;
         let revision =
-            cargo::get_libra2_node_binary_at_revision(revision).map(|(revision, bin)| {
+            cargo::get_creditchain_node_binary_at_revision(revision).map(|(revision, bin)| {
                 let version = Version::new(usize::MIN, revision);
                 LocalVersion { bin, version }
             })?;
@@ -98,14 +98,14 @@ impl LocalFactory {
         Ok(Self::new(versions, None))
     }
 
-    /// Create a LocalFactory with a libra2-node version built at the tip of upstream/main and the
+    /// Create a LocalFactory with a creditchain-node version built at the tip of upstream/main and the
     /// current workspace, suitable for compatibility testing.
     pub fn with_upstream_and_workspace() -> Result<Self> {
         let upstream_main = cargo::git_get_upstream_remote().map(|r| format!("{}/main", r))?;
         Self::with_revision_and_workspace(&upstream_main)
     }
 
-    /// Create a LocalFactory with a libra2-node version built at merge-base of upstream/main and the
+    /// Create a LocalFactory with a creditchain-node version built at merge-base of upstream/main and the
     /// current workspace, suitable for compatibility testing.
     pub fn with_upstream_merge_base_and_workspace() -> Result<Self> {
         let upstream_main = cargo::git_get_upstream_remote().map(|r| format!("{}/main", r))?;

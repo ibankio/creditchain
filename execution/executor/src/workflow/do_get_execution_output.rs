@@ -6,29 +6,29 @@ use crate::{
     metrics::{EXECUTOR_ERRORS, OTHER_TIMERS},
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_block_executor::txn_provider::default::DefaultTxnProvider;
+use creditchain_block_executor::txn_provider::default::DefaultTxnProvider;
 #[cfg(feature = "consensus-only-perf-test")]
-use libra2_block_executor::txn_provider::TxnProvider;
-use libra2_crypto::HashValue;
-use libra2_executor_service::{
+use creditchain_block_executor::txn_provider::TxnProvider;
+use creditchain_crypto::HashValue;
+use creditchain_executor_service::{
     local_executor_helper::SHARDED_BLOCK_EXECUTOR,
     remote_executor_client::{get_remote_addresses, REMOTE_SHARDED_BLOCK_EXECUTOR},
 };
-use libra2_executor_types::{
+use creditchain_executor_types::{
     execution_output::ExecutionOutput,
     planned::Planned,
     should_forward_to_subscription_service,
     transactions_with_output::{TransactionsToKeep, TransactionsWithOutput},
 };
-use libra2_experimental_runtimes::thread_manager::THREAD_MANAGER;
-use libra2_logger::prelude::*;
-use libra2_metrics_core::TimerHelper;
-use libra2_storage_interface::state_store::{
+use creditchain_experimental_runtimes::thread_manager::THREAD_MANAGER;
+use creditchain_logger::prelude::*;
+use creditchain_metrics_core::TimerHelper;
+use creditchain_storage_interface::state_store::{
     state::LedgerState, state_view::cached_state_view::CachedStateView,
 };
 #[cfg(feature = "consensus-only-perf-test")]
-use libra2_types::transaction::ExecutionStatus;
-use libra2_types::{
+use creditchain_types::transaction::ExecutionStatus;
+use creditchain_types::{
     block_executor::{
         config::BlockExecutorConfigFromOnchain,
         partitioner::{ExecutableTransactions, PartitionedTransactions},
@@ -47,7 +47,7 @@ use libra2_types::{
     },
     write_set::{TransactionWrite, WriteSet},
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use itertools::Itertools;
 use std::sync::Arc;
 
@@ -264,7 +264,7 @@ impl DoGetExecutionOutput {
         onchain_config: BlockExecutorConfigFromOnchain,
         transaction_slice_metadata: TransactionSliceMetadata,
     ) -> Result<BlockOutput<TransactionOutput>> {
-        use libra2_types::{
+        use creditchain_types::{
             state_store::{StateViewId, TStateView},
             transaction::TransactionAuxiliaryData,
             write_set::WriteSet,
@@ -502,14 +502,14 @@ impl TStateView for WriteSetStateView<'_> {
     fn get_state_value(
         &self,
         state_key: &Self::Key,
-    ) -> libra2_types::state_store::StateViewResult<Option<StateValue>> {
+    ) -> creditchain_types::state_store::StateViewResult<Option<StateValue>> {
         Ok(self
             .write_set
             .get_write_op(state_key)
             .and_then(|write_op| write_op.as_state_value()))
     }
 
-    fn get_usage(&self) -> libra2_types::state_store::StateViewResult<StateStorageUsage> {
+    fn get_usage(&self) -> creditchain_types::state_store::StateViewResult<StateStorageUsage> {
         unreachable!("Not supposed to be called on WriteSetStateView.")
     }
 }
@@ -517,10 +517,10 @@ impl TStateView for WriteSetStateView<'_> {
 #[cfg(test)]
 mod tests {
     use super::Parser;
-    use libra2_storage_interface::state_store::{
+    use creditchain_storage_interface::state_store::{
         state::LedgerState, state_view::cached_state_view::CachedStateView,
     };
-    use libra2_types::{
+    use creditchain_types::{
         contract_event::ContractEvent,
         transaction::{
             AuxiliaryInfo, ExecutionStatus, PersistedAuxiliaryInfo, Transaction,

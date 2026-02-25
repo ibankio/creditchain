@@ -7,7 +7,7 @@ use crate::parquet_processors::parquet_utils::util::{HasVersion, NamedTable};
 use allocative_derive::Allocative;
 use anyhow::{Context, Result};
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{
+   creditchain_protos::transaction::v1::{
         DeleteResource, MoveStructTag as MoveStructTagPB, WriteResource,
     },
     utils::convert::standardize_address,

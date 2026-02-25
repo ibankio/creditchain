@@ -13,26 +13,26 @@ use crate::{
     transport::ConnectionMetadata,
     ProtocolId,
 };
-use libra2_config::{
+use creditchain_config::{
     config::{PeerRole, RoleType},
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_types::PeerId;
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_types::PeerId;
 use async_trait::async_trait;
 use futures::StreamExt;
 use std::{collections::HashMap, sync::Arc, time::Duration};
 
 /// A sender to a node to mock an inbound network message from [`PeerManager`]
 pub type InboundMessageSender =
-    libra2_channels::libra2_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>;
+    creditchain_channels::creditchain_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>;
 
 /// A sender to a node to mock an inbound connection from [`PeerManager`]
 pub type ConnectionUpdateSender = crate::peer_manager::conn_notifs_channel::Sender;
 
 /// A receiver to get outbound network messages to [`PeerManager`]
 pub type OutboundMessageReceiver =
-    libra2_channels::libra2_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>;
+    creditchain_channels::creditchain_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>;
 
 /// A connection handle describing the network for a node.
 ///

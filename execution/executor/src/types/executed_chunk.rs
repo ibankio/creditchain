@@ -5,7 +5,7 @@
 #![forbid(unsafe_code)]
 
 use crate::types::partial_state_compute_result::PartialStateComputeResult;
-use libra2_types::ledger_info::LedgerInfoWithSignatures;
+use creditchain_types::ledger_info::LedgerInfoWithSignatures;
 
 #[derive(Debug)]
 pub struct ExecutedChunk {

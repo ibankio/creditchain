@@ -4,8 +4,8 @@
 
 mod admin;
 pub use admin::*;
-mod libra2;
-pub use self::libra2::*;
+mod creditchain;
+pub use self::creditchain::*;
 mod network;
 pub use network::*;
 mod test;
@@ -21,7 +21,7 @@ pub use node::*;
 mod chain_info;
 pub mod prometheus_metrics;
 
-use libra2_framework::ReleaseBundle;
+use creditchain_framework::ReleaseBundle;
 pub use chain_info::*;
 
 /// A wrapper around a usize in order to represent an opaque version of a Node.

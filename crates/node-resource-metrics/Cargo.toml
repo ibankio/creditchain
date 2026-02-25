@@ -1,5 +1,5 @@
 [package]
-name = "libra2-node-resource-metrics"
+name = "creditchain-node-resource-metrics"
 description = "System resource metrics collector"
 version = "0.1.0"
 
@@ -13,10 +13,10 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-build-info = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
+creditchain-build-info = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
 cfg-if = { workspace = true }
 once_cell = { workspace = true }
 prometheus = { workspace = true }

@@ -7,12 +7,12 @@ use crate::{
     state_sync_utils::enable_consensus_observer,
     utils::{add_node_to_seeds, create_test_accounts, execute_transactions, wait_for_all_nodes},
 };
-use libra2_config::{
+use creditchain_config::{
     config::{NodeConfig, OverrideNodeConfig, PeerRole},
     network_id::NetworkId,
 };
-use libra2_forge::{LocalNode, NodeExt, Swarm};
-use libra2_types::on_chain_config::{
+use creditchain_forge::{LocalNode, NodeExt, Swarm};
+use creditchain_types::on_chain_config::{
     ConsensusAlgorithmConfig, OnChainConsensusConfig, ValidatorTxnConfig, DEFAULT_WINDOW_SIZE,
 };
 use std::sync::Arc;

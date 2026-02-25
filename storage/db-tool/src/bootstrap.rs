@@ -3,15 +3,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{ensure, format_err, Context, Result};
-use libra2_config::config::{
+use creditchain_config::config::{
     RocksdbConfigs, StorageDirPaths, BUFFERED_STATE_TARGET_ITEMS,
     DEFAULT_MAX_NUM_NODES_PER_LRU_CACHE_SHARD, NO_OP_STORAGE_PRUNER_CONFIG,
 };
-use libra2_db::Libra2DB;
-use libra2_executor::db_bootstrapper::calculate_genesis;
-use libra2_storage_interface::DbReaderWriter;
-use libra2_types::{transaction::Transaction, waypoint::Waypoint};
-use libra2_vm::libra2_vm::Libra2VMBlockExecutor;
+use creditchain_db::CreditChainDB;
+use creditchain_executor::db_bootstrapper::calculate_genesis;
+use creditchain_storage_interface::DbReaderWriter;
+use creditchain_types::{transaction::Transaction, waypoint::Waypoint};
+use creditchain_vm::creditchain_vm::CreditChainVMBlockExecutor;
 use clap::Parser;
 use std::{
     fs::File,
@@ -21,7 +21,7 @@ use std::{
 
 #[derive(Parser)]
 #[clap(
-    name = "libra2-db-bootstrapper",
+    name = "creditchain-db-bootstrapper",
     about = "Calculate, verify and commit the genesis to local DB without a consensus among validators."
 )]
 pub struct Command {
@@ -49,7 +49,7 @@ impl Command {
 
         // Opening the DB exclusively, it's not allowed to run this tool alongside a running node which
         // operates on the same DB.
-        let db = Libra2DB::open(
+        let db = CreditChainDB::open(
             StorageDirPaths::from_path(&self.db_dir),
             false,
             NO_OP_STORAGE_PRUNER_CONFIG, /* pruner */
@@ -77,7 +77,7 @@ impl Command {
         }
 
         let committer =
-            calculate_genesis::<Libra2VMBlockExecutor>(&db, ledger_summary, &genesis_txn)
+            calculate_genesis::<CreditChainVMBlockExecutor>(&db, ledger_summary, &genesis_txn)
                 .with_context(|| format_err!("Failed to calculate genesis."))?;
         println!(
             "Successfully calculated genesis. Got waypoint: {}",

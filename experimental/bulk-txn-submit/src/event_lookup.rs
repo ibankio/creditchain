@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{bail, Result};
-use libra2_sdk::{
+use creditchain_sdk::{
     move_types::language_storage::TypeTag,
     types::{account_address::AccountAddress, contract_event::ContractEvent},
 };
@@ -79,7 +79,7 @@ where
 pub fn get_deposit_dst(events: &[ContractEvent]) -> Result<AccountAddress> {
     let deposit_event: DepositMoveStruct = search_single_event_data(
         events,
-        &TypeTag::from_str("0x1::coin::Deposit<0x1::libra2_coin::Libra2Coin>")?,
+        &TypeTag::from_str("0x1::coin::Deposit<0x1::creditchain_coin::CreditChainCoin>")?,
     )?;
     Ok(deposit_event.account)
 }

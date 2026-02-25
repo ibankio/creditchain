@@ -8,16 +8,16 @@ use crate::{
     shared_mempool::{start_shared_mempool, types::SharedMempoolNotification},
     tests::common::TestTransaction,
 };
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::{
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::{
     config::{Identity, NodeConfig, PeerRole, RoleType},
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_crypto::{x25519::PrivateKey, Uniform};
-use libra2_event_notifications::{ReconfigNotification, ReconfigNotificationListener};
-use libra2_infallible::{Mutex, MutexGuard, RwLock};
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_network::{
+use creditchain_crypto::{x25519::PrivateKey, Uniform};
+use creditchain_event_notifications::{ReconfigNotification, ReconfigNotificationListener};
+use creditchain_infallible::{Mutex, MutexGuard, RwLock};
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_network::{
     application::{
         interface::{NetworkClient, NetworkServiceEvents},
         storage::PeersAndMetadata,
@@ -32,13 +32,13 @@ use libra2_network::{
     transport::ConnectionMetadata,
     ProtocolId,
 };
-use libra2_storage_interface::mock::MockDbReaderWriter;
-use libra2_types::{
+use creditchain_storage_interface::mock::MockDbReaderWriter;
+use creditchain_types::{
     on_chain_config::{InMemoryOnChainConfig, OnChainConfigPayload},
     transaction::ReplayProtector,
     PeerId,
 };
-use libra2_vm_validator::mocks::mock_vm_validator::MockVMValidator;
+use creditchain_vm_validator::mocks::mock_vm_validator::MockVMValidator;
 use enum_dispatch::enum_dispatch;
 use futures::{
     channel::mpsc::{self, unbounded, UnboundedReceiver},
@@ -471,9 +471,9 @@ impl Node {
 /// Allows us to mock out the network without dealing with the details
 pub struct NodeNetworkInterface {
     /// Peer request receiver for messages
-    pub(crate) network_reqs_rx: libra2_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>,
+    pub(crate) network_reqs_rx: creditchain_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>,
     /// Peer notification sender for sending outgoing messages to other peers
-    pub(crate) network_notifs_tx: libra2_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>,
+    pub(crate) network_notifs_tx: creditchain_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>,
 }
 
 impl NodeNetworkInterface {
@@ -542,10 +542,10 @@ fn setup_node_network_interface(
     // Create the network sender and events receiver
     static MAX_QUEUE_SIZE: usize = 8;
     let (network_reqs_tx, network_reqs_rx) =
-        libra2_channel::new(QueueStyle::FIFO, MAX_QUEUE_SIZE, None);
-    let (connection_reqs_tx, _) = libra2_channel::new(QueueStyle::FIFO, MAX_QUEUE_SIZE, None);
+        creditchain_channel::new(QueueStyle::FIFO, MAX_QUEUE_SIZE, None);
+    let (connection_reqs_tx, _) = creditchain_channel::new(QueueStyle::FIFO, MAX_QUEUE_SIZE, None);
     let (network_notifs_tx, network_notifs_rx) =
-        libra2_channel::new(QueueStyle::FIFO, MAX_QUEUE_SIZE, None);
+        creditchain_channel::new(QueueStyle::FIFO, MAX_QUEUE_SIZE, None);
     let network_sender = NetworkSender::new(
         PeerManagerRequestSender::new(network_reqs_tx),
         ConnectionRequestSender::new(connection_reqs_tx),
@@ -577,8 +577,8 @@ fn start_node_mempool(
     let (_ac_endpoint_sender, ac_endpoint_receiver) = mpsc::channel(1_024);
     let (_quorum_store_sender, quorum_store_receiver) = mpsc::channel(1_024);
     let (_mempool_notifier, mempool_listener) =
-        libra2_mempool_notifications::new_mempool_notifier_listener_pair(100);
-    let (reconfig_sender, reconfig_events) = libra2_channel::new(QueueStyle::LIFO, 1, None);
+        creditchain_mempool_notifications::new_mempool_notifier_listener_pair(100);
+    let (reconfig_sender, reconfig_events) = creditchain_channel::new(QueueStyle::LIFO, 1, None);
     let reconfig_event_subscriber = ReconfigNotificationListener {
         notification_receiver: reconfig_events,
     };
@@ -592,7 +592,7 @@ fn start_node_mempool(
         })
         .unwrap();
 
-    let runtime = libra2_runtimes::spawn_named_runtime("shared-mem".into(), None);
+    let runtime = creditchain_runtimes::spawn_named_runtime("shared-mem".into(), None);
     start_shared_mempool(
         runtime.handle(),
         &config,

@@ -12,7 +12,7 @@ use crate::{
 use allocative_derive::Allocative;
 use libra2_indexer_processor_sdk::{
     libra2_indexer_transaction_stream::utils::time::{compute_nanos_since_epoch, parse_timestamp},
-   libra2_protos::{
+   creditchain_protos::{
         transaction::v1::BlockMetadataTransaction as ProtoBlockMetadataTransaction,
         util::timestamp::Timestamp,
     },

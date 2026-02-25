@@ -7,9 +7,9 @@ extern crate core;
 #[cfg(test)]
 mod account_abstraction;
 #[cfg(test)]
-mod libra2;
+mod creditchain;
 #[cfg(test)]
-mod libra2_cli;
+mod creditchain_cli;
 #[cfg(test)]
 mod client;
 #[cfg(test)]

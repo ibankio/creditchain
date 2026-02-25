@@ -4,7 +4,7 @@
 
 #![allow(clippy::unwrap_used)]
 
-use libra2_metrics_core::{
+use creditchain_metrics_core::{
     register_histogram_vec, register_int_counter_vec, register_int_gauge_vec, HistogramTimer,
     HistogramVec, IntCounterVec, IntGaugeVec,
 };
@@ -18,7 +18,7 @@ pub const WAYPOINT_VERSION: &str = "waypoint_version";
 
 pub static LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_safety_rules_latency",
+        "creditchain_safety_rules_latency",
         "Time to perform an operation",
         &["source", "field"]
     )
@@ -27,7 +27,7 @@ pub static LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
 
 static QUERY_COUNTER: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_safety_rules_queries",
+        "creditchain_safety_rules_queries",
         "Outcome of calling into LSR",
         &["method", "result"]
     )
@@ -36,7 +36,7 @@ static QUERY_COUNTER: Lazy<IntCounterVec> = Lazy::new(|| {
 
 static STATE_GAUGE: Lazy<IntGaugeVec> = Lazy::new(|| {
     register_int_gauge_vec!(
-        "libra2_safety_rules_state",
+        "creditchain_safety_rules_state",
         "Current internal state of LSR",
         &["field"]
     )

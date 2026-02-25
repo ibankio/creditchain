@@ -8,7 +8,7 @@ use super::{
 };
 use crate::processors::user_transaction::models::signatures::Signature;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{
+   creditchain_protos::transaction::v1::{
         account_signature::{Signature as AccountSignatureEnum, Type as AccountSignatureTypeEnum},
         AccountSignature, MultiKeySignature, SingleKeySignature,
     },

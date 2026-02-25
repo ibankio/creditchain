@@ -6,9 +6,9 @@
 mod mock_vm_test;
 
 use anyhow::Result;
-use libra2_block_executor::txn_provider::{default::DefaultTxnProvider, TxnProvider};
-use libra2_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, Uniform};
-use libra2_types::{
+use creditchain_block_executor::txn_provider::{default::DefaultTxnProvider, TxnProvider};
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, Uniform};
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::NEW_EPOCH_EVENT_V2_MOVE_TYPE_TAG,
     block_executor::{
@@ -30,7 +30,7 @@ use libra2_types::{
     vm_status::{StatusCode, VMStatus},
     write_set::{WriteOp, WriteSet, WriteSetMut},
 };
-use libra2_vm::{
+use creditchain_vm::{
     sharded_block_executor::{executor_client::ExecutorClient, ShardedBlockExecutor},
     VMBlockExecutor,
 };

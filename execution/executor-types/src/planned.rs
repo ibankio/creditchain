@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::metrics::TIMER;
-use libra2_infallible::Mutex;
-use libra2_metrics_core::TimerHelper;
+use creditchain_infallible::Mutex;
+use creditchain_metrics_core::TimerHelper;
 use once_cell::sync::OnceCell;
 use rayon::ThreadPool;
 use std::{ops::Deref, sync::mpsc::Receiver};

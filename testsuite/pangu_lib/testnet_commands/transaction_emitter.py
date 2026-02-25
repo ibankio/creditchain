@@ -21,7 +21,7 @@ def transaction_emitter_main(
 ):
     #
     # Create command array
-    command_array = ["libra2-transaction-emitter"]
+    command_array = ["creditchain-transaction-emitter"]
     command_array.extend(args)
 
     #

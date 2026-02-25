@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_sdk::types::PeerId;
+use creditchain_sdk::types::PeerId;
 use std::fmt::{Display, Formatter};
 
 #[derive(Eq, Hash, PartialEq, Debug, Clone)]

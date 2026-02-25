@@ -1,7 +1,7 @@
 // Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-pub mod libra2_vm_uncoordinated;
+pub mod creditchain_vm_uncoordinated;
 pub mod native_config;
 pub mod native_transaction;
 pub mod native_vm;

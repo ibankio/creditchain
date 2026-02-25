@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-grpc-data-service"
+name = "creditchain-indexer-grpc-data-service"
 description = "CreditChain Indexer gRPC data service to serve the data from cache and file store."
 version = "1.0.0"
 
@@ -14,12 +14,12 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-indexer-grpc-server-framework = { workspace = true }
-libra2-indexer-grpc-utils = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-moving-average = { workspace = true }
-libra2-protos = { workspace = true }
-libra2-transaction-filter = { workspace = true }
+creditchain-indexer-grpc-server-framework = { workspace = true }
+creditchain-indexer-grpc-utils = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-moving-average = { workspace = true }
+creditchain-protos = { workspace = true }
+creditchain-transaction-filter = { workspace = true }
 async-trait = { workspace = true }
 clap = { workspace = true }
 futures = { workspace = true }

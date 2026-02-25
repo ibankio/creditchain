@@ -1,7 +1,7 @@
 module poc::type_name {
-   use libra2_std::type_info;
+   use creditchain_std::type_info;
    use std::string::{String};
-   use libra2_std::table::Table;
+   use creditchain_std::table::Table;
 
    struct MyStruct has copy, drop, store {
        x: u64,

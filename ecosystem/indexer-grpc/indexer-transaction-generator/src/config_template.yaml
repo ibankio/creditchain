@@ -1,23 +1,23 @@
 import_config:
   testnet:
     # Transaction Stream endpoint address.
-    transaction_stream_endpoint: https://grpc.testnet.libra2.org:443
-    # (Optional) The key to use with developers.libra2.org
+    transaction_stream_endpoint: https://grpc.testnet.creditchain.org:443
+    # (Optional) The key to use with developers.creditchain.org
     api_key: YOUR_KEY_HERE
     # A map from versions to dump and their output names.
     versions_to_import:
       123: testnet_v1.json
   # mainnet:
   #   # Transaction Stream endpoint address.
-  #   transaction_stream_endpoint: https://grpc.mainnet.libra2.org:443
-  #   # (Optional) The key to use with developers.libra2.org
+  #   transaction_stream_endpoint: https://grpc.mainnet.creditchain.org:443
+  #   # (Optional) The key to use with developers.creditchain.org
   #   api_key: YOUR_KEY_HERE
   #   versions_to_import:
   #     123: mainnetnet_v1.json
   # devnet:
   #   # Transaction Stream endpoint address.
-  #   transaction_stream_endpoint: https://grpc.devnet.libra2.org:443
-  #   # (Optional) The key to use with developers.libra2.org
+  #   transaction_stream_endpoint: https://grpc.devnet.creditchain.org:443
+  #   # (Optional) The key to use with developers.creditchain.org
   #   api_key: YOUR_KEY_HERE
   #   versions_to_import:
   #     123: devnet_v1.json

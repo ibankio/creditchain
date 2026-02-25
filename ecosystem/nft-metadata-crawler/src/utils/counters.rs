@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_metrics_core::{
+use creditchain_metrics_core::{
     register_int_counter, register_int_counter_vec, IntCounter, IntCounterVec,
 };
 use once_cell::sync::Lazy;

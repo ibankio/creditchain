@@ -4,11 +4,11 @@
 
 use crate::db_access::DbAccessUtil;
 use anyhow::Result;
-use libra2_storage_interface::{
+use creditchain_storage_interface::{
     state_store::state_view::db_state_view::LatestDbStateCheckpointView, DbReaderWriter,
 };
-use libra2_transaction_generator_lib::{CounterState, ReliableTransactionSubmitter};
-use libra2_types::{
+use creditchain_transaction_generator_lib::{CounterState, ReliableTransactionSubmitter};
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::AccountResource,
     state_store::MoveResourceExt,

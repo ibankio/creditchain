@@ -12,12 +12,12 @@ use crate::{
     },
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_metrics_core::TimerHelper;
-use libra2_storage_interface::{
+use creditchain_metrics_core::TimerHelper;
+use creditchain_storage_interface::{
     state_store::{state::LedgerState, state_summary::LedgerStateSummary},
     DbReader, LedgerSummary,
 };
-use libra2_types::{proof::accumulator::InMemoryTransactionAccumulator, transaction::Version};
+use creditchain_types::{proof::accumulator::InMemoryTransactionAccumulator, transaction::Version};
 use std::{collections::VecDeque, sync::Arc};
 
 pub(crate) struct ChunkToUpdateLedger {

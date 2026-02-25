@@ -3,8 +3,8 @@
 
 use crate::config::TransactionImporterPerNetworkConfig;
 use anyhow::Context;
-use libra2_indexer_grpc_utils::create_data_service_grpc_client;
-use libra2_protos::indexer::v1::GetTransactionsRequest;
+use creditchain_indexer_grpc_utils::create_data_service_grpc_client;
+use creditchain_protos::indexer::v1::GetTransactionsRequest;
 use std::{path::Path, time::Duration};
 
 /// GRPC request metadata key for the token ID.
@@ -66,7 +66,7 @@ impl TransactionImporterPerNetworkConfig {
 #[cfg(test)]
 mod tests {
     use crate::config::TransactionImporterPerNetworkConfig;
-    use libra2_protos::{
+    use creditchain_protos::{
         indexer::v1::{
             raw_data_server::{RawData, RawDataServer},
             GetTransactionsRequest, TransactionsResponse,

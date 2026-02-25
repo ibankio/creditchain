@@ -5,7 +5,7 @@ module 0xABCD::vector_picture {
     use std::error;
     use std::signer;
     use std::vector;
-    use libra2_std::object;
+    use creditchain_std::object;
 
     /// The caller tried to mutate an item outside the bounds of the vector.
     const E_INDEX_OUT_OF_BOUNDS: u64 = 1;
@@ -17,7 +17,7 @@ module 0xABCD::vector_picture {
         all: vector<address>,
     }
 
-    #[resource_group_member(group = libra2_framework::object::ObjectGroup)]
+    #[resource_group_member(group = creditchain_framework::object::ObjectGroup)]
     struct Palette has key {
         vec: vector<Color>,
     }

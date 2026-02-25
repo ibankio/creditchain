@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-//! Implementation of the unary RPC protocol as per [Libra2Net wire protocol v1].
+//! Implementation of the unary RPC protocol as per [CreditChainNet wire protocol v1].
 //!
 //! ## Design:
 //!
@@ -41,7 +41,7 @@
 //! We limit the number of pending inbound and outbound RPC tasks to ensure that
 //! resource usage is bounded.
 //!
-//! [Libra2Net wire protocol v1]: https://github.com/libra2org/libra2-core/blob/main/specifications/network/messaging-v1.md
+//! [CreditChainNet wire protocol v1]: https://github.com/libra2org/libra2-core/blob/main/specifications/network/messaging-v1.md
 //! [`Peer`]: crate::peer::Peer
 
 use crate::{
@@ -58,13 +58,13 @@ use crate::{
     ProtocolId,
 };
 use anyhow::anyhow;
-use libra2_channels::libra2_channel;
-use libra2_config::network_id::NetworkContext;
-use libra2_id_generator::{IdGenerator, U32IdGenerator};
-use libra2_logger::prelude::*;
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_time_service::{timeout, TimeService, TimeServiceTrait};
-use libra2_types::PeerId;
+use creditchain_channels::creditchain_channel;
+use creditchain_config::network_id::NetworkContext;
+use creditchain_id_generator::{IdGenerator, U32IdGenerator};
+use creditchain_logger::prelude::*;
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_time_service::{timeout, TimeService, TimeServiceTrait};
+use creditchain_types::PeerId;
 use bytes::Bytes;
 use error::RpcError;
 use futures::{
@@ -205,7 +205,7 @@ impl InboundRpcs {
     /// Handle a new inbound `RpcRequest` message off the wire.
     pub fn handle_inbound_request(
         &mut self,
-        peer_notifs_tx: &libra2_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>,
+        peer_notifs_tx: &creditchain_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>,
         mut request: ReceivedMessage,
     ) -> Result<(), RpcError> {
         let network_context = &self.network_context;
@@ -324,7 +324,7 @@ impl InboundRpcs {
     /// the outbound write queue.
     pub fn send_outbound_response(
         &mut self,
-        write_reqs_tx: &mut libra2_channel::Sender<(), NetworkMessage>,
+        write_reqs_tx: &mut creditchain_channel::Sender<(), NetworkMessage>,
         maybe_response: Result<(RpcResponse, ProtocolId), RpcError>,
     ) -> Result<(), RpcError> {
         let network_context = &self.network_context;
@@ -434,7 +434,7 @@ impl OutboundRpcs {
     pub fn handle_outbound_request(
         &mut self,
         request: OutboundRpcRequest,
-        write_reqs_tx: &mut libra2_channel::Sender<(), NetworkMessage>,
+        write_reqs_tx: &mut creditchain_channel::Sender<(), NetworkMessage>,
     ) -> Result<(), RpcError> {
         let network_context = &self.network_context;
         let peer_id = &self.remote_peer_id;

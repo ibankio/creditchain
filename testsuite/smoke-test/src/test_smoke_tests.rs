@@ -5,19 +5,19 @@ use crate::{
     smoke_test_environment::SwarmBuilder,
     utils::{MAX_CONNECTIVITY_WAIT_SECS, MAX_HEALTHY_WAIT_SECS},
 };
-use libra2_config::config::{NodeConfig, OverrideNodeConfig};
-use libra2_forge::{NodeExt, Swarm};
+use creditchain_config::config::{NodeConfig, OverrideNodeConfig};
+use creditchain_forge::{NodeExt, Swarm};
 use std::{
     sync::Arc,
     time::{Duration, Instant},
 };
 
 /// Bring up a swarm normally, then run get_bin, and bring up a VFN.
-/// Previously get_bin triggered a rebuild of libra2-node, which caused issues that were only seen
+/// Previously get_bin triggered a rebuild of creditchain-node, which caused issues that were only seen
 /// during parallel execution of tests.
 /// This test should make regressions obvious.
 #[tokio::test]
-async fn test_libra2_node_after_get_bin() {
+async fn test_creditchain_node_after_get_bin() {
     let mut swarm = SwarmBuilder::new_local(1)
         .with_libra2()
         .with_init_config(Arc::new(|_, conf, _| {
@@ -28,8 +28,8 @@ async fn test_libra2_node_after_get_bin() {
     let version = swarm.versions().max().unwrap();
     let validator_peer_ids = swarm.validators().map(|v| v.peer_id()).collect::<Vec<_>>();
 
-    // Before #5308 this re-compiled libra2-node and caused a panic on the vfn.
-    let _libra2_cli = crate::workspace_builder::get_bin("aptos");
+    // Before #5308 this re-compiled creditchain-node and caused a panic on the vfn.
+    let _creditchain_cli = crate::workspace_builder::get_bin("aptos");
 
     let validator = validator_peer_ids[0];
     let _vfn = swarm

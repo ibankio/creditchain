@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::ProofRead;
-use libra2_crypto::HashValue;
-use libra2_types::proof::SparseMerkleProofExt;
+use creditchain_crypto::HashValue;
+use creditchain_types::proof::SparseMerkleProofExt;
 use std::collections::HashMap;
 
 #[derive(Default)]

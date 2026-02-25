@@ -1,5 +1,5 @@
 module poc::get_script_hash {
-    use libra2_framework::transaction_context;
+    use creditchain_framework::transaction_context;
 
     public entry fun main(_owner: &signer) {
         let _script_hash = transaction_context::get_script_hash();

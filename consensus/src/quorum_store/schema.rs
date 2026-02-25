@@ -3,12 +3,12 @@
 
 use crate::quorum_store::types::PersistedValue;
 use anyhow::Result;
-use libra2_crypto::HashValue;
-use libra2_schemadb::{
+use creditchain_crypto::HashValue;
+use creditchain_schemadb::{
     schema::{KeyCodec, Schema, ValueCodec},
     ColumnFamilyName,
 };
-use libra2_types::quorum_store::BatchId;
+use creditchain_types::quorum_store::BatchId;
 
 pub(crate) const BATCH_CF_NAME: ColumnFamilyName = "batch";
 pub(crate) const BATCH_ID_CF_NAME: ColumnFamilyName = "batch_ID";
@@ -20,7 +20,7 @@ impl Schema for BatchSchema {
     type Key = HashValue;
     type Value = PersistedValue;
 
-    const COLUMN_FAMILY_NAME: libra2_schemadb::ColumnFamilyName = BATCH_CF_NAME;
+    const COLUMN_FAMILY_NAME: creditchain_schemadb::ColumnFamilyName = BATCH_CF_NAME;
 }
 
 impl KeyCodec<BatchSchema> for HashValue {
@@ -50,7 +50,7 @@ impl Schema for BatchIdSchema {
     type Key = u64;
     type Value = BatchId;
 
-    const COLUMN_FAMILY_NAME: libra2_schemadb::ColumnFamilyName = BATCH_ID_CF_NAME;
+    const COLUMN_FAMILY_NAME: creditchain_schemadb::ColumnFamilyName = BATCH_ID_CF_NAME;
 }
 
 impl KeyCodec<BatchIdSchema> for u64 {

@@ -1,5 +1,5 @@
 module poc::ecdsa_recover_internal {
-    use libra2_std::secp256k1;
+    use creditchain_std::secp256k1;
     use std::option;
     use std::hash;
 

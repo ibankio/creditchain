@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_crypto::{
+use creditchain_crypto::{
     bls12381,
     ed25519::Ed25519PrivateKey,
     multi_ed25519::{MultiEd25519PublicKey, MultiEd25519Signature},
@@ -10,8 +10,8 @@ use libra2_crypto::{
     traits::{SigningKey, Uniform},
     PrivateKey,
 };
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
-use libra2_types::{
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_types::{
     block_metadata_ext::BlockMetadataExt,
     contract_event, event,
     state_store::{state_key::StateKey, state_value::PersistedStateValueMetadata},
@@ -32,11 +32,11 @@ pub fn output_file() -> Option<&'static str> {
 
 /// This aims at signing canonically serializable BCS data
 #[derive(CryptoHasher, BCSCryptoHash, Serialize, Deserialize)]
-struct TestLibra2Crypto(String);
+struct TestCreditChainCrypto(String);
 
 /// Record sample values for crypto types used by consensus.
 fn trace_crypto_values(tracer: &mut Tracer, samples: &mut Samples) -> Result<()> {
-    let message = TestLibra2Crypto("Hello, World".to_string());
+    let message = TestCreditChainCrypto("Hello, World".to_string());
 
     let mut rng: StdRng = SeedableRng::from_seed([0; 32]);
 
@@ -56,7 +56,7 @@ fn trace_crypto_values(tracer: &mut Tracer, samples: &mut Samples) -> Result<()>
     tracer.trace_value::<MultiEd25519Signature>(samples, &signature.clone().into())?;
 
     let secp256k1_private_key = secp256k1_ecdsa::PrivateKey::generate(&mut rng);
-    let secp256k1_public_key = libra2_crypto::PrivateKey::public_key(&secp256k1_private_key);
+    let secp256k1_public_key = creditchain_crypto::PrivateKey::public_key(&secp256k1_private_key);
     let secp256k1_signature = secp256k1_private_key.sign(&message).unwrap();
     tracer.trace_value(samples, &secp256k1_private_key)?;
     tracer.trace_value(samples, &secp256k1_public_key)?;
@@ -83,7 +83,7 @@ pub fn get_registry() -> Result<Registry> {
     trace_crypto_values(&mut tracer, &mut samples)?;
     tracer.trace_value(
         &mut samples,
-        &libra2_consensus_types::block::Block::make_genesis_block(),
+        &creditchain_consensus_types::block::Block::make_genesis_block(),
     )?;
     tracer.trace_value(&mut samples, &event::EventKey::random())?;
     tracer.trace_value(&mut samples, &write_set::WriteOp::legacy_deletion())?;
@@ -109,20 +109,20 @@ pub fn get_registry() -> Result<Registry> {
     tracer.trace_type::<transaction::authenticator::AnyPublicKey>(&samples)?;
     tracer.trace_type::<transaction::authenticator::AnySignature>(&samples)?;
     tracer.trace_type::<transaction::webauthn::AssertionSignature>(&samples)?;
-    tracer.trace_type::<libra2_types::keyless::EphemeralCertificate>(&samples)?;
+    tracer.trace_type::<creditchain_types::keyless::EphemeralCertificate>(&samples)?;
     tracer.trace_type::<write_set::WriteOp>(&samples)?;
     tracer.trace_type::<PersistedStateValueMetadata>(&samples)?;
 
     tracer.trace_type::<StateKey>(&samples)?;
-    tracer.trace_type::<libra2_consensus::quorum_store::types::BatchResponse>(&samples)?;
-    tracer.trace_type::<libra2_consensus_types::round_timeout::RoundTimeoutReason>(&samples)?;
-    tracer.trace_type::<libra2_consensus::network_interface::ConsensusMsg>(&samples)?;
-    tracer.trace_type::<libra2_consensus::network_interface::CommitMessage>(&samples)?;
-    tracer.trace_type::<libra2_consensus_types::block_data::BlockType>(&samples)?;
-    tracer.trace_type::<libra2_consensus_types::block_retrieval::BlockRetrievalStatus>(&samples)?;
-    tracer.trace_type::<libra2_consensus_types::payload::PayloadExecutionLimit>(&samples)?;
-    tracer.trace_type::<libra2_consensus_types::common::Payload>(&samples)?;
-    tracer.trace_type::<libra2_consensus_types::block_retrieval::BlockRetrievalRequest>(&samples)?;
+    tracer.trace_type::<creditchain_consensus::quorum_store::types::BatchResponse>(&samples)?;
+    tracer.trace_type::<creditchain_consensus_types::round_timeout::RoundTimeoutReason>(&samples)?;
+    tracer.trace_type::<creditchain_consensus::network_interface::ConsensusMsg>(&samples)?;
+    tracer.trace_type::<creditchain_consensus::network_interface::CommitMessage>(&samples)?;
+    tracer.trace_type::<creditchain_consensus_types::block_data::BlockType>(&samples)?;
+    tracer.trace_type::<creditchain_consensus_types::block_retrieval::BlockRetrievalStatus>(&samples)?;
+    tracer.trace_type::<creditchain_consensus_types::payload::PayloadExecutionLimit>(&samples)?;
+    tracer.trace_type::<creditchain_consensus_types::common::Payload>(&samples)?;
+    tracer.trace_type::<creditchain_consensus_types::block_retrieval::BlockRetrievalRequest>(&samples)?;
 
     // aliases within StructTag
     tracer.ignore_aliases("StructTag", &["type_params"])?;

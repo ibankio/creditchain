@@ -1,6 +1,6 @@
 module poc::is_identifier {
     use std::string;
-    use libra2_framework::function_info;
+    use creditchain_framework::function_info;
 
     public entry fun main(_owner:&signer) {
         let module_name = string::utf8(b"valid_module");

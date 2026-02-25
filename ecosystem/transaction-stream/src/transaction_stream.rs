@@ -6,13 +6,13 @@ use crate::{
     utils::{additional_headers::AdditionalHeaders, time::timestamp_to_iso},
 };
 use anyhow::{anyhow, Result};
-use libra2_moving_average::MovingAverage;
-use libra2_protos::{
+use creditchain_moving_average::MovingAverage;
+use creditchain_protos::{
     indexer::v1::{raw_data_client::RawDataClient, GetTransactionsRequest, TransactionsResponse},
     transaction::v1::Transaction,
     util::timestamp::Timestamp,
 };
-use libra2_transaction_filter::BooleanTransactionFilter;
+use creditchain_transaction_filter::BooleanTransactionFilter;
 use futures_util::StreamExt;
 use prost::Message;
 use idxsample::{idxsample, IDXSampleRate};

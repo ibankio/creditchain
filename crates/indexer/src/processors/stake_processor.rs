@@ -20,7 +20,7 @@ use crate::{
     },
     schema,
 };
-use libra2_api_types::Transaction as APITransaction;
+use creditchain_api_types::Transaction as APITransaction;
 use async_trait::async_trait;
 use diesel::{pg::upsert::excluded, result::Error, ExpressionMethods, PgConnection};
 use field_count::FieldCount;
@@ -81,7 +81,7 @@ fn insert_to_db(
     delegator_pool_balances: Vec<DelegatorPoolBalance>,
     current_delegator_pool_balances: Vec<CurrentDelegatorPoolBalance>,
 ) -> Result<(), diesel::result::Error> {
-    libra2_logger::trace!(
+    creditchain_logger::trace!(
         name = name,
         start_version = start_version,
         end_version = end_version,

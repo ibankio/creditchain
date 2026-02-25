@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{stream_coordinator::IndexerStreamCoordinator, ServiceContext};
-use libra2_logger::{error, info};
-use libra2_protos::{
+use creditchain_logger::{error, info};
+use creditchain_protos::{
     indexer::v1::{raw_data_server::RawData, GetTransactionsRequest, TransactionsResponse},
     internal::fullnode::v1::transactions_from_node_response,
 };
@@ -116,7 +116,7 @@ impl RawData for LocalnetDataService {
                 match external_service_tx.send(response).await {
                     Ok(_) => {},
                     Err(e) => {
-                        libra2_logger::warn!(
+                        creditchain_logger::warn!(
                             "[indexer-grpc] Unable to send end batch status: {:?}",
                             e
                         );

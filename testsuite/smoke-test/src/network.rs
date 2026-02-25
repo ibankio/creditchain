@@ -7,19 +7,19 @@ use crate::{
     state_sync::test_all_validator_failures,
     utils::{MAX_CONNECTIVITY_WAIT_SECS, MAX_HEALTHY_WAIT_SECS},
 };
-use libra2::test::CliTestFramework;
-use libra2_config::{
+use creditchain::test::CliTestFramework;
+use creditchain_config::{
     config::{
         DiscoveryMethod, FileDiscovery, Identity, NetworkConfig, NodeConfig, OverrideNodeConfig,
         Peer, PeerSet, RestDiscovery,
     },
     network_id::NetworkId,
 };
-use libra2_crypto::{encoding_type::EncodingType, x25519, x25519::PrivateKey};
-use libra2_forge::{FullNode, Node, NodeExt, Swarm};
-use libra2_genesis::config::HostAndPort;
-use libra2_sdk::move_types::account_address::AccountAddress;
-use libra2_temppath::TempPath;
+use creditchain_crypto::{encoding_type::EncodingType, x25519, x25519::PrivateKey};
+use creditchain_forge::{FullNode, Node, NodeExt, Swarm};
+use creditchain_genesis::config::HostAndPort;
+use creditchain_sdk::move_types::account_address::AccountAddress;
+use creditchain_temppath::TempPath;
 use std::{
     collections::HashMap,
     path::Path,

@@ -1,8 +1,8 @@
 
 module 0xABCD::permissioned_transfer {
-    use libra2_framework::libra2_account;
-    use libra2_framework::permissioned_signer;
-    use libra2_framework::primary_fungible_store;
+    use creditchain_framework::creditchain_account;
+    use creditchain_framework::permissioned_signer;
+    use creditchain_framework::primary_fungible_store;
 
     public entry fun transfer_permissioned(
         source: &signer, to: address, amount: u64
@@ -11,7 +11,7 @@ module 0xABCD::permissioned_transfer {
         let permissioned_signer = permissioned_signer::signer_from_permissioned_handle(&handle);
 
         primary_fungible_store::grant_apt_permission(source, &permissioned_signer, amount);
-        libra2_account::transfer(&permissioned_signer, to, amount);
+        creditchain_account::transfer(&permissioned_signer, to, amount);
 
         permissioned_signer::destroy_permissioned_handle(handle);
     }
@@ -19,6 +19,6 @@ module 0xABCD::permissioned_transfer {
     public entry fun transfer(
         source: &signer, to: address, amount: u64
     ) {
-        libra2_account::transfer(source, to, amount);
+        creditchain_account::transfer(source, to, amount);
     }
 }

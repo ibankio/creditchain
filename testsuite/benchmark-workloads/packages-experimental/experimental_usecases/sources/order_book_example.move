@@ -5,8 +5,8 @@ module 0xABCD::order_book_example {
     use std::vector;
     use std::table::{Self, Table};
 
-    use libra2_experimental::order_book::{Self, OrderBook};
-    use libra2_experimental::order_book_types::{Self, OrderIdType, good_till_cancelled};
+    use creditchain_experimental::order_book::{Self, OrderBook};
+    use creditchain_experimental::order_book_types::{Self, OrderIdType, good_till_cancelled};
 
     const ENOT_AUTHORIZED: u64 = 1;
     // Resource being modified doesn't exist

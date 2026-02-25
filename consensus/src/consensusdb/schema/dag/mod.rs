@@ -10,8 +10,8 @@ use crate::{
     define_schema,
 };
 use anyhow::Result;
-use libra2_crypto::HashValue;
-use libra2_schemadb::{
+use creditchain_crypto::HashValue;
+use creditchain_schemadb::{
     schema::{KeyCodec, ValueCodec},
     ColumnFamilyName,
 };

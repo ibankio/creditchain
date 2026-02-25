@@ -6,16 +6,16 @@ use crate::{
     counters::{DISCOVERY_COUNTS, EVENT_PROCESSING_LOOP_BUSY_DURATION_S, NETWORK_KEY_MISMATCH},
     DiscoveryError,
 };
-use libra2_config::{
+use creditchain_config::{
     config::{Peer, PeerRole, PeerSet},
     network_id::NetworkContext,
 };
-use libra2_crypto::x25519;
-use libra2_event_notifications::ReconfigNotificationListener;
-use libra2_logger::prelude::*;
-use libra2_network::{counters::inc_by_with_context, logging::NetworkSchema};
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_types::on_chain_config::{OnChainConfigPayload, OnChainConfigProvider, ValidatorSet};
+use creditchain_crypto::x25519;
+use creditchain_event_notifications::ReconfigNotificationListener;
+use creditchain_logger::prelude::*;
+use creditchain_network::{counters::inc_by_with_context, logging::NetworkSchema};
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_types::on_chain_config::{OnChainConfigPayload, OnChainConfigProvider, ValidatorSet};
 use futures::Stream;
 use std::{
     collections::HashSet,
@@ -154,11 +154,11 @@ pub(crate) fn extract_validator_set_updates(
 mod tests {
     use super::*;
     use crate::DiscoveryChangeListener;
-    use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-    use libra2_config::config::HANDSHAKE_VERSION;
-    use libra2_crypto::{bls12381, x25519::PrivateKey, PrivateKey as PK, Uniform};
-    use libra2_event_notifications::ReconfigNotification;
-    use libra2_types::{
+    use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+    use creditchain_config::config::HANDSHAKE_VERSION;
+    use creditchain_crypto::{bls12381, x25519::PrivateKey, PrivateKey as PK, Uniform};
+    use creditchain_event_notifications::ReconfigNotification;
+    use creditchain_types::{
         network_address::NetworkAddress,
         on_chain_config::{InMemoryOnChainConfig, OnChainConfig},
         validator_config::ValidatorConfig,
@@ -175,17 +175,17 @@ mod tests {
 
     #[test]
     fn metric_if_key_mismatch() {
-        libra2_logger::Logger::init_for_testing();
+        creditchain_logger::Logger::init_for_testing();
         let runtime = Runtime::new().unwrap();
         let consensus_private_key = bls12381::PrivateKey::generate_for_testing();
         let consensus_pubkey = consensus_private_key.public_key();
         let pubkey = test_pubkey([0u8; 32]);
         let different_pubkey = test_pubkey([1u8; 32]);
-        let peer_id = libra2_types::account_address::from_identity_public_key(pubkey);
+        let peer_id = creditchain_types::account_address::from_identity_public_key(pubkey);
 
         // Build up the Reconfig Listener
-        let (conn_mgr_reqs_tx, _rx) = libra2_channels::new_test(1);
-        let (mut reconfig_sender, reconfig_events) = libra2_channel::new(QueueStyle::LIFO, 1, None);
+        let (conn_mgr_reqs_tx, _rx) = creditchain_channels::new_test(1);
+        let (mut reconfig_sender, reconfig_events) = creditchain_channel::new(QueueStyle::LIFO, 1, None);
         let reconfig_listener = ReconfigNotificationListener {
             notification_receiver: reconfig_events,
         };
@@ -239,7 +239,7 @@ mod tests {
         peer_id: PeerId,
         consensus_pubkey: bls12381::PublicKey,
         pubkey: x25519::PublicKey,
-        reconfig_tx: &mut libra2_channels::libra2_channel::Sender<
+        reconfig_tx: &mut creditchain_channels::creditchain_channel::Sender<
             (),
             ReconfigNotification<InMemoryOnChainConfig>,
         >,

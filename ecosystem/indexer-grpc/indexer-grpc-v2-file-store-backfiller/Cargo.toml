@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-grpc-v2-file-store-backfiller"
+name = "creditchain-indexer-grpc-v2-file-store-backfiller"
 description = "Indexer gRPC v2 file store backfiller from fullnode."
 version = "1.0.1"
 
@@ -14,9 +14,9 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-indexer-grpc-server-framework = { workspace = true }
-libra2-indexer-grpc-utils = { workspace = true }
-libra2-protos = { workspace = true }
+creditchain-indexer-grpc-server-framework = { workspace = true }
+creditchain-indexer-grpc-utils = { workspace = true }
+creditchain-protos = { workspace = true }
 async-trait = { workspace = true }
 clap = { workspace = true }
 futures = { workspace = true }

@@ -12,16 +12,16 @@ use crate::{
     utils,
     utils::{OutputFallbackHandler, SpeculativeStreamState, PENDING_DATA_LOG_FREQ_SECS},
 };
-use libra2_config::config::ContinuousSyncingMode;
-use libra2_data_streaming_service::{
+use creditchain_config::config::ContinuousSyncingMode;
+use creditchain_data_streaming_service::{
     data_notification::{DataNotification, DataPayload, NotificationId},
     data_stream::DataStreamListener,
     streaming_client::{DataStreamingClient, Epoch, NotificationAndFeedback, NotificationFeedback},
 };
-use libra2_infallible::Mutex;
-use libra2_logger::{prelude::*, sample, sample::SampleRate};
-use libra2_storage_interface::DbReader;
-use libra2_types::{
+use creditchain_infallible::Mutex;
+use creditchain_logger::{prelude::*, sample, sample::SampleRate};
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{
     ledger_info::LedgerInfoWithSignatures,
     transaction::{TransactionListWithProofV2, TransactionOutputListWithProofV2, Version},
 };
@@ -41,7 +41,7 @@ pub struct ContinuousSyncer<StorageSyncer, StreamingClient> {
     // The speculative state tracking the active data stream
     speculative_stream_state: Option<SpeculativeStreamState>,
 
-    // The client through which to stream data from the Libra2 network
+    // The client through which to stream data from the CreditChain network
     streaming_client: StreamingClient,
 
     // The interface to read from storage

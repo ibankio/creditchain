@@ -1,5 +1,5 @@
 [package]
-name = "libra2-transaction-filter"
+name = "creditchain-transaction-filter"
 version = "0.1.1"
 
 # Workspace inherited keys
@@ -14,7 +14,7 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-protos = { workspace = true }
+creditchain-protos = { workspace = true }
 derivative = { workspace = true }
 derive_builder = { workspace = true }
 memchr = { workspace = true }

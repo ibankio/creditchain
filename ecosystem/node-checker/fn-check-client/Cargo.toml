@@ -1,6 +1,6 @@
 [package]
-name = "libra2-fn-check-client"
-description = "Tool to check the health of all VFNs registered in the validator set of an Libra2 network or PFNs from a config file"
+name = "creditchain-fn-check-client"
+description = "Tool to check the health of all VFNs registered in the validator set of an CreditChain network or PFNs from a config file"
 version = "0.1.1"
 
 # Workspace inherited keys
@@ -14,9 +14,9 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-node-checker = { workspace = true }
-libra2-sdk = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-node-checker = { workspace = true }
+creditchain-sdk = { workspace = true }
 clap = { workspace = true }
 env_logger = { workspace = true }
 futures = { workspace = true }
@@ -27,4 +27,4 @@ serde_json = { workspace = true }
 tokio = { workspace = true }
 
 [package.metadata.cargo-machete]
-ignored = ["libra2-node-checker"]
+ignored = ["creditchain-node-checker"]

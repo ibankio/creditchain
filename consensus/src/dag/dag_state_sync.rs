@@ -14,11 +14,11 @@ use crate::{
     pipeline::execution_client::TExecutionClient,
 };
 use anyhow::{bail, ensure};
-use libra2_channels::libra2_channel;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_logger::{debug, error};
-use libra2_time_service::TimeService;
-use libra2_types::{
+use creditchain_channels::creditchain_channel;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_logger::{debug, error};
+use creditchain_time_service::TimeService;
+use creditchain_types::{
     epoch_change::EpochChangeProof, epoch_state::EpochState, ledger_info::LedgerInfoWithSignatures,
 };
 use core::fmt;
@@ -286,7 +286,7 @@ impl SyncModeMessageHandler {
 
     pub(crate) async fn run(
         mut self,
-        dag_rpc_rx: &mut libra2_channel::Receiver<Author, IncomingDAGRequest>,
+        dag_rpc_rx: &mut creditchain_channel::Receiver<Author, IncomingDAGRequest>,
         buffer: &mut Vec<DAGMessage>,
     ) -> Option<CertifiedNodeMessage> {
         while let Some(msg) = dag_rpc_rx.next().await {

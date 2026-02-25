@@ -8,7 +8,7 @@ use super::{
 };
 use crate::checker::CheckResult;
 use anyhow::{anyhow, Context, Result};
-use libra2_logger::warn;
+use creditchain_logger::warn;
 use async_trait::async_trait;
 use prometheus_parse::{Scrape, Value};
 use reqwest::Url;

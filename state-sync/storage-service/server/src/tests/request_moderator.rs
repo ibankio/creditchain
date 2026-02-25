@@ -5,23 +5,23 @@ use crate::{
     moderator::UnhealthyPeerState,
     tests::{mock::MockClient, utils},
 };
-use libra2_config::{
+use creditchain_config::{
     config::{PeerRole, StorageServiceConfig},
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_network::{
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_network::{
     application::metadata::ConnectionState,
     protocols::wire::handshake::v1::{MessagingProtocolVersion, ProtocolIdSet},
     transport::{ConnectionId, ConnectionMetadata},
 };
-use libra2_storage_service_types::{
+use creditchain_storage_service_types::{
     requests::{DataRequest, StorageServiceRequest, TransactionsWithProofRequest},
     responses::StorageServiceResponse,
     StorageServiceError,
 };
-use libra2_time_service::MockTimeService;
-use libra2_types::{account_address::AccountAddress, network_address::NetworkAddress, PeerId};
+use creditchain_time_service::MockTimeService;
+use creditchain_types::{account_address::AccountAddress, network_address::NetworkAddress, PeerId};
 use claims::assert_matches;
 use dashmap::DashMap;
 use std::{str::FromStr, sync::Arc, time::Duration};

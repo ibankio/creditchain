@@ -20,9 +20,9 @@ use crate::{
     },
 };
 use anyhow::{anyhow, bail, ensure};
-use libra2_channels::{self, libra2_channel, message_queues::QueueStyle};
-use libra2_config::network_id::NetworkId;
-use libra2_consensus_types::{
+use creditchain_channels::{self, creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::network_id::NetworkId;
+use creditchain_consensus_types::{
     block_retrieval::{BlockRetrievalRequest, BlockRetrievalRequestV1, BlockRetrievalResponse},
     common::Author,
     opt_proposal_msg::OptProposalMsg,
@@ -34,14 +34,14 @@ use libra2_consensus_types::{
     sync_info::SyncInfo,
     vote_msg::VoteMsg,
 };
-use libra2_logger::prelude::*;
-use libra2_network::{
+use creditchain_logger::prelude::*;
+use creditchain_network::{
     application::interface::{NetworkClient, NetworkServiceEvents},
     protocols::{network::Event, rpc::error::RpcError},
     ProtocolId,
 };
-use libra2_reliable_broadcast::{RBMessage, RBNetworkSender};
-use libra2_types::{
+use creditchain_reliable_broadcast::{RBMessage, RBNetworkSender};
+use creditchain_types::{
     account_address::AccountAddress, epoch_change::EpochChangeProof,
     ledger_info::LedgerInfoWithSignatures, validator_verifier::ValidatorVerifier,
 };
@@ -177,15 +177,15 @@ impl IncomingRpcRequest {
 /// Will be returned by the NetworkTask upon startup.
 pub struct NetworkReceivers {
     /// Provide a LIFO buffer for each (Author, MessageType) key
-    pub consensus_messages: libra2_channel::Receiver<
+    pub consensus_messages: creditchain_channel::Receiver<
         (AccountAddress, Discriminant<ConsensusMsg>),
         (AccountAddress, ConsensusMsg),
     >,
-    pub quorum_store_messages: libra2_channel::Receiver<
+    pub quorum_store_messages: creditchain_channel::Receiver<
         (AccountAddress, Discriminant<ConsensusMsg>),
         (AccountAddress, ConsensusMsg),
     >,
-    pub rpc_rx: libra2_channel::Receiver<
+    pub rpc_rx: creditchain_channel::Receiver<
         (AccountAddress, Discriminant<IncomingRpcRequest>),
         (AccountAddress, IncomingRpcRequest),
     >,
@@ -220,16 +220,16 @@ pub struct NetworkSender {
     pub(crate) consensus_network_client: ConsensusNetworkClient<NetworkClient<ConsensusMsg>>,
     // Self sender and self receivers provide a shortcut for sending the messages to itself.
     // (self sending is not supported by the networking API).
-    self_sender: libra2_channels::UnboundedSender<Event<ConsensusMsg>>,
+    self_sender: creditchain_channels::UnboundedSender<Event<ConsensusMsg>>,
     validators: Arc<ValidatorVerifier>,
-    time_service: libra2_time_service::TimeService,
+    time_service: creditchain_time_service::TimeService,
 }
 
 impl NetworkSender {
     pub fn new(
         author: Author,
         consensus_network_client: ConsensusNetworkClient<NetworkClient<ConsensusMsg>>,
-        self_sender: libra2_channels::UnboundedSender<Event<ConsensusMsg>>,
+        self_sender: creditchain_channels::UnboundedSender<Event<ConsensusMsg>>,
         validators: Arc<ValidatorVerifier>,
     ) -> Self {
         NetworkSender {
@@ -237,7 +237,7 @@ impl NetworkSender {
             consensus_network_client,
             self_sender,
             validators,
-            time_service: libra2_time_service::TimeService::real(),
+            time_service: creditchain_time_service::TimeService::real(),
         }
     }
 
@@ -672,15 +672,15 @@ impl ProofNotifier for NetworkSender {
 }
 
 pub struct NetworkTask {
-    consensus_messages_tx: libra2_channel::Sender<
+    consensus_messages_tx: creditchain_channel::Sender<
         (AccountAddress, Discriminant<ConsensusMsg>),
         (AccountAddress, ConsensusMsg),
     >,
-    quorum_store_messages_tx: libra2_channel::Sender<
+    quorum_store_messages_tx: creditchain_channel::Sender<
         (AccountAddress, Discriminant<ConsensusMsg>),
         (AccountAddress, ConsensusMsg),
     >,
-    rpc_tx: libra2_channel::Sender<
+    rpc_tx: creditchain_channel::Sender<
         (AccountAddress, Discriminant<IncomingRpcRequest>),
         (AccountAddress, IncomingRpcRequest),
     >,
@@ -691,21 +691,21 @@ impl NetworkTask {
     /// Establishes the initial connections with the peers and returns the receivers.
     pub fn new(
         network_service_events: NetworkServiceEvents<ConsensusMsg>,
-        self_receiver: libra2_channels::UnboundedReceiver<Event<ConsensusMsg>>,
+        self_receiver: creditchain_channels::UnboundedReceiver<Event<ConsensusMsg>>,
     ) -> (NetworkTask, NetworkReceivers) {
-        let (consensus_messages_tx, consensus_messages) = libra2_channel::new(
+        let (consensus_messages_tx, consensus_messages) = creditchain_channel::new(
             QueueStyle::FIFO,
             10,
             Some(&counters::CONSENSUS_CHANNEL_MSGS),
         );
-        let (quorum_store_messages_tx, quorum_store_messages) = libra2_channel::new(
+        let (quorum_store_messages_tx, quorum_store_messages) = creditchain_channel::new(
             QueueStyle::FIFO,
             // TODO: tune this value based on quorum store messages with backpressure
             50,
             Some(&counters::QUORUM_STORE_CHANNEL_MSGS),
         );
         let (rpc_tx, rpc_rx) =
-            libra2_channel::new(QueueStyle::FIFO, 10, Some(&counters::RPC_CHANNEL_MSGS));
+            creditchain_channel::new(QueueStyle::FIFO, 10, Some(&counters::RPC_CHANNEL_MSGS));
 
         // Verify the network events have been constructed correctly
         let network_and_events = network_service_events.into_network_and_events();
@@ -738,7 +738,7 @@ impl NetworkTask {
     fn push_msg(
         peer_id: AccountAddress,
         msg: ConsensusMsg,
-        tx: &libra2_channel::Sender<
+        tx: &creditchain_channel::Sender<
             (AccountAddress, Discriminant<ConsensusMsg>),
             (AccountAddress, ConsensusMsg),
         >,

@@ -1,5 +1,5 @@
 [package]
-name = "libra2-mempool"
+name = "creditchain-mempool"
 description = "CreditChain mempool for consuming incoming transactions"
 version = "0.1.1"
 
@@ -14,26 +14,26 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-bounded-executor = { workspace = true }
-libra2-channels = { workspace = true }
-libra2-config = { workspace = true }
-libra2-consensus-types = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-event-notifications = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-mempool-notifications = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-netcore = { workspace = true }
-libra2-network = { workspace = true }
-libra2-peer-monitoring-service-types = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-short-hex-str = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-transaction-filters = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm-validator = { workspace = true }
+creditchain-bounded-executor = { workspace = true }
+creditchain-channels = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-consensus-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-event-notifications = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-mempool-notifications = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-netcore = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-peer-monitoring-service-types = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-short-hex-str = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-transaction-filters = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm-validator = { workspace = true }
 bcs = { workspace = true }
 fail = { workspace = true }
 futures = { workspace = true }
@@ -50,18 +50,18 @@ tokio = { workspace = true }
 tokio-stream = { workspace = true }
 
 [dev-dependencies]
-libra2-compression = { workspace = true }
-libra2-config = { workspace = true }
-libra2-id-generator = { workspace = true }
-libra2-network = { workspace = true, features = ["fuzzing"] }
-libra2-storage-interface = { workspace = true, features = ["fuzzing"] }
-libra2-time-service = { workspace = true, features = ["testing"] }
-libra2-transaction-filters = { workspace = true, features = ["fuzzing"] }
+creditchain-compression = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-id-generator = { workspace = true }
+creditchain-network = { workspace = true, features = ["fuzzing"] }
+creditchain-storage-interface = { workspace = true, features = ["fuzzing"] }
+creditchain-time-service = { workspace = true, features = ["testing"] }
+creditchain-transaction-filters = { workspace = true, features = ["fuzzing"] }
 enum_dispatch = { workspace = true }
 proptest = { workspace = true }
 
 [features]
 default = []
-failpoints = ["fail/failpoints", "libra2-vm-validator/failpoints"]
-fuzzing = ["proptest", "libra2-types/fuzzing", "libra2-storage-interface/fuzzing", "libra2-config/fuzzing"]
+failpoints = ["fail/failpoints", "creditchain-vm-validator/failpoints"]
+fuzzing = ["proptest", "creditchain-types/fuzzing", "creditchain-storage-interface/fuzzing", "creditchain-config/fuzzing"]
 consensus-only-perf-test = []

@@ -16,9 +16,9 @@ use crate::{
     CreateAccountsArgs,
 };
 use anyhow::{bail, Context, Result};
-use libra2_sdk::transaction_builder::TransactionFactory;
-use libra2_transaction_generator_lib::{AccountType, TransactionType};
-use libra2_types::{account_address::AccountAddress, keyless::test_utils::get_sample_esk};
+use creditchain_sdk::transaction_builder::TransactionFactory;
+use creditchain_transaction_generator_lib::{AccountType, TransactionType};
+use creditchain_types::{account_address::AccountAddress, keyless::test_utils::get_sample_esk};
 use log::{error, info};
 use rand::{rngs::StdRng, SeedableRng};
 use std::{
@@ -92,7 +92,7 @@ pub async fn emit_transactions_with_cluster(
     let emitter = TxnEmitter::new(
         TransactionFactory::new(cluster.chain_id)
             .with_transaction_expiration_time(args.txn_expiration_time_secs)
-            .with_gas_unit_price(libra2_global_constants::GAS_UNIT_PRICE),
+            .with_gas_unit_price(creditchain_global_constants::GAS_UNIT_PRICE),
         StdRng::from_entropy(),
         client,
     );

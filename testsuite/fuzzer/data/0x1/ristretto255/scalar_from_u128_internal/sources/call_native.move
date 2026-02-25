@@ -1,5 +1,5 @@
 module poc::scalar_from_u128_internal {
-    use libra2_std::ristretto255::{Self, Scalar};
+    use creditchain_std::ristretto255::{Self, Scalar};
 
     public entry fun main(_owner: &signer) {
         let input_val = 123456789012345678901234567890123456789u128;

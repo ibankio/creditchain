@@ -1,5 +1,5 @@
 [package]
-name = "libra2-peer-monitoring-service-server"
+name = "creditchain-peer-monitoring-service-server"
 description = "The peer monitoring service (server-side)"
 version = "0.1.1"
 
@@ -13,18 +13,18 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-bounded-executor = { workspace = true }
-libra2-build-info = { workspace = true }
-libra2-channels = { workspace = true }
-libra2-config = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-netcore = { workspace = true }
-libra2-network = { workspace = true }
-libra2-peer-monitoring-service-types = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-bounded-executor = { workspace = true }
+creditchain-build-info = { workspace = true }
+creditchain-channels = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-netcore = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-peer-monitoring-service-types = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-types = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
 futures = { workspace = true }
@@ -35,9 +35,9 @@ tokio = { workspace = true }
 
 [dev-dependencies]
 anyhow = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-network = { workspace = true, features = ["fuzzing"] }
-libra2-time-service = { workspace = true, features = ["testing"] }
+creditchain-crypto = { workspace = true }
+creditchain-network = { workspace = true, features = ["fuzzing"] }
+creditchain-time-service = { workspace = true, features = ["testing"] }
 claims = { workspace = true }
 maplit = { workspace = true }
 mockall = { workspace = true }

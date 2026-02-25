@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::*;
-use libra2_consensus_types::block::block_test_utils::certificate_for_genesis;
-use libra2_schemadb::{schema::fuzzing::assert_encode_decode, test_no_panic_decoding};
+use creditchain_consensus_types::block::block_test_utils::certificate_for_genesis;
+use creditchain_schemadb::{schema::fuzzing::assert_encode_decode, test_no_panic_decoding};
 
 #[test]
 fn test_encode_decode() {

@@ -1,0 +1,9 @@
+[package]
+name = "RingDeque"
+version = "0.0.0"
+
+[dependencies]
+CreditChainFramework = { local = "../../framework/creditchain-framework" }
+
+[addresses]
+ring_deque = "_"

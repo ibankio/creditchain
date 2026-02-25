@@ -1,5 +1,5 @@
 [package]
-name = "libra2-storage-service-notifications"
+name = "creditchain-storage-service-notifications"
 description = "The notification interface between state sync and the storage service"
 version = "0.1.1"
 
@@ -13,13 +13,13 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-channels = { workspace = true }
+creditchain-channels = { workspace = true }
 async-trait = { workspace = true }
 futures = { workspace = true }
 serde = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-crypto = { workspace = true }
+creditchain-crypto = { workspace = true }
 claims = { workspace = true }
 tokio = { workspace = true }

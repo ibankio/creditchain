@@ -7,7 +7,7 @@ use crate::{
 };
 use libra2_indexer_processor_sdk::{
     libra2_indexer_transaction_stream::utils::time::parse_timestamp,
-   libra2_protos::transaction::v1::{
+   creditchain_protos::transaction::v1::{
         transaction::TxnData, Transaction, TransactionInfo, UserTransactionRequest,
     },
     utils::{
@@ -87,7 +87,7 @@ impl GasFee {
         block_height: i64,
         fee_statement: Option<FeeStatement>,
     ) -> Self {
-        let libra2_coin_burned =
+        let creditchain_coin_burned =
             BigDecimal::from(txn_info.gas_used * user_transaction_request.gas_unit_price);
         let gas_fee_payer_address = match user_transaction_request.signature.as_ref() {
             Some(signature) => get_fee_payer_address(signature, transaction_version),
@@ -99,7 +99,7 @@ impl GasFee {
             owner_address: Some(standardize_address(
                 &user_transaction_request.sender.to_string(),
             )),
-            amount: Some(libra2_coin_burned),
+            amount: Some(creditchain_coin_burned),
             gas_fee_payer_address,
             is_transaction_success: txn_info.success,
             entry_function_id_str: entry_function_id_str.clone(),

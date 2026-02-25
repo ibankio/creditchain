@@ -55,7 +55,7 @@ mod sdk_account_restoration_processor_tests {
         database::{PostgresTestDatabase, TestDatabase},
         sdk_test_context::SdkTestContext,
     };
-    use libra2_indexer_test_transactions::json_transactions::generated_transactions::{
+    use creditchain_indexer_test_transactions::json_transactions::generated_transactions::{
         IMPORTED_MAINNET_TXNS_2200077591_ACCOUNT_RESTORATION_SINGLE_ED25519,
         IMPORTED_MAINNET_TXNS_2200077673_ACCOUNT_RESTORATION_UNVERIFIED_KEY_ROTATION_TO_MULTI_KEY_TXN,
         IMPORTED_MAINNET_TXNS_2200077800_ACCOUNT_RESTORATION_ROTATED_TO_MULTI_KEY,

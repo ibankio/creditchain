@@ -1,5 +1,5 @@
 module poc::verify_multisignature_internal {
-    use libra2_std::bls12381::{Self, PublicKeyWithPoP, ProofOfPossession};
+    use creditchain_std::bls12381::{Self, PublicKeyWithPoP, ProofOfPossession};
     use std::vector;
     use std::option::{Self};
 

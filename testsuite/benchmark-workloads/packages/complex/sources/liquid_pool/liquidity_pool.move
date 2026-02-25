@@ -3,18 +3,18 @@
 /// For volatile pairs, the price and reserves can be computed using the constant product formula k = x * y.
 /// For stable pairs, the price is computed using k = x^3 * y + x * y^3.
 module publisher_address::liquidity_pool {
-    use libra2_framework::event;
-    use libra2_framework::fungible_asset::{
+    use creditchain_framework::event;
+    use creditchain_framework::fungible_asset::{
         Self, FungibleAsset, FungibleStore, Metadata,
         BurnRef, MintRef, TransferRef,
     };
-    use libra2_framework::object::{Self, ConstructorRef, Object};
-    use libra2_framework::primary_fungible_store;
-    // use libra2_std::comparator;
-    use libra2_std::math128;
-    use libra2_std::math64;
-    use libra2_std::smart_table::{Self, SmartTable};
-    use libra2_std::smart_vector::{Self, SmartVector};
+    use creditchain_framework::object::{Self, ConstructorRef, Object};
+    use creditchain_framework::primary_fungible_store;
+    // use creditchain_std::comparator;
+    use creditchain_std::math128;
+    use creditchain_std::math64;
+    use creditchain_std::smart_table::{Self, SmartTable};
+    use creditchain_std::smart_vector::{Self, SmartVector};
 
     use std::bcs;
     use std::option;
@@ -60,7 +60,7 @@ module publisher_address::liquidity_pool {
         volatile_fee_bps: u64,
     }
 
-    #[resource_group_member(group = libra2_framework::object::ObjectGroup)]
+    #[resource_group_member(group = creditchain_framework::object::ObjectGroup)]
     struct LiquidityPool has key {
         token_store_1: Object<FungibleStore>,
         token_store_2: Object<FungibleStore>,
@@ -71,7 +71,7 @@ module publisher_address::liquidity_pool {
         is_stable: bool,
     }
 
-    #[resource_group_member(group = libra2_framework::object::ObjectGroup)]
+    #[resource_group_member(group = creditchain_framework::object::ObjectGroup)]
     struct FeesAccounting has key {
         total_fees_1: u128,
         total_fees_2: u128,

@@ -20,23 +20,23 @@ use crate::{
     QuorumStoreRequest, QuorumStoreResponse, SubmissionStatus,
 };
 use anyhow::Result;
-use libra2_config::{config::TransactionFilterConfig, network_id::PeerNetworkId};
-use libra2_consensus_types::common::RejectedTransactionSummary;
-use libra2_crypto::HashValue;
-use libra2_infallible::{Mutex, RwLock};
-use libra2_logger::prelude::*;
-use libra2_mempool_notifications::CommittedTransaction;
-use libra2_metrics_core::HistogramTimer;
-use libra2_network::application::interface::NetworkClientInterface;
-use libra2_storage_interface::state_store::state_view::db_state_view::LatestDbStateCheckpointView;
-use libra2_types::{
+use creditchain_config::{config::TransactionFilterConfig, network_id::PeerNetworkId};
+use creditchain_consensus_types::common::RejectedTransactionSummary;
+use creditchain_crypto::HashValue;
+use creditchain_infallible::{Mutex, RwLock};
+use creditchain_logger::prelude::*;
+use creditchain_mempool_notifications::CommittedTransaction;
+use creditchain_metrics_core::HistogramTimer;
+use creditchain_network::application::interface::NetworkClientInterface;
+use creditchain_storage_interface::state_store::state_view::db_state_view::LatestDbStateCheckpointView;
+use creditchain_types::{
     account_address::AccountAddress,
     mempool_status::{MempoolStatus, MempoolStatusCode},
     on_chain_config::{OnChainConfigPayload, OnChainConfigProvider, OnChainConsensusConfig},
     transaction::{ReplayProtector, SignedTransaction},
     vm_status::{DiscardedVMStatus, StatusCode},
 };
-use libra2_vm_validator::vm_validator::{get_account_sequence_number, TransactionValidation};
+use creditchain_vm_validator::vm_validator::{get_account_sequence_number, TransactionValidation};
 use futures::{channel::oneshot, stream::FuturesUnordered};
 use rayon::prelude::*;
 use std::{
@@ -648,7 +648,7 @@ pub(crate) fn process_quorum_store_request<NetworkClient, TransactionValidator>(
                     );
                     // gc before pulling block as extra protection against txns that may expire in consensus
                     // Note: this gc operation relies on the fact that consensus uses the system time to determine block timestamp
-                    let curr_time = libra2_infallible::duration_since_epoch();
+                    let curr_time = creditchain_infallible::duration_since_epoch();
                     mempool.gc_by_expiration_time(curr_time);
                 }
 
@@ -783,9 +783,9 @@ pub(crate) async fn process_config_update<V, P>(
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
-    use libra2_transaction_filters::transaction_filter::TransactionFilter;
-    use libra2_types::{
+    use creditchain_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
+    use creditchain_transaction_filters::transaction_filter::TransactionFilter;
+    use creditchain_types::{
         chain_id::ChainId,
         transaction::{RawTransaction, Script, TransactionPayload},
     };

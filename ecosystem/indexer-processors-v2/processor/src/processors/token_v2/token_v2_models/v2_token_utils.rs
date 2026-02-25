@@ -11,7 +11,7 @@ use crate::processors::{
 use ahash::{AHashMap, AHashSet};
 use anyhow::{Context, Result};
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{Event, WriteResource},
+   creditchain_protos::transaction::v1::{Event, WriteResource},
     utils::{
         convert::{deserialize_from_string, standardize_address, truncate_str},
         extract::{
@@ -99,12 +99,12 @@ impl TryFrom<&WriteResource> for Collection {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Libra2Collection {
+pub struct CreditChainCollection {
     pub mutable_description: bool,
     pub mutable_uri: bool,
 }
 
-impl TryFrom<&WriteResource> for Libra2Collection {
+impl TryFrom<&WriteResource> for CreditChainCollection {
     type Error = anyhow::Error;
 
     fn try_from(write_resource: &WriteResource) -> anyhow::Result<Self> {

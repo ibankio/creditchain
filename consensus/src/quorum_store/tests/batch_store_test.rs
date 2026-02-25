@@ -6,10 +6,10 @@ use crate::quorum_store::{
     quorum_store_db::QuorumStoreDB,
     types::{PersistedValue, StorageMode},
 };
-use libra2_consensus_types::proof_of_store::BatchInfo;
-use libra2_crypto::HashValue;
-use libra2_temppath::TempPath;
-use libra2_types::{
+use creditchain_consensus_types::proof_of_store::BatchInfo;
+use creditchain_crypto::HashValue;
+use creditchain_temppath::TempPath;
+use creditchain_types::{
     account_address::AccountAddress, quorum_store::BatchId, transaction::SignedTransaction,
     validator_verifier::random_validator_verifier,
 };

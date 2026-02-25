@@ -3,7 +3,7 @@
 use crate::{
     create_account_transaction, ObjectPool, TransactionGenerator, TransactionGeneratorCreator,
 };
-use libra2_sdk::{
+use creditchain_sdk::{
     move_types::account_address::AccountAddress,
     transaction_builder::TransactionFactory,
     types::{transaction::SignedTransaction, LocalAccount},

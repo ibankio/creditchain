@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-//! The Libra2 API response / error handling philosophy.
+//! The CreditChain API response / error handling philosophy.
 //!
 //! The return type for every endpoint should be a
 //! `poem::Result<MyResponse<T>, MyError>` where MyResponse is an instance of
@@ -30,7 +30,7 @@
 // TODO: https://github.com/libra2org/libra2-core/issues/2279
 
 use super::{accept_type::AcceptType, bcs_payload::Bcs};
-use libra2_api_types::{Address, Libra2Error, Libra2ErrorCode, HashValue, LedgerInfo};
+use creditchain_api_types::{Address, CreditChainError, CreditChainErrorCode, HashValue, LedgerInfo};
 use move_core_types::{
     identifier::{IdentStr, Identifier},
     language_storage::StructTag,
@@ -41,7 +41,7 @@ use std::fmt::Display;
 
 /// An enum representing the different types of outputs for APIs
 #[derive(ResponseContent)]
-pub enum Libra2ResponseContent<T: ToJSON + Send + Sync> {
+pub enum CreditChainResponseContent<T: ToJSON + Send + Sync> {
     /// When returning data as JSON, we take in T and then serialize to JSON as
     /// part of the response.
     Json(Json<T>),
@@ -55,9 +55,9 @@ pub enum Libra2ResponseContent<T: ToJSON + Send + Sync> {
 /// This trait defines common functions that all error responses should impl.
 /// As a user you shouldn't worry about this, the generate_error_response macro
 /// takes care of it for you. Mostly these are helpers to allow callers holding
-/// an error response to manipulate the Libra2Error inside it.
-pub trait Libra2ErrorResponse {
-    fn inner_mut(&mut self) -> &mut Libra2Error;
+/// an error response to manipulate the CreditChainError inside it.
+pub trait CreditChainErrorResponse {
+    fn inner_mut(&mut self) -> &mut CreditChainError;
 }
 
 /// This macro defines traits for all of the given status codes. In each trait
@@ -68,49 +68,49 @@ pub trait Libra2ErrorResponse {
 /// fn fail_point_poem<E: InternalError>(name: &str) -> anyhow::Result<(), E>
 /// This should be invoked just once, taking in every status that we use
 /// throughout the entire API. Every one of these traits requires that the
-/// implementor also implements Libra2ErrorResponse, which saves functions from
+/// implementor also implements CreditChainErrorResponse, which saves functions from
 /// having to add that bound to errors themselves.
 #[macro_export]
 macro_rules! generate_error_traits {
     ($($trait_name:ident),*) => {
         paste::paste! {
         $(
-        pub trait [<$trait_name Error>]: Libra2ErrorResponse {
+        pub trait [<$trait_name Error>]: CreditChainErrorResponse {
             // With ledger info and an error code
             #[allow(unused)]
             fn [<$trait_name:snake _with_code>]<Err: std::fmt::Display>(
                 err: Err,
-                error_code: libra2_api_types::Libra2ErrorCode,
-                ledger_info: &libra2_api_types::LedgerInfo,
+                error_code: creditchain_api_types::CreditChainErrorCode,
+                ledger_info: &creditchain_api_types::LedgerInfo,
             ) -> Self where Self: Sized;
 
             // With an error code and no ledger info headers (special case)
             #[allow(unused)]
             fn [<$trait_name:snake _with_code_no_info>]<Err: std::fmt::Display>(
                 err: Err,
-                error_code: libra2_api_types::Libra2ErrorCode,
+                error_code: creditchain_api_types::CreditChainErrorCode,
             ) -> Self where Self: Sized;
 
             #[allow(unused)]
             fn [<$trait_name:snake _with_optional_vm_status_and_ledger_info>]<Err: std::fmt::Display>(
                 err: Err,
-                error_code: libra2_api_types::Libra2ErrorCode,
-                vm_status: Option<libra2_types::vm_status::StatusCode>,
-                ledger_info: Option<&libra2_api_types::LedgerInfo>
+                error_code: creditchain_api_types::CreditChainErrorCode,
+                vm_status: Option<creditchain_types::vm_status::StatusCode>,
+                ledger_info: Option<&creditchain_api_types::LedgerInfo>
             ) -> Self where Self: Sized;
 
             #[allow(unused)]
             fn [<$trait_name:snake _with_vm_status>]<Err: std::fmt::Display>(
                 err: Err,
-                error_code: libra2_api_types::Libra2ErrorCode,
-                vm_status: libra2_types::vm_status::StatusCode,
-                ledger_info: &libra2_api_types::LedgerInfo
+                error_code: creditchain_api_types::CreditChainErrorCode,
+                vm_status: creditchain_types::vm_status::StatusCode,
+                ledger_info: &creditchain_api_types::LedgerInfo
             ) -> Self where Self: Sized;
 
             #[allow(unused)]
-            fn [<$trait_name:snake _from_libra2_error>](
-                libra2_error: libra2_api_types::Libra2Error,
-                ledger_info: &libra2_api_types::LedgerInfo
+            fn [<$trait_name:snake _from_creditchain_error>](
+                creditchain_error: creditchain_api_types::CreditChainError,
+                ledger_info: &creditchain_api_types::LedgerInfo
             ) -> Self where Self: Sized;
         }
         )*
@@ -138,25 +138,25 @@ macro_rules! generate_error_response {
         pub enum $enum_name {
             $(
             #[oai(status = $status)]
-            $name(poem_openapi::payload::Json<Box<libra2_api_types::Libra2Error>>,
+            $name(poem_openapi::payload::Json<Box<creditchain_api_types::CreditChainError>>,
                 // We use just regular u64 here instead of U64 since all header
                 // values are implicitly strings anyway.
                 /// Chain ID of the current chain
-                #[oai(header = "X-Libra2-Chain-Id")] Option<u8>,
+                #[oai(header = "X-CreditChain-Chain-Id")] Option<u8>,
                 /// Current ledger version of the chain
-                #[oai(header = "X-libra2-ledger-Version")] Option<u64>,
+                #[oai(header = "X-creditchain-ledger-Version")] Option<u64>,
                 /// Oldest non-pruned ledger version of the chain
-                #[oai(header = "X-libra2-ledger-Oldest-Version")] Option<u64>,
+                #[oai(header = "X-creditchain-ledger-Oldest-Version")] Option<u64>,
                 /// Current timestamp of the chain
-                #[oai(header = "X-libra2-ledger-TimestampUsec")] Option<u64>,
+                #[oai(header = "X-creditchain-ledger-TimestampUsec")] Option<u64>,
                 /// Current epoch of the chain
-                #[oai(header = "X-Libra2-Epoch")] Option<u64>,
+                #[oai(header = "X-CreditChain-Epoch")] Option<u64>,
                 /// Current block height of the chain
-                #[oai(header = "X-Libra2-Block-Height")] Option<u64>,
+                #[oai(header = "X-CreditChain-Block-Height")] Option<u64>,
                 /// Oldest non-pruned block height of the chain
-                #[oai(header = "X-Libra2-Oldest-Block-Height")] Option<u64>,
+                #[oai(header = "X-CreditChain-Oldest-Block-Height")] Option<u64>,
                 /// The cost of the call in terms of gas
-                #[oai(header = "X-Libra2-Gas-Used")] Option<u64>,
+                #[oai(header = "X-CreditChain-Gas-Used")] Option<u64>,
             ),
             )*
         }
@@ -169,10 +169,10 @@ macro_rules! generate_error_response {
         impl $crate::response::[<$name Error>] for $enum_name {
             fn [<$name:snake _with_code>]<Err: std::fmt::Display>(
                 err: Err,
-                error_code: libra2_api_types::Libra2ErrorCode,
-                ledger_info: &libra2_api_types::LedgerInfo
+                error_code: creditchain_api_types::CreditChainErrorCode,
+                ledger_info: &creditchain_api_types::LedgerInfo
             )-> Self where Self: Sized {
-                let error = libra2_api_types::Libra2Error::new_with_error_code(err, error_code);
+                let error = creditchain_api_types::CreditChainError::new_with_error_code(err, error_code);
                 let payload = poem_openapi::payload::Json(Box::new(error));
 
                 Self::from($enum_name::$name(
@@ -190,9 +190,9 @@ macro_rules! generate_error_response {
 
             fn [<$name:snake _with_code_no_info>]<Err: std::fmt::Display>(
                 err: Err,
-                error_code: libra2_api_types::Libra2ErrorCode,
+                error_code: creditchain_api_types::CreditChainErrorCode,
             )-> Self where Self: Sized {
-                let error = libra2_api_types::Libra2Error::new_with_error_code(err, error_code);
+                let error = creditchain_api_types::CreditChainError::new_with_error_code(err, error_code);
                 let payload = poem_openapi::payload::Json(Box::new(error));
 
                 Self::from($enum_name::$name(
@@ -209,14 +209,14 @@ macro_rules! generate_error_response {
             }
             fn [<$name:snake _with_optional_vm_status_and_ledger_info>]<Err: std::fmt::Display>(
                 err: Err,
-                error_code: libra2_api_types::Libra2ErrorCode,
-                vm_status: Option<libra2_types::vm_status::StatusCode>,
-                ledger_info: Option<&libra2_api_types::LedgerInfo>
+                error_code: creditchain_api_types::CreditChainErrorCode,
+                vm_status: Option<creditchain_types::vm_status::StatusCode>,
+                ledger_info: Option<&creditchain_api_types::LedgerInfo>
             ) -> Self where Self: Sized {
                 let error = if let Some(vm_status) = vm_status {
-                    libra2_api_types::Libra2Error::new_with_vm_status(err, error_code, vm_status)
+                    creditchain_api_types::CreditChainError::new_with_vm_status(err, error_code, vm_status)
                 } else {
-                    libra2_api_types::Libra2Error::new_with_error_code(err, error_code)
+                    creditchain_api_types::CreditChainError::new_with_error_code(err, error_code)
                 };
                 let payload = poem_openapi::payload::Json(Box::new(error));
                 Self::from($enum_name::$name(
@@ -234,11 +234,11 @@ macro_rules! generate_error_response {
 
             fn [<$name:snake _with_vm_status>]<Err: std::fmt::Display>(
                 err: Err,
-                error_code: libra2_api_types::Libra2ErrorCode,
-                vm_status: libra2_types::vm_status::StatusCode,
-                ledger_info: &libra2_api_types::LedgerInfo
+                error_code: creditchain_api_types::CreditChainErrorCode,
+                vm_status: creditchain_types::vm_status::StatusCode,
+                ledger_info: &creditchain_api_types::LedgerInfo
             ) -> Self where Self: Sized {
-                let error = libra2_api_types::Libra2Error::new_with_vm_status(err, error_code, vm_status);
+                let error = creditchain_api_types::CreditChainError::new_with_vm_status(err, error_code, vm_status);
                 let payload = poem_openapi::payload::Json(Box::new(error));
                 Self::from($enum_name::$name(
                     payload,
@@ -253,11 +253,11 @@ macro_rules! generate_error_response {
                 ))
             }
 
-            fn [<$name:snake _from_libra2_error>](
-                libra2_error: libra2_api_types::Libra2Error,
-                ledger_info: &libra2_api_types::LedgerInfo
+            fn [<$name:snake _from_creditchain_error>](
+                creditchain_error: creditchain_api_types::CreditChainError,
+                ledger_info: &creditchain_api_types::LedgerInfo
             ) -> Self where Self: Sized {
-                let payload = poem_openapi::payload::Json(Box::new(libra2_error));
+                let payload = poem_openapi::payload::Json(Box::new(creditchain_error));
                 Self::from($enum_name::$name(
                     payload,
                     Some(ledger_info.chain_id),
@@ -274,9 +274,9 @@ macro_rules! generate_error_response {
         )*
         }
 
-        // Generate a function that helps get the Libra2Error within.
-        impl $crate::response::Libra2ErrorResponse for $enum_name {
-            fn inner_mut(&mut self) -> &mut libra2_api_types::Libra2Error {
+        // Generate a function that helps get the CreditChainError within.
+        impl $crate::response::CreditChainErrorResponse for $enum_name {
+            fn inner_mut(&mut self) -> &mut creditchain_api_types::CreditChainError {
                 match self {
                     $(
                     $enum_name::$name(poem_openapi::payload::Json(inner),
@@ -325,27 +325,27 @@ macro_rules! generate_success_response {
             $name(
                 // We use just regular u64 here instead of U64 since all header
                 // values are implicitly strings anyway.
-                $crate::response::Libra2ResponseContent<T>,
+                $crate::response::CreditChainResponseContent<T>,
                 /// Chain ID of the current chain
-                #[oai(header = "X-Libra2-Chain-Id")] u8,
+                #[oai(header = "X-CreditChain-Chain-Id")] u8,
                 /// Current ledger version of the chain
-                #[oai(header = "X-libra2-ledger-Version")] u64,
+                #[oai(header = "X-creditchain-ledger-Version")] u64,
                 /// Oldest non-pruned ledger version of the chain
-                #[oai(header = "X-libra2-ledger-Oldest-Version")] u64,
+                #[oai(header = "X-creditchain-ledger-Oldest-Version")] u64,
                 /// Current timestamp of the chain
-                #[oai(header = "X-libra2-ledger-TimestampUsec")] u64,
+                #[oai(header = "X-creditchain-ledger-TimestampUsec")] u64,
                 /// Current epoch of the chain
-                #[oai(header = "X-Libra2-Epoch")] u64,
+                #[oai(header = "X-CreditChain-Epoch")] u64,
                 /// Current block height of the chain
-                #[oai(header = "X-Libra2-Block-Height")] u64,
+                #[oai(header = "X-CreditChain-Block-Height")] u64,
                 /// Oldest non-pruned block height of the chain
-                #[oai(header = "X-Libra2-Oldest-Block-Height")] u64,
+                #[oai(header = "X-CreditChain-Oldest-Block-Height")] u64,
                 /// The cost of the call in terms of gas
-                #[oai(header = "X-Libra2-Gas-Used")] Option<u64>,
+                #[oai(header = "X-CreditChain-Gas-Used")] Option<u64>,
                 /// Cursor to be used for endpoints that support cursor-based
                 /// pagination. Pass this to the `start` field of the endpoint
                 /// on the next call to get the next page of results.
-                #[oai(header = "X-Libra2-Cursor")] Option<String>,
+                #[oai(header = "X-CreditChain-Cursor")] Option<String>,
             ),
             )*
         }
@@ -359,17 +359,17 @@ macro_rules! generate_success_response {
             )*
         }
 
-        // Generate a From impl that builds a response from Libra2ResponseContent.
+        // Generate a From impl that builds a response from CreditChainResponseContent.
         // Each variant in the main enum takes in the same argument, so the macro
         // is really just helping us enumerate and build each variant. We use this
         // in the other From impls.
-        impl <T: poem_openapi::types::ToJSON + Send + Sync> From<($crate::response::Libra2ResponseContent<T>, &libra2_api_types::LedgerInfo, [<$enum_name Status>])>
+        impl <T: poem_openapi::types::ToJSON + Send + Sync> From<($crate::response::CreditChainResponseContent<T>, &creditchain_api_types::LedgerInfo, [<$enum_name Status>])>
             for $enum_name<T>
         {
             fn from(
                 (value, ledger_info, status): (
-                    $crate::response::Libra2ResponseContent<T>,
-                    &libra2_api_types::LedgerInfo,
+                    $crate::response::CreditChainResponseContent<T>,
+                    &creditchain_api_types::LedgerInfo,
                     [<$enum_name Status>]
                 ),
             ) -> Self {
@@ -395,29 +395,29 @@ macro_rules! generate_success_response {
         }
 
         // Generate a From impl that builds a response from a Json<T> and friends.
-        impl<T: poem_openapi::types::ToJSON + Send + Sync> From<(poem_openapi::payload::Json<T>, &libra2_api_types::LedgerInfo, [<$enum_name Status>])>
+        impl<T: poem_openapi::types::ToJSON + Send + Sync> From<(poem_openapi::payload::Json<T>, &creditchain_api_types::LedgerInfo, [<$enum_name Status>])>
             for $enum_name<T>
         {
             fn from(
-                (value, ledger_info, status): (poem_openapi::payload::Json<T>, &libra2_api_types::LedgerInfo, [<$enum_name Status>]),
+                (value, ledger_info, status): (poem_openapi::payload::Json<T>, &creditchain_api_types::LedgerInfo, [<$enum_name Status>]),
             ) -> Self {
-                let content = $crate::response::Libra2ResponseContent::Json(value);
+                let content = $crate::response::CreditChainResponseContent::Json(value);
                 Self::from((content, ledger_info, status))
             }
         }
 
         // Generate a From impl that builds a response from a Bcs<Vec<u8>> and friends.
-        impl<T: poem_openapi::types::ToJSON + Send + Sync> From<($crate::bcs_payload::Bcs, &libra2_api_types::LedgerInfo, [<$enum_name Status>])>
+        impl<T: poem_openapi::types::ToJSON + Send + Sync> From<($crate::bcs_payload::Bcs, &creditchain_api_types::LedgerInfo, [<$enum_name Status>])>
             for $enum_name<T>
         {
             fn from(
                 (value, ledger_info, status): (
                     $crate::bcs_payload::Bcs,
-                    &libra2_api_types::LedgerInfo,
+                    &creditchain_api_types::LedgerInfo,
                     [<$enum_name Status>]
                 ),
             ) -> Self {
-                let content = $crate::response::Libra2ResponseContent::Bcs(value);
+                let content = $crate::response::CreditChainResponseContent::Bcs(value);
                 Self::from((content, ledger_info, status))
             }
         }
@@ -430,7 +430,7 @@ macro_rules! generate_success_response {
             pub fn try_from_rust_value<E: $crate::response::InternalError>(
                 (value, ledger_info, status, accept_type): (
                     T,
-                    &libra2_api_types::LedgerInfo,
+                    &creditchain_api_types::LedgerInfo,
                     [<$enum_name Status>],
                     &$crate::accept_type::AcceptType
                 ),
@@ -441,7 +441,7 @@ macro_rules! generate_success_response {
                             bcs::to_bytes(&value)
                                 .map_err(|e| E::internal_with_code(
                                     e,
-                                    libra2_api_types::Libra2ErrorCode::InternalError,
+                                    creditchain_api_types::CreditChainErrorCode::InternalError,
                                     ledger_info
                                 ))?
                         ),
@@ -459,7 +459,7 @@ macro_rules! generate_success_response {
            pub fn try_from_json<E: $crate::response::InternalError>(
                 (value, ledger_info, status): (
                     T,
-                    &libra2_api_types::LedgerInfo,
+                    &creditchain_api_types::LedgerInfo,
                     [<$enum_name Status>],
                 ),
             ) -> Result<Self, E> {
@@ -473,7 +473,7 @@ macro_rules! generate_success_response {
             pub fn try_from_bcs<B: serde::Serialize, E: $crate::response::InternalError>(
                 (value, ledger_info, status): (
                     B,
-                    &libra2_api_types::LedgerInfo,
+                    &creditchain_api_types::LedgerInfo,
                     [<$enum_name Status>],
                 ),
             ) -> Result<Self, E> {
@@ -482,7 +482,7 @@ macro_rules! generate_success_response {
                         bcs::to_bytes(&value)
                             .map_err(|e| E::internal_with_code(
                                 e,
-                                libra2_api_types::Libra2ErrorCode::InternalError,
+                                creditchain_api_types::CreditChainErrorCode::InternalError,
                                 ledger_info
                             ))?
                     ),
@@ -494,7 +494,7 @@ macro_rules! generate_success_response {
             pub fn try_from_encoded<E: $crate::response::InternalError>(
                 (value, ledger_info, status): (
                     Vec<u8>,
-                    &libra2_api_types::LedgerInfo,
+                    &creditchain_api_types::LedgerInfo,
                     [<$enum_name Status>],
                 ),
             ) -> Result<Self, E> {
@@ -507,11 +507,11 @@ macro_rules! generate_success_response {
                )))
             }
 
-            pub fn with_cursor(mut self, new_cursor: Option<libra2_types::state_store::state_key::StateKey>) -> Self {
+            pub fn with_cursor(mut self, new_cursor: Option<creditchain_types::state_store::state_key::StateKey>) -> Self {
                 match self {
                     $(
                     [<$enum_name>]::$name(_, _, _, _, _, _, _, _, _, ref mut cursor) => {
-                        *cursor = new_cursor.map(|c| libra2_api_types::StateKeyWrapper::from(c).to_string());
+                        *cursor = new_cursor.map(|c| creditchain_api_types::StateKeyWrapper::from(c).to_string());
                     }
                     )*
                 }
@@ -584,7 +584,7 @@ pub type BasicResultWith404<T> = poem::Result<BasicResponse<T>, BasicErrorWith40
 pub fn build_not_found<S: Display, E: NotFoundError>(
     resource: &str,
     identifier: S,
-    error_code: Libra2ErrorCode,
+    error_code: CreditChainErrorCode,
     ledger_info: &LedgerInfo,
 ) -> E {
     E::not_found_with_code(
@@ -600,7 +600,7 @@ pub fn json_api_disabled<S: Display, E: ForbiddenError>(identifier: S) -> E {
             "{} with JSON output is disabled on this endpoint",
             identifier
         ),
-        Libra2ErrorCode::ApiDisabled,
+        CreditChainErrorCode::ApiDisabled,
     )
 }
 
@@ -610,21 +610,21 @@ pub fn bcs_api_disabled<S: Display, E: ForbiddenError>(identifier: S) -> E {
             "{} with BCS output is disabled on this endpoint",
             identifier
         ),
-        Libra2ErrorCode::ApiDisabled,
+        CreditChainErrorCode::ApiDisabled,
     )
 }
 
 pub fn api_disabled<S: Display, E: ForbiddenError>(identifier: S) -> E {
     E::forbidden_with_code_no_info(
         format!("{} is disabled on this endpoint", identifier),
-        Libra2ErrorCode::ApiDisabled,
+        CreditChainErrorCode::ApiDisabled,
     )
 }
 
 pub fn api_forbidden<S: Display, E: ForbiddenError>(identifier: S, extra_help: S) -> E {
     E::forbidden_with_code_no_info(
         format!("{} is not allowed. {}", identifier, extra_help),
-        Libra2ErrorCode::ApiDisabled,
+        CreditChainErrorCode::ApiDisabled,
     )
 }
 
@@ -632,7 +632,7 @@ pub fn version_not_found<E: NotFoundError>(ledger_version: u64, ledger_info: &Le
     build_not_found(
         "Ledger version",
         format!("Ledger version({})", ledger_version),
-        Libra2ErrorCode::VersionNotFound,
+        CreditChainErrorCode::VersionNotFound,
         ledger_info,
     )
 }
@@ -644,7 +644,7 @@ pub fn transaction_not_found_by_version<E: NotFoundError>(
     build_not_found(
         "Transaction",
         format!("Ledger version({})", ledger_version),
-        Libra2ErrorCode::TransactionNotFound,
+        CreditChainErrorCode::TransactionNotFound,
         ledger_info,
     )
 }
@@ -656,7 +656,7 @@ pub fn transaction_not_found_by_hash<E: NotFoundError>(
     build_not_found(
         "Transaction",
         format!("Transaction hash({})", hash),
-        Libra2ErrorCode::TransactionNotFound,
+        CreditChainErrorCode::TransactionNotFound,
         ledger_info,
     )
 }
@@ -664,7 +664,7 @@ pub fn transaction_not_found_by_hash<E: NotFoundError>(
 pub fn version_pruned<E: GoneError>(ledger_version: u64, ledger_info: &LedgerInfo) -> E {
     E::gone_with_code(
         format!("Ledger version({}) has been pruned", ledger_version),
-        Libra2ErrorCode::VersionPruned,
+        CreditChainErrorCode::VersionPruned,
         ledger_info,
     )
 }
@@ -680,7 +680,7 @@ pub fn account_not_found<E: NotFoundError>(
             "Address({}) and Ledger version({})",
             address, ledger_version
         ),
-        Libra2ErrorCode::AccountNotFound,
+        CreditChainErrorCode::AccountNotFound,
         ledger_info,
     )
 }
@@ -699,7 +699,7 @@ pub fn resource_not_found<E: NotFoundError>(
             struct_tag.to_canonical_string(),
             ledger_version
         ),
-        Libra2ErrorCode::ResourceNotFound,
+        CreditChainErrorCode::ResourceNotFound,
         ledger_info,
     )
 }
@@ -716,7 +716,7 @@ pub fn module_not_found<E: NotFoundError>(
             "Address({}), Module name({}) and Ledger version({})",
             address, module_name, ledger_version
         ),
-        Libra2ErrorCode::ModuleNotFound,
+        CreditChainErrorCode::ModuleNotFound,
         ledger_info,
     )
 }
@@ -737,7 +737,7 @@ pub fn struct_field_not_found<E: NotFoundError>(
             field_name,
             ledger_version
         ),
-        Libra2ErrorCode::StructFieldNotFound,
+        CreditChainErrorCode::StructFieldNotFound,
         ledger_info,
     )
 }
@@ -754,7 +754,7 @@ pub fn table_item_not_found<E: NotFoundError>(
             "Table handle({}), Table key({}) and Ledger version({})",
             table_handle, table_key, ledger_version
         ),
-        Libra2ErrorCode::TableItemNotFound,
+        CreditChainErrorCode::TableItemNotFound,
         ledger_info,
     )
 }
@@ -766,7 +766,7 @@ pub fn block_not_found_by_height<E: NotFoundError>(
     build_not_found(
         "Block",
         format!("Block height({})", block_height,),
-        Libra2ErrorCode::BlockNotFound,
+        CreditChainErrorCode::BlockNotFound,
         ledger_info,
     )
 }
@@ -778,7 +778,7 @@ pub fn block_not_found_by_version<E: NotFoundError>(
     build_not_found(
         "Block",
         format!("Ledger version({})", ledger_version,),
-        Libra2ErrorCode::BlockNotFound,
+        CreditChainErrorCode::BlockNotFound,
         ledger_info,
     )
 }
@@ -786,7 +786,7 @@ pub fn block_not_found_by_version<E: NotFoundError>(
 pub fn block_pruned_by_height<E: GoneError>(block_height: u64, ledger_info: &LedgerInfo) -> E {
     E::gone_with_code(
         format!("Block({}) has been pruned", block_height),
-        Libra2ErrorCode::BlockPruned,
+        CreditChainErrorCode::BlockPruned,
         ledger_info,
     )
 }

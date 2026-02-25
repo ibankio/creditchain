@@ -7,16 +7,16 @@ use crate::{
     provider::{api_index::ApiIndexProvider, Provider, ProviderCollection},
 };
 use anyhow::{Context, Result};
-use libra2_sdk::types::chain_id::ChainId;
-use libra2_transaction_emitter_lib::{
+use creditchain_sdk::types::chain_id::ChainId;
+use creditchain_transaction_emitter_lib::{
     emit_transactions_with_cluster, Cluster, ClusterArgs, CoinSourceArgs, EmitArgs,
 };
-use libra2_transaction_workloads_lib::args::EmitWorkloadArgs;
+use creditchain_transaction_workloads_lib::args::EmitWorkloadArgs;
 use serde::{Deserialize, Serialize};
 use thiserror::Error as ThisError;
 
 const NODE_REQUIREMENTS_LINK: &str =
-    "https://docs.libra2.org/nodes/validator-node/operator/node-requirements";
+    "https://docs.creditchain.io/nodes/validator-node/operator/node-requirements";
 
 #[derive(Debug, ThisError)]
 pub enum TpsCheckerError {

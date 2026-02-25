@@ -11,11 +11,11 @@
 
 use crate::schema::TABLE_INFO_CF_NAME;
 use anyhow::Result;
-use libra2_schemadb::{
+use creditchain_schemadb::{
     define_pub_schema,
     schema::{KeyCodec, ValueCodec},
 };
-use libra2_types::state_store::table::{TableHandle, TableInfo};
+use creditchain_types::state_store::table::{TableHandle, TableInfo};
 
 define_pub_schema!(TableInfoSchema, TableHandle, TableInfo, TABLE_INFO_CF_NAME);
 

@@ -6,17 +6,17 @@ use crate::{
     optimistic_fetch::OptimisticFetchRequest, storage::StorageReaderInterface,
     subscription::SubscriptionStreamRequests,
 };
-use libra2_config::network_id::PeerNetworkId;
-use libra2_metrics_core::HistogramVec;
-use libra2_storage_service_types::{
+use creditchain_config::network_id::PeerNetworkId;
+use creditchain_metrics_core::HistogramVec;
+use creditchain_storage_service_types::{
     requests::{DataRequest, EpochEndingLedgerInfoRequest, StorageServiceRequest},
     responses::{
         DataResponse, NewTransactionDataWithProofResponse, StorageServerSummary,
         StorageServiceResponse,
     },
 };
-use libra2_time_service::TimeService;
-use libra2_types::ledger_info::LedgerInfoWithSignatures;
+use creditchain_time_service::TimeService;
+use creditchain_types::ledger_info::LedgerInfoWithSignatures;
 use arc_swap::ArcSwap;
 use dashmap::DashMap;
 use mini_moka::sync::Cache;
@@ -34,7 +34,7 @@ pub fn get_epoch_ending_ledger_info<T: StorageReaderInterface>(
     peer_network_id: &PeerNetworkId,
     storage: T,
     time_service: TimeService,
-) -> libra2_storage_service_types::Result<LedgerInfoWithSignatures, Error> {
+) -> creditchain_storage_service_types::Result<LedgerInfoWithSignatures, Error> {
     // Create a new storage request for the epoch ending ledger info
     let data_request = DataRequest::GetEpochEndingLedgerInfos(EpochEndingLedgerInfoRequest {
         start_epoch: epoch,
@@ -98,7 +98,7 @@ pub fn notify_peer_of_new_data<T: StorageReaderInterface>(
     missing_data_request: StorageServiceRequest,
     target_ledger_info: LedgerInfoWithSignatures,
     response_sender: ResponseSender,
-) -> libra2_storage_service_types::Result<DataResponse, Error> {
+) -> creditchain_storage_service_types::Result<DataResponse, Error> {
     // Handle the storage service request to fetch the missing data
     let use_compression = missing_data_request.use_compression;
     let handler = Handler::new(

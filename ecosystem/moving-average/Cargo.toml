@@ -1,5 +1,5 @@
 [package]
-name = "libra2-moving-average"
+name = "creditchain-moving-average"
 description = "Utility to calculate moving average such as TPS"
 version = "0.1.0"
 

@@ -34,9 +34,9 @@ use crate::{
     util::is_vtxn_expected,
 };
 use anyhow::{bail, ensure, Context};
-use libra2_channels::libra2_channel;
-use libra2_config::config::{BlockTransactionFilterConfig, ConsensusConfig};
-use libra2_consensus_types::{
+use creditchain_channels::creditchain_channel;
+use creditchain_config::config::{BlockTransactionFilterConfig, ConsensusConfig};
+use creditchain_consensus_types::{
     block::Block,
     block_data::BlockType,
     common::{Author, Round},
@@ -56,14 +56,14 @@ use libra2_consensus_types::{
     vote_msg::VoteMsg,
     wrapped_ledger_info::WrappedLedgerInfo,
 };
-use libra2_crypto::{hash::CryptoHash, HashValue};
-use libra2_infallible::{checked, Mutex};
-use libra2_logger::prelude::*;
+use creditchain_crypto::{hash::CryptoHash, HashValue};
+use creditchain_infallible::{checked, Mutex};
+use creditchain_logger::prelude::*;
 #[cfg(test)]
-use libra2_safety_rules::ConsensusState;
-use libra2_safety_rules::TSafetyRules;
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_types::{
+use creditchain_safety_rules::ConsensusState;
+use creditchain_safety_rules::TSafetyRules;
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_types::{
     block_info::BlockInfo,
     epoch_state::EpochState,
     on_chain_config::{
@@ -273,7 +273,7 @@ pub struct RoundManager {
     storage: Arc<dyn PersistentLivenessStorage>,
     onchain_config: OnChainConsensusConfig,
     vtxn_config: ValidatorTxnConfig,
-    buffered_proposal_tx: libra2_channel::Sender<Author, VerifiedEvent>,
+    buffered_proposal_tx: creditchain_channel::Sender<Author, VerifiedEvent>,
     block_txn_filter_config: BlockTransactionFilterConfig,
     local_config: ConsensusConfig,
     randomness_config: OnChainRandomnessConfig,
@@ -290,7 +290,7 @@ pub struct RoundManager {
     >,
     proposal_status_tracker: Arc<dyn TPastProposalStatusTracker>,
     pending_opt_proposals: BTreeMap<Round, OptBlockData>,
-    opt_proposal_loopback_tx: libra2_channels::UnboundedSender<OptBlockData>,
+    opt_proposal_loopback_tx: creditchain_channels::UnboundedSender<OptBlockData>,
 }
 
 impl RoundManager {
@@ -305,14 +305,14 @@ impl RoundManager {
         network: Arc<NetworkSender>,
         storage: Arc<dyn PersistentLivenessStorage>,
         onchain_config: OnChainConsensusConfig,
-        buffered_proposal_tx: libra2_channel::Sender<Author, VerifiedEvent>,
+        buffered_proposal_tx: creditchain_channel::Sender<Author, VerifiedEvent>,
         block_txn_filter_config: BlockTransactionFilterConfig,
         local_config: ConsensusConfig,
         randomness_config: OnChainRandomnessConfig,
         jwk_consensus_config: OnChainJWKConsensusConfig,
         fast_rand_config: Option<RandConfig>,
         proposal_status_tracker: Arc<dyn TPastProposalStatusTracker>,
-        opt_proposal_loopback_tx: libra2_channels::UnboundedSender<OptBlockData>,
+        opt_proposal_loopback_tx: creditchain_channels::UnboundedSender<OptBlockData>,
     ) -> Self {
         // when decoupled execution is false,
         // the counter is still static.
@@ -1277,7 +1277,7 @@ impl RoundManager {
 
     async fn resend_verified_proposal_to_self(
         block_store: Arc<BlockStore>,
-        self_sender: libra2_channel::Sender<Author, VerifiedEvent>,
+        self_sender: creditchain_channel::Sender<Author, VerifiedEvent>,
         proposal: Block,
         author: Author,
         polling_interval_ms: u64,
@@ -1329,7 +1329,7 @@ impl RoundManager {
             .context("[RoundManager] Process proposal")?;
 
         fail_point!("consensus::create_invalid_vote", |_| {
-            use libra2_crypto::bls12381;
+            use creditchain_crypto::bls12381;
             let faulty_vote = Vote::new_with_signature(
                 vote.vote_data().clone(),
                 vote.author(),
@@ -1593,7 +1593,7 @@ impl RoundManager {
         ))?;
 
         fail_point!("consensus::create_invalid_order_vote", |_| {
-            use libra2_crypto::bls12381;
+            use creditchain_crypto::bls12381;
             let faulty_order_vote = OrderVote::new_with_signature(
                 order_vote.author(),
                 order_vote.ledger_info().clone(),
@@ -2009,12 +2009,12 @@ impl RoundManager {
     #[allow(clippy::unwrap_used)]
     pub async fn start(
         mut self,
-        mut event_rx: libra2_channel::Receiver<
+        mut event_rx: creditchain_channel::Receiver<
             (Author, Discriminant<VerifiedEvent>),
             (Author, VerifiedEvent),
         >,
-        mut buffered_proposal_rx: libra2_channel::Receiver<Author, VerifiedEvent>,
-        mut opt_proposal_loopback_rx: libra2_channels::UnboundedReceiver<OptBlockData>,
+        mut buffered_proposal_rx: creditchain_channel::Receiver<Author, VerifiedEvent>,
+        mut opt_proposal_loopback_rx: creditchain_channels::UnboundedReceiver<OptBlockData>,
         close_rx: oneshot::Receiver<oneshot::Sender<()>>,
     ) {
         info!(epoch = self.epoch_state.epoch, "RoundManager started");

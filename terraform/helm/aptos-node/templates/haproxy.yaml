@@ -166,7 +166,7 @@ spec:
         # These ports are exposed by HAProxy. See haproxy.cfg for more details
         # Fullnode ports are dynamically assigned based on the number of fullnode groups
         ports:
-        # Libra2net
+        # CreditChainnet
         - containerPort: 6180 # validator
         - containerPort: 6182 # fullnode
         # Fullnode API

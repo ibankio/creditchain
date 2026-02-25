@@ -9,12 +9,12 @@ use crate::{
     NODE_METRIC_PORT, REST_API_HAPROXY_SERVICE_PORT, REST_API_SERVICE_PORT,
 };
 use anyhow::{anyhow, format_err};
-use libra2_config::config::NodeConfig;
-use libra2_db::common::{LEDGER_DB_NAME, STATE_MERKLE_DB_NAME};
-use libra2_logger::info;
-use libra2_rest_client::Client as RestClient;
-use libra2_sdk::types::PeerId;
-use libra2_state_sync_driver::metadata_storage::STATE_SYNC_DB_NAME;
+use creditchain_config::config::NodeConfig;
+use creditchain_db::common::{LEDGER_DB_NAME, STATE_MERKLE_DB_NAME};
+use creditchain_logger::info;
+use creditchain_rest_client::Client as RestClient;
+use creditchain_sdk::types::PeerId;
+use creditchain_state_sync_driver::metadata_storage::STATE_SYNC_DB_NAME;
 use futures::try_join;
 use k8s_openapi::api::core::v1::Pod;
 use kube::Api;
@@ -29,7 +29,7 @@ use std::{
     time::{Duration, Instant},
 };
 
-const LIBRA2_DATA_DIR: &str = "/opt/libra2/data";
+const CREDITCHAIN_DATA_DIR: &str = "/opt/libra2/data";
 
 pub struct K8sNode {
     pub(crate) name: String,
@@ -210,9 +210,9 @@ impl Node for K8sNode {
 
     async fn clear_storage(&self) -> Result<()> {
         // Remove all storage files
-        let ledger_db_path = format!("{}/db/{}", LIBRA2_DATA_DIR, LEDGER_DB_NAME);
-        let state_db_path = format!("{}/db/{}", LIBRA2_DATA_DIR, STATE_MERKLE_DB_NAME);
-        let state_sync_db_path = format!("{}/db/{}", LIBRA2_DATA_DIR, STATE_SYNC_DB_NAME);
+        let ledger_db_path = format!("{}/db/{}", CREDITCHAIN_DATA_DIR, LEDGER_DB_NAME);
+        let state_db_path = format!("{}/db/{}", CREDITCHAIN_DATA_DIR, STATE_MERKLE_DB_NAME);
+        let state_sync_db_path = format!("{}/db/{}", CREDITCHAIN_DATA_DIR, STATE_SYNC_DB_NAME);
 
         let delete_storage_paths = [
             "-n",

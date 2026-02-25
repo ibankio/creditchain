@@ -1,7 +1,0 @@
-[package]
-name = "TooLargeTest"
-version = "0.0.0"
-
-[dependencies]
-Libra2Framework = { git = "https://github.com/libra2org/libra2-framework.git", subdir = "libra2-framework", rev = "mainnet" }
-MoveStdlib = { git = "https://github.com/libra2org/libra2-framework.git", subdir = "move-stdlib", rev = "mainnet" }

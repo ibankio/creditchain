@@ -1,5 +1,5 @@
 [package]
-name = "libra2-secure-storage"
+name = "creditchain-secure-storage"
 description = "CreditChain's Persistent, Secure Storage"
 version = "0.1.1"
 
@@ -13,12 +13,12 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-crypto = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-vault-client = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-vault-client = { workspace = true }
 base64 = { workspace = true }
 bcs = { workspace = true }
 chrono = { workspace = true }
@@ -29,10 +29,10 @@ serde_json = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-crypto = { workspace = true, features = ["fuzzing"] }
-libra2-crypto-derive = { workspace = true }
+creditchain-crypto = { workspace = true, features = ["fuzzing"] }
+creditchain-crypto-derive = { workspace = true }
 rand = { workspace = true }
 
 [features]
-fuzzing = ["libra2-crypto/fuzzing"]
+fuzzing = ["creditchain-crypto/fuzzing"]
 testing = []

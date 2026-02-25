@@ -15,7 +15,7 @@ use crate::{
     liveness::{
         cached_proposer_election::CachedProposerElection,
         leader_reputation::{
-            extract_epoch_to_proposers, Libra2DBBackend, LeaderReputation,
+            extract_epoch_to_proposers, CreditChainDBBackend, LeaderReputation,
             ProposerAndVoterHeuristic, ReputationHeuristic,
         },
         proposal_generator::{
@@ -56,33 +56,33 @@ use crate::{
     util::time_service::TimeService,
 };
 use anyhow::{anyhow, bail, ensure, Context};
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::config::{
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::config::{
     BatchTransactionFilterConfig, BlockTransactionFilterConfig, ConsensusConfig,
     DagConsensusConfig, NodeConfig,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block_retrieval::BlockRetrievalRequest,
     common::{Author, Round},
     epoch_retrieval::EpochRetrievalRequest,
     proof_of_store::ProofCache,
     utils::PayloadTxnsSize,
 };
-use libra2_crypto::bls12381::PrivateKey;
-use libra2_dkg::{
+use creditchain_crypto::bls12381::PrivateKey;
+use creditchain_dkg::{
     pvss::{traits::Transcript, Player},
     weighted_vuf::traits::WeightedVUF,
 };
-use libra2_event_notifications::ReconfigNotificationListener;
-use libra2_infallible::{duration_since_epoch, Mutex};
-use libra2_logger::prelude::*;
-use libra2_mempool::QuorumStoreRequest;
-use libra2_network::{application::interface::NetworkClient, protocols::network::Event};
-use libra2_safety_rules::{
+use creditchain_event_notifications::ReconfigNotificationListener;
+use creditchain_infallible::{duration_since_epoch, Mutex};
+use creditchain_logger::prelude::*;
+use creditchain_mempool::QuorumStoreRequest;
+use creditchain_network::{application::interface::NetworkClient, protocols::network::Event};
+use creditchain_safety_rules::{
     safety_rules_manager, Error, PersistentSafetyStorage, SafetyRulesManager,
 };
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     dkg::{real_dkg::maybe_dk_from_bls_sk, DKGState, DKGTrait, DefaultDKG},
     epoch_change::EpochChangeProof,
@@ -98,7 +98,7 @@ use libra2_types::{
     validator_signer::ValidatorSigner,
     validator_verifier::ValidatorVerifier,
 };
-use libra2_validator_transaction_pool::VTxnPoolState;
+use creditchain_validator_transaction_pool::VTxnPoolState;
 use fail::fail_point;
 use futures::{
     channel::{mpsc, mpsc::Sender, oneshot},
@@ -136,9 +136,9 @@ pub struct EpochManager<P: OnChainConfigProvider> {
     config: ConsensusConfig,
     randomness_override_seq_num: u64,
     time_service: Arc<dyn TimeService>,
-    self_sender: libra2_channels::UnboundedSender<Event<ConsensusMsg>>,
+    self_sender: creditchain_channels::UnboundedSender<Event<ConsensusMsg>>,
     network_sender: ConsensusNetworkClient<NetworkClient<ConsensusMsg>>,
-    timeout_sender: libra2_channels::Sender<Round>,
+    timeout_sender: creditchain_channels::Sender<Round>,
     quorum_store_enabled: bool,
     quorum_store_to_mempool_sender: Sender<QuorumStoreRequest>,
     execution_client: Arc<dyn TExecutionClient>,
@@ -147,27 +147,27 @@ pub struct EpochManager<P: OnChainConfigProvider> {
     vtxn_pool: VTxnPoolState,
     reconfig_events: ReconfigNotificationListener<P>,
     // channels to rand manager
-    rand_manager_msg_tx: Option<libra2_channel::Sender<AccountAddress, IncomingRandGenRequest>>,
+    rand_manager_msg_tx: Option<creditchain_channel::Sender<AccountAddress, IncomingRandGenRequest>>,
     // channels to round manager
     round_manager_tx: Option<
-        libra2_channel::Sender<(Author, Discriminant<VerifiedEvent>), (Author, VerifiedEvent)>,
+        creditchain_channel::Sender<(Author, Discriminant<VerifiedEvent>), (Author, VerifiedEvent)>,
     >,
-    buffered_proposal_tx: Option<libra2_channel::Sender<Author, VerifiedEvent>>,
+    buffered_proposal_tx: Option<creditchain_channel::Sender<Author, VerifiedEvent>>,
     round_manager_close_tx: Option<oneshot::Sender<oneshot::Sender<()>>>,
     epoch_state: Option<Arc<EpochState>>,
     block_retrieval_tx:
-        Option<libra2_channel::Sender<AccountAddress, IncomingBlockRetrievalRequest>>,
-    quorum_store_msg_tx: Option<libra2_channel::Sender<AccountAddress, (Author, VerifiedEvent)>>,
+        Option<creditchain_channel::Sender<AccountAddress, IncomingBlockRetrievalRequest>>,
+    quorum_store_msg_tx: Option<creditchain_channel::Sender<AccountAddress, (Author, VerifiedEvent)>>,
     quorum_store_coordinator_tx: Option<Sender<CoordinatorCommand>>,
     quorum_store_storage: Arc<dyn QuorumStoreStorage>,
     batch_retrieval_tx:
-        Option<libra2_channel::Sender<AccountAddress, IncomingBatchRetrievalRequest>>,
+        Option<creditchain_channel::Sender<AccountAddress, IncomingBatchRetrievalRequest>>,
     bounded_executor: BoundedExecutor,
     // recovery_mode is set to true when the recovery manager is spawned
     recovery_mode: bool,
 
-    libra2_time_service: libra2_time_service::TimeService,
-    dag_rpc_tx: Option<libra2_channel::Sender<AccountAddress, IncomingDAGRequest>>,
+    creditchain_time_service: creditchain_time_service::TimeService,
+    dag_rpc_tx: Option<creditchain_channel::Sender<AccountAddress, IncomingDAGRequest>>,
     dag_shutdown_tx: Option<oneshot::Sender<oneshot::Sender<()>>>,
     dag_config: DagConsensusConfig,
     payload_manager: Arc<dyn TPayloadManager>,
@@ -186,16 +186,16 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
     pub(crate) fn new(
         node_config: &NodeConfig,
         time_service: Arc<dyn TimeService>,
-        self_sender: libra2_channels::UnboundedSender<Event<ConsensusMsg>>,
+        self_sender: creditchain_channels::UnboundedSender<Event<ConsensusMsg>>,
         network_sender: ConsensusNetworkClient<NetworkClient<ConsensusMsg>>,
-        timeout_sender: libra2_channels::Sender<Round>,
+        timeout_sender: creditchain_channels::Sender<Round>,
         quorum_store_to_mempool_sender: Sender<QuorumStoreRequest>,
         execution_client: Arc<dyn TExecutionClient>,
         storage: Arc<dyn PersistentLivenessStorage>,
         quorum_store_storage: Arc<dyn QuorumStoreStorage>,
         reconfig_events: ReconfigNotificationListener<P>,
         bounded_executor: BoundedExecutor,
-        libra2_time_service: libra2_time_service::TimeService,
+        creditchain_time_service: creditchain_time_service::TimeService,
         vtxn_pool: VTxnPoolState,
         rand_storage: Arc<dyn RandStorage<AugmentedData>>,
         consensus_publisher: Option<Arc<ConsensusPublisher>>,
@@ -240,7 +240,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
             recovery_mode: false,
             dag_rpc_tx: None,
             dag_shutdown_tx: None,
-            libra2_time_service,
+            creditchain_time_service,
             dag_config,
             payload_manager: Arc::new(DirectMempoolPayloadManager::new()),
             rand_storage,
@@ -270,7 +270,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
     fn create_round_state(
         &self,
         time_service: Arc<dyn TimeService>,
-        timeout_sender: libra2_channels::Sender<Round>,
+        timeout_sender: creditchain_channels::Sender<Round>,
     ) -> RoundState {
         let time_interval = Box::new(ExponentialTimeInterval::new(
             Duration::from_millis(self.config.round_initial_timeout_ms),
@@ -336,10 +336,10 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
                     + onchain_config.max_failed_authors_to_store()
                     + PROPOSER_ROUND_BEHIND_STORAGE_BUFFER;
 
-                let backend = Arc::new(Libra2DBBackend::new(
+                let backend = Arc::new(CreditChainDBBackend::new(
                     window_size,
                     seek_len,
-                    self.storage.libra2_db(),
+                    self.storage.creditchain_db(),
                 ));
                 let voting_powers: Vec<_> = if weight_by_voting_power {
                     proposers
@@ -423,7 +423,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         // If we are considering beyond the current epoch, we need to fetch validators for those epochs
         if epoch_state.epoch > first_epoch_to_consider {
             self.storage
-                .libra2_db()
+                .creditchain_db()
                 .get_epoch_ending_ledger_infos(first_epoch_to_consider - 1, epoch_state.epoch)
                 .map_err(Into::into)
                 .and_then(|proof| {
@@ -458,7 +458,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         );
         let proof = self
             .storage
-            .libra2_db()
+            .creditchain_db()
             .get_epoch_ending_ledger_infos(request.start_epoch, request.end_epoch)
             .map_err(DbError::from)
             .context("[EpochManager] Failed to get epoch proof")?;
@@ -571,7 +571,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         block_store: Arc<BlockStore>,
         max_blocks_allowed: u64,
     ) {
-        let (request_tx, mut request_rx) = libra2_channel::new::<_, IncomingBlockRetrievalRequest>(
+        let (request_tx, mut request_rx) = creditchain_channel::new::<_, IncomingBlockRetrievalRequest>(
             QueueStyle::KLAST,
             10,
             Some(&counters::BLOCK_RETRIEVAL_TASK_MSGS),
@@ -683,7 +683,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         epoch_state: Arc<EpochState>,
         network_sender: Arc<NetworkSender>,
     ) {
-        let (recovery_manager_tx, recovery_manager_rx) = libra2_channel::new(
+        let (recovery_manager_tx, recovery_manager_rx) = creditchain_channel::new(
             QueueStyle::KLAST,
             10,
             Some(&counters::ROUND_MANAGER_CHANNEL_MSGS),
@@ -739,7 +739,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
                 consensus_to_quorum_store_rx,
                 self.quorum_store_to_mempool_sender.clone(),
                 self.config.mempool_txn_pull_timeout_ms,
-                self.storage.libra2_db().clone(),
+                self.storage.creditchain_db().clone(),
                 network_sender,
                 epoch_state.verifier.clone(),
                 self.proof_cache.clone(),
@@ -805,7 +805,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         payload_manager: Arc<dyn TPayloadManager>,
         rand_config: Option<RandConfig>,
         fast_rand_config: Option<RandConfig>,
-        rand_msg_rx: libra2_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
+        rand_msg_rx: creditchain_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
     ) {
         let epoch = epoch_state.epoch;
         info!(
@@ -938,20 +938,20 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
                 .allow_batches_without_pos_in_proposal,
             opt_qs_payload_param_provider,
         );
-        let (round_manager_tx, round_manager_rx) = libra2_channel::new(
+        let (round_manager_tx, round_manager_rx) = creditchain_channel::new(
             QueueStyle::KLAST,
             10,
             Some(&counters::ROUND_MANAGER_CHANNEL_MSGS),
         );
 
-        let (buffered_proposal_tx, buffered_proposal_rx) = libra2_channel::new(
+        let (buffered_proposal_tx, buffered_proposal_rx) = creditchain_channel::new(
             QueueStyle::KLAST,
             10,
             Some(&counters::ROUND_MANAGER_CHANNEL_MSGS),
         );
 
         let (opt_proposal_loopback_tx, opt_proposal_loopback_rx) =
-            libra2_channels::new_unbounded(&counters::OP_COUNTERS.gauge("opt_proposal_queue"));
+            creditchain_channels::new_unbounded(&counters::OP_COUNTERS.gauge("opt_proposal_queue"));
 
         self.round_manager_tx = Some(round_manager_tx.clone());
         self.buffered_proposal_tx = Some(buffered_proposal_tx.clone());
@@ -1264,7 +1264,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
             )
             .await;
 
-        let (rand_msg_tx, rand_msg_rx) = libra2_channel::new::<AccountAddress, IncomingRandGenRequest>(
+        let (rand_msg_tx, rand_msg_rx) = creditchain_channel::new::<AccountAddress, IncomingRandGenRequest>(
             QueueStyle::KLAST,
             10,
             None,
@@ -1356,7 +1356,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         payload_manager: Arc<dyn TPayloadManager>,
         rand_config: Option<RandConfig>,
         fast_rand_config: Option<RandConfig>,
-        rand_msg_rx: libra2_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
+        rand_msg_rx: creditchain_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
     ) {
         match self.storage.start(
             consensus_config.order_vote_enabled(),
@@ -1407,7 +1407,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         payload_manager: Arc<dyn TPayloadManager>,
         rand_config: Option<RandConfig>,
         fast_rand_config: Option<RandConfig>,
-        rand_msg_rx: libra2_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
+        rand_msg_rx: creditchain_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
     ) {
         let epoch = epoch_state.epoch;
         let signer = Arc::new(ValidatorSigner::new(
@@ -1422,7 +1422,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         );
         let highest_committed_round = self
             .storage
-            .libra2_db()
+            .creditchain_db()
             .get_latest_ledger_info()
             .expect("unable to get latest ledger info")
             .commit_info()
@@ -1455,7 +1455,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
             epoch,
             epoch_to_validators,
             self.storage.consensus_db(),
-            self.storage.libra2_db(),
+            self.storage.creditchain_db(),
         ));
 
         let network_sender_arc = Arc::new(network_sender);
@@ -1470,7 +1470,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
             network_sender_arc.clone(),
             network_sender_arc.clone(),
             network_sender_arc,
-            self.libra2_time_service.clone(),
+            self.creditchain_time_service.clone(),
             payload_manager,
             payload_client,
             self.execution_client
@@ -1487,7 +1487,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
                 .allow_batches_without_pos_in_proposal,
         );
 
-        let (dag_rpc_tx, dag_rpc_rx) = libra2_channel::new(QueueStyle::FIFO, 10, None);
+        let (dag_rpc_tx, dag_rpc_rx) = creditchain_channel::new(QueueStyle::FIFO, 10, None);
         self.dag_rpc_tx = Some(dag_rpc_tx);
         let (dag_shutdown_tx, dag_shutdown_rx) = oneshot::channel();
         self.dag_shutdown_tx = Some(dag_shutdown_tx);
@@ -1691,7 +1691,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
     }
 
     fn forward_event_to<K: Eq + Hash + Clone, V>(
-        mut maybe_tx: Option<libra2_channel::Sender<K, V>>,
+        mut maybe_tx: Option<creditchain_channel::Sender<K, V>>,
         key: K,
         value: V,
     ) -> anyhow::Result<()> {
@@ -1703,11 +1703,11 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
     }
 
     fn forward_event(
-        quorum_store_msg_tx: Option<libra2_channel::Sender<AccountAddress, (Author, VerifiedEvent)>>,
+        quorum_store_msg_tx: Option<creditchain_channel::Sender<AccountAddress, (Author, VerifiedEvent)>>,
         round_manager_tx: Option<
-            libra2_channel::Sender<(Author, Discriminant<VerifiedEvent>), (Author, VerifiedEvent)>,
+            creditchain_channel::Sender<(Author, Discriminant<VerifiedEvent>), (Author, VerifiedEvent)>,
         >,
-        buffered_proposal_tx: Option<libra2_channel::Sender<Author, VerifiedEvent>>,
+        buffered_proposal_tx: Option<creditchain_channel::Sender<Author, VerifiedEvent>>,
         peer_id: AccountAddress,
         event: VerifiedEvent,
         payload_manager: Arc<dyn TPayloadManager>,
@@ -1887,7 +1887,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
 
     pub async fn start(
         mut self,
-        mut round_timeout_sender_rx: libra2_channels::Receiver<Round>,
+        mut round_timeout_sender_rx: creditchain_channels::Receiver<Round>,
         mut network_receivers: NetworkReceivers,
     ) {
         // initial start of the processor

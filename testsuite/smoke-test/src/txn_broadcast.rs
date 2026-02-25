@@ -8,8 +8,8 @@ use crate::{
         MAX_CONNECTIVITY_WAIT_SECS, MAX_HEALTHY_WAIT_SECS,
     },
 };
-use libra2_config::config::{NodeConfig, OverrideNodeConfig};
-use libra2_forge::{NodeExt, Swarm, SwarmExt};
+use creditchain_config::config::{NodeConfig, OverrideNodeConfig};
+use creditchain_forge::{NodeExt, Swarm, SwarmExt};
 use std::{
     sync::Arc,
     time::{Duration, Instant},

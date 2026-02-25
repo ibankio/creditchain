@@ -6,9 +6,9 @@ use crate::{
     smoke_test_environment::SwarmBuilder,
     utils::{get_current_consensus_config, get_on_chain_resource},
 };
-use libra2_forge::{Node, Swarm, SwarmExt};
-use libra2_logger::{debug, info};
-use libra2_types::{dkg::DKGState, on_chain_config::OnChainRandomnessConfig};
+use creditchain_forge::{Node, Swarm, SwarmExt};
+use creditchain_logger::{debug, info};
+use creditchain_types::{dkg::DKGState, on_chain_config::OnChainRandomnessConfig};
 use std::{sync::Arc, time::Duration};
 
 /// Enable on-chain randomness by enabling validator transactions and randomness main logic.
@@ -37,7 +37,7 @@ async fn enable_feature_2() {
     let decrypt_key_map = decrypt_key_map(&swarm);
 
     let client_endpoint = swarm.validators().nth(1).unwrap().rest_api_endpoint();
-    let client = libra2_rest_client::Client::new(client_endpoint.clone());
+    let client = creditchain_rest_client::Client::new(client_endpoint.clone());
 
     swarm
         .wait_for_all_nodes_to_catchup_to_epoch(3, Duration::from_secs(epoch_duration_secs * 2))
@@ -51,13 +51,13 @@ async fn enable_feature_2() {
     let script = format!(
         r#"
 script {{
-    use libra2_framework::libra2_governance;
-    use libra2_framework::consensus_config;
-    use libra2_framework::randomness_config;
-    use libra2_std::fixed_point64;
+    use creditchain_framework::creditchain_governance;
+    use creditchain_framework::consensus_config;
+    use creditchain_framework::randomness_config;
+    use creditchain_std::fixed_point64;
 
     fun main(core_resources: &signer) {{
-        let framework_signer = libra2_governance::get_signer_testnet_only(core_resources, @0x1);
+        let framework_signer = creditchain_governance::get_signer_testnet_only(core_resources, @0x1);
         let consensus_config_bytes = vector{:?};
         consensus_config::set_for_next_epoch(&framework_signer, consensus_config_bytes);
         let randomness_config = randomness_config::new_v1(
@@ -65,7 +65,7 @@ script {{
             fixed_point64::create_from_rational(2, 3)
         );
         randomness_config::set_for_next_epoch(&framework_signer, randomness_config);
-        libra2_governance::reconfigure(&framework_signer);
+        creditchain_governance::reconfigure(&framework_signer);
     }}
 }}
 "#,

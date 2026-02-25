@@ -1,0 +1,38 @@
+[package]
+name = "creditchain-move-debugger"
+version = "0.1.1"
+description = "A tool to replay transactions on chain and to execute transactions locally."
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+anyhow = { workspace = true }
+creditchain-block-executor = { workspace = true }
+creditchain-consensus = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-gas-profiling = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-validator-interface = { workspace = true }
+creditchain-vm = { workspace = true }
+creditchain-vm-environment = { workspace = true }
+creditchain-vm-logging = { workspace = true }
+creditchain-vm-types = { workspace = true }
+bcs = { workspace = true }
+clap = { workspace = true }
+itertools = { workspace = true }
+regex = { workspace = true }
+reqwest = { workspace = true }
+tokio = { workspace = true }
+url = { workspace = true }
+
+[[bin]]
+name = "remote-gas-profiler"

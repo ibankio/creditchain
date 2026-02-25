@@ -12,8 +12,8 @@ Ensure you `cd` to the repo root.
 
 Run the necessary benches.
 ```
-cargo bench -p libra2-crypto -- hash/SHA2-256
-cargo bench -p libra2-crypto -- ark_bls12_381
+cargo bench -p creditchain-crypto -- hash/SHA2-256
+cargo bench -p creditchain-crypto -- ark_bls12_381
 ```
 
 Compute `gas_per_ns` using `hash/SHA2-256` bench results.
@@ -28,7 +28,7 @@ Value `k` and `b` should be printed.
 {"b": 336.51096106242346, "k": 4.868293006038344}
 ```
 
-Combined with the [pre-defined](https://github.com/ibankio/creditchain/blob/2d6ed231ca39fc07422dfe95aa76746b2210e36d/libra2-move/libra2-gas-schedule/src/gas_schedule/move_stdlib.rs#L23-L24) SHA2-256 gas formula (unscaled internal gas):`g(n)=183n+11028`,
+Combined with the [pre-defined](https://github.com/ibankio/creditchain/blob/2d6ed231ca39fc07422dfe95aa76746b2210e36d/creditchain-move/creditchain-gas-schedule/src/gas_schedule/move_stdlib.rs#L23-L24) SHA2-256 gas formula (unscaled internal gas):`g(n)=183n+11028`,
 it can be calculated that `gas_per_ns = 183/k`.
 
 Second last, go to `scripts/algebra-gas/update_algebra_gas_params.py`

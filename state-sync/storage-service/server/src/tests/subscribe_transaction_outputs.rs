@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::tests::{mock, mock::MockClient, utils};
-use libra2_config::{
+use creditchain_config::{
     config::StorageServiceConfig,
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_types::{epoch_change::EpochChangeProof, PeerId};
+use creditchain_types::{epoch_change::EpochChangeProof, PeerId};
 use claims::assert_none;
 
 #[tokio::test(flavor = "multi_thread")]

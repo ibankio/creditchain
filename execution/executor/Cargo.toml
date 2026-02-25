@@ -1,5 +1,5 @@
 [package]
-name = "libra2-executor"
+name = "creditchain-executor"
 description = "CreditChain executor"
 version = "0.1.1"
 
@@ -14,21 +14,21 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-block-executor = { workspace = true }
-libra2-consensus-types = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-drop-helper = { workspace = true }
-libra2-executor-service = { workspace = true }
-libra2-executor-types = { workspace = true }
-libra2-experimental-runtimes = { workspace = true }
-libra2-indexer-grpc-table-info = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
+creditchain-block-executor = { workspace = true }
+creditchain-consensus-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-drop-helper = { workspace = true }
+creditchain-executor-service = { workspace = true }
+creditchain-executor-types = { workspace = true }
+creditchain-experimental-runtimes = { workspace = true }
+creditchain-indexer-grpc-table-info = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
 fail = { workspace = true }
@@ -39,16 +39,16 @@ rayon = { workspace = true }
 serde = { workspace = true }
 
 [dev-dependencies]
-libra2-cached-packages = { workspace = true }
-libra2-config = { workspace = true }
-libra2-db = { workspace = true }
-libra2-db-indexer = { workspace = true, features = ["fuzzing"] }
-libra2-executor-test-helpers = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-transaction-simulation = { workspace = true }
-libra2-types = { workspace = true, features = ["testing"] }
-libra2-vm-genesis = { workspace = true }
+creditchain-cached-packages = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-db-indexer = { workspace = true, features = ["fuzzing"] }
+creditchain-executor-test-helpers = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-transaction-simulation = { workspace = true }
+creditchain-types = { workspace = true, features = ["testing"] }
+creditchain-vm-genesis = { workspace = true }
 arr_macro = { workspace = true }
 criterion = { workspace = true }
 proptest = { workspace = true }
@@ -56,8 +56,8 @@ rand = { workspace = true }
 
 [features]
 default = []
-fuzzing = ["libra2-consensus-types/fuzzing", "libra2-crypto/fuzzing", "libra2-types/fuzzing", "libra2-storage-interface/fuzzing"]
-failpoints = ["fail/failpoints", "libra2-vm/failpoints"]
+fuzzing = ["creditchain-consensus-types/fuzzing", "creditchain-crypto/fuzzing", "creditchain-types/fuzzing", "creditchain-storage-interface/fuzzing"]
+failpoints = ["fail/failpoints", "creditchain-vm/failpoints"]
 consensus-only-perf-test = []
 
 [[bench]]

@@ -8,7 +8,7 @@ use crate::processors::default::models::move_resources::MoveResource;
 use anyhow::Context;
 use libra2_indexer_processor_sdk::{
     libra2_indexer_transaction_stream::utils::time::parse_timestamp_secs,
-   libra2_protos::transaction::v1::{Event, WriteResource},
+   creditchain_protos::transaction::v1::{Event, WriteResource},
     utils::convert::{
         bigdecimal_to_u64, deserialize_from_string, standardize_address, truncate_str,
     },

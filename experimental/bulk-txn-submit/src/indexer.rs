@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Result;
-use libra2_logger::warn;
-use libra2_sdk::types::chain_id::ChainId;
+use creditchain_logger::warn;
+use creditchain_sdk::types::chain_id::ChainId;
 use chrono::{DateTime, NaiveDateTime, TimeZone, Utc};
 use serde::{Deserialize, Serialize};
 use std::sync::{atomic::AtomicI64, Arc};
@@ -23,11 +23,11 @@ struct ProcessorStatus {
 
 fn indexer_status_url(chain_id: ChainId) -> &'static str {
     if chain_id.is_mainnet() {
-        "https://indexer.mainnet.libra2.org/api/rest/get_latest_processor_status"
+        "https://indexer.mainnet.creditchain.io/api/rest/get_latest_processor_status"
     } else if chain_id.is_testnet() {
-        "https://indexer-testnet.staging.gcp.libra2.org/api/rest/get_latest_processor_status"
+        "https://indexer-testnet.staging.gcp.creditchain.io/api/rest/get_latest_processor_status"
     } else {
-        "https://indexer-devnet.staging.gcp.libra2.org/api/rest/get_latest_processor_status"
+        "https://indexer-devnet.staging.gcp.creditchain.io/api/rest/get_latest_processor_status"
     }
 }
 

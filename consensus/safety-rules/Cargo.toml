@@ -1,5 +1,5 @@
 [package]
-name = "libra2-safety-rules"
+name = "creditchain-safety-rules"
 description = "CreditChain safety rules"
 version = "0.1.0"
 
@@ -13,17 +13,17 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-config = { workspace = true }
-libra2-consensus-types = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-secure-net = { workspace = true }
-libra2-secure-storage = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vault-client = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-consensus-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-secure-net = { workspace = true }
+creditchain-secure-storage = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vault-client = { workspace = true }
 hex = { workspace = true }
 once_cell = { workspace = true }
 proptest = { workspace = true, optional = true }
@@ -33,10 +33,10 @@ serde_json = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-config = { workspace = true, features = ["fuzzing"] }
-libra2-consensus-types = { workspace = true, features = ["fuzzing"] }
-libra2-proptest-helpers = { workspace = true }
-libra2-secure-storage = { workspace = true, features = ["testing"] }
+creditchain-config = { workspace = true, features = ["fuzzing"] }
+creditchain-consensus-types = { workspace = true, features = ["fuzzing"] }
+creditchain-proptest-helpers = { workspace = true }
+creditchain-secure-storage = { workspace = true, features = ["testing"] }
 claims = { workspace = true }
 criterion = { workspace = true }
 proptest = { workspace = true }
@@ -50,5 +50,5 @@ required-features = ["testing"]
 
 [features]
 default = []
-fuzzing = ["libra2-consensus-types/fuzzing", "libra2-config/fuzzing", "proptest"]
-testing = ["libra2-secure-storage/testing"]
+fuzzing = ["creditchain-consensus-types/fuzzing", "creditchain-config/fuzzing", "proptest"]
+testing = ["creditchain-secure-storage/testing"]

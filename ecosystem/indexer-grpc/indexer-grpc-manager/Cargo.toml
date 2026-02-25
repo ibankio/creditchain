@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-grpc-manager"
+name = "creditchain-indexer-grpc-manager"
 description = "CreditChain Indexer gRPC Manager"
 version = "1.0.1"
 
@@ -14,10 +14,10 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-indexer-grpc-server-framework = { workspace = true }
-libra2-indexer-grpc-utils = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-protos = { workspace = true }
+creditchain-indexer-grpc-server-framework = { workspace = true }
+creditchain-indexer-grpc-utils = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-protos = { workspace = true }
 async-trait = { workspace = true }
 build_html = { workspace = true }
 clap = { workspace = true }
@@ -35,7 +35,7 @@ tracing = { workspace = true }
 warp = { workspace = true }
 
 [dev-dependencies]
-libra2-config = { workspace = true }
+creditchain-config = { workspace = true }
 serde_json = { workspace = true }
 
 [target.'cfg(unix)'.dependencies]

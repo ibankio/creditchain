@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{anyhow, ensure, Result};
-use libra2_infallible::RwLock;
-use libra2_logger::{debug, info, warn};
+use creditchain_infallible::RwLock;
+use creditchain_logger::{debug, info, warn};
 use serde::de::DeserializeOwned;
 use std::{sync::Arc, time::Duration};
 

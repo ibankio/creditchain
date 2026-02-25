@@ -5,7 +5,7 @@ use crate::{
     create_buffered_load, LoadDestination, NetworkLoadTest, COOLDOWN_DURATION_FRACTION,
     WARMUP_DURATION_FRACTION,
 };
-use libra2_forge::{
+use creditchain_forge::{
     success_criteria::{SuccessCriteria, SuccessCriteriaChecker},
     EmitJobRequest, NetworkContextSynchronizer, NetworkTest, Result, Swarm, Test, TestReport,
 };

@@ -14,18 +14,18 @@ use crate::{
     test_utils::mock_storage::MockStorage,
 };
 use anyhow::{anyhow, format_err, Result};
-use libra2_channels::libra2_channel;
-use libra2_consensus_types::{
+use creditchain_channels::creditchain_channel;
+use creditchain_consensus_types::{
     common::{Payload, Round},
     pipelined_block::PipelinedBlock,
     vote_data::VoteData,
     wrapped_ledger_info::WrappedLedgerInfo,
 };
-use libra2_crypto::{bls12381::PrivateKey, HashValue};
-use libra2_executor_types::ExecutorResult;
-use libra2_infallible::Mutex;
-use libra2_logger::prelude::*;
-use libra2_types::{
+use creditchain_crypto::{bls12381::PrivateKey, HashValue};
+use creditchain_executor_types::ExecutorResult;
+use creditchain_infallible::Mutex;
+use creditchain_logger::prelude::*;
+use creditchain_types::{
     epoch_state::EpochState,
     ledger_info::LedgerInfoWithSignatures,
     on_chain_config::{OnChainConsensusConfig, OnChainExecutionConfig, OnChainRandomnessConfig},
@@ -120,7 +120,7 @@ impl TExecutionClient for MockExecutionClient {
         _onchain_randomness_config: &OnChainRandomnessConfig,
         _rand_config: Option<RandConfig>,
         _fast_rand_config: Option<RandConfig>,
-        _rand_msg_rx: libra2_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
+        _rand_msg_rx: creditchain_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
         _highest_committed_round: Round,
     ) {
     }

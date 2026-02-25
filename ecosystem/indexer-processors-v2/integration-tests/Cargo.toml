@@ -16,7 +16,7 @@ rust-version = { workspace = true }
 ahash = { workspace = true }
 anyhow = { workspace = true }
 libra2-indexer-processor-sdk = { workspace = true }
-libra2-indexer-test-transactions = { workspace = true }
+creditchain-indexer-test-transactions = { workspace = true }
 assert-json-diff = { workspace = true }
 bigdecimal = { workspace = true }
 chrono = { workspace = true }

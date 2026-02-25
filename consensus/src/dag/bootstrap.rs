@@ -35,17 +35,17 @@ use crate::{
     payload_manager::TPayloadManager,
     pipeline::{buffer_manager::OrderedBlocks, execution_client::TExecutionClient},
 };
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_channels::{
-    libra2_channel::{self, Receiver},
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_channels::{
+    creditchain_channel::{self, Receiver},
     message_queues::QueueStyle,
 };
-use libra2_config::config::DagConsensusConfig;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_infallible::{Mutex, RwLock};
-use libra2_logger::{debug, info};
-use libra2_reliable_broadcast::{RBNetworkSender, ReliableBroadcast};
-use libra2_types::{
+use creditchain_config::config::DagConsensusConfig;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_infallible::{Mutex, RwLock};
+use creditchain_logger::{debug, info};
+use creditchain_reliable_broadcast::{RBNetworkSender, ReliableBroadcast};
+use creditchain_types::{
     epoch_state::EpochState,
     on_chain_config::{
         AnchorElectionMode, DagConsensusConfigV1,
@@ -329,7 +329,7 @@ pub struct DagBootstrapper {
     rb_network_sender: Arc<dyn RBNetworkSender<DAGMessage, DAGRpcResult>>,
     dag_network_sender: Arc<dyn TDAGNetworkSender>,
     proof_notifier: Arc<dyn ProofNotifier>,
-    time_service: libra2_time_service::TimeService,
+    time_service: creditchain_time_service::TimeService,
     payload_manager: Arc<dyn TPayloadManager>,
     payload_client: Arc<dyn PayloadClient>,
     ordered_nodes_tx: UnboundedSender<OrderedBlocks>,
@@ -354,7 +354,7 @@ impl DagBootstrapper {
         rb_network_sender: Arc<dyn RBNetworkSender<DAGMessage, DAGRpcResult>>,
         dag_network_sender: Arc<dyn TDAGNetworkSender>,
         proof_notifier: Arc<dyn ProofNotifier>,
-        time_service: libra2_time_service::TimeService,
+        time_service: creditchain_time_service::TimeService,
         payload_manager: Arc<dyn TPayloadManager>,
         payload_client: Arc<dyn PayloadClient>,
         ordered_nodes_tx: UnboundedSender<OrderedBlocks>,
@@ -737,14 +737,14 @@ pub(super) fn bootstrap_dag_for_test(
     rb_network_sender: Arc<dyn RBNetworkSender<DAGMessage, DAGRpcResult>>,
     dag_network_sender: Arc<dyn TDAGNetworkSender>,
     proof_notifier: Arc<dyn ProofNotifier>,
-    time_service: libra2_time_service::TimeService,
+    time_service: creditchain_time_service::TimeService,
     payload_manager: Arc<dyn TPayloadManager>,
     payload_client: Arc<dyn PayloadClient>,
     execution_client: Arc<dyn TExecutionClient>,
 ) -> (
     JoinHandle<SyncOutcome>,
     JoinHandle<()>,
-    libra2_channel::Sender<Author, IncomingDAGRequest>,
+    creditchain_channel::Sender<Author, IncomingDAGRequest>,
     UnboundedReceiver<OrderedBlocks>,
 ) {
     let (ordered_nodes_tx, ordered_nodes_rx) = futures_channel::mpsc::unbounded();
@@ -773,7 +773,7 @@ pub(super) fn bootstrap_dag_for_test(
 
     let (_base_state, handler, fetch_service) = bootstraper.full_bootstrap();
 
-    let (dag_rpc_tx, dag_rpc_rx) = libra2_channel::new(QueueStyle::FIFO, 64, None);
+    let (dag_rpc_tx, dag_rpc_rx) = creditchain_channel::new(QueueStyle::FIFO, 64, None);
 
     let dh_handle = tokio::spawn(async move {
         let mut dag_rpc_rx = dag_rpc_rx;

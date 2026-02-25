@@ -9,7 +9,7 @@ use move_vm_types::{
 };
 
 /// Additional data stored alongside deserialized or verified modules.
-pub struct Libra2ModuleExtension {
+pub struct CreditChainModuleExtension {
     /// Serialized representation of the module.
     bytes: Bytes,
     /// Module's hash.
@@ -19,7 +19,7 @@ pub struct Libra2ModuleExtension {
     state_value_metadata: StateValueMetadata,
 }
 
-impl Libra2ModuleExtension {
+impl CreditChainModuleExtension {
     /// Creates new extension based on [StateValue].
     pub fn new(state_value: StateValue) -> Self {
         let (state_value_metadata, bytes) = state_value.unpack();
@@ -37,13 +37,13 @@ impl Libra2ModuleExtension {
     }
 }
 
-impl WithBytes for Libra2ModuleExtension {
+impl WithBytes for CreditChainModuleExtension {
     fn bytes(&self) -> &Bytes {
         &self.bytes
     }
 }
 
-impl WithHash for Libra2ModuleExtension {
+impl WithHash for CreditChainModuleExtension {
     fn hash(&self) -> &[u8; 32] {
         &self.hash
     }

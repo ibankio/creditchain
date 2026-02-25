@@ -6,14 +6,14 @@ use crate::tests::{
     mock::{MockClient, MockDatabaseReader},
     utils,
 };
-use libra2_config::config::StorageServiceConfig;
-use libra2_crypto::hash::HashValue;
-use libra2_storage_service_types::{
+use creditchain_config::config::StorageServiceConfig;
+use creditchain_crypto::hash::HashValue;
+use creditchain_storage_service_types::{
     requests::{DataRequest, StateValuesWithProofRequest},
     responses::{DataResponse, StorageServiceResponse},
     StorageServiceError,
 };
-use libra2_types::{
+use creditchain_types::{
     proof::definition::SparseMerkleRangeProof,
     state_store::{
         state_key::StateKey,

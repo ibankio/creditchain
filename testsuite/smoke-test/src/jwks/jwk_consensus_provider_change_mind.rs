@@ -11,9 +11,9 @@ use crate::{
     },
     smoke_test_environment::SwarmBuilder,
 };
-use libra2_forge::{NodeExt, Swarm, SwarmExt};
-use libra2_logger::{debug, info};
-use libra2_types::{
+use creditchain_forge::{NodeExt, Swarm, SwarmExt};
+use creditchain_logger::{debug, info};
+use creditchain_types::{
     jwks::{
         jwk::JWK, secure_test_rsa_jwk, unsupported::UnsupportedJWK, AllProvidersJWKs, ProviderJWKs,
     },

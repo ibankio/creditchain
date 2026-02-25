@@ -6,10 +6,10 @@
 //! This module is to contain all networking logging information.
 //!
 //! ```
-//! use libra2_config::network_id::NetworkContext;
-//! use libra2_logger::info;
-//! use libra2_types::{PeerId, network_address::NetworkAddress};
-//! use libra2_network::logging::NetworkSchema;
+//! use creditchain_config::network_id::NetworkContext;
+//! use creditchain_logger::info;
+//! use creditchain_types::{PeerId, network_address::NetworkAddress};
+//! use creditchain_network::logging::NetworkSchema;
 //!
 //! info!(
 //!   NetworkSchema::new(&NetworkContext::mock())
@@ -25,10 +25,10 @@ use crate::{
     connectivity_manager::DiscoverySource,
     transport::{ConnectionId, ConnectionMetadata},
 };
-use libra2_config::network_id::NetworkContext;
-use libra2_logger::Schema;
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_config::network_id::NetworkContext;
+use creditchain_logger::Schema;
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 
 #[derive(Schema)]
 pub struct NetworkSchema<'a> {

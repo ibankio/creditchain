@@ -1,6 +1,6 @@
 module poc::hash_to_internal {
-    use libra2_std::crypto_algebra::{Self};
-    use libra2_std::bls12381_algebra::{G1, HashG1XmdSha256SswuRo};
+    use creditchain_std::crypto_algebra::{Self};
+    use creditchain_std::bls12381_algebra::{G1, HashG1XmdSha256SswuRo};
 
     public entry fun main(_owner: &signer) {
         let msg1 = b"hello";

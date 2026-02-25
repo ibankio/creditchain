@@ -1,5 +1,5 @@
 [package]
-name = "libra2-keyless-pepper-example-client-rust"
+name = "creditchain-keyless-pepper-example-client-rust"
 description = "CreditChain Keyless pepper service"
 version = "0.1.1"
 
@@ -13,10 +13,10 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-crypto = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-keyless-pepper-common = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-keyless-pepper-common = { workspace = true }
+creditchain-types = { workspace = true }
 ark-bls12-381 = { workspace = true }
 ark-serialize = { workspace = true }
 bcs = { workspace = true }

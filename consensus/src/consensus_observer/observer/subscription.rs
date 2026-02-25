@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::consensus_observer::{common::error::Error, observer::subscription_utils};
-use libra2_config::{config::ConsensusObserverConfig, network_id::PeerNetworkId};
-use libra2_network::application::metadata::PeerMetadata;
-use libra2_storage_interface::DbReader;
-use libra2_time_service::{TimeService, TimeServiceTrait};
+use creditchain_config::{config::ConsensusObserverConfig, network_id::PeerNetworkId};
+use creditchain_network::application::metadata::PeerMetadata;
+use creditchain_storage_interface::DbReader;
+use creditchain_time_service::{TimeService, TimeServiceTrait};
 use std::{
     collections::{HashMap, HashSet},
     sync::Arc,
@@ -235,16 +235,16 @@ impl ConsensusObserverSubscription {
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_config::config::PeerRole;
-    use libra2_netcore::transport::ConnectionOrigin;
-    use libra2_network::{
+    use creditchain_config::config::PeerRole;
+    use creditchain_netcore::transport::ConnectionOrigin;
+    use creditchain_network::{
         protocols::wire::handshake::v1::{MessagingProtocolVersion, ProtocolIdSet},
         transport::{ConnectionId, ConnectionMetadata},
         ProtocolId,
     };
-    use libra2_peer_monitoring_service_types::PeerMonitoringMetadata;
-    use libra2_storage_interface::Result;
-    use libra2_types::{network_address::NetworkAddress, transaction::Version};
+    use creditchain_peer_monitoring_service_types::PeerMonitoringMetadata;
+    use creditchain_storage_interface::Result;
+    use creditchain_types::{network_address::NetworkAddress, transaction::Version};
     use claims::assert_matches;
     use mockall::mock;
 

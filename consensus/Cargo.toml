@@ -1,5 +1,5 @@
 [package]
-name = "libra2-consensus"
+name = "creditchain-consensus"
 description = "CreditChain consensus"
 version = "0.1.1"
 
@@ -14,41 +14,41 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-bitvec = { workspace = true }
-libra2-bounded-executor = { workspace = true }
-libra2-channels = { workspace = true }
-libra2-collections = { workspace = true }
-libra2-config = { workspace = true }
-libra2-consensus-notifications = { workspace = true }
-libra2-consensus-types = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-crypto-derive = { workspace = true }
-libra2-dkg = { workspace = true }
-libra2-enum-conversion-derive = { workspace = true }
-libra2-event-notifications = { workspace = true }
-libra2-executor = { workspace = true }
-libra2-executor-types = { workspace = true }
-libra2-experimental-runtimes = { workspace = true }
-libra2-fallible = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-mempool = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-network = { workspace = true }
-libra2-peer-monitoring-service-types = { workspace = true }
-libra2-reliable-broadcast = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-safety-rules = { workspace = true }
-libra2-schemadb = { workspace = true }
-libra2-secure-storage = { workspace = true }
-libra2-short-hex-str = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-transaction-filters = { workspace = true }
-libra2-types = { workspace = true }
-libra2-validator-transaction-pool = { workspace = true }
-libra2-vm = { workspace = true }
+creditchain-bitvec = { workspace = true }
+creditchain-bounded-executor = { workspace = true }
+creditchain-channels = { workspace = true }
+creditchain-collections = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-consensus-notifications = { workspace = true }
+creditchain-consensus-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-crypto-derive = { workspace = true }
+creditchain-dkg = { workspace = true }
+creditchain-enum-conversion-derive = { workspace = true }
+creditchain-event-notifications = { workspace = true }
+creditchain-executor = { workspace = true }
+creditchain-executor-types = { workspace = true }
+creditchain-experimental-runtimes = { workspace = true }
+creditchain-fallible = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-mempool = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-peer-monitoring-service-types = { workspace = true }
+creditchain-reliable-broadcast = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-safety-rules = { workspace = true }
+creditchain-schemadb = { workspace = true }
+creditchain-secure-storage = { workspace = true }
+creditchain-short-hex-str = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-transaction-filters = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-validator-transaction-pool = { workspace = true }
+creditchain-vm = { workspace = true }
 async-trait = { workspace = true }
 bcs = { workspace = true }
 byteorder = { workspace = true }
@@ -87,19 +87,19 @@ tokio-retry = { workspace = true }
 tokio-stream = { workspace = true }
 
 [dev-dependencies]
-libra2-cached-packages = { workspace = true }
-libra2-config = { workspace = true, features = ["fuzzing"] }
-libra2-consensus-types = { workspace = true, features = ["fuzzing"] }
-libra2-executor-test-helpers = { workspace = true }
-libra2-keygen = { workspace = true }
-libra2-mempool = { workspace = true, features = ["fuzzing"] }
-libra2-netcore = { workspace = true }
-libra2-network = { workspace = true, features = ["fuzzing"] }
-libra2-safety-rules = { workspace = true, features = ["testing"] }
-libra2-transaction-filters = { workspace = true, features = ["fuzzing"] }
-libra2-types = { workspace = true, features = ["testing"] }
-libra2-vm = { workspace = true, features = ["fuzzing"] }
-libra2-vm-validator = { workspace = true }
+creditchain-cached-packages = { workspace = true }
+creditchain-config = { workspace = true, features = ["fuzzing"] }
+creditchain-consensus-types = { workspace = true, features = ["fuzzing"] }
+creditchain-executor-test-helpers = { workspace = true }
+creditchain-keygen = { workspace = true }
+creditchain-mempool = { workspace = true, features = ["fuzzing"] }
+creditchain-netcore = { workspace = true }
+creditchain-network = { workspace = true, features = ["fuzzing"] }
+creditchain-safety-rules = { workspace = true, features = ["testing"] }
+creditchain-transaction-filters = { workspace = true, features = ["fuzzing"] }
+creditchain-types = { workspace = true, features = ["testing"] }
+creditchain-vm = { workspace = true, features = ["fuzzing"] }
+creditchain-vm-validator = { workspace = true }
 claims = { workspace = true }
 mockall = { workspace = true }
 move-core-types = { workspace = true }
@@ -110,12 +110,12 @@ tempfile = { workspace = true }
 [features]
 default = []
 fuzzing = [
-    "libra2-consensus-types/fuzzing",
-    "libra2-config/fuzzing",
-    "libra2-crypto/fuzzing",
-    "libra2-mempool/fuzzing",
-    "libra2-types/fuzzing",
-    "libra2-safety-rules/testing",
+    "creditchain-consensus-types/fuzzing",
+    "creditchain-config/fuzzing",
+    "creditchain-crypto/fuzzing",
+    "creditchain-mempool/fuzzing",
+    "creditchain-types/fuzzing",
+    "creditchain-safety-rules/testing",
 ]
 failpoints = ["fail/failpoints"]
 

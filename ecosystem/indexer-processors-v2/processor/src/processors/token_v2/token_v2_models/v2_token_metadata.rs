@@ -19,7 +19,7 @@ use crate::{
 use allocative_derive::Allocative;
 use anyhow::Context;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::WriteResource,
+   creditchain_protos::transaction::v1::WriteResource,
     utils::convert::{standardize_address, truncate_str},
 };
 use field_count::FieldCount;

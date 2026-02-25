@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::application;
-use libra2_crypto::noise::NoiseError;
-use libra2_short_hex_str::ShortHexStr;
-use libra2_types::PeerId;
+use creditchain_crypto::noise::NoiseError;
+use creditchain_short_hex_str::ShortHexStr;
+use creditchain_types::PeerId;
 use std::io;
 use thiserror::Error;
 

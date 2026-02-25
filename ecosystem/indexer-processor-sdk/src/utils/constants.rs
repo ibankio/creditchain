@@ -5,8 +5,8 @@
 
 use once_cell::sync::Lazy;
 
-/// Type string for Libra2Coin.
-pub const LIBRA2_COIN_TYPE_STR: &str = "0x1::libra2_coin::Libra2Coin";
+/// Type string for CreditChainCoin.
+pub const CREDITCHAIN_COIN_TYPE_STR: &str = "0x1::creditchain_coin::CreditChainCoin";
 
 pub static LBT_METADATA_ADDRESS_RAW: Lazy<[u8; 32]> = Lazy::new(|| {
     let mut addr = [0u8; 32];

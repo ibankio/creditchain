@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::COMPRESSION_SUFFIX_LABEL;
-use libra2_types::transaction::Version;
+use creditchain_types::transaction::Version;
 use serde::{Deserialize, Serialize};
 
 /// A storage service request.

@@ -6,7 +6,7 @@ use crate::block_storage::{
     execution_pool::common_test::create_block_tree_with_forks_unordered_parents, BlockReader,
     BlockStore,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block_retrieval::{
         BlockRetrievalRequest, BlockRetrievalRequestV1, BlockRetrievalRequestV2,
         BlockRetrievalResponse, BlockRetrievalStatus,

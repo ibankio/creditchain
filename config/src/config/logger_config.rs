@@ -9,8 +9,8 @@ use crate::{
     },
     utils,
 };
-use libra2_logger::{Level, CHANNEL_SIZE};
-use libra2_types::chain_id::ChainId;
+use creditchain_logger::{Level, CHANNEL_SIZE};
+use creditchain_types::chain_id::ChainId;
 use serde::{Deserialize, Serialize};
 use serde_yaml::Value;
 

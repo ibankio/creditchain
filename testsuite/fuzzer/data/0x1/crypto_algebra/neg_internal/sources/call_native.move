@@ -1,6 +1,6 @@
 module poc::neg_internal {
-    use libra2_std::crypto_algebra::{from_u64, neg, add, eq, zero};
-    use libra2_std::bls12381_algebra::{Fr};
+    use creditchain_std::crypto_algebra::{from_u64, neg, add, eq, zero};
+    use creditchain_std::bls12381_algebra::{Fr};
 
     public entry fun main(_owner:&signer) {
         let z = zero<Fr>();

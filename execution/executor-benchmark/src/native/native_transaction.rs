@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     transaction::signature_verified_transaction::SignatureVerifiedTransaction,
 };
@@ -41,15 +41,15 @@ pub enum NativeTransaction {
 impl NativeTransaction {
     pub fn parse(txn: &SignatureVerifiedTransaction) -> Self {
         match &txn.expect_valid() {
-            libra2_types::transaction::Transaction::UserTransaction(user_txn) => {
+            creditchain_types::transaction::Transaction::UserTransaction(user_txn) => {
                 match user_txn.payload() {
-                    libra2_types::transaction::TransactionPayload::EntryFunction(f) => {
+                    creditchain_types::transaction::TransactionPayload::EntryFunction(f) => {
                         match (
                             *f.module().address(),
                             f.module().name().as_str(),
                             f.function().as_str(),
                         ) {
-                            (AccountAddress::ONE, "libra2_account", "fungible_transfer_only") => {
+                            (AccountAddress::ONE, "creditchain_account", "fungible_transfer_only") => {
                                 Self::FaTransfer {
                                     sender: user_txn.sender(),
                                     sequence_number: user_txn.sequence_number(),
@@ -65,7 +65,7 @@ impl NativeTransaction {
                                 fail_on_recipient_account_existing: false,
                                 fail_on_recipient_account_missing: true,
                             },
-                            (AccountAddress::ONE, "libra2_account", "transfer") => Self::Transfer {
+                            (AccountAddress::ONE, "creditchain_account", "transfer") => Self::Transfer {
                                 sender: user_txn.sender(),
                                 sequence_number: user_txn.sequence_number(),
                                 recipient: bcs::from_bytes(&f.args()[0]).unwrap(),
@@ -73,7 +73,7 @@ impl NativeTransaction {
                                 fail_on_recipient_account_existing: false,
                                 fail_on_recipient_account_missing: false,
                             },
-                            (AccountAddress::ONE, "libra2_account", "create_account") => {
+                            (AccountAddress::ONE, "creditchain_account", "create_account") => {
                                 Self::Transfer {
                                     sender: user_txn.sender(),
                                     sequence_number: user_txn.sequence_number(),
@@ -83,7 +83,7 @@ impl NativeTransaction {
                                     fail_on_recipient_account_missing: false,
                                 }
                             },
-                            (AccountAddress::ONE, "libra2_account", "batch_transfer") => {
+                            (AccountAddress::ONE, "creditchain_account", "batch_transfer") => {
                                 Self::BatchTransfer {
                                     sender: user_txn.sender(),
                                     sequence_number: user_txn.sequence_number(),
@@ -116,7 +116,7 @@ impl NativeTransaction {
                     _ => unimplemented!(),
                 }
             },
-            libra2_types::transaction::Transaction::BlockEpilogue(_) => Self::BlockEpilogue,
+            creditchain_types::transaction::Transaction::BlockEpilogue(_) => Self::BlockEpilogue,
             _ => unimplemented!(),
         }
     }

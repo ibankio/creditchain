@@ -8,10 +8,10 @@ use crate::{
     quorum_cert::QuorumCert,
 };
 use anyhow::ensure;
-use libra2_crypto::HashValue;
-use libra2_crypto_derive::CryptoHasher;
-use libra2_infallible::duration_since_epoch;
-use libra2_types::{block_info::BlockInfo, validator_txn::ValidatorTransaction};
+use creditchain_crypto::HashValue;
+use creditchain_crypto_derive::CryptoHasher;
+use creditchain_infallible::duration_since_epoch;
+use creditchain_types::{block_info::BlockInfo, validator_txn::ValidatorTransaction};
 use serde::{Deserialize, Serialize};
 use std::{
     fmt::{Display, Formatter},

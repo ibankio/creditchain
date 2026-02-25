@@ -1,5 +1,5 @@
 module poc::point_equals {
-    use libra2_std::ristretto255::{Self};
+    use creditchain_std::ristretto255::{Self};
 
     public entry fun main(_owner: &signer) {
         let point1 = ristretto255::point_identity();

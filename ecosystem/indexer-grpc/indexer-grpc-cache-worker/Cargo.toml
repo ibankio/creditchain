@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-grpc-cache-worker"
+name = "creditchain-indexer-grpc-cache-worker"
 description = "Indexer gRPC worker to collect on-chain data from node gRPC and push to cache."
 version = "1.0.1"
 
@@ -14,11 +14,11 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-indexer-grpc-server-framework = { workspace = true }
-libra2-indexer-grpc-utils = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-moving-average = { workspace = true }
-libra2-protos = { workspace = true }
+creditchain-indexer-grpc-server-framework = { workspace = true }
+creditchain-indexer-grpc-utils = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-moving-average = { workspace = true }
+creditchain-protos = { workspace = true }
 async-trait = { workspace = true }
 clap = { workspace = true }
 futures = { workspace = true }
@@ -39,7 +39,7 @@ jemallocator = { version = "0.5.0", features = [
 ] }
 
 [dev-dependencies]
-libra2-config = { workspace = true }
+creditchain-config = { workspace = true }
 reqwest = { workspace = true }
 tempfile = { workspace = true }
 

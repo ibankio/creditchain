@@ -9,7 +9,7 @@ use crate::{
 };
 use anyhow::{Context, Result};
 #[cfg(target_os = "linux")]
-use libra2_system_utils::profiling::start_cpu_profiling;
+use creditchain_system_utils::profiling::start_cpu_profiling;
 use autometrics::settings::AutometricsSettings;
 use axum::{http::StatusCode, response::IntoResponse, routing::get, Router};
 use backtrace::Backtrace;

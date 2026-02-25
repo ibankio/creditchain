@@ -5,7 +5,7 @@
 use crate::dkg::DKGTranscriptMetadata;
 use crate::{dkg::DKGTranscript, jwks, validator_verifier::ValidatorVerifier};
 use anyhow::Context;
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 #[cfg(any(test, feature = "fuzzing"))]
 use move_core_types::account_address::AccountAddress;
 use serde::{Deserialize, Serialize};

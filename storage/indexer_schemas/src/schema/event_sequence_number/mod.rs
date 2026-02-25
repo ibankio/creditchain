@@ -12,11 +12,11 @@
 
 use crate::schema::EVENT_SEQUENCE_NUMBER_CF_NAME;
 use anyhow::Result;
-use libra2_schemadb::{
+use creditchain_schemadb::{
     define_pub_schema,
     schema::{KeyCodec, ValueCodec},
 };
-use libra2_types::event::EventKey;
+use creditchain_types::event::EventKey;
 
 define_pub_schema!(
     EventSequenceNumberSchema,

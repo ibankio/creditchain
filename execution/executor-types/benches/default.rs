@@ -1,10 +1,10 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_executor_types::should_forward_to_subscription_service;
+use creditchain_executor_types::should_forward_to_subscription_service;
 #[cfg(feature = "bench")]
-use libra2_executor_types::should_forward_to_subscription_service_old;
-use libra2_types::contract_event::ContractEvent;
+use creditchain_executor_types::should_forward_to_subscription_service_old;
+use creditchain_types::contract_event::ContractEvent;
 use criterion::{criterion_group, criterion_main, Criterion};
 
 fn default_targets(c: &mut Criterion) {

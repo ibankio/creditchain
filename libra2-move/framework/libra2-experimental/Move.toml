@@ -1,9 +1,0 @@
-[package]
-name = "Libra2Experimental"
-version = "1.0.0"
-
-[addresses]
-libra2_experimental = "0x7"
-
-[dependencies]
-Libra2Framework = { local = "../libra2-framework" }

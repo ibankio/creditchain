@@ -1,12 +1,12 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_infallible::Mutex;
-use libra2_logger::info;
-use libra2_storage_interface::state_store::state_view::cached_state_view::CachedStateView;
-use libra2_vm::{
+use creditchain_infallible::Mutex;
+use creditchain_logger::info;
+use creditchain_storage_interface::state_store::state_view::cached_state_view::CachedStateView;
+use creditchain_vm::{
     sharded_block_executor::{local_executor_shard::LocalExecutorClient, ShardedBlockExecutor},
-    Libra2VM,
+    CreditChainVM,
 };
 use once_cell::sync::Lazy;
 use std::sync::Arc;
@@ -16,6 +16,6 @@ pub static SHARDED_BLOCK_EXECUTOR: Lazy<
 > = Lazy::new(|| {
     info!("LOCAL_SHARDED_BLOCK_EXECUTOR created");
     Arc::new(Mutex::new(
-        LocalExecutorClient::create_local_sharded_block_executor(Libra2VM::get_num_shards(), None),
+        LocalExecutorClient::create_local_sharded_block_executor(CreditChainVM::get_num_shards(), None),
     ))
 });

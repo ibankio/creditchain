@@ -6,10 +6,10 @@ module 0xABCD::simple {
     use std::signer;
     use std::string::{Self, String, utf8};
     use std::vector;
-    use libra2_framework::event::{Self, EventHandle};
-    use libra2_framework::account;
-    use libra2_framework::code;
-    use libra2_std::table::{Self, Table};
+    use creditchain_framework::event::{Self, EventHandle};
+    use creditchain_framework::account;
+    use creditchain_framework::code;
+    use creditchain_std::table::{Self, Table};
 
     // Through the constant pool it will be possible to change this
     // constant to be as big or as small as desired.

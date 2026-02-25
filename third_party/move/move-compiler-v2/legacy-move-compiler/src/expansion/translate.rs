@@ -54,7 +54,7 @@ struct Context<'env, 'map> {
     is_source_definition: bool,
     in_spec_context: bool,
     in_deprecated_code: bool,
-    in_libra2_libs: bool,
+    in_creditchain_libs: bool,
     exp_specs: BTreeMap<SpecId, E::SpecBlock>,
     env: &'env mut CompilationEnv,
 }
@@ -75,7 +75,7 @@ impl<'env> Context<'env, '_> {
             is_source_definition: false,
             in_spec_context: false,
             in_deprecated_code: false,
-            in_libra2_libs: false,
+            in_creditchain_libs: false,
             exp_specs: BTreeMap::new(),
         }
     }
@@ -452,21 +452,21 @@ fn set_sender_address(
     })
 }
 
-// This is a hack to recognize LIBRA2 StdLib, Framework, and Token libs to avoid warnings on some old errors.
+// This is a hack to recognize CREDITCHAIN StdLib, Framework, and Token libs to avoid warnings on some old errors.
 // This will be removed after library attributes are cleaned up.
 // (See https://github.com/libra2org/libra2-core/issues/9410)
-fn module_is_in_libra2_libs(module_address: Option<Spanned<Address>>) -> bool {
-    const LIBRA2_STDLIB_NAME: &str = "libra2_std";
-    static LIBRA2_STDLIB_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =
+fn module_is_in_creditchain_libs(module_address: Option<Spanned<Address>>) -> bool {
+    const CREDITCHAIN_STDLIB_NAME: &str = "creditchain_std";
+    static CREDITCHAIN_STDLIB_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =
         Lazy::new(|| NumericalAddress::parse_str("0x1").unwrap());
-    const LIBRA2_FRAMEWORK_NAME: &str = "libra2_framework";
-    static LIBRA2_FRAMEWORK_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =
+    const CREDITCHAIN_FRAMEWORK_NAME: &str = "creditchain_framework";
+    static CREDITCHAIN_FRAMEWORK_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =
         Lazy::new(|| NumericalAddress::parse_str("0x1").unwrap());
-    const LIBRA2_TOKEN_NAME: &str = "libra2_token";
-    static LIBRA2_TOKEN_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =
+    const CREDITCHAIN_TOKEN_NAME: &str = "creditchain_token";
+    static CREDITCHAIN_TOKEN_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =
         Lazy::new(|| NumericalAddress::parse_str("0x3").unwrap());
-    const LIBRA2_TOKEN_OBJECTS_NAME: &str = "libra2_token_objects";
-    static LIBRA2_TOKEN_OBJECTS_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =
+    const CREDITCHAIN_TOKEN_OBJECTS_NAME: &str = "creditchain_token_objects";
+    static CREDITCHAIN_TOKEN_OBJECTS_NUMERICAL_ADDRESS: Lazy<NumericalAddress> =
         Lazy::new(|| NumericalAddress::parse_str("0x4").unwrap());
     match &module_address {
         Some(spanned_address) => {
@@ -475,17 +475,17 @@ fn module_is_in_libra2_libs(module_address: Option<Spanned<Address>>) -> bool {
                 Address::Numerical(optional_name, spanned_numerical_address) => match optional_name
                 {
                     Some(spanned_symbol) => {
-                        ((&spanned_symbol.value as &str) == LIBRA2_STDLIB_NAME
-                            && (spanned_numerical_address.value == *LIBRA2_STDLIB_NUMERICAL_ADDRESS))
-                            || ((&spanned_symbol.value as &str) == LIBRA2_FRAMEWORK_NAME
+                        ((&spanned_symbol.value as &str) == CREDITCHAIN_STDLIB_NAME
+                            && (spanned_numerical_address.value == *CREDITCHAIN_STDLIB_NUMERICAL_ADDRESS))
+                            || ((&spanned_symbol.value as &str) == CREDITCHAIN_FRAMEWORK_NAME
                                 && (spanned_numerical_address.value
-                                    == *LIBRA2_FRAMEWORK_NUMERICAL_ADDRESS))
-                            || ((&spanned_symbol.value as &str) == LIBRA2_TOKEN_NAME
+                                    == *CREDITCHAIN_FRAMEWORK_NUMERICAL_ADDRESS))
+                            || ((&spanned_symbol.value as &str) == CREDITCHAIN_TOKEN_NAME
                                 && (spanned_numerical_address.value
-                                    == *LIBRA2_TOKEN_NUMERICAL_ADDRESS))
-                            || ((&spanned_symbol.value as &str) == LIBRA2_TOKEN_OBJECTS_NAME
+                                    == *CREDITCHAIN_TOKEN_NUMERICAL_ADDRESS))
+                            || ((&spanned_symbol.value as &str) == CREDITCHAIN_TOKEN_OBJECTS_NAME
                                 && (spanned_numerical_address.value
-                                    == *LIBRA2_TOKEN_OBJECTS_NUMERICAL_ADDRESS))
+                                    == *CREDITCHAIN_TOKEN_OBJECTS_NUMERICAL_ADDRESS))
                     },
                     None => false,
                 },
@@ -534,10 +534,10 @@ fn module_(
     {
         context.in_deprecated_code = true;
     }
-    if context.env.flags().warn_of_deprecation_use_in_libra2_libs() {
-        context.in_libra2_libs = false;
+    if context.env.flags().warn_of_deprecation_use_in_creditchain_libs() {
+        context.in_creditchain_libs = false;
     } else {
-        context.in_libra2_libs = module_is_in_libra2_libs(module_address);
+        context.in_creditchain_libs = module_is_in_creditchain_libs(module_address);
     }
 
     let mut new_scope = AliasMapBuilder::new();
@@ -635,7 +635,7 @@ fn script_(context: &mut Context, package_name: Option<Symbol>, pscript: P::Scri
         "ICE there should be no aliases entering a script"
     );
     context.set_current_module(None);
-    context.in_libra2_libs = false;
+    context.in_creditchain_libs = false;
 
     let mut constants = UniqueMap::new();
     for c in pconstants {
@@ -1204,7 +1204,7 @@ fn member_has_deprecated_annotation(
 
 fn check_for_deprecated_module_use(context: &mut Context, mident: &ModuleIdent) -> bool {
     let warn_deprecation = &context.env.flags().warn_of_deprecation_use();
-    if !warn_deprecation || context.in_deprecated_code || context.in_libra2_libs {
+    if !warn_deprecation || context.in_deprecated_code || context.in_creditchain_libs {
         return false;
     }
     if let Some(loc) = module_has_deprecated_annotation(context, mident) {
@@ -1229,7 +1229,7 @@ fn check_for_deprecated_member_use(
     deprecated_item: DeprecatedItem,
 ) {
     let warn_deprecation = &context.env.flags().warn_of_deprecation_use();
-    if !warn_deprecation || context.in_deprecated_code || context.in_libra2_libs {
+    if !warn_deprecation || context.in_deprecated_code || context.in_creditchain_libs {
         return;
     }
     let mident = match mident_in {

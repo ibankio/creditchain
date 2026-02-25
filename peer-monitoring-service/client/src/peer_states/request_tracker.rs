@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_time_service::{TimeService, TimeServiceTrait};
+use creditchain_time_service::{TimeService, TimeServiceTrait};
 use std::{
     ops::Add,
     time::{Duration, Instant},
@@ -107,7 +107,7 @@ impl RequestTracker {
 #[cfg(test)]
 mod test {
     use crate::peer_states::request_tracker::RequestTracker;
-    use libra2_time_service::{TimeService, TimeServiceTrait};
+    use creditchain_time_service::{TimeService, TimeServiceTrait};
     use std::time::Duration;
 
     #[test]

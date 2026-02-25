@@ -1,4 +1,4 @@
-module libra2_std::M {
+module creditchain_std::M {
     fun foo() {}
 
     #[testonly]

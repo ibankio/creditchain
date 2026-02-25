@@ -10,12 +10,12 @@ use crate::{
         quorum_store_db::MockQuorumStoreDB, types::Batch,
     },
 };
-use libra2_config::config::BatchTransactionFilterConfig;
-use libra2_consensus_types::common::Author;
-use libra2_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
-use libra2_network::application::{interface::NetworkClient, storage::PeersAndMetadata};
-use libra2_transaction_filters::batch_transaction_filter::BatchTransactionFilter;
-use libra2_types::{
+use creditchain_config::config::BatchTransactionFilterConfig;
+use creditchain_consensus_types::common::Author;
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
+use creditchain_network::application::{interface::NetworkClient, storage::PeersAndMetadata};
+use creditchain_transaction_filters::batch_transaction_filter::BatchTransactionFilter;
+use creditchain_types::{
     chain_id::ChainId,
     quorum_store::BatchId,
     transaction::{RawTransaction, Script, SignedTransaction, TransactionPayload},
@@ -161,7 +161,7 @@ fn create_consensus_network_sender() -> NetworkSender {
     let consensus_network_client = ConsensusNetworkClient::new(network_client.clone());
 
     // Create the self sender and validator verifier
-    let (self_sender, _self_receiver) = libra2_channels::new_unbounded_test();
+    let (self_sender, _self_receiver) = creditchain_channels::new_unbounded_test();
     let validator_verifier = Arc::new(ValidatorVerifier::new(vec![]));
 
     // Create a network sender

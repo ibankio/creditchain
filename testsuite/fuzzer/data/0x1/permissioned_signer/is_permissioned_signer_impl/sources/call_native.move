@@ -1,5 +1,5 @@
 module poc::is_permissioned_signer_impl {
-    use libra2_framework::permissioned_signer;
+    use creditchain_framework::permissioned_signer;
 
     public entry fun main(owner: &signer) {
         let _is_perm = permissioned_signer::is_permissioned_signer(owner);

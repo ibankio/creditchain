@@ -16,12 +16,12 @@ use crate::{
         RocksdbOpt, TrustedWaypointOpt,
     },
 };
-use libra2_backup_service::start_backup_service;
-use libra2_config::utils::get_available_port;
-use libra2_db::Libra2DB;
-use libra2_storage_interface::DbReader;
-use libra2_temppath::TempPath;
-use libra2_types::{
+use creditchain_backup_service::start_backup_service;
+use creditchain_config::utils::get_available_port;
+use creditchain_db::CreditChainDB;
+use creditchain_storage_interface::DbReader;
+use creditchain_temppath::TempPath;
+use creditchain_types::{
     aggregate_signature::AggregateSignature,
     ledger_info::LedgerInfoWithSignatures,
     proptest_types::{AccountInfoUniverse, LedgerInfoWithSignaturesGen},
@@ -108,7 +108,7 @@ fn end_to_end() {
         .map(|li| li.ledger_info().next_block_epoch())
         .unwrap_or(0);
 
-    let tgt_db = Libra2DB::new_for_test(&tgt_db_dir);
+    let tgt_db = CreditChainDB::new_for_test(&tgt_db_dir);
     assert_eq!(
         tgt_db
             .get_epoch_ending_ledger_infos(0, target_version_next_block_epoch)

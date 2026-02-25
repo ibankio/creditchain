@@ -16,11 +16,11 @@ use crate::{
     },
 };
 use anyhow::{Context, Result};
-use libra2_crypto::{ed25519::Ed25519Signature, secp256r1_ecdsa, HashValue, PrivateKey, SigningKey};
-use libra2_ledger::Libra2LedgerError;
-use libra2_rest_client::{libra2_api_types::MoveStructTag, Client, PepperRequest, ProverRequest};
-pub use libra2_types::*;
-use libra2_types::{
+use creditchain_crypto::{ed25519::Ed25519Signature, secp256r1_ecdsa, HashValue, PrivateKey, SigningKey};
+use creditchain_ledger::CreditChainLedgerError;
+use creditchain_rest_client::{creditchain_api_types::MoveStructTag, Client, PepperRequest, ProverRequest};
+pub use creditchain_types::*;
+use creditchain_types::{
     event::EventKey,
     function_info::FunctionInfo,
     keyless::{
@@ -48,7 +48,7 @@ use std::{
     time::{Duration, SystemTime, UNIX_EPOCH},
 };
 
-pub const LIBRA2_COIN_TYPE_STR: &str = "0x1::libra2_coin::Libra2Coin";
+pub const CREDITCHAIN_COIN_TYPE_STR: &str = "0x1::creditchain_coin::CreditChainCoin";
 lazy_static! {
     pub static ref LBT_METADATA_ADDRESS: AccountAddress = {
         let mut addr = [0u8; 32];
@@ -119,7 +119,7 @@ impl<T: Into<AccountKey>> From<T> for LocalAccountAuthenticator {
     }
 }
 
-/// LocalAccount represents an account on the Libra2 blockchain. Internally it
+/// LocalAccount represents an account on the CreditChain blockchain. Internally it
 /// holds the private / public key pair and the address of the account. You can
 /// use this struct to help transact with the blockchain, e.g. by generating a
 /// new account and signing transactions.
@@ -144,12 +144,12 @@ pub fn get_paired_fa_primary_store_address(
     let mut bytes = address.to_vec();
     bytes.append(&mut fa_metadata_address.to_vec());
     bytes.push(0xFC);
-    AccountAddress::from_bytes(libra2_crypto::hash::HashValue::sha3_256_of(&bytes).to_vec()).unwrap()
+    AccountAddress::from_bytes(creditchain_crypto::hash::HashValue::sha3_256_of(&bytes).to_vec()).unwrap()
 }
 
 pub fn get_paired_fa_metadata_address(coin_type_name: &MoveStructTag) -> AccountAddress {
     let coin_type_name = coin_type_name.to_string();
-    if coin_type_name == LIBRA2_COIN_TYPE_STR {
+    if coin_type_name == CREDITCHAIN_COIN_TYPE_STR {
         *LBT_METADATA_ADDRESS
     } else {
         let mut preimage = LBT_METADATA_ADDRESS.to_vec();
@@ -161,7 +161,7 @@ pub fn get_paired_fa_metadata_address(coin_type_name: &MoveStructTag) -> Account
 
 impl LocalAccount {
     /// Create a new representation of an account locally. Note: This function
-    /// does not actually create an account on the Libra2 blockchain, just a
+    /// does not actually create an account on the CreditChain blockchain, just a
     /// local representation.
     pub fn new<T: Into<AccountKey>>(address: AccountAddress, key: T, sequence_number: u64) -> Self {
         Self {
@@ -336,7 +336,7 @@ impl LocalAccount {
     }
 
     /// Generate a new account locally. Note: This function does not actually
-    /// create an account on the Libra2 blockchain, it just generates a new
+    /// create an account on the CreditChain blockchain, it just generates a new
     /// account locally.
     pub fn generate<R>(rng: &mut R) -> Self
     where
@@ -662,12 +662,12 @@ impl HardwareWalletAccount {
     }
 
     /// Create a new account from a Ledger device.
-    /// This requires the Ledger device to be connected, unlocked and the Libra2 app to be opened
+    /// This requires the Ledger device to be connected, unlocked and the CreditChain app to be opened
     pub fn from_ledger(
         derivation_path: String,
         sequence_number: u64,
-    ) -> Result<Self, Libra2LedgerError> {
-        let public_key = libra2_ledger::get_public_key(&derivation_path, false)?;
+    ) -> Result<Self, CreditChainLedgerError> {
+        let public_key = creditchain_ledger::get_public_key(&derivation_path, false)?;
         let authentication_key = AuthenticationKey::ed25519(&public_key);
         let address = authentication_key.account_address();
 
@@ -707,8 +707,8 @@ impl HardwareWalletAccount {
     pub fn sign_arbitrary_message(
         &self,
         message: &[u8],
-    ) -> Result<Ed25519Signature, Libra2LedgerError> {
-        libra2_ledger::sign_message(&self.derivation_path, message)
+    ) -> Result<Ed25519Signature, CreditChainLedgerError> {
+        creditchain_ledger::sign_message(&self.derivation_path, message)
     }
 }
 
@@ -1228,14 +1228,14 @@ async fn get_pepper_from_jwt(
 mod tests {
     use super::*;
     use crate::coin_client::CoinClient;
-    use libra2_crypto::ed25519::Ed25519PrivateKey;
-    use libra2_rest_client::{Libra2BaseUrl, FaucetClient};
+    use creditchain_crypto::ed25519::Ed25519PrivateKey;
+    use creditchain_rest_client::{CreditChainBaseUrl, FaucetClient};
     use reqwest::Url;
 
     #[test]
     fn test_recover_account_from_derive_path() {
         // Same constants in test cases of TypeScript
-        // https://github.com/libra2org/libra2-core/blob/main/ecosystem/typescript/sdk/src/libra2_account.test.ts
+        // https://github.com/libra2org/libra2-core/blob/main/ecosystem/typescript/sdk/src/creditchain_account.test.ts
         let derive_path = "m/44'/637'/0'/0'/0'";
         let mnemonic_phrase =
             "shoot island position soft burden budget tooth cruel issue economy destroy above";
@@ -1276,7 +1276,7 @@ mod tests {
     #[ignore]
     #[tokio::test]
     async fn test_derive_keyless_account() {
-        let libra2_rest_client = Client::builder(Libra2BaseUrl::Devnet).build();
+        let creditchain_rest_client = Client::builder(CreditChainBaseUrl::Devnet).build();
         // This JWT is taken from https://github.com/aptos-labs/aptos-ts-sdk/blob/f644e61beb70e69dfd489e75287c67b527385135/tests/e2e/api/keyless.test.ts#L11
         // As is the ephemeralKeyPair
         // This ephemeralKeyPair expires December 29, 2024.
@@ -1287,11 +1287,11 @@ mod tests {
         let esk = Ed25519PrivateKey::try_from(sk_bytes.as_slice()).unwrap();
         let ephemeral_key_pair =
             EphemeralKeyPair::new_ed25519(esk, 1735475012, vec![0; 31]).unwrap();
-        let mut account = derive_keyless_account(&libra2_rest_client, jwt, ephemeral_key_pair, None)
+        let mut account = derive_keyless_account(&creditchain_rest_client, jwt, ephemeral_key_pair, None)
             .await
             .unwrap();
         println!("Address: {}", account.address().to_hex_literal());
-        let balance = libra2_rest_client
+        let balance = creditchain_rest_client
             .view_apt_account_balance(account.address())
             .await
             .unwrap()
@@ -1299,8 +1299,8 @@ mod tests {
         if balance < 10000000 {
             println!("Funding account");
             let faucet_client = FaucetClient::new_from_rest_client(
-                Url::from_str("https://faucet.devnet.libra2.org").unwrap(),
-                libra2_rest_client.clone(),
+                Url::from_str("https://faucet.devnet.creditchain.io").unwrap(),
+                creditchain_rest_client.clone(),
             );
             faucet_client
                 .fund(account.address(), 10000000)
@@ -1309,13 +1309,13 @@ mod tests {
         }
         println!(
             "Balance: {}",
-            libra2_rest_client
+            creditchain_rest_client
                 .view_apt_account_balance(account.address())
                 .await
                 .unwrap()
                 .into_inner()
         );
-        let coin_client = CoinClient::new(&libra2_rest_client);
+        let coin_client = CoinClient::new(&creditchain_rest_client);
         let signed_txn = coin_client
             .get_signed_transfer_txn(
                 &mut account,
@@ -1331,7 +1331,7 @@ mod tests {
         println!(
             "Sent 1111111 to 0x7968dab936c1bad187c60ce4082f307d030d780e91e694ae03aef16aba73f30"
         );
-        libra2_rest_client
+        creditchain_rest_client
             .submit_without_deserializing_response(&signed_txn)
             .await
             .unwrap();

@@ -11,18 +11,18 @@ use crate::{
     },
     QuorumStoreRequest,
 };
-use libra2_config::config::{NodeConfig, NodeType};
-use libra2_event_notifications::{DbBackedOnChainConfig, ReconfigNotificationListener};
-use libra2_infallible::{Mutex, RwLock};
-use libra2_logger::Level;
-use libra2_mempool_notifications::MempoolNotificationListener;
-use libra2_network::application::{
+use creditchain_config::config::{NodeConfig, NodeType};
+use creditchain_event_notifications::{DbBackedOnChainConfig, ReconfigNotificationListener};
+use creditchain_infallible::{Mutex, RwLock};
+use creditchain_logger::Level;
+use creditchain_mempool_notifications::MempoolNotificationListener;
+use creditchain_network::application::{
     interface::{NetworkClient, NetworkServiceEvents},
     storage::PeersAndMetadata,
 };
-use libra2_storage_interface::DbReader;
-use libra2_types::on_chain_config::OnChainConfigProvider;
-use libra2_vm_validator::vm_validator::{PooledVMValidator, TransactionValidation};
+use creditchain_storage_interface::DbReader;
+use creditchain_types::on_chain_config::OnChainConfigProvider;
+use creditchain_vm_validator::vm_validator::{PooledVMValidator, TransactionValidation};
 use futures::channel::mpsc::{Receiver, UnboundedSender};
 use std::sync::Arc;
 use tokio::runtime::{Handle, Runtime};
@@ -81,7 +81,7 @@ pub(crate) fn start_shared_mempool<TransactionValidator, ConfigProvider>(
         config.mempool.system_transaction_gc_interval_ms,
     ));
 
-    if libra2_logger::enabled!(Level::Trace) {
+    if creditchain_logger::enabled!(Level::Trace) {
         executor.spawn(snapshot_job(
             mempool,
             config.mempool.mempool_snapshot_interval_secs,
@@ -100,7 +100,7 @@ pub fn bootstrap(
     mempool_reconfig_events: ReconfigNotificationListener<DbBackedOnChainConfig>,
     peers_and_metadata: Arc<PeersAndMetadata>,
 ) -> Runtime {
-    let runtime = libra2_runtimes::spawn_named_runtime("shared-mem".into(), None);
+    let runtime = creditchain_runtimes::spawn_named_runtime("shared-mem".into(), None);
     let mempool = Arc::new(Mutex::new(CoreMempool::new(config)));
     let vm_validator = Arc::new(RwLock::new(PooledVMValidator::new(
         Arc::clone(&db),

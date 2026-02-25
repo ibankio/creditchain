@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 use crate::{RemoteKVRequest, RemoteKVResponse};
-use libra2_secure_net::network_controller::{Message, NetworkController};
+use creditchain_secure_net::network_controller::{Message, NetworkController};
 use crossbeam_channel::{Receiver, Sender};
 use std::{
     net::SocketAddr,
@@ -10,8 +10,8 @@ use std::{
 
 extern crate itertools;
 use crate::metrics::REMOTE_EXECUTOR_TIMER;
-use libra2_logger::trace;
-use libra2_types::state_store::{StateView, TStateView};
+use creditchain_logger::trace;
+use creditchain_types::state_store::{StateView, TStateView};
 use itertools::Itertools;
 
 pub struct RemoteStateViewService<S: StateView + Sync + Send + 'static> {

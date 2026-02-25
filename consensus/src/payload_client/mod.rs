@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::error::QuorumStoreError;
-use libra2_consensus_types::{common::Payload, payload_pull_params::PayloadPullParameters};
-use libra2_types::validator_txn::ValidatorTransaction;
-use libra2_validator_transaction_pool::TransactionFilter;
+use creditchain_consensus_types::{common::Payload, payload_pull_params::PayloadPullParameters};
+use creditchain_types::validator_txn::ValidatorTransaction;
+use creditchain_validator_transaction_pool::TransactionFilter;
 
 pub mod mixed;
 pub mod user;

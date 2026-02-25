@@ -1,7 +1,7 @@
 module poc::downcast_internal {
     use std::option::{Self};
-    use libra2_std::crypto_algebra::{Self};
-    use libra2_std::bls12381_algebra::{Fq12, Gt};
+    use creditchain_std::crypto_algebra::{Self};
+    use creditchain_std::bls12381_algebra::{Fq12, Gt};
 
     public entry fun main(_owner: &signer) {
         let zero_gt = crypto_algebra::zero<Gt>();

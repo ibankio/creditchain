@@ -1,6 +1,6 @@
 [package]
-name = "libra2-storage-service-server"
-description = "The Libra2 storage service (server-side)"
+name = "creditchain-storage-service-server"
+description = "The CreditChain storage service (server-side)"
 version = "0.1.1"
 
 # Workspace inherited keys
@@ -14,17 +14,17 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-channels = { workspace = true }
-libra2-config = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-network = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-storage-service-notifications = { workspace = true }
-libra2-storage-service-types = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-channels = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-storage-service-notifications = { workspace = true }
+creditchain-storage-service-types = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-types = { workspace = true }
 arc-swap = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
@@ -38,13 +38,13 @@ tokio = { workspace = true }
 
 [dev-dependencies]
 anyhow = { workspace = true }
-libra2-bitvec = { workspace = true }
-libra2-config = { workspace = true, features = ["fuzzing"] }
-libra2-crypto = { workspace = true }
-libra2-netcore = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-time-service = { workspace = true, features = ["async", "testing"] }
-libra2-types = { workspace = true }
+creditchain-bitvec = { workspace = true }
+creditchain-config = { workspace = true, features = ["fuzzing"] }
+creditchain-crypto = { workspace = true }
+creditchain-netcore = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-time-service = { workspace = true, features = ["async", "testing"] }
+creditchain-types = { workspace = true }
 claims = { workspace = true }
 maplit = { workspace = true }
 mockall = { workspace = true }

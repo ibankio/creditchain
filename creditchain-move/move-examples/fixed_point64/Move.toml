@@ -1,0 +1,16 @@
+[package]
+name = "fixed_point64"
+version = "1.0.0"
+authors = []
+
+[addresses]
+fixed_point64 = "0xdeadbeef"
+
+[dev-addresses]
+
+[dependencies.CreditChainFramework]
+git = "https://github.com/creditchainorg/creditchain-framework.git"
+rev = "mainnet"
+subdir = "creditchain-framework"
+
+[dev-dependencies]

@@ -1,6 +1,6 @@
 [package]
-name = "libra2-storage-service-types"
-description = "Common types offered by the Libra2 storage service"
+name = "creditchain-storage-service-types"
+description = "Common types offered by the CreditChain storage service"
 version = "0.1.1"
 
 # Workspace inherited keys
@@ -13,18 +13,18 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-compression = { workspace = true }
-libra2-config = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-compression = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-types = { workspace = true }
 bcs = { workspace = true }
 num-traits = { workspace = true }
 serde = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-time-service = { workspace = true, features = ["testing"] }
+creditchain-time-service = { workspace = true, features = ["testing"] }
 claims = { workspace = true }
 proptest = { workspace = true }
 rand = { workspace = true }

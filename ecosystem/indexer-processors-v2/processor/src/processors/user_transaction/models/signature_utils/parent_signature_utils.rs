@@ -6,7 +6,7 @@ use super::account_signature_utils::{
 };
 use crate::processors::user_transaction::models::signatures::Signature;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{
+   creditchain_protos::transaction::v1::{
         account_signature::Type as AccountSignatureTypeEnum,
         signature::{Signature as SignatureEnum, Type as SignatureTypeEnum},
         Ed25519Signature, FeePayerSignature, MultiAgentSignature, MultiEd25519Signature,

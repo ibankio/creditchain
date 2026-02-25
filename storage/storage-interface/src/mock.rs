@@ -4,9 +4,9 @@
 
 //! This module provides mock dbreader for tests.
 
-use crate::{errors::Libra2DbError, DbReader, DbWriter, Result};
-use libra2_crypto::HashValue;
-use libra2_types::{
+use crate::{errors::CreditChainDbError, DbReader, DbWriter, Result};
+use creditchain_crypto::HashValue;
+use creditchain_types::{
     proof::SparseMerkleProofExt,
     state_store::{
         state_key::{inner::StateKeyInner, StateKey},
@@ -41,7 +41,7 @@ impl DbReader for MockDbReaderWriter {
         match state_key.inner() {
             StateKeyInner::AccessPath(..) => Ok(None),
             StateKeyInner::Raw(raw_key) => Ok(Some(StateValue::from(raw_key.to_owned()))),
-            _ => Err(Libra2DbError::Other(format!(
+            _ => Err(CreditChainDbError::Other(format!(
                 "Not supported state key type {:?}",
                 state_key
             ))),

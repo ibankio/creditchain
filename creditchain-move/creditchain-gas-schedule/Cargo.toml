@@ -1,0 +1,23 @@
+[package]
+name = "creditchain-gas-schedule"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+creditchain-gas-algebra = { workspace = true }
+creditchain-global-constants = { workspace = true }
+move-core-types = { workspace = true }
+move-vm-types = { workspace = true }
+paste = { workspace = true }
+rand = { workspace = true }
+
+[features]
+testing = ["creditchain-global-constants/testing"]

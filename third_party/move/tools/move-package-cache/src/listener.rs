@@ -1,7 +1,7 @@
 // Copyright (c) A-p-t-o-s Foundation
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_framework::natives::code::PackageMetadata;
+use creditchain_framework::natives::code::PackageMetadata;
 use move_core_types::account_address::AccountAddress;
 use std::path::Path;
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::timestamp_to_unixtime;
-use libra2_protos::indexer::v1::StreamProgress;
+use creditchain_protos::indexer::v1::StreamProgress;
 use build_html::{Html, HtmlChild, HtmlContainer, HtmlElement, HtmlPage, HtmlTag};
 use std::time::{Duration, SystemTime};
 use warp::{

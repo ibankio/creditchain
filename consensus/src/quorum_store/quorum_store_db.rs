@@ -9,14 +9,14 @@ use crate::{
     },
 };
 use anyhow::Result;
-use libra2_crypto::HashValue;
-use libra2_logger::prelude::*;
-use libra2_schemadb::{
+use creditchain_crypto::HashValue;
+use creditchain_logger::prelude::*;
+use creditchain_schemadb::{
     batch::{SchemaBatch, WriteBatch},
     schema::Schema,
     Options, DB,
 };
-use libra2_types::quorum_store::BatchId;
+use creditchain_types::quorum_store::BatchId;
 use std::{collections::HashMap, path::Path, time::Instant};
 
 pub trait QuorumStoreStorage: Sync + Send {

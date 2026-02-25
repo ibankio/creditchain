@@ -5,12 +5,12 @@ use crate::{
     execution_output::ExecutionOutput, state_checkpoint_output::StateCheckpointOutput,
     ChunkCommitNotification, LedgerUpdateOutput,
 };
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{TransactionAccumulatorHasher, ACCUMULATOR_PLACEHOLDER_HASH},
     HashValue,
 };
-use libra2_storage_interface::chunk_to_commit::ChunkToCommit;
-use libra2_types::{
+use creditchain_storage_interface::chunk_to_commit::ChunkToCommit;
+use creditchain_types::{
     contract_event::ContractEvent,
     epoch_state::EpochState,
     proof::{accumulator::InMemoryTransactionAccumulator, AccumulatorExtensionProof},

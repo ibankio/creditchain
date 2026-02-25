@@ -5,7 +5,7 @@
 //! Protocol used to exchange supported protocol information with a remote.
 
 use crate::protocols::wire::handshake::v1::HandshakeMsg;
-use libra2_netcore::framing::{read_u16frame, write_u16frame};
+use creditchain_netcore::framing::{read_u16frame, write_u16frame};
 use bytes::BytesMut;
 use futures::io::{AsyncRead, AsyncWrite, AsyncWriteExt};
 use std::io;
@@ -49,9 +49,9 @@ mod tests {
         },
         ProtocolId,
     };
-    use libra2_config::network_id::NetworkId;
-    use libra2_memsocket::MemorySocket;
-    use libra2_types::chain_id::ChainId;
+    use creditchain_config::network_id::NetworkId;
+    use creditchain_memsocket::MemorySocket;
+    use creditchain_types::chain_id::ChainId;
     use futures::{executor::block_on, future::join};
     use std::{collections::BTreeMap, iter::FromIterator};
 

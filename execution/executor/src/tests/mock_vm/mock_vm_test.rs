@@ -3,15 +3,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::{balance_ap, encode_mint_transaction, encode_transfer_transaction, seqnum_ap, MockVM};
-use libra2_block_executor::txn_provider::default::DefaultTxnProvider;
-use libra2_types::{
+use creditchain_block_executor::txn_provider::default::DefaultTxnProvider;
+use creditchain_types::{
     account_address::AccountAddress,
     bytes::NumToBytes,
     state_store::{state_key::StateKey, MockStateView},
     transaction::signature_verified_transaction::into_signature_verified_block,
     write_set::WriteOp,
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use std::collections::BTreeMap;
 
 fn gen_address(index: u8) -> AccountAddress {

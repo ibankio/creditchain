@@ -1,0 +1,22 @@
+[package]
+name = "creditchain-move-e2e-benchmark"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+creditchain-language-e2e-tests = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-transaction-generator-lib = { workspace = true }
+creditchain-transaction-workloads-lib = { workspace = true }
+creditchain-types = { workspace = true }
+clap = { workspace = true }
+rand = { workspace = true }
+serde_json = { workspace = true }

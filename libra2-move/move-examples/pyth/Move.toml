@@ -1,9 +1,0 @@
-[package]
-name = "Pyth"
-version = "0.0.1"
-
-[dependencies]
-Libra2Framework = { git = "https://github.com/libra2org/libra2-framework.git", subdir = "libra2-framework", rev = "mainnet" }
-
-[addresses]
-pyth = "_"

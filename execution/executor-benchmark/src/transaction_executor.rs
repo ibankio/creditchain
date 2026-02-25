@@ -3,14 +3,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{metrics::TIMER, pipeline::LedgerUpdateMessage};
-use libra2_crypto::hash::HashValue;
-use libra2_executor::block_executor::BlockExecutor;
-use libra2_executor_types::BlockExecutorTrait;
-use libra2_logger::info;
-use libra2_types::block_executor::{
+use creditchain_crypto::hash::HashValue;
+use creditchain_executor::block_executor::BlockExecutor;
+use creditchain_executor_types::BlockExecutorTrait;
+use creditchain_logger::info;
+use creditchain_types::block_executor::{
     config::BlockExecutorConfigFromOnchain, partitioner::ExecutableBlock,
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use std::{
     sync::{mpsc, Arc},
     time::{Duration, Instant},

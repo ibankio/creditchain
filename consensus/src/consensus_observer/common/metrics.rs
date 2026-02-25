@@ -3,8 +3,8 @@
 
 #![allow(clippy::unwrap_used)]
 
-use libra2_config::network_id::{NetworkId, PeerNetworkId};
-use libra2_metrics_core::{
+use creditchain_config::network_id::{NetworkId, PeerNetworkId};
+use creditchain_metrics_core::{
     exponential_buckets, register_histogram_vec, register_int_counter, register_int_counter_vec,
     register_int_gauge_vec, HistogramVec, IntCounter, IntCounterVec, IntGaugeVec,
 };

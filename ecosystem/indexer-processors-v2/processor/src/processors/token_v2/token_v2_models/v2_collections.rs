@@ -23,7 +23,7 @@ use crate::{
 use allocative_derive::Allocative;
 use anyhow::Context;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{WriteResource, WriteTableItem},
+   creditchain_protos::transaction::v1::{WriteResource, WriteTableItem},
     postgres::utils::database::{DbContext, DbPoolConnection},
     utils::convert::standardize_address,
 };
@@ -135,8 +135,8 @@ impl CollectionV2 {
                     );
                 }
 
-                // Getting collection mutability config from Libra2Collection
-                let collection = object_data.libra2_collection.as_ref();
+                // Getting collection mutability config from CreditChainCollection
+                let collection = object_data.creditchain_collection.as_ref();
                 if let Some(collection) = collection {
                     mutable_description = Some(collection.mutable_description);
                     mutable_uri = Some(collection.mutable_uri);

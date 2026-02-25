@@ -13,9 +13,9 @@ use crate::{
         network::Event,
     },
 };
-use libra2_config::network_id::PeerNetworkId;
-use libra2_infallible::RwLock;
-use libra2_types::PeerId;
+use creditchain_config::network_id::PeerNetworkId;
+use creditchain_infallible::RwLock;
+use creditchain_types::PeerId;
 use futures::{stream::FusedStream, Stream};
 use std::{
     collections::HashMap,

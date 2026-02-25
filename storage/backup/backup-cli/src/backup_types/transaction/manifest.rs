@@ -4,7 +4,7 @@
 
 use crate::storage::FileHandle;
 use anyhow::{ensure, Result};
-use libra2_types::transaction::Version;
+use creditchain_types::transaction::Version;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Deserialize, Serialize, Debug)]

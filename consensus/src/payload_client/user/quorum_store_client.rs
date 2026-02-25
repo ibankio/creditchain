@@ -5,13 +5,13 @@ use crate::{
     counters::WAIT_FOR_FULL_BLOCKS_TRIGGERED, error::QuorumStoreError, monitor,
     payload_client::user::UserPayloadClient,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::{Payload, PayloadFilter},
     payload_pull_params::{OptQSPayloadPullParams, PayloadPullParameters},
     request_response::{GetPayloadCommand, GetPayloadRequest, GetPayloadResponse},
     utils::PayloadTxnsSize,
 };
-use libra2_logger::info;
+use creditchain_logger::info;
 use fail::fail_point;
 use futures_channel::{mpsc, oneshot};
 use std::time::{Duration, Instant};

@@ -14,13 +14,13 @@ use crate::{
     liveness::proposer_election::{choose_index, ProposerElection},
 };
 use anyhow::{ensure, Result};
-use libra2_bitvec::BitVec;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_crypto::HashValue;
-use libra2_infallible::{Mutex, MutexGuard};
-use libra2_logger::prelude::*;
-use libra2_storage_interface::DbReader;
-use libra2_types::{
+use creditchain_bitvec::BitVec;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_crypto::HashValue;
+use creditchain_infallible::{Mutex, MutexGuard};
+use creditchain_logger::prelude::*;
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{
     account_config::NewBlockEvent, epoch_change::EpochChangeProof, epoch_state::EpochState,
 };
 use std::{
@@ -51,19 +51,19 @@ pub struct VersionedNewBlockEvent {
     pub version: u64,
 }
 
-pub struct Libra2DBBackend {
+pub struct CreditChainDBBackend {
     window_size: usize,
     seek_len: usize,
-    libra2_db: Arc<dyn DbReader>,
+    creditchain_db: Arc<dyn DbReader>,
     db_result: Mutex<Option<(Vec<VersionedNewBlockEvent>, u64, bool)>>,
 }
 
-impl Libra2DBBackend {
-    pub fn new(window_size: usize, seek_len: usize, libra2_db: Arc<dyn DbReader>) -> Self {
+impl CreditChainDBBackend {
+    pub fn new(window_size: usize, seek_len: usize, creditchain_db: Arc<dyn DbReader>) -> Self {
         Self {
             window_size,
             seek_len,
-            libra2_db,
+            creditchain_db,
             db_result: Mutex::new(None),
         }
     }
@@ -76,7 +76,7 @@ impl Libra2DBBackend {
         // assumes target round is not too far from latest commit
         let limit = self.window_size + self.seek_len;
 
-        let events = self.libra2_db.get_latest_block_events(limit)?;
+        let events = self.creditchain_db.get_latest_block_events(limit)?;
 
         let max_returned_version = events.first().map_or(0, |first| first.transaction_version);
 
@@ -152,7 +152,7 @@ impl Libra2DBBackend {
             (result, HashValue::zero())
         } else {
             let root_hash = self
-                .libra2_db
+                .creditchain_db
                 .get_accumulator_root_hash(max_version)
                 .unwrap_or_else(|_| {
                     error!(
@@ -166,7 +166,7 @@ impl Libra2DBBackend {
     }
 }
 
-impl MetadataBackend for Libra2DBBackend {
+impl MetadataBackend for CreditChainDBBackend {
     // assume the target_round only increases
     fn get_block_metadata(
         &self,
@@ -174,7 +174,7 @@ impl MetadataBackend for Libra2DBBackend {
         target_round: Round,
     ) -> (Vec<NewBlockEvent>, HashValue) {
         let mut locked = self.db_result.lock();
-        let latest_db_version = self.libra2_db.get_latest_ledger_info_version().unwrap_or(0);
+        let latest_db_version = self.creditchain_db.get_latest_ledger_info_version().unwrap_or(0);
         // lazy init db_result
         if locked.is_none() {
             if let Err(e) = self.refresh_db_result(&mut locked, latest_db_version) {

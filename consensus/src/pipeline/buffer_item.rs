@@ -4,16 +4,16 @@
 
 use crate::{counters, pipeline::hashable::Hashable};
 use anyhow::anyhow;
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::{Author, Round},
     pipeline::commit_vote::CommitVote,
     pipelined_block::PipelinedBlock,
 };
-use libra2_crypto::{bls12381, HashValue};
-use libra2_executor_types::ExecutorResult;
-use libra2_logger::prelude::*;
-use libra2_reliable_broadcast::DropGuard;
-use libra2_types::{
+use creditchain_crypto::{bls12381, HashValue};
+use creditchain_executor_types::ExecutorResult;
+use creditchain_logger::prelude::*;
+use creditchain_reliable_broadcast::DropGuard;
+use creditchain_types::{
     block_info::BlockInfo,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures, SignatureAggregator},
     validator_verifier::ValidatorVerifier,
@@ -457,10 +457,10 @@ impl BufferItem {
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_consensus_types::{block::Block, block_data::BlockData};
-    use libra2_crypto::HashValue;
-    use libra2_executor_types::state_compute_result::StateComputeResult;
-    use libra2_types::{
+    use creditchain_consensus_types::{block::Block, block_data::BlockData};
+    use creditchain_crypto::HashValue;
+    use creditchain_executor_types::state_compute_result::StateComputeResult;
+    use creditchain_types::{
         aggregate_signature::AggregateSignature,
         ledger_info::LedgerInfo,
         validator_signer::ValidatorSigner,

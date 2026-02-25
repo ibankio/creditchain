@@ -1,5 +1,5 @@
 module poc::validate_pubkey_internal {
-    use libra2_std::bls12381;
+    use creditchain_std::bls12381;
     use std::option::{Self, Option};
 
     public entry fun main(_owner: &signer) {

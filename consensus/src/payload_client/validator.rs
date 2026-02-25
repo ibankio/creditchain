@@ -1,9 +1,9 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_types::validator_txn::ValidatorTransaction;
-use libra2_validator_transaction_pool as vtxn_pool;
-use libra2_validator_transaction_pool::VTxnPoolState;
+use creditchain_types::validator_txn::ValidatorTransaction;
+use creditchain_validator_transaction_pool as vtxn_pool;
+use creditchain_validator_transaction_pool::VTxnPoolState;
 use std::{
     ops::Add,
     time::{Duration, Instant},

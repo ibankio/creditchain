@@ -1,7 +1,7 @@
 // Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::AccountResource,
     event::{EventHandle, EventKey},

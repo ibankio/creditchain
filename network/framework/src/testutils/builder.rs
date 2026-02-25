@@ -6,7 +6,7 @@ use crate::testutils::{
     test_framework::TestFramework,
     test_node::{NodeId, NodeType, TestNode},
 };
-use libra2_config::{
+use creditchain_config::{
     config::NodeConfig,
     network_id::{NetworkId, PeerNetworkId},
 };

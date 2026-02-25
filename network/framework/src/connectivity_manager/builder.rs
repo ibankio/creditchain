@@ -8,8 +8,8 @@ use crate::{
     counters,
     peer_manager::{conn_notifs_channel, ConnectionRequestSender},
 };
-use libra2_config::{config::PeerSet, network_id::NetworkContext};
-use libra2_time_service::TimeService;
+use creditchain_config::{config::PeerSet, network_id::NetworkContext};
+use creditchain_time_service::TimeService;
 use std::{sync::Arc, time::Duration};
 use tokio::runtime::Handle;
 use tokio_retry::strategy::ExponentialBackoff;
@@ -18,7 +18,7 @@ pub type ConnectivityManagerService = ConnectivityManager<ExponentialBackoff>;
 
 pub struct ConnectivityManagerBuilder {
     connectivity_manager: Option<ConnectivityManagerService>,
-    conn_mgr_reqs_tx: libra2_channels::Sender<ConnectivityRequest>,
+    conn_mgr_reqs_tx: creditchain_channels::Sender<ConnectivityRequest>,
 }
 
 impl ConnectivityManagerBuilder {
@@ -37,7 +37,7 @@ impl ConnectivityManagerBuilder {
         mutual_authentication: bool,
         enable_latency_aware_dialing: bool,
     ) -> Self {
-        let (conn_mgr_reqs_tx, conn_mgr_reqs_rx) = libra2_channels::new(
+        let (conn_mgr_reqs_tx, conn_mgr_reqs_rx) = creditchain_channels::new(
             channel_size,
             &counters::PENDING_CONNECTIVITY_MANAGER_REQUESTS,
         );
@@ -62,7 +62,7 @@ impl ConnectivityManagerBuilder {
         }
     }
 
-    pub fn conn_mgr_reqs_tx(&self) -> libra2_channels::Sender<ConnectivityRequest> {
+    pub fn conn_mgr_reqs_tx(&self) -> creditchain_channels::Sender<ConnectivityRequest> {
         self.conn_mgr_reqs_tx.clone()
     }
 

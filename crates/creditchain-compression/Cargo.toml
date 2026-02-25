@@ -1,0 +1,27 @@
+[package]
+name = "creditchain-compression"
+description = "A unified compression interface and implementation offered by CreditChain"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+lz4 = { workspace = true }
+once_cell = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+creditchain-crypto = { workspace = true }
+creditchain-types = { workspace = true }
+bcs = { workspace = true }
+rand = { workspace = true }
+serde = { workspace = true }

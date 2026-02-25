@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{
-    metrics::{LIBRA2_SCHEMADB_DELETES_SAMPLED, LIBRA2_SCHEMADB_PUT_BYTES_SAMPLED, TIMER},
+    metrics::{CREDITCHAIN_SCHEMADB_DELETES_SAMPLED, CREDITCHAIN_SCHEMADB_PUT_BYTES_SAMPLED, TIMER},
     schema::{KeyCodec, Schema, ValueCodec},
     ColumnFamilyName, DB,
 };
-use libra2_drop_helper::DropHelper;
-use libra2_metrics_core::TimerHelper;
-use libra2_storage_interface::Result as DbResult;
+use creditchain_drop_helper::DropHelper;
+use creditchain_metrics_core::TimerHelper;
+use creditchain_storage_interface::Result as DbResult;
 use std::{
     collections::HashMap,
     fmt::{Debug, Formatter},
@@ -32,13 +32,13 @@ impl BatchStats {
     fn commit(&self) {
         for (cf_name, put_sizes) in &self.put_sizes {
             for put_size in put_sizes {
-                LIBRA2_SCHEMADB_PUT_BYTES_SAMPLED
+                CREDITCHAIN_SCHEMADB_PUT_BYTES_SAMPLED
                     .with_label_values(&[cf_name])
                     .observe(*put_size as f64);
             }
         }
         for (cf_name, num_deletes) in &self.num_deletes {
-            LIBRA2_SCHEMADB_DELETES_SAMPLED
+            CREDITCHAIN_SCHEMADB_DELETES_SAMPLED
                 .with_label_values(&[cf_name])
                 .inc_by(*num_deletes as u64);
         }

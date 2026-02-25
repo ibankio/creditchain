@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_metrics_core::{exponential_buckets, HistogramVec};
+use creditchain_metrics_core::{exponential_buckets, HistogramVec};
 use once_cell::sync::Lazy;
 use prometheus::{
     core::{self, Collector},

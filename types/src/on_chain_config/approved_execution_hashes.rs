@@ -17,6 +17,6 @@ impl ApprovedExecutionHashes {
 }
 
 impl OnChainConfig for ApprovedExecutionHashes {
-    const MODULE_IDENTIFIER: &'static str = "libra2_governance";
+    const MODULE_IDENTIFIER: &'static str = "creditchain_governance";
     const TYPE_IDENTIFIER: &'static str = "ApprovedExecutionHashes";
 }

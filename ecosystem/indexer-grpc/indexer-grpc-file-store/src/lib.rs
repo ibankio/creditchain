@@ -5,8 +5,8 @@ pub mod metrics;
 pub mod processor;
 
 use anyhow::Result;
-use libra2_indexer_grpc_server_framework::RunnableConfig;
-use libra2_indexer_grpc_utils::{config::IndexerGrpcFileStoreConfig, types::RedisUrl};
+use creditchain_indexer_grpc_server_framework::RunnableConfig;
+use creditchain_indexer_grpc_utils::{config::IndexerGrpcFileStoreConfig, types::RedisUrl};
 use processor::Processor;
 use serde::{Deserialize, Serialize};
 

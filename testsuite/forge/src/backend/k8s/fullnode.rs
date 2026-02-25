@@ -8,15 +8,15 @@ use crate::{
     VALIDATOR_0_STATEFUL_SET_NAME,
 };
 use anyhow::Context;
-use libra2_config::{
+use creditchain_config::{
     config::{
         ApiConfig, BaseConfig, DiscoveryMethod, ExecutionConfig, NetworkConfig, NodeConfig,
         OverrideNodeConfig, RoleType, WaypointConfig,
     },
     network_id::NetworkId,
 };
-use libra2_sdk::types::PeerId;
-use libra2_short_hex_str::AsShortHexStr;
+use creditchain_sdk::types::PeerId;
+use creditchain_short_hex_str::AsShortHexStr;
 use k8s_openapi::{
     api::{
         apps::v1::{StatefulSet, StatefulSetSpec},
@@ -39,8 +39,8 @@ use std::{
 };
 use tempfile::TempDir;
 
-// these are constants given by the libra2-node helm chart
-// see terraform/helm/libra2-node/templates/validator.yaml
+// these are constants given by the creditchain-node helm chart
+// see terraform/helm/creditchain-node/templates/validator.yaml
 
 // the name of the NodeConfig for the PFN, as well as the key in the k8s ConfigMap
 // where the NodeConfig is stored
@@ -52,12 +52,12 @@ const GENESIS_CONFIG_VOLUME_PATH: &str = "/opt/libra2/genesis";
 const GENESIS_CONFIG_WRITABLE_VOLUME_NAME: &str = "writable-genesis";
 
 // the path where the config file is mounted in the fullnode
-const libra2_config_VOLUME_NAME: &str = "libra2-config";
-const libra2_config_VOLUME_PATH: &str = "/opt/libra2/etc";
+const creditchain_config_VOLUME_NAME: &str = "creditchain-config";
+const creditchain_config_VOLUME_PATH: &str = "/opt/libra2/etc";
 
 // the path where the data volume is mounted in the fullnode
-const LIBRA2_DATA_VOLUME_NAME: &str = "libra2-data";
-const LIBRA2_DATA_VOLUME_PATH: &str = "/opt/libra2/data";
+const CREDITCHAIN_DATA_VOLUME_NAME: &str = "creditchain-data";
+const CREDITCHAIN_DATA_VOLUME_PATH: &str = "/opt/libra2/data";
 
 /// Derive the fullnode image from the validator image. They will share the same image repo (validator), but not necessarily the version (image tag)
 fn get_fullnode_image_from_validator_image(
@@ -109,7 +109,7 @@ fn create_fullnode_persistent_volume_claim(
 
     Ok(PersistentVolumeClaim {
         metadata: ObjectMeta {
-            name: Some(LIBRA2_DATA_VOLUME_NAME.to_string()),
+            name: Some(CREDITCHAIN_DATA_VOLUME_NAME.to_string()),
             ..ObjectMeta::default()
         },
         spec: Some(PersistentVolumeClaimSpec {
@@ -170,19 +170,19 @@ fn create_fullnode_container(
     Ok(Container {
         image: Some(fullnode_image),
         args: Some(vec![
-            "/usr/local/bin/libra2-node".to_string(),
+            "/usr/local/bin/creditchain-node".to_string(),
             "-f".to_string(),
             format!("/opt/libra2/etc/{}", FULLNODE_CONFIG_MAP_KEY),
         ]),
         volume_mounts: Some(vec![
             VolumeMount {
-                mount_path: libra2_config_VOLUME_PATH.to_string(),
-                name: libra2_config_VOLUME_NAME.to_string(),
+                mount_path: creditchain_config_VOLUME_PATH.to_string(),
+                name: creditchain_config_VOLUME_NAME.to_string(),
                 ..VolumeMount::default()
             },
             VolumeMount {
-                mount_path: LIBRA2_DATA_VOLUME_PATH.to_string(),
-                name: LIBRA2_DATA_VOLUME_NAME.to_string(),
+                mount_path: CREDITCHAIN_DATA_VOLUME_PATH.to_string(),
+                name: CREDITCHAIN_DATA_VOLUME_NAME.to_string(),
                 ..VolumeMount::default()
             },
             VolumeMount {
@@ -211,7 +211,7 @@ fn create_fullnode_volumes(
             ..Volume::default()
         },
         Volume {
-            name: libra2_config_VOLUME_NAME.to_string(),
+            name: creditchain_config_VOLUME_NAME.to_string(),
             config_map: Some(ConfigMapVolumeSource {
                 name: Some(fullnode_node_config_config_map_name),
                 ..ConfigMapVolumeSource::default()
@@ -307,7 +307,7 @@ pub fn get_default_pfn_node_config() -> NodeConfig {
     NodeConfig {
         base: BaseConfig {
             role: RoleType::FullNode,
-            data_dir: PathBuf::from(LIBRA2_DATA_VOLUME_PATH),
+            data_dir: PathBuf::from(CREDITCHAIN_DATA_VOLUME_PATH),
             waypoint: WaypointConfig::FromFile(waypoint_path),
             ..BaseConfig::default()
         },
@@ -514,15 +514,15 @@ pub async fn install_public_fullnode<'a>(
 mod tests {
     use super::*;
     use crate::MockK8sResourceApi;
-    use libra2_config::config::Identity;
-    use libra2_sdk::crypto::{x25519::PrivateKey, Uniform};
+    use creditchain_config::config::Identity;
+    use creditchain_sdk::crypto::{x25519::PrivateKey, Uniform};
     use k8s_openapi::apimachinery::pkg::api::resource::Quantity;
 
-    /// Get a dummy validator persistent volume claim that looks like one created by terraform/helm/libra2-node/templates/validator.yaml
+    /// Get a dummy validator persistent volume claim that looks like one created by terraform/helm/creditchain-node/templates/validator.yaml
     fn get_dummy_validator_persistent_volume_claim() -> PersistentVolumeClaim {
         PersistentVolumeClaim {
             metadata: ObjectMeta {
-                name: Some("libra2-node-0-validator-e42069".to_string()),
+                name: Some("creditchain-node-0-validator-e42069".to_string()),
                 ..ObjectMeta::default()
             },
             spec: Some(PersistentVolumeClaimSpec {
@@ -545,7 +545,7 @@ mod tests {
         }
     }
 
-    /// Get a dummy validator stateful set that looks like one created by terraform/helm/libra2-node/templates/validator.yaml
+    /// Get a dummy validator stateful set that looks like one created by terraform/helm/creditchain-node/templates/validator.yaml
     fn get_dummy_validator_stateful_set() -> StatefulSet {
         let labels: BTreeMap<String, String> = [
             (
@@ -554,7 +554,7 @@ mod tests {
             ),
             (
                 "app.kubernetes.io/instance".to_string(),
-                "libra2-node-0-validator-0".to_string(),
+                "creditchain-node-0-validator-0".to_string(),
             ),
             (
                 "app.kubernetes.io/part-of".to_string(),
@@ -566,7 +566,7 @@ mod tests {
         .collect();
         StatefulSet {
             metadata: ObjectMeta {
-                name: Some("libra2-node-0-validator".to_string()),
+                name: Some("creditchain-node-0-validator".to_string()),
                 labels: Some(labels.clone()),
                 ..ObjectMeta::default()
             },
@@ -584,19 +584,19 @@ mod tests {
                                 "banana.fruit.libra2/potato/validator:banana_image_tag".to_string(),
                             ),
                             command: Some(vec![
-                                "/usr/local/bin/libra2-node".to_string(),
+                                "/usr/local/bin/creditchain-node".to_string(),
                                 "-f".to_string(),
                                 "/opt/libra2/etc/validator.yaml".to_string(),
                             ]),
                             volume_mounts: Some(vec![
                                 VolumeMount {
-                                    mount_path: libra2_config_VOLUME_PATH.to_string(),
-                                    name: libra2_config_VOLUME_NAME.to_string(),
+                                    mount_path: creditchain_config_VOLUME_PATH.to_string(),
+                                    name: creditchain_config_VOLUME_NAME.to_string(),
                                     ..VolumeMount::default()
                                 },
                                 VolumeMount {
-                                    mount_path: LIBRA2_DATA_VOLUME_PATH.to_string(),
-                                    name: LIBRA2_DATA_VOLUME_NAME.to_string(),
+                                    mount_path: CREDITCHAIN_DATA_VOLUME_PATH.to_string(),
+                                    name: CREDITCHAIN_DATA_VOLUME_NAME.to_string(),
                                     ..VolumeMount::default()
                                 },
                                 VolumeMount {
@@ -619,7 +619,7 @@ mod tests {
     #[tokio::test]
     /// Test that we can create a node config configmap and that it contains the node config at a known data key
     async fn test_create_node_config_map() {
-        let config_map_name = "libra2-node-0-validator-0-config".to_string();
+        let config_map_name = "creditchain-node-0-validator-0-config".to_string();
         let node_config = NodeConfig::default();
         let override_config = OverrideNodeConfig::new_with_default_base(node_config.clone());
 
@@ -654,7 +654,7 @@ mod tests {
         );
         let pvc = PersistentVolumeClaim {
             metadata: ObjectMeta {
-                name: Some(LIBRA2_DATA_VOLUME_NAME.to_string()),
+                name: Some(CREDITCHAIN_DATA_VOLUME_NAME.to_string()),
                 ..ObjectMeta::default()
             },
             spec: Some(PersistentVolumeClaimSpec {
@@ -684,7 +684,7 @@ mod tests {
         let peer_id = PeerId::random();
         let fullnode_name = "fullnode-".to_string() + &peer_id.to_string(); // everything should be keyed on this
         let fullnode_image = "fruit.com/banana:latest".to_string();
-        let fullnode_genesis_secret_name = format!("libra2-node-0-genesis-e{}", era);
+        let fullnode_genesis_secret_name = format!("creditchain-node-0-genesis-e{}", era);
         let fullnode_node_config_config_map_name = format!("{}-config", fullnode_name);
 
         let fullnode_stateful_set = create_fullnode_stateful_set(

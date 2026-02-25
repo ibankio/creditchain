@@ -1,8 +1,8 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_bitvec::BitVec;
-use libra2_consensus_types::common::Round;
+use creditchain_bitvec::BitVec;
+use creditchain_consensus_types::common::Round;
 use serde::{Deserialize, Serialize};
 use std::ops::Deref;
 use thiserror::Error as ThisError;

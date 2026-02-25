@@ -5,9 +5,9 @@ use crate::{
     remote_cordinator_client::RemoteCoordinatorClient,
     remote_cross_shard_client::RemoteCrossShardClient, remote_state_view::RemoteStateViewClient,
 };
-use libra2_secure_net::network_controller::NetworkController;
-use libra2_types::block_executor::partitioner::ShardId;
-use libra2_vm::sharded_block_executor::sharded_executor_service::ShardedExecutorService;
+use creditchain_secure_net::network_controller::NetworkController;
+use creditchain_types::block_executor::partitioner::ShardId;
+use creditchain_vm::sharded_block_executor::sharded_executor_service::ShardedExecutorService;
 use std::{net::SocketAddr, sync::Arc, thread};
 
 /// A service that provides support for remote execution. Essentially, it reads a request from

@@ -12,11 +12,11 @@ use crate::{
     workspace_builder::workspace_root,
 };
 use anyhow::{bail, Result};
-use libra2_backup_cli::metadata::view::BackupStorageState;
-use libra2_forge::{reconfig, Libra2PublicInfo, Node, NodeExt, Swarm, SwarmExt};
-use libra2_logger::info;
-use libra2_temppath::TempPath;
-use libra2_types::{transaction::Version, waypoint::Waypoint};
+use creditchain_backup_cli::metadata::view::BackupStorageState;
+use creditchain_forge::{reconfig, CreditChainPublicInfo, Node, NodeExt, Swarm, SwarmExt};
+use creditchain_logger::info;
+use creditchain_temppath::TempPath;
+use creditchain_types::{transaction::Version, waypoint::Waypoint};
 use itertools::Itertools;
 use std::{
     fs,
@@ -34,9 +34,9 @@ const LINE: &str = "----------";
 #[tokio::test]
 async fn test_db_restore() {
     // pre-build tools
-    ::libra2_logger::Logger::new().init();
+    ::creditchain_logger::Logger::new().init();
     info!("---------- 0. test_db_restore started.");
-    workspace_builder::get_bin("libra2-debugger");
+    workspace_builder::get_bin("creditchain-debugger");
     info!("---------- 1. pre-building finished.");
 
     let mut swarm = SwarmBuilder::new_local(4).with_libra2().build().await;
@@ -180,15 +180,15 @@ async fn test_db_restore() {
 }
 
 fn db_backup_verify(backup_path: &Path, trusted_waypoints: &[Waypoint]) {
-    info!("---------- running libra2-debugger libra2-db backup-verify");
+    info!("---------- running creditchain-debugger creditchain-db backup-verify");
     let now = Instant::now();
-    let bin_path = workspace_builder::get_bin("libra2-debugger");
+    let bin_path = workspace_builder::get_bin("creditchain-debugger");
     let metadata_cache_path = TempPath::new();
 
     metadata_cache_path.create_as_dir().unwrap();
 
     let mut cmd = Command::new(bin_path.as_path());
-    cmd.args(["libra2-db", "backup", "verify"]);
+    cmd.args(["creditchain-db", "backup", "verify"]);
     trusted_waypoints.iter().for_each(|w| {
         cmd.arg("--trust-waypoint");
         cmd.arg(&w.to_string());
@@ -213,14 +213,14 @@ fn db_backup_verify(backup_path: &Path, trusted_waypoints: &[Waypoint]) {
 fn replay_verify(backup_path: &Path, trusted_waypoints: &[Waypoint]) {
     info!("---------- running replay-verify");
     let now = Instant::now();
-    let bin_path = workspace_builder::get_bin("libra2-debugger");
+    let bin_path = workspace_builder::get_bin("creditchain-debugger");
     let metadata_cache_path = TempPath::new();
     let target_db_dir = TempPath::new();
 
     metadata_cache_path.create_as_dir().unwrap();
 
     let mut cmd = Command::new(bin_path.as_path());
-    cmd.args(["libra2-db", "replay-verify"]);
+    cmd.args(["creditchain-db", "replay-verify"]);
     trusted_waypoints.iter().for_each(|w| {
         cmd.arg("--trust-waypoint");
         cmd.arg(&w.to_string());
@@ -303,7 +303,7 @@ fn get_backup_storage_state(
     let output = Command::new(bin_path)
         .current_dir(workspace_root())
         .args([
-            "libra2-db",
+            "creditchain-db",
             "backup",
             "query",
             "backup-storage-state",
@@ -330,7 +330,7 @@ pub(crate) fn db_backup(
 ) -> (TempPath, Version) {
     info!("---------- running libra2 db tool backup");
     let now = Instant::now();
-    let bin_path = workspace_builder::get_bin("libra2-debugger");
+    let bin_path = workspace_builder::get_bin("creditchain-debugger");
     let metadata_cache_path1 = TempPath::new();
     let metadata_cache_path2 = TempPath::new();
     let backup_path = TempPath::new();
@@ -347,7 +347,7 @@ pub(crate) fn db_backup(
     let mut backup_coordinator = Command::new(bin_path.as_path())
         .current_dir(workspace_root())
         .args([
-            "libra2-db",
+            "creditchain-db",
             "backup",
             "continuously",
             "--backup-service-address",
@@ -381,7 +381,7 @@ pub(crate) fn db_backup(
     let compaction = Command::new(bin_path.as_path())
         .current_dir(workspace_root())
         .args([
-            "libra2-db",
+            "creditchain-db",
             "backup-maintenance",
             "compact",
             "--epoch-ending-file-compact-factor",
@@ -417,13 +417,13 @@ pub(crate) fn db_restore(
     target_verion: Option<Version>, /* target version should be same as epoch ending version to start a node */
 ) {
     let now = Instant::now();
-    let bin_path = workspace_builder::get_bin("libra2-debugger");
+    let bin_path = workspace_builder::get_bin("creditchain-debugger");
     let metadata_cache_path = TempPath::new();
 
     metadata_cache_path.create_as_dir().unwrap();
 
     let mut cmd = Command::new(bin_path.as_path());
-    cmd.args(["libra2-db", "restore", "bootstrap-db"]);
+    cmd.args(["creditchain-db", "restore", "bootstrap-db"]);
     trusted_waypoints.iter().for_each(|w| {
         cmd.arg("--trust-waypoint");
         cmd.arg(&w.to_string());
@@ -454,7 +454,7 @@ pub(crate) fn db_restore(
     info!("Backup restored in {} seconds.", now.elapsed().as_secs());
 }
 
-async fn do_transfer_or_reconfig(info: &mut Libra2PublicInfo) -> Result<()> {
+async fn do_transfer_or_reconfig(info: &mut CreditChainPublicInfo) -> Result<()> {
     const LOTS_MONEY: u64 = 100_000_000;
     let r = rand::random::<u64>() % 10;
     if r < 3 {
@@ -481,7 +481,7 @@ async fn do_transfer_or_reconfig(info: &mut Libra2PublicInfo) -> Result<()> {
     Ok(())
 }
 
-async fn do_transfers_and_reconfigs(mut info: Libra2PublicInfo, quit_flag: Arc<AtomicBool>) {
+async fn do_transfers_and_reconfigs(mut info: CreditChainPublicInfo, quit_flag: Arc<AtomicBool>) {
     // loop until aborted
     while !quit_flag.load(Ordering::Acquire) {
         do_transfer_or_reconfig(&mut info).await.unwrap();
@@ -490,7 +490,7 @@ async fn do_transfers_and_reconfigs(mut info: Libra2PublicInfo, quit_flag: Arc<A
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 10)]
 async fn test_db_restart() {
-    ::libra2_logger::Logger::new().init();
+    ::creditchain_logger::Logger::new().init();
 
     info!("{LINE} Test started.");
     let mut swarm = SwarmBuilder::new_local(4).with_libra2().build().await;
@@ -505,7 +505,7 @@ async fn test_db_restart() {
     let non_restarting_validator_id = restarting_validator_ids.pop().unwrap();
     let non_restarting_validator = swarm.validator(non_restarting_validator_id).unwrap();
     let chain_info = swarm.chain_info();
-    let mut pub_chain_info = Libra2PublicInfo::new(
+    let mut pub_chain_info = CreditChainPublicInfo::new(
         chain_info.chain_id(),
         non_restarting_validator
             .inspection_service_endpoint()

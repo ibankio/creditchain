@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::util::time_service::{ScheduledTask, TimeService};
-use libra2_infallible::Mutex;
-use libra2_logger::prelude::*;
+use creditchain_infallible::Mutex;
+use creditchain_logger::prelude::*;
 use async_trait::async_trait;
 use futures::future::AbortHandle;
 use std::{sync::Arc, time::Duration};

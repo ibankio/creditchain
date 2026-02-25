@@ -13,16 +13,16 @@ use crate::{
         utils::Timeouts,
     },
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     payload::TDataInfo,
     proof_of_store::{
         BatchInfo, ProofCache, ProofOfStore, SignedBatchInfo, SignedBatchInfoError,
         SignedBatchInfoMsg,
     },
 };
-use libra2_logger::prelude::*;
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_types::{
+use creditchain_logger::prelude::*;
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_types::{
     ledger_info::SignatureAggregator, validator_verifier::ValidatorVerifier, PeerId,
 };
 use std::{

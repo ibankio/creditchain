@@ -1,5 +1,5 @@
 module poc::point_add_internal {
-    use libra2_std::ristretto255::{Self, RistrettoPoint};
+    use creditchain_std::ristretto255::{Self, RistrettoPoint};
 
     public entry fun main(_owner: &signer) {
         let point1: RistrettoPoint = ristretto255::basepoint();

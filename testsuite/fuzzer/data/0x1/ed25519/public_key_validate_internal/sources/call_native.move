@@ -1,5 +1,5 @@
 module poc::public_key_validate_internal {
-    use libra2_std::ed25519::{Self};
+    use creditchain_std::ed25519::{Self};
     use std::option::{Self};
     use std::vector;
 

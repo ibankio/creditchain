@@ -4,7 +4,7 @@
 use crate::network_controller::{
     inbound_handler::InboundHandler, outbound_handler::OutboundHandler,
 };
-use libra2_logger::{info, warn};
+use creditchain_logger::{info, warn};
 use crossbeam_channel::{unbounded, Receiver, Sender};
 use serde::{Deserialize, Serialize};
 use std::{
@@ -168,7 +168,7 @@ impl NetworkController {
 #[cfg(test)]
 mod tests {
     use crate::network_controller::{Message, NetworkController};
-    use libra2_config::utils;
+    use creditchain_config::utils;
     use std::{
         net::{IpAddr, Ipv4Addr, SocketAddr},
         thread,

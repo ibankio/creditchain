@@ -15,17 +15,17 @@ use url::Url;
 async fn main() -> Result<()> {
     let cache = PackageCache::new_with_listener("./data", DebugPackageCacheListener).unwrap();
 
-    let libra2_framework_url =
+    let creditchain_framework_url =
         Url::from_str("https://github.com/libra2org/libra2-framework").unwrap();
 
     let oid = cache
-        .resolve_git_revision(&libra2_framework_url, "main")
+        .resolve_git_revision(&creditchain_framework_url, "main")
         .await?;
-    cache.checkout_git_repo(&libra2_framework_url, oid).await?;
+    cache.checkout_git_repo(&creditchain_framework_url, oid).await?;
 
     cache
         .fetch_on_chain_package(
-            Url::from_str("https://fullnode.mainnet.libra2.org").unwrap(),
+            Url::from_str("https://fullnode.mainnet.creditchain.io").unwrap(),
             3022354983,
             AccountAddress::ONE,
             "MoveStdlib",

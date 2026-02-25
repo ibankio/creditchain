@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Result;
-use libra2_crypto::HashValue;
-use libra2_experimental_layered_map::{LayeredMap, MapLayer};
-use libra2_schemadb::{
+use creditchain_crypto::HashValue;
+use creditchain_experimental_layered_map::{LayeredMap, MapLayer};
+use creditchain_schemadb::{
     batch::WriteBatch,
     define_schema,
     schema::{KeyCodec, ValueCodec},
     DB, DEFAULT_COLUMN_FAMILY_NAME,
 };
-use libra2_temppath::TempPath;
+use creditchain_temppath::TempPath;
 use criterion::{
     criterion_group, criterion_main, measurement::WallTime, BatchSize, BenchmarkGroup, Criterion,
 };

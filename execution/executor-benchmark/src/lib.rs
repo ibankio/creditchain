@@ -20,23 +20,23 @@ use crate::{
     db_access::DbAccessUtil, pipeline::Pipeline, transaction_committer::TransactionCommitter,
     transaction_executor::TransactionExecutor, transaction_generator::TransactionGenerator,
 };
-use libra2_config::config::{NodeConfig, PrunerConfig, NO_OP_STORAGE_PRUNER_CONFIG};
-use libra2_db::Libra2DB;
-use libra2_executor::block_executor::BlockExecutor;
-use libra2_jellyfish_merkle::metrics::{
-    LIBRA2_JELLYFISH_INTERNAL_ENCODED_BYTES, LIBRA2_JELLYFISH_LEAF_ENCODED_BYTES,
+use creditchain_config::config::{NodeConfig, PrunerConfig, NO_OP_STORAGE_PRUNER_CONFIG};
+use creditchain_db::CreditChainDB;
+use creditchain_executor::block_executor::BlockExecutor;
+use creditchain_jellyfish_merkle::metrics::{
+    CREDITCHAIN_JELLYFISH_INTERNAL_ENCODED_BYTES, CREDITCHAIN_JELLYFISH_LEAF_ENCODED_BYTES,
 };
-use libra2_logger::{info, warn};
-use libra2_sdk::types::LocalAccount;
-use libra2_storage_interface::{
+use creditchain_logger::{info, warn};
+use creditchain_sdk::types::LocalAccount;
+use creditchain_storage_interface::{
     state_store::state_view::db_state_view::LatestDbStateCheckpointView, DbReader, DbReaderWriter,
 };
-use libra2_transaction_generator_lib::{
+use creditchain_transaction_generator_lib::{
     create_txn_generator_creator, AlwaysApproveRootAccountHandle, TransactionGeneratorCreator,
     TransactionType::{self, CoinTransfer},
 };
-use libra2_types::on_chain_config::{FeatureFlag, Features};
-use libra2_vm::{libra2_vm::Libra2VMBlockExecutor, Libra2VM, VMBlockExecutor};
+use creditchain_types::on_chain_config::{FeatureFlag, Features};
+use creditchain_vm::{creditchain_vm::CreditChainVMBlockExecutor, CreditChainVM, VMBlockExecutor};
 use db_generator::create_db_with_accounts;
 use db_reliable_submitter::DbReliableTransactionSubmitter;
 use measurements::{EventMeasurements, OverallMeasurement, OverallMeasuring};
@@ -63,7 +63,7 @@ pub fn default_benchmark_features() -> Features {
 
 pub fn init_db(config: &NodeConfig) -> DbReaderWriter {
     DbReaderWriter::new(
-        Libra2DB::open(
+        CreditChainDB::open(
             config.storage.get_dir_paths(),
             false, /* readonly */
             config.storage.storage_pruner_config,
@@ -88,7 +88,7 @@ fn create_checkpoint(
     }
     std::fs::create_dir_all(checkpoint_dir.as_ref()).unwrap();
 
-    Libra2DB::create_checkpoint(source_dir, checkpoint_dir, enable_storage_sharding)
+    CreditChainDB::create_checkpoint(source_dir, checkpoint_dir, enable_storage_sharding)
         .expect("db checkpoint creation fails.");
 }
 
@@ -103,7 +103,7 @@ pub enum BenchmarkWorkload {
 
 enum InitializedBenchmarkWorkload {
     TransactionMix {
-        transaction_generators: Vec<Box<dyn libra2_transaction_generator_lib::TransactionGenerator>>,
+        transaction_generators: Vec<Box<dyn creditchain_transaction_generator_lib::TransactionGenerator>>,
         phase: Arc<AtomicUsize>,
         workload_name: String,
     },
@@ -141,7 +141,7 @@ where
         enable_storage_sharding,
     );
     let (mut config, genesis_key) =
-        libra2_genesis::test_utils::test_config_with_custom_features(init_features);
+        creditchain_genesis::test_utils::test_config_with_custom_features(init_features);
     config.storage.dir = checkpoint_dir.as_ref().to_path_buf();
     config.storage.storage_pruner_config = pruner_config;
     config.storage.rocksdb_configs.enable_storage_sharding = enable_storage_sharding;
@@ -155,7 +155,7 @@ where
             if matches!(transaction_type, CoinTransfer { non_conflicting, .. } if *non_conflicting)
             {
                 // In case of non-conflicting coin transfer,
-                // `libra2_executor_benchmark::transaction_generator::TransactionGenerator` needs to hold
+                // `creditchain_executor_benchmark::transaction_generator::TransactionGenerator` needs to hold
                 // at least `block_size` number of accounts, all as signer only.
                 num_accounts_to_load = block_size;
                 if transactions_per_sender > 1 {
@@ -201,7 +201,7 @@ where
             let (main_signer_accounts, burner_accounts) =
                 accounts_cache.split(num_main_signer_accounts);
 
-            let (transaction_generator_creator, phase) = init_workload::<Libra2VMBlockExecutor>(
+            let (transaction_generator_creator, phase) = init_workload::<CreditChainVMBlockExecutor>(
                 transaction_mix,
                 root_account.clone(),
                 main_signer_accounts,
@@ -309,7 +309,7 @@ where
     }
 
     // Assert there were no error log lines in the run.
-    assert_eq!(0, libra2_logger::ERROR_LOG_COUNT.get());
+    assert_eq!(0, creditchain_logger::ERROR_LOG_COUNT.get());
 
     OverallMeasurement::print_end_table(&staged_results, &overall_results);
     staged_events.print_end_table();
@@ -424,7 +424,7 @@ fn add_accounts_impl<V>(
     V: VMBlockExecutor + 'static,
 {
     let (mut config, genesis_key) =
-        libra2_genesis::test_utils::test_config_with_custom_features(init_features);
+        creditchain_genesis::test_utils::test_config_with_custom_features(init_features);
     config.storage.dir = output_dir.as_ref().to_path_buf();
     config.storage.storage_pruner_config = pruner_config;
     config.storage.rocksdb_configs.enable_storage_sharding = enable_storage_sharding;
@@ -485,7 +485,7 @@ fn add_accounts_impl<V>(
     );
 
     // Assert there were no error log lines in the run.
-    assert_eq!(0, libra2_logger::ERROR_LOG_COUNT.get());
+    assert_eq!(0, creditchain_logger::ERROR_LOG_COUNT.get());
 
     log_total_supply(&db.reader);
 
@@ -494,11 +494,11 @@ fn add_accounts_impl<V>(
 
     println!(
         "Total written internal nodes value size: {} bytes",
-        LIBRA2_JELLYFISH_INTERNAL_ENCODED_BYTES.get()
+        CREDITCHAIN_JELLYFISH_INTERNAL_ENCODED_BYTES.get()
     );
     println!(
         "Total written leaf nodes value size: {} bytes",
-        LIBRA2_JELLYFISH_LEAF_ENCODED_BYTES.get()
+        CREDITCHAIN_JELLYFISH_LEAF_ENCODED_BYTES.get()
     );
 }
 
@@ -525,11 +525,11 @@ pub fn run_single_with_default_params(
     concurrency_level: usize,
     mode: SingleRunMode,
 ) -> SingleRunResults {
-    libra2_logger::Logger::new().init();
+    creditchain_logger::Logger::new().init();
 
-    Libra2VM::set_num_shards_once(1);
-    Libra2VM::set_concurrency_level_once(concurrency_level);
-    Libra2VM::set_processed_transactions_detailed_counters();
+    CreditChainVM::set_num_shards_once(1);
+    CreditChainVM::set_concurrency_level_once(concurrency_level);
+    CreditChainVM::set_processed_transactions_detailed_counters();
 
     rayon::ThreadPoolBuilder::new()
         .thread_name(|index| format!("rayon-global-{}", index))
@@ -586,7 +586,7 @@ pub fn run_single_with_default_params(
         ..Default::default()
     };
 
-    create_db_with_accounts::<Libra2VMBlockExecutor>(
+    create_db_with_accounts::<CreditChainVMBlockExecutor>(
         num_accounts,       /* num_accounts */
         100000 * 100000000, /* init_account_balance */
         10000,              /* block_size */
@@ -608,7 +608,7 @@ pub fn run_single_with_default_params(
         ..Default::default()
     };
 
-    run_benchmark::<Libra2VMBlockExecutor>(
+    run_benchmark::<CreditChainVMBlockExecutor>(
         benchmark_block_size, /* block_size */
         num_blocks,           /* num_blocks */
         BenchmarkWorkload::TransactionMix(vec![(transaction_type, 1)]),
@@ -632,7 +632,7 @@ mod tests {
         db_generator::bootstrap_with_genesis,
         default_benchmark_features, init_db,
         native::{
-            libra2_vm_uncoordinated::Libra2VMParallelUncoordinatedBlockExecutor,
+            creditchain_vm_uncoordinated::CreditChainVMParallelUncoordinatedBlockExecutor,
             native_config::NativeConfig,
             native_vm::NativeVMBlockExecutor,
             parallel_uncoordinated_block_executor::{
@@ -645,15 +645,15 @@ mod tests {
         transaction_generator::TransactionGenerator,
         BenchmarkWorkload,
     };
-    use libra2_config::config::NO_OP_STORAGE_PRUNER_CONFIG;
-    use libra2_crypto::HashValue;
-    use libra2_executor::block_executor::BlockExecutor;
-    use libra2_executor_types::BlockExecutorTrait;
-    use libra2_sdk::{transaction_builder::libra2_stdlib, types::LocalAccount};
-    use libra2_temppath::TempPath;
-    use libra2_transaction_generator_lib::WorkflowProgress;
-    use libra2_transaction_workloads_lib::args::TransactionTypeArg;
-    use libra2_types::{
+    use creditchain_config::config::NO_OP_STORAGE_PRUNER_CONFIG;
+    use creditchain_crypto::HashValue;
+    use creditchain_executor::block_executor::BlockExecutor;
+    use creditchain_executor_types::BlockExecutorTrait;
+    use creditchain_sdk::{transaction_builder::creditchain_stdlib, types::LocalAccount};
+    use creditchain_temppath::TempPath;
+    use creditchain_transaction_generator_lib::WorkflowProgress;
+    use creditchain_transaction_workloads_lib::args::TransactionTypeArg;
+    use creditchain_types::{
         access_path::Path,
         account_address::AccountAddress,
         on_chain_config::{FeatureFlag, Features},
@@ -663,7 +663,7 @@ mod tests {
             TransactionOutput, TransactionPayload,
         },
     };
-    use libra2_vm::{libra2_vm::Libra2VMBlockExecutor, Libra2VM, VMBlockExecutor};
+    use creditchain_vm::{creditchain_vm::CreditChainVMBlockExecutor, CreditChainVM, VMBlockExecutor};
     use itertools::Itertools;
     use move_core_types::language_storage::StructTag;
     use rand::thread_rng;
@@ -674,7 +674,7 @@ mod tests {
 
     #[test]
     fn test_compare_vm_and_vm_uncoordinated() {
-        test_compare_prod_and_another_all_types::<Libra2VMParallelUncoordinatedBlockExecutor>(true);
+        test_compare_prod_and_another_all_types::<CreditChainVMParallelUncoordinatedBlockExecutor>(true);
     }
 
     #[test]
@@ -698,13 +698,13 @@ mod tests {
         // non_fa_features.disable(FeatureFlag::COIN_TO_FUNGIBLE_ASSET_MIGRATION);
 
         test_compare_prod_and_another::<E>(values_match, non_fa_features.clone(), |address| {
-            libra2_stdlib::libra2_account_transfer(address, 1000)
+            creditchain_stdlib::creditchain_account_transfer(address, 1000)
         });
 
         test_compare_prod_and_another::<E>(
             values_match,
             non_fa_features,
-            libra2_stdlib::libra2_account_create_account,
+            creditchain_stdlib::creditchain_account_create_account,
         );
 
         let mut fa_features = default_benchmark_features();
@@ -714,17 +714,17 @@ mod tests {
         fa_features.disable(FeatureFlag::CONCURRENT_FUNGIBLE_BALANCE);
 
         test_compare_prod_and_another::<E>(values_match, fa_features.clone(), |address| {
-            libra2_stdlib::libra2_account_fungible_transfer_only(address, 1000)
+            creditchain_stdlib::creditchain_account_fungible_transfer_only(address, 1000)
         });
 
         test_compare_prod_and_another::<E>(values_match, fa_features.clone(), |address| {
-            libra2_stdlib::libra2_account_transfer(address, 1000)
+            creditchain_stdlib::creditchain_account_transfer(address, 1000)
         });
 
         test_compare_prod_and_another::<E>(
             values_match,
             fa_features,
-            libra2_stdlib::libra2_account_create_account,
+            creditchain_stdlib::creditchain_account_create_account,
         );
     }
 
@@ -733,7 +733,7 @@ mod tests {
         features: Features,
         txn_payload_f: impl Fn(AccountAddress) -> TransactionPayload,
     ) {
-        libra2_logger::Logger::new().init();
+        creditchain_logger::Logger::new().init();
 
         let db_dir = TempPath::new();
 
@@ -742,14 +742,14 @@ mod tests {
         bootstrap_with_genesis(&db_dir, false, features.clone());
 
         let (mut config, genesis_key) =
-            libra2_genesis::test_utils::test_config_with_custom_features(features);
+            creditchain_genesis::test_utils::test_config_with_custom_features(features);
         config.storage.dir = db_dir.as_ref().to_path_buf();
         config.storage.storage_pruner_config = NO_OP_STORAGE_PRUNER_CONFIG;
         config.storage.rocksdb_configs.enable_storage_sharding = false;
 
         let (txn, vm_result) = {
             let vm_db = init_db(&config);
-            let vm_executor = BlockExecutor::<Libra2VMBlockExecutor>::new(vm_db.clone());
+            let vm_executor = BlockExecutor::<CreditChainVMBlockExecutor>::new(vm_db.clone());
 
             let root_account = TransactionGenerator::read_root_account(genesis_key, &vm_db);
             let dst = LocalAccount::generate(&mut thread_rng());
@@ -897,7 +897,7 @@ mod tests {
     ) where
         E: VMBlockExecutor + 'static,
     {
-        libra2_logger::Logger::new().init();
+        creditchain_logger::Logger::new().init();
 
         let storage_dir = TempPath::new();
         let checkpoint_dir = TempPath::new();
@@ -908,7 +908,7 @@ mod tests {
         features.enable(FeatureFlag::NEW_ACCOUNTS_DEFAULT_TO_FA_LBT_STORE);
         features.enable(FeatureFlag::OPERATIONS_DEFAULT_TO_FA_LBT_STORE);
 
-        crate::db_generator::create_db_with_accounts::<Libra2VMBlockExecutor>(
+        crate::db_generator::create_db_with_accounts::<CreditChainVMBlockExecutor>(
             100, /* num_accounts */
             // TODO(Gas): double check if this is correct
             100_000_000_000, /* init_account_balance */
@@ -956,15 +956,15 @@ mod tests {
 
     #[test]
     fn test_benchmark_default() {
-        test_generic_benchmark::<Libra2VMBlockExecutor>(None, true);
+        test_generic_benchmark::<CreditChainVMBlockExecutor>(None, true);
     }
 
     #[test]
     fn test_publish_transaction() {
-        Libra2VM::set_num_shards_once(1);
-        Libra2VM::set_concurrency_level_once(4);
-        Libra2VM::set_processed_transactions_detailed_counters();
-        test_generic_benchmark::<Libra2VMBlockExecutor>(
+        CreditChainVM::set_num_shards_once(1);
+        CreditChainVM::set_concurrency_level_once(4);
+        CreditChainVM::set_processed_transactions_detailed_counters();
+        test_generic_benchmark::<CreditChainVMBlockExecutor>(
             Some(TransactionTypeArg::RepublishAndCall),
             true,
         );
@@ -972,11 +972,11 @@ mod tests {
 
     #[test]
     fn test_benchmark_transaction() {
-        Libra2VM::set_num_shards_once(4);
-        Libra2VM::set_concurrency_level_once(4);
-        Libra2VM::set_processed_transactions_detailed_counters();
+        CreditChainVM::set_num_shards_once(4);
+        CreditChainVM::set_concurrency_level_once(4);
+        CreditChainVM::set_processed_transactions_detailed_counters();
         NativeConfig::set_concurrency_level_once(4);
-        test_generic_benchmark::<Libra2VMBlockExecutor>(
+        test_generic_benchmark::<CreditChainVMBlockExecutor>(
             Some(TransactionTypeArg::ModifyGlobalMilestoneAggV2),
             true,
         );

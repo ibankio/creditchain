@@ -1,5 +1,5 @@
 [package]
-name = "libra2-backup-service"
+name = "creditchain-backup-service"
 description = "Backup service"
 version = "0.1.1"
 
@@ -13,13 +13,13 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-crypto = { workspace = true }
-libra2-db = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
 hyper = { workspace = true }
@@ -30,10 +30,10 @@ tokio-stream = { workspace = true }
 warp = { workspace = true }
 
 [dev-dependencies]
-libra2-config = { workspace = true }
-libra2-db = { workspace = true, features = ["fuzzing"] }
-libra2-temppath = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-db = { workspace = true, features = ["fuzzing"] }
+creditchain-temppath = { workspace = true }
 reqwest = { workspace = true }
 
 [features]
-fuzzing = ["libra2-db/fuzzing"]
+fuzzing = ["creditchain-db/fuzzing"]

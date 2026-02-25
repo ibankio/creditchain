@@ -7,7 +7,7 @@ use crate::{
     remote_service::{self, RemoteService},
     safety_rules_manager,
 };
-use libra2_config::config::{SafetyRulesConfig, SafetyRulesService};
+use creditchain_config::config::{SafetyRulesConfig, SafetyRulesService};
 use std::net::SocketAddr;
 
 pub struct Process {

@@ -1,15 +1,15 @@
 # Cloud provider
 cloud: EKS
 
-# -- Default image tag to use for all libra2 images
+# -- Default image tag to use for all creditchain images
 imageTag: devnet
 
 genesis:
-  # -- Validator username prefix, used to get genesis secrets. This should be the fullname for the libra2-node helm release
-  username_prefix: libra2-node
+  # -- Validator username prefix, used to get genesis secrets. This should be the fullname for the creditchain-node helm release
+  username_prefix: creditchain-node
   # -- Number of validators deployed in this testnet
   numValidators:
-  # -- Libra2 Chain ID
+  # -- CreditChain Chain ID
   chain_id:
 
 waypoint:

@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{PeerMonitorState, PeerMonitoringServiceClient, StreamExt};
-use libra2_channels::{libra2_channel, libra2_channel::Receiver, message_queues::QueueStyle};
-use libra2_config::{
+use creditchain_channels::{creditchain_channel, creditchain_channel::Receiver, message_queues::QueueStyle};
+use creditchain_config::{
     config::PeerRole,
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_network::{
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_network::{
     application::{interface::NetworkClient, metadata::ConnectionState, storage::PeersAndMetadata},
     peer_manager::{ConnectionRequestSender, PeerManagerRequest, PeerManagerRequestSender},
     protocols::{
@@ -17,17 +17,17 @@ use libra2_network::{
     },
     transport::ConnectionMetadata,
 };
-use libra2_peer_monitoring_service_server::network::{NetworkRequest, ResponseSender};
-use libra2_peer_monitoring_service_types::PeerMonitoringServiceMessage;
-use libra2_time_service::TimeService;
-use libra2_types::account_address::{AccountAddress as PeerId, AccountAddress};
+use creditchain_peer_monitoring_service_server::network::{NetworkRequest, ResponseSender};
+use creditchain_peer_monitoring_service_types::PeerMonitoringServiceMessage;
+use creditchain_time_service::TimeService;
+use creditchain_types::account_address::{AccountAddress as PeerId, AccountAddress};
 use futures::FutureExt;
 use std::{collections::HashMap, sync::Arc};
 
 /// A simple mock of the peer monitoring server for test purposes
 pub struct MockMonitoringServer {
     peer_manager_request_receivers:
-        HashMap<NetworkId, libra2_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>>,
+        HashMap<NetworkId, creditchain_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>>,
     peers_and_metadata: Arc<PeersAndMetadata>,
 }
 
@@ -41,14 +41,14 @@ impl MockMonitoringServer {
         TimeService,
     ) {
         // Setup the test logger (if it hasn't already been initialized)
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         // Setup the request channels and the network sender for each network
         let mut network_senders = HashMap::new();
         let mut peer_manager_request_receivers = HashMap::new();
         for network_id in &all_network_ids {
             // Create the channels and network sender
-            let queue_config = libra2_channel::Config::new(10).queue_style(QueueStyle::FIFO);
+            let queue_config = creditchain_channel::Config::new(10).queue_style(QueueStyle::FIFO);
             let (peer_manager_request_sender, peer_manager_request_receiver) = queue_config.build();
             let (connection_request_sender, _connection_request_receiver) = queue_config.build();
             let network_sender = NetworkSender::new(

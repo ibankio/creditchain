@@ -87,10 +87,10 @@ use crate::sparse_merkle::{
     updater::SubTreeUpdater,
     utils::get_state_shard_id,
 };
-use libra2_crypto::{hash::SPARSE_MERKLE_PLACEHOLDER_HASH, HashValue};
-use libra2_infallible::Mutex;
-use libra2_metrics_core::IntGaugeHelper;
-use libra2_types::{
+use creditchain_crypto::{hash::SPARSE_MERKLE_PLACEHOLDER_HASH, HashValue};
+use creditchain_infallible::Mutex;
+use creditchain_metrics_core::IntGaugeHelper;
+use creditchain_types::{
     nibble::{nibble_path::NibblePath, Nibble},
     proof::SparseMerkleProofExt,
     state_store::state_key::StateKey,

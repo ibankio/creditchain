@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::new_test_context;
-use libra2_api_test_context::current_function_name;
-use libra2_api_types::{new_vm_utf8_string, AsConverter, HexEncodedBytes, MoveConverter, MoveType};
-use libra2_types::state_store::StateView;
+use creditchain_api_test_context::current_function_name;
+use creditchain_api_types::{new_vm_utf8_string, AsConverter, HexEncodedBytes, MoveConverter, MoveType};
+use creditchain_types::state_store::StateView;
 use move_core_types::{
     account_address::AccountAddress,
     value::{MoveStruct, MoveValue as VmMoveValue},

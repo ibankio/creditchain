@@ -1,7 +1,0 @@
-[package]
-name = "test"
-version = "0.0.0"
-
-[dependencies]
-Libra2Stdlib = { local = "../../../../../framework/libra2-stdlib" }
-MoveStdlib = { local = "../../../../../framework/move-stdlib" }

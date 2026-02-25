@@ -1,7 +1,7 @@
 module 0xABCD::fungible_asset_example {
-    use libra2_framework::fungible_asset::{Self, MintRef, TransferRef, BurnRef, Metadata};
-    use libra2_framework::object::{Self, Object};
-    use libra2_framework::primary_fungible_store;
+    use creditchain_framework::fungible_asset::{Self, MintRef, TransferRef, BurnRef, Metadata};
+    use creditchain_framework::object::{Self, Object};
+    use creditchain_framework::primary_fungible_store;
     use std::error;
     use std::signer;
     use std::string::utf8;
@@ -12,7 +12,7 @@ module 0xABCD::fungible_asset_example {
 
     const ASSET_SYMBOL: vector<u8> = b"FA";
 
-    #[resource_group_member(group = libra2_framework::object::ObjectGroup)]
+    #[resource_group_member(group = creditchain_framework::object::ObjectGroup)]
     /// Hold refs to control the minting, transfer and burning of fungible assets.
     struct ManagedFungibleAsset has key {
         mint_ref: MintRef,

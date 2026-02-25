@@ -3,11 +3,11 @@
 
 use crate::{counters::DKG_STAGE_SECONDS, types::DKGTranscriptRequest, DKGMessage};
 use anyhow::{anyhow, ensure, Context};
-use libra2_consensus_types::common::Author;
-use libra2_infallible::{duration_since_epoch, Mutex};
-use libra2_logger::info;
-use libra2_reliable_broadcast::BroadcastStatus;
-use libra2_types::{
+use creditchain_consensus_types::common::Author;
+use creditchain_infallible::{duration_since_epoch, Mutex};
+use creditchain_logger::info;
+use creditchain_reliable_broadcast::BroadcastStatus;
+use creditchain_types::{
     dkg::{DKGTrait, DKGTranscript},
     epoch_state::EpochState,
     validator_verifier::VerifyError,

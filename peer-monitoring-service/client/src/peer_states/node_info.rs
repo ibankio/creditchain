@@ -6,15 +6,15 @@ use crate::{
     peer_states::{key_value::StateValueInterface, request_tracker::RequestTracker},
     Error, LogEntry, LogEvent, LogSchema,
 };
-use libra2_config::{config::NodeMonitoringConfig, network_id::PeerNetworkId};
-use libra2_infallible::RwLock;
-use libra2_logger::warn;
-use libra2_network::application::metadata::PeerMetadata;
-use libra2_peer_monitoring_service_types::{
+use creditchain_config::{config::NodeMonitoringConfig, network_id::PeerNetworkId};
+use creditchain_infallible::RwLock;
+use creditchain_logger::warn;
+use creditchain_network::application::metadata::PeerMetadata;
+use creditchain_peer_monitoring_service_types::{
     request::PeerMonitoringServiceRequest,
     response::{NodeInformationResponse, PeerMonitoringServiceResponse},
 };
-use libra2_time_service::TimeService;
+use creditchain_time_service::TimeService;
 use std::{
     fmt,
     fmt::{Display, Formatter},
@@ -144,22 +144,22 @@ impl Display for NodeInfoState {
 #[cfg(test)]
 mod test {
     use crate::peer_states::{key_value::StateValueInterface, node_info::NodeInfoState};
-    use libra2_config::{
+    use creditchain_config::{
         config::{NodeMonitoringConfig, PeerRole},
         network_id::PeerNetworkId,
     };
-    use libra2_netcore::transport::ConnectionOrigin;
-    use libra2_network::{
+    use creditchain_netcore::transport::ConnectionOrigin;
+    use creditchain_network::{
         application::metadata::PeerMetadata,
         protocols::wire::handshake::v1::{MessagingProtocolVersion, ProtocolIdSet},
         transport::{ConnectionId, ConnectionMetadata},
     };
-    use libra2_peer_monitoring_service_types::{
+    use creditchain_peer_monitoring_service_types::{
         request::PeerMonitoringServiceRequest,
         response::{NodeInformationResponse, PeerMonitoringServiceResponse},
     };
-    use libra2_time_service::TimeService;
-    use libra2_types::network_address::NetworkAddress;
+    use creditchain_time_service::TimeService;
+    use creditchain_types::network_address::NetworkAddress;
     use std::{str::FromStr, time::Duration};
 
     // Useful test constants
@@ -178,7 +178,7 @@ mod test {
         // Handle several valid node info responses and verify the state
         for i in 0..10 {
             // Generate the test data
-            let build_information = libra2_build_info::get_build_information();
+            let build_information = creditchain_build_info::get_build_information();
             let highest_synced_epoch = i;
             let highest_synced_version = (i + 1) * 100;
             let ledger_timestamp_usecs = (i + 1) * 200;

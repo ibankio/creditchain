@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::network_controller::{metrics::NETWORK_HANDLER_TIMER, Message, MessageType};
-use libra2_logger::{error, info};
-use libra2_protos::remote_executor::v1::{
+use creditchain_logger::{error, info};
+use creditchain_protos::remote_executor::v1::{
     network_message_service_client::NetworkMessageServiceClient,
     network_message_service_server::{NetworkMessageService, NetworkMessageServiceServer},
     Empty, NetworkMessage, FILE_DESCRIPTOR_SET,
@@ -162,7 +162,7 @@ impl GRPCNetworkMessageServiceClientWrapper {
 
 #[test]
 fn basic_test() {
-    use libra2_config::utils;
+    use creditchain_config::utils;
     use std::{
         net::{IpAddr, Ipv4Addr},
         thread,

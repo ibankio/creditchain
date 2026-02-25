@@ -3,8 +3,8 @@
 
 use super::common::NAMESPACE;
 use crate::collectors::common::MeasureLatency;
-use libra2_infallible::Mutex;
-use libra2_metrics_core::const_metric::ConstMetric;
+use creditchain_infallible::Mutex;
+use creditchain_metrics_core::const_metric::ConstMetric;
 use prometheus::{
     core::{Collector, Desc, Describer},
     proto::MetricFamily,

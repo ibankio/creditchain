@@ -5,7 +5,7 @@
 use crate::liveness::{
     proposer_election::ProposerElection, rotating_proposer_election::RotatingProposer,
 };
-use libra2_types::account_address::AccountAddress;
+use creditchain_types::account_address::AccountAddress;
 
 #[test]
 fn test_rotating_proposer() {

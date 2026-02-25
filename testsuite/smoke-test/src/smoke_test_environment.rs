@@ -2,16 +2,16 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2::test::CliTestFramework;
-use libra2_config::{config::NodeConfig, keys::ConfigKey, utils::get_available_port};
-use libra2_crypto::ed25519::Ed25519PrivateKey;
-use libra2_faucet_core::server::{FunderKeyEnum, RunConfig};
-use libra2_forge::{ActiveNodesGuard, Factory, LocalFactory, LocalSwarm, Node};
-use libra2_framework::ReleaseBundle;
-use libra2_genesis::builder::{InitConfigFn, InitGenesisConfigFn, InitGenesisStakeFn};
-use libra2_infallible::Mutex;
-use libra2_logger::prelude::*;
-use libra2_types::chain_id::ChainId;
+use creditchain::test::CliTestFramework;
+use creditchain_config::{config::NodeConfig, keys::ConfigKey, utils::get_available_port};
+use creditchain_crypto::ed25519::Ed25519PrivateKey;
+use creditchain_faucet_core::server::{FunderKeyEnum, RunConfig};
+use creditchain_forge::{ActiveNodesGuard, Factory, LocalFactory, LocalSwarm, Node};
+use creditchain_framework::ReleaseBundle;
+use creditchain_genesis::builder::{InitConfigFn, InitGenesisConfigFn, InitGenesisStakeFn};
+use creditchain_infallible::Mutex;
+use creditchain_logger::prelude::*;
+use creditchain_types::chain_id::ChainId;
 use once_cell::sync::Lazy;
 use rand::rngs::OsRng;
 use std::{num::NonZeroUsize, sync::Arc};
@@ -50,12 +50,12 @@ impl SwarmBuilder {
     }
 
     pub fn with_libra2(mut self) -> Self {
-        self.genesis_framework = Some(libra2_cached_packages::head_release_bundle().clone());
+        self.genesis_framework = Some(creditchain_cached_packages::head_release_bundle().clone());
         self
     }
 
-    pub fn with_libra2_testnet(mut self) -> Self {
-        self.genesis_framework = Some(libra2_framework::testnet_release_bundle().clone());
+    pub fn with_creditchain_testnet(mut self) -> Self {
+        self.genesis_framework = Some(creditchain_framework::testnet_release_bundle().clone());
         self
     }
 
@@ -86,7 +86,7 @@ impl SwarmBuilder {
 
     // Gas is not enabled with this setup, it's enabled via forge instance.
     pub async fn build_inner(&mut self) -> anyhow::Result<LocalSwarm> {
-        ::libra2_logger::Logger::new().init();
+        ::creditchain_logger::Logger::new().init();
         info!("Preparing to finish compiling");
         // TODO change to return Swarm trait
         // Add support for forge

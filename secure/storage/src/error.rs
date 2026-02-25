@@ -54,11 +54,11 @@ impl From<serde_json::Error> for Error {
     }
 }
 
-impl From<libra2_vault_client::Error> for Error {
-    fn from(error: libra2_vault_client::Error) -> Self {
+impl From<creditchain_vault_client::Error> for Error {
+    fn from(error: creditchain_vault_client::Error) -> Self {
         match error {
-            libra2_vault_client::Error::NotFound(_, key) => Self::KeyNotSet(key),
-            libra2_vault_client::Error::HttpError(403, _, _) => Self::PermissionDenied,
+            creditchain_vault_client::Error::NotFound(_, key) => Self::KeyNotSet(key),
+            creditchain_vault_client::Error::HttpError(403, _, _) => Self::PermissionDenied,
             _ => Self::InternalError(format!("{}", error)),
         }
     }

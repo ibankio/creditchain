@@ -10,7 +10,7 @@ use crate::{
     service::GrpcManagerService,
 };
 use anyhow::Result;
-use libra2_protos::indexer::v1::grpc_manager_server::GrpcManagerServer;
+use creditchain_protos::indexer::v1::grpc_manager_server::GrpcManagerServer;
 use std::{sync::Arc, time::Duration};
 use tokio::sync::{oneshot::channel, Mutex};
 use tonic::{codec::CompressionEncoding, transport::Server};

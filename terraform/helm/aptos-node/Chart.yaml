@@ -1,8 +1,8 @@
 apiVersion: v2
-name: libra2-node
+name: creditchain-node
 version: 1.0.0
 appVersion: 1.0.0
-description: Libra2 blockchain node deployment
-home: https://libra2.org/
+description: CreditChain blockchain node deployment
+home: https://creditchain.org/
 sources:
-- https://github.com/libra2org/libra2-core
+- https://github.com/creditchainorg/creditchain-core

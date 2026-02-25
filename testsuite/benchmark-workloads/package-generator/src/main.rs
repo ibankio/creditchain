@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::bail;
-use libra2_transaction_generator_lib::{create_prebuilt_packages_bundle, PrebuiltPackageConfig};
+use creditchain_transaction_generator_lib::{create_prebuilt_packages_bundle, PrebuiltPackageConfig};
 use clap::Parser;
 use std::{
     fs, io,
@@ -24,7 +24,7 @@ struct Args {
     /// Root directory where the Rust file to access prebuilt packages will be saved.
     #[clap(long)]
     prebuilt_packages_rust_dir: PathBuf,
-    /// If true, uses local libra2-framework from libra2-core.
+    /// If true, uses local creditchain-framework from creditchain-core.
     #[clap(long)]
     use_local_std: bool,
 }

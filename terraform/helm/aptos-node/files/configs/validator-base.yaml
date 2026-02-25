@@ -5,7 +5,7 @@
 base:
   role: validator
   waypoint:
-    from_file: /opt/libra2/genesis/waypoint.txt
+    from_file: /opt/creditchain/genesis/waypoint.txt
 
 consensus:
   safety_rules:
@@ -18,11 +18,11 @@ consensus:
     initial_safety_rules_config:
       from_file:
         waypoint:
-          from_file: /opt/libra2/genesis/waypoint.txt
-        identity_blob_path: /opt/libra2/genesis/validator-identity.yaml
+          from_file: /opt/creditchain/genesis/waypoint.txt
+        identity_blob_path: /opt/creditchain/genesis/validator-identity.yaml
 
 execution:
-  genesis_file_location: /opt/libra2/genesis/genesis.blob
+  genesis_file_location: /opt/creditchain/genesis/genesis.blob
 
 full_node_networks:
   - network_id:
@@ -45,4 +45,4 @@ validator_network:
   discovery_method: "onchain"
   identity:
     type: "from_file"
-    path: /opt/libra2/genesis/validator-identity.yaml
+    path: /opt/creditchain/genesis/validator-identity.yaml

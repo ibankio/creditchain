@@ -4,7 +4,7 @@
 
 //! Integration tests for validator_network.
 use crate::dummy::{setup_network, DummyMsg};
-use libra2_network::{application::interface::NetworkClientInterface, protocols::network::Event};
+use creditchain_network::{application::interface::NetworkClientInterface, protocols::network::Event};
 use futures::{future::join, StreamExt};
 use std::time::Duration;
 
@@ -15,7 +15,7 @@ fn test_network_builder() {
 
 #[test]
 fn test_direct_send() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     let tn = setup_network();
     let dialer_peer = tn.dialer_peer;
     let mut dialer_events = tn.dialer_events;
@@ -60,7 +60,7 @@ fn test_direct_send() {
 
 #[test]
 fn test_rpc() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     let tn = setup_network();
     let dialer_peer = tn.dialer_peer;
     let mut dialer_events = tn.dialer_events;

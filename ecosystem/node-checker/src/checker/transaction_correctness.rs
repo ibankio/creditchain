@@ -7,7 +7,7 @@ use crate::{
     provider::{api_index::ApiIndexProvider, Provider, ProviderCollection},
 };
 use anyhow::Result;
-use libra2_rest_client::{libra2_api_types::TransactionData, Client as Libra2RestClient};
+use creditchain_rest_client::{creditchain_api_types::TransactionData, Client as CreditChainRestClient};
 use serde::{Deserialize, Serialize};
 use std::cmp::{max, min};
 
@@ -32,7 +32,7 @@ impl TransactionCorrectnessChecker {
 
     /// Fetch a transaction by version and return it.
     async fn get_transaction_by_version(
-        client: &Libra2RestClient,
+        client: &CreditChainRestClient,
         version: u64,
         node_name: &str,
     ) -> Result<TransactionData, CheckerError> {
@@ -55,7 +55,7 @@ impl TransactionCorrectnessChecker {
     /// as returned by the API.
     fn unwrap_accumulator_root_hash(
         transaction_data: &TransactionData,
-    ) -> Result<&libra2_crypto::HashValue, CheckerError> {
+    ) -> Result<&creditchain_crypto::HashValue, CheckerError> {
         match transaction_data {
             TransactionData::OnChain(on_chain) => Ok(&on_chain.accumulator_root_hash),
             wildcard => Err(CheckerError::NonRetryableEndpointError(

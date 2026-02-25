@@ -17,11 +17,11 @@ use crate::{
         MempoolSenderBucket, MultiBucketTimelineIndexIds, TimelineIndexIdentifier,
     },
 };
-use libra2_config::config::NodeConfig;
-use libra2_consensus_types::common::{TransactionInProgress, TransactionSummary};
-use libra2_crypto::HashValue;
-use libra2_logger::prelude::*;
-use libra2_types::{
+use creditchain_config::config::NodeConfig;
+use creditchain_consensus_types::common::{TransactionInProgress, TransactionSummary};
+use creditchain_crypto::HashValue;
+use creditchain_logger::prelude::*;
+use creditchain_types::{
     account_address::AccountAddress,
     mempool_status::{MempoolStatus, MempoolStatusCode},
     transaction::{use_case::UseCaseKey, ReplayProtector, SignedTransaction},
@@ -267,7 +267,7 @@ impl Mempool {
             );
 
             let insertion_timestamp =
-                libra2_infallible::duration_since_epoch_at(&insertion_info.insertion_time);
+                creditchain_infallible::duration_since_epoch_at(&insertion_info.insertion_time);
             if let Some(insertion_to_block) = block_timestamp.checked_sub(insertion_timestamp) {
                 counters::core_mempool_txn_commit_latency(
                     counters::COMMIT_ACCEPTED_BLOCK_LABEL,
@@ -332,7 +332,7 @@ impl Mempool {
 
         let now = SystemTime::now();
         let expiration_time =
-            libra2_infallible::duration_since_epoch_at(&now) + self.system_transaction_timeout;
+            creditchain_infallible::duration_since_epoch_at(&now) + self.system_transaction_timeout;
 
         let sender = txn.sender();
         let txn_info = MempoolTransaction::new(
@@ -347,7 +347,7 @@ impl Mempool {
 
         let submitted_by_label = txn_info.insertion_info.submitted_by_label();
         let status = self.transactions.insert(txn_info, account_sequence_number);
-        let now = libra2_infallible::duration_since_epoch().as_millis() as u64;
+        let now = creditchain_infallible::duration_since_epoch().as_millis() as u64;
 
         if status.code == MempoolStatusCode::Accepted {
             counters::SENDER_BUCKET_FREQUENCIES
@@ -589,7 +589,7 @@ impl Mempool {
     /// Removes all expired transactions and clears expired entries in metrics
     /// cache and sequence number cache.
     pub(crate) fn gc(&mut self) {
-        let now = libra2_infallible::duration_since_epoch();
+        let now = creditchain_infallible::duration_since_epoch();
         self.transactions.gc_by_system_ttl(now);
     }
 

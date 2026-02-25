@@ -4,8 +4,8 @@
 
 use crate::{common::Author, sync_info::SyncInfo, vote::Vote};
 use anyhow::ensure;
-use libra2_crypto::HashValue;
-use libra2_types::validator_verifier::ValidatorVerifier;
+use creditchain_crypto::HashValue;
+use creditchain_types::validator_verifier::ValidatorVerifier;
 use serde::{Deserialize, Serialize};
 use std::fmt::{Display, Formatter};
 

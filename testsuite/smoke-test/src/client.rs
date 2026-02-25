@@ -9,8 +9,8 @@ use crate::{
         MAX_HEALTHY_WAIT_SECS,
     },
 };
-use libra2_cached_packages::libra2_stdlib;
-use libra2_forge::{NodeExt, Swarm};
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_forge::{NodeExt, Swarm};
 use std::{
     sync::Arc,
     time::{Duration, Instant},
@@ -102,7 +102,7 @@ async fn test_concurrent_transfers_single_node() {
 
     for _ in 0..20 {
         let txn = account_0.sign_with_transaction_builder(
-            transaction_factory.payload(libra2_stdlib::libra2_coin_transfer(account_1.address(), 1)),
+            transaction_factory.payload(creditchain_stdlib::creditchain_coin_transfer(account_1.address(), 1)),
         );
         client.submit_and_wait(&txn).await.unwrap();
     }

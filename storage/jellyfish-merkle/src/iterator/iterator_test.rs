@@ -8,9 +8,9 @@ use crate::{
     test_helper::{gen_value, plus_one},
     JellyfishMerkleTree,
 };
-use libra2_crypto::HashValue;
-use libra2_storage_interface::Result;
-use libra2_types::transaction::Version;
+use creditchain_crypto::HashValue;
+use creditchain_storage_interface::Result;
+use creditchain_types::transaction::Version;
 use rand::{rngs::StdRng, SeedableRng};
 use std::{collections::BTreeMap, sync::Arc};
 

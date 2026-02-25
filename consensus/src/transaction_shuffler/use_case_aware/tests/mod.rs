@@ -1,7 +1,7 @@
 // Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_types::transaction::use_case::{UseCaseAwareTransaction, UseCaseKey};
+use creditchain_types::transaction::use_case::{UseCaseAwareTransaction, UseCaseKey};
 use move_core_types::account_address::AccountAddress;
 use proptest_derive::Arbitrary;
 use std::fmt::Debug;

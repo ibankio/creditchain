@@ -11,7 +11,7 @@ use crate::{
     },
     payload_manager::DirectMempoolPayloadManager,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block::{block_test_utils::certificate_for_genesis, Block},
     common::{Author, Round},
     payload_pull_params::OptQSPayloadPullParams,
@@ -19,9 +19,9 @@ use libra2_consensus_types::{
     quorum_cert::QuorumCert,
     sync_info::SyncInfo,
 };
-use libra2_crypto::{HashValue, PrivateKey, Uniform};
-use libra2_logger::Level;
-use libra2_types::{ledger_info::LedgerInfo, validator_signer::ValidatorSigner};
+use creditchain_crypto::{HashValue, PrivateKey, Uniform};
+use creditchain_logger::Level;
+use creditchain_types::{ledger_info::LedgerInfo, validator_signer::ValidatorSigner};
 use std::{future::Future, sync::Arc, time::Duration};
 use tokio::{runtime, time::timeout};
 
@@ -38,10 +38,10 @@ use crate::{
     pipeline::{execution_client::DummyExecutionClient, pipeline_builder::PipelineBuilder},
     util::mock_time_service::SimulatedTimeService,
 };
-use libra2_consensus_types::{block::block_test_utils::gen_test_certificate, common::Payload};
-use libra2_crypto::ed25519::{Ed25519PrivateKey, Ed25519Signature};
-use libra2_infallible::Mutex;
-use libra2_types::{
+use creditchain_consensus_types::{block::block_test_utils::gen_test_certificate, common::Payload};
+use creditchain_crypto::ed25519::{Ed25519PrivateKey, Ed25519Signature};
+use creditchain_infallible::Mutex;
+use creditchain_types::{
     block_info::BlockInfo,
     chain_id::ChainId,
     on_chain_config::DEFAULT_ENABLED_WINDOW_SIZE,
@@ -295,10 +295,10 @@ fn nocapture() -> bool {
 
 pub fn consensus_runtime() -> runtime::Runtime {
     if nocapture() {
-        ::libra2_logger::Logger::new().level(Level::Debug).init();
+        ::creditchain_logger::Logger::new().level(Level::Debug).init();
     }
 
-    libra2_runtimes::spawn_named_runtime("consensus".into(), None)
+    creditchain_runtimes::spawn_named_runtime("consensus".into(), None)
 }
 
 pub fn timed_block_on<F>(runtime: &runtime::Runtime, f: F) -> <F as Future>::Output

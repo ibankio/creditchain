@@ -7,7 +7,7 @@
 use crate::{db::resources::COIN_ADDR, processors::default::models::move_resources::MoveResource};
 use anyhow::{bail, Context, Result};
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{move_type::Content, DeleteResource, MoveType, WriteResource},
+   creditchain_protos::transaction::v1::{move_type::Content, DeleteResource, MoveType, WriteResource},
     utils::{
         convert::{deserialize_from_string, standardize_address, truncate_str},
         extract::hash_str,

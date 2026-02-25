@@ -1,0 +1,9 @@
+[package]
+name = "bcs_stream"
+version = "0.0.0"
+
+[addresses]
+bcs_stream = "0xCAFE"
+
+[dependencies]
+CreditChainStdlib = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-stdlib", rev = "mainnet" }

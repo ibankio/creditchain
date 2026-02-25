@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{validator_set::extract_validator_set_updates, DiscoveryError};
-use libra2_config::{config::PeerSet, network_id::NetworkContext};
-use libra2_logger::info;
-use libra2_time_service::{Interval, TimeService, TimeServiceTrait};
-use libra2_types::{account_address::AccountAddress, on_chain_config::ValidatorSet};
+use creditchain_config::{config::PeerSet, network_id::NetworkContext};
+use creditchain_logger::info;
+use creditchain_time_service::{Interval, TimeService, TimeServiceTrait};
+use creditchain_types::{account_address::AccountAddress, on_chain_config::ValidatorSet};
 use futures::{executor::block_on, Stream};
 use std::{
     pin::Pin,
@@ -17,7 +17,7 @@ use std::{
 /// set nodes.  Useful for when genesis is significantly far behind in time
 pub struct RestStream {
     network_context: NetworkContext,
-    rest_client: libra2_rest_client::Client,
+    rest_client: creditchain_rest_client::Client,
     interval: Pin<Box<Interval>>,
 }
 
@@ -30,7 +30,7 @@ impl RestStream {
     ) -> Self {
         RestStream {
             network_context,
-            rest_client: libra2_rest_client::Client::new(rest_url),
+            rest_client: creditchain_rest_client::Client::new(rest_url),
             interval: Box::pin(time_service.interval(interval_duration)),
         }
     }

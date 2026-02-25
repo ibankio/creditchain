@@ -11,12 +11,12 @@ use crate::{
     thread::ThreadService,
     SafetyRules, TSafetyRules,
 };
-use libra2_config::config::{InitialSafetyRulesConfig, SafetyRulesConfig, SafetyRulesService};
-use libra2_crypto::bls12381::PublicKey;
-use libra2_global_constants::CONSENSUS_KEY;
-use libra2_infallible::RwLock;
-use libra2_logger::{info, warn};
-use libra2_secure_storage::{KVStorage, Storage};
+use creditchain_config::config::{InitialSafetyRulesConfig, SafetyRulesConfig, SafetyRulesService};
+use creditchain_crypto::bls12381::PublicKey;
+use creditchain_global_constants::CONSENSUS_KEY;
+use creditchain_infallible::RwLock;
+use creditchain_logger::{info, warn};
+use creditchain_secure_storage::{KVStorage, Storage};
 use std::{net::SocketAddr, sync::Arc, time::Instant};
 
 pub fn storage(config: &SafetyRulesConfig) -> PersistentSafetyStorage {

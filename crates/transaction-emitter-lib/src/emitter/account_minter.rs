@@ -7,16 +7,16 @@ use super::{
 };
 use crate::{emitter::create_private_key_account_generator, EmitJobRequest};
 use anyhow::{anyhow, bail, format_err, Context, Result};
-use libra2_config::config::DEFAULT_MAX_SUBMIT_TRANSACTION_BATCH_SIZE;
-use libra2_crypto::{ed25519::Ed25519PrivateKey, encoding_type::EncodingType};
-use libra2_sdk::{
-    transaction_builder::{libra2_stdlib, TransactionFactory},
+use creditchain_config::config::DEFAULT_MAX_SUBMIT_TRANSACTION_BATCH_SIZE;
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, encoding_type::EncodingType};
+use creditchain_sdk::{
+    transaction_builder::{creditchain_stdlib, TransactionFactory},
     types::{transaction::SignedTransaction, AccountKey, LocalAccount},
 };
-use libra2_transaction_generator_lib::{
+use creditchain_transaction_generator_lib::{
     CounterState, ReliableTransactionSubmitter, RootAccountHandle,
 };
-use libra2_types::account_address::AccountAddress;
+use creditchain_types::account_address::AccountAddress;
 use core::result::Result::{Err, Ok};
 use futures::{future::try_join_all, StreamExt};
 use log::{error, info};
@@ -130,7 +130,7 @@ impl SourceAccountManager<'_> {
         let txn = self
             .source_account
             .sign_with_transaction_builder(self.txn_factory.payload(
-                libra2_stdlib::libra2_coin_mint(self.source_account_address(), amount),
+                creditchain_stdlib::creditchain_coin_mint(self.source_account_address(), amount),
             ));
 
         if let Err(e) = txn_executor.execute_transactions(&[txn]).await {
@@ -515,7 +515,7 @@ pub fn create_and_fund_account_request(
     txn_factory: &TransactionFactory,
 ) -> SignedTransaction {
     creation_account.sign_with_transaction_builder(
-        txn_factory.payload(libra2_stdlib::libra2_account_transfer(address, amount)),
+        txn_factory.payload(creditchain_stdlib::creditchain_account_transfer(address, amount)),
     )
 }
 

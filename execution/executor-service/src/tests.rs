@@ -5,10 +5,10 @@ use crate::{
     remote_executor_client::RemoteExecutorClient, test_utils,
     thread_executor_service::ThreadExecutorService,
 };
-use libra2_config::utils;
-use libra2_secure_net::network_controller::NetworkController;
-use libra2_transaction_simulation::InMemoryStateStore;
-use libra2_vm::sharded_block_executor::ShardedBlockExecutor;
+use creditchain_config::utils;
+use creditchain_secure_net::network_controller::NetworkController;
+use creditchain_transaction_simulation::InMemoryStateStore;
+use creditchain_vm::sharded_block_executor::ShardedBlockExecutor;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 pub fn create_thread_remote_executor_shards(

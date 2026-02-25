@@ -3,9 +3,9 @@
 
 #![forbid(unsafe_code)]
 
-use libra2_crypto::HashValue;
-use libra2_drop_helper::DropHelper;
-use libra2_storage_interface::state_store::state_summary::LedgerStateSummary;
+use creditchain_crypto::HashValue;
+use creditchain_drop_helper::DropHelper;
+use creditchain_storage_interface::state_store::state_summary::LedgerStateSummary;
 use derive_more::Deref;
 use std::sync::Arc;
 

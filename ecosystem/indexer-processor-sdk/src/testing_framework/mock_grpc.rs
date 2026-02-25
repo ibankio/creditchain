@@ -1,7 +1,7 @@
 // Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_protos::indexer::v1::{
+use creditchain_protos::indexer::v1::{
     raw_data_server::{RawData, RawDataServer},
     GetTransactionsRequest, ProcessedRange, TransactionsResponse,
 };

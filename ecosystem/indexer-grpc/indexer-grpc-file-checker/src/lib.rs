@@ -4,7 +4,7 @@
 pub mod processor;
 
 use anyhow::Result;
-use libra2_indexer_grpc_server_framework::RunnableConfig;
+use creditchain_indexer_grpc_server_framework::RunnableConfig;
 use processor::Processor;
 use serde::{Deserialize, Serialize};
 

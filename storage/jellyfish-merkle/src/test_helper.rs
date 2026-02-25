@@ -3,13 +3,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{mock_tree_store::MockTreeStore, node_type::LeafNode, JellyfishMerkleTree, TestKey};
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{CryptoHash, SPARSE_MERKLE_PLACEHOLDER_HASH},
     HashValue,
 };
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
-use libra2_storage_interface::jmt_update_refs;
-use libra2_types::{
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_storage_interface::jmt_update_refs;
+use creditchain_types::{
     proof::{SparseMerkleInternalNode, SparseMerkleRangeProof},
     transaction::Version,
 };

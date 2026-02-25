@@ -1,0 +1,23 @@
+[package]
+name = "creditchain-gas-calibration"
+version = "0.1.1"
+edition = "2021"
+license = { workspace = true }
+
+[dependencies]
+anyhow = { workspace = true }
+creditchain-abstract-gas-usage = { workspace = true }
+creditchain-cached-packages = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-gas-algebra = { workspace = true }
+creditchain-gas-schedule = { workspace = true }
+creditchain-language-e2e-tests = { workspace = true }
+creditchain-types = { workspace = true }
+bcs = { workspace = true }
+clap = { workspace = true }
+float-cmp = { workspace = true }
+move-binary-format = { workspace = true }
+move-core-types = { workspace = true }
+move-ir-compiler = { workspace = true }
+nalgebra = { workspace = true }
+walkdir = { workspace = true }

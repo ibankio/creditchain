@@ -1,13 +1,13 @@
 module addr::exceed_limit {
     use std::option::Option;
-    use libra2_framework::account::Account;
+    use creditchain_framework::account::Account;
     use std::signer;
     use std::string::{Self};
     use std::simple_map::{SimpleMap, Self};
     use std::vector;
 
-    use libra2_token::token;
-    use libra2_token::token::TokenId;
+    use creditchain_token::token;
+    use creditchain_token::token::TokenId;
 
     // This struct is too large and exceeds the maximum allowed number of type nodes.
     enum MyStructEnum has key, store {

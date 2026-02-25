@@ -2,20 +2,20 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Result;
-use libra2_backup_cli::{
+use creditchain_backup_cli::{
     coordinators::replay_verify::{ReplayError, ReplayVerifyCoordinator},
     metadata::cache::MetadataCacheOpt,
     storage::DBToolStorageOpt,
     utils::{ConcurrentDownloadsOpt, ReplayConcurrencyLevelOpt, RocksdbOpt, TrustedWaypointOpt},
 };
-use libra2_config::config::{
+use creditchain_config::config::{
     StorageDirPaths, BUFFERED_STATE_TARGET_ITEMS, DEFAULT_MAX_NUM_NODES_PER_LRU_CACHE_SHARD,
     NO_OP_STORAGE_PRUNER_CONFIG,
 };
-use libra2_db::{get_restore_handler::GetRestoreHandler, Libra2DB};
-use libra2_executor_types::VerifyExecutionMode;
-use libra2_logger::info;
-use libra2_types::transaction::Version;
+use creditchain_db::{get_restore_handler::GetRestoreHandler, CreditChainDB};
+use creditchain_executor_types::VerifyExecutionMode;
+use creditchain_logger::info;
+use creditchain_types::transaction::Version;
 use clap::Parser;
 use std::{path::PathBuf, process, sync::Arc};
 
@@ -61,7 +61,7 @@ pub struct Opt {
 
 impl Opt {
     pub async fn run(self) -> Result<()> {
-        let restore_handler = Arc::new(Libra2DB::open_kv_only(
+        let restore_handler = Arc::new(CreditChainDB::open_kv_only(
             StorageDirPaths::from_path(self.db_dir),
             false,                       /* read_only */
             NO_OP_STORAGE_PRUNER_CONFIG, /* pruner config */

@@ -3,9 +3,9 @@
 
 use crate::{metrics::JWK_FETCH_SECONDS, Issuer, KeyID};
 use anyhow::{anyhow, Result};
-use libra2_keyless_pepper_common::jwt::parse;
-use libra2_logger::warn;
-use libra2_types::jwks::rsa::RSA_JWK;
+use creditchain_keyless_pepper_common::jwt::parse;
+use creditchain_logger::warn;
+use creditchain_types::jwks::rsa::RSA_JWK;
 use dashmap::DashMap;
 use jsonwebtoken::DecodingKey;
 use once_cell::sync::Lazy;

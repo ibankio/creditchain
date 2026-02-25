@@ -6,7 +6,7 @@ use crate::{
     persistent_safety_storage::PersistentSafetyStorage, serializer::SerializerService, SafetyRules,
     TSafetyRules,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block::Block,
     common::{Payload, Round},
     quorum_cert::QuorumCert,
@@ -17,9 +17,9 @@ use libra2_consensus_types::{
     vote_data::VoteData,
     vote_proposal::VoteProposal,
 };
-use libra2_crypto::hash::{CryptoHash, TransactionAccumulatorHasher};
-use libra2_secure_storage::{InMemoryStorage, Storage};
-use libra2_types::{
+use creditchain_crypto::hash::{CryptoHash, TransactionAccumulatorHasher};
+use creditchain_secure_storage::{InMemoryStorage, Storage};
+use creditchain_types::{
     aggregate_signature::{AggregateSignature, PartialSignatures},
     block_info::BlockInfo,
     epoch_change::EpochChangeProof,

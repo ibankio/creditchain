@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-grpc-fullnode"
+name = "creditchain-indexer-grpc-fullnode"
 description = "CreditChain Indexer GRPC runtime on fullnode."
 version = "1.0.1"
 
@@ -29,19 +29,19 @@ tokio-stream = { workspace = true }
 tonic = { workspace = true }
 tonic-reflection = { workspace = true }
 
-libra2-api = { workspace = true }
-libra2-api-types = { workspace = true }
-libra2-bitvec = { workspace = true }
-libra2-config = { workspace = true }
-libra2-indexer-grpc-utils = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-mempool = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-moving-average = { workspace = true }
-libra2-protos = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-api = { workspace = true }
+creditchain-api-types = { workspace = true }
+creditchain-bitvec = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-indexer-grpc-utils = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-mempool = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-moving-average = { workspace = true }
+creditchain-protos = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
 
 move-core-types = { workspace = true }
 
@@ -50,19 +50,19 @@ goldenfile = { workspace = true }
 rand = { workspace = true }
 regex = { workspace = true }
 
-libra2-api-test-context = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-db = { workspace = true }
-libra2-executor = { workspace = true }
-libra2-executor-types = { workspace = true }
-libra2-framework = { workspace = true }
-libra2-genesis = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-mempool = { workspace = true }
-libra2-mempool-notifications = { workspace = true }
-libra2-proptest-helpers = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-secure-storage = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-vm = { workspace = true }
-libra2-vm-validator = { workspace = true }
+creditchain-api-test-context = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-executor = { workspace = true }
+creditchain-executor-types = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-genesis = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-mempool = { workspace = true }
+creditchain-mempool-notifications = { workspace = true }
+creditchain-proptest-helpers = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-secure-storage = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-vm = { workspace = true }
+creditchain-vm-validator = { workspace = true }

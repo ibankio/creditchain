@@ -1,5 +1,5 @@
 [package]
-name = "libra2-backup-cli"
+name = "creditchain-backup-cli"
 description = "Backup CLI"
 version = "0.1.1"
 
@@ -14,26 +14,26 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-backup-service = { workspace = true }
-libra2-config = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-db = { workspace = true }
-libra2-db-indexer-schemas = { workspace = true }
-libra2-executor = { workspace = true }
-libra2-executor-test-helpers = { workspace = true }
-libra2-executor-types = { workspace = true }
-libra2-indexer-grpc-table-info = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-jellyfish-merkle = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-proptest-helpers = { workspace = true }
-libra2-push-metrics = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
-libra2-vm-environment = { workspace = true }
+creditchain-backup-service = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-db-indexer-schemas = { workspace = true }
+creditchain-executor = { workspace = true }
+creditchain-executor-test-helpers = { workspace = true }
+creditchain-executor-types = { workspace = true }
+creditchain-indexer-grpc-table-info = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-jellyfish-merkle = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-proptest-helpers = { workspace = true }
+creditchain-push-metrics = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
+creditchain-vm-environment = { workspace = true }
 async-trait = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
@@ -59,15 +59,15 @@ tokio-stream = { workspace = true, features = ["fs"] }
 tokio-util = { workspace = true }
 
 [dev-dependencies]
-libra2-backup-service = { workspace = true }
-libra2-config = { workspace = true }
-libra2-db = { workspace = true }
-libra2-executor-test-helpers = { workspace = true }
-libra2-proptest-helpers = { workspace = true }
-libra2-storage-interface = { workspace = true }
+creditchain-backup-service = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-executor-test-helpers = { workspace = true }
+creditchain-proptest-helpers = { workspace = true }
+creditchain-storage-interface = { workspace = true }
 proptest = { workspace = true }
 warp = { workspace = true }
 
 [features]
 testing = []
-fuzzing = ["libra2-db/fuzzing"]
+fuzzing = ["creditchain-db/fuzzing"]

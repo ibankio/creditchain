@@ -1,5 +1,5 @@
 [package]
-name = "libra2-db-indexer"
+name = "creditchain-db-indexer"
 description = "CreditChainDB Internal Indexer"
 version = "0.1.1"
 
@@ -14,15 +14,15 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-config = { workspace = true }
-libra2-db-indexer-schemas = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-resource-viewer = { workspace = true }
-libra2-rocksdb-options = { workspace = true }
-libra2-schemadb = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-db-indexer-schemas = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-resource-viewer = { workspace = true }
+creditchain-rocksdb-options = { workspace = true }
+creditchain-schemadb = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
 dashmap = { workspace = true }
@@ -30,11 +30,11 @@ move-core-types = { workspace = true }
 once_cell = { workspace = true }
 
 [dev-dependencies]
-libra2-proptest-helpers = { workspace = true }
-libra2-schemadb = { workspace = true, features = ["fuzzing"] }
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-proptest-helpers = { workspace = true }
+creditchain-schemadb = { workspace = true, features = ["fuzzing"] }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 rand = { workspace = true }
 
 [features]
 default = []
-fuzzing = ["libra2-types/fuzzing", "libra2-schemadb/fuzzing"]
+fuzzing = ["creditchain-types/fuzzing", "creditchain-schemadb/fuzzing"]

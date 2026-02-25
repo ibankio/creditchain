@@ -7,12 +7,12 @@ use super::{
     NodeKey,
 };
 use crate::{node_type::NodeType, test_helper::ValueBlob, LeafNode, StateKey, TreeReader};
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{CryptoHash, SPARSE_MERKLE_PLACEHOLDER_HASH},
     HashValue,
 };
-use libra2_storage_interface::Result;
-use libra2_types::{
+use creditchain_storage_interface::Result;
+use creditchain_types::{
     nibble::{nibble_path::NibblePath, Nibble},
     proof::{definition::NodeInProof, SparseMerkleInternalNode, SparseMerkleLeafNode},
     transaction::Version,

@@ -6,7 +6,7 @@ use crate::{
     move_any::{Any as MoveAny, AsMoveAny},
     move_utils::as_move_value::AsMoveValue,
 };
-use libra2_crypto::HashValue;
+use creditchain_crypto::HashValue;
 use std::str::FromStr;
 
 #[test]

@@ -10,7 +10,7 @@
 current_path=$PWD
 
 root_path="$(dirname $0)/.."
-move_path="$root_path/libra2-move/framework"
+move_path="$root_path/creditchain-move/framework"
 
 cd $move_path
 cargo run
@@ -25,7 +25,7 @@ cd $current_path
 rm -rf $outpath
 mkdir -p $outpath
 
-RELEASE_PATH="$move_path/libra2-framework/releases/artifacts/current/build"
+RELEASE_PATH="$move_path/creditchain-framework/releases/artifacts/current/build"
 
 for folder in $(ls $RELEASE_PATH); do
   mkdir -p $outpath/$folder
@@ -33,7 +33,7 @@ for folder in $(ls $RELEASE_PATH); do
     outfile=$outpath/$folder/$file
     cp $RELEASE_PATH/$folder/docs/$file $outfile
     sed -i \
-      's#../../../../../../../libra2-framework/releases/artifacts/current/build/\(.*\)/docs/\(.*.md\)#../\1/\2#g' \
+      's#../../../../../../../creditchain-framework/releases/artifacts/current/build/\(.*\)/docs/\(.*.md\)#../\1/\2#g' \
       $outfile
   done
 done

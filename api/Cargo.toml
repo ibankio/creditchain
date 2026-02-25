@@ -1,5 +1,5 @@
 [package]
-name = "libra2-api"
+name = "creditchain-api"
 description = "CreditChain REST API"
 version = "0.2.1"
 
@@ -14,21 +14,21 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-api-types = { workspace = true }
-libra2-bcs-utils = { workspace = true }
-libra2-build-info = { workspace = true }
-libra2-config = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-gas-schedule = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-mempool = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
+creditchain-api-types = { workspace = true }
+creditchain-bcs-utils = { workspace = true }
+creditchain-build-info = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-gas-schedule = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-mempool = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
 fail = { workspace = true }
@@ -50,14 +50,14 @@ serde_json = { workspace = true }
 tokio = { workspace = true }
 
 [dev-dependencies]
-libra2-api-test-context = { workspace = true }
-libra2-cached-packages = { workspace = true }
-libra2-framework = { workspace = true }
-libra2-gas-meter = { workspace = true }
-libra2-gas-schedule = { workspace = true, features = ["testing"] }
-libra2-move-stdlib = { workspace = true }
-libra2-proptest-helpers = { workspace = true }
-libra2-transaction-filters = { workspace = true, features = ["fuzzing"] }
+creditchain-api-test-context = { workspace = true }
+creditchain-cached-packages = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-gas-meter = { workspace = true }
+creditchain-gas-schedule = { workspace = true, features = ["testing"] }
+creditchain-move-stdlib = { workspace = true }
+creditchain-proptest-helpers = { workspace = true }
+creditchain-transaction-filters = { workspace = true, features = ["fuzzing"] }
 move-package = { workspace = true }
 passkey-types = { workspace = true }
 percent-encoding = { workspace = true }

@@ -3,17 +3,17 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{add_accounts_impl, PipelineConfig};
-use libra2_config::{
+use creditchain_config::{
     config::{
         PrunerConfig, RocksdbConfigs, StorageDirPaths, BUFFERED_STATE_TARGET_ITEMS,
         DEFAULT_MAX_NUM_NODES_PER_LRU_CACHE_SHARD, NO_OP_STORAGE_PRUNER_CONFIG,
     },
     utils::get_genesis_txn,
 };
-use libra2_db::Libra2DB;
-use libra2_executor::db_bootstrapper::{generate_waypoint, maybe_bootstrap};
-use libra2_storage_interface::DbReaderWriter;
-use libra2_types::{
+use creditchain_db::CreditChainDB;
+use creditchain_executor::db_bootstrapper::{generate_waypoint, maybe_bootstrap};
+use creditchain_storage_interface::DbReaderWriter;
+use creditchain_types::{
     jwks::{jwk::JWK, patch::IssuerJWK},
     keyless::{
         circuit_constants::TEST_GROTH16_SETUP,
@@ -22,7 +22,7 @@ use libra2_types::{
     },
     on_chain_config::Features,
 };
-use libra2_vm::{libra2_vm::Libra2VMBlockExecutor, VMBlockExecutor};
+use creditchain_vm::{creditchain_vm::CreditChainVMBlockExecutor, VMBlockExecutor};
 use std::{fs, path::Path, sync::Arc};
 
 pub fn create_db_with_accounts<V>(
@@ -79,7 +79,7 @@ pub(crate) fn bootstrap_with_genesis(
     init_features: Features,
 ) {
     let (config, _genesis_key) =
-        libra2_genesis::test_utils::test_config_with_custom_onchain(Some(Arc::new(move |config| {
+        creditchain_genesis::test_utils::test_config_with_custom_onchain(Some(Arc::new(move |config| {
             config.initial_features_override = Some(init_features.clone());
             config.initial_jwks = vec![IssuerJWK {
                 issuer: get_sample_iss(),
@@ -94,7 +94,7 @@ pub(crate) fn bootstrap_with_genesis(
     rocksdb_configs.state_merkle_db_config.max_open_files = -1;
     rocksdb_configs.enable_storage_sharding = enable_storage_sharding;
     let (_db, db_rw) = DbReaderWriter::wrap(
-        Libra2DB::open(
+        CreditChainDB::open(
             StorageDirPaths::from_path(db_dir),
             false, /* readonly */
             NO_OP_STORAGE_PRUNER_CONFIG,
@@ -109,8 +109,8 @@ pub(crate) fn bootstrap_with_genesis(
 
     // Bootstrap db with genesis
     let waypoint =
-        generate_waypoint::<Libra2VMBlockExecutor>(&db_rw, get_genesis_txn(&config).unwrap())
+        generate_waypoint::<CreditChainVMBlockExecutor>(&db_rw, get_genesis_txn(&config).unwrap())
             .unwrap();
-    maybe_bootstrap::<Libra2VMBlockExecutor>(&db_rw, get_genesis_txn(&config).unwrap(), waypoint)
+    maybe_bootstrap::<CreditChainVMBlockExecutor>(&db_rw, get_genesis_txn(&config).unwrap(), waypoint)
         .unwrap();
 }

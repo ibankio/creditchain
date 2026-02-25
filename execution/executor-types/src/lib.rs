@@ -4,9 +4,9 @@
 #![forbid(unsafe_code)]
 
 use anyhow::Result;
-use libra2_crypto::HashValue;
-use libra2_scratchpad::SparseMerkleTree;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_scratchpad::SparseMerkleTree;
+use creditchain_types::{
     account_config::{NEW_EPOCH_EVENT_MOVE_TYPE_TAG, NEW_EPOCH_EVENT_V2_MOVE_TYPE_TAG},
     block_executor::{config::BlockExecutorConfigFromOnchain, partitioner::ExecutableBlock},
     contract_event::ContractEvent,

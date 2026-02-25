@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::error::QuorumStoreError;
-use libra2_consensus_types::{common::Payload, payload_pull_params::PayloadPullParameters};
+use creditchain_consensus_types::{common::Payload, payload_pull_params::PayloadPullParameters};
 #[cfg(test)]
-use libra2_types::transaction::SignedTransaction;
+use creditchain_types::transaction::SignedTransaction;
 #[cfg(test)]
 use std::time::Duration;
 #[cfg(test)]
@@ -40,7 +40,7 @@ impl UserPayloadClient for DummyClient {
         &self,
         mut params: PayloadPullParameters,
     ) -> anyhow::Result<Payload, QuorumStoreError> {
-        use libra2_consensus_types::utils::PayloadTxnsSize;
+        use creditchain_consensus_types::utils::PayloadTxnsSize;
 
         let timer = Instant::now();
         let mut nxt_txn_idx = 0;

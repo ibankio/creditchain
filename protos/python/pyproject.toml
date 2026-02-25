@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "libra2-protos"
+name = "creditchain-protos"
 version = "1.1.2"
 description = "Code generated from protobuf definitions for the CreditChain tech stack"
 authors = ["CreditChain Research Team"]
@@ -7,8 +7,8 @@ license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/ibankio/creditchain"
 homepage = "https://github.com/ibankio/creditchain/tree/main/protos/python"
-keywords = ["web3", "libra2", "blockchain", "indexer"]
-packages = [{include = "libra2_protos"}]
+keywords = ["web3", "creditchain", "blockchain", "indexer"]
+packages = [{include = "creditchain_protos"}]
 
 [tool.poe.tasks]
 generate = "./generate.sh"

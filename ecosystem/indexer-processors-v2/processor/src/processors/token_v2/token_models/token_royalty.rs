@@ -11,7 +11,7 @@ use crate::{
     schema::current_token_royalty_v1,
 };
 use allocative_derive::Allocative;
-use libra2_indexer_processor_sdk::libra2_protos::transaction::v1::WriteTableItem;
+use libra2_indexer_processor_sdk::creditchain_protos::transaction::v1::WriteTableItem;
 use bigdecimal::BigDecimal;
 use field_count::FieldCount;
 use parquet_derive::ParquetRecordWriter;

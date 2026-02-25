@@ -6,102 +6,102 @@ members = [
     "api/openapi-spec-generator",
     "api/test-context",
     "api/types",
-    "libra2-move/libra2-abstract-gas-usage",
-    "libra2-move/libra2-aggregator",
-    "libra2-move/libra2-debugger",
-    "libra2-move/libra2-e2e-comparison-testing",
-    "libra2-move/libra2-gas-algebra",
-    "libra2-move/libra2-gas-calibration",
-    "libra2-move/libra2-gas-meter",
-    "libra2-move/libra2-gas-profiling",
-    "libra2-move/libra2-gas-schedule",
-    "libra2-move/libra2-gas-schedule-updator",
-    "libra2-move/libra2-memory-usage-tracker",
-    "libra2-move/libra2-native-interface",
-    "libra2-move/libra2-release-builder",
-    "libra2-move/libra2-resource-viewer",
-    "libra2-move/libra2-sdk-builder",
-    "libra2-move/libra2-transaction-benchmarks",
-    "libra2-move/libra2-transaction-simulation",
-    "libra2-move/libra2-transactional-test-harness",
-    "libra2-move/libra2-validator-interface",
-    "libra2-move/libra2-vm",
-    "libra2-move/libra2-vm-benchmarks",
-    "libra2-move/libra2-vm-environment",
-    "libra2-move/libra2-vm-logging",
-    "libra2-move/libra2-vm-profiling",
-    "libra2-move/libra2-vm-types",
-    "libra2-move/libra2-workspace-server",
-    "libra2-move/block-executor",
-    "libra2-move/e2e-benchmark",
-    "libra2-move/e2e-move-tests",
-    "libra2-move/e2e-tests",
-    "libra2-move/e2e-testsuite",
-    "libra2-move/framework",
-    "libra2-move/framework/cached-packages",
-    "libra2-move/framework/table-natives",
-    "libra2-move/move-examples",
-    "libra2-move/mvhashmap",
-    "libra2-move/package-builder",
-    "libra2-move/replay-benchmark",
-    "libra2-move/script-composer",
-    "libra2-move/vm-genesis",
-    "libra2-node",
+    "creditchain-move/creditchain-abstract-gas-usage",
+    "creditchain-move/creditchain-aggregator",
+    "creditchain-move/creditchain-debugger",
+    "creditchain-move/creditchain-e2e-comparison-testing",
+    "creditchain-move/creditchain-gas-algebra",
+    "creditchain-move/creditchain-gas-calibration",
+    "creditchain-move/creditchain-gas-meter",
+    "creditchain-move/creditchain-gas-profiling",
+    "creditchain-move/creditchain-gas-schedule",
+    "creditchain-move/creditchain-gas-schedule-updator",
+    "creditchain-move/creditchain-memory-usage-tracker",
+    "creditchain-move/creditchain-native-interface",
+    "creditchain-move/creditchain-release-builder",
+    "creditchain-move/creditchain-resource-viewer",
+    "creditchain-move/creditchain-sdk-builder",
+    "creditchain-move/creditchain-transaction-benchmarks",
+    "creditchain-move/creditchain-transaction-simulation",
+    "creditchain-move/creditchain-transactional-test-harness",
+    "creditchain-move/creditchain-validator-interface",
+    "creditchain-move/creditchain-vm",
+    "creditchain-move/creditchain-vm-benchmarks",
+    "creditchain-move/creditchain-vm-environment",
+    "creditchain-move/creditchain-vm-logging",
+    "creditchain-move/creditchain-vm-profiling",
+    "creditchain-move/creditchain-vm-types",
+    "creditchain-move/creditchain-workspace-server",
+    "creditchain-move/block-executor",
+    "creditchain-move/e2e-benchmark",
+    "creditchain-move/e2e-move-tests",
+    "creditchain-move/e2e-tests",
+    "creditchain-move/e2e-testsuite",
+    "creditchain-move/framework",
+    "creditchain-move/framework/cached-packages",
+    "creditchain-move/framework/table-natives",
+    "creditchain-move/move-examples",
+    "creditchain-move/mvhashmap",
+    "creditchain-move/package-builder",
+    "creditchain-move/replay-benchmark",
+    "creditchain-move/script-composer",
+    "creditchain-move/vm-genesis",
+    "creditchain-node",
     "config",
     "config/global-constants",
     "consensus",
     "consensus/consensus-types",
     "consensus/safety-rules",
-    "crates/libra2",
-    "crates/libra2-admin-service",
-    "crates/libra2-api-tester",
-    "crates/libra2-bcs-utils",
-    "crates/libra2-bitvec",
-    "crates/libra2-build-info",
-    "crates/libra2-collections",
-    "crates/libra2-compression",
-    "crates/libra2-crypto",
-    "crates/libra2-crypto-derive",
-    "crates/libra2-debugger",
-    "crates/libra2-dkg",
-    "crates/libra2-drop-helper",
-    "crates/libra2-enum-conversion-derive",
-    "crates/libra2-faucet/cli",
-    "crates/libra2-faucet/core",
-    "crates/libra2-faucet/metrics-server",
-    "crates/libra2-faucet/service",
-    "crates/libra2-genesis",
-    "crates/libra2-github-client",
-    "crates/libra2-id-generator",
-    "crates/libra2-infallible",
-    "crates/libra2-inspection-service",
-    "crates/libra2-jwk-consensus",
-    "crates/libra2-keygen",
-    "crates/libra2-ledger",
-    "crates/libra2-localnet",
-    "crates/libra2-log-derive",
-    "crates/libra2-logger",
-    "crates/libra2-metrics-core",
-    "crates/libra2-network-checker",
-    "crates/libra2-node-identity",
-    "crates/libra2-openapi",
-    "crates/libra2-profiler",
-    "crates/libra2-proptest-helpers",
-    "crates/libra2-push-metrics",
-    "crates/libra2-rate-limiter",
-    "crates/libra2-rest-client",
-    "crates/libra2-retrier",
-    "crates/libra2-rosetta",
-    "crates/libra2-rosetta-cli",
-    "crates/libra2-runtimes",
-    "crates/libra2-speculative-state-helper",
-    "crates/libra2-system-utils",
-    "crates/libra2-telemetry",
-    "crates/libra2-telemetry-service",
-    "crates/libra2-temppath",
-    "crates/libra2-time-service",
-    "crates/libra2-transaction-filters",
-    "crates/libra2-warp-webserver",
+    "crates/creditchain",
+    "crates/creditchain-admin-service",
+    "crates/creditchain-api-tester",
+    "crates/creditchain-bcs-utils",
+    "crates/creditchain-bitvec",
+    "crates/creditchain-build-info",
+    "crates/creditchain-collections",
+    "crates/creditchain-compression",
+    "crates/creditchain-crypto",
+    "crates/creditchain-crypto-derive",
+    "crates/creditchain-debugger",
+    "crates/creditchain-dkg",
+    "crates/creditchain-drop-helper",
+    "crates/creditchain-enum-conversion-derive",
+    "crates/creditchain-faucet/cli",
+    "crates/creditchain-faucet/core",
+    "crates/creditchain-faucet/metrics-server",
+    "crates/creditchain-faucet/service",
+    "crates/creditchain-genesis",
+    "crates/creditchain-github-client",
+    "crates/creditchain-id-generator",
+    "crates/creditchain-infallible",
+    "crates/creditchain-inspection-service",
+    "crates/creditchain-jwk-consensus",
+    "crates/creditchain-keygen",
+    "crates/creditchain-ledger",
+    "crates/creditchain-localnet",
+    "crates/creditchain-log-derive",
+    "crates/creditchain-logger",
+    "crates/creditchain-metrics-core",
+    "crates/creditchain-network-checker",
+    "crates/creditchain-node-identity",
+    "crates/creditchain-openapi",
+    "crates/creditchain-profiler",
+    "crates/creditchain-proptest-helpers",
+    "crates/creditchain-push-metrics",
+    "crates/creditchain-rate-limiter",
+    "crates/creditchain-rest-client",
+    "crates/creditchain-retrier",
+    "crates/creditchain-rosetta",
+    "crates/creditchain-rosetta-cli",
+    "crates/creditchain-runtimes",
+    "crates/creditchain-speculative-state-helper",
+    "crates/creditchain-system-utils",
+    "crates/creditchain-telemetry",
+    "crates/creditchain-telemetry-service",
+    "crates/creditchain-temppath",
+    "crates/creditchain-time-service",
+    "crates/creditchain-transaction-filters",
+    "crates/creditchain-warp-webserver",
     "crates/bounded-executor",
     "crates/channel",
     "crates/crash-handler",
@@ -118,7 +118,7 @@ members = [
     "crates/transaction-generator-lib",
     "crates/transaction-workloads-lib",
     "crates/validator-transaction-pool",
-    "devtools/libra2-cargo-cli",
+    "devtools/creditchain-cargo-cli",
     "dkg",
     "ecosystem/indexer-grpc/indexer-grpc-cache-worker",
     "ecosystem/indexer-grpc/indexer-grpc-data-service",
@@ -137,6 +137,8 @@ members = [
     "ecosystem/indexer-grpc/indexer-transaction-generator",
     "ecosystem/indexer-grpc/transaction-filter",
     "ecosystem/indexer-processor-sdk",
+    "ecosystem/indexer-processors-v2/processor",
+    "ecosystem/indexer-processors-v2/integration-tests",
     "ecosystem/nft-metadata-crawler",
     "ecosystem/node-checker",
     "ecosystem/node-checker/fn-check-client",
@@ -169,7 +171,7 @@ members = [
     "secure/net",
     "secure/storage",
     "secure/storage/vault",
-    "state-sync/libra2-data-client",
+    "state-sync/creditchain-data-client",
     "state-sync/data-streaming-service",
     "state-sync/inter-component/consensus-notifications",
     "state-sync/inter-component/event-notifications",
@@ -180,7 +182,7 @@ members = [
     "state-sync/storage-service/server",
     "state-sync/storage-service/types",
     "storage/accumulator",
-    "storage/libra2db",
+    "storage/creditchaindb",
     "storage/backup/backup-cli",
     "storage/backup/backup-service",
     "storage/db-tool",
@@ -260,22 +262,22 @@ members = [
     "vm-validator",
 ]
 
-# NOTE: default-members is the complete list of binaries that form the "production Libra2 codebase". These members should
+# NOTE: default-members is the complete list of binaries that form the "production CreditChain codebase". These members should
 # never include crates that require fuzzing features or test features. These are the crates we want built with no extra
 # test-only code included.
 #
 # For more, see the "Conditional compilation for tests" section in documentation/coding_guidelines.md.
 default-members = [
-    "libra2-node",
+    "creditchain-node",
     "consensus/safety-rules",
-    "crates/libra2",
-    "crates/libra2-debugger",
-    "crates/libra2-faucet/service",
-    "crates/libra2-keygen",
-    "crates/libra2-rate-limiter",
-    "crates/libra2-rosetta",
+    "crates/creditchain",
+    "crates/creditchain-debugger",
+    "crates/creditchain-faucet/service",
+    "crates/creditchain-keygen",
+    "crates/creditchain-rate-limiter",
+    "crates/creditchain-rosetta",
     "crates/transaction-emitter",
-    "libra2-move/framework",
+    "creditchain-move/framework",
     "storage/backup/backup-cli",
     "ecosystem/node-checker",
 ]
@@ -294,189 +296,189 @@ rust-version = "1.80.1"
 [workspace.dependencies]
 # Internal crate dependencies.
 # Please do not add any test features here: they should be declared by the individual crate.
-libra2 = { path = "crates/libra2" }
-libra2-accumulator = { path = "storage/accumulator" }
-libra2-admin-service = { path = "crates/libra2-admin-service" }
-libra2-aggregator = { path = "libra2-move/libra2-aggregator" }
-libra2-api = { path = "api" }
-libra2-api-test-context = { path = "api/test-context" }
-libra2-api-types = { path = "api/types" }
-libra2-backup-cli = { path = "storage/backup/backup-cli" }
-libra2-backup-service = { path = "storage/backup/backup-service" }
-libra2-bcs-utils = { path = "crates/libra2-bcs-utils" }
-libra2-bounded-executor = { path = "crates/bounded-executor" }
-libra2-block-executor = { path = "libra2-move/block-executor" }
-libra2-bitvec = { path = "crates/libra2-bitvec" }
-libra2-build-info = { path = "crates/libra2-build-info" }
-libra2-cached-packages = { path = "libra2-move/framework/cached-packages" }
-libra2-channels = { path = "crates/channel" }
-libra2-cli-common = { path = "crates/libra2-cli-common" }
-libra2-collections = { path = "crates/libra2-collections" }
-libra2-compression = { path = "crates/libra2-compression" }
-libra2-consensus = { path = "consensus" }
-libra2-consensus-notifications = { path = "state-sync/inter-component/consensus-notifications" }
-libra2-consensus-types = { path = "consensus/consensus-types" }
-libra2-config = { path = "config" }
-libra2-crash-handler = { path = "crates/crash-handler" }
-libra2-crypto = { path = "crates/libra2-crypto" }
-libra2-crypto-derive = { path = "crates/libra2-crypto-derive" }
-libra2-data-client = { path = "state-sync/libra2-data-client" }
-libra2-data-streaming-service = { path = "state-sync/data-streaming-service" }
-libra2-db = { path = "storage/libra2db" }
-libra2-db-indexer = { path = "storage/indexer" }
-libra2-db-indexer-schemas = { path = "storage/indexer_schemas" }
-libra2-db-tool = { path = "storage/db-tool" }
-libra2-debugger = { path = "crates/libra2-debugger" }
-libra2-dkg = { path = "crates/libra2-dkg" }
-libra2-dkg-runtime = { path = "dkg" }
-libra2-drop-helper = { path = "crates/libra2-drop-helper" }
-libra2-event-notifications = { path = "state-sync/inter-component/event-notifications" }
-libra2-executor = { path = "execution/executor" }
-libra2-block-partitioner = { path = "execution/block-partitioner" }
-libra2-enum-conversion-derive = { path = "crates/libra2-enum-conversion-derive" }
-libra2-executor-service = { path = "execution/executor-service" }
-libra2-executor-test-helpers = { path = "execution/executor-test-helpers" }
-libra2-executor-types = { path = "execution/executor-types" }
-libra2-experimental-hexy = { path = "experimental/storage/hexy" }
-libra2-experimental-bulk-txn-submit = { path = "experimental/bulk-txn-submit" }
-libra2-experimental-layered-map = { path = "experimental/storage/layered-map" }
-libra2-experimental-ptx-executor = { path = "experimental/execution/ptx-executor" }
-libra2-experimental-runtimes = { path = "experimental/runtimes" }
-libra2-faucet-cli = { path = "crates/libra2-faucet/cli" }
-libra2-faucet-core = { path = "crates/libra2-faucet/core" }
-libra2-faucet-service = { path = "crates/libra2-faucet/service" }
-libra2-faucet-metrics-server = { path = "crates/libra2-faucet/metrics-server" }
-libra2-fallible = { path = "crates/fallible" }
-libra2-forge = { path = "testsuite/forge" }
-libra2-framework = { path = "libra2-move/framework" }
+creditchain = { path = "crates/creditchain" }
+creditchain-accumulator = { path = "storage/accumulator" }
+creditchain-admin-service = { path = "crates/creditchain-admin-service" }
+creditchain-aggregator = { path = "creditchain-move/creditchain-aggregator" }
+creditchain-api = { path = "api" }
+creditchain-api-test-context = { path = "api/test-context" }
+creditchain-api-types = { path = "api/types" }
+creditchain-backup-cli = { path = "storage/backup/backup-cli" }
+creditchain-backup-service = { path = "storage/backup/backup-service" }
+creditchain-bcs-utils = { path = "crates/creditchain-bcs-utils" }
+creditchain-bounded-executor = { path = "crates/bounded-executor" }
+creditchain-block-executor = { path = "creditchain-move/block-executor" }
+creditchain-bitvec = { path = "crates/creditchain-bitvec" }
+creditchain-build-info = { path = "crates/creditchain-build-info" }
+creditchain-cached-packages = { path = "creditchain-move/framework/cached-packages" }
+creditchain-channels = { path = "crates/channel" }
+creditchain-cli-common = { path = "crates/creditchain-cli-common" }
+creditchain-collections = { path = "crates/creditchain-collections" }
+creditchain-compression = { path = "crates/creditchain-compression" }
+creditchain-consensus = { path = "consensus" }
+creditchain-consensus-notifications = { path = "state-sync/inter-component/consensus-notifications" }
+creditchain-consensus-types = { path = "consensus/consensus-types" }
+creditchain-config = { path = "config" }
+creditchain-crash-handler = { path = "crates/crash-handler" }
+creditchain-crypto = { path = "crates/creditchain-crypto" }
+creditchain-crypto-derive = { path = "crates/creditchain-crypto-derive" }
+creditchain-data-client = { path = "state-sync/creditchain-data-client" }
+creditchain-data-streaming-service = { path = "state-sync/data-streaming-service" }
+creditchain-db = { path = "storage/creditchaindb" }
+creditchain-db-indexer = { path = "storage/indexer" }
+creditchain-db-indexer-schemas = { path = "storage/indexer_schemas" }
+creditchain-db-tool = { path = "storage/db-tool" }
+creditchain-debugger = { path = "crates/creditchain-debugger" }
+creditchain-dkg = { path = "crates/creditchain-dkg" }
+creditchain-dkg-runtime = { path = "dkg" }
+creditchain-drop-helper = { path = "crates/creditchain-drop-helper" }
+creditchain-event-notifications = { path = "state-sync/inter-component/event-notifications" }
+creditchain-executor = { path = "execution/executor" }
+creditchain-block-partitioner = { path = "execution/block-partitioner" }
+creditchain-enum-conversion-derive = { path = "crates/creditchain-enum-conversion-derive" }
+creditchain-executor-service = { path = "execution/executor-service" }
+creditchain-executor-test-helpers = { path = "execution/executor-test-helpers" }
+creditchain-executor-types = { path = "execution/executor-types" }
+creditchain-experimental-hexy = { path = "experimental/storage/hexy" }
+creditchain-experimental-bulk-txn-submit = { path = "experimental/bulk-txn-submit" }
+creditchain-experimental-layered-map = { path = "experimental/storage/layered-map" }
+creditchain-experimental-ptx-executor = { path = "experimental/execution/ptx-executor" }
+creditchain-experimental-runtimes = { path = "experimental/runtimes" }
+creditchain-faucet-cli = { path = "crates/creditchain-faucet/cli" }
+creditchain-faucet-core = { path = "crates/creditchain-faucet/core" }
+creditchain-faucet-service = { path = "crates/creditchain-faucet/service" }
+creditchain-faucet-metrics-server = { path = "crates/creditchain-faucet/metrics-server" }
+creditchain-fallible = { path = "crates/fallible" }
+creditchain-forge = { path = "testsuite/forge" }
+creditchain-framework = { path = "creditchain-move/framework" }
 fuzzer = { path = "testsuite/fuzzer" }
-libra2-abstract-gas-usage = { path = "libra2-move/libra2-abstract-gas-usage" }
-libra2-gas-meter = { path = "libra2-move/libra2-gas-meter" }
-libra2-gas-algebra = { path = "libra2-move/libra2-gas-algebra" }
-libra2-gas-calibration = { path = "libra2-move/libra2-gas-calibration" }
-libra2-gas-profiling = { path = "libra2-move/libra2-gas-profiling" }
-libra2-gas-schedule = { path = "libra2-move/libra2-gas-schedule" }
-libra2-gas-schedule-updator = { path = "libra2-move/libra2-gas-schedule-updator" }
-libra2-genesis = { path = "crates/libra2-genesis" }
-libra2-github-client = { path = "crates/libra2-github-client" }
-libra2-global-constants = { path = "config/global-constants" }
-libra2-id-generator = { path = "crates/libra2-id-generator" }
-libra2-indexer = { path = "crates/indexer" }
-libra2-indexer-grpc-cache-worker = { path = "ecosystem/indexer-grpc/indexer-grpc-cache-worker" }
-libra2-indexer-grpc-data-service = { path = "ecosystem/indexer-grpc/indexer-grpc-data-service" }
-libra2-indexer-grpc-data-service-v2 = { path = "ecosystem/indexer-grpc/indexer-grpc-data-service-v2" }
-libra2-indexer-grpc-file-store = { path = "ecosystem/indexer-grpc/indexer-grpc-file-store" }
-libra2-indexer-grpc-file-checker = { path = "ecosystem/indexer-grpc/indexer-grpc-file-checker" }
-libra2-indexer-grpc-file-store-backfiller = { path = "ecosystem/indexer-grpc/indexer-grpc-file-store-backfiller" }
-libra2-indexer-grpc-fullnode = { path = "ecosystem/indexer-grpc/indexer-grpc-fullnode" }
-libra2-indexer-grpc-in-memory-cache-benchmark = { path = "ecosystem/indexer-grpc/indexer-grpc-in-memory-cache-benchmark" }
-libra2-indexer-grpc-manager = { path = "ecosystem/indexer-grpc/indexer-grpc-manager" }
-libra2-indexer-grpc-table-info = { path = "ecosystem/indexer-grpc/indexer-grpc-table-info" }
-libra2-indexer-test-transactions = { path = "ecosystem/indexer-grpc/indexer-test-transactions" }
-libra2-indexer-grpc-utils = { path = "ecosystem/indexer-grpc/indexer-grpc-utils" }
-libra2-indexer-grpc-v2-file-store-backfiller = { path = "ecosystem/indexer-grpc/indexer-grpc-v2-file-store-backfiller" }
-libra2-indexer-grpc-server-framework = { path = "ecosystem/indexer-grpc/indexer-grpc-server-framework" }
-libra2-indexer-transaction-generator = { path = "ecosystem/indexer-grpc/indexer-transaction-generator" }
-libra2-infallible = { path = "crates/libra2-infallible" }
-libra2-inspection-service = { path = "crates/libra2-inspection-service" }
-libra2-jellyfish-merkle = { path = "storage/jellyfish-merkle" }
-libra2-jwk-consensus = { path = "crates/libra2-jwk-consensus" }
-libra2-jwk-utils = { path = "crates/jwk-utils" }
-libra2-keygen = { path = "crates/libra2-keygen" }
-libra2-language-e2e-tests = { path = "libra2-move/e2e-tests" }
-libra2-ledger = { path = "crates/libra2-ledger" }
-libra2-localnet = { path = "crates/libra2-localnet" }
-libra2-log-derive = { path = "crates/libra2-log-derive" }
-libra2-logger = { path = "crates/libra2-logger" }
-libra2-memory-usage-tracker = { path = "libra2-move/libra2-memory-usage-tracker" }
-libra2-mempool = { path = "mempool" }
-libra2-mempool-notifications = { path = "state-sync/inter-component/mempool-notifications" }
-libra2-memsocket = { path = "network/memsocket" }
-libra2-metrics-core = { path = "crates/libra2-metrics-core" }
-libra2-move-debugger = { path = "libra2-move/libra2-debugger" }
-libra2-move-examples = { path = "libra2-move/move-examples" }
-libra2-move-e2e-benchmark = { path = "libra2-move/e2e-benchmark" }
-libra2-mvhashmap = { path = "libra2-move/mvhashmap" }
-libra2-native-interface = { path = "libra2-move/libra2-native-interface" }
-libra2-netcore = { path = "network/netcore" }
-libra2-network = { path = "network/framework" }
-libra2-network-benchmark = { path = "network/benchmark" }
-libra2-network-builder = { path = "network/builder" }
-libra2-network-checker = { path = "crates/libra2-network-checker" }
-libra2-network-discovery = { path = "network/discovery" }
-libra2-nft-metadata-crawler = { path = "ecosystem/nft-metadata-crawler" }
-libra2-node = { path = "libra2-node" }
-libra2-node-checker = { path = "ecosystem/node-checker" }
-libra2-node-identity = { path = "crates/libra2-node-identity" }
-libra2-node-resource-metrics = { path = "crates/node-resource-metrics" }
-libra2-num-variants = { path = "crates/num-variants" }
-libra2-openapi = { path = "crates/libra2-openapi" }
-libra2-package-builder = { path = "libra2-move/package-builder" }
-libra2-peer-monitoring-service-client = { path = "peer-monitoring-service/client" }
-libra2-peer-monitoring-service-server = { path = "peer-monitoring-service/server" }
-libra2-peer-monitoring-service-types = { path = "peer-monitoring-service/types" }
-libra2-keyless-common = { path = "keyless/common" }
-libra2-keyless-pepper-common = { path = "keyless/pepper/common" }
-libra2-keyless-pepper-service = { path = "keyless/pepper/service" }
-libra2-profiler = { path = "crates/libra2-profiler" }
-libra2-proptest-helpers = { path = "crates/libra2-proptest-helpers" }
-libra2-protos = { path = "protos/rust" }
-libra2-proxy = { path = "crates/proxy" }
-libra2-push-metrics = { path = "crates/libra2-push-metrics" }
-libra2-rate-limiter = { path = "crates/libra2-rate-limiter" }
-libra2-release-builder = { path = "libra2-move/libra2-release-builder" }
-libra2-reliable-broadcast = { path = "crates/reliable-broadcast" }
-libra2-replay-benchmark = { path = "libra2-move/replay-benchmark" }
-libra2-resource-viewer = { path = "libra2-move/libra2-resource-viewer" }
-libra2-rest-client = { path = "crates/libra2-rest-client" }
-libra2-retrier = { path = "crates/libra2-retrier" }
-libra2-rocksdb-options = { path = "storage/rocksdb-options" }
-libra2-rosetta = { path = "crates/libra2-rosetta" }
-libra2-runtimes = { path = "crates/libra2-runtimes" }
-libra2-safety-rules = { path = "consensus/safety-rules" }
-libra2-schemadb = { path = "storage/schemadb" }
-libra2-scratchpad = { path = "storage/scratchpad" }
-libra2-script-composer = { path = "libra2-move/script-composer" }
-libra2-sdk = { path = "sdk" }
-libra2-sdk-builder = { path = "libra2-move/libra2-sdk-builder" }
-libra2-secure-net = { path = "secure/net" }
-libra2-secure-storage = { path = "secure/storage" }
-libra2-short-hex-str = { path = "crates/short-hex-str" }
-libra2-speculative-state-helper = { path = "crates/libra2-speculative-state-helper" }
-libra2-state-sync-driver = { path = "state-sync/state-sync-driver" }
-libra2-storage-interface = { path = "storage/storage-interface" }
-libra2-storage-service-client = { path = "state-sync/storage-service/client" }
-libra2-storage-service-notifications = { path = "state-sync/inter-component/storage-service-notifications" }
-libra2-storage-service-types = { path = "state-sync/storage-service/types" }
-libra2-storage-service-server = { path = "state-sync/storage-service/server" }
-libra2-system-utils = { path = "crates/libra2-system-utils" }
-libra2-transaction-filter = { path = "ecosystem/indexer-grpc/transaction-filter" }
-libra2-transaction-filters = { path = "crates/libra2-transaction-filters" }
-libra2-telemetry = { path = "crates/libra2-telemetry" }
-libra2-telemetry-service = { path = "crates/libra2-telemetry-service" }
-libra2-temppath = { path = "crates/libra2-temppath" }
-libra2-testcases = { path = "testsuite/testcases" }
-libra2-time-service = { path = "crates/libra2-time-service", features = [
+creditchain-abstract-gas-usage = { path = "creditchain-move/creditchain-abstract-gas-usage" }
+creditchain-gas-meter = { path = "creditchain-move/creditchain-gas-meter" }
+creditchain-gas-algebra = { path = "creditchain-move/creditchain-gas-algebra" }
+creditchain-gas-calibration = { path = "creditchain-move/creditchain-gas-calibration" }
+creditchain-gas-profiling = { path = "creditchain-move/creditchain-gas-profiling" }
+creditchain-gas-schedule = { path = "creditchain-move/creditchain-gas-schedule" }
+creditchain-gas-schedule-updator = { path = "creditchain-move/creditchain-gas-schedule-updator" }
+creditchain-genesis = { path = "crates/creditchain-genesis" }
+creditchain-github-client = { path = "crates/creditchain-github-client" }
+creditchain-global-constants = { path = "config/global-constants" }
+creditchain-id-generator = { path = "crates/creditchain-id-generator" }
+creditchain-indexer = { path = "crates/indexer" }
+creditchain-indexer-grpc-cache-worker = { path = "ecosystem/indexer-grpc/indexer-grpc-cache-worker" }
+creditchain-indexer-grpc-data-service = { path = "ecosystem/indexer-grpc/indexer-grpc-data-service" }
+creditchain-indexer-grpc-data-service-v2 = { path = "ecosystem/indexer-grpc/indexer-grpc-data-service-v2" }
+creditchain-indexer-grpc-file-store = { path = "ecosystem/indexer-grpc/indexer-grpc-file-store" }
+creditchain-indexer-grpc-file-checker = { path = "ecosystem/indexer-grpc/indexer-grpc-file-checker" }
+creditchain-indexer-grpc-file-store-backfiller = { path = "ecosystem/indexer-grpc/indexer-grpc-file-store-backfiller" }
+creditchain-indexer-grpc-fullnode = { path = "ecosystem/indexer-grpc/indexer-grpc-fullnode" }
+creditchain-indexer-grpc-in-memory-cache-benchmark = { path = "ecosystem/indexer-grpc/indexer-grpc-in-memory-cache-benchmark" }
+creditchain-indexer-grpc-manager = { path = "ecosystem/indexer-grpc/indexer-grpc-manager" }
+creditchain-indexer-grpc-table-info = { path = "ecosystem/indexer-grpc/indexer-grpc-table-info" }
+creditchain-indexer-test-transactions = { path = "ecosystem/indexer-grpc/indexer-test-transactions" }
+creditchain-indexer-grpc-utils = { path = "ecosystem/indexer-grpc/indexer-grpc-utils" }
+creditchain-indexer-grpc-v2-file-store-backfiller = { path = "ecosystem/indexer-grpc/indexer-grpc-v2-file-store-backfiller" }
+creditchain-indexer-grpc-server-framework = { path = "ecosystem/indexer-grpc/indexer-grpc-server-framework" }
+creditchain-indexer-transaction-generator = { path = "ecosystem/indexer-grpc/indexer-transaction-generator" }
+creditchain-infallible = { path = "crates/creditchain-infallible" }
+creditchain-inspection-service = { path = "crates/creditchain-inspection-service" }
+creditchain-jellyfish-merkle = { path = "storage/jellyfish-merkle" }
+creditchain-jwk-consensus = { path = "crates/creditchain-jwk-consensus" }
+creditchain-jwk-utils = { path = "crates/jwk-utils" }
+creditchain-keygen = { path = "crates/creditchain-keygen" }
+creditchain-language-e2e-tests = { path = "creditchain-move/e2e-tests" }
+creditchain-ledger = { path = "crates/creditchain-ledger" }
+creditchain-localnet = { path = "crates/creditchain-localnet" }
+creditchain-log-derive = { path = "crates/creditchain-log-derive" }
+creditchain-logger = { path = "crates/creditchain-logger" }
+creditchain-memory-usage-tracker = { path = "creditchain-move/creditchain-memory-usage-tracker" }
+creditchain-mempool = { path = "mempool" }
+creditchain-mempool-notifications = { path = "state-sync/inter-component/mempool-notifications" }
+creditchain-memsocket = { path = "network/memsocket" }
+creditchain-metrics-core = { path = "crates/creditchain-metrics-core" }
+creditchain-move-debugger = { path = "creditchain-move/creditchain-debugger" }
+creditchain-move-examples = { path = "creditchain-move/move-examples" }
+creditchain-move-e2e-benchmark = { path = "creditchain-move/e2e-benchmark" }
+creditchain-mvhashmap = { path = "creditchain-move/mvhashmap" }
+creditchain-native-interface = { path = "creditchain-move/creditchain-native-interface" }
+creditchain-netcore = { path = "network/netcore" }
+creditchain-network = { path = "network/framework" }
+creditchain-network-benchmark = { path = "network/benchmark" }
+creditchain-network-builder = { path = "network/builder" }
+creditchain-network-checker = { path = "crates/creditchain-network-checker" }
+creditchain-network-discovery = { path = "network/discovery" }
+creditchain-nft-metadata-crawler = { path = "ecosystem/nft-metadata-crawler" }
+creditchain-node = { path = "creditchain-node" }
+creditchain-node-checker = { path = "ecosystem/node-checker" }
+creditchain-node-identity = { path = "crates/creditchain-node-identity" }
+creditchain-node-resource-metrics = { path = "crates/node-resource-metrics" }
+creditchain-num-variants = { path = "crates/num-variants" }
+creditchain-openapi = { path = "crates/creditchain-openapi" }
+creditchain-package-builder = { path = "creditchain-move/package-builder" }
+creditchain-peer-monitoring-service-client = { path = "peer-monitoring-service/client" }
+creditchain-peer-monitoring-service-server = { path = "peer-monitoring-service/server" }
+creditchain-peer-monitoring-service-types = { path = "peer-monitoring-service/types" }
+creditchain-keyless-common = { path = "keyless/common" }
+creditchain-keyless-pepper-common = { path = "keyless/pepper/common" }
+creditchain-keyless-pepper-service = { path = "keyless/pepper/service" }
+creditchain-profiler = { path = "crates/creditchain-profiler" }
+creditchain-proptest-helpers = { path = "crates/creditchain-proptest-helpers" }
+creditchain-protos = { path = "protos/rust" }
+creditchain-proxy = { path = "crates/proxy" }
+creditchain-push-metrics = { path = "crates/creditchain-push-metrics" }
+creditchain-rate-limiter = { path = "crates/creditchain-rate-limiter" }
+creditchain-release-builder = { path = "creditchain-move/creditchain-release-builder" }
+creditchain-reliable-broadcast = { path = "crates/reliable-broadcast" }
+creditchain-replay-benchmark = { path = "creditchain-move/replay-benchmark" }
+creditchain-resource-viewer = { path = "creditchain-move/creditchain-resource-viewer" }
+creditchain-rest-client = { path = "crates/creditchain-rest-client" }
+creditchain-retrier = { path = "crates/creditchain-retrier" }
+creditchain-rocksdb-options = { path = "storage/rocksdb-options" }
+creditchain-rosetta = { path = "crates/creditchain-rosetta" }
+creditchain-runtimes = { path = "crates/creditchain-runtimes" }
+creditchain-safety-rules = { path = "consensus/safety-rules" }
+creditchain-schemadb = { path = "storage/schemadb" }
+creditchain-scratchpad = { path = "storage/scratchpad" }
+creditchain-script-composer = { path = "creditchain-move/script-composer" }
+creditchain-sdk = { path = "sdk" }
+creditchain-sdk-builder = { path = "creditchain-move/creditchain-sdk-builder" }
+creditchain-secure-net = { path = "secure/net" }
+creditchain-secure-storage = { path = "secure/storage" }
+creditchain-short-hex-str = { path = "crates/short-hex-str" }
+creditchain-speculative-state-helper = { path = "crates/creditchain-speculative-state-helper" }
+creditchain-state-sync-driver = { path = "state-sync/state-sync-driver" }
+creditchain-storage-interface = { path = "storage/storage-interface" }
+creditchain-storage-service-client = { path = "state-sync/storage-service/client" }
+creditchain-storage-service-notifications = { path = "state-sync/inter-component/storage-service-notifications" }
+creditchain-storage-service-types = { path = "state-sync/storage-service/types" }
+creditchain-storage-service-server = { path = "state-sync/storage-service/server" }
+creditchain-system-utils = { path = "crates/creditchain-system-utils" }
+creditchain-transaction-filter = { path = "ecosystem/indexer-grpc/transaction-filter" }
+creditchain-transaction-filters = { path = "crates/creditchain-transaction-filters" }
+creditchain-telemetry = { path = "crates/creditchain-telemetry" }
+creditchain-telemetry-service = { path = "crates/creditchain-telemetry-service" }
+creditchain-temppath = { path = "crates/creditchain-temppath" }
+creditchain-testcases = { path = "testsuite/testcases" }
+creditchain-time-service = { path = "crates/creditchain-time-service", features = [
     "async",
 ] }
-libra2-transaction-emitter-lib = { path = "crates/transaction-emitter-lib" }
-libra2-transaction-generator-lib = { path = "crates/transaction-generator-lib" }
-libra2-transaction-workloads-lib = { path = "crates/transaction-workloads-lib" }
-libra2-transaction-simulation = { path = "libra2-move/libra2-transaction-simulation" }
-libra2-transactional-test-harness = { path = "libra2-move/libra2-transactional-test-harness" }
-libra2-types = { path = "types" }
-libra2-validator-interface = { path = "libra2-move/libra2-validator-interface" }
-libra2-validator-transaction-pool = { path = "crates/validator-transaction-pool" }
-libra2-vault-client = { path = "secure/storage/vault" }
-libra2-vm = { path = "libra2-move/libra2-vm" }
-libra2-vm-environment = { path = "libra2-move/libra2-vm-environment" }
-libra2-vm-logging = { path = "libra2-move/libra2-vm-logging" }
-libra2-vm-genesis = { path = "libra2-move/vm-genesis" }
-libra2-vm-types = { path = "libra2-move/libra2-vm-types" }
-libra2-vm-validator = { path = "vm-validator" }
-libra2-workspace-server = { path = "libra2-move/libra2-workspace-server" }
-libra2-warp-webserver = { path = "crates/libra2-warp-webserver" }
-libra2-cargo-cli = { path = "devtools/libra2-cargo-cli" }
+creditchain-transaction-emitter-lib = { path = "crates/transaction-emitter-lib" }
+creditchain-transaction-generator-lib = { path = "crates/transaction-generator-lib" }
+creditchain-transaction-workloads-lib = { path = "crates/transaction-workloads-lib" }
+creditchain-transaction-simulation = { path = "creditchain-move/creditchain-transaction-simulation" }
+creditchain-transactional-test-harness = { path = "creditchain-move/creditchain-transactional-test-harness" }
+creditchain-types = { path = "types" }
+creditchain-validator-interface = { path = "creditchain-move/creditchain-validator-interface" }
+creditchain-validator-transaction-pool = { path = "crates/validator-transaction-pool" }
+creditchain-vault-client = { path = "secure/storage/vault" }
+creditchain-vm = { path = "creditchain-move/creditchain-vm" }
+creditchain-vm-environment = { path = "creditchain-move/creditchain-vm-environment" }
+creditchain-vm-logging = { path = "creditchain-move/creditchain-vm-logging" }
+creditchain-vm-genesis = { path = "creditchain-move/vm-genesis" }
+creditchain-vm-types = { path = "creditchain-move/creditchain-vm-types" }
+creditchain-vm-validator = { path = "vm-validator" }
+creditchain-workspace-server = { path = "creditchain-move/creditchain-workspace-server" }
+creditchain-warp-webserver = { path = "crates/creditchain-warp-webserver" }
+creditchain-cargo-cli = { path = "devtools/creditchain-cargo-cli" }
 
 # External crate dependencies.
 # Please do not add any test features here: they should be declared by the individual crate.
@@ -504,8 +506,8 @@ ark-std = { version = "0.4.0", features = ["getrandom"] }
 libra2-indexer-processor-sdk = { path = "ecosystem/indexer-processor-sdk", features = [
     "postgres_partial",
 ] }
-libra2-indexer-processors-v2 = { path = "ecosystem/indexer-processors-v2" }
-libra2-moving-average = { path = "ecosystem/moving-average" }
+# processor crate is a workspace member at ecosystem/indexer-processors-v2/processor
+creditchain-moving-average = { path = "ecosystem/moving-average" }
 libra2-indexer-transaction-stream = { path = "ecosystem/transaction-stream" }
 instrumented-channel = { path = "ecosystem/instrumented-channel" }
 idxsample = { path = "ecosystem/indexer-processor-sdk/idxsample" }
@@ -692,6 +694,8 @@ pathsearch = "0.2.0"
 passkey-authenticator = { version = "0.2.0", features = ["testable"] }
 passkey-client = { version = "0.2.0" }
 passkey-types = { version = "0.2.0" }
+parquet = { version = "53.0", default-features = false, features = ["arrow", "snap", "brotli", "flate2", "lz4", "zstd"] }
+parquet_derive = "53.0"
 pbjson = "0.5.1"
 percent-encoding = "2.1.0"
 petgraph = "0.6.5"
@@ -706,7 +710,7 @@ pretty = "0.10.0"
 pretty_assertions = "1.2.1"
 # We set default-features to false so we don't onboard the libpq dep. See more here:
 # https://github.com/libra2org/libra2-core/pull/12568
-processor = { git = "https://github.com/libra2org/libra2-indexer-processors-v2.git", default-features = false }
+processor = { path = "ecosystem/indexer-processors-v2/processor", default-features = false }
 procfs = "0.14.1"
 proc-macro2 = "1.0.38"
 project-root = "0.2.2"
@@ -846,7 +850,7 @@ autometrics = { version = "1.0.1", features = ["prometheus-exporter"] }
 delegate = "0.12.0"
 
 # Locking this because newer versions of kanal are using the unstable feature error_in_core, which
-# will break the Libra2 CLI. 
+# will break the CreditChain CLI. 
 kanal = "=0.1.0-pre8"
 prometheus-client = "0.22.2"
 testcontainers = "0.20.1"
@@ -855,7 +859,7 @@ testcontainers = "0.20.1"
 postgres-native-tls = "0.5.0"
 tokio-postgres = "0.7.10"
 
-# from libra2-indexer-processor-v2 ======
+# from creditchain-indexer-processor-v2 ======
 
 allocative = "0.3.3"
 allocative_derive = "0.3.3"
@@ -919,8 +923,8 @@ move-prover-boogie-backend = { path = "third_party/move/move-prover/boogie-backe
 move-prover-bytecode-pipeline = { path = "third_party/move/move-prover/bytecode-pipeline" }
 move-prover-test-utils = { path = "third_party/move/move-prover/test-utils" }
 move-prover-lab = { path = "third_party/move/move-prover/lab" }
-libra2-move-stdlib = { path = "libra2-move/framework/move-stdlib" }
-libra2-table-natives = { path = "libra2-move/framework/table-natives" }
+creditchain-move-stdlib = { path = "creditchain-move/framework/move-stdlib" }
+creditchain-table-natives = { path = "creditchain-move/framework/table-natives" }
 move-resource-viewer = { path = "third_party/move/tools/move-resource-viewer" }
 move-stackless-bytecode = { path = "third_party/move/move-model/bytecode" }
 move-stackless-bytecode-test-utils = { path = "third_party/move/move-model/bytecode-test-utils" }
@@ -988,3 +992,6 @@ libra2-indexer-processor-sdk = { path = "ecosystem/indexer-processor-sdk" }
 
 [patch."https://github.com/libra2org/libra2-indexer-processor-sdk.git"]
 libra2-indexer-processor-sdk = { path = "ecosystem/indexer-processor-sdk" }
+
+[patch."https://github.com/libra2org/libra2-indexer-processors-v2.git"]
+processor = { path = "ecosystem/indexer-processors-v2/processor" }

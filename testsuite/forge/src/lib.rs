@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-//! Forge is a framework for writing and running end-to-end tests in Libra2
+//! Forge is a framework for writing and running end-to-end tests in CreditChain
 
 pub use anyhow::Result;
 
@@ -14,9 +14,9 @@ mod runner;
 pub use runner::*;
 
 mod backend;
-pub use libra2_transaction_emitter_lib::*;
-pub use libra2_transaction_generator_lib::*;
-pub use libra2_transaction_workloads_lib::*;
+pub use creditchain_transaction_emitter_lib::*;
+pub use creditchain_transaction_generator_lib::*;
+pub use creditchain_transaction_workloads_lib::*;
 pub use backend::*;
 
 mod report;

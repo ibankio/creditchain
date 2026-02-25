@@ -13,14 +13,14 @@ use crate::{
             FungibleAssetStore, FungibleAssetSupply,
         },
         token_v2::token_v2_models::v2_token_utils::{
-            Libra2Collection, ConcurrentSupply, FixedSupply, PropertyMapModel, TokenIdentifiers,
+            CreditChainCollection, ConcurrentSupply, FixedSupply, PropertyMapModel, TokenIdentifiers,
             TokenV2, TransferEvent, UnlimitedSupply,
         },
     },
 };
 use ahash::AHashMap;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::WriteResource,
+   creditchain_protos::transaction::v1::WriteResource,
     utils::convert::{deserialize_from_string, standardize_address},
 };
 use bigdecimal::BigDecimal;
@@ -49,7 +49,7 @@ pub struct ObjectAggregatedData {
     pub fungible_asset_store: Option<FungibleAssetStore>,
     pub concurrent_fungible_asset_balance: Option<ConcurrentFungibleAssetBalance>,
     // Token v2 structs
-    pub libra2_collection: Option<Libra2Collection>,
+    pub creditchain_collection: Option<CreditChainCollection>,
     pub fixed_supply: Option<FixedSupply>,
     pub property_map: Option<PropertyMapModel>,
     pub token: Option<TokenV2>,
@@ -76,7 +76,7 @@ impl Default for ObjectAggregatedData {
             concurrent_fungible_asset_supply: None,
             concurrent_fungible_asset_balance: None,
             fungible_asset_store: None,
-            libra2_collection: None,
+            creditchain_collection: None,
             fixed_supply: None,
             property_map: None,
             token: None,

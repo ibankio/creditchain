@@ -13,13 +13,13 @@ use crate::{
     utils::{GlobalRestoreOptions, RestoreRunMode, TrustedWaypointOpt},
 };
 use anyhow::Result;
-use libra2_db::backup::restore_handler::RestoreHandler;
-use libra2_executor_types::VerifyExecutionMode;
-use libra2_logger::prelude::*;
-use libra2_storage_interface::Libra2DbError;
-use libra2_types::{on_chain_config::TimedFeatureOverride, transaction::Version};
-use libra2_vm::Libra2VM;
-use libra2_vm_environment::prod_configs::set_timed_feature_override;
+use creditchain_db::backup::restore_handler::RestoreHandler;
+use creditchain_executor_types::VerifyExecutionMode;
+use creditchain_logger::prelude::*;
+use creditchain_storage_interface::CreditChainDbError;
+use creditchain_types::{on_chain_config::TimedFeatureOverride, transaction::Version};
+use creditchain_vm::CreditChainVM;
+use creditchain_vm_environment::prod_configs::set_timed_feature_override;
 use std::sync::Arc;
 use thiserror::Error;
 
@@ -37,8 +37,8 @@ impl From<anyhow::Error> for ReplayError {
     }
 }
 
-impl From<Libra2DbError> for ReplayError {
-    fn from(error: Libra2DbError) -> Self {
+impl From<CreditChainDbError> for ReplayError {
+    fn from(error: CreditChainDbError) -> Self {
         ReplayError::OtherError(error.to_string())
     }
 }
@@ -99,7 +99,7 @@ impl ReplayVerifyCoordinator {
     }
 
     async fn run_impl(self) -> Result<(), ReplayError> {
-        Libra2VM::set_concurrency_level_once(self.replay_concurrency_level);
+        CreditChainVM::set_concurrency_level_once(self.replay_concurrency_level);
         set_timed_feature_override(TimedFeatureOverride::Replay);
 
         let metadata_view = metadata::cache::sync_and_load(

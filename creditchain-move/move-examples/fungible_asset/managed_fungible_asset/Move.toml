@@ -1,0 +1,12 @@
+[package]
+name = "ManagedFungibleAsset"
+version = "0.0.0"
+
+[addresses]
+creditchain_framework = "0x1"
+creditchain_token_objects = "0x4"
+example_addr = "_"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }
+CreditChainTokenObjects = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-token-objects", rev = "mainnet" }

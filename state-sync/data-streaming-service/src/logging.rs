@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::error::Error;
-use libra2_logger::Schema;
+use creditchain_logger::Schema;
 use serde::Serialize;
 
 #[derive(Schema)]
@@ -30,7 +30,7 @@ impl LogSchema<'_> {
 #[derive(Clone, Copy, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum LogEntry {
-    Libra2DataClient,
+    CreditChainDataClient,
     CheckStreamProgress,
     CreatedSubscriptionStream,
     EndOfStreamNotification,

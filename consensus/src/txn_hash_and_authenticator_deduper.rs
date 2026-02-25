@@ -5,8 +5,8 @@ use crate::{
     counters::{TXN_DEDUP_FILTERED, TXN_DEDUP_SECONDS},
     transaction_deduper::TransactionDeduper,
 };
-use libra2_experimental_runtimes::thread_manager::optimal_min_len;
-use libra2_types::transaction::SignedTransaction;
+use creditchain_experimental_runtimes::thread_manager::optimal_min_len;
+use creditchain_types::transaction::SignedTransaction;
 use rayon::prelude::*;
 use std::collections::{HashMap, HashSet};
 
@@ -107,15 +107,15 @@ mod tests {
         transaction_deduper::TransactionDeduper,
         txn_hash_and_authenticator_deduper::TxnHashAndAuthenticatorDeduper,
     };
-    use libra2_crypto::ed25519::{Ed25519PrivateKey, Ed25519PublicKey};
-    use libra2_keygen::KeyGen;
-    use libra2_types::{
+    use creditchain_crypto::ed25519::{Ed25519PrivateKey, Ed25519PublicKey};
+    use creditchain_keygen::KeyGen;
+    use creditchain_types::{
         chain_id::ChainId,
         transaction::{
             EntryFunction, RawTransaction, ReplayProtector, Script, SignedTransaction,
             TransactionExecutable,
         },
-        utility_coin::Libra2CoinType,
+        utility_coin::CreditChainCoinType,
         CoinType,
     };
     use move_core_types::{account_address::AccountAddress, ident_str, language_storage::ModuleId};
@@ -136,7 +136,7 @@ mod tests {
         }
 
         pub fn with_keypair(privkey: Ed25519PrivateKey, pubkey: Ed25519PublicKey) -> Self {
-            let addr = libra2_types::account_address::from_public_key(&pubkey);
+            let addr = creditchain_types::account_address::from_public_key(&pubkey);
             Account {
                 addr,
                 privkey,
@@ -182,7 +182,7 @@ mod tests {
         let entry_func = EntryFunction::new(
             ModuleId::new(AccountAddress::ONE, ident_str!("coin").to_owned()),
             ident_str!("transfer").to_owned(),
-            vec![Libra2CoinType::type_tag()],
+            vec![CreditChainCoinType::type_tag()],
             vec![
                 bcs::to_bytes(&receiver).unwrap(),
                 bcs::to_bytes(&1).unwrap(),

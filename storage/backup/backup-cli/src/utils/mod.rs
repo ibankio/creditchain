@@ -11,26 +11,26 @@ pub(crate) mod stream;
 #[cfg(any(test, feature = "testing"))]
 pub mod test_utils;
 
-use libra2_config::config::{
+use creditchain_config::config::{
     RocksdbConfig, RocksdbConfigs, StorageDirPaths, BUFFERED_STATE_TARGET_ITEMS,
     DEFAULT_MAX_NUM_NODES_PER_LRU_CACHE_SHARD, NO_OP_STORAGE_PRUNER_CONFIG,
 };
-use libra2_crypto::HashValue;
-use libra2_db::{
+use creditchain_crypto::HashValue;
+use creditchain_db::{
     backup::restore_handler::RestoreHandler,
-    db::Libra2DB,
+    db::CreditChainDB,
     get_restore_handler::GetRestoreHandler,
     state_restore::{
         StateSnapshotRestore, StateSnapshotRestoreMode, StateValueBatch, StateValueWriter,
     },
 };
-use libra2_db_indexer_schemas::metadata::StateSnapshotProgress;
-use libra2_indexer_grpc_table_info::internal_indexer_db_service::InternalIndexerDBService;
-use libra2_infallible::duration_since_epoch;
-use libra2_jellyfish_merkle::{NodeBatch, TreeWriter};
-use libra2_logger::info;
-use libra2_storage_interface::{Libra2DbError, Result};
-use libra2_types::{
+use creditchain_db_indexer_schemas::metadata::StateSnapshotProgress;
+use creditchain_indexer_grpc_table_info::internal_indexer_db_service::InternalIndexerDBService;
+use creditchain_infallible::duration_since_epoch;
+use creditchain_jellyfish_merkle::{NodeBatch, TreeWriter};
+use creditchain_logger::info;
+use creditchain_storage_interface::{CreditChainDbError, Result};
+use creditchain_types::{
     state_store::{
         state_key::StateKey, state_storage_usage::StateStorageUsage, state_value::StateValue,
     },
@@ -305,7 +305,7 @@ impl TryFrom<GlobalRestoreOpt> for GlobalRestoreOptions {
             } else {
                 None
             };
-            let restore_handler = Arc::new(Libra2DB::open_kv_only(
+            let restore_handler = Arc::new(CreditChainDB::open_kv_only(
                 StorageDirPaths::from_path(db_dir),
                 false,                       /* read_only */
                 NO_OP_STORAGE_PRUNER_CONFIG, /* pruner config */
@@ -355,7 +355,7 @@ impl TrustedWaypointOpt {
             trusted_waypoints
                 .insert(w.version(), w)
                 .map_or(Ok(()), |w| {
-                    Err(Libra2DbError::Other(format!(
+                    Err(CreditChainDbError::Other(format!(
                         "Duplicated waypoints at version {}",
                         w.version()
                     )))
@@ -391,7 +391,7 @@ pub struct ConcurrentDataRequestsOpt {}
 
 #[derive(Clone, Copy, Default, Parser)]
 pub struct ReplayConcurrencyLevelOpt {
-    /// Libra2VM::set_concurrency_level_once() is called with this
+    /// CreditChainVM::set_concurrency_level_once() is called with this
     #[clap(
         long,
         help = "concurrency_level used by the transaction executor, applicable when replaying transactions \
@@ -430,7 +430,7 @@ impl<T: AsRef<Path>> PathToString for T {
             .to_path_buf()
             .into_os_string()
             .into_string()
-            .map_err(|s| Libra2DbError::Other(format!("into_string failed for OsString '{:?}'", s)))
+            .map_err(|s| CreditChainDbError::Other(format!("into_string failed for OsString '{:?}'", s)))
     }
 }
 

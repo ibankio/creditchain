@@ -1,6 +1,6 @@
 module poc::serialize_internal {
-    use libra2_std::crypto_algebra::{Self, Element};
-    use libra2_std::bls12381_algebra::{G1, FormatG1Compr};
+    use creditchain_std::crypto_algebra::{Self, Element};
+    use creditchain_std::bls12381_algebra::{G1, FormatG1Compr};
     use std::vector;
 
     public entry fun main(_owner: &signer) {

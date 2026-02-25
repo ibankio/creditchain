@@ -9,7 +9,7 @@ use crate::{
 };
 use allocative_derive::Allocative;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{
+   creditchain_protos::transaction::v1::{
         DeleteModule, MoveModule as MoveModulePB, MoveModuleBytecode, WriteModule,
     },
     utils::convert::standardize_address,

@@ -1,5 +1,5 @@
 module poc::create_unbounded_aggregator {
-    use libra2_framework::aggregator_v2;
+    use creditchain_framework::aggregator_v2;
 
     public entry fun main(_owner:&signer) {
         let _agg = aggregator_v2::create_unbounded_aggregator<u64>();

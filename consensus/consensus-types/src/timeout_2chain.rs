@@ -4,9 +4,9 @@
 
 use crate::{common::Author, quorum_cert::QuorumCert};
 use anyhow::ensure;
-use libra2_crypto::{bls12381, CryptoMaterialError};
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
-use libra2_types::{
+use creditchain_crypto::{bls12381, CryptoMaterialError};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_types::{
     account_address::AccountAddress,
     aggregate_signature::{AggregateSignature, PartialSignatures},
     block_info::Round,
@@ -21,7 +21,7 @@ use std::{
 };
 
 /// This structure contains all the information necessary to construct a signature
-/// on the equivalent of a Libra2BFT v4 timeout message.
+/// on the equivalent of a CreditChainBFT v4 timeout message.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct TwoChainTimeout {
     /// Epoch number corresponds to the set of validators that are active for this round.
@@ -104,7 +104,7 @@ pub struct TimeoutSigningRepr {
 }
 
 /// TimeoutCertificate is a proof that 2f+1 participants in epoch i
-/// have voted in round r and we can now move to round r+1. Libra2BFT v4 requires signature to sign on
+/// have voted in round r and we can now move to round r+1. CreditChainBFT v4 requires signature to sign on
 /// the TimeoutSigningRepr and carry the TimeoutWithHighestQC with highest quorum cert among 2f+1.
 #[derive(Debug, Clone, Serialize, Deserialize, Eq, PartialEq)]
 pub struct TwoChainTimeoutCertificate {
@@ -403,13 +403,13 @@ mod tests {
         quorum_cert::QuorumCert,
         timeout_2chain::{TwoChainTimeout, TwoChainTimeoutWithPartialSignatures},
     };
-    use libra2_crypto::bls12381;
+    use creditchain_crypto::bls12381;
 
     #[test]
     fn test_2chain_timeout_certificate() {
         use crate::vote_data::VoteData;
-        use libra2_crypto::hash::CryptoHash;
-        use libra2_types::{
+        use creditchain_crypto::hash::CryptoHash;
+        use creditchain_types::{
             aggregate_signature::PartialSignatures,
             block_info::BlockInfo,
             ledger_info::{LedgerInfo, LedgerInfoWithVerifiedSignatures},

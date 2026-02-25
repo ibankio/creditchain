@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 // Maximum number of threads for the file store
 pub const MAXIMUM_NUMBER_FILESTORE_THREADS: usize = 10;
 // GRPC request metadata key for the token ID.
-pub const GRPC_AUTH_TOKEN_HEADER: &str = "x-libra2-data-authorization";
+pub const GRPC_AUTH_TOKEN_HEADER: &str = "x-creditchain-data-authorization";
 // GRPC request metadata key for the request name. This is used to identify the
 // data destination.
 pub const GRPC_REQUEST_NAME_HEADER: &str = "x-aptos-request-name";
@@ -20,27 +20,27 @@ pub const MESSAGE_SIZE_LIMIT: usize = 1024 * 1024 * 15;
 /// The type of the auth identity. For example, "anonymous IP" or "application" (API
 /// key). For now all data service connections must be from an application, but we
 /// include this for future-proofing.
-pub const REQUEST_HEADER_LIBRA2_IDENTIFIER_TYPE: &str = "x-aptos-identifier-type";
+pub const REQUEST_HEADER_CREDITCHAIN_IDENTIFIER_TYPE: &str = "x-aptos-identifier-type";
 /// The identifier uniquely identifies the requester. For an application, this is the
 /// application ID, a UUID4.
-pub const REQUEST_HEADER_LIBRA2_IDENTIFIER: &str = "x-aptos-identifier";
+pub const REQUEST_HEADER_CREDITCHAIN_IDENTIFIER: &str = "x-aptos-identifier";
 /// The email of the requester. For an application, this is the email of the user who
 /// created the application. When looking at metrics based on this label, you should
 /// also parallelize based on the application name. Or just use the identifier.
-pub const REQUEST_HEADER_LIBRA2_EMAIL: &str = "x-aptos-email";
+pub const REQUEST_HEADER_CREDITCHAIN_EMAIL: &str = "x-aptos-email";
 /// The name of the application, e.g. something like "Graffio Testnet".
-pub const REQUEST_HEADER_LIBRA2_APPLICATION_NAME: &str = "x-aptos-application-name";
+pub const REQUEST_HEADER_CREDITCHAIN_APPLICATION_NAME: &str = "x-aptos-application-name";
 
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct IndexerGrpcRequestMetadata {
     pub processor_name: String,
-    /// See `REQUEST_HEADER_LIBRA2_IDENTIFIER_TYPE` for more information.
+    /// See `REQUEST_HEADER_CREDITCHAIN_IDENTIFIER_TYPE` for more information.
     pub request_identifier_type: String,
-    /// See `REQUEST_HEADER_LIBRA2_IDENTIFIER` for more information.
+    /// See `REQUEST_HEADER_CREDITCHAIN_IDENTIFIER` for more information.
     pub request_identifier: String,
-    /// See `REQUEST_HEADER_LIBRA2_EMAIL` for more information.
+    /// See `REQUEST_HEADER_CREDITCHAIN_EMAIL` for more information.
     pub request_email: String,
-    /// See `REQUEST_HEADER_LIBRA2_APPLICATION_NAME` for more information.
+    /// See `REQUEST_HEADER_CREDITCHAIN_APPLICATION_NAME` for more information.
     pub request_application_name: String,
     pub request_connection_id: String,
     // Token is no longer needed behind api gateway.

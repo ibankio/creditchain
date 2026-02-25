@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{ensure, Context, Result};
-use libra2_indexer_grpc_utils::compression_util::{FileEntry, StorageFormat};
-use libra2_metrics_core::{register_int_counter, IntCounter};
+use creditchain_indexer_grpc_utils::compression_util::{FileEntry, StorageFormat};
+use creditchain_metrics_core::{register_int_counter, IntCounter};
 use cloud_storage::Client;
 use once_cell::sync::Lazy;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};

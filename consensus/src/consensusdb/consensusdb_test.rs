@@ -5,13 +5,13 @@
 use self::schema::dag::NodeSchema;
 use super::*;
 use crate::dag::{CertifiedNode, Extensions, Node, Vote};
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block::block_test_utils::certificate_for_genesis,
     common::{Author, Payload},
 };
-use libra2_crypto::bls12381::Signature;
-use libra2_temppath::TempPath;
-use libra2_types::aggregate_signature::AggregateSignature;
+use creditchain_crypto::bls12381::Signature;
+use creditchain_temppath::TempPath;
+use creditchain_types::aggregate_signature::AggregateSignature;
 use std::{collections::HashMap, hash::Hash};
 
 #[test]

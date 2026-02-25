@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-grpc-utils"
+name = "creditchain-indexer-grpc-utils"
 description = "Indexer gRPC utils."
 version = "1.0.1"
 
@@ -14,9 +14,9 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-protos = { workspace = true }
-libra2-transaction-filter = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-protos = { workspace = true }
+creditchain-transaction-filter = { workspace = true }
 async-trait = { workspace = true }
 backoff = { workspace = true }
 base64 = { workspace = true }

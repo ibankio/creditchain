@@ -15,15 +15,15 @@ mod node_type_test;
 
 use crate::{
     get_hash,
-    metrics::{LIBRA2_JELLYFISH_INTERNAL_ENCODED_BYTES, LIBRA2_JELLYFISH_LEAF_ENCODED_BYTES},
+    metrics::{CREDITCHAIN_JELLYFISH_INTERNAL_ENCODED_BYTES, CREDITCHAIN_JELLYFISH_LEAF_ENCODED_BYTES},
     Key, TreeReader,
 };
 use anyhow::{ensure, Context, Result};
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{CryptoHash, SPARSE_MERKLE_PLACEHOLDER_HASH},
     HashValue,
 };
-use libra2_types::{
+use creditchain_types::{
     nibble::{nibble_path::NibblePath, Nibble, ROOT_NIBBLE_HEIGHT},
     proof::{definition::NodeInProof, SparseMerkleInternalNode, SparseMerkleLeafNode},
     transaction::Version,
@@ -833,12 +833,12 @@ where
             Node::Internal(internal_node) => {
                 out.push(NodeTag::Internal as u8);
                 internal_node.serialize(&mut out)?;
-                LIBRA2_JELLYFISH_INTERNAL_ENCODED_BYTES.inc_by(out.len() as u64);
+                CREDITCHAIN_JELLYFISH_INTERNAL_ENCODED_BYTES.inc_by(out.len() as u64);
             },
             Node::Leaf(leaf_node) => {
                 out.push(NodeTag::Leaf as u8);
                 out.extend(bcs::to_bytes(&leaf_node)?);
-                LIBRA2_JELLYFISH_LEAF_ENCODED_BYTES.inc_by(out.len() as u64);
+                CREDITCHAIN_JELLYFISH_LEAF_ENCODED_BYTES.inc_by(out.len() as u64);
             },
             Node::Null => {
                 out.push(NodeTag::Null as u8);

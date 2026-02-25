@@ -3,18 +3,18 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{data_notification::DataNotification, data_stream::DataStreamListener, error::Error};
-use libra2_config::config::Libra2DataClientConfig;
-use libra2_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, SigningKey, Uniform};
-use libra2_data_client::{
+use creditchain_config::config::CreditChainDataClientConfig;
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, SigningKey, Uniform};
+use creditchain_data_client::{
     global_summary::{AdvertisedData, GlobalDataSummary, OptimalChunkSizes},
     interface::{
-        Libra2DataClientInterface, Response, ResponseCallback, ResponseContext, ResponseError,
+        CreditChainDataClientInterface, Response, ResponseCallback, ResponseContext, ResponseError,
         SubscriptionRequestMetadata,
     },
 };
-use libra2_infallible::Mutex;
-use libra2_logger::Level;
-use libra2_storage_service_types::{
+use creditchain_infallible::Mutex;
+use creditchain_logger::Level;
+use creditchain_storage_service_types::{
     requests::{
         DataRequest, EpochEndingLedgerInfoRequest, NewTransactionOutputsWithProofRequest,
         NewTransactionsOrOutputsWithProofRequest, NewTransactionsWithProofRequest,
@@ -26,7 +26,7 @@ use libra2_storage_service_types::{
     responses::{CompleteDataRange, TransactionOrOutputListWithProofV2},
     Epoch,
 };
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     aggregate_signature::AggregateSignature,
     block_info::BlockInfo,
@@ -80,10 +80,10 @@ pub const MAX_REAL_EPOCH_END: u64 = MAX_ADVERTISED_EPOCH_END + 2;
 pub const MAX_REAL_TRANSACTION: u64 = MAX_ADVERTISED_TRANSACTION + 10;
 pub const MAX_REAL_TRANSACTION_OUTPUT: u64 = MAX_REAL_TRANSACTION;
 
-/// A simple mock of the Libra2 Data Client
+/// A simple mock of the CreditChain Data Client
 #[derive(Clone, Debug)]
-pub struct MockLibra2DataClient {
-    pub libra2_data_client_config: Libra2DataClientConfig,
+pub struct MockCreditChainDataClient {
+    pub creditchain_data_client_config: CreditChainDataClientConfig,
     pub advertised_epoch_ending_ledger_infos: BTreeMap<Epoch, LedgerInfoWithSignatures>,
     pub advertised_synced_ledger_infos: Vec<LedgerInfoWithSignatures>,
     pub data_beyond_highest_advertised: bool, // If true, data exists beyond the highest advertised
@@ -94,9 +94,9 @@ pub struct MockLibra2DataClient {
     pub skip_timeout_verification: bool, // If true, skips timeout verification for incoming requests
 }
 
-impl MockLibra2DataClient {
+impl MockCreditChainDataClient {
     pub fn new(
-        libra2_data_client_config: Libra2DataClientConfig,
+        creditchain_data_client_config: CreditChainDataClientConfig,
         data_beyond_highest_advertised: bool,
         limit_chunk_sizes: bool,
         skip_emulate_network_latencies: bool,
@@ -129,7 +129,7 @@ impl MockLibra2DataClient {
         let data_request_counter = Arc::new(Mutex::new(HashMap::new()));
 
         Self {
-            libra2_data_client_config,
+            creditchain_data_client_config,
             advertised_epoch_ending_ledger_infos,
             advertised_synced_ledger_infos,
             data_beyond_highest_advertised,
@@ -144,10 +144,10 @@ impl MockLibra2DataClient {
     /// Clones the mock data client without timeout verification
     fn clone_without_timeout_verification(&self) -> Self {
         // Clone the mock data client and skip timeout verification
-        let mut libra2_data_client = self.clone();
-        libra2_data_client.skip_timeout_verification = true;
+        let mut creditchain_data_client = self.clone();
+        creditchain_data_client.skip_timeout_verification = true;
 
-        libra2_data_client
+        creditchain_data_client
     }
 
     /// Emulates network latencies by sleeping for 10 -> 50 ms
@@ -158,12 +158,12 @@ impl MockLibra2DataClient {
     }
 
     /// Emulates a timeout by sleeping for a long time and returning a timeout error
-    async fn emulate_network_request_timeout(&self) -> libra2_data_client::error::Error {
+    async fn emulate_network_request_timeout(&self) -> creditchain_data_client::error::Error {
         // Sleep for a while
         tokio::time::sleep(Duration::from_secs(MAX_NOTIFICATION_TIMEOUT_SECS)).await;
 
         // Return a timeout error
-        libra2_data_client::error::Error::TimeoutWaitingForResponse("RPC timed out!".into())
+        creditchain_data_client::error::Error::TimeoutWaitingForResponse("RPC timed out!".into())
     }
 
     /// Calculates the last index for the given start and end indices (with
@@ -212,13 +212,13 @@ impl MockLibra2DataClient {
         if !self.skip_timeout_verification {
             // Verify the given timeout for the request
             let expected_timeout = if is_optimistic_fetch_request {
-                self.libra2_data_client_config.optimistic_fetch_timeout_ms
+                self.creditchain_data_client_config.optimistic_fetch_timeout_ms
             } else if is_subscription_request {
-                self.libra2_data_client_config
+                self.creditchain_data_client_config
                     .subscription_response_timeout_ms
             } else {
-                let min_timeout = self.libra2_data_client_config.response_timeout_ms;
-                let max_timeout = self.libra2_data_client_config.max_response_timeout_ms;
+                let min_timeout = self.creditchain_data_client_config.response_timeout_ms;
+                let max_timeout = self.creditchain_data_client_config.max_response_timeout_ms;
 
                 // Check how many times the given request has been made
                 // and update the request counter.
@@ -244,7 +244,7 @@ impl MockLibra2DataClient {
 }
 
 #[async_trait]
-impl Libra2DataClientInterface for MockLibra2DataClient {
+impl CreditChainDataClientInterface for MockCreditChainDataClient {
     fn get_global_data_summary(&self) -> GlobalDataSummary {
         // Create a random set of optimal chunk sizes to emulate changing environments
         let optimal_chunk_sizes = OptimalChunkSizes {
@@ -288,7 +288,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         start_index: u64,
         end_index: u64,
         request_timeout_ms: u64,
-    ) -> Result<Response<StateValueChunkWithProof>, libra2_data_client::error::Error> {
+    ) -> Result<Response<StateValueChunkWithProof>, creditchain_data_client::error::Error> {
         // Verify the request timeout
         let data_request = DataRequest::GetStateValuesWithProof(StateValuesWithProofRequest {
             version,
@@ -332,7 +332,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         start_epoch: Epoch,
         end_epoch: Epoch,
         request_timeout_ms: u64,
-    ) -> Result<Response<Vec<LedgerInfoWithSignatures>>, libra2_data_client::error::Error> {
+    ) -> Result<Response<Vec<LedgerInfoWithSignatures>>, creditchain_data_client::error::Error> {
         // Verify the request timeout
         let data_request = DataRequest::GetEpochEndingLedgerInfos(EpochEndingLedgerInfoRequest {
             start_epoch,
@@ -370,7 +370,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         request_timeout_ms: u64,
     ) -> Result<
         Response<(TransactionOutputListWithProofV2, LedgerInfoWithSignatures)>,
-        libra2_data_client::error::Error,
+        creditchain_data_client::error::Error,
     > {
         // Verify the request timeout
         let data_request =
@@ -386,20 +386,20 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         // Attempt to fetch and serve the new data
         if self.data_beyond_highest_advertised && known_version < MAX_REAL_TRANSACTION_OUTPUT {
             // Create a mock data client without timeout verification (to handle the internal requests)
-            let libra2_data_client = self.clone_without_timeout_verification();
+            let creditchain_data_client = self.clone_without_timeout_verification();
 
             // Determine the target ledger info
             let target_ledger_info =
-                determine_target_ledger_info(known_epoch, request_timeout_ms, &libra2_data_client)
+                determine_target_ledger_info(known_epoch, request_timeout_ms, &creditchain_data_client)
                     .await;
 
             // Fetch the new transaction outputs
-            let outputs_with_proof = libra2_data_client
+            let outputs_with_proof = creditchain_data_client
                 .get_transaction_outputs_with_proof(
                     known_version + 1,
                     known_version + 1,
                     known_version + 1,
-                    self.libra2_data_client_config.response_timeout_ms,
+                    self.creditchain_data_client_config.response_timeout_ms,
                 )
                 .await
                 .unwrap()
@@ -424,7 +424,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         request_timeout_ms: u64,
     ) -> Result<
         Response<(TransactionListWithProofV2, LedgerInfoWithSignatures)>,
-        libra2_data_client::error::Error,
+        creditchain_data_client::error::Error,
     > {
         // Verify the request timeout
         let data_request =
@@ -441,21 +441,21 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         // Attempt to fetch and serve the new data
         if self.data_beyond_highest_advertised && known_version < MAX_REAL_TRANSACTION {
             // Create a mock data client without timeout verification (to handle the internal requests)
-            let libra2_data_client = self.clone_without_timeout_verification();
+            let creditchain_data_client = self.clone_without_timeout_verification();
 
             // Determine the target ledger info
             let target_ledger_info =
-                determine_target_ledger_info(known_epoch, request_timeout_ms, &libra2_data_client)
+                determine_target_ledger_info(known_epoch, request_timeout_ms, &creditchain_data_client)
                     .await;
 
             // Fetch the new transactions
-            let transactions_with_proof = libra2_data_client
+            let transactions_with_proof = creditchain_data_client
                 .get_transactions_with_proof(
                     known_version + 1,
                     known_version + 1,
                     known_version + 1,
                     include_events,
-                    self.libra2_data_client_config.response_timeout_ms,
+                    self.creditchain_data_client_config.response_timeout_ms,
                 )
                 .await
                 .unwrap()
@@ -478,7 +478,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         known_epoch: Epoch,
         include_events: bool,
         request_timeout_ms: u64,
-    ) -> libra2_data_client::error::Result<
+    ) -> creditchain_data_client::error::Result<
         Response<(TransactionOrOutputListWithProofV2, LedgerInfoWithSignatures)>,
     > {
         // Verify the request timeout
@@ -496,11 +496,11 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         self.emulate_network_latencies().await;
 
         // Create a mock data client without timeout verification (to handle the internal requests)
-        let libra2_data_client = self.clone_without_timeout_verification();
+        let creditchain_data_client = self.clone_without_timeout_verification();
 
         // Get the new transactions or outputs response
         let response = if return_transactions_instead_of_outputs() {
-            let (transactions, ledger_info) = libra2_data_client
+            let (transactions, ledger_info) = creditchain_data_client
                 .get_new_transactions_with_proof(
                     known_version,
                     known_epoch,
@@ -511,7 +511,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
                 .payload;
             ((Some(transactions), None), ledger_info)
         } else {
-            let (outputs, ledger_info) = libra2_data_client
+            let (outputs, ledger_info) = creditchain_data_client
                 .get_new_transaction_outputs_with_proof(
                     known_version,
                     known_epoch,
@@ -530,7 +530,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         &self,
         version: Version,
         request_timeout_ms: u64,
-    ) -> Result<Response<u64>, libra2_data_client::error::Error> {
+    ) -> Result<Response<u64>, creditchain_data_client::error::Error> {
         // Verify the request timeout
         let data_request = DataRequest::GetNumberOfStatesAtVersion(version);
         self.verify_request_timeout_value(request_timeout_ms, false, false, data_request);
@@ -548,7 +548,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         start_version: Version,
         end_version: Version,
         request_timeout_ms: u64,
-    ) -> Result<Response<TransactionOutputListWithProofV2>, libra2_data_client::error::Error> {
+    ) -> Result<Response<TransactionOutputListWithProofV2>, creditchain_data_client::error::Error> {
         // Verify the request timeout
         let data_request =
             DataRequest::GetTransactionOutputsWithProof(TransactionOutputsWithProofRequest {
@@ -578,7 +578,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         end_version: Version,
         include_events: bool,
         request_timeout_ms: u64,
-    ) -> Result<Response<TransactionListWithProofV2>, libra2_data_client::error::Error> {
+    ) -> Result<Response<TransactionListWithProofV2>, creditchain_data_client::error::Error> {
         // Verify the request timeout
         let data_request = DataRequest::GetTransactionsWithProof(TransactionsWithProofRequest {
             proof_version,
@@ -609,7 +609,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         end_version: Version,
         include_events: bool,
         request_timeout_ms: u64,
-    ) -> libra2_data_client::error::Result<Response<TransactionOrOutputListWithProofV2>> {
+    ) -> creditchain_data_client::error::Result<Response<TransactionOrOutputListWithProofV2>> {
         // Verify the request timeout
         let data_request =
             DataRequest::GetTransactionsOrOutputsWithProof(TransactionsOrOutputsWithProofRequest {
@@ -625,11 +625,11 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         self.emulate_network_latencies().await;
 
         // Create a mock data client without timeout verification (to handle the internal requests)
-        let libra2_data_client = self.clone_without_timeout_verification();
+        let creditchain_data_client = self.clone_without_timeout_verification();
 
         // Get the transactions or outputs response
         let transactions_or_outputs = if return_transactions_instead_of_outputs() {
-            let transactions_with_proof = libra2_data_client
+            let transactions_with_proof = creditchain_data_client
                 .get_transactions_with_proof(
                     proof_version,
                     start_version,
@@ -640,7 +640,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
                 .await?;
             (Some(transactions_with_proof.payload), None)
         } else {
-            let outputs_with_proof = libra2_data_client
+            let outputs_with_proof = creditchain_data_client
                 .get_transaction_outputs_with_proof(
                     proof_version,
                     start_version,
@@ -659,7 +659,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         &self,
         subscription_request_metadata: SubscriptionRequestMetadata,
         request_timeout_ms: u64,
-    ) -> libra2_data_client::error::Result<
+    ) -> creditchain_data_client::error::Result<
         Response<(TransactionOutputListWithProofV2, LedgerInfoWithSignatures)>,
     > {
         // Extract the known version, known epoch and the subscription stream index
@@ -690,21 +690,21 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         // Attempt to fetch and serve the new data
         if self.data_beyond_highest_advertised && known_version < MAX_REAL_TRANSACTION_OUTPUT {
             // Create a mock data client without timeout verification (to handle the internal requests)
-            let libra2_data_client = self.clone_without_timeout_verification();
+            let creditchain_data_client = self.clone_without_timeout_verification();
 
             // Determine the target ledger info
             let known_epoch = self.find_known_epoch_for_version(known_version);
             let target_ledger_info =
-                determine_target_ledger_info(known_epoch, request_timeout_ms, &libra2_data_client)
+                determine_target_ledger_info(known_epoch, request_timeout_ms, &creditchain_data_client)
                     .await;
 
             // Fetch the new transaction outputs
-            let outputs_with_proof = libra2_data_client
+            let outputs_with_proof = creditchain_data_client
                 .get_transaction_outputs_with_proof(
                     known_version + 1,
                     known_version + 1,
                     known_version + 1,
-                    self.libra2_data_client_config.response_timeout_ms,
+                    self.creditchain_data_client_config.response_timeout_ms,
                 )
                 .await
                 .unwrap()
@@ -726,7 +726,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         subscription_request_metadata: SubscriptionRequestMetadata,
         include_events: bool,
         request_timeout_ms: u64,
-    ) -> libra2_data_client::error::Result<
+    ) -> creditchain_data_client::error::Result<
         Response<(TransactionListWithProofV2, LedgerInfoWithSignatures)>,
     > {
         // Extract the known version, known epoch and the subscription stream index
@@ -757,22 +757,22 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         // Attempt to fetch and serve the new data
         if self.data_beyond_highest_advertised && known_version < MAX_REAL_TRANSACTION_OUTPUT {
             // Create a mock data client without timeout verification (to handle the internal requests)
-            let libra2_data_client = self.clone_without_timeout_verification();
+            let creditchain_data_client = self.clone_without_timeout_verification();
 
             // Determine the target ledger info
             let known_epoch = self.find_known_epoch_for_version(known_version);
             let target_ledger_info =
-                determine_target_ledger_info(known_epoch, request_timeout_ms, &libra2_data_client)
+                determine_target_ledger_info(known_epoch, request_timeout_ms, &creditchain_data_client)
                     .await;
 
             // Fetch the new transaction outputs
-            let outputs_with_proof = libra2_data_client
+            let outputs_with_proof = creditchain_data_client
                 .get_transactions_with_proof(
                     known_version + 1,
                     known_version + 1,
                     known_version + 1,
                     include_events,
-                    self.libra2_data_client_config.response_timeout_ms,
+                    self.creditchain_data_client_config.response_timeout_ms,
                 )
                 .await
                 .unwrap()
@@ -794,7 +794,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         subscription_request_metadata: SubscriptionRequestMetadata,
         include_events: bool,
         request_timeout_ms: u64,
-    ) -> libra2_data_client::error::Result<
+    ) -> creditchain_data_client::error::Result<
         Response<(TransactionOrOutputListWithProofV2, LedgerInfoWithSignatures)>,
     > {
         // Extract the known version, known epoch and the subscription stream index
@@ -822,11 +822,11 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
         self.emulate_network_latencies().await;
 
         // Create a mock data client without timeout verification (to handle the internal requests)
-        let libra2_data_client = self.clone_without_timeout_verification();
+        let creditchain_data_client = self.clone_without_timeout_verification();
 
         // Send the new transactions or outputs response
         let response = if return_transactions_instead_of_outputs() {
-            let (transactions, ledger_info) = libra2_data_client
+            let (transactions, ledger_info) = creditchain_data_client
                 .subscribe_to_transactions_with_proof(
                     subscription_request_metadata,
                     include_events,
@@ -836,7 +836,7 @@ impl Libra2DataClientInterface for MockLibra2DataClient {
                 .payload;
             ((Some(transactions), None), ledger_info)
         } else {
-            let (outputs, ledger_info) = libra2_data_client
+            let (outputs, ledger_info) = creditchain_data_client
                 .subscribe_to_transaction_outputs_with_proof(
                     subscription_request_metadata,
                     request_timeout_ms,
@@ -1022,11 +1022,11 @@ fn create_range_random_u64(min_value: u64, max_value: u64) -> u64 {
 async fn determine_target_ledger_info(
     known_epoch: Epoch,
     request_timeout_ms: u64,
-    libra2_data_client: &MockLibra2DataClient,
+    creditchain_data_client: &MockCreditChainDataClient,
 ) -> LedgerInfoWithSignatures {
     if known_epoch <= MAX_REAL_EPOCH_END {
         // Fetch the epoch ending ledger info
-        libra2_data_client
+        creditchain_data_client
             .get_epoch_ending_ledger_infos(known_epoch, known_epoch, request_timeout_ms)
             .await
             .unwrap()
@@ -1038,9 +1038,9 @@ async fn determine_target_ledger_info(
     }
 }
 
-/// Initializes the Libra2 logger for tests
+/// Initializes the CreditChain logger for tests
 pub fn initialize_logger() {
-    libra2_logger::Logger::builder()
+    creditchain_logger::Logger::builder()
         .is_async(false)
         .level(Level::Info)
         .build();

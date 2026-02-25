@@ -5,8 +5,8 @@ use crate::{
     event_v2_translator::EventV2TranslationEngine, metrics::TIMER,
     utils::PrefixedStateValueIterator,
 };
-use libra2_config::config::internal_indexer_db_config::InternalIndexerDBConfig;
-use libra2_db_indexer_schemas::{
+use creditchain_config::config::internal_indexer_db_config::InternalIndexerDBConfig;
+use creditchain_db_indexer_schemas::{
     metadata::{MetadataKey, MetadataValue, StateSnapshotProgress},
     schema::{
         event_by_key::EventByKeySchema, event_by_version::EventByVersionSchema,
@@ -20,12 +20,12 @@ use libra2_db_indexer_schemas::{
         MAX_REQUEST_LIMIT,
     },
 };
-use libra2_logger::warn;
-use libra2_schemadb::{batch::SchemaBatch, DB};
-use libra2_storage_interface::{
-    db_ensure as ensure, db_other_bail as bail, Libra2DbError, DbReader, Result,
+use creditchain_logger::warn;
+use creditchain_schemadb::{batch::SchemaBatch, DB};
+use creditchain_storage_interface::{
+    db_ensure as ensure, db_other_bail as bail, CreditChainDbError, DbReader, Result,
 };
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::{BURN_TYPE, MINT_TYPE},
     contract_event::{ContractEvent, ContractEventV1, ContractEventV2, EventWithVersion},
@@ -184,7 +184,7 @@ impl InternalIndexerDB {
             address,
             min_seq_num
                 .checked_add(num_versions)
-                .ok_or(Libra2DbError::TooManyRequested(min_seq_num, num_versions))?,
+                .ok_or(CreditChainDbError::TooManyRequested(min_seq_num, num_versions))?,
             ledger_version,
         ))
     }
@@ -297,7 +297,7 @@ impl InternalIndexerDB {
     ) -> Result<ContractEventV1> {
         self.db
             .get::<TranslatedV1EventSchema>(&(version, index))?
-            .ok_or_else(|| Libra2DbError::NotFound(format!("Event {} of Txn {}", index, version)))
+            .ok_or_else(|| CreditChainDbError::NotFound(format!("Event {} of Txn {}", index, version)))
     }
 }
 
@@ -407,7 +407,7 @@ impl DBIndexer {
 
     /// Process a batch of transactions that is within the range of  `start_version` to `end_version`. Left inclusive, right exclusive.
     pub fn process_a_batch(&self, start_version: Version, end_version: Version) -> Result<Version> {
-        let _timer: libra2_metrics_core::HistogramTimer =
+        let _timer: creditchain_metrics_core::HistogramTimer =
             TIMER.with_label_values(&["process_a_batch"]).start_timer();
         let mut version = start_version;
         let num_transactions = self.get_num_of_transactions(version, end_version)?;
@@ -482,7 +482,7 @@ impl DBIndexer {
                             }
                         }
                     }
-                    Ok::<(), Libra2DbError>(())
+                    Ok::<(), CreditChainDbError>(())
                 })?;
             }
 
@@ -496,7 +496,7 @@ impl DBIndexer {
                 });
             }
             version += 1;
-            Ok::<(), Libra2DbError>(())
+            Ok::<(), CreditChainDbError>(())
         })?;
         assert!(version > 0, "batch number should be greater than 0");
 
@@ -545,7 +545,7 @@ impl DBIndexer {
         )?;
         self.sender
             .send(Some(batch))
-            .map_err(|e| Libra2DbError::Other(e.to_string()))?;
+            .map_err(|e| CreditChainDbError::Other(e.to_string()))?;
         Ok(version)
     }
 

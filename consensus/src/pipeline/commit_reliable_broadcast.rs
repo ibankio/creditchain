@@ -3,13 +3,13 @@
 
 use crate::{counters, network::NetworkSender, network_interface::ConsensusMsg};
 use anyhow::bail;
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::Author,
     pipeline::{commit_decision::CommitDecision, commit_vote::CommitVote},
 };
-use libra2_infallible::Mutex;
-use libra2_reliable_broadcast::{BroadcastStatus, RBMessage, RBNetworkSender};
-use libra2_types::{validator_verifier::ValidatorVerifier, PeerId};
+use creditchain_infallible::Mutex;
+use creditchain_reliable_broadcast::{BroadcastStatus, RBMessage, RBNetworkSender};
+use creditchain_types::{validator_verifier::ValidatorVerifier, PeerId};
 use async_trait::async_trait;
 use bytes::Bytes;
 use serde::{Deserialize, Serialize};

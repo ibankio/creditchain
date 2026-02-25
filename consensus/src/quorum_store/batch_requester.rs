@@ -9,11 +9,11 @@ use crate::{
         types::{BatchRequest, BatchResponse, PersistedValue},
     },
 };
-use libra2_crypto::HashValue;
-use libra2_executor_types::*;
-use libra2_infallible::Mutex;
-use libra2_logger::prelude::*;
-use libra2_types::{transaction::SignedTransaction, validator_verifier::ValidatorVerifier, PeerId};
+use creditchain_crypto::HashValue;
+use creditchain_executor_types::*;
+use creditchain_infallible::Mutex;
+use creditchain_logger::prelude::*;
+use creditchain_types::{transaction::SignedTransaction, validator_verifier::ValidatorVerifier, PeerId};
 use futures::{stream::FuturesUnordered, StreamExt};
 use rand::Rng;
 use std::{collections::BTreeSet, sync::Arc, time::Duration};

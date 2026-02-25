@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{ensure, Result};
-use libra2_executor_types::LedgerUpdateOutput;
-use libra2_experimental_runtimes::thread_manager::THREAD_MANAGER;
-use libra2_types::{
+use creditchain_executor_types::LedgerUpdateOutput;
+use creditchain_experimental_runtimes::thread_manager::THREAD_MANAGER;
+use creditchain_types::{
     epoch_state::EpochState,
     ledger_info::LedgerInfoWithSignatures,
     proof::{accumulator::InMemoryTransactionAccumulator, TransactionInfoListWithProof},

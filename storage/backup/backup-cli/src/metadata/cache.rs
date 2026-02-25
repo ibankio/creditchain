@@ -9,8 +9,8 @@ use crate::{
     utils::{error_notes::ErrorNotes, stream::StreamX},
 };
 use anyhow::{anyhow, Context, Result};
-use libra2_logger::prelude::*;
-use libra2_temppath::TempPath;
+use creditchain_logger::prelude::*;
+use creditchain_temppath::TempPath;
 use async_trait::async_trait;
 use clap::Parser;
 use std::{

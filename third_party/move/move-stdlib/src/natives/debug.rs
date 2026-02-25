@@ -466,9 +466,9 @@ mod testing {
                 }
             },
             MoveValue::Closure(_) => {
-                // Using non-Libra2 Move stdlib with function values is not supported. In general,
+                // Using non-CreditChain Move stdlib with function values is not supported. In general,
                 // this debug implementation should be removed and replaced by the new one from
-                // Libra2 Move.
+                // CreditChain Move.
                 return Err(PartialVMError::new(StatusCode::FEATURE_NOT_ENABLED));
             },
             MoveValue::Struct(move_struct) => match move_struct {

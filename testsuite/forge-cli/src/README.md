@@ -11,7 +11,7 @@ run local and remote CreditChain swarms (i.e., networks of validators and valida
 example, to deploy a local validator swarm, run:
 
 ```
-cargo run -p libra2-forge-cli -- --suite "run_forever" --num-validators 4 test local-swarm
+cargo run -p creditchain-forge-cli -- --suite "run_forever" --num-validators 4 test local-swarm
 ```
 
 This will start a local network of 4 validators, each running in their own process. The
@@ -23,11 +23,11 @@ run the above command you should see:
 
 ```
 ...
-2022-09-01T15:41:27.228289Z [main] INFO crates/libra2-genesis/src/builder.rs:462 Building genesis with 4 validators. Directory of output: "/private/var/folders/dx/c0l2rrkn0656gfx6v5_dy_p80000gn/T/.tmpq9uPMJ"
+2022-09-01T15:41:27.228289Z [main] INFO crates/creditchain-genesis/src/builder.rs:462 Building genesis with 4 validators. Directory of output: "/private/var/folders/dx/c0l2rrkn0656gfx6v5_dy_p80000gn/T/.tmpq9uPMJ"
 ...
 2022-09-01T15:41:28.090606Z [main] INFO testsuite/forge/src/backend/local/swarm.rs:207 The root (or mint) key for the swarm is: 0xf9f...
 ...
-2022-09-01T15:41:28.094800Z [main] INFO testsuite/forge/src/backend/local/node.rs:129 Started node 0 (PID: 78939) with command: ".../creditchain/target/debug/libra2-node" "-f" "/private/var/folders/dx/c0l2rrkn0656gfx6v5_dy_p80000gn/T/.tmpq9uPMJ/0/node.yaml"
+2022-09-01T15:41:28.094800Z [main] INFO testsuite/forge/src/backend/local/node.rs:129 Started node 0 (PID: 78939) with command: ".../creditchain/target/debug/creditchain-node" "-f" "/private/var/folders/dx/c0l2rrkn0656gfx6v5_dy_p80000gn/T/.tmpq9uPMJ/0/node.yaml"
 2022-09-01T15:41:28.094825Z [main] INFO testsuite/forge/src/backend/local/node.rs:137 Node 0: REST API is listening at: http://127.0.0.1:64566
 2022-09-01T15:41:28.094838Z [main] INFO testsuite/forge/src/backend/local/node.rs:142 Node 0: Inspection service is listening at http://127.0.0.1:64568
 ...
@@ -38,7 +38,7 @@ it, e.g., stop and restart node `0`:
 
 ```
 kill -9 <Node 0 PID>
-cargo run -p libra2-node -- -f <Location to the node 0 configuration file displayed above>
+cargo run -p creditchain-node -- -f <Location to the node 0 configuration file displayed above>
 ```
 
 ## Faucet and minting
@@ -46,7 +46,7 @@ cargo run -p libra2-node -- -f <Location to the node 0 configuration file displa
 In order to mint coins in this test network you need to run a faucet. You can do that with this command:
 
 ```bash
-cargo run -p libra2-faucet-service -- run-simple --key <key> --node-url <node_url>
+cargo run -p creditchain-faucet-service -- run-simple --key <key> --node-url <node_url>
 ```
 
 You can get the values above like this:
@@ -61,25 +61,25 @@ curl -X POST http://127.0.0.1:8081/mint?amount=<amount to mint>&pub_key=<public 
 
 As an alternative to using the faucet service, you may use the faucet CLI directly:
 ```
-cargo run -p libra2-faucet-cli -- --amount 10 --accounts <account_address> --key <private_key>
+cargo run -p creditchain-faucet-cli -- --amount 10 --accounts <account_address> --key <private_key>
 ```
 
 :::tip Faucet and CreditChain CLI
-See more on how the faucet works in the [README](https://github.com/ibankio/creditchain/tree/main/crates/libra2-faucet).
+See more on how the faucet works in the [README](https://github.com/ibankio/creditchain/tree/main/crates/creditchain-faucet).
 
-Also see how to use the [CreditChain CLI](../cli-tools/libra2-cli/use-cli/use-libra2-cli.md#account-examples) with an existing faucet.
+Also see how to use the [CreditChain CLI](../cli-tools/creditchain-cli/use-cli/use-creditchain-cli.md#account-examples) with an existing faucet.
 :::
 
 ## Validator fullnodes
 
 To also run validator fullnodes inside the network, use the `--num-validator-fullnodes` flag, e.g.,:
 ```
-cargo run -p libra2-forge-cli -- --suite "run_forever" --num-validators 3 --num-validator-fullnodes 1 test local-swarm
+cargo run -p creditchain-forge-cli -- --suite "run_forever" --num-validators 3 --num-validator-fullnodes 1 test local-swarm
 ```
 
 ## Additional usage
 
 To see all tool usage options, run:
 ```
-cargo run -p libra2-forge-cli --help
+cargo run -p creditchain-forge-cli --help
 ```

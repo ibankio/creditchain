@@ -1,5 +1,5 @@
 [package]
-name = "libra2-block-partitioner"
+name = "creditchain-block-partitioner"
 description = "A tool to partition a block store into smaller chunks based on graph partitioning."
 
 version = "0.1.1"
@@ -14,10 +14,10 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-crypto = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-types = { workspace = true }
 bcs = { workspace = true }
 clap = { workspace = true }
 dashmap = { workspace = true }

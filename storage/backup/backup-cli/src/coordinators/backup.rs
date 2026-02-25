@@ -20,10 +20,10 @@ use crate::{
     },
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_db::backup::backup_handler::DbState;
-use libra2_infallible::duration_since_epoch;
-use libra2_logger::prelude::*;
-use libra2_types::transaction::Version;
+use creditchain_db::backup::backup_handler::DbState;
+use creditchain_infallible::duration_since_epoch;
+use creditchain_logger::prelude::*;
+use creditchain_types::transaction::Version;
 use clap::Parser;
 use futures::{stream, Future, StreamExt};
 use std::{
@@ -520,7 +520,7 @@ fn get_next_snapshot(last_in_backup: Option<u64>, db_state: DbState, interval: u
 #[cfg(test)]
 mod tests {
     use crate::coordinators::backup::{get_batch_range, get_next_snapshot};
-    use libra2_db::backup::backup_handler::DbState;
+    use creditchain_db::backup::backup_handler::DbState;
 
     #[test]
     fn test_get_batch_range() {

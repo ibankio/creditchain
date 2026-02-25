@@ -16,15 +16,15 @@ use crate::consensus_observer::{
     observer::{subscription::ConsensusObserverSubscription, subscription_utils},
     publisher::consensus_publisher::ConsensusPublisher,
 };
-use libra2_config::{
+use creditchain_config::{
     config::ConsensusObserverConfig,
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_infallible::Mutex;
-use libra2_logger::{info, warn};
-use libra2_network::application::{interface::NetworkClient, metadata::PeerMetadata};
-use libra2_storage_interface::DbReader;
-use libra2_time_service::TimeService;
+use creditchain_infallible::Mutex;
+use creditchain_logger::{info, warn};
+use creditchain_network::application::{interface::NetworkClient, metadata::PeerMetadata};
+use creditchain_storage_interface::DbReader;
+use creditchain_time_service::TimeService;
 use itertools::Itertools;
 use std::{collections::HashMap, sync::Arc};
 use strum::IntoEnumIterator;
@@ -432,17 +432,17 @@ fn update_total_subscription_metrics(active_subscription_peers: &[PeerNetworkId]
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_config::{config::PeerRole, network_id::NetworkId};
-    use libra2_netcore::transport::ConnectionOrigin;
-    use libra2_network::{
+    use creditchain_config::{config::PeerRole, network_id::NetworkId};
+    use creditchain_netcore::transport::ConnectionOrigin;
+    use creditchain_network::{
         application::storage::PeersAndMetadata,
         protocols::wire::handshake::v1::{MessagingProtocolVersion, ProtocolId, ProtocolIdSet},
         transport::{ConnectionId, ConnectionMetadata},
     };
-    use libra2_peer_monitoring_service_types::{
+    use creditchain_peer_monitoring_service_types::{
         response::NetworkInformationResponse, PeerMonitoringMetadata,
     };
-    use libra2_types::{network_address::NetworkAddress, transaction::Version, PeerId};
+    use creditchain_types::{network_address::NetworkAddress, transaction::Version, PeerId};
     use claims::assert_matches;
     use maplit::hashmap;
     use mockall::mock;
@@ -452,7 +452,7 @@ mod test {
     mock! {
         pub DatabaseReader {}
         impl DbReader for DatabaseReader {
-            fn get_latest_ledger_info_version(&self) -> libra2_storage_interface::Result<Version>;
+            fn get_latest_ledger_info_version(&self) -> creditchain_storage_interface::Result<Version>;
         }
     }
 

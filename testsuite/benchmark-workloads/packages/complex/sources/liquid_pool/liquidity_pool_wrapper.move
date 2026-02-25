@@ -1,9 +1,9 @@
 // benchmark is run without indexer, so we need to do bookeeping onchain.
 
 module publisher_address::liquidity_pool_wrapper {
-    use libra2_framework::fungible_asset::{Self, Metadata, MintRef};
-    use libra2_framework::object::{Self, Object};
-    use libra2_framework::primary_fungible_store;
+    use creditchain_framework::fungible_asset::{Self, Metadata, MintRef};
+    use creditchain_framework::object::{Self, Object};
+    use creditchain_framework::primary_fungible_store;
     use publisher_address::liquidity_pool::{Self, LiquidityPool};
     use std::option;
     use std::string;

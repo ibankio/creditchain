@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::NetworkLoadTest;
-use libra2_forge::{NetworkContextSynchronizer, NetworkTest, Result, Swarm, Test, TestReport};
+use creditchain_forge::{NetworkContextSynchronizer, NetworkTest, Result, Swarm, Test, TestReport};
 use async_trait::async_trait;
 use rand::{seq::SliceRandom, thread_rng};
 use std::{sync::Arc, time::Duration};

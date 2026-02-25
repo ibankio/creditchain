@@ -7,7 +7,7 @@
 
 use super::coin_utils::{CoinInfoType, CoinResource};
 use crate::schema::coin_infos;
-use libra2_indexer_processor_sdk::libra2_protos::transaction::v1::WriteResource;
+use libra2_indexer_processor_sdk::creditchain_protos::transaction::v1::WriteResource;
 use field_count::FieldCount;
 use serde::{Deserialize, Serialize};
 

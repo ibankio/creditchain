@@ -16,20 +16,20 @@ use crate::{
         },
     },
 };
-use libra2_config::{
+use creditchain_config::{
     config::{MempoolConfig, NodeType},
     network_id::PeerNetworkId,
 };
-use libra2_infallible::RwLock;
-use libra2_logger::prelude::*;
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_network::{
+use creditchain_infallible::RwLock;
+use creditchain_logger::prelude::*;
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_network::{
     application::{error::Error, interface::NetworkClientInterface, metadata::PeerMetadata},
     transport::ConnectionMetadata,
 };
-use libra2_time_service::TimeService;
-use libra2_types::transaction::SignedTransaction;
-use libra2_vm_validator::vm_validator::TransactionValidation;
+use creditchain_time_service::TimeService;
+use creditchain_types::transaction::SignedTransaction;
+use creditchain_vm_validator::vm_validator::TransactionValidation;
 use fail::fail_point;
 use serde::{Deserialize, Serialize};
 use std::{

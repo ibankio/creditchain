@@ -1,0 +1,11 @@
+[package]
+name = "basic_coin"
+version = "0.0.0"
+
+[addresses]
+named_addr = "0xCAFE"
+
+[dependencies.CreditChainStdlib]
+git = 'https://github.com/creditchainorg/creditchain-framework.git'
+rev = 'main'
+subdir = 'creditchain-stdlib'

@@ -38,27 +38,27 @@ services:
       - redis
 
   indexer-grpc-cache-worker:
-    image: "${INDEXER_GRPC_IMAGE_REPO:-libra2org/indexer-grpc}:${IMAGE_TAG:-main}"
+    image: "${INDEXER_GRPC_IMAGE_REPO:-creditchainorg/indexer-grpc}:${IMAGE_TAG:-main}"
     networks:
       shared:
         ipv4_address: 172.16.1.13
     restart: unless-stopped
     volumes:
-      - type: volume # XXX: needed now before refactor https://github.com/libra2org/libra2-core/
+      - type: volume # XXX: needed now before refactor https://github.com/creditchainorg/creditchain-core/
         source: indexer-grpc-file-store
-        target: /opt/libra2/file-store
+        target: /opt/creditchain/file-store
       - type: bind
         source: ./cache-worker-config.yaml
-        target: /opt/libra2/cache-worker-config.yaml
+        target: /opt/creditchain/cache-worker-config.yaml
     command:
-      - '/usr/local/bin/libra2-indexer-grpc-cache-worker'
+      - '/usr/local/bin/creditchain-indexer-grpc-cache-worker'
       - '--config-path'
-      - '/opt/libra2/cache-worker-config.yaml'
+      - '/opt/creditchain/cache-worker-config.yaml'
     depends_on:
       - redis
 
   indexer-grpc-file-store:
-    image: "${INDEXER_GRPC_IMAGE_REPO:-libra2org/indexer-grpc}:${IMAGE_TAG:-main}"
+    image: "${INDEXER_GRPC_IMAGE_REPO:-creditchainorg/indexer-grpc}:${IMAGE_TAG:-main}"
     networks:
       shared:
         ipv4_address: 172.16.1.14
@@ -66,40 +66,40 @@ services:
     volumes:
       - type: volume
         source: indexer-grpc-file-store
-        target: /opt/libra2/file-store
+        target: /opt/creditchain/file-store
       - type: bind
         source: ./file-store-config.yaml
-        target: /opt/libra2/file-store-config.yaml
+        target: /opt/creditchain/file-store-config.yaml
     command:
-      - '/usr/local/bin/libra2-indexer-grpc-file-store'
+      - '/usr/local/bin/creditchain-indexer-grpc-file-store'
       - '--config-path'
-      - '/opt/libra2/file-store-config.yaml'
+      - '/opt/creditchain/file-store-config.yaml'
     depends_on:
       - redis
 
   indexer-grpc-data-service:
-    image: "${INDEXER_GRPC_IMAGE_REPO:-libra2org/indexer-grpc}:${IMAGE_TAG:-main}"
+    image: "${INDEXER_GRPC_IMAGE_REPO:-creditchainorg/indexer-grpc}:${IMAGE_TAG:-main}"
     networks:
       shared:
         ipv4_address: 172.16.1.15
     restart: unless-stopped
     volumes:
-      - type: volume # XXX: needed now before refactor https://github.com/libra2org/libra2-core/pull/8139
+      - type: volume # XXX: needed now before refactor https://github.com/creditchainorg/creditchain-core/pull/8139
         source: indexer-grpc-file-store
-        target: /opt/libra2/file-store
+        target: /opt/creditchain/file-store
       - type: bind
         source: ./data-service-config.yaml
-        target: /opt/libra2/data-service-config.yaml
+        target: /opt/creditchain/data-service-config.yaml
       - type: bind
         source: ./data-service-grpc-server.key
-        target: /opt/libra2/certs/data-service-grpc-server.key
+        target: /opt/creditchain/certs/data-service-grpc-server.key
       - type: bind
         source: ./data-service-grpc-server.crt
-        target: /opt/libra2/certs/data-service-grpc-server.crt
+        target: /opt/creditchain/certs/data-service-grpc-server.crt
     command:
-      - '/usr/local/bin/libra2-indexer-grpc-data-service'
+      - '/usr/local/bin/creditchain-indexer-grpc-data-service'
       - '--config-path'
-      - '/opt/libra2/data-service-config.yaml'
+      - '/opt/creditchain/data-service-config.yaml'
     ports:
       - "50052:50052" # GRPC non-secure
       - "50053:50053" # GRPC secure
@@ -113,7 +113,7 @@ services:
 networks:
   shared:
     external: true
-    name: "libra2-docker-compose-shared"
+    name: "creditchain-docker-compose-shared"
 
 volumes:
   indexer-grpc-file-store:

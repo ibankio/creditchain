@@ -2,7 +2,7 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_types::transaction;
+use creditchain_types::transaction;
 use move_core_types::language_storage;
 use serde_reflection::{Registry, Result, Samples, Tracer, TracerConfig};
 

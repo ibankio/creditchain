@@ -5,10 +5,10 @@ use crate::{
     smoke_test_environment::SwarmBuilder,
     utils::{get_current_consensus_config, get_current_version},
 };
-use libra2_forge::{NodeExt, SwarmExt};
-use libra2_logger::{debug, info};
-use libra2_rest_client::Client;
-use libra2_types::on_chain_config::OnChainRandomnessConfig;
+use creditchain_forge::{NodeExt, SwarmExt};
+use creditchain_logger::{debug, info};
+use creditchain_rest_client::Client;
+use creditchain_types::on_chain_config::OnChainRandomnessConfig;
 use futures::future::join_all;
 use std::{sync::Arc, time::Duration};
 
@@ -51,8 +51,8 @@ async fn dummy_validator_txns() {
             )
         })
         .collect::<Vec<_>>();
-    let libra2_results = join_all(tasks).await;
-    println!("libra2_results={:?}", libra2_results);
+    let creditchain_results = join_all(tasks).await;
+    println!("creditchain_results={:?}", creditchain_results);
 
     let version_milestone_0 = get_current_version(&validator_clients[0]).await;
     let version_milestone_1 = version_milestone_0 + 10;

@@ -7,10 +7,10 @@ use crate::{
     utils::error_notes::ErrorNotes,
 };
 use anyhow::Result;
-use libra2_crypto::HashValue;
-use libra2_db::backup::backup_handler::DbState;
-use libra2_metrics_core::{IntCounterHelper, TimerHelper};
-use libra2_types::transaction::Version;
+use creditchain_crypto::HashValue;
+use creditchain_db::backup::backup_handler::DbState;
+use creditchain_metrics_core::{IntCounterHelper, TimerHelper};
+use creditchain_types::transaction::Version;
 use clap::Parser;
 use futures::TryStreamExt;
 use tokio::{
@@ -25,7 +25,7 @@ pub struct BackupServiceClientOpt {
     #[clap(
         long = "backup-service-address",
         default_value = "http://localhost:6186",
-        help = "Backup service address. By default a Libra2 Node runs the backup service serving \
+        help = "Backup service address. By default a CreditChain Node runs the backup service serving \
         on tcp port 6186 to localhost only."
     )]
     pub address: String,

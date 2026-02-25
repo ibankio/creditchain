@@ -9,10 +9,10 @@ use crate::{
     },
     round_manager::VerifiedEvent,
 };
-use libra2_channels::libra2_channel;
-use libra2_consensus_types::{common::Author, proof_of_store::BatchInfo};
-use libra2_logger::prelude::*;
-use libra2_types::{account_address::AccountAddress, PeerId};
+use creditchain_channels::creditchain_channel;
+use creditchain_consensus_types::{common::Author, proof_of_store::BatchInfo};
+use creditchain_logger::prelude::*;
+use creditchain_types::{account_address::AccountAddress, PeerId};
 use futures::StreamExt;
 use tokio::sync::{mpsc, oneshot};
 
@@ -27,7 +27,7 @@ pub struct QuorumStoreCoordinator {
     remote_batch_coordinator_cmd_tx: Vec<mpsc::Sender<BatchCoordinatorCommand>>,
     proof_coordinator_cmd_tx: mpsc::Sender<ProofCoordinatorCommand>,
     proof_manager_cmd_tx: mpsc::Sender<ProofManagerCommand>,
-    quorum_store_msg_tx: libra2_channel::Sender<AccountAddress, (Author, VerifiedEvent)>,
+    quorum_store_msg_tx: creditchain_channel::Sender<AccountAddress, (Author, VerifiedEvent)>,
 }
 
 impl QuorumStoreCoordinator {
@@ -37,7 +37,7 @@ impl QuorumStoreCoordinator {
         remote_batch_coordinator_cmd_tx: Vec<mpsc::Sender<BatchCoordinatorCommand>>,
         proof_coordinator_cmd_tx: mpsc::Sender<ProofCoordinatorCommand>,
         proof_manager_cmd_tx: mpsc::Sender<ProofManagerCommand>,
-        quorum_store_msg_tx: libra2_channel::Sender<AccountAddress, (Author, VerifiedEvent)>,
+        quorum_store_msg_tx: creditchain_channel::Sender<AccountAddress, (Author, VerifiedEvent)>,
     ) -> Self {
         Self {
             my_peer_id,

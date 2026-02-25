@@ -43,8 +43,8 @@ pub fn has_errors_then_report(model: &GlobalEnv) -> bool {
         |d| {
             let include = d.labels.iter().all(|l| {
                 let fname = model.get_file(l.file_id).to_string_lossy();
-                !fname.contains("libra2-framework/sources")
-                    && !fname.contains("libra2-stdlib/sources")
+                !fname.contains("creditchain-framework/sources")
+                    && !fname.contains("creditchain-stdlib/sources")
             });
             if include && d.severity == codespan_reporting::diagnostic::Severity::Error {
                 has_errors = true;

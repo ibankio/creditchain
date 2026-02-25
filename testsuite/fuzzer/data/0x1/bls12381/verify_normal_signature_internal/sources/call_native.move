@@ -1,5 +1,5 @@
 module poc::verify_normal_signature_internal {
-    use libra2_std::bls12381::{Self};
+    use creditchain_std::bls12381::{Self};
     use std::option::{Self};
 
     public entry fun main(_owner: &signer) {

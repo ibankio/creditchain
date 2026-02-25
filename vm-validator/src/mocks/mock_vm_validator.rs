@@ -4,13 +4,13 @@
 
 use crate::vm_validator::TransactionValidation;
 use anyhow::Result;
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     state_store::StateView,
     transaction::{SignedTransaction, VMValidatorResult},
     vm_status::StatusCode,
 };
-use libra2_vm::VMValidator;
+use creditchain_vm::VMValidator;
 use move_vm_runtime::ModuleStorage;
 
 pub const ACCOUNT_DNE_TEST_ADD: AccountAddress =

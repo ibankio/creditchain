@@ -1,5 +1,5 @@
 [package]
-name = "libra2-consensus-types"
+name = "creditchain-consensus-types"
 description = "CreditChain consensus types"
 version = "0.1.0"
 
@@ -14,14 +14,14 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-bitvec = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-crypto-derive = { workspace = true }
-libra2-executor-types = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-short-hex-str = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-bitvec = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-crypto-derive = { workspace = true }
+creditchain-executor-types = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-short-hex-str = { workspace = true }
+creditchain-types = { workspace = true }
 bcs = { workspace = true }
 derivative = { workspace = true }
 fail = { workspace = true }
@@ -37,11 +37,11 @@ serde = { workspace = true }
 tokio = { workspace = true }
 
 [dev-dependencies]
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 proptest = { workspace = true }
 serde_json = { workspace = true }
 
 [features]
 default = []
 failpoints = ["fail/failpoints"]
-fuzzing = ["proptest", "libra2-types/fuzzing", "libra2-crypto/fuzzing"]
+fuzzing = ["proptest", "creditchain-types/fuzzing", "creditchain-crypto/fuzzing"]

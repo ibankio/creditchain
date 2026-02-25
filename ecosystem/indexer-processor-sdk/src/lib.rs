@@ -15,7 +15,7 @@ pub mod utils;
 
 // Re-exporting crates to provide a cohesive SDK interface
 pub use libra2_indexer_transaction_stream;
-pub use libra2_protos;
+pub use creditchain_protos;
 pub use bcs;
 pub use instrumented_channel;
 

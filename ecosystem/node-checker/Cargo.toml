@@ -1,5 +1,5 @@
 [package]
-name = "libra2-node-checker"
+name = "creditchain-node-checker"
 description = "CreditChain Node Health Checker"
 version = "0.1.2"
 
@@ -14,14 +14,14 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-config = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-network-checker = { workspace = true }
-libra2-rest-client = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-transaction-emitter-lib = { workspace = true }
-libra2-transaction-workloads-lib = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-network-checker = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-transaction-emitter-lib = { workspace = true }
+creditchain-transaction-workloads-lib = { workspace = true }
 async-trait = { workspace = true }
 clap = { workspace = true }
 futures = { workspace = true }
@@ -38,5 +38,5 @@ tokio = { workspace = true }
 url = { workspace = true }
 
 [lib]
-name = "libra2_node_checker_lib"
+name = "creditchain_node_checker_lib"
 path = "src/lib.rs"

@@ -6,9 +6,9 @@ use crate::{
     connection_manager::ConnectionManager,
     metrics::{COUNTER, TIMER},
 };
-use libra2_indexer_grpc_utils::file_store_operator_v2::file_store_reader::FileStoreReader;
-use libra2_protos::indexer::v1::{GetTransactionsRequest, ProcessedRange, TransactionsResponse};
-use libra2_transaction_filter::BooleanTransactionFilter;
+use creditchain_indexer_grpc_utils::file_store_operator_v2::file_store_reader::FileStoreReader;
+use creditchain_protos::indexer::v1::{GetTransactionsRequest, ProcessedRange, TransactionsResponse};
+use creditchain_transaction_filter::BooleanTransactionFilter;
 use futures::executor::block_on;
 use std::{
     sync::Arc,

@@ -25,15 +25,15 @@ use crate::{
     },
 };
 use anyhow::format_err;
-use libra2_config::config::StateSyncDriverConfig;
-use libra2_data_streaming_service::data_notification::NotificationId;
-use libra2_event_notifications::EventSubscriptionService;
-use libra2_executor_types::ChunkCommitNotification;
-use libra2_infallible::{Mutex, RwLock};
-use libra2_mempool_notifications::MempoolNotificationListener;
-use libra2_storage_interface::{Libra2DbError, DbReaderWriter};
-use libra2_storage_service_notifications::StorageServiceNotificationListener;
-use libra2_types::{
+use creditchain_config::config::StateSyncDriverConfig;
+use creditchain_data_streaming_service::data_notification::NotificationId;
+use creditchain_event_notifications::EventSubscriptionService;
+use creditchain_executor_types::ChunkCommitNotification;
+use creditchain_infallible::{Mutex, RwLock};
+use creditchain_mempool_notifications::MempoolNotificationListener;
+use creditchain_storage_interface::{CreditChainDbError, DbReaderWriter};
+use creditchain_storage_service_notifications::StorageServiceNotificationListener;
+use creditchain_types::{
     ledger_info::LedgerInfoWithSignatures,
     transaction::{TransactionOutputListWithProofV2, Version},
 };
@@ -659,7 +659,7 @@ async fn test_initialize_state_synchronizer_receiver_error() {
     db_writer
         .expect_get_state_snapshot_receiver()
         .returning(|_, _| {
-            Err(Libra2DbError::Other(
+            Err(CreditChainDbError::Other(
                 "Failed to get snapshot receiver!".to_string(),
             ))
         });
@@ -833,7 +833,7 @@ async fn test_save_states_invalid_chunk() {
     snapshot_receiver
         .expect_add_chunk()
         .with(always(), always())
-        .returning(|_, _| Err(Libra2DbError::Other("Invalid chunk!".to_string())));
+        .returning(|_, _| Err(CreditChainDbError::Other("Invalid chunk!".to_string())));
 
     // Setup the mock db writer
     let mut db_writer = create_mock_db_writer();
@@ -896,7 +896,7 @@ fn create_storage_synchronizer(
     StorageSynchronizer<MockChunkExecutor, PersistentMetadataStorage>,
     StorageSynchronizerHandles,
 ) {
-    libra2_logger::Logger::init_for_testing();
+    creditchain_logger::Logger::init_for_testing();
 
     // Create the notification channels
     let (commit_notification_sender, commit_notification_listener) =
@@ -910,17 +910,17 @@ fn create_storage_synchronizer(
 
     // Create the mempool notification handler
     let (mempool_notification_sender, mempool_notification_listener) =
-        libra2_mempool_notifications::new_mempool_notifier_listener_pair(100);
+        creditchain_mempool_notifications::new_mempool_notifier_listener_pair(100);
     let mempool_notification_handler = MempoolNotificationHandler::new(mempool_notification_sender);
 
     // Create the storage service handler
     let (storage_service_notifier, storage_service_listener) =
-        libra2_storage_service_notifications::new_storage_service_notifier_listener_pair();
+        creditchain_storage_service_notifications::new_storage_service_notifier_listener_pair();
     let storage_service_notification_handler =
         StorageServiceNotificationHandler::new(storage_service_notifier);
 
     // Create the metadata storage
-    let db_path = libra2_temppath::TempPath::new();
+    let db_path = creditchain_temppath::TempPath::new();
     let metadata_storage = PersistentMetadataStorage::new(db_path.path());
 
     // Create the storage synchronizer

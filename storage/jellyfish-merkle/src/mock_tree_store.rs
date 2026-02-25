@@ -6,9 +6,9 @@ use crate::{
     node_type::{LeafNode, Node, NodeKey},
     NodeBatch, Result, StaleNodeIndex, TreeReader, TreeUpdateBatch, TreeWriter,
 };
-use libra2_infallible::RwLock;
-use libra2_storage_interface::{db_ensure as ensure, db_other_bail, Libra2DbError};
-use libra2_types::transaction::Version;
+use creditchain_infallible::RwLock;
+use creditchain_storage_interface::{db_ensure as ensure, db_other_bail, CreditChainDbError};
+use creditchain_types::transaction::Version;
 use std::collections::{hash_map::Entry, BTreeSet, HashMap};
 pub struct MockTreeStore<K> {
     data: RwLock<(HashMap<NodeKey, Node<K>>, BTreeSet<StaleNodeIndex>)>,

@@ -80,10 +80,10 @@ where
         where_clause: additional_where_clause,
     };
     let debug = diesel::debug_query::<diesel::pg::Pg, _>(&final_query).to_string();
-    libra2_logger::debug!("Executing query: {:?}", debug);
+    creditchain_logger::debug!("Executing query: {:?}", debug);
     let res = final_query.execute(conn);
     if let Err(ref e) = res {
-        libra2_logger::warn!("Error running query: {:?}\n{}", e, debug);
+        creditchain_logger::warn!("Error running query: {:?}\n{}", e, debug);
     }
     res
 }

@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::config::{CacheConfig, IndexerGrpcManagerConfig, ServiceConfig};
-use libra2_config::utils::get_available_port;
-use libra2_indexer_grpc_server_framework::RunnableConfig;
-use libra2_indexer_grpc_utils::{
+use creditchain_config::utils::get_available_port;
+use creditchain_indexer_grpc_server_framework::RunnableConfig;
+use creditchain_indexer_grpc_utils::{
     config::IndexerGrpcFileStoreConfig,
     file_store_operator_v2::common::{FileStoreMetadata, METADATA_FILE_NAME},
 };

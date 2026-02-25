@@ -7,8 +7,8 @@ use crate::{
     serializer::{SafetyRulesInput, SerializerClient, SerializerService, TSerializerClient},
     Error, SafetyRules, TSafetyRules,
 };
-use libra2_logger::warn;
-use libra2_secure_net::{NetworkClient, NetworkServer};
+use creditchain_logger::warn;
+use creditchain_secure_net::{NetworkClient, NetworkServer};
 use std::net::SocketAddr;
 
 pub trait RemoteService {

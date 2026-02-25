@@ -5,7 +5,7 @@ This repository contains the protobuf definitions for CreditChain.
 ## Usage
 Import generated classes like this:
 ```python
-from libra2_protos.libra2.transaction.v1.transaction_pb2 import Transaction
+from creditchain_protos.libra2.transaction.v1.transaction_pb2 import Transaction
 ```
 
 Then use them like this:

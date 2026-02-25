@@ -2,8 +2,8 @@
 // Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_consensus::transaction_shuffler_fuzzing::use_case_aware::{Config, UseCaseAwareShuffler};
-use libra2_types::transaction::use_case::{UseCaseAwareTransaction, UseCaseKey};
+use creditchain_consensus::transaction_shuffler_fuzzing::use_case_aware::{Config, UseCaseAwareShuffler};
+use creditchain_types::transaction::use_case::{UseCaseAwareTransaction, UseCaseKey};
 use arbitrary::Arbitrary;
 use libfuzzer_sys::fuzz_target;
 use move_core_types::account_address::AccountAddress;

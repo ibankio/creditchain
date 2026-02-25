@@ -5,7 +5,7 @@ use crate::context::Context;
 #[allow(unused_imports)]
 use anyhow::{format_err, Result};
 #[cfg(feature = "failpoints")]
-use libra2_logger::prelude::*;
+use creditchain_logger::prelude::*;
 use poem::{
     handler,
     web::{Data, Query},

@@ -10,10 +10,10 @@ use crate::{
     network_id::NetworkId,
     utils,
 };
-use libra2_crypto::{x25519, Uniform};
-use libra2_secure_storage::{CryptoStorage, KVStorage, Storage};
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_types::{
+use creditchain_crypto::{x25519, Uniform};
+use creditchain_secure_storage::{CryptoStorage, KVStorage, Storage};
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_types::{
     account_address::from_identity_public_key, network_address::NetworkAddress,
     transaction::authenticator::AuthenticationKey, PeerId,
 };
@@ -33,7 +33,7 @@ use std::{
 // TODO: We could possibly move these constants somewhere else, but since they are defaults for the
 //   configurations of the system, we'll leave it here for now.
 /// Current supported protocol negotiation handshake version. See
-/// [`libra2_network::protocols::wire::v1`](../../network/protocols/wire/handshake/v1/index.html).
+/// [`creditchain_network::protocols::wire::v1`](../../network/protocols/wire/handshake/v1/index.html).
 pub const HANDSHAKE_VERSION: u8 = 0;
 pub const NETWORK_CHANNEL_SIZE: usize = 1024;
 pub const PING_INTERVAL_MS: u64 = 10_000;

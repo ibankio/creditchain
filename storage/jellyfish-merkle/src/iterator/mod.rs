@@ -14,9 +14,9 @@ use crate::{
     node_type::{Child, InternalNode, Node, NodeKey},
     TreeReader,
 };
-use libra2_crypto::HashValue;
-use libra2_storage_interface::{db_ensure as ensure, db_other_bail, Libra2DbError, Result};
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_storage_interface::{db_ensure as ensure, db_other_bail, CreditChainDbError, Result};
+use creditchain_types::{
     nibble::{nibble_path::NibblePath, Nibble, ROOT_NIBBLE_HEIGHT},
     transaction::Version,
 };

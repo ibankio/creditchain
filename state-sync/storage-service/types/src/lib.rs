@@ -37,7 +37,7 @@ pub enum StorageServiceError {
     TooManyInvalidRequests(String),
 }
 
-/// A single storage service message sent or received over Libra2Net.
+/// A single storage service message sent or received over CreditChainNet.
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[allow(clippy::large_enum_variant)]
 pub enum StorageServiceMessage {

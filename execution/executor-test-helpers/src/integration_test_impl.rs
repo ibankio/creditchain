@@ -4,24 +4,24 @@
 
 use crate::{bootstrap_genesis, gen_block_id, gen_ledger_info_with_sigs};
 use anyhow::{ensure, Result};
-use libra2_cached_packages::libra2_stdlib;
-use libra2_config::config::DEFAULT_MAX_NUM_NODES_PER_LRU_CACHE_SHARD;
-use libra2_consensus_types::block::Block;
-use libra2_db::Libra2DB;
-use libra2_executor::block_executor::BlockExecutor;
-use libra2_executor_types::BlockExecutorTrait;
-use libra2_sdk::{
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_config::config::DEFAULT_MAX_NUM_NODES_PER_LRU_CACHE_SHARD;
+use creditchain_consensus_types::block::Block;
+use creditchain_db::CreditChainDB;
+use creditchain_executor::block_executor::BlockExecutor;
+use creditchain_executor_types::BlockExecutorTrait;
+use creditchain_sdk::{
     move_types::account_address::AccountAddress,
     transaction_builder::TransactionFactory,
     types::{AccountKey, LocalAccount},
 };
-use libra2_storage_interface::{
+use creditchain_storage_interface::{
     state_store::state_view::db_state_view::{DbStateViewAtVersion, VerifiedStateViewAtVersion},
     DbReaderWriter,
 };
-use libra2_types::{
+use creditchain_types::{
     account_config::{
-        libra2_test_root_address, primary_apt_store, AccountResource, FungibleStoreResource,
+        creditchain_test_root_address, primary_apt_store, AccountResource, FungibleStoreResource,
         ObjectGroupResource,
     },
     block_metadata::BlockMetadata,
@@ -40,13 +40,13 @@ use libra2_types::{
     trusted_state::{TrustedState, TrustedStateChange},
     waypoint::Waypoint,
 };
-use libra2_vm::libra2_vm::Libra2VMBlockExecutor;
+use creditchain_vm::creditchain_vm::CreditChainVMBlockExecutor;
 use move_core_types::move_resource::MoveStructType;
 use rand::SeedableRng;
 use std::{path::Path, sync::Arc};
 
-pub fn test_execution_with_storage_impl() -> Arc<Libra2DB> {
-    let path = libra2_temppath::TempPath::new();
+pub fn test_execution_with_storage_impl() -> Arc<CreditChainDB> {
+    let path = creditchain_temppath::TempPath::new();
     path.create_as_dir().unwrap();
     test_execution_with_storage_impl_inner(false, path.path())
 }
@@ -54,23 +54,23 @@ pub fn test_execution_with_storage_impl() -> Arc<Libra2DB> {
 pub fn test_execution_with_storage_impl_inner(
     force_sharding: bool,
     db_path: &Path,
-) -> Arc<Libra2DB> {
+) -> Arc<CreditChainDB> {
     const B: u64 = 1_000_000_000;
 
-    let (genesis, validators) = libra2_vm_genesis::test_genesis_change_set_and_validators(Some(1));
+    let (genesis, validators) = creditchain_vm_genesis::test_genesis_change_set_and_validators(Some(1));
     let genesis_txn = Transaction::GenesisTransaction(WriteSetPayload::Direct(genesis));
 
     let core_resources_account: LocalAccount = LocalAccount::new(
-        libra2_test_root_address(),
-        AccountKey::from_private_key(libra2_vm_genesis::GENESIS_KEYPAIR.0.clone()),
+        creditchain_test_root_address(),
+        AccountKey::from_private_key(creditchain_vm_genesis::GENESIS_KEYPAIR.0.clone()),
         0,
     );
 
-    let (libra2_db, db, executor, waypoint) =
+    let (creditchain_db, db, executor, waypoint) =
         create_db_and_executor(db_path, &genesis_txn, force_sharding);
 
     let parent_block_id = executor.committed_block_id();
-    let signer = libra2_types::validator_signer::ValidatorSigner::new(
+    let signer = creditchain_types::validator_signer::ValidatorSigner::new(
         validators[0].data.owner_address,
         Arc::new(validators[0].consensus_key.clone()),
     );
@@ -134,7 +134,7 @@ pub fn test_execution_with_storage_impl_inner(
         account1.sign_with_transaction_builder(txn_factory.transfer(account3.address(), 70 * B));
 
     let reconfig1 = core_resources_account.sign_with_transaction_builder(
-        txn_factory.payload(libra2_stdlib::libra2_governance_force_end_epoch_test_only()),
+        txn_factory.payload(creditchain_stdlib::creditchain_governance_force_end_epoch_test_only()),
     );
 
     let block1: Vec<_> = into_signature_verified_block(vec![
@@ -162,7 +162,7 @@ pub fn test_execution_with_storage_impl_inner(
         2,
     ));
     let reconfig2 = core_resources_account.sign_with_transaction_builder(
-        txn_factory.payload(libra2_stdlib::libra2_governance_force_end_epoch_test_only()),
+        txn_factory.payload(creditchain_stdlib::creditchain_governance_force_end_epoch_test_only()),
     );
     let block2 = into_signature_verified_block(vec![block2_meta, UserTransaction(reconfig2)]);
 
@@ -386,7 +386,7 @@ pub fn test_execution_with_storage_impl_inner(
     let expected_txns: Vec<Transaction> = block3.iter().map(|t| t.expect_valid().clone()).collect();
     verify_transactions(&transaction_list_with_proof, &expected_txns).unwrap();
 
-    libra2_db
+    creditchain_db
 }
 
 fn approx_eq(a: u64, b: u64) -> bool {
@@ -399,20 +399,20 @@ pub fn create_db_and_executor<P: AsRef<std::path::Path>>(
     genesis: &Transaction,
     force_sharding: bool, // if true force sharding db otherwise using default db
 ) -> (
-    Arc<Libra2DB>,
+    Arc<CreditChainDB>,
     DbReaderWriter,
-    BlockExecutor<Libra2VMBlockExecutor>,
+    BlockExecutor<CreditChainVMBlockExecutor>,
     Waypoint,
 ) {
     let (db, dbrw) = force_sharding
         .then(|| {
-            DbReaderWriter::wrap(Libra2DB::new_for_test_with_sharding(
+            DbReaderWriter::wrap(CreditChainDB::new_for_test_with_sharding(
                 &path,
                 DEFAULT_MAX_NUM_NODES_PER_LRU_CACHE_SHARD,
             ))
         })
-        .unwrap_or_else(|| DbReaderWriter::wrap(Libra2DB::new_for_test(&path)));
-    let waypoint = bootstrap_genesis::<Libra2VMBlockExecutor>(&dbrw, genesis).unwrap();
+        .unwrap_or_else(|| DbReaderWriter::wrap(CreditChainDB::new_for_test(&path)));
+    let waypoint = bootstrap_genesis::<CreditChainVMBlockExecutor>(&dbrw, genesis).unwrap();
     let executor = BlockExecutor::new(dbrw.clone());
 
     (db, dbrw, executor, waypoint)

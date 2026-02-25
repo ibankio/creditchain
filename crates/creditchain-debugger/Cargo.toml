@@ -1,0 +1,29 @@
+[package]
+name = "creditchain-debugger"
+version = "0.1.1"
+description = "Debugging tools."
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+anyhow = { workspace = true }
+creditchain-consensus = { workspace = true }
+creditchain-db-tool = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-move-debugger = { workspace = true }
+creditchain-push-metrics = { workspace = true }
+clap = { workspace = true }
+tokio = { workspace = true }
+
+[target.'cfg(unix)'.dependencies]
+jemallocator = { version = "0.5.0", features = [
+    "profiling",
+    "unprefixed_malloc_on_supported_platforms",
+] }

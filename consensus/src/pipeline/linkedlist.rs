@@ -5,7 +5,7 @@
 // modified from https://rust-unofficial.github.io/too-many-lists/fourth-final.html (MIT License)
 
 // maybe later we can move this to /common
-use libra2_infallible::{Mutex, MutexGuard};
+use creditchain_infallible::{Mutex, MutexGuard};
 use std::{
     cell::{Ref, RefCell, RefMut},
     rc::Rc,

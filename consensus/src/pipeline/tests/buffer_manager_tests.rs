@@ -23,16 +23,16 @@ use crate::{
         consensus_runtime, timed_block_on, MockStorage, RandomComputeResultStateComputer,
     },
 };
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::{config::ConsensusObserverConfig, network_id::NetworkId};
-use libra2_consensus_types::{
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::{config::ConsensusObserverConfig, network_id::NetworkId};
+use creditchain_consensus_types::{
     block::block_test_utils::certificate_for_genesis, pipelined_block::PipelinedBlock,
     vote_proposal::VoteProposal,
 };
-use libra2_crypto::{hash::ACCUMULATOR_PLACEHOLDER_HASH, HashValue};
-use libra2_infallible::Mutex;
-use libra2_network::{
+use creditchain_crypto::{hash::ACCUMULATOR_PLACEHOLDER_HASH, HashValue};
+use creditchain_infallible::Mutex;
+use creditchain_network::{
     application::{interface::NetworkClient, storage::PeersAndMetadata},
     peer_manager::{ConnectionRequestSender, PeerManagerRequestSender},
     protocols::{
@@ -40,9 +40,9 @@ use libra2_network::{
         network::{Event, NewNetworkSender},
     },
 };
-use libra2_safety_rules::{PersistentSafetyStorage, SafetyRulesManager};
-use libra2_secure_storage::Storage;
-use libra2_types::{
+use creditchain_safety_rules::{PersistentSafetyStorage, SafetyRulesManager};
+use creditchain_secure_storage::Storage;
+use creditchain_types::{
     account_address::AccountAddress,
     epoch_state::EpochState,
     ledger_info::LedgerInfo,
@@ -62,8 +62,8 @@ pub fn prepare_buffer_manager(
     BufferManager,
     Sender<OrderedBlocks>,
     Sender<ResetRequest>,
-    libra2_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>,
-    libra2_channels::UnboundedReceiver<Event<ConsensusMsg>>,
+    creditchain_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>,
+    creditchain_channels::UnboundedReceiver<Event<ConsensusMsg>>,
     PipelinePhase<ExecutionSchedulePhase>,
     PipelinePhase<ExecutionWaitPhase>,
     PipelinePhase<SigningPhase>,
@@ -85,7 +85,7 @@ pub fn prepare_buffer_manager(
         Waypoint::new_epoch_boundary(&LedgerInfo::mock_genesis(Some(validator_set))).unwrap();
 
     let safety_storage = PersistentSafetyStorage::initialize(
-        Storage::from(libra2_secure_storage::InMemoryStorage::new()),
+        Storage::from(creditchain_secure_storage::InMemoryStorage::new()),
         signer.author(),
         signer.private_key().clone(),
         waypoint,
@@ -98,8 +98,8 @@ pub fn prepare_buffer_manager(
     let mut safety_rules = MetricsSafetyRules::new(safety_rules_manager.client(), storage);
     safety_rules.perform_initialize().unwrap();
 
-    let (network_reqs_tx, _network_reqs_rx) = libra2_channel::new(QueueStyle::FIFO, 8, None);
-    let (connection_reqs_tx, _) = libra2_channel::new(QueueStyle::FIFO, 8, None);
+    let (network_reqs_tx, _network_reqs_rx) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
+    let (connection_reqs_tx, _) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
     let network_sender = network::NetworkSender::new(
         PeerManagerRequestSender::new(network_reqs_tx),
         ConnectionRequestSender::new(connection_reqs_tx),
@@ -112,7 +112,7 @@ pub fn prepare_buffer_manager(
     );
     let consensus_network_client = ConsensusNetworkClient::new(network_client);
 
-    let (self_loop_tx, self_loop_rx) = libra2_channels::new_unbounded_test();
+    let (self_loop_tx, self_loop_rx) = creditchain_channels::new_unbounded_test();
     let validators = Arc::new(validators);
     let network = NetworkSender::new(
         author,
@@ -121,7 +121,7 @@ pub fn prepare_buffer_manager(
         validators.clone(),
     );
 
-    let (msg_tx, msg_rx) = libra2_channel::new::<
+    let (msg_tx, msg_rx) = creditchain_channel::new::<
         AccountAddress,
         (AccountAddress, IncomingCommitRequest),
     >(QueueStyle::FIFO, channel_size, None);
@@ -180,8 +180,8 @@ pub fn prepare_buffer_manager(
 pub fn launch_buffer_manager() -> (
     Sender<OrderedBlocks>,
     Sender<ResetRequest>,
-    libra2_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>,
-    libra2_channels::UnboundedReceiver<Event<ConsensusMsg>>,
+    creditchain_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>,
+    creditchain_channels::UnboundedReceiver<Event<ConsensusMsg>>,
     HashValue,
     Runtime,
     Vec<ValidatorSigner>,
@@ -228,7 +228,7 @@ pub fn launch_buffer_manager() -> (
 
 async fn loopback_commit_vote(
     msg: Event<ConsensusMsg>,
-    msg_tx: &libra2_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>,
+    msg_tx: &creditchain_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>,
     verifier: &ValidatorVerifier,
 ) {
     match msg {

@@ -1,9 +1,9 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_bitvec::BitVec;
-use libra2_crypto::bls12381;
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_bitvec::BitVec;
+use creditchain_crypto::bls12381;
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 use move_core_types::account_address::AccountAddress;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;

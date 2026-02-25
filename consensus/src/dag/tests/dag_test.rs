@@ -9,10 +9,10 @@ use crate::dag::{
     types::{CertifiedNode, DagSnapshotBitmask, Node},
     NodeId, Vote,
 };
-use libra2_consensus_types::common::Author;
-use libra2_crypto::HashValue;
-use libra2_infallible::Mutex;
-use libra2_types::{
+use creditchain_consensus_types::common::Author;
+use creditchain_crypto::HashValue;
+use creditchain_infallible::Mutex;
+use creditchain_types::{
     epoch_state::EpochState, ledger_info::LedgerInfoWithSignatures,
     validator_signer::ValidatorSigner, validator_verifier::random_validator_verifier,
 };

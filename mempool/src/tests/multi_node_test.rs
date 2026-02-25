@@ -14,12 +14,12 @@ use crate::{
         },
     },
 };
-use libra2_config::{
+use creditchain_config::{
     config::{NodeConfig, PeerRole},
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_network::{
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_network::{
     peer_manager::PeerManagerRequest,
     protocols::{
         direct_send::Message,
@@ -28,7 +28,7 @@ use libra2_network::{
     },
     ProtocolId,
 };
-use libra2_types::{
+use creditchain_types::{
     transaction::{ReplayProtector, SignedTransaction},
     PeerId,
 };

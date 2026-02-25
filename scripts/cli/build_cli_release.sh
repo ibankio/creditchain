@@ -16,8 +16,8 @@
 
 set -e
 
-NAME='libra2-cli'
-CRATE_NAME='libra2'
+NAME='creditchain-cli'
+CRATE_NAME='creditchain'
 CARGO_PATH="crates/$CRATE_NAME/Cargo.toml"
 PLATFORM_NAME="$1"
 EXPECTED_VERSION="$2"
@@ -43,7 +43,7 @@ if [[ "$SKIP_CHECKS" != "true" ]]; then
   fi
 
   # Check that the release doesn't already exist
-  if curl -s --stderr /dev/null --output /dev/null --head -f "https://github.com/ibankio/creditchain/releases/download/libra2-cli-v$EXPECTED_VERSION/libra2-cli-$EXPECTED_VERSION-Ubuntu-22.04-x86_64.zip"; then
+  if curl -s --stderr /dev/null --output /dev/null --head -f "https://github.com/ibankio/creditchain/releases/download/creditchain-cli-v$EXPECTED_VERSION/creditchain-cli-$EXPECTED_VERSION-Ubuntu-22.04-x86_64.zip"; then
     echo "$EXPECTED_VERSION already released"
     exit 3
   fi

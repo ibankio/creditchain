@@ -9,14 +9,14 @@ use crate::{
     network::PeerMonitoringServiceNetworkEvents,
     storage::StorageReaderInterface,
 };
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_config::{
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_config::{
     config::{BaseConfig, NodeConfig},
     network_id::NetworkId,
 };
-use libra2_logger::prelude::*;
-use libra2_network::application::storage::PeersAndMetadata;
-use libra2_peer_monitoring_service_types::{
+use creditchain_logger::prelude::*;
+use creditchain_network::application::storage::PeersAndMetadata;
+use creditchain_peer_monitoring_service_types::{
     request::{LatencyPingRequest, PeerMonitoringServiceRequest},
     response::{
         ConnectionMetadata, LatencyPingResponse, NetworkInformationResponse,
@@ -24,7 +24,7 @@ use libra2_peer_monitoring_service_types::{
     },
     PeerMonitoringServiceError, Result, MAX_DISTANCE_FROM_VALIDATORS,
 };
-use libra2_time_service::{TimeService, TimeServiceTrait};
+use creditchain_time_service::{TimeService, TimeServiceTrait};
 use error::Error;
 use futures::stream::StreamExt;
 use std::{cmp::min, sync::Arc, time::Instant};
@@ -258,7 +258,7 @@ impl<T: StorageReaderInterface> Handler<T> {
 
     fn get_node_information(&self) -> Result<PeerMonitoringServiceResponse, Error> {
         // Get the node information
-        let build_information = libra2_build_info::get_build_information();
+        let build_information = creditchain_build_info::get_build_information();
         let current_time: Instant = self.time_service.now();
         let uptime = current_time.duration_since(self.start_time);
         let (highest_synced_epoch, highest_synced_version) =

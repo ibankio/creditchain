@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{ConsensusState, Error};
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block_data::BlockData,
     order_vote::OrderVote,
     order_vote_proposal::OrderVoteProposal,
@@ -11,8 +11,8 @@ use libra2_consensus_types::{
     vote::Vote,
     vote_proposal::VoteProposal,
 };
-use libra2_crypto::bls12381;
-use libra2_types::{
+use creditchain_crypto::bls12381;
+use creditchain_types::{
     epoch_change::EpochChangeProof,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},
 };

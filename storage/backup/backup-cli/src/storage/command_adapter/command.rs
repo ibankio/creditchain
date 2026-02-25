@@ -4,7 +4,7 @@
 
 use crate::{storage::command_adapter::config::EnvVar, utils::error_notes::ErrorNotes};
 use anyhow::{bail, ensure, Result};
-use libra2_logger::prelude::*;
+use creditchain_logger::prelude::*;
 use futures::{
     future::BoxFuture,
     task::{Context, Poll},

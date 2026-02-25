@@ -11,7 +11,7 @@ use crate::{
         TransactionWithProof,
     },
 };
-use libra2_crypto::{
+use creditchain_crypto::{
     ed25519::{self, Ed25519PrivateKey, Ed25519Signature},
     PrivateKey, Uniform,
 };

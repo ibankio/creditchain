@@ -35,7 +35,7 @@ Please follow standard fullnode installation guide on github.com/ibankio/creditc
 
 ### Running indexer
 ```bash
-cargo run -p libra2-node --features "indexer" --release -- -f <some_path>/fullnode.yaml
+cargo run -p creditchain-node --features "indexer" --release -- -f <some_path>/fullnode.yaml
 ```
    * Example fullnode.yaml modification
       ```
@@ -112,6 +112,6 @@ pg_ctl: could not start server
 then run `brew services restart postgresql`
 6. Alias for starting testnet (put this in `~/.zshrc`)
 ```bash
-alias testnet="cd ~/Desktop/creditchain; CARGO_NET_GIT_FETCH_WITH_CLI=true cargo run -p libra2-node -- --test"
+alias testnet="cd ~/Desktop/creditchain; CARGO_NET_GIT_FETCH_WITH_CLI=true cargo run -p creditchain-node -- --test"
 ```
 Then run `source ~/.zshrc`, and start testnet by running `testnet` in your terminal

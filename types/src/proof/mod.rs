@@ -24,14 +24,14 @@ use crate::{
     transaction::{TransactionInfo, Version},
 };
 use anyhow::{ensure, Result};
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{
         CryptoHash, CryptoHasher, EventAccumulatorHasher, SparseMerkleInternalHasher,
         TestOnlyHasher, TransactionAccumulatorHasher,
     },
     HashValue,
 };
-use libra2_crypto_derive::CryptoHasher;
+use creditchain_crypto_derive::CryptoHasher;
 #[cfg(any(test, feature = "fuzzing"))]
 use proptest_derive::Arbitrary;
 use serde::{Deserialize, Serialize};

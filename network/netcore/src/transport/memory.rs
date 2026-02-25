@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::transport::Transport;
-use libra2_memsocket::{MemoryListener, MemorySocket};
-use libra2_types::{
+use creditchain_memsocket::{MemoryListener, MemorySocket};
+use creditchain_types::{
     network_address::{parse_memory, NetworkAddress, Protocol},
     PeerId,
 };
@@ -102,7 +102,7 @@ impl Stream for Listener {
 #[cfg(test)]
 mod test {
     use crate::transport::{memory::MemoryTransport, Transport};
-    use libra2_types::PeerId;
+    use creditchain_types::PeerId;
     use futures::{
         executor::block_on,
         future::join,

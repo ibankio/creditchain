@@ -9,13 +9,13 @@ use crate::{
     },
     test_utils::create_vec_signed_transactions,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::Author,
     proof_of_store::{ProofOfStore, SignedBatchInfo},
 };
-use libra2_crypto::HashValue;
-use libra2_infallible::Mutex;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_infallible::Mutex;
+use creditchain_types::{
     aggregate_signature::PartialSignatures,
     block_info::BlockInfo,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},

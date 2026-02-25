@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::tests::{mock, mock::MockClient, utils};
-use libra2_config::config::StorageServiceConfig;
-use libra2_storage_service_types::{responses::DataResponse, StorageServiceError};
+use creditchain_config::config::StorageServiceConfig;
+use creditchain_storage_service_types::{responses::DataResponse, StorageServiceError};
 use claims::assert_matches;
 use mockall::{predicate::eq, Sequence};
 

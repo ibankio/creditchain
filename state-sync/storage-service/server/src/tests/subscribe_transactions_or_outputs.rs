@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::tests::{mock, mock::MockClient, utils};
-use libra2_config::{
+use creditchain_config::{
     config::StorageServiceConfig,
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_network::protocols::network::RpcError;
-use libra2_types::{
+use creditchain_network::protocols::network::RpcError;
+use creditchain_types::{
     epoch_change::EpochChangeProof,
     ledger_info::LedgerInfoWithSignatures,
     transaction::{TransactionListWithProofV2, TransactionOutputListWithProofV2},

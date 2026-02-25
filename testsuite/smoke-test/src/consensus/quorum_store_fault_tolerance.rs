@@ -6,13 +6,13 @@ use crate::{
     smoke_test_environment::SwarmBuilder, txn_emitter::generate_traffic,
     utils::update_consensus_config,
 };
-use libra2_consensus::QUORUM_STORE_DB_NAME;
-use libra2_forge::{
+use creditchain_consensus::QUORUM_STORE_DB_NAME;
+use creditchain_forge::{
     args::TransactionTypeArg, reconfig, wait_for_all_nodes_to_catchup, NodeExt, Swarm, SwarmExt,
 };
-use libra2_logger::info;
-use libra2_rest_client::Client;
-use libra2_types::on_chain_config::{ConsensusConfigV1, OnChainConsensusConfig};
+use creditchain_logger::info;
+use creditchain_rest_client::Client;
+use creditchain_types::on_chain_config::{ConsensusConfigV1, OnChainConsensusConfig};
 use std::{fs, sync::Arc, time::Duration};
 
 const MAX_WAIT_SECS: u64 = 60;

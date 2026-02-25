@@ -3,12 +3,12 @@
 
 use crate::{errors::FilterError, traits::Filterable};
 use anyhow::Error;
-use libra2_protos::transaction::v1::{transaction::TransactionType, Transaction};
+use creditchain_protos::transaction::v1::{transaction::TransactionType, Transaction};
 use serde::{Deserialize, Serialize};
 
 /// Example:
 /// ```
-/// use libra2_transaction_filter::TransactionRootFilterBuilder;
+/// use creditchain_transaction_filter::TransactionRootFilterBuilder;
 ///
 /// let filter = TransactionRootFilterBuilder::default()
 ///   .success(true)
@@ -26,8 +26,8 @@ pub struct TransactionRootFilter {
     pub txn_type: Option<TransactionType>,
 }
 
-impl From<libra2_protos::indexer::v1::TransactionRootFilter> for TransactionRootFilter {
-    fn from(proto_filter: libra2_protos::indexer::v1::TransactionRootFilter) -> Self {
+impl From<creditchain_protos::indexer::v1::TransactionRootFilter> for TransactionRootFilter {
+    fn from(proto_filter: creditchain_protos::indexer::v1::TransactionRootFilter) -> Self {
         Self {
             success: proto_filter.success,
             txn_type: proto_filter
@@ -37,7 +37,7 @@ impl From<libra2_protos::indexer::v1::TransactionRootFilter> for TransactionRoot
     }
 }
 
-impl From<TransactionRootFilter> for libra2_protos::indexer::v1::TransactionRootFilter {
+impl From<TransactionRootFilter> for creditchain_protos::indexer::v1::TransactionRootFilter {
     fn from(transaction_root_filter: TransactionRootFilter) -> Self {
         Self {
             success: transaction_root_filter.success,

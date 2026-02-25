@@ -11,9 +11,9 @@ pub enum Error {
     #[error("The requested data is unavailable and cannot be found in the network! Error: {0}")]
     DataIsUnavailable(String),
     #[error("Error returned by the libra2 data client: {0}")]
-    Libra2DataClientError(String),
+    CreditChainDataClientError(String),
     #[error("The response from the libra2 data client is invalid! Error: {0}")]
-    Libra2DataClientResponseIsInvalid(String),
+    CreditChainDataClientResponseIsInvalid(String),
     #[error("An integer overflow has occurred: {0}")]
     IntegerOverflow(String),
     #[error("No data to fetch: {0}")]
@@ -29,8 +29,8 @@ impl Error {
     pub fn get_label(&self) -> &'static str {
         match self {
             Self::DataIsUnavailable(_) => "data_is_unavailable",
-            Self::Libra2DataClientError(_) => "libra2_data_client_error",
-            Self::Libra2DataClientResponseIsInvalid(_) => "libra2_data_client_response_is_invalid",
+            Self::CreditChainDataClientError(_) => "creditchain_data_client_error",
+            Self::CreditChainDataClientResponseIsInvalid(_) => "creditchain_data_client_response_is_invalid",
             Self::IntegerOverflow(_) => "integer_overflow",
             Self::NoDataToFetch(_) => "no_data_to_fetch",
             Self::UnexpectedErrorEncountered(_) => "unexpected_error_encountered",
@@ -39,9 +39,9 @@ impl Error {
     }
 }
 
-impl From<libra2_data_client::error::Error> for Error {
-    fn from(error: libra2_data_client::error::Error) -> Self {
-        Error::Libra2DataClientError(error.to_string())
+impl From<creditchain_data_client::error::Error> for Error {
+    fn from(error: creditchain_data_client::error::Error) -> Self {
+        Error::CreditChainDataClientError(error.to_string())
     }
 }
 

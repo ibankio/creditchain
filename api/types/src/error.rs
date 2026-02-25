@@ -2,35 +2,35 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_types::vm_status::StatusCode;
+use creditchain_types::vm_status::StatusCode;
 use poem_openapi::{Enum, Object};
 use serde::{Deserialize, Serialize};
 use std::fmt::Formatter;
 
 /// This is the generic struct we use for all API errors, it contains a string
-/// message and an Libra2 API specific error code.
+/// message and an CreditChain API specific error code.
 #[derive(Debug, Clone, Serialize, Deserialize, Object)]
-pub struct Libra2Error {
+pub struct CreditChainError {
     /// A message describing the error
     pub message: String,
-    pub error_code: Libra2ErrorCode,
+    pub error_code: CreditChainErrorCode,
     /// A code providing VM error details when submitting transactions to the VM
     pub vm_error_code: Option<u64>,
 }
 
-impl std::fmt::Display for Libra2Error {
+impl std::fmt::Display for CreditChainError {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(f, "Error({:?}): {:#}", self.error_code, self.message)
     }
 }
 
-impl std::error::Error for Libra2Error {}
+impl std::error::Error for CreditChainError {}
 
-impl Libra2Error {
+impl CreditChainError {
     pub fn new_with_error_code<ErrorType: std::fmt::Display>(
         error: ErrorType,
-        error_code: Libra2ErrorCode,
-    ) -> Libra2Error {
+        error_code: CreditChainErrorCode,
+    ) -> CreditChainError {
         Self {
             message: format!("{:#}", error),
             error_code,
@@ -40,9 +40,9 @@ impl Libra2Error {
 
     pub fn new_with_vm_status<ErrorType: std::fmt::Display>(
         error: ErrorType,
-        error_code: Libra2ErrorCode,
+        error_code: CreditChainErrorCode,
         vm_error_code: StatusCode,
-    ) -> Libra2Error {
+    ) -> CreditChainError {
         Self {
             message: format!("{:#}", error),
             error_code,
@@ -57,7 +57,7 @@ impl Libra2Error {
 #[oai(rename_all = "snake_case")]
 #[serde(rename_all = "snake_case")]
 #[repr(u32)]
-pub enum Libra2ErrorCode {
+pub enum CreditChainErrorCode {
     /// Account not found at the requested version
     AccountNotFound = 101,
     /// Resource not found at the requested version
@@ -114,7 +114,7 @@ pub enum Libra2ErrorCode {
     ApiDisabled = 603,
 }
 
-impl Libra2ErrorCode {
+impl CreditChainErrorCode {
     pub fn as_u32(&self) -> u32 {
         *self as u32
     }
@@ -122,17 +122,17 @@ impl Libra2ErrorCode {
 
 #[test]
 fn test_serialize_deserialize() {
-    let with_code = Libra2Error::new_with_vm_status(
+    let with_code = CreditChainError::new_with_vm_status(
         "Invalid transaction",
-        Libra2ErrorCode::VmError,
-        libra2_types::vm_status::StatusCode::UNKNOWN_MODULE,
+        CreditChainErrorCode::VmError,
+        creditchain_types::vm_status::StatusCode::UNKNOWN_MODULE,
     );
-    let _: Libra2Error = bcs::from_bytes(&bcs::to_bytes(&with_code).unwrap()).unwrap();
-    let _: Libra2Error = serde_json::from_str(&serde_json::to_string(&with_code).unwrap()).unwrap();
+    let _: CreditChainError = bcs::from_bytes(&bcs::to_bytes(&with_code).unwrap()).unwrap();
+    let _: CreditChainError = serde_json::from_str(&serde_json::to_string(&with_code).unwrap()).unwrap();
 
     let without_code =
-        Libra2Error::new_with_error_code("some message", Libra2ErrorCode::MempoolIsFull);
-    let _: Libra2Error = bcs::from_bytes(&bcs::to_bytes(&without_code).unwrap()).unwrap();
-    let _: Libra2Error =
+        CreditChainError::new_with_error_code("some message", CreditChainErrorCode::MempoolIsFull);
+    let _: CreditChainError = bcs::from_bytes(&bcs::to_bytes(&without_code).unwrap()).unwrap();
+    let _: CreditChainError =
         serde_json::from_str(&serde_json::to_string(&without_code).unwrap()).unwrap();
 }

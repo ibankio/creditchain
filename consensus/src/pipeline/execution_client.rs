@@ -27,20 +27,20 @@ use crate::{
     transaction_shuffler::create_transaction_shuffler,
 };
 use anyhow::{anyhow, Result};
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::config::{ConsensusConfig, ConsensusObserverConfig};
-use libra2_consensus_types::{
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::config::{ConsensusConfig, ConsensusObserverConfig};
+use creditchain_consensus_types::{
     common::{Author, Round},
     pipelined_block::PipelinedBlock,
     wrapped_ledger_info::WrappedLedgerInfo,
 };
-use libra2_crypto::bls12381::PrivateKey;
-use libra2_executor_types::ExecutorResult;
-use libra2_infallible::RwLock;
-use libra2_logger::prelude::*;
-use libra2_network::{application::interface::NetworkClient, protocols::network::Event};
-use libra2_types::{
+use creditchain_crypto::bls12381::PrivateKey;
+use creditchain_executor_types::ExecutorResult;
+use creditchain_infallible::RwLock;
+use creditchain_logger::prelude::*;
+use creditchain_network::{application::interface::NetworkClient, protocols::network::Event};
+use creditchain_types::{
     epoch_state::EpochState,
     ledger_info::LedgerInfoWithSignatures,
     on_chain_config::{OnChainConsensusConfig, OnChainExecutionConfig, OnChainRandomnessConfig},
@@ -69,7 +69,7 @@ pub trait TExecutionClient: Send + Sync {
         onchain_randomness_config: &OnChainRandomnessConfig,
         rand_config: Option<RandConfig>,
         fast_rand_config: Option<RandConfig>,
-        rand_msg_rx: libra2_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
+        rand_msg_rx: creditchain_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
         highest_committed_round: Round,
     );
 
@@ -113,7 +113,7 @@ pub trait TExecutionClient: Send + Sync {
 struct BufferManagerHandle {
     pub execute_tx: Option<UnboundedSender<OrderedBlocks>>,
     pub commit_tx:
-        Option<libra2_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>>,
+        Option<creditchain_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>>,
     pub reset_tx_to_buffer_manager: Option<UnboundedSender<ResetRequest>>,
     pub reset_tx_to_rand_manager: Option<UnboundedSender<ResetRequest>>,
 }
@@ -131,7 +131,7 @@ impl BufferManagerHandle {
     pub fn init(
         &mut self,
         execute_tx: UnboundedSender<OrderedBlocks>,
-        commit_tx: libra2_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>,
+        commit_tx: creditchain_channel::Sender<AccountAddress, (AccountAddress, IncomingCommitRequest)>,
         reset_tx_to_buffer_manager: UnboundedSender<ResetRequest>,
         reset_tx_to_rand_manager: Option<UnboundedSender<ResetRequest>>,
     ) {
@@ -159,7 +159,7 @@ pub struct ExecutionProxyClient {
     consensus_config: ConsensusConfig,
     execution_proxy: Arc<ExecutionProxy>,
     author: Author,
-    self_sender: libra2_channels::UnboundedSender<Event<ConsensusMsg>>,
+    self_sender: creditchain_channels::UnboundedSender<Event<ConsensusMsg>>,
     network_sender: ConsensusNetworkClient<NetworkClient<ConsensusMsg>>,
     bounded_executor: BoundedExecutor,
     // channels to buffer manager
@@ -174,7 +174,7 @@ impl ExecutionProxyClient {
         consensus_config: ConsensusConfig,
         execution_proxy: Arc<ExecutionProxy>,
         author: Author,
-        self_sender: libra2_channels::UnboundedSender<Event<ConsensusMsg>>,
+        self_sender: creditchain_channels::UnboundedSender<Event<ConsensusMsg>>,
         network_sender: ConsensusNetworkClient<NetworkClient<ConsensusMsg>>,
         bounded_executor: BoundedExecutor,
         rand_storage: Arc<dyn RandStorage<AugmentedData>>,
@@ -203,7 +203,7 @@ impl ExecutionProxyClient {
         rand_config: Option<RandConfig>,
         fast_rand_config: Option<RandConfig>,
         onchain_consensus_config: &OnChainConsensusConfig,
-        rand_msg_rx: libra2_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
+        rand_msg_rx: creditchain_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
         highest_committed_round: Round,
         buffer_manager_back_pressure_enabled: bool,
         consensus_observer_config: ConsensusObserverConfig,
@@ -219,7 +219,7 @@ impl ExecutionProxyClient {
         let (reset_buffer_manager_tx, reset_buffer_manager_rx) = unbounded::<ResetRequest>();
 
         let (commit_msg_tx, commit_msg_rx) =
-            libra2_channel::new::<AccountAddress, (AccountAddress, IncomingCommitRequest)>(
+            creditchain_channel::new::<AccountAddress, (AccountAddress, IncomingCommitRequest)>(
                 QueueStyle::FIFO,
                 100,
                 Some(&counters::BUFFER_MANAGER_MSGS),
@@ -316,7 +316,7 @@ impl TExecutionClient for ExecutionProxyClient {
         onchain_randomness_config: &OnChainRandomnessConfig,
         rand_config: Option<RandConfig>,
         fast_rand_config: Option<RandConfig>,
-        rand_msg_rx: libra2_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
+        rand_msg_rx: creditchain_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
         highest_committed_round: Round,
     ) {
         let maybe_rand_msg_tx = self.spawn_decoupled_execution(
@@ -533,7 +533,7 @@ impl TExecutionClient for DummyExecutionClient {
         _onchain_randomness_config: &OnChainRandomnessConfig,
         _rand_config: Option<RandConfig>,
         _fast_rand_config: Option<RandConfig>,
-        _rand_msg_rx: libra2_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
+        _rand_msg_rx: creditchain_channel::Receiver<AccountAddress, IncomingRandGenRequest>,
         _highest_committed_round: Round,
     ) {
     }

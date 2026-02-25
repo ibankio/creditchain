@@ -1,5 +1,5 @@
 [package]
-name = "libra2-reliable-broadcast"
+name = "creditchain-reliable-broadcast"
 description = "CreditChain Reliable Broadcast Implementation"
 version = "0.1.1"
 
@@ -14,13 +14,13 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-bounded-executor = { workspace = true }
-libra2-consensus-types = { workspace = true }
-libra2-enum-conversion-derive = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-bounded-executor = { workspace = true }
+creditchain-consensus-types = { workspace = true }
+creditchain-enum-conversion-derive = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-types = { workspace = true }
 async-trait = { workspace = true }
 bytes = { workspace = true }
 claims = { workspace = true }
@@ -30,8 +30,8 @@ tokio = { workspace = true }
 tokio-retry = { workspace = true }
 
 [dev-dependencies]
-libra2-consensus-types = { workspace = true, features = ["fuzzing"] }
-libra2-time-service = { workspace = true, features = ["testing"] }
+creditchain-consensus-types = { workspace = true, features = ["fuzzing"] }
+creditchain-time-service = { workspace = true, features = ["testing"] }
 
 [features]
 default = []

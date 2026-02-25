@@ -3,9 +3,9 @@ name = "pack_token_v1"
 version = "0.0.0"
 
 [dependencies]
-MoveStdlib = { local = "../../../../../libra2-move/framework/move-stdlib" }
-Libra2Framework = { local = "../../../../../libra2-move/framework/libra2-framework" }
-Libra2Token = { local = "../../../../../libra2-move/framework/libra2-token" }
+MoveStdlib = { local = "../../../../../creditchain-move/framework/move-stdlib" }
+CreditChainFramework = { local = "../../../../../creditchain-move/framework/creditchain-framework" }
+CreditChainToken = { local = "../../../../../creditchain-move/framework/creditchain-token" }
 
 [addresses]
 addr = "_"

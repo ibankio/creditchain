@@ -7,7 +7,7 @@ use crate::{
     listener::{EmptyPackageCacheListener, PackageCacheListener},
 };
 use anyhow::{bail, Result};
-use libra2_framework::natives::code::PackageRegistry;
+use creditchain_framework::natives::code::PackageRegistry;
 use futures::future;
 use git2::{
     build::RepoBuilder, FetchOptions, ObjectType, Oid, RemoteCallbacks, Repository, TreeWalkResult,
@@ -312,7 +312,7 @@ impl<L> PackageCache<L> {
         self.listener
             .on_bytecode_package_download_start(address, package_name);
 
-        let client = libra2_rest_client::Client::new(fullnode_url.clone());
+        let client = creditchain_rest_client::Client::new(fullnode_url.clone());
 
         let package_registry = client
             .get_account_resource_at_version_bcs::<PackageRegistry>(

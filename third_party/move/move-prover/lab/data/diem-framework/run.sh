@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FRAMEWORK="../../../../../../libra2-move/framework/libra2-framework/sources"
+FRAMEWORK="../../../../../../creditchain-move/framework/creditchain-framework/sources"
 
 # Benchmark per function
 cargo run --release -p prover-lab -- bench -f -c prover.toml $FRAMEWORK/*.move

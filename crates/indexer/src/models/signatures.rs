@@ -4,7 +4,7 @@
 
 use crate::{models::transactions::Transaction, schema::signatures, util::standardize_address};
 use anyhow::{Context, Result};
-use libra2_api_types::{
+use creditchain_api_types::{
     AbstractionSignature as APIAbstractionSignature, AccountSignature as APIAccountSignature,
     Ed25519Signature as APIEd25519Signature, FeePayerSignature as APIFeePayerSignature,
     MultiAgentSignature as APIMultiAgentSignature,
@@ -12,7 +12,7 @@ use libra2_api_types::{
     NoAccountSignature as APINoAccountSignature, SingleKeySignature as APISingleKeySignature,
     TransactionSignature as APITransactionSignature,
 };
-use libra2_bitvec::BitVec;
+use creditchain_bitvec::BitVec;
 use field_count::FieldCount;
 use serde::{Deserialize, Serialize};
 

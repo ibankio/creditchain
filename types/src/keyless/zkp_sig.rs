@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::keyless::Groth16Proof;
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 use serde::{Deserialize, Serialize};
 
 #[derive(

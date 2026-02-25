@@ -2,18 +2,18 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_metrics_core::{
+use creditchain_metrics_core::{
     exponential_buckets, register_histogram_vec, register_int_counter_vec, HistogramVec,
     IntCounterVec,
 };
 use once_cell::sync::Lazy;
 
-pub static LIBRA2_SCHEMADB_SEEK_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(|| {
+pub static CREDITCHAIN_SCHEMADB_SEEK_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
         // metric name
-        "libra2_schemadb_seek_latency_seconds",
+        "creditchain_schemadb_seek_latency_seconds",
         // metric description
-        "Libra2 schemadb seek latency in seconds",
+        "CreditChain schemadb seek latency in seconds",
         // metric labels (dimensions)
         &["cf_name", "tag"],
         exponential_buckets(/*start=*/ 1e-6, /*factor=*/ 2.0, /*count=*/ 22).unwrap(),
@@ -21,12 +21,12 @@ pub static LIBRA2_SCHEMADB_SEEK_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(
     .unwrap()
 });
 
-pub static LIBRA2_SCHEMADB_ITER_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(|| {
+pub static CREDITCHAIN_SCHEMADB_ITER_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
         // metric name
-        "libra2_schemadb_iter_latency_seconds",
+        "creditchain_schemadb_iter_latency_seconds",
         // metric description
-        "Libra2 schemadb iter latency in seconds",
+        "CreditChain schemadb iter latency in seconds",
         // metric labels (dimensions)
         &["cf_name"],
         exponential_buckets(/*start=*/ 1e-6, /*factor=*/ 2.0, /*count=*/ 22).unwrap(),
@@ -34,24 +34,24 @@ pub static LIBRA2_SCHEMADB_ITER_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(
     .unwrap()
 });
 
-pub static LIBRA2_SCHEMADB_ITER_BYTES: Lazy<HistogramVec> = Lazy::new(|| {
+pub static CREDITCHAIN_SCHEMADB_ITER_BYTES: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
         // metric name
-        "libra2_schemadb_iter_bytes",
+        "creditchain_schemadb_iter_bytes",
         // metric description
-        "Libra2 schemadb iter size in bytes",
+        "CreditChain schemadb iter size in bytes",
         // metric labels (dimensions)
         &["cf_name"]
     )
     .unwrap()
 });
 
-pub static LIBRA2_SCHEMADB_GET_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(|| {
+pub static CREDITCHAIN_SCHEMADB_GET_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
         // metric name
-        "libra2_schemadb_get_latency_seconds",
+        "creditchain_schemadb_get_latency_seconds",
         // metric description
-        "Libra2 schemadb get latency in seconds",
+        "CreditChain schemadb get latency in seconds",
         // metric labels (dimensions)
         &["cf_name"],
         exponential_buckets(/*start=*/ 1e-6, /*factor=*/ 2.0, /*count=*/ 22).unwrap(),
@@ -59,24 +59,24 @@ pub static LIBRA2_SCHEMADB_GET_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(|
     .unwrap()
 });
 
-pub static LIBRA2_SCHEMADB_GET_BYTES: Lazy<HistogramVec> = Lazy::new(|| {
+pub static CREDITCHAIN_SCHEMADB_GET_BYTES: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
         // metric name
-        "libra2_schemadb_get_bytes",
+        "creditchain_schemadb_get_bytes",
         // metric description
-        "Libra2 schemadb get call returned data size in bytes",
+        "CreditChain schemadb get call returned data size in bytes",
         // metric labels (dimensions)
         &["cf_name"]
     )
     .unwrap()
 });
 
-pub static LIBRA2_SCHEMADB_BATCH_COMMIT_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(|| {
+pub static CREDITCHAIN_SCHEMADB_BATCH_COMMIT_LATENCY_SECONDS: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
         // metric name
-        "libra2_schemadb_batch_commit_latency_seconds",
+        "creditchain_schemadb_batch_commit_latency_seconds",
         // metric description
-        "Libra2 schemadb schema batch commit latency in seconds",
+        "CreditChain schemadb schema batch commit latency in seconds",
         // metric labels (dimensions)
         &["db_name"],
         exponential_buckets(/*start=*/ 1e-3, /*factor=*/ 2.0, /*count=*/ 20).unwrap(),
@@ -84,34 +84,34 @@ pub static LIBRA2_SCHEMADB_BATCH_COMMIT_LATENCY_SECONDS: Lazy<HistogramVec> = La
     .unwrap()
 });
 
-pub static LIBRA2_SCHEMADB_BATCH_COMMIT_BYTES: Lazy<HistogramVec> = Lazy::new(|| {
+pub static CREDITCHAIN_SCHEMADB_BATCH_COMMIT_BYTES: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
         // metric name
-        "libra2_schemadb_batch_commit_bytes",
+        "creditchain_schemadb_batch_commit_bytes",
         // metric description
-        "Libra2 schemadb schema batch commit size in bytes",
+        "CreditChain schemadb schema batch commit size in bytes",
         // metric labels (dimensions)
         &["db_name"]
     )
     .unwrap()
 });
 
-pub static LIBRA2_SCHEMADB_PUT_BYTES_SAMPLED: Lazy<HistogramVec> = Lazy::new(|| {
+pub static CREDITCHAIN_SCHEMADB_PUT_BYTES_SAMPLED: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
         // metric name
-        "libra2_schemadb_put_bytes_sampled",
+        "creditchain_schemadb_put_bytes_sampled",
         // metric description
-        "Libra2 schemadb put call puts data size in bytes (sampled)",
+        "CreditChain schemadb put call puts data size in bytes (sampled)",
         // metric labels (dimensions)
         &["cf_name"]
     )
     .unwrap()
 });
 
-pub static LIBRA2_SCHEMADB_DELETES_SAMPLED: Lazy<IntCounterVec> = Lazy::new(|| {
+pub static CREDITCHAIN_SCHEMADB_DELETES_SAMPLED: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_storage_deletes_sampled",
-        "Libra2 storage delete calls (sampled)",
+        "creditchain_storage_deletes_sampled",
+        "CreditChain storage delete calls (sampled)",
         &["cf_name"]
     )
     .unwrap()
@@ -119,7 +119,7 @@ pub static LIBRA2_SCHEMADB_DELETES_SAMPLED: Lazy<IntCounterVec> = Lazy::new(|| {
 
 pub static TIMER: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_schema_db_timer_seconds",
+        "creditchain_schema_db_timer_seconds",
         "Various timers for performance analysis.",
         &["name", "sub_name"],
         exponential_buckets(/*start=*/ 1e-9, /*factor=*/ 2.0, /*count=*/ 32).unwrap(),

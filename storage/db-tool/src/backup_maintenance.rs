@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 use anyhow::Result;
-use libra2_backup_cli::{
+use creditchain_backup_cli::{
     coordinators::backup::BackupCompactor, metadata::cache::MetadataCacheOpt,
     storage::DBToolStorageOpt, utils::ConcurrentDownloadsOpt,
 };

@@ -15,11 +15,11 @@ use crate::consensus_observer::{
         },
     },
 };
-use libra2_channels::libra2_channel::Receiver;
-use libra2_config::{config::ConsensusObserverConfig, network_id::PeerNetworkId};
-use libra2_infallible::RwLock;
-use libra2_logger::{error, info, warn};
-use libra2_network::application::interface::NetworkClient;
+use creditchain_channels::creditchain_channel::Receiver;
+use creditchain_config::{config::ConsensusObserverConfig, network_id::PeerNetworkId};
+use creditchain_infallible::RwLock;
+use creditchain_logger::{error, info, warn};
+use creditchain_network::application::interface::NetworkClient;
 use futures::StreamExt;
 use futures_channel::mpsc;
 use std::{collections::HashSet, sync::Arc, time::Duration};
@@ -355,13 +355,13 @@ mod test {
     use crate::consensus_observer::network::{
         network_events::ResponseSender, observer_message::BlockTransactionPayload,
     };
-    use libra2_config::network_id::NetworkId;
-    use libra2_crypto::HashValue;
-    use libra2_network::{
+    use creditchain_config::network_id::NetworkId;
+    use creditchain_crypto::HashValue;
+    use creditchain_network::{
         application::{metadata::ConnectionState, storage::PeersAndMetadata},
         transport::ConnectionMetadata,
     };
-    use libra2_types::{
+    use creditchain_types::{
         aggregate_signature::AggregateSignature,
         block_info::BlockInfo,
         ledger_info::{LedgerInfo, LedgerInfoWithSignatures},

@@ -1,0 +1,28 @@
+[package]
+name = "creditchain-gas-schedule-updator"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+creditchain-gas-schedule = { workspace = true }
+creditchain-package-builder = { workspace = true }
+creditchain-types = { workspace = true }
+
+move-core-types = { workspace = true }
+move-model = { workspace = true }
+
+anyhow = { workspace = true }
+bcs = { workspace = true }
+clap = { workspace = true }
+
+[dev-dependencies]
+creditchain-framework = { workspace = true }
+tempfile = { workspace = true }

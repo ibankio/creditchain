@@ -11,15 +11,15 @@ use crate::{
 };
 use anyhow::Context;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::WriteTableItem,
-    utils::{constants::LIBRA2_COIN_TYPE_STR, extract::hash_str},
+   creditchain_protos::transaction::v1::WriteTableItem,
+    utils::{constants::CREDITCHAIN_COIN_TYPE_STR, extract::hash_str},
 };
 use bigdecimal::BigDecimal;
 use field_count::FieldCount;
 use serde::{Deserialize, Serialize};
-const LIBRA2_COIN_SUPPLY_TABLE_HANDLE: &str =
+const CREDITCHAIN_COIN_SUPPLY_TABLE_HANDLE: &str =
     "0x1b854694ae746cdbd8d44186ca4929b2b337df21d1c74633be19b2710552fdca";
-const LIBRA2_COIN_SUPPLY_TABLE_KEY: &str =
+const CREDITCHAIN_COIN_SUPPLY_TABLE_KEY: &str =
     "0x619dc29a0aac8fa146714058e8dd6d2d0f3bdf5f6331907bf91f3acd81e6935";
 
 #[derive(Clone, Debug, Deserialize, FieldCount, Identifiable, Insertable, Serialize)]
@@ -35,7 +35,7 @@ pub struct CoinSupply {
 }
 
 impl CoinSupply {
-    /// Currently only supports libra2_coin. Aggregator table detail is in CoinInfo which for libra2 coin appears during genesis.
+    /// Currently only supports creditchain_coin. Aggregator table detail is in CoinInfo which for libra2 coin appears during genesis.
     /// We query for the aggregator table details (handle and key) once upon indexer initiation and use it to fetch supply.
     pub fn from_write_table_item(
         write_table_item: &WriteTableItem,
@@ -49,7 +49,7 @@ impl CoinSupply {
                 return Ok(None);
             }
             // Return early if not aggregator table handle
-            if write_table_item.handle.as_str() != LIBRA2_COIN_SUPPLY_TABLE_HANDLE {
+            if write_table_item.handle.as_str() != CREDITCHAIN_COIN_SUPPLY_TABLE_HANDLE {
                 return Ok(None);
             }
 
@@ -66,7 +66,7 @@ impl CoinSupply {
 
             // Return early if not libra2 coin aggregator key
             let table_key = table_item.decoded_key.as_str().unwrap();
-            if table_key != LIBRA2_COIN_SUPPLY_TABLE_KEY {
+            if table_key != CREDITCHAIN_COIN_SUPPLY_TABLE_KEY {
                 return Ok(None);
             }
             // Everything matches. Get the coin supply
@@ -84,8 +84,8 @@ impl CoinSupply {
                 ))?;
             return Ok(Some(Self {
                 transaction_version: txn_version,
-                coin_type_hash: hash_str(LIBRA2_COIN_TYPE_STR),
-                coin_type: LIBRA2_COIN_TYPE_STR.to_string(),
+                coin_type_hash: hash_str(CREDITCHAIN_COIN_TYPE_STR),
+                coin_type: CREDITCHAIN_COIN_TYPE_STR.to_string(),
                 supply,
                 transaction_timestamp: txn_timestamp,
                 transaction_epoch: txn_epoch,

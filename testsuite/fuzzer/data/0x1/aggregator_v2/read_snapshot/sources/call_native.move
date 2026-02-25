@@ -1,5 +1,5 @@
 module poc::read_snapshot {
-    use libra2_framework::aggregator_v2;
+    use creditchain_framework::aggregator_v2;
 
     public entry fun main(_owner: &signer) {
         let snap = aggregator_v2::create_snapshot<u64>(789u64);

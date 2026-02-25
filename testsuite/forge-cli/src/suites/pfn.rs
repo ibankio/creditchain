@@ -3,12 +3,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::ungrouped::RELIABLE_PROGRESS_THRESHOLD;
-use libra2_config::config::NodeConfig;
-use libra2_forge::{
+use creditchain_config::config::NodeConfig;
+use creditchain_forge::{
     success_criteria::{LatencyType, SuccessCriteria},
     EmitJobMode, EmitJobRequest, ForgeConfig, OverrideNodeConfigFn,
 };
-use libra2_testcases::public_fullnode_performance::PFNPerformance;
+use creditchain_testcases::public_fullnode_performance::PFNPerformance;
 use std::{num::NonZeroUsize, sync::Arc, time::Duration};
 
 /// Attempts to match the test name to a PFN test

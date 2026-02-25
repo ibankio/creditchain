@@ -10,10 +10,10 @@ use crate::{
         setup_mempool_with_broadcast_buckets, txn_bytes_len, TestTransaction,
     },
 };
-use libra2_config::config::{MempoolConfig, NodeConfig};
-use libra2_consensus_types::common::{TransactionInProgress, TransactionSummary};
-use libra2_crypto::HashValue;
-use libra2_types::{
+use creditchain_config::config::{MempoolConfig, NodeConfig};
+use creditchain_consensus_types::common::{TransactionInProgress, TransactionSummary};
+use creditchain_crypto::HashValue;
+use creditchain_types::{
     account_address::AccountAddress,
     mempool_status::MempoolStatusCode,
     transaction::{ReplayProtector, SignedTransaction},

@@ -19,7 +19,7 @@ use crate::{
 use ahash::AHashMap;
 use allocative::Allocative;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::WriteResource, utils::convert::standardize_address,
+   creditchain_protos::transaction::v1::WriteResource, utils::convert::standardize_address,
 };
 use diesel::prelude::*;
 use field_count::FieldCount;

@@ -1,10 +1,10 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_channels::libra2_channel;
-use libra2_crypto::{hash::CryptoHash, HashValue};
-use libra2_infallible::Mutex;
-use libra2_types::validator_txn::{Topic, ValidatorTransaction};
+use creditchain_channels::creditchain_channel;
+use creditchain_crypto::{hash::CryptoHash, HashValue};
+use creditchain_infallible::Mutex;
+use creditchain_types::validator_txn::{Topic, ValidatorTransaction};
 use std::{
     collections::{BTreeMap, HashMap, HashSet},
     fmt::{Debug, Formatter},
@@ -59,7 +59,7 @@ impl VTxnPoolState {
         &self,
         topic: Topic,
         txn: Arc<ValidatorTransaction>,
-        pull_notification_tx: Option<libra2_channel::Sender<(), Arc<ValidatorTransaction>>>,
+        pull_notification_tx: Option<creditchain_channel::Sender<(), Arc<ValidatorTransaction>>>,
     ) -> TxnGuard {
         let mut pool = self.inner.lock();
         let seq_num = pool.next_seq_num;
@@ -105,7 +105,7 @@ impl VTxnPoolState {
 struct PoolItem {
     topic: Topic,
     txn: Arc<ValidatorTransaction>,
-    pull_notification_tx: Option<libra2_channel::Sender<(), Arc<ValidatorTransaction>>>,
+    pull_notification_tx: Option<creditchain_channel::Sender<(), Arc<ValidatorTransaction>>>,
 }
 
 /// PoolState invariants.

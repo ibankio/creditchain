@@ -142,12 +142,12 @@ pub enum PackageLocation {
     /// Refers to a package published on-chain.
     ///
     // TODO: The current design is tentative. There are issues we plan to resolve later:
-    //       - Leaky abstraction -- can we still want to maintain clear Move/Libra2 separation?
+    //       - Leaky abstraction -- can we still want to maintain clear Move/CreditChain separation?
     //       - Replacing `String` w/ more specific data structures
     //         - `node_url`: Should accept both URL and known network names (e.g. "mainnet")
     //         - `package_addr`: May accept both numerical and named addresses
-    Libra2 {
-        /// URL to the Libra2 full-node connected to the network where the package is published.
+    CreditChain {
+        /// URL to the CreditChain full-node connected to the network where the package is published.
         node_url: String,
 
         /// Address of the published package.
@@ -287,7 +287,7 @@ impl<'de> Deserialize<'de> for Dependency {
                 subdir: raw.subdir,
             },
             (None, None, Some(node_url)) => match raw.address {
-                Some(package_addr) => PackageLocation::Libra2 {
+                Some(package_addr) => PackageLocation::CreditChain {
                     node_url,
                     package_addr,
                 },
@@ -356,7 +356,7 @@ impl Dependency {
                 raw.rev = rev;
                 raw.subdir = subdir;
             },
-            PackageLocation::Libra2 {
+            PackageLocation::CreditChain {
                 node_url,
                 package_addr,
             } => {

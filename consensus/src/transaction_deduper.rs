@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::txn_hash_and_authenticator_deduper::TxnHashAndAuthenticatorDeduper;
-use libra2_logger::info;
-use libra2_types::{on_chain_config::TransactionDeduperType, transaction::SignedTransaction};
+use creditchain_logger::info;
+use creditchain_types::{on_chain_config::TransactionDeduperType, transaction::SignedTransaction};
 use std::sync::Arc;
 
 /// Interface to dedup transactions. The dedup filters duplicate transactions within a block.

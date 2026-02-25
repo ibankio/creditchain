@@ -3,8 +3,8 @@
 
 use crate::NetworkLoadTest;
 use anyhow::Context;
-use libra2_forge::{NetworkContextSynchronizer, NetworkTest, NodeExt, Test};
-use libra2_sdk::move_types::account_address::AccountAddress;
+use creditchain_forge::{NetworkContextSynchronizer, NetworkTest, NodeExt, Test};
+use creditchain_sdk::move_types::account_address::AccountAddress;
 use async_trait::async_trait;
 use std::{
     ops::DerefMut,

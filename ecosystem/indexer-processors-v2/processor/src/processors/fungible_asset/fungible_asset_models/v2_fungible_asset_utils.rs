@@ -9,7 +9,7 @@ use crate::processors::token_v2::{
 };
 use anyhow::{Context, Result};
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::WriteResource,
+   creditchain_protos::transaction::v1::WriteResource,
     utils::{
         convert::{deserialize_from_string, truncate_str},
         extract::Aggregator,

@@ -1,6 +1,6 @@
 [package]
-name = "libra2-storage-service-client"
-description = "The Libra2 storage service (client-side)"
+name = "creditchain-storage-service-client"
+description = "The CreditChain storage service (client-side)"
 version = "0.1.1"
 
 # Workspace inherited keys
@@ -13,7 +13,7 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-config = { workspace = true }
-libra2-network = { workspace = true }
-libra2-storage-service-types = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-storage-service-types = { workspace = true }
 thiserror = { workspace = true }

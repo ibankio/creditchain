@@ -4,11 +4,11 @@
 
 use crate::block_executor::BlockExecutor;
 use anyhow::Result;
-use libra2_block_executor::txn_provider::default::DefaultTxnProvider;
-use libra2_crypto::{hash::SPARSE_MERKLE_PLACEHOLDER_HASH, HashValue};
-use libra2_executor_types::BlockExecutorTrait;
-use libra2_storage_interface::{chunk_to_commit::ChunkToCommit, DbReader, DbReaderWriter, DbWriter};
-use libra2_types::{
+use creditchain_block_executor::txn_provider::default::DefaultTxnProvider;
+use creditchain_crypto::{hash::SPARSE_MERKLE_PLACEHOLDER_HASH, HashValue};
+use creditchain_executor_types::BlockExecutorTrait;
+use creditchain_storage_interface::{chunk_to_commit::ChunkToCommit, DbReader, DbReaderWriter, DbWriter};
+use creditchain_types::{
     block_executor::{
         config::BlockExecutorConfigFromOnchain, partitioner::PartitionedTransactions,
         transaction_slice_metadata::TransactionSliceMetadata,
@@ -24,7 +24,7 @@ use libra2_types::{
     },
     vm_status::VMStatus,
 };
-use libra2_vm::{
+use creditchain_vm::{
     sharded_block_executor::{executor_client::ExecutorClient, ShardedBlockExecutor},
     VMBlockExecutor,
 };
@@ -91,11 +91,11 @@ impl VMBlockExecutor for FakeVM {
 pub struct FakeDb;
 
 impl DbReader for FakeDb {
-    fn get_latest_ledger_info_version(&self) -> libra2_storage_interface::Result<Version> {
+    fn get_latest_ledger_info_version(&self) -> creditchain_storage_interface::Result<Version> {
         Ok(self.get_latest_ledger_info()?.ledger_info().version())
     }
 
-    fn get_latest_commit_metadata(&self) -> libra2_storage_interface::Result<(Version, u64)> {
+    fn get_latest_commit_metadata(&self) -> creditchain_storage_interface::Result<(Version, u64)> {
         let ledger_info_with_sig = self.get_latest_ledger_info()?;
         let ledger_info = ledger_info_with_sig.ledger_info();
         Ok((ledger_info.version(), ledger_info.timestamp_usecs()))
@@ -107,7 +107,7 @@ impl DbWriter for FakeDb {
         &self,
         _chunk: ChunkToCommit,
         _sync_commit: bool,
-    ) -> libra2_storage_interface::Result<()> {
+    ) -> creditchain_storage_interface::Result<()> {
         Ok(())
     }
 
@@ -116,7 +116,7 @@ impl DbWriter for FakeDb {
         _version: Version,
         _ledger_info_with_sigs: Option<&LedgerInfoWithSignatures>,
         _chunk: Option<ChunkToCommit>,
-    ) -> libra2_storage_interface::Result<()> {
+    ) -> creditchain_storage_interface::Result<()> {
         Ok(())
     }
 }

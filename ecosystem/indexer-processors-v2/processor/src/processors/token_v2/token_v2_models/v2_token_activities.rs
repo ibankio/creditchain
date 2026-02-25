@@ -21,7 +21,7 @@ use crate::{
 };
 use allocative_derive::Allocative;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::Event, utils::convert::standardize_address,
+   creditchain_protos::transaction::v1::Event, utils::convert::standardize_address,
 };
 use bigdecimal::{BigDecimal, One, ToPrimitive, Zero};
 use field_count::FieldCount;

@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-test-transactions"
+name = "creditchain-indexer-test-transactions"
 description = "Indexer integration testing framework."
 version = "1.0.1"
 
@@ -13,5 +13,5 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dev-dependencies]
-libra2-protos = { workspace = true }
+creditchain-protos = { workspace = true }
 serde_json = { workspace = true }

@@ -5,10 +5,10 @@ use crate::{
     connectivity_manager::{DiscoveredPeer, DiscoveredPeerSet},
     logging::NetworkSchema,
 };
-use libra2_config::network_id::NetworkContext;
-use libra2_infallible::RwLock;
-use libra2_logger::error;
-use libra2_types::PeerId;
+use creditchain_config::network_id::NetworkContext;
+use creditchain_infallible::RwLock;
+use creditchain_logger::error;
+use creditchain_types::PeerId;
 use maplit::hashset;
 use ordered_float::OrderedFloat;
 use rand_latest::prelude::*;
@@ -224,11 +224,11 @@ fn get_unselected_peer_ids(
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_config::{
+    use creditchain_config::{
         config::{PeerRole, RoleType},
         network_id::NetworkId,
     };
-    use libra2_types::account_address::AccountAddress;
+    use creditchain_types::account_address::AccountAddress;
     use rand::Rng;
     use std::collections::{BinaryHeap, HashMap};
 

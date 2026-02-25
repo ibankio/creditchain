@@ -1,8 +1,8 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_logger::info;
-use libra2_types::{
+use creditchain_logger::info;
+use creditchain_types::{
     on_chain_config::TransactionShufflerType,
     transaction::{
         signature_verified_transaction::SignatureVerifiedTransaction, SignedTransaction,

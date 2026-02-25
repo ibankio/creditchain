@@ -1,8 +1,8 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_inspection_service::utils::get_encoded_metrics;
-use libra2_metrics_core::{exponential_buckets, register_histogram_vec, HistogramVec, TextEncoder};
+use creditchain_inspection_service::utils::get_encoded_metrics;
+use creditchain_metrics_core::{exponential_buckets, register_histogram_vec, HistogramVec, TextEncoder};
 use hyper::{
     header::CONTENT_TYPE,
     service::{make_service_fn, service_fn},

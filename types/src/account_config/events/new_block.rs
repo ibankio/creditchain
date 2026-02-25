@@ -8,7 +8,7 @@ use crate::{
     event::{EventHandle, EventKey},
 };
 use anyhow::Result;
-use libra2_crypto::HashValue;
+use creditchain_crypto::HashValue;
 use move_core_types::{
     ident_str,
     identifier::IdentStr,

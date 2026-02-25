@@ -1,0 +1,36 @@
+[package]
+name = "creditchain-comparison-testing"
+version = "0.1.0"
+authors = ["CreditChain Team <research@creditchain.io>"]
+description = "A tool to perform comparison testing on the compiler"
+repository = "https://github.com/libra2org/libra2-core"
+homepage = "https://creditchain.io"
+license = "Apache-2.0"
+publish = false
+edition = "2021"
+default-run = "creditchain-comparison-testing"
+
+[dependencies]
+anyhow = { workspace = true }
+creditchain-block-executor = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-language-e2e-tests = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-transaction-simulation = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-validator-interface = { workspace = true }
+creditchain-vm = { workspace = true }
+bcs = { workspace = true }
+clap = { workspace = true }
+futures = { workspace = true }
+itertools = { workspace = true }
+legacy-move-compiler = { workspace = true }
+move-binary-format = { workspace = true }
+move-core-types = { workspace = true }
+move-model = { workspace = true }
+move-package = { workspace = true }
+rocksdb = { workspace = true }
+serde = { workspace = true }
+tempfile = { workspace = true }
+tokio = { workspace = true }
+url = { workspace = true }

@@ -1,5 +1,5 @@
 module poc::native_format_list {
-   use libra2_std::string_utils;
+   use creditchain_std::string_utils;
    use std::string::{String};
 
    public entry fun main(_owner: &signer) {

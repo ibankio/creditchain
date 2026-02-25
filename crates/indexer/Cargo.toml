@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer"
+name = "creditchain-indexer"
 description = "CreditChain Indexer"
 version = "0.0.2"
 
@@ -14,16 +14,16 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-api = { workspace = true }
-libra2-api-types = { workspace = true }
-libra2-bitvec = { workspace = true }
-libra2-config = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-mempool = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-api = { workspace = true }
+creditchain-api-types = { workspace = true }
+creditchain-bitvec = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-mempool = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
 async-trait = { workspace = true }
 bcs = { workspace = true }
 bigdecimal = { workspace = true }
@@ -46,4 +46,4 @@ sha2 = { workspace = true }
 tokio = { workspace = true }
 
 [dev-dependencies]
-libra2-api-test-context = { workspace = true }
+creditchain-api-test-context = { workspace = true }

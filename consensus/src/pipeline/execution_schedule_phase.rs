@@ -4,8 +4,8 @@
 use crate::pipeline::{
     execution_wait_phase::ExecutionWaitRequest, pipeline_phase::StatelessPipeline,
 };
-use libra2_consensus_types::pipelined_block::PipelinedBlock;
-use libra2_crypto::HashValue;
+use creditchain_consensus_types::pipelined_block::PipelinedBlock;
+use creditchain_crypto::HashValue;
 use async_trait::async_trait;
 use futures::FutureExt;
 use std::{
@@ -56,7 +56,7 @@ impl StatelessPipeline for ExecutionSchedulePhase {
             None => {
                 return ExecutionWaitRequest {
                     block_id: HashValue::zero(),
-                    fut: Box::pin(async { Err(libra2_executor_types::ExecutorError::EmptyBlocks) }),
+                    fut: Box::pin(async { Err(creditchain_executor_types::ExecutorError::EmptyBlocks) }),
                 }
             },
         };

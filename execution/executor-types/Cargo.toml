@@ -1,5 +1,5 @@
 [package]
-name = "libra2-executor-types"
+name = "creditchain-executor-types"
 description = "CreditChain executor interface types"
 version = "0.1.1"
 
@@ -14,14 +14,14 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-drop-helper = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-scratchpad = { workspace = true }
-libra2-secure-net = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-drop-helper = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-scratchpad = { workspace = true }
+creditchain-secure-net = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
 bcs = { workspace = true }
 criterion = { workspace = true }
 derive_more = { workspace = true }
@@ -33,11 +33,11 @@ serde = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 
 [features]
 default = []
-fuzzing = ["libra2-crypto/fuzzing", "libra2-types/fuzzing"]
+fuzzing = ["creditchain-crypto/fuzzing", "creditchain-types/fuzzing"]
 bench = []
 
 [[bench]]

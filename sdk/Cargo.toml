@@ -1,6 +1,6 @@
 [package]
-name = "libra2-sdk"
-description = "The Official Libra2 SDK"
+name = "creditchain-sdk"
+description = "The Official CreditChain SDK"
 version = "0.0.4"
 
 # Workspace inherited keys
@@ -14,12 +14,12 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-cached-packages = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-ledger = { workspace = true }
-libra2-rest-client = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-cached-packages = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-ledger = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-types = { workspace = true }
 base64 = { workspace = true }
 bcs = { workspace = true }
 ed25519-dalek-bip32 = { workspace = true }

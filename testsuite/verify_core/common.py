@@ -45,8 +45,8 @@ def warm_cache_and_get_latest_backup_version(
     """query latest version in backup, at the same time, pre-heat metadata cache"""
     db_backup_result = subprocess.Popen(
         [
-            "target/release/libra2-debugger",
-            "libra2-db",
+            "target/release/creditchain-debugger",
+            "creditchain-db",
             "backup",
             "query",
             "backup-storage-state",

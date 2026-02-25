@@ -10,12 +10,12 @@ use crate::processors::{
     },
     objects::v2_object_utils::{ObjectCore, Untransferable},
     token_v2::token_v2_models::v2_token_utils::{
-        Libra2Collection, Collection, ConcurrentSupply, FixedSupply, PropertyMapModel,
+        CreditChainCollection, Collection, ConcurrentSupply, FixedSupply, PropertyMapModel,
         TokenIdentifiers, TokenV2, UnlimitedSupply,
     },
 };
 use anyhow::Result;
-use libra2_indexer_processor_sdk::libra2_protos::transaction::v1::WriteResource;
+use libra2_indexer_processor_sdk::creditchain_protos::transaction::v1::WriteResource;
 use const_format::formatcp;
 
 pub const COIN_ADDR: &str = "0x0000000000000000000000000000000000000000000000000000000000000001";
@@ -37,7 +37,7 @@ pub const TYPE_COLLECTION: &str = formatcp!("{TOKEN_V2_ADDR}::collection::Collec
 pub const TYPE_CONCURRENT_SUPPLY: &str = formatcp!("{TOKEN_V2_ADDR}::collection::ConcurrentSupply");
 pub const TYPE_FIXED_SUPPLY: &str = formatcp!("{TOKEN_V2_ADDR}::collection::FixedSupply");
 pub const TYPE_UNLIMITED_SUPPLY: &str = formatcp!("{TOKEN_V2_ADDR}::collection::UnlimitedSupply");
-pub const TYPE_LIBRA2_COLLECTION: &str = formatcp!("{TOKEN_V2_ADDR}::libra2_token::Libra2Collection");
+pub const TYPE_CREDITCHAIN_COLLECTION: &str = formatcp!("{TOKEN_V2_ADDR}::creditchain_token::CreditChainCollection");
 pub const TYPE_TOKEN_V2: &str = formatcp!("{TOKEN_V2_ADDR}::token::Token");
 pub const TYPE_TOKEN_IDENTIFIERS: &str = formatcp!("{TOKEN_V2_ADDR}::token::TokenIdentifiers");
 pub const TYPE_PROPERTY_MAP: &str = formatcp!("{TOKEN_V2_ADDR}::property_map::PropertyMap");
@@ -122,7 +122,7 @@ impl V2FungibleAssetResource {
 }
 
 pub enum V2TokenResource {
-    Libra2Collection(Libra2Collection),
+    CreditChainCollection(CreditChainCollection),
     Collection(Collection),
     ConcurrentSupply(ConcurrentSupply),
     FixedSupply(FixedSupply),
@@ -135,9 +135,9 @@ pub enum V2TokenResource {
     Account(Account),
 }
 
-impl Resource for Libra2Collection {
+impl Resource for CreditChainCollection {
     fn type_str() -> &'static str {
-        TYPE_LIBRA2_COLLECTION
+        TYPE_CREDITCHAIN_COLLECTION
     }
 }
 
@@ -206,7 +206,7 @@ impl V2TokenResource {
         let type_str = MoveResource::get_outer_type_from_write_resource(write_resource);
         Ok(Some(match type_str.as_str() {
             TYPE_ACCOUNT => Self::Account(write_resource.try_into()?),
-            TYPE_LIBRA2_COLLECTION => Self::Libra2Collection(write_resource.try_into()?),
+            TYPE_CREDITCHAIN_COLLECTION => Self::CreditChainCollection(write_resource.try_into()?),
             TYPE_COLLECTION => Self::Collection(write_resource.try_into()?),
             TYPE_CONCURRENT_SUPPLY => Self::ConcurrentSupply(write_resource.try_into()?),
             TYPE_FIXED_SUPPLY => Self::FixedSupply(write_resource.try_into()?),

@@ -1,5 +1,5 @@
 [package]
-name = "libra2-keyless-pepper-common"
+name = "creditchain-keyless-pepper-common"
 description = "CreditChain Keyless pepper library"
 version = "0.1.1"
 
@@ -14,10 +14,10 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-crypto-derive = { workspace = true }
-libra2-dkg = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-crypto-derive = { workspace = true }
+creditchain-dkg = { workspace = true }
+creditchain-types = { workspace = true }
 ark-bls12-381 = { workspace = true }
 ark-ec = { workspace = true }
 ark-ff = { workspace = true }

@@ -25,13 +25,13 @@ use crate::{
     },
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_db::backup::restore_handler::RestoreHandler;
-use libra2_executor::chunk_executor::ChunkExecutor;
-use libra2_executor_types::{ChunkExecutorTrait, TransactionReplayer, VerifyExecutionMode};
-use libra2_logger::prelude::*;
-use libra2_metrics_core::TimerHelper;
-use libra2_storage_interface::DbReaderWriter;
-use libra2_types::{
+use creditchain_db::backup::restore_handler::RestoreHandler;
+use creditchain_executor::chunk_executor::ChunkExecutor;
+use creditchain_executor_types::{ChunkExecutorTrait, TransactionReplayer, VerifyExecutionMode};
+use creditchain_logger::prelude::*;
+use creditchain_metrics_core::TimerHelper;
+use creditchain_storage_interface::DbReaderWriter;
+use creditchain_types::{
     contract_event::ContractEvent,
     ledger_info::LedgerInfoWithSignatures,
     proof::{TransactionAccumulatorRangeProof, TransactionInfoListWithProof},
@@ -41,7 +41,7 @@ use libra2_types::{
     },
     write_set::WriteSet,
 };
-use libra2_vm::{libra2_vm::Libra2VMBlockExecutor, Libra2VM};
+use creditchain_vm::{creditchain_vm::CreditChainVMBlockExecutor, CreditChainVM};
 use clap::Parser;
 use futures::{
     future,
@@ -316,7 +316,7 @@ impl TransactionRestoreBatchController {
                 self.output_transaction_analysis.is_none(),
                 "Bug: requested to output transaction output sizing info in restore mode.",
             );
-            Libra2VM::set_concurrency_level_once(self.global_opt.replay_concurrency_level);
+            CreditChainVM::set_concurrency_level_once(self.global_opt.replay_concurrency_level);
 
             let kv_only = self.replay_from_version.is_some_and(|(_, k)| k);
             let txns_to_execute_stream = self
@@ -658,8 +658,8 @@ impl TransactionRestoreBatchController {
         let (first_version, _) = self.replay_from_version.unwrap();
         restore_handler.reset_state_store();
         let replay_start = Instant::now();
-        let db = DbReaderWriter::from_arc(Arc::clone(&restore_handler.libra2db));
-        let chunk_replayer = Arc::new(ChunkExecutor::<Libra2VMBlockExecutor>::new(db));
+        let db = DbReaderWriter::from_arc(Arc::clone(&restore_handler.creditchaindb));
+        let chunk_replayer = Arc::new(ChunkExecutor::<CreditChainVMBlockExecutor>::new(db));
         let ledger_update_stream = txns_to_execute_stream
             .try_chunks(BATCH_SIZE)
             .err_into::<anyhow::Error>()

@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{CryptoKVStorage, Error, GetResponse, KVStorage};
-use libra2_time_service::{TimeService, TimeServiceTrait};
+use creditchain_time_service::{TimeService, TimeServiceTrait};
 use serde::{de::DeserializeOwned, Serialize};
 use std::collections::HashMap;
 

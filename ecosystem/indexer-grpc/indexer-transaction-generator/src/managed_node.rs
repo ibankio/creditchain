@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Context;
-use libra2::node::local_testnet::{
+use creditchain::node::local_testnet::{
     faucet::FaucetManager,
     get_derived_test_dir,
     health_checker::HealthChecker,
     node::{build_node_config, NodeManager},
     traits::ServiceManager,
 };
-use libra2_config::config::DEFAULT_GRPC_STREAM_PORT;
-use libra2_faucet_core::server::{FunderKeyEnum, RunConfig};
+use creditchain_config::config::DEFAULT_GRPC_STREAM_PORT;
+use creditchain_faucet_core::server::{FunderKeyEnum, RunConfig};
 use rand::{rngs::StdRng, SeedableRng};
 use std::{collections::HashSet, net::Ipv4Addr, path::PathBuf};
 use tokio::{

@@ -17,10 +17,10 @@ use crate::{
     utils::{unix_timestamp_sec, GlobalRestoreOptions, RestoreRunMode, TrustedWaypointOpt},
 };
 use anyhow::Result;
-use libra2_db::state_restore::StateSnapshotRestoreMode;
-use libra2_executor_types::VerifyExecutionMode;
-use libra2_logger::prelude::*;
-use libra2_types::transaction::Version;
+use creditchain_db::state_restore::StateSnapshotRestoreMode;
+use creditchain_executor_types::VerifyExecutionMode;
+use creditchain_logger::prelude::*;
+use creditchain_types::transaction::Version;
 use std::{path::PathBuf, sync::Arc};
 
 pub struct VerifyCoordinator {

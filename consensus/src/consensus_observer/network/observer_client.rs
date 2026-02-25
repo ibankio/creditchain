@@ -12,10 +12,10 @@ use crate::consensus_observer::{
         ConsensusObserverResponse,
     },
 };
-use libra2_config::network_id::PeerNetworkId;
-use libra2_logger::{debug, warn};
-use libra2_network::application::{interface::NetworkClientInterface, storage::PeersAndMetadata};
-use libra2_time_service::{TimeService, TimeServiceTrait};
+use creditchain_config::network_id::PeerNetworkId;
+use creditchain_logger::{debug, warn};
+use creditchain_network::application::{interface::NetworkClientInterface, storage::PeersAndMetadata};
+use creditchain_time_service::{TimeService, TimeServiceTrait};
 use bytes::Bytes;
 use rand::Rng;
 use std::{sync::Arc, time::Duration};

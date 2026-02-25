@@ -13,7 +13,7 @@ use crate::{
     transaction::Version,
 };
 use anyhow::{bail, Error, Result};
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 use move_core_types::{
     ident_str,
     language_storage::{StructTag, TypeTag, CORE_CODE_ADDRESS},

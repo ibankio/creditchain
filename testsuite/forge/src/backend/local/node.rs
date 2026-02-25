@@ -4,20 +4,20 @@
 
 use crate::{FullNode, HealthCheckError, LocalVersion, Node, NodeExt, Validator, Version};
 use anyhow::{anyhow, ensure, Context, Result};
-use libra2_config::{
+use creditchain_config::{
     config::{NodeConfig, SECURE_STORAGE_FILENAME},
     keys::ConfigKey,
 };
-use libra2_db::{
+use creditchain_db::{
     common::{LEDGER_DB_NAME, STATE_MERKLE_DB_NAME},
     fast_sync_storage_wrapper::SECONDARY_DB_DIR,
 };
-use libra2_logger::{debug, info};
-use libra2_sdk::{
+use creditchain_logger::{debug, info};
+use creditchain_sdk::{
     crypto::ed25519::Ed25519PrivateKey,
     types::{account_address::AccountAddress, PeerId},
 };
-use libra2_state_sync_driver::metadata_storage::STATE_SYNC_DB_NAME;
+use creditchain_state_sync_driver::metadata_storage::STATE_SYNC_DB_NAME;
 use std::{
     env,
     fs::{self, OpenOptions},

@@ -25,7 +25,7 @@ spec:
           app.kubernetes.io/name: haproxy
           app.kubernetes.io/instance: haproxy-{{$i}}
     ports:
-      # Libra2Net from HAproxy
+      # CreditChainNet from HAproxy
     - protocol: TCP
       port: 6180
     - protocol: TCP
@@ -58,7 +58,7 @@ spec:
     - protocol: TCP
       port: 6180
 
-  # Libra2Net from local full nodes
+  # CreditChainNet from local full nodes
   - from:
     - podSelector:
         matchLabels:
@@ -69,7 +69,7 @@ spec:
     - protocol: TCP
       port: 6181
   egress:
-  # Libra2Net to other validators
+  # CreditChainNet to other validators
   - ports:
     - protocol: TCP
       port: 6180

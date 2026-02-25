@@ -10,7 +10,7 @@ use crate::{
     schema::{current_token_datas, token_datas},
     util::standardize_address,
 };
-use libra2_api_types::WriteTableItem as APIWriteTableItem;
+use creditchain_api_types::WriteTableItem as APIWriteTableItem;
 use bigdecimal::BigDecimal;
 use field_count::FieldCount;
 use serde::{Deserialize, Serialize};
@@ -157,7 +157,7 @@ impl TokenData {
                     },
                 )));
             } else {
-                libra2_logger::warn!(
+                creditchain_logger::warn!(
                     transaction_version = txn_version,
                     key_type = table_item_data.key_type,
                     key = table_item_data.key,

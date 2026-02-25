@@ -1,5 +1,5 @@
 [package]
-name = "libra2-schemadb"
+name = "creditchain-schemadb"
 description = "CreditChain schemadb"
 version = "0.1.1"
 
@@ -14,10 +14,10 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-drop-helper = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-storage-interface = { workspace = true }
+creditchain-drop-helper = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-storage-interface = { workspace = true }
 dunce = { workspace = true }
 once_cell = { workspace = true }
 proptest = { workspace = true, optional = true }
@@ -25,7 +25,7 @@ rand = { workspace = true }
 rocksdb = { workspace = true }
 
 [dev-dependencies]
-libra2-temppath = { workspace = true }
+creditchain-temppath = { workspace = true }
 byteorder = { workspace = true }
 proptest = { workspace = true }
 

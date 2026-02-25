@@ -19,12 +19,12 @@ use crate::{
     },
     tests::{utils, utils::create_ledger_info},
 };
-use libra2_config::config::DataStreamingServiceConfig;
-use libra2_crypto::HashValue;
-use libra2_data_client::{global_summary::GlobalDataSummary, interface::ResponsePayload};
-use libra2_id_generator::U64IdGenerator;
-use libra2_storage_service_types::responses::CompleteDataRange;
-use libra2_types::{
+use creditchain_config::config::DataStreamingServiceConfig;
+use creditchain_crypto::HashValue;
+use creditchain_data_client::{global_summary::GlobalDataSummary, interface::ResponsePayload};
+use creditchain_id_generator::U64IdGenerator;
+use creditchain_storage_service_types::responses::CompleteDataRange;
+use creditchain_types::{
     proof::{SparseMerkleRangeProof, TransactionInfoListWithProof},
     state_store::{
         state_key::StateKey,

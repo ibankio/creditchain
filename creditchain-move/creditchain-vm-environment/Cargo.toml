@@ -1,0 +1,35 @@
+[package]
+name = "creditchain-vm-environment"
+description = "CreditChain VM environment"
+version = "0.0.2"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+creditchain-framework = { workspace = true }
+creditchain-gas-algebra = { workspace = true }
+creditchain-gas-schedule = { workspace = true }
+creditchain-move-stdlib = { workspace = true }
+creditchain-native-interface = { workspace = true }
+creditchain-table-natives = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm-types = { workspace = true }
+bcs = { workspace = true }
+move-binary-format = { workspace = true }
+move-bytecode-verifier = { workspace = true }
+move-core-types = { workspace = true }
+move-vm-runtime = { workspace = true }
+move-vm-types = { workspace = true }
+once_cell = { workspace = true }
+sha3 = { workspace = true }
+
+[dev-dependencies]
+creditchain-types = { workspace = true, features = ["testing", "fuzzing"] }
+serde = { workspace = true }

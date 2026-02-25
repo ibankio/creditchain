@@ -12,7 +12,7 @@ use crate::{
     nibble::{Nibble, ROOT_NIBBLE_HEIGHT},
     state_store::state_key::StateKey,
 };
-use libra2_crypto::hash::CryptoHash;
+use creditchain_crypto::hash::CryptoHash;
 #[cfg(any(test, feature = "fuzzing"))]
 use proptest::{collection::vec, prelude::*};
 use serde::{Deserialize, Serialize};

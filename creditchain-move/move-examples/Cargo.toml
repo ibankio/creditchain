@@ -1,0 +1,30 @@
+[package]
+name = "creditchain-move-examples"
+description = "Move examples"
+version = "0.1.0"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+creditchain-framework = { workspace = true }
+creditchain-gas-schedule = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm ={ workspace = true, features = ["testing"] }
+clap = { workspace = true }
+move-cli = { workspace = true }
+move-model = { workspace = true }
+move-package = { workspace = true }
+move-prover = { workspace = true }
+move-unit-test = { workspace = true }
+move-vm-runtime = { workspace = true }
+
+[dev-dependencies]
+creditchain-framework = { workspace = true, features = ["testing"] }
+tempfile = { workspace = true }

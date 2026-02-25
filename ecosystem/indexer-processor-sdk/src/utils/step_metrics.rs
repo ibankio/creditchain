@@ -10,7 +10,7 @@ use prometheus_client::{
 };
 use std::sync::atomic::AtomicU64;
 
-pub const METRICS_PREFIX: &str = "libra2_procsdk_step_";
+pub const METRICS_PREFIX: &str = "creditchain_procsdk_step_";
 
 pub fn init_step_metrics_registry(registry: &mut Registry) {
     // AsyncStep metrics

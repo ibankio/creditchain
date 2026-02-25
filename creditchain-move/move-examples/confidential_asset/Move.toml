@@ -1,0 +1,10 @@
+[package]
+name = "ConfidentialAssetExample"
+version = "1.0.0"
+
+[dependencies]
+CreditChainFramework = { local = "../../framework/creditchain-framework" }
+CreditChainExperimental = { local = "../../framework/creditchain-experimental" }
+
+[addresses]
+confidential_asset_example = "_"

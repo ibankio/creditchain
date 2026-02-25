@@ -1,6 +1,6 @@
 module poc::zero_internal {
-    use libra2_std::crypto_algebra::{Self, Element};
-    use libra2_std::bls12381_algebra::{Fr};
+    use creditchain_std::crypto_algebra::{Self, Element};
+    use creditchain_std::bls12381_algebra::{Fr};
 
     public entry fun main(_owner: &signer) {
         let _fr_zero: Element<Fr> = crypto_algebra::zero<Fr>();

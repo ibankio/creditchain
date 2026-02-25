@@ -4,8 +4,8 @@
 module 0xABCD::smart_table_picture {
     use std::signer;
     use std::vector;
-    use libra2_std::object;
-    use libra2_std::smart_table::{Self, SmartTable};
+    use creditchain_std::object;
+    use creditchain_std::smart_table::{Self, SmartTable};
 
     /// The caller tried to mutate an item outside the bounds of the vector.
     const E_INDEX_OUT_OF_BOUNDS: u64 = 1;
@@ -14,7 +14,7 @@ module 0xABCD::smart_table_picture {
         all: vector<address>,
     }
 
-    #[resource_group_member(group = libra2_framework::object::ObjectGroup)]
+    #[resource_group_member(group = creditchain_framework::object::ObjectGroup)]
     struct Palette has key {
         pixels: SmartTable<u32, u8>,
     }

@@ -1,0 +1,50 @@
+[package]
+name = "creditchain-telemetry"
+description = "CreditChain utilities to collect observability data from a node and send it to a remote destination"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+anyhow = { workspace = true }
+creditchain-api = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-consensus = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-mempool = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-node-resource-metrics = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-state-sync-driver = { workspace = true }
+creditchain-telemetry-service = { workspace = true }
+creditchain-types = { workspace = true }
+flate2 = { workspace = true }
+futures = { workspace = true }
+once_cell = { workspace = true }
+prometheus = { workspace = true }
+rand = { workspace = true }
+rand_core = { workspace = true }
+reqwest = { workspace = true }
+reqwest-middleware = { workspace = true }
+reqwest-retry = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sysinfo = { workspace = true }
+tokio = { workspace = true }
+tokio-stream = { workspace = true }
+url = { workspace = true }
+uuid = { workspace = true }
+
+[dev-dependencies]
+httpmock = { workspace = true }

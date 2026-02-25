@@ -5,9 +5,9 @@ use crate::{
     randomness::{decrypt_key_map, num_validators, verify_dkg_transcript, wait_for_dkg_finish},
     smoke_test_environment::SwarmBuilder,
 };
-use libra2::test::CliTestFramework;
-use libra2_forge::{Node, Swarm};
-use libra2_types::on_chain_config::OnChainRandomnessConfig;
+use creditchain::test::CliTestFramework;
+use creditchain_forge::{Node, Swarm};
+use creditchain_types::on_chain_config::OnChainRandomnessConfig;
 use std::sync::Arc;
 
 #[tokio::test]
@@ -34,7 +34,7 @@ async fn dkg_with_validator_join_leave() {
 
     println!("Wait for a moment when DKG is not running.");
     let client_endpoint = swarm.validators().nth(1).unwrap().rest_api_endpoint();
-    let client = libra2_rest_client::Client::new(client_endpoint.clone());
+    let client = creditchain_rest_client::Client::new(client_endpoint.clone());
     let dkg_session_1 = wait_for_dkg_finish(&client, None, time_limit_secs).await;
     println!(
         "Current epoch is {}. Number of validators: {}.",
@@ -72,7 +72,7 @@ async fn dkg_with_validator_join_leave() {
     };
 
     println!("Give the victim some money so it can first send transactions.");
-    let mut public_info = swarm.chain_info().into_libra2_public_info();
+    let mut public_info = swarm.chain_info().into_creditchain_public_info();
     public_info
         .mint(victim_validator_addr, 100000000000000)
         .await

@@ -12,8 +12,8 @@ use crate::{
     keys::ConfigKey,
 };
 use anyhow::bail;
-use libra2_crypto::{bls12381, Uniform};
-use libra2_types::{chain_id::ChainId, network_address::NetworkAddress, waypoint::Waypoint, PeerId};
+use creditchain_crypto::{bls12381, Uniform};
+use creditchain_types::{chain_id::ChainId, network_address::NetworkAddress, waypoint::Waypoint, PeerId};
 use rand::rngs::StdRng;
 use serde::{Deserialize, Serialize};
 use std::{

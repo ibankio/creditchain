@@ -1,6 +1,6 @@
 apiVersion: v2
 name: chaos
-description: Chaos Mesh for Libra2
+description: Chaos Mesh for CreditChain
 version: 2.5.2+aptos0
 
 dependencies:

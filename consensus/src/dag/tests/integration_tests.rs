@@ -11,11 +11,11 @@ use crate::{
     pipeline::{buffer_manager::OrderedBlocks, execution_client::DummyExecutionClient},
     test_utils::{consensus_runtime, MockPayloadManager, MockStorage},
 };
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::network_id::{NetworkId, PeerNetworkId};
-use libra2_consensus_types::common::Author;
-use libra2_logger::debug;
-use libra2_network::{
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::network_id::{NetworkId, PeerNetworkId};
+use creditchain_consensus_types::common::Author;
+use creditchain_logger::debug;
+use creditchain_network::{
     application::interface::NetworkClient,
     peer_manager::{ConnectionRequestSender, PeerManagerRequestSender},
     protocols::{
@@ -25,8 +25,8 @@ use libra2_network::{
     transport::ConnectionMetadata,
     ProtocolId,
 };
-use libra2_time_service::TimeService;
-use libra2_types::{
+use creditchain_time_service::TimeService;
+use creditchain_types::{
     epoch_state::EpochState,
     ledger_info::generate_ledger_info_with_sig,
     validator_signer::ValidatorSigner,
@@ -45,9 +45,9 @@ use tokio::task::JoinHandle;
 struct DagBootstrapUnit {
     nh_task_handle: JoinHandle<SyncOutcome>,
     df_task_handle: JoinHandle<()>,
-    dag_rpc_tx: libra2_channel::Sender<Author, IncomingDAGRequest>,
+    dag_rpc_tx: creditchain_channel::Sender<Author, IncomingDAGRequest>,
     network_events: Box<
-        Select<NetworkEvents<ConsensusMsg>, libra2_channels::UnboundedReceiver<Event<ConsensusMsg>>>,
+        Select<NetworkEvents<ConsensusMsg>, creditchain_channels::UnboundedReceiver<Event<ConsensusMsg>>>,
     >,
 }
 
@@ -62,7 +62,7 @@ impl DagBootstrapUnit {
         network_events: Box<
             Select<
                 NetworkEvents<ConsensusMsg>,
-                libra2_channels::UnboundedReceiver<Event<ConsensusMsg>>,
+                creditchain_channels::UnboundedReceiver<Event<ConsensusMsg>>,
             >,
         >,
         all_signers: Vec<ValidatorSigner>,
@@ -137,13 +137,13 @@ fn create_network(
 ) -> (
     NetworkSender,
     Box<
-        Select<NetworkEvents<ConsensusMsg>, libra2_channels::UnboundedReceiver<Event<ConsensusMsg>>>,
+        Select<NetworkEvents<ConsensusMsg>, creditchain_channels::UnboundedReceiver<Event<ConsensusMsg>>>,
     >,
 ) {
-    let (network_reqs_tx, network_reqs_rx) = libra2_channel::new(QueueStyle::FIFO, 8, None);
-    let (connection_reqs_tx, _) = libra2_channel::new(QueueStyle::FIFO, 8, None);
-    let (consensus_tx, consensus_rx) = libra2_channel::new(QueueStyle::FIFO, 8, None);
-    let (_conn_mgr_reqs_tx, conn_mgr_reqs_rx) = libra2_channels::new_test(8);
+    let (network_reqs_tx, network_reqs_rx) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
+    let (connection_reqs_tx, _) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
+    let (consensus_tx, consensus_rx) = creditchain_channel::new(QueueStyle::FIFO, 8, None);
+    let (_conn_mgr_reqs_tx, conn_mgr_reqs_rx) = creditchain_channels::new_test(8);
     let network_sender = network::NetworkSender::new(
         PeerManagerRequestSender::new(network_reqs_tx),
         ConnectionRequestSender::new(connection_reqs_tx),
@@ -157,7 +157,7 @@ fn create_network(
     let consensus_network_client = ConsensusNetworkClient::new(network_client);
     let network_events = NetworkEvents::new(consensus_rx, None, true);
 
-    let (self_sender, self_receiver) = libra2_channels::new_unbounded_test();
+    let (self_sender, self_receiver) = creditchain_channels::new_unbounded_test();
     let network = NetworkSender::new(author, consensus_network_client, self_sender, validators);
 
     let twin_id = TwinId { id, author };
@@ -202,7 +202,7 @@ fn bootstrap_nodes(
                 signer.clone(),
                 storage,
                 network,
-                libra2_time_service::TimeService::real(),
+                creditchain_time_service::TimeService::real(),
                 network_events,
                 signers.clone(),
             )

@@ -3,8 +3,8 @@
 use crate::{
     publishing::publish_util::PackageHandler, TransactionGenerator, TransactionGeneratorCreator,
 };
-use libra2_infallible::RwLock;
-use libra2_sdk::{
+use creditchain_infallible::RwLock;
+use creditchain_sdk::{
     transaction_builder::TransactionFactory,
     types::{transaction::SignedTransaction, LocalAccount},
 };

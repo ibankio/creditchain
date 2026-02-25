@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::Error;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_logger::Schema;
-use libra2_types::waypoint::Waypoint;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_logger::Schema;
+use creditchain_types::waypoint::Waypoint;
 use serde::Serialize;
 
 #[derive(Schema)]

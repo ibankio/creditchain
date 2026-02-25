@@ -14,7 +14,7 @@ use crate::{
     waypoint::Waypoint,
 };
 use anyhow::{bail, ensure, format_err, Result};
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 #[cfg(any(test, feature = "fuzzing"))]
 use proptest_derive::Arbitrary;
 use serde::{Deserialize, Serialize};

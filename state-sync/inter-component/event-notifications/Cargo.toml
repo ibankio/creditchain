@@ -1,5 +1,5 @@
 [package]
-name = "libra2-event-notifications"
+name = "creditchain-event-notifications"
 description = "The notification service offered by state sync for on-chain events"
 version = "0.1.1"
 
@@ -14,22 +14,22 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-channels = { workspace = true }
-libra2-id-generator = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-channels = { workspace = true }
+creditchain-id-generator = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-types = { workspace = true }
 futures = { workspace = true }
 serde = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-crypto = { workspace = true }
-libra2-db = { workspace = true }
-libra2-executor-test-helpers = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-vm = { workspace = true }
-libra2-vm-genesis = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-executor-test-helpers = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-vm = { workspace = true }
+creditchain-vm-genesis = { workspace = true }
 bcs = { workspace = true }
 claims = { workspace = true }
 move-binary-format = { workspace = true }

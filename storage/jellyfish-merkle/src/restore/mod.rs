@@ -12,13 +12,13 @@ use crate::{
     },
     NibbleExt, TreeReader, TreeWriter, ROOT_NIBBLE_HEIGHT,
 };
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{CryptoHash, SPARSE_MERKLE_PLACEHOLDER_HASH},
     HashValue,
 };
-use libra2_logger::info;
-use libra2_storage_interface::{db_ensure as ensure, Libra2DbError, Result};
-use libra2_types::{
+use creditchain_logger::info;
+use creditchain_storage_interface::{db_ensure as ensure, CreditChainDbError, Result};
+use creditchain_types::{
     nibble::{
         nibble_path::{NibbleIterator, NibblePath},
         ExpectNibble, Nibble,

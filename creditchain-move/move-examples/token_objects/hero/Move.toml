@@ -1,0 +1,10 @@
+[package]
+name = "Hero"
+version = "0.0.0"
+
+[addresses]
+hero = "_"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }
+CreditChainTokenObjects = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-token-objects", rev = "mainnet" }

@@ -4,9 +4,9 @@ Utility function that lets you create a Postgres processor. It works by running 
 
 ## How to use
 1. Install Postgres and Diesel CLI
-2. Add the `libra2-indexer-processor-sdk` crate with the `postgres_full` feature in the `[dependencies]` section of your `Config.toml`:
+2. Add the `creditchain-indexer-processor-sdk` crate with the `postgres_full` feature in the `[dependencies]` section of your `Config.toml`:
 ```
-libra2-indexer-processor-sdk = { git = "https://github.com/ibankio/creditchain.git", rev = "{COMMIT_HASH}", features = ["postgres_full"] }
+creditchain-indexer-processor-sdk = { git = "https://github.com/ibankio/creditchain.git", rev = "{COMMIT_HASH}", features = ["postgres_full"] }
 ```
 3. Setup Diesel and define your DB migrations. 
 4. In `main.rs`, call the `process` function with your indexing logic. You'll need to implement this part:

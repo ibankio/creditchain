@@ -12,18 +12,18 @@ use crate::{
     },
     storage_synchronizer::StorageSynchronizer,
 };
-use libra2_config::config::NodeConfig;
-use libra2_consensus_notifications::ConsensusNotificationListener;
-use libra2_data_client::client::Libra2DataClient;
-use libra2_data_streaming_service::streaming_client::StreamingServiceClient;
-use libra2_event_notifications::{EventNotificationSender, EventSubscriptionService};
-use libra2_executor_types::ChunkExecutorTrait;
-use libra2_infallible::Mutex;
-use libra2_mempool_notifications::MempoolNotificationSender;
-use libra2_storage_interface::DbReaderWriter;
-use libra2_storage_service_notifications::StorageServiceNotificationSender;
-use libra2_time_service::TimeService;
-use libra2_types::waypoint::Waypoint;
+use creditchain_config::config::NodeConfig;
+use creditchain_consensus_notifications::ConsensusNotificationListener;
+use creditchain_data_client::client::CreditChainDataClient;
+use creditchain_data_streaming_service::streaming_client::StreamingServiceClient;
+use creditchain_event_notifications::{EventNotificationSender, EventSubscriptionService};
+use creditchain_executor_types::ChunkExecutorTrait;
+use creditchain_infallible::Mutex;
+use creditchain_mempool_notifications::MempoolNotificationSender;
+use creditchain_storage_interface::DbReaderWriter;
+use creditchain_storage_service_notifications::StorageServiceNotificationSender;
+use creditchain_time_service::TimeService;
+use creditchain_types::waypoint::Waypoint;
 use futures::{
     channel::{mpsc, mpsc::UnboundedSender},
     executor::block_on,
@@ -55,7 +55,7 @@ impl DriverFactory {
         metadata_storage: MetadataStorage,
         consensus_listener: ConsensusNotificationListener,
         event_subscription_service: EventSubscriptionService,
-        libra2_data_client: Libra2DataClient,
+        creditchain_data_client: CreditChainDataClient,
         streaming_service_client: StreamingServiceClient,
         time_service: TimeService,
     ) -> Self {
@@ -70,7 +70,7 @@ impl DriverFactory {
             metadata_storage,
             consensus_listener,
             event_subscription_service,
-            libra2_data_client,
+            creditchain_data_client,
             streaming_service_client,
             time_service,
         );
@@ -96,7 +96,7 @@ impl DriverFactory {
         metadata_storage: MetadataStorage,
         consensus_listener: ConsensusNotificationListener,
         mut event_subscription_service: EventSubscriptionService,
-        libra2_data_client: Libra2DataClient,
+        creditchain_data_client: CreditChainDataClient,
         streaming_service_client: StreamingServiceClient,
         time_service: TimeService,
     ) -> (Self, UnboundedSender<CommitNotification>) {
@@ -135,7 +135,7 @@ impl DriverFactory {
 
         // Create a new runtime (if required)
         let driver_runtime = if create_runtime {
-            let runtime = libra2_runtimes::spawn_named_runtime("sync-driver".into(), None);
+            let runtime = creditchain_runtimes::spawn_named_runtime("sync-driver".into(), None);
             Some(runtime)
         } else {
             None
@@ -176,7 +176,7 @@ impl DriverFactory {
             metadata_storage,
             storage_service_notification_handler,
             storage_synchronizer,
-            libra2_data_client,
+            creditchain_data_client,
             streaming_service_client,
             storage.reader,
             time_service,
@@ -208,7 +208,7 @@ impl DriverFactory {
 /// Note: it's useful to maintain separate runtimes because the logger
 /// can prepend all logs with the runtime thread name.
 pub struct StateSyncRuntimes {
-    _libra2_data_client: Runtime,
+    _creditchain_data_client: Runtime,
     state_sync: DriverFactory,
     _storage_service: Runtime,
     _streaming_service: Runtime,
@@ -216,13 +216,13 @@ pub struct StateSyncRuntimes {
 
 impl StateSyncRuntimes {
     pub fn new(
-        libra2_data_client: Runtime,
+        creditchain_data_client: Runtime,
         state_sync: DriverFactory,
         storage_service: Runtime,
         streaming_service: Runtime,
     ) -> Self {
         Self {
-            _libra2_data_client: libra2_data_client,
+            _creditchain_data_client: creditchain_data_client,
             state_sync,
             _storage_service: storage_service,
             _streaming_service: streaming_service,

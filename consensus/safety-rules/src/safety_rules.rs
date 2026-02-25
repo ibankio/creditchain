@@ -10,7 +10,7 @@ use crate::{
     persistent_safety_storage::PersistentSafetyStorage,
     t_safety_rules::TSafetyRules,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block_data::BlockData,
     common::{Author, Round},
     order_vote::OrderVote,
@@ -22,9 +22,9 @@ use libra2_consensus_types::{
     vote_data::VoteData,
     vote_proposal::VoteProposal,
 };
-use libra2_crypto::{bls12381, hash::CryptoHash};
-use libra2_logger::prelude::*;
-use libra2_types::{
+use creditchain_crypto::{bls12381, hash::CryptoHash};
+use creditchain_logger::prelude::*;
+use creditchain_types::{
     epoch_change::EpochChangeProof,
     epoch_state::EpochState,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},

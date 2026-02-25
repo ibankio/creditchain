@@ -5,10 +5,10 @@
 base:
   role: "full_node"
   waypoint:
-    from_file: /opt/libra2/genesis/waypoint.txt
+    from_file: /opt/creditchain/genesis/waypoint.txt
 
 execution:
-  genesis_file_location: /opt/libra2/genesis/genesis.blob
+  genesis_file_location: /opt/creditchain/genesis/genesis.blob
 
 storage:
   rocksdb_configs:
@@ -22,7 +22,7 @@ full_node_networks:
   listen_address: "/ip4/0.0.0.0/tcp/6182"
   identity:
     type: "from_file"
-    path: "/opt/libra2/genesis/validator-full-node-identity.yaml"
+    path: "/opt/creditchain/genesis/validator-full-node-identity.yaml"
   enable_proxy_protocol: {{ $.Values.haproxy.config.send_proxy_protocol }}
   # Assume public network config always exists as the first list item in helm values
   {{ with index $.Values.fullnode.config.full_node_networks 0 }}

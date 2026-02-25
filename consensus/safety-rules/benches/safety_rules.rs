@@ -4,10 +4,10 @@
 
 #![allow(clippy::unwrap_used)]
 
-use libra2_consensus_types::block::block_test_utils;
-use libra2_safety_rules::{test_utils, PersistentSafetyStorage, SafetyRulesManager, TSafetyRules};
-use libra2_secure_storage::{InMemoryStorage, KVStorage, OnDiskStorage, Storage, VaultStorage};
-use libra2_types::validator_signer::ValidatorSigner;
+use creditchain_consensus_types::block::block_test_utils;
+use creditchain_safety_rules::{test_utils, PersistentSafetyStorage, SafetyRulesManager, TSafetyRules};
+use creditchain_secure_storage::{InMemoryStorage, KVStorage, OnDiskStorage, Storage, VaultStorage};
+use creditchain_types::validator_signer::ValidatorSigner;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use tempfile::NamedTempFile;
 

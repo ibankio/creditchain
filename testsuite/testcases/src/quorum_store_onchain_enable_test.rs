@@ -3,10 +3,10 @@
 
 use crate::{generate_onchain_config_blob, NetworkLoadTest};
 use anyhow::Ok;
-use libra2::test::CliTestFramework;
-use libra2_forge::{NetworkContextSynchronizer, NetworkTest, NodeExt, SwarmExt, Test};
-use libra2_sdk::bcs;
-use libra2_types::{
+use creditchain::test::CliTestFramework;
+use creditchain_forge::{NetworkContextSynchronizer, NetworkTest, NodeExt, SwarmExt, Test};
+use creditchain_sdk::bcs;
+use creditchain_types::{
     account_config::CORE_CODE_ADDRESS,
     on_chain_config::{ConsensusConfigV1, OnChainConsensusConfig},
 };
@@ -28,8 +28,8 @@ impl Test for QuorumStoreOnChainEnableTest {
 impl NetworkLoadTest for QuorumStoreOnChainEnableTest {
     async fn test(
         &self,
-        swarm: Arc<tokio::sync::RwLock<Box<dyn libra2_forge::Swarm>>>,
-        _report: &mut libra2_forge::TestReport,
+        swarm: Arc<tokio::sync::RwLock<Box<dyn creditchain_forge::Swarm>>>,
+        _report: &mut creditchain_forge::TestReport,
         duration: std::time::Duration,
     ) -> anyhow::Result<()> {
         let faucet_endpoint: reqwest::Url = "http://localhost:8081".parse().unwrap();
@@ -81,10 +81,10 @@ impl NetworkLoadTest for QuorumStoreOnChainEnableTest {
         let update_consensus_config_script = format!(
             r#"
     script {{
-        use libra2_framework::libra2_governance;
-        use libra2_framework::consensus_config;
+        use creditchain_framework::creditchain_governance;
+        use creditchain_framework::consensus_config;
         fun main(core_resources: &signer) {{
-            let framework_signer = libra2_governance::get_signer_testnet_only(core_resources, @0000000000000000000000000000000000000000000000000000000000000001);
+            let framework_signer = creditchain_governance::get_signer_testnet_only(core_resources, @0000000000000000000000000000000000000000000000000000000000000001);
             let config_bytes = {};
             consensus_config::set(&framework_signer, config_bytes);
         }}

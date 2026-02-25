@@ -9,12 +9,12 @@
 //! queued items. While there is only one [`Receiver`], there can be
 //! many [`Sender`]s, which are also cheap to clone.
 //!
-//! This channel differs from our other channel implementation, [`libra2_channel`],
+//! This channel differs from our other channel implementation, [`creditchain_channel`],
 //! in that it is just a single queue (vs. different queues for different keys)
 //! with backpressure (senders will block if the queue is full instead of evicting
 //! another item in the queue) that only implements FIFO (vs. LIFO or KLAST).
 
-use libra2_metrics_core::IntGauge;
+use creditchain_metrics_core::IntGauge;
 use futures::{
     channel::mpsc,
     sink::Sink,
@@ -26,9 +26,9 @@ use std::pin::Pin;
 #[cfg(test)]
 mod test;
 
-pub mod libra2_channel;
+pub mod creditchain_channel;
 #[cfg(test)]
-mod libra2_channel_test;
+mod creditchain_channel_test;
 
 pub mod message_queues;
 #[cfg(test)]

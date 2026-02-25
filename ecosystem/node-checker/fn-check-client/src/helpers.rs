@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{Context, Result};
-use libra2_sdk::types::network_address::NetworkAddress;
+use creditchain_sdk::types::network_address::NetworkAddress;
 use reqwest::Url;
 use std::net::{SocketAddr, ToSocketAddrs};
 

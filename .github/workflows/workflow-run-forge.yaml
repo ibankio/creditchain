@@ -162,7 +162,7 @@ jobs:
           GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           GCP_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
           # action/docker-setup logs in to GCP under project "aptos-ci", but this workflow
-          # runs kubectl under project "libra2-forge-gcp-0", to which the service account
+          # runs kubectl under project "creditchain-forge-gcp-0", to which the service account
           # of "aptos-ci" has delegated access. The exported environment variables will
           # still refer to "aptos-ci", which confuses the gcloud CLI, so we need to keep
           # them out of the environment. That's ok, because gcloud will take configuration
@@ -183,7 +183,7 @@ jobs:
       - name: "Setup GCloud project"
         if: ${{ !inputs.SKIP_JOB }}
         shell: bash
-        run: gcloud config set project libra2-forge-gcp-0
+        run: gcloud config set project creditchain-forge-gcp-0
 
       - name: Check for Forge images
         if: ${{ !inputs.SKIP_JOB }}

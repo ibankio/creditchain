@@ -1,6 +1,6 @@
 module poc::pairing_internal {
-    use libra2_std::crypto_algebra::{Self, Element};
-    use libra2_std::bls12381_algebra::{G1, G2, Gt};
+    use creditchain_std::crypto_algebra::{Self, Element};
+    use creditchain_std::bls12381_algebra::{G1, G2, Gt};
 
     public entry fun main(_owner: &signer) {
         let g1_element: Element<G1> = crypto_algebra::one<G1>();

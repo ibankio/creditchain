@@ -1,7 +1,7 @@
 // Copyright (c) CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_backup_cli::{
+use creditchain_backup_cli::{
     metadata::{
         cache::{sync_and_load, MetadataCacheOpt},
         StateSnapshotBackupMeta,
@@ -9,7 +9,7 @@ use libra2_backup_cli::{
     storage::DBToolStorageOpt,
     utils::ConcurrentDownloadsOpt,
 };
-use libra2_types::transaction::Version;
+use creditchain_types::transaction::Version;
 use clap::Parser;
 use itertools::Itertools;
 use std::{

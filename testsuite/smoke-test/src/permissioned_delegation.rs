@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::smoke_test_environment::SwarmBuilder;
-use libra2::move_tool::MemberId;
-use libra2_cached_packages::libra2_stdlib;
-use libra2_crypto::SigningKey;
-use libra2_forge::Swarm;
-use libra2_types::function_info::FunctionInfo;
+use creditchain::move_tool::MemberId;
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_crypto::SigningKey;
+use creditchain_forge::Swarm;
+use creditchain_types::function_info::FunctionInfo;
 use move_core_types::account_address::AccountAddress;
 use std::{str::FromStr, sync::Arc};
 
@@ -16,7 +16,7 @@ async fn test_permissioned_delegation() {
         .with_libra2()
         .build_with_cli(0)
         .await;
-    let mut info = swarm.libra2_public_info();
+    let mut info = swarm.creditchain_public_info();
 
     let mut account1 = info
         .create_and_fund_user_account(100_000_000_000)
@@ -53,13 +53,13 @@ async fn test_permissioned_delegation() {
     let script = format!(
         r#"
     script {{
-    use libra2_std::ed25519;
-    use libra2_framework::coin;
-    use libra2_framework::permissioned_delegation;
-    use libra2_framework::primary_fungible_store;
-    use libra2_framework::transaction_validation;
+    use creditchain_std::ed25519;
+    use creditchain_framework::coin;
+    use creditchain_framework::permissioned_delegation;
+    use creditchain_framework::primary_fungible_store;
+    use creditchain_framework::transaction_validation;
     fun main(sender: &signer) {{
-        coin::migrate_to_fungible_store<libra2_framework::libra2_coin::Libra2Coin>(sender);
+        coin::migrate_to_fungible_store<creditchain_framework::creditchain_coin::CreditChainCoin>(sender);
         let key = permissioned_delegation::gen_ed25519_key(ed25519::new_unvalidated_public_key_from_bytes(x"{}"));
         let permissioned_signer = permissioned_delegation::add_permissioned_handle(sender, key, std::option::none(), {});
         primary_fungible_store::grant_apt_permission(sender, &permissioned_signer, 1000000000); // 10 apt
@@ -104,7 +104,7 @@ async fn test_permissioned_delegation() {
         vec![],
         None,
         info.transaction_factory()
-            .payload(libra2_stdlib::libra2_account_fungible_transfer_only(
+            .payload(creditchain_stdlib::creditchain_account_fungible_transfer_only(
                 account2.address(),
                 100000000,
             )),
@@ -116,7 +116,7 @@ async fn test_permissioned_delegation() {
         vec![],
         None,
         info.transaction_factory()
-            .payload(libra2_stdlib::libra2_account_fungible_transfer_only(
+            .payload(creditchain_stdlib::creditchain_account_fungible_transfer_only(
                 account2.address(),
                 200000000,
             )),
@@ -128,7 +128,7 @@ async fn test_permissioned_delegation() {
         vec![],
         None,
         info.transaction_factory()
-            .payload(libra2_stdlib::libra2_account_fungible_transfer_only(
+            .payload(creditchain_stdlib::creditchain_account_fungible_transfer_only(
                 account2.address(),
                 200000000,
             ))
@@ -140,7 +140,7 @@ async fn test_permissioned_delegation() {
         vec![],
         None,
         info.transaction_factory()
-            .payload(libra2_stdlib::libra2_account_fungible_transfer_only(
+            .payload(creditchain_stdlib::creditchain_account_fungible_transfer_only(
                 account2.address(),
                 700000001,
             ))
@@ -152,7 +152,7 @@ async fn test_permissioned_delegation() {
         vec![],
         None,
         info.transaction_factory()
-            .payload(libra2_stdlib::libra2_account_fungible_transfer_only(
+            .payload(creditchain_stdlib::creditchain_account_fungible_transfer_only(
                 account2.address(),
                 700000000,
             ))

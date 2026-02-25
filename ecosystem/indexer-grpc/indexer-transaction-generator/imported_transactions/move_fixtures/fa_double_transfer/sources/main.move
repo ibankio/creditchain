@@ -3,9 +3,9 @@ script {
     use std::string::{utf8};
     use std::option;
 
-    use libra2_framework::object::{Self, object_from_constructor_ref};
-    use libra2_framework::fungible_asset::{Self, Metadata};
-    use libra2_framework::primary_fungible_store::{Self};
+    use creditchain_framework::object::{Self, object_from_constructor_ref};
+    use creditchain_framework::fungible_asset::{Self, Metadata};
+    use creditchain_framework::primary_fungible_store::{Self};
 
     const ASSET_SYMBOL: vector<u8> = b"FA";
 

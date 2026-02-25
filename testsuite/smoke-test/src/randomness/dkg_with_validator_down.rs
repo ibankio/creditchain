@@ -5,8 +5,8 @@ use crate::{
     randomness::{decrypt_key_map, verify_dkg_transcript, wait_for_dkg_finish},
     smoke_test_environment::SwarmBuilder,
 };
-use libra2_forge::NodeExt;
-use libra2_types::on_chain_config::OnChainRandomnessConfig;
+use creditchain_forge::NodeExt;
+use creditchain_types::on_chain_config::OnChainRandomnessConfig;
 use std::sync::Arc;
 
 #[tokio::test]

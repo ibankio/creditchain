@@ -9,7 +9,7 @@ use crate::{
     },
     transaction::Version,
 };
-use libra2_crypto::{hash::CryptoHash, HashValue};
+use creditchain_crypto::{hash::CryptoHash, HashValue};
 use derivative::Derivative;
 use StateSlot::*;
 

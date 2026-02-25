@@ -23,11 +23,11 @@ use crate::{
     },
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_db::state_restore::StateSnapshotRestoreMode;
-use libra2_infallible::Mutex;
-use libra2_logger::prelude::*;
-use libra2_storage_interface::StateSnapshotReceiver;
-use libra2_types::{
+use creditchain_db::state_restore::StateSnapshotRestoreMode;
+use creditchain_infallible::Mutex;
+use creditchain_logger::prelude::*;
+use creditchain_storage_interface::StateSnapshotReceiver;
+use creditchain_types::{
     access_path::Path,
     ledger_info::LedgerInfoWithSignatures,
     on_chain_config::Features,
@@ -38,7 +38,7 @@ use libra2_types::{
     },
     transaction::Version,
 };
-use libra2_vm_environment::prod_configs::{libra2_prod_verifier_config, LATEST_GAS_FEATURE_VERSION};
+use creditchain_vm_environment::prod_configs::{creditchain_prod_verifier_config, LATEST_GAS_FEATURE_VERSION};
 use clap::Parser;
 use futures::{stream, TryStreamExt};
 use move_binary_format::CompiledModule;
@@ -236,7 +236,7 @@ impl StateSnapshotRestoreController {
         // TODO: Instead of using default features, fetch them from the the state.
         let features = Features::default();
 
-        let config = libra2_prod_verifier_config(LATEST_GAS_FEATURE_VERSION, &features);
+        let config = creditchain_prod_verifier_config(LATEST_GAS_FEATURE_VERSION, &features);
         for (key, value) in blob {
             if let StateKeyInner::AccessPath(p) = key.inner() {
                 if let Path::Code(module_id) = p.get_path() {

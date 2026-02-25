@@ -1,5 +1,5 @@
 [package]
-name = "libra2-testcases"
+name = "creditchain-testcases"
 description = "CreditChain compatibility tests"
 version = "0.0.1"
 
@@ -14,18 +14,18 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2 = { workspace = true, features = ["fuzzing"] }
-libra2-config = { workspace = true }
-libra2-forge = { workspace = true }
-libra2-global-constants = { workspace = true }
-libra2-keygen = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-release-builder = { workspace = true }
-libra2-rest-client = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-types = { workspace = true }
+creditchain = { workspace = true, features = ["fuzzing"] }
+creditchain-config = { workspace = true }
+creditchain-forge = { workspace = true }
+creditchain-global-constants = { workspace = true }
+creditchain-keygen = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-release-builder = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-types = { workspace = true }
 async-trait = { workspace = true }
 bcs = { workspace = true }
 csv = { workspace = true }

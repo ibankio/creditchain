@@ -23,9 +23,9 @@ spec:
     spec:
       containers:
       - command:
-        - /usr/local/bin/libra2-node
+        - /usr/local/bin/creditchain-node
         - -f
-        - /opt/libra2/etc/validator.yaml
+        - /opt/creditchain/etc/validator.yaml
         image: aptoslabs/validator:devnet@sha256:f0c62463b0e86acc9ad081c54be2d1823f143f780c73828b876caebc978c8947
         name: test_username-validator
         ports:
@@ -34,24 +34,24 @@ spec:
         - containerPort: 6181
         - containerPort: 9101
         volumeMounts:
-        - mountPath: /opt/libra2/etc
-          name: libra2-config
-        - mountPath: /opt/libra2/genesis
+        - mountPath: /opt/creditchain/etc
+          name: creditchain-config
+        - mountPath: /opt/creditchain/genesis
           name: genesis-config
-        - mountPath: /opt/libra2/identites
+        - mountPath: /opt/creditchain/identites
           name: aptos-secret
-        - mountPath: /opt/libra2/data
-          name: libra2-data
+        - mountPath: /opt/creditchain/data
+          name: creditchain-data
       volumes:
       - configMap:
           name: test_username-validator-configmap
-        name: libra2-config
+        name: creditchain-config
       - configMap:
           name: genesis-artifiact-configmap-pangu
         name: genesis-config
       - name: aptos-secret
         secret:
           secretName: identity-secrets-test_username
-      - name: libra2-data
+      - name: creditchain-data
         persistentVolumeClaim:
           claimName: test_username-validator-pvc

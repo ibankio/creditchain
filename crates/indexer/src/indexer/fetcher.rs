@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::counters::{FETCHED_TRANSACTION, UNABLE_TO_FETCH_TRANSACTION};
-use libra2_api::Context;
-use libra2_api_types::{AsConverter, LedgerInfo, Transaction, TransactionOnChainData};
-use libra2_logger::prelude::*;
+use creditchain_api::Context;
+use creditchain_api_types::{AsConverter, LedgerInfo, Transaction, TransactionOnChainData};
+use creditchain_logger::prelude::*;
 use futures::{channel::mpsc, SinkExt};
 use std::{sync::Arc, time::Duration};
 use tokio::task::JoinHandle;
@@ -67,7 +67,7 @@ impl Fetcher {
             } else {
                 sample!(
                     SampleRate::Frequency(10),
-                    libra2_logger::info!(
+                    creditchain_logger::info!(
                         highest_known_version = self.highest_known_version,
                         "Found new highest known version",
                     )
@@ -237,9 +237,9 @@ async fn fetch_nexts(
         });
     let mut timestamp = block_event.proposed_time();
     let mut epoch = block_event.epoch();
-    let mut epoch_bcs = libra2_api_types::U64::from(epoch);
+    let mut epoch_bcs = creditchain_api_types::U64::from(epoch);
     let mut block_height = block_event.height();
-    let mut block_height_bcs = libra2_api_types::U64::from(block_height);
+    let mut block_height_bcs = creditchain_api_types::U64::from(block_height);
 
     let state_view = context.latest_state_view().unwrap();
     let converter = state_view.as_converter(context.db.clone(), context.indexer_reader.clone());
@@ -253,15 +253,15 @@ async fn fetch_nexts(
             if let Some(txn) = raw_txn.transaction.try_as_block_metadata_ext() {
                 timestamp = txn.timestamp_usecs();
                 epoch = txn.epoch();
-                epoch_bcs = libra2_api_types::U64::from(epoch);
+                epoch_bcs = creditchain_api_types::U64::from(epoch);
                 block_height += 1;
-                block_height_bcs = libra2_api_types::U64::from(block_height);
+                block_height_bcs = creditchain_api_types::U64::from(block_height);
             } else if let Some(txn) = raw_txn.transaction.try_as_block_metadata() {
                 timestamp = txn.timestamp_usecs();
                 epoch = txn.epoch();
-                epoch_bcs = libra2_api_types::U64::from(epoch);
+                epoch_bcs = creditchain_api_types::U64::from(epoch);
                 block_height += 1;
-                block_height_bcs = libra2_api_types::U64::from(block_height);
+                block_height_bcs = creditchain_api_types::U64::from(block_height);
             }
         }
         let res = converter

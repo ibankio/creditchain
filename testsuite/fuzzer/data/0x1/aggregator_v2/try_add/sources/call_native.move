@@ -1,5 +1,5 @@
 module poc::try_add {
-    use libra2_framework::aggregator_v2;
+    use creditchain_framework::aggregator_v2;
 
     const U64_MAX: u64 = 18446744073709551615u64;
 

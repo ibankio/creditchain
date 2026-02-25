@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::{pipeline_health::TPipelineHealth, TChainHealth};
-use libra2_config::config::DagPayloadConfig;
-use libra2_consensus_types::common::Round;
-use libra2_types::epoch_state::EpochState;
+use creditchain_config::config::DagPayloadConfig;
+use creditchain_consensus_types::common::Round;
+use creditchain_types::epoch_state::EpochState;
 use std::{sync::Arc, time::Duration};
 
 #[derive(Clone)]

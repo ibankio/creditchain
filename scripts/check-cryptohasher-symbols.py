@@ -17,12 +17,12 @@ import subprocess
 
 # False positives that needs to be skipped for now.
 whitelisted_symbols = set([
-    'TestLibra2Crypto',
+    'TestCreditChainCrypto',
 ])
 
 ignored_crates = set([
     'ahash',
-    'libra2_sdk',
+    'creditchain_sdk',
     'seahash',
     'siphasher',
 ])

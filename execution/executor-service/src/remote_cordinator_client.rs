@@ -4,12 +4,12 @@ use crate::{
     metrics::REMOTE_EXECUTOR_TIMER, remote_state_view::RemoteStateViewClient, ExecuteBlockCommand,
     RemoteExecutionRequest, RemoteExecutionResult,
 };
-use libra2_secure_net::network_controller::{Message, NetworkController};
-use libra2_types::{
+use creditchain_secure_net::network_controller::{Message, NetworkController};
+use creditchain_types::{
     block_executor::partitioner::ShardId, state_store::state_key::StateKey,
     transaction::TransactionOutput, vm_status::VMStatus,
 };
-use libra2_vm::sharded_block_executor::{
+use creditchain_vm::sharded_block_executor::{
     coordinator_client::CoordinatorClient, ExecutorShardCommand,
 };
 use crossbeam_channel::{Receiver, Sender};

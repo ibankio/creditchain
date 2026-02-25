@@ -5,7 +5,7 @@ use crate::{
     grpc_network_service::GRPCNetworkMessageServiceServerWrapper,
     network_controller::{Message, MessageType},
 };
-use libra2_logger::warn;
+use creditchain_logger::warn;
 use crossbeam_channel::Sender;
 use std::{
     collections::HashMap,

@@ -3,7 +3,7 @@
 
 use crate::ARITY;
 use anyhow::{ensure, Result};
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{CryptoHasher, HexyHasher},
     HashValue,
 };

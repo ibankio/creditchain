@@ -1,0 +1,10 @@
+[package]
+name = "AA"
+version = "0.0.0"
+
+[addresses]
+aa = "_"
+
+[dependencies]
+CreditChainFramework = { local = "../../../framework/creditchain-framework" }
+CreditChainStdlib = { local = "../../../framework/creditchain-stdlib" }

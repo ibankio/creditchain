@@ -3,8 +3,8 @@
 #![allow(unused)]
 
 pub use super::prebuilt_packages::PreBuiltPackagesImpl;
-use libra2_framework::natives::code::{MoveOption, PackageMetadata};
-use libra2_sdk::{
+use creditchain_framework::natives::code::{MoveOption, PackageMetadata};
+use creditchain_sdk::{
     bcs,
     move_types::{
         account_address::AccountAddress, ident_str, identifier::Identifier,
@@ -15,7 +15,7 @@ use libra2_sdk::{
         transaction::{EntryFunction, Script, TransactionPayload},
     },
 };
-use libra2_transaction_generator_lib::{
+use creditchain_transaction_generator_lib::{
     entry_point_trait::{
         get_payload, AutomaticArgs, EntryPointTrait, MultiSigConfig, PreBuiltPackages,
     },

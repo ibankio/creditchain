@@ -56,7 +56,7 @@ jobs:
       - name: Generate runnable states from e2e tests
         working-directory: testsuite/fuzzer/
         run: |
-          ./fuzz.sh block-builder generate_runnable_states_recursive /libra2-move/e2e-move-tests move_aptosvm_publish_and_run_seed_corpus
+          ./fuzz.sh block-builder generate_runnable_states_recursive /creditchain-move/e2e-move-tests move_aptosvm_publish_and_run_seed_corpus
 
       - name: Generate runnable states transactional from transactional tests
         working-directory: testsuite/fuzzer/

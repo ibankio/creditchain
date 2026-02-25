@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::DbReader;
-use libra2_crypto::HashValue;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_types::{
     ledger_info::LedgerInfo,
     state_store::{
         errors::StateViewError, state_key::StateKey, state_storage_usage::StateStorageUsage,

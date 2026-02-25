@@ -9,11 +9,11 @@ use crate::{
         MAX_CATCH_UP_WAIT_SECS, MAX_CONNECTIVITY_WAIT_SECS, MAX_HEALTHY_WAIT_SECS,
     },
 };
-use libra2_config::{
+use creditchain_config::{
     config::{DiscoveryMethod, NodeConfig, OverrideNodeConfig, PeerRole},
     network_id::NetworkId,
 };
-use libra2_forge::{LocalSwarm, NodeExt, Swarm, SwarmExt};
+use creditchain_forge::{LocalSwarm, NodeExt, Swarm, SwarmExt};
 use std::time::{Duration, Instant};
 
 #[tokio::test]

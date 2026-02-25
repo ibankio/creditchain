@@ -6,7 +6,7 @@ use crate::config::{
     config_optimizer::ConfigOptimizer, config_sanitizer::ConfigSanitizer,
     node_config_loader::NodeType, Error, NodeConfig,
 };
-use libra2_types::chain_id::ChainId;
+use creditchain_types::chain_id::ChainId;
 use serde::{Deserialize, Serialize};
 use serde_yaml::Value;
 
@@ -27,7 +27,7 @@ const MAX_CONCURRENT_STATE_REQUESTS: u64 = 6;
 #[serde(default, deny_unknown_fields)]
 pub struct StateSyncConfig {
     pub data_streaming_service: DataStreamingServiceConfig,
-    pub libra2_data_client: Libra2DataClientConfig,
+    pub creditchain_data_client: CreditChainDataClientConfig,
     pub state_sync_driver: StateSyncDriverConfig,
     pub storage_service: StorageServiceConfig,
 }
@@ -310,7 +310,7 @@ impl Default for DynamicPrefetchingConfig {
 
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq, Serialize)]
 #[serde(default, deny_unknown_fields)]
-pub struct Libra2DataPollerConfig {
+pub struct CreditChainDataPollerConfig {
     /// The additional number of polls to send per peer bucket (per second)
     pub additional_polls_per_peer_bucket: u64,
     /// The minimum number of polls that should be sent per second
@@ -327,7 +327,7 @@ pub struct Libra2DataPollerConfig {
     pub poll_loop_interval_ms: u64,
 }
 
-impl Default for Libra2DataPollerConfig {
+impl Default for CreditChainDataPollerConfig {
     fn default() -> Self {
         Self {
             additional_polls_per_peer_bucket: 1,
@@ -343,7 +343,7 @@ impl Default for Libra2DataPollerConfig {
 
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq, Serialize)]
 #[serde(default, deny_unknown_fields)]
-pub struct Libra2DataMultiFetchConfig {
+pub struct CreditChainDataMultiFetchConfig {
     /// Whether or not to enable multi-fetch for data client requests
     pub enable_multi_fetch: bool,
     /// The number of additional requests to send per peer bucket
@@ -359,7 +359,7 @@ pub struct Libra2DataMultiFetchConfig {
     pub multi_fetch_peer_bucket_size: usize,
 }
 
-impl Default for Libra2DataMultiFetchConfig {
+impl Default for CreditChainDataMultiFetchConfig {
     fn default() -> Self {
         Self {
             enable_multi_fetch: true,
@@ -373,7 +373,7 @@ impl Default for Libra2DataMultiFetchConfig {
 
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq, Serialize)]
 #[serde(default, deny_unknown_fields)]
-pub struct Libra2LatencyFilteringConfig {
+pub struct CreditChainLatencyFilteringConfig {
     /// The reduction factor for latency filtering when selecting peers
     pub latency_filtering_reduction_factor: u64,
     /// Minimum peer ratio for latency filtering
@@ -382,7 +382,7 @@ pub struct Libra2LatencyFilteringConfig {
     pub min_peers_for_latency_filtering: u64,
 }
 
-impl Default for Libra2LatencyFilteringConfig {
+impl Default for CreditChainLatencyFilteringConfig {
     fn default() -> Self {
         Self {
             latency_filtering_reduction_factor: 2, // Only consider the best 50% of peers
@@ -394,17 +394,17 @@ impl Default for Libra2LatencyFilteringConfig {
 
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq, Serialize)]
 #[serde(default, deny_unknown_fields)]
-pub struct Libra2DataClientConfig {
+pub struct CreditChainDataClientConfig {
     /// Whether transaction data v2 is enabled
     pub enable_transaction_data_v2: bool,
     /// The libra2 data poller config for the data client
-    pub data_poller_config: Libra2DataPollerConfig,
+    pub data_poller_config: CreditChainDataPollerConfig,
     /// The libra2 data multi-fetch config for the data client
-    pub data_multi_fetch_config: Libra2DataMultiFetchConfig,
+    pub data_multi_fetch_config: CreditChainDataMultiFetchConfig,
     /// Whether or not to ignore peers with low peer scores
     pub ignore_low_score_peers: bool,
     /// The libra2 latency filtering config for the data client
-    pub latency_filtering_config: Libra2LatencyFilteringConfig,
+    pub latency_filtering_config: CreditChainLatencyFilteringConfig,
     /// The interval (milliseconds) at which to refresh the latency monitor
     pub latency_monitor_loop_interval_ms: u64,
     /// Maximum number of epoch ending ledger infos per chunk
@@ -439,14 +439,14 @@ pub struct Libra2DataClientConfig {
     pub use_compression: bool,
 }
 
-impl Default for Libra2DataClientConfig {
+impl Default for CreditChainDataClientConfig {
     fn default() -> Self {
         Self {
             enable_transaction_data_v2: false, // TODO: flip this once V2 data is enabled
-            data_poller_config: Libra2DataPollerConfig::default(),
-            data_multi_fetch_config: Libra2DataMultiFetchConfig::default(),
+            data_poller_config: CreditChainDataPollerConfig::default(),
+            data_multi_fetch_config: CreditChainDataMultiFetchConfig::default(),
             ignore_low_score_peers: true,
-            latency_filtering_config: Libra2LatencyFilteringConfig::default(),
+            latency_filtering_config: CreditChainLatencyFilteringConfig::default(),
             latency_monitor_loop_interval_ms: 100,
             max_epoch_chunk_size: MAX_EPOCH_CHUNK_SIZE,
             max_num_output_reductions: 0,

@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{anyhow, bail};
-use libra2_framework::{natives::code::PackageMetadata, BuildOptions, BuiltPackage};
-use libra2_sdk::bcs;
+use creditchain_framework::{natives::code::PackageMetadata, BuildOptions, BuiltPackage};
+use creditchain_sdk::bcs;
 use move_package::source_package::std_lib::StdVersion;
 use serde::{Deserialize, Serialize};
 use std::{
@@ -20,7 +20,7 @@ fn get_local_framework_path() -> String {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .parent()
         .and_then(|p| p.parent())
-        .map(|p| p.join("libra2-move").join("framework"))
+        .map(|p| p.join("creditchain-move").join("framework"))
         .expect("framework path")
         .to_string_lossy()
         .to_string()
@@ -55,7 +55,7 @@ impl PrebuiltPackagesBundle {
 pub struct PrebuiltPackageConfig {
     /// If true, packages are compiled with latest (possibly unstable) version.
     pub latest_language: bool,
-    /// If true, will use the local Libra2 framework.
+    /// If true, will use the local CreditChain framework.
     pub use_local_std: bool,
 }
 
@@ -119,8 +119,8 @@ pub fn create_prebuilt_packages_bundle(
 //
 // To update this code, run `testsuite/benchmark-workloads/generate.py`.
 
-use libra2_sdk::bcs;
-use libra2_transaction_generator_lib::{
+use creditchain_sdk::bcs;
+use creditchain_transaction_generator_lib::{
     entry_point_trait::PreBuiltPackages, publishing::prebuild_packages::PrebuiltPackagesBundle,
 };
 use once_cell::sync::Lazy;

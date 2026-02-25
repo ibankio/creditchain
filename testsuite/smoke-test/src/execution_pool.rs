@@ -5,10 +5,10 @@ use crate::{
     smoke_test_environment::SwarmBuilder,
     utils::{update_consensus_config, MAX_CATCH_UP_WAIT_SECS},
 };
-use libra2::test::CliTestFramework;
-use libra2_forge::{LocalSwarm, NodeExt, Swarm, SwarmExt};
-use libra2_rest_client::Client;
-use libra2_types::on_chain_config::{
+use creditchain::test::CliTestFramework;
+use creditchain_forge::{LocalSwarm, NodeExt, Swarm, SwarmExt};
+use creditchain_rest_client::Client;
+use creditchain_types::on_chain_config::{
     ConsensusAlgorithmConfig, OnChainConsensusConfig, ValidatorTxnConfig,
 };
 use move_core_types::language_storage::CORE_CODE_ADDRESS;

@@ -6,16 +6,16 @@ use super::{
     utils::{BatchKey, BatchSortKey, TimeExpirations},
 };
 use crate::quorum_store::counters;
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::{Author, TxnSummaryWithExpiration},
     payload::TDataInfo,
     proof_of_store::{BatchInfo, ProofOfStore},
     utils::PayloadTxnsSize,
 };
-use libra2_logger::{info, sample, sample::SampleRate, warn};
-use libra2_metrics_core::TimerHelper;
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_types::{transaction::SignedTransaction, PeerId};
+use creditchain_logger::{info, sample, sample::SampleRate, warn};
+use creditchain_metrics_core::TimerHelper;
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_types::{transaction::SignedTransaction, PeerId};
 use rand::{prelude::SliceRandom, thread_rng};
 use std::{
     cmp::Reverse,
@@ -323,7 +323,7 @@ impl BatchProofQueue {
     // If the validator receives the batch from batch coordinator, but doesn't receive the corresponding
     // proof before the batch expires, the batch summary will be garbage collected.
     fn gc_expired_batch_summaries_without_proofs(&mut self) {
-        let timestamp = libra2_infallible::duration_since_epoch().as_micros() as u64;
+        let timestamp = creditchain_infallible::duration_since_epoch().as_micros() as u64;
         self.items.retain(|_, item| {
             if item.is_committed() || item.proof.is_some() || item.info.expiration() > timestamp {
                 true
@@ -592,7 +592,7 @@ impl BatchProofQueue {
         }
 
         let max_batch_creation_ts_usecs = min_batch_age_usecs
-            .map(|min_age| libra2_infallible::duration_since_epoch().as_micros() as u64 - min_age);
+            .map(|min_age| creditchain_infallible::duration_since_epoch().as_micros() as u64 - min_age);
         let mut iters = vec![];
         for (_, batches) in self
             .author_to_batches
@@ -721,7 +721,7 @@ impl BatchProofQueue {
         }
         let start = Instant::now();
         self.latest_block_timestamp = block_timestamp;
-        if let Some(time_lag) = libra2_infallible::duration_since_epoch()
+        if let Some(time_lag) = creditchain_infallible::duration_since_epoch()
             .checked_sub(Duration::from_micros(block_timestamp))
         {
             counters::TIME_LAG_IN_BATCH_PROOF_QUEUE.observe_duration(time_lag);

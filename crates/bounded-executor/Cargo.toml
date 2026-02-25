@@ -1,5 +1,5 @@
 [package]
-name = "libra2-bounded-executor"
+name = "creditchain-bounded-executor"
 description = "Executor bounded by number of concurrent tasks"
 version = "0.1.1"
 

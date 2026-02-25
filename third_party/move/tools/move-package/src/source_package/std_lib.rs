@@ -12,10 +12,10 @@ use std::{fmt::Display, path::PathBuf};
 
 /// Represents a standard library.
 pub enum StdLib {
-    Libra2TokenObjects,
-    Libra2Token,
-    Libra2Framework,
-    Libra2Stdlib,
+    CreditChainTokenObjects,
+    CreditChainToken,
+    CreditChainFramework,
+    CreditChainStdlib,
     MoveStdlib,
 }
 
@@ -56,10 +56,10 @@ impl StdLib {
     /// Returns the name of the standard library.
     pub fn as_str(&self) -> &'static str {
         match self {
-            StdLib::Libra2Token => "Libra2Token",
-            StdLib::Libra2TokenObjects => "Libra2TokenObjects",
-            StdLib::Libra2Framework => "Libra2Framework",
-            StdLib::Libra2Stdlib => "Libra2Stdlib",
+            StdLib::CreditChainToken => "CreditChainToken",
+            StdLib::CreditChainTokenObjects => "CreditChainTokenObjects",
+            StdLib::CreditChainFramework => "CreditChainFramework",
+            StdLib::CreditChainStdlib => "CreditChainStdlib",
             StdLib::MoveStdlib => "MoveStdlib",
         }
     }
@@ -67,10 +67,10 @@ impl StdLib {
     /// Returns the standard library from the given package name, or `None` if the package name is not a standard library.
     pub fn from_package_name(package_name: Symbol) -> Option<StdLib> {
         match package_name.as_str() {
-            "Libra2Token" => Some(StdLib::Libra2Token),
-            "Libra2TokenObjects" => Some(StdLib::Libra2TokenObjects),
-            "Libra2Framework" => Some(StdLib::Libra2Framework),
-            "Libra2Stdlib" => Some(StdLib::Libra2Stdlib),
+            "CreditChainToken" => Some(StdLib::CreditChainToken),
+            "CreditChainTokenObjects" => Some(StdLib::CreditChainTokenObjects),
+            "CreditChainFramework" => Some(StdLib::CreditChainFramework),
+            "CreditChainStdlib" => Some(StdLib::CreditChainStdlib),
             "MoveStdlib" => Some(StdLib::MoveStdlib),
             _ => None,
         }
@@ -79,10 +79,10 @@ impl StdLib {
     /// Returns the subdirectory of the standard library in the git repository.
     fn sub_dir(&self) -> &'static str {
         match self {
-            StdLib::Libra2Token => "libra2-token",
-            StdLib::Libra2TokenObjects => "libra2-token-objects",
-            StdLib::Libra2Framework => "libra2-framework",
-            StdLib::Libra2Stdlib => "libra2-stdlib",
+            StdLib::CreditChainToken => "creditchain-token",
+            StdLib::CreditChainTokenObjects => "creditchain-token-objects",
+            StdLib::CreditChainFramework => "creditchain-framework",
+            StdLib::CreditChainStdlib => "creditchain-stdlib",
             StdLib::MoveStdlib => "move-stdlib",
         }
     }

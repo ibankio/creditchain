@@ -3,4 +3,4 @@
 
 #[allow(clippy::all)]
 mod pb;
-pub use pb::libra2::*;
+pub use pb::creditchain::*;

@@ -6,9 +6,9 @@ use crate::dag::{
     types::NodeCertificate,
 };
 use anyhow::ensure;
-use libra2_consensus_types::common::Round;
-use libra2_infallible::{duration_since_epoch, Mutex};
-use libra2_types::epoch_state::EpochState;
+use creditchain_consensus_types::common::Round;
+use creditchain_infallible::{duration_since_epoch, Mutex};
+use creditchain_types::epoch_state::EpochState;
 use std::{cmp::Ordering, sync::Arc, time::Duration};
 use tokio::task::JoinHandle;
 

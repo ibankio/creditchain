@@ -2,9 +2,9 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_crypto::HashValue;
-use libra2_storage_interface::Libra2DbError;
-use libra2_types::{state_store::errors::StateViewError, transaction::Version};
+use creditchain_crypto::HashValue;
+use creditchain_storage_interface::CreditChainDbError;
+use creditchain_types::{state_store::errors::StateViewError, transaction::Version};
 use serde::{Deserialize, Serialize};
 use std::fmt::Display;
 use thiserror::Error;
@@ -51,8 +51,8 @@ impl From<anyhow::Error> for ExecutorError {
     }
 }
 
-impl From<Libra2DbError> for ExecutorError {
-    fn from(error: Libra2DbError) -> Self {
+impl From<CreditChainDbError> for ExecutorError {
+    fn from(error: CreditChainDbError) -> Self {
         Self::InternalError {
             error: format!("{}", error),
         }
@@ -73,8 +73,8 @@ impl From<bcs::Error> for ExecutorError {
     }
 }
 
-impl From<libra2_secure_net::Error> for ExecutorError {
-    fn from(error: libra2_secure_net::Error) -> Self {
+impl From<creditchain_secure_net::Error> for ExecutorError {
+    fn from(error: creditchain_secure_net::Error) -> Self {
         Self::InternalError {
             error: format!("{}", error),
         }

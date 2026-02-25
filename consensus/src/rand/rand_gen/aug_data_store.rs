@@ -9,9 +9,9 @@ use crate::rand::rand_gen::{
     },
 };
 use anyhow::ensure;
-use libra2_consensus_types::common::Author;
-use libra2_logger::error;
-use libra2_types::validator_signer::ValidatorSigner;
+use creditchain_consensus_types::common::Author;
+use creditchain_logger::error;
+use creditchain_types::validator_signer::ValidatorSigner;
 use std::{collections::HashMap, sync::Arc};
 
 pub struct AugDataStore<D> {

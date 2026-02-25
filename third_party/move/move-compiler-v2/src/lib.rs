@@ -213,7 +213,7 @@ pub fn run_checker(options: Options) -> anyhow::Result<GlobalEnv> {
         },
         options.language_version.unwrap_or_default(),
         options.warn_deprecated,
-        options.warn_of_deprecation_use_in_libra2_libs,
+        options.warn_of_deprecation_use_in_creditchain_libs,
         options.compile_test_code,
         options.compile_verify_code,
     )?;
@@ -379,7 +379,7 @@ pub fn env_check_and_transform_pipeline<'a, 'b>(options: &'a Options) -> EnvProc
         env_pipeline.add("model AST lints", model_ast_lints::checker);
     }
 
-    // The comparison rewriter is a new features in Libra2 Move 2.2 and onwards
+    // The comparison rewriter is a new features in CreditChain Move 2.2 and onwards
     let rewrite_cmp = options
         .language_version
         .unwrap_or_default()

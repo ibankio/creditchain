@@ -8,10 +8,10 @@ use crate::{
     native::{native_config::NATIVE_EXECUTOR_POOL, native_transaction::NativeTransaction},
 };
 use anyhow::{bail, Result};
-use libra2_block_executor::{
+use creditchain_block_executor::{
     counters::BLOCK_EXECUTOR_INNER_EXECUTE_BLOCK, txn_provider::default::DefaultTxnProvider,
 };
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::{
         primary_apt_store, AccountResource, CoinInfoResource, CoinRegister, CoinStoreResource,
@@ -34,9 +34,9 @@ use libra2_types::{
     },
     vm_status::{StatusCode, VMStatus},
     write_set::{WriteOp, WriteSetMut},
-    Libra2CoinType,
+    CreditChainCoinType,
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use dashmap::{
     mapref::one::{Ref, RefMut},
     DashMap,
@@ -506,7 +506,7 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
         state_view: &(impl StateView + Sync),
         output: &mut IncrementalOutput,
     ) -> Result<()> {
-        let coin_info = DbAccessUtil::get_value::<CoinInfoResource<Libra2CoinType>>(
+        let coin_info = DbAccessUtil::get_value::<CoinInfoResource<CreditChainCoinType>>(
             &self.db_util.common.apt_coin_info_resource,
             state_view,
         )?
@@ -588,7 +588,7 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
         state_view: &(impl StateView + Sync),
         output: &mut IncrementalOutput,
     ) -> Result<()> {
-        let sender_coin_store_key = self.db_util.new_state_key_libra2_coin(&sender_address);
+        let sender_coin_store_key = self.db_util.new_state_key_creditchain_coin(&sender_address);
         let sender_coin_store_opt = {
             let _timer = TIMER
                 .with_label_values(&["read_sender_coin_store"])
@@ -700,7 +700,7 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
         state_view: &(impl StateView + Sync),
         output: &mut IncrementalOutput,
     ) -> Result<bool> {
-        let recipient_coin_store_key = self.db_util.new_state_key_libra2_coin(&recipient_address);
+        let recipient_coin_store_key = self.db_util.new_state_key_creditchain_coin(&recipient_address);
 
         let (mut recipient_coin_store, recipient_coin_store_existed) =
             match DbAccessUtil::get_apt_coin_store(&recipient_coin_store_key, state_view)? {
@@ -709,7 +709,7 @@ impl CommonNativeRawTransactionExecutor for NativeRawTransactionExecutor {
                     output.events.push(
                         CoinRegister {
                             account: AccountAddress::ONE,
-                            type_info: DbAccessUtil::new_type_info_resource::<Libra2CoinType>()?,
+                            type_info: DbAccessUtil::new_type_info_resource::<CreditChainCoinType>()?,
                         }
                         .create_event_v2()
                         .expect("Creating CoinRegister should always succeed"),
@@ -791,8 +791,8 @@ enum CachedResource {
     Account(AccountResource),
     FungibleStore(FungibleStoreResource),
     FungibleSupply(ConcurrentSupplyResource),
-    AptCoinStore(CoinStoreResource<Libra2CoinType>),
-    AptCoinInfo(CoinInfoResource<Libra2CoinType>),
+    AptCoinStore(CoinStoreResource<CreditChainCoinType>),
+    AptCoinInfo(CoinInfoResource<CreditChainCoinType>),
     AptCoinSupply(CoinSupply),
     SupplyDecrement(SupplyWithDecrement),
 }
@@ -921,7 +921,7 @@ impl CommonNativeRawTransactionExecutor for NativeValueCacheRawTransactionExecut
             let entry =
                 self.cache_get_mut_or_init(&self.db_util.common.apt_coin_info_resource, |key| {
                     CachedResource::AptCoinInfo(
-                        DbAccessUtil::get_value::<CoinInfoResource<Libra2CoinType>>(key, state_view)
+                        DbAccessUtil::get_value::<CoinInfoResource<CreditChainCoinType>>(key, state_view)
                             .unwrap()
                             .unwrap(),
                     )
@@ -1123,7 +1123,7 @@ impl NativeValueCacheRawTransactionExecutor {
         decrement: u64,
         fail_on_missing: bool,
     ) -> bool {
-        let coin_store_key = self.db_util.new_state_key_libra2_coin(&account);
+        let coin_store_key = self.db_util.new_state_key_creditchain_coin(&account);
         let mut exists = true;
 
         let mut entry = self.cache_get_mut_or_init(&coin_store_key, |key| {

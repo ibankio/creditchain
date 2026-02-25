@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{smoke_test_environment::new_local_swarm_with_libra2, txn_emitter::generate_traffic};
-use libra2_forge::args::TransactionTypeArg;
+use creditchain_forge::args::TransactionTypeArg;
 use std::time::Duration;
 
 #[ignore]

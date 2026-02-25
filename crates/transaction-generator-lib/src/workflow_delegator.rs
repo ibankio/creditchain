@@ -11,8 +11,8 @@ use crate::{
     ObjectPool, ReliableTransactionSubmitter, RootAccountHandle, TransactionGenerator,
     TransactionGeneratorCreator, WorkflowProgress,
 };
-use libra2_logger::{sample, sample::SampleRate};
-use libra2_sdk::{
+use creditchain_logger::{sample, sample::SampleRate};
+use creditchain_sdk::{
     transaction_builder::TransactionFactory,
     types::{transaction::SignedTransaction, LocalAccount},
 };

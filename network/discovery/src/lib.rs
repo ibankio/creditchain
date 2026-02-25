@@ -6,17 +6,17 @@ use crate::{
     counters::DISCOVERY_COUNTS, file::FileStream, rest::RestStream,
     validator_set::ValidatorSetStream,
 };
-use libra2_config::{config::PeerSet, network_id::NetworkContext};
-use libra2_crypto::x25519;
-use libra2_event_notifications::ReconfigNotificationListener;
-use libra2_logger::prelude::*;
-use libra2_network::{
+use creditchain_config::{config::PeerSet, network_id::NetworkContext};
+use creditchain_crypto::x25519;
+use creditchain_event_notifications::ReconfigNotificationListener;
+use creditchain_logger::prelude::*;
+use creditchain_network::{
     connectivity_manager::{ConnectivityRequest, DiscoverySource},
     counters::inc_by_with_context,
     logging::NetworkSchema,
 };
-use libra2_time_service::TimeService;
-use libra2_types::on_chain_config::OnChainConfigProvider;
+use creditchain_time_service::TimeService;
+use creditchain_types::on_chain_config::OnChainConfigProvider;
 use futures::{Stream, StreamExt};
 use std::{
     path::Path,
@@ -35,14 +35,14 @@ mod validator_set;
 pub enum DiscoveryError {
     IO(std::io::Error),
     Parsing(String),
-    Rest(libra2_rest_client::error::RestError),
+    Rest(creditchain_rest_client::error::RestError),
 }
 
 /// A union type for all implementations of `DiscoveryChangeListenerTrait`
 pub struct DiscoveryChangeListener<P: OnChainConfigProvider> {
     discovery_source: DiscoverySource,
     network_context: NetworkContext,
-    update_channel: libra2_channels::Sender<ConnectivityRequest>,
+    update_channel: creditchain_channels::Sender<ConnectivityRequest>,
     source_stream: DiscoveryChangeStream<P>,
 }
 
@@ -67,7 +67,7 @@ impl<P: OnChainConfigProvider> Stream for DiscoveryChangeStream<P> {
 impl<P: OnChainConfigProvider> DiscoveryChangeListener<P> {
     pub fn validator_set(
         network_context: NetworkContext,
-        update_channel: libra2_channels::Sender<ConnectivityRequest>,
+        update_channel: creditchain_channels::Sender<ConnectivityRequest>,
         expected_pubkey: x25519::PublicKey,
         reconfig_events: ReconfigNotificationListener<P>,
     ) -> Self {
@@ -86,7 +86,7 @@ impl<P: OnChainConfigProvider> DiscoveryChangeListener<P> {
 
     pub fn file(
         network_context: NetworkContext,
-        update_channel: libra2_channels::Sender<ConnectivityRequest>,
+        update_channel: creditchain_channels::Sender<ConnectivityRequest>,
         file_path: &Path,
         interval_duration: Duration,
         time_service: TimeService,
@@ -106,7 +106,7 @@ impl<P: OnChainConfigProvider> DiscoveryChangeListener<P> {
 
     pub fn rest(
         network_context: NetworkContext,
-        update_channel: libra2_channels::Sender<ConnectivityRequest>,
+        update_channel: creditchain_channels::Sender<ConnectivityRequest>,
         rest_url: url::Url,
         interval_duration: Duration,
         time_service: TimeService,

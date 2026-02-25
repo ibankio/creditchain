@@ -6,18 +6,18 @@ use crate::{
     error::Error,
     logging::{LogEntry, LogSchema},
 };
-use libra2_consensus_notifications::{
+use creditchain_consensus_notifications::{
     ConsensusCommitNotification, ConsensusNotification, ConsensusNotificationListener,
     ConsensusSyncDurationNotification, ConsensusSyncTargetNotification,
 };
-use libra2_data_streaming_service::data_notification::NotificationId;
-use libra2_event_notifications::{EventNotificationSender, EventSubscriptionService};
-use libra2_infallible::Mutex;
-use libra2_logger::prelude::*;
-use libra2_mempool_notifications::MempoolNotificationSender;
-use libra2_storage_service_notifications::StorageServiceNotificationSender;
-use libra2_time_service::{TimeService, TimeServiceTrait};
-use libra2_types::{
+use creditchain_data_streaming_service::data_notification::NotificationId;
+use creditchain_event_notifications::{EventNotificationSender, EventSubscriptionService};
+use creditchain_infallible::Mutex;
+use creditchain_logger::prelude::*;
+use creditchain_mempool_notifications::MempoolNotificationSender;
+use creditchain_storage_service_notifications::StorageServiceNotificationSender;
+use creditchain_time_service::{TimeService, TimeServiceTrait};
+use creditchain_types::{
     contract_event::ContractEvent,
     ledger_info::LedgerInfoWithSignatures,
     transaction::{Transaction, Version},
@@ -355,7 +355,7 @@ impl ConsensusNotificationHandler {
     ) -> Result<(), Error> {
         // Wrap the result in an error that consensus can process
         let result = result.map_err(|error| {
-            libra2_consensus_notifications::Error::UnexpectedErrorEncountered(format!("{:?}", error))
+            creditchain_consensus_notifications::Error::UnexpectedErrorEncountered(format!("{:?}", error))
         });
 
         // Send the result
@@ -387,7 +387,7 @@ impl ConsensusNotificationHandler {
     ) -> Result<(), Error> {
         // Wrap the result in an error that consensus can process
         let result = result.map_err(|error| {
-            libra2_consensus_notifications::Error::UnexpectedErrorEncountered(format!("{:?}", error))
+            creditchain_consensus_notifications::Error::UnexpectedErrorEncountered(format!("{:?}", error))
         });
 
         // Send the result
@@ -415,7 +415,7 @@ impl ConsensusNotificationHandler {
     ) -> Result<(), Error> {
         // Wrap the result in an error that consensus can process
         let result = result.map_err(|error| {
-            libra2_consensus_notifications::Error::UnexpectedErrorEncountered(format!("{:?}", error))
+            creditchain_consensus_notifications::Error::UnexpectedErrorEncountered(format!("{:?}", error))
         });
 
         // Send the result

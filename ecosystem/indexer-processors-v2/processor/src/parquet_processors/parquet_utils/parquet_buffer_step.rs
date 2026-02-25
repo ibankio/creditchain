@@ -304,6 +304,7 @@ mod tests {
     use std::{collections::HashMap, sync::Arc, time::Duration};
 
     #[tokio::test]
+    #[ignore] // Requires GCS credentials
     #[allow(clippy::needless_return)]
     async fn test_parquet_buffer_step_no_upload() -> anyhow::Result<()> {
         let db_config = create_parquet_db_config();
@@ -331,6 +332,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore] // Requires GCS credentials
     #[allow(clippy::needless_return)]
     async fn test_parquet_buffer_step_trigger_upload() -> anyhow::Result<()> {
         let buffer_max_size = 25; // Default ParquetTypeStructs for MoveResource is 24 bytes

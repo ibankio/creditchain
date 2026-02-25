@@ -4,8 +4,8 @@
 
 use crate::{quorum_cert::QuorumCert, vote_data::VoteData};
 use anyhow::{ensure, Context};
-use libra2_crypto::hash::CryptoHash;
-use libra2_types::{
+use creditchain_crypto::hash::CryptoHash;
+use creditchain_types::{
     block_info::BlockInfo, ledger_info::LedgerInfoWithSignatures,
     validator_verifier::ValidatorVerifier,
 };
@@ -45,8 +45,8 @@ impl WrappedLedgerInfo {
         Self {
             vote_data: VoteData::dummy(),
             signed_ledger_info: LedgerInfoWithSignatures::new(
-                libra2_types::ledger_info::LedgerInfo::dummy(),
-                libra2_types::aggregate_signature::AggregateSignature::empty(),
+                creditchain_types::ledger_info::LedgerInfo::dummy(),
+                creditchain_types::aggregate_signature::AggregateSignature::empty(),
             ),
         }
     }

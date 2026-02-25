@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::collectors::common::NAMESPACE;
-use libra2_infallible::Mutex;
-use libra2_metrics_core::const_metric::ConstMetric;
+use creditchain_infallible::Mutex;
+use creditchain_metrics_core::const_metric::ConstMetric;
 use prometheus::{
     core::{Collector, Desc, Describer},
     proto::MetricFamily,
@@ -37,8 +37,8 @@ impl BasicNodeInfoCollector {
         let build_info = if let Some(build_info) = maybe_build_info {
             build_info
         } else {
-            let git_hash = libra2_build_info::get_git_hash();
-            fallback_build_info.insert(libra2_build_info::BUILD_COMMIT_HASH.into(), git_hash);
+            let git_hash = creditchain_build_info::get_git_hash();
+            fallback_build_info.insert(creditchain_build_info::BUILD_COMMIT_HASH.into(), git_hash);
             &fallback_build_info
         };
 
@@ -59,14 +59,14 @@ impl BasicNodeInfoCollector {
             .unwrap();
 
         let git_hash = build_info
-            .get(libra2_build_info::BUILD_COMMIT_HASH)
+            .get(creditchain_build_info::BUILD_COMMIT_HASH)
             .cloned()
             .unwrap_or_else(|| String::from(UNKNOW_LABEL));
         let release_metric =
             ConstMetric::new_gauge(release_hash_desc, 1.0, Some(&[git_hash])).unwrap();
 
         let node_version = build_info
-            .get(libra2_build_info::BUILD_PKG_VERSION)
+            .get(creditchain_build_info::BUILD_PKG_VERSION)
             .cloned()
             .unwrap_or_else(|| String::from(UNKNOW_LABEL));
         let version_metric =

@@ -3,7 +3,7 @@
 
 use crate::metrics::{ERROR_COUNT, WAIT_FOR_FILE_STORE_COUNTER};
 use anyhow::{bail, Context, Result};
-use libra2_indexer_grpc_utils::{
+use creditchain_indexer_grpc_utils::{
     cache_operator::CacheOperator,
     compression_util::{FileStoreMetadata, StorageFormat},
     config::IndexerGrpcFileStoreConfig,
@@ -12,8 +12,8 @@ use libra2_indexer_grpc_utils::{
     file_store_operator::FileStoreOperator,
     types::RedisUrl,
 };
-use libra2_moving_average::MovingAverage;
-use libra2_protos::internal::fullnode::v1::{
+use creditchain_moving_average::MovingAverage;
+use creditchain_protos::internal::fullnode::v1::{
     stream_status::StatusType, transactions_from_node_response::Response,
     GetTransactionsFromNodeRequest, TransactionsFromNodeResponse,
 };

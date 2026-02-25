@@ -9,13 +9,13 @@ use crate::{
     workflow::{do_get_execution_output::DoGetExecutionOutput, ApplyExecutionOutput},
 };
 use anyhow::{anyhow, ensure, format_err, Result};
-use libra2_crypto::HashValue;
-use libra2_logger::prelude::*;
-use libra2_storage_interface::{
+use creditchain_crypto::HashValue;
+use creditchain_logger::prelude::*;
+use creditchain_storage_interface::{
     state_store::state_view::cached_state_view::CachedStateView, DbReaderWriter, DbWriter,
     LedgerSummary,
 };
-use libra2_types::{
+use creditchain_types::{
     account_config::CORE_CODE_ADDRESS,
     aggregate_signature::AggregateSignature,
     block_executor::{
@@ -30,7 +30,7 @@ use libra2_types::{
     transaction::{AuxiliaryInfo, Transaction},
     waypoint::Waypoint,
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use std::sync::Arc;
 
 pub fn generate_waypoint<V: VMBlockExecutor>(

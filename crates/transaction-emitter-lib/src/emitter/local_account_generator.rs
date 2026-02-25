@@ -1,12 +1,12 @@
 use anyhow::bail;
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
-use libra2_crypto::ed25519::Ed25519PrivateKey;
-use libra2_sdk::types::{
+use creditchain_crypto::ed25519::Ed25519PrivateKey;
+use creditchain_sdk::types::{
     AccountKey, EphemeralKeyPair, EphemeralPrivateKey, KeylessAccount, LocalAccount,
 };
-use libra2_transaction_generator_lib::ReliableTransactionSubmitter;
-use libra2_types::{
+use creditchain_transaction_generator_lib::ReliableTransactionSubmitter;
+use creditchain_types::{
     keyless,
     keyless::{Claims, OpenIdSig, Pepper, ZeroKnowledgeSig},
 };

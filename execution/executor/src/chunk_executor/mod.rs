@@ -16,21 +16,21 @@ use crate::{
     },
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_executor_types::{
+use creditchain_executor_types::{
     ChunkCommitNotification, ChunkExecutorTrait, TransactionReplayer, VerifyExecutionMode,
 };
-use libra2_experimental_runtimes::thread_manager::THREAD_MANAGER;
-use libra2_infallible::{Mutex, RwLock};
-use libra2_logger::prelude::*;
-use libra2_metrics_core::{IntGaugeHelper, TimerHelper};
-use libra2_storage_interface::{
+use creditchain_experimental_runtimes::thread_manager::THREAD_MANAGER;
+use creditchain_infallible::{Mutex, RwLock};
+use creditchain_logger::prelude::*;
+use creditchain_metrics_core::{IntGaugeHelper, TimerHelper};
+use creditchain_storage_interface::{
     state_store::{
         state::State, state_summary::ProvableStateSummary,
         state_view::cached_state_view::CachedStateView,
     },
     DbReaderWriter,
 };
-use libra2_types::{
+use creditchain_types::{
     block_executor::{
         config::BlockExecutorConfigFromOnchain,
         transaction_slice_metadata::TransactionSliceMetadata,
@@ -47,7 +47,7 @@ use libra2_types::{
     },
     write_set::WriteSet,
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use chunk_commit_queue::{ChunkCommitQueue, ChunkToUpdateLedger};
 use chunk_result_verifier::{ChunkResultVerifier, ReplayChunkVerifier, StateSyncChunkVerifier};
 use fail::fail_point;

@@ -10,8 +10,8 @@ use crate::{
     },
 };
 use anyhow::{Context, Result};
-use libra2_crypto::Uniform;
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_crypto::Uniform;
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 use move_core_types::{
     account_address::AccountAddress, ident_str, identifier::IdentStr, language_storage::TypeTag,
     move_resource::MoveStructType,

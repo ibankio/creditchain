@@ -5,26 +5,26 @@ use crate::{
     smoke_test_environment::SwarmBuilder,
     utils::{create_test_accounts, execute_transactions},
 };
-use libra2_cached_packages::libra2_stdlib;
-use libra2_config::config::{
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_config::config::{
     BatchTransactionFilterConfig, BlockTransactionFilterConfig, NodeConfig, TransactionFilterConfig,
 };
-use libra2_crypto::ed25519::{Ed25519PrivateKey, Ed25519PublicKey};
-use libra2_forge::{LocalSwarm, NodeExt, Swarm};
-use libra2_keygen::KeyGen;
-use libra2_sdk::{
+use creditchain_crypto::ed25519::{Ed25519PrivateKey, Ed25519PublicKey};
+use creditchain_forge::{LocalSwarm, NodeExt, Swarm};
+use creditchain_keygen::KeyGen;
+use creditchain_sdk::{
     crypto::{PrivateKey, SigningKey},
     types::{
         transaction::{authenticator::AuthenticationKey, SignedTransaction},
         LocalAccount,
     },
 };
-use libra2_transaction_filters::{
+use creditchain_transaction_filters::{
     batch_transaction_filter::{BatchTransactionFilter, BatchTransactionMatcher},
     block_transaction_filter::{BlockTransactionFilter, BlockTransactionMatcher},
     transaction_filter::{TransactionFilter, TransactionMatcher},
 };
-use libra2_types::on_chain_config::{
+use creditchain_types::on_chain_config::{
     ConsensusAlgorithmConfig, OnChainConsensusConfig, ValidatorTxnConfig, DEFAULT_WINDOW_SIZE,
 };
 use move_core_types::account_address::AccountAddress;
@@ -59,8 +59,8 @@ async fn test_consensus_block_filter() {
     let transaction = create_transaction_from_sender(private_key, sender_address, &mut swarm).await;
 
     // Submit the transaction and wait for it to be processed
-    let libra2_public_info = swarm.libra2_public_info();
-    let response = libra2_public_info
+    let creditchain_public_info = swarm.creditchain_public_info();
+    let response = creditchain_public_info
         .client()
         .submit_and_wait(&transaction)
         .await;
@@ -96,8 +96,8 @@ async fn test_mempool_transaction_filter() {
     let transaction = create_transaction_from_sender(private_key, sender_address, &mut swarm).await;
 
     // Submit the transaction and wait for it to be processed
-    let libra2_public_info = swarm.libra2_public_info();
-    let response = libra2_public_info
+    let creditchain_public_info = swarm.creditchain_public_info();
+    let response = creditchain_public_info
         .client()
         .submit_and_wait(&transaction)
         .await;
@@ -133,8 +133,8 @@ async fn test_quorum_store_batch_filter() {
     let transaction = create_transaction_from_sender(private_key, sender_address, &mut swarm).await;
 
     // Submit the transaction and wait for it to be processed
-    let libra2_public_info = swarm.libra2_public_info();
-    let response = libra2_public_info
+    let creditchain_public_info = swarm.creditchain_public_info();
+    let response = creditchain_public_info
         .client()
         .submit_and_wait(&transaction)
         .await;
@@ -155,12 +155,12 @@ async fn create_account_with_funds(
     sender_address: AccountAddress,
     swarm: &mut LocalSwarm,
 ) {
-    let mut libra2_public_info = swarm.libra2_public_info();
-    libra2_public_info
+    let mut creditchain_public_info = swarm.creditchain_public_info();
+    creditchain_public_info
         .create_user_account(public_key)
         .await
         .unwrap();
-    libra2_public_info
+    creditchain_public_info
         .mint(sender_address, 10_000_000)
         .await
         .unwrap();
@@ -184,8 +184,8 @@ async fn create_signed_transaction_from_sender(
     swarm: &mut LocalSwarm,
 ) -> SignedTransaction {
     // Fetch the sequence number for the sender address
-    let libra2_public_info = swarm.libra2_public_info();
-    let sequence_number = libra2_public_info
+    let creditchain_public_info = swarm.creditchain_public_info();
+    let sequence_number = creditchain_public_info
         .client()
         .get_account(sender_address)
         .await
@@ -194,9 +194,9 @@ async fn create_signed_transaction_from_sender(
         .sequence_number;
 
     // Create the unsigned transaction
-    let unsigned_txn = libra2_public_info
+    let unsigned_txn = creditchain_public_info
         .transaction_factory()
-        .payload(libra2_stdlib::libra2_coin_transfer(receiver.address(), 100))
+        .payload(creditchain_stdlib::creditchain_coin_transfer(receiver.address(), 100))
         .sender(sender_address)
         .sequence_number(sequence_number)
         .max_gas_amount(1_000_000)
@@ -219,8 +219,8 @@ async fn create_transaction_from_sender(
     create_account_with_funds(&private_key.public_key(), sender_address, swarm).await;
 
     // Create a receiver account and mint some coins to it
-    let mut libra2_public_info = swarm.libra2_public_info();
-    let receiver = libra2_public_info.random_account();
+    let mut creditchain_public_info = swarm.creditchain_public_info();
+    let receiver = creditchain_public_info.random_account();
     create_account_with_funds(receiver.public_key(), receiver.address(), swarm).await;
 
     // Create a signed transaction

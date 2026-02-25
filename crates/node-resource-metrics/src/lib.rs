@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::collectors::BasicNodeInfoCollector;
-use libra2_infallible::Mutex;
-use libra2_logger::warn;
+use creditchain_infallible::Mutex;
+use creditchain_logger::warn;
 use cfg_if::cfg_if;
 use collectors::{
     CollectorLatencyCollector, CpuMetricsCollector, DiskMetricsCollector, LoadAvgCollector,

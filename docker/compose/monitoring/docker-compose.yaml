@@ -86,4 +86,4 @@ volumes:
 # networks:
 #   default:
 #     external: true
-#     name: "libra2-docker-compose-shared"
+#     name: "creditchain-docker-compose-shared"

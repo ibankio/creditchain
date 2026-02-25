@@ -14,16 +14,16 @@ use crate::{
     workspace_builder::workspace_root,
 };
 use anyhow::anyhow;
-use libra2_config::{
+use creditchain_config::{
     config::{AdminServiceConfig, InitialSafetyRulesConfig, NodeConfig},
     network_id::NetworkId,
 };
-use libra2_forge::{
+use creditchain_forge::{
     get_highest_synced_version, get_highest_synced_version_and_epoch,
     wait_for_all_nodes_to_catchup, LocalNode, LocalSwarm, Node, NodeExt, SwarmExt, Validator,
 };
-use libra2_temppath::TempPath;
-use libra2_types::{transaction::Transaction, waypoint::Waypoint};
+use creditchain_temppath::TempPath;
+use creditchain_types::{transaction::Transaction, waypoint::Waypoint};
 use move_core_types::language_storage::CORE_CODE_ADDRESS;
 use regex::Regex;
 use reqwest::Client;
@@ -45,14 +45,14 @@ use std::{
 /// 1. Start a 4 node validator network, including 2 VFNs.
 /// 2. Use consensus `sync_only` mode to force all nodes to stop at the same version (i.e., emulate a halt).
 /// 3. Use the libra2 CLI to generate a genesis transaction that removes the last validator from the set.
-/// 4. Use the libra2-debugger to manually apply the genesis transaction to all remaining validators.
+/// 4. Use the creditchain-debugger to manually apply the genesis transaction to all remaining validators.
 /// 5. Verify that the network is able to resume consensus and that the last validator is no longer in the set.
-/// 6. Use the libra2-debugger to manually apply the genesis transaction to all VFNs.
+/// 6. Use the creditchain-debugger to manually apply the genesis transaction to all VFNs.
 /// 7. Verify that the VFNs are able to sync with the rest of the network.
 async fn test_fullnode_genesis_transaction_flow() {
-    println!("0. Building the Libra2 CLI and debugger!");
-    let libra2_debugger = workspace_builder::get_bin("libra2-debugger");
-    let libra2_cli = workspace_builder::get_bin("libra2");
+    println!("0. Building the CreditChain CLI and debugger!");
+    let creditchain_debugger = workspace_builder::get_bin("creditchain-debugger");
+    let creditchain_cli = workspace_builder::get_bin("creditchain");
 
     println!("1. Starting a 4 node validator network with 2 VFNs!");
     let num_validators = 4;
@@ -92,15 +92,15 @@ async fn test_fullnode_genesis_transaction_flow() {
 
     println!("5. Generating a genesis transaction that removes the last validator from the set!");
     let (genesis_blob_path, genesis_transaction) =
-        generate_genesis_transaction(&mut swarm, libra2_cli);
+        generate_genesis_transaction(&mut swarm, creditchain_cli);
 
     println!("6. Applying the genesis transaction to the first validator!");
     let first_validator_config = swarm.validators_mut().next().unwrap().config().clone();
     let first_validator_storage_dir = first_validator_config.storage.dir();
-    let output = Command::new(libra2_debugger.as_path())
+    let output = Command::new(creditchain_debugger.as_path())
         .current_dir(workspace_root())
         .args(&vec![
-            "libra2-db",
+            "creditchain-db",
             "bootstrap",
             first_validator_storage_dir.to_str().unwrap(),
             "--genesis-txn-file",
@@ -191,13 +191,13 @@ async fn test_fullnode_genesis_transaction_flow() {
 /// 2. Enable consensus `sync_only` mode for the last validator and verify that it can sync.
 /// 3. Use consensus `sync_only` mode to force all nodes to stop at the same version (i.e., emulate a halt).
 /// 4. Use the libra2 CLI to generate a genesis transaction that removes the last validator from the set.
-/// 5. Use the libra2-debugger to manually apply the genesis transaction to all remaining validators.
+/// 5. Use the creditchain-debugger to manually apply the genesis transaction to all remaining validators.
 /// 6. Verify that the network is able to resume consensus and that the last validator is no longer in the set.
 /// 7. Verify that a failed validator node is able to db-restore and rejoin the network.
 async fn test_validator_genesis_transaction_and_db_restore_flow() {
-    println!("0. Building the Libra2 CLI and debugger!");
-    let libra2_debugger = workspace_builder::get_bin("libra2-debugger");
-    let libra2_cli = workspace_builder::get_bin("libra2");
+    println!("0. Building the CreditChain CLI and debugger!");
+    let creditchain_debugger = workspace_builder::get_bin("creditchain-debugger");
+    let creditchain_cli = workspace_builder::get_bin("creditchain");
 
     println!("1. Starting a 5 node validator network!");
     let num_validators = 5;
@@ -229,15 +229,15 @@ async fn test_validator_genesis_transaction_and_db_restore_flow() {
 
     println!("6. Generating a genesis transaction that removes the last validator from the set!");
     let (genesis_blob_path, genesis_transaction) =
-        generate_genesis_transaction(&mut swarm, libra2_cli);
+        generate_genesis_transaction(&mut swarm, creditchain_cli);
 
     println!("7. Applying the genesis transaction to the first validator!");
     let first_validator_config = swarm.validators_mut().next().unwrap().config().clone();
     let first_validator_storage_dir = first_validator_config.storage.dir();
-    let output = Command::new(libra2_debugger.as_path())
+    let output = Command::new(creditchain_debugger.as_path())
         .current_dir(workspace_root())
         .args(&vec![
-            "libra2-db",
+            "creditchain-db",
             "bootstrap",
             first_validator_storage_dir.to_str().unwrap(),
             "--genesis-txn-file",
@@ -423,7 +423,7 @@ pub(crate) async fn enable_sync_only_mode(num_nodes: usize, validator_node: &mut
 /// Generates a genesis write-set transaction that removes the last validator from the set
 fn generate_genesis_transaction(
     env: &mut LocalSwarm,
-    libra2_cli: PathBuf,
+    creditchain_cli: PathBuf,
 ) -> (TempPath, Transaction) {
     // Get the address of the last validator
     let last_validator_address = env
@@ -438,14 +438,14 @@ fn generate_genesis_transaction(
     let script = format!(
         r#"
         script {{
-            use libra2_framework::stake;
-            use libra2_framework::libra2_governance;
-            use libra2_framework::block;
+            use creditchain_framework::stake;
+            use creditchain_framework::creditchain_governance;
+            use creditchain_framework::block;
 
             fun main(vm_signer: &signer, framework_signer: &signer) {{
                 stake::remove_validators(framework_signer, &vector[@0x{}]);
                 block::emit_writeset_block_event(vm_signer, @0x1);
-                libra2_governance::force_end_epoch(framework_signer);
+                creditchain_governance::force_end_epoch(framework_signer);
             }}
     }}
     "#,
@@ -462,16 +462,16 @@ fn generate_genesis_transaction(
     let framework_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("..")
         .join("..")
-        .join("libra2-move")
+        .join("creditchain-move")
         .join("framework")
-        .join("libra2-framework");
+        .join("creditchain-framework");
 
     // Create a temporary file to hold the genesis blob
     let genesis_blob_path = TempPath::new();
     genesis_blob_path.create_as_file().unwrap();
 
     // Generate the genesis write-set transaction
-    Command::new(libra2_cli.as_path())
+    Command::new(creditchain_cli.as_path())
         .current_dir(workspace_root())
         .args(&vec![
             "genesis",
@@ -517,7 +517,7 @@ fn parse_waypoint(bootstrap_command_output: &str) -> Waypoint {
         .unwrap()
         .captures(bootstrap_command_output)
         .ok_or_else(|| {
-            anyhow!("Failed to parse `libra2-debugger libra2-db bootstrap` waypoint output!")
+            anyhow!("Failed to parse `creditchain-debugger creditchain-db bootstrap` waypoint output!")
         });
     Waypoint::from_str(waypoint.unwrap()[1].into()).unwrap()
 }

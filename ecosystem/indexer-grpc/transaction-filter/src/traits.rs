@@ -196,6 +196,6 @@ mod test {
         let res = outer.is_valid();
         assert!(res.is_err());
         let error = res.unwrap_err();
-        assert_eq!(error.to_string(), "Filter Error: This is a test error!\nTrace Path:\nlibra2_transaction_filter::traits::test::InnerStruct:   {\"a\":\"test\"}\ncore::option::Option<libra2_transaction_filter::traits::test::InnerStruct>:   {\"a\":\"test\"}\nlibra2_transaction_filter::traits::test::OuterStruct:   {\"inner\":{\"a\":\"test\"}}");
+        assert_eq!(error.to_string(), "Filter Error: This is a test error!\nTrace Path:\ncreditchain_transaction_filter::traits::test::InnerStruct:   {\"a\":\"test\"}\ncore::option::Option<creditchain_transaction_filter::traits::test::InnerStruct>:   {\"a\":\"test\"}\ncreditchain_transaction_filter::traits::test::OuterStruct:   {\"inner\":{\"a\":\"test\"}}");
     }
 }

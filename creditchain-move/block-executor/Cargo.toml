@@ -1,0 +1,78 @@
+[package]
+name = "creditchain-block-executor"
+description = "CreditChain block transaction executor library, parallel execution via Block-STM"
+version = "0.1.1"
+
+# Workspace inherited keys
+authors = { workspace = true }
+edition = { workspace = true }
+homepage = { workspace = true }
+license = { workspace = true }
+publish = { workspace = true }
+repository = { workspace = true }
+rust-version = { workspace = true }
+
+[dependencies]
+ambassador = { workspace = true }
+anyhow = { workspace = true }
+creditchain-aggregator = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-drop-helper = { workspace = true }
+creditchain-gas-schedule = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-mvhashmap = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm-environment = { workspace = true }
+creditchain-vm-logging = { workspace = true }
+creditchain-vm-types = { workspace = true }
+arc-swap = { workspace = true }
+bcs = { workspace = true }
+bytes = { workspace = true }
+cfg-if = { workspace = true }
+claims = { workspace = true }
+concurrent-queue = { workspace = true }
+criterion = { workspace = true, optional = true }
+crossbeam = { workspace = true }
+derivative = { workspace = true }
+fail = { workspace = true }
+hashbrown = { workspace = true }
+move-binary-format = { workspace = true }
+move-core-types = { workspace = true }
+move-vm-runtime = { workspace = true }
+move-vm-types = { workspace = true }
+num_cpus = { workspace = true }
+once_cell = { workspace = true }
+parking_lot = { workspace = true }
+proptest = { workspace = true, optional = true }
+proptest-derive = { workspace = true, optional = true }
+rand = { workspace = true }
+rayon = { workspace = true }
+scopeguard = { workspace = true }
+
+[dev-dependencies]
+creditchain-aggregator = { workspace = true, features = ["testing"] }
+creditchain-transaction-simulation = { workspace = true }
+creditchain-types = { workspace = true, features = ["testing"] }
+criterion = { workspace = true }
+fail = { workspace = true, features = ["failpoints"] }
+itertools = { workspace = true }
+move-vm-runtime = { workspace = true, features = ["testing"] }
+move-vm-types = { workspace = true, features = ["testing"] }
+proptest = { workspace = true }
+proptest-derive = { workspace = true }
+rand = { workspace = true }
+test-case = { workspace = true }
+
+[features]
+testing = []
+fuzzing = ["criterion", "proptest", "proptest-derive"]
+
+[[bench]]
+name = "scheduler_benches"
+harness = false
+required-features = ["fuzzing"]
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(fuzzing)'] }

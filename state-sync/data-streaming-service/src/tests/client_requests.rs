@@ -9,10 +9,10 @@ use crate::{
     },
     tests::utils::create_ledger_info,
 };
-use libra2_config::config::{DataStreamingServiceConfig, DynamicPrefetchingConfig};
-use libra2_data_client::global_summary::GlobalDataSummary;
-use libra2_id_generator::U64IdGenerator;
-use libra2_storage_service_types::responses::CompleteDataRange;
+use creditchain_config::config::{DataStreamingServiceConfig, DynamicPrefetchingConfig};
+use creditchain_data_client::global_summary::GlobalDataSummary;
+use creditchain_id_generator::U64IdGenerator;
+use creditchain_storage_service_types::responses::CompleteDataRange;
 use std::sync::Arc;
 
 #[test]

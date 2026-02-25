@@ -3,19 +3,19 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{
-    Address, Libra2Error, EntryFunctionId, EventGuid, HashValue, HexEncodedBytes,
+    Address, CreditChainError, EntryFunctionId, EventGuid, HashValue, HexEncodedBytes,
     MoveModuleBytecode, MoveModuleId, MoveResource, MoveScriptBytecode, MoveStructTag, MoveType,
     MoveValue, VerifyInput, VerifyInputWithRecursion, U64,
 };
 use anyhow::{bail, Context as AnyhowContext, Result};
-use libra2_crypto::{
+use creditchain_crypto::{
     ed25519::{self, Ed25519PublicKey, ED25519_PUBLIC_KEY_LENGTH, ED25519_SIGNATURE_LENGTH},
     multi_ed25519::{self, MultiEd25519PublicKey, BITMAP_NUM_OF_BYTES, MAX_NUM_OF_KEYS},
     secp256k1_ecdsa, secp256r1_ecdsa,
     secp256r1_ecdsa::PUBLIC_KEY_LENGTH,
     ValidCryptoMaterial,
 };
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     aggregate_signature::AggregateSignature,
     block_metadata::BlockMetadata,
@@ -78,7 +78,7 @@ impl TransactionData {
     ) -> Result<Self> {
         if txn.version > latest_ledger_version {
             match txn.transaction {
-                libra2_types::transaction::Transaction::UserTransaction(txn) => {
+                creditchain_types::transaction::Transaction::UserTransaction(txn) => {
                     Ok(Self::Pending(Box::new(txn)))
                 },
                 _ => bail!("convert non-user onchain transaction to pending shouldn't exist"),
@@ -103,19 +103,19 @@ pub struct TransactionOnChainData {
     /// The ledger version of the transaction
     pub version: u64,
     /// The transaction submitted
-    pub transaction: libra2_types::transaction::Transaction,
+    pub transaction: creditchain_types::transaction::Transaction,
     /// Information about the transaction
-    pub info: libra2_types::transaction::TransactionInfo,
+    pub info: creditchain_types::transaction::TransactionInfo,
     /// Events emitted by the transaction
     pub events: Vec<ContractEvent>,
     /// The accumulator root hash at this version
-    pub accumulator_root_hash: libra2_crypto::HashValue,
+    pub accumulator_root_hash: creditchain_crypto::HashValue,
     /// Final state of resources changed by the transaction
-    pub changes: libra2_types::write_set::WriteSet,
+    pub changes: creditchain_types::write_set::WriteSet,
 }
 
-impl From<(TransactionWithProof, libra2_crypto::HashValue)> for TransactionOnChainData {
-    fn from((txn, accumulator_root_hash): (TransactionWithProof, libra2_crypto::HashValue)) -> Self {
+impl From<(TransactionWithProof, creditchain_crypto::HashValue)> for TransactionOnChainData {
+    fn from((txn, accumulator_root_hash): (TransactionWithProof, creditchain_crypto::HashValue)) -> Self {
         Self {
             version: txn.version,
             transaction: txn.transaction,
@@ -130,14 +130,14 @@ impl From<(TransactionWithProof, libra2_crypto::HashValue)> for TransactionOnCha
 impl
     From<(
         TransactionWithProof,
-        libra2_crypto::HashValue,
+        creditchain_crypto::HashValue,
         &TransactionOutput,
     )> for TransactionOnChainData
 {
     fn from(
         (txn, accumulator_root_hash, txn_output): (
             TransactionWithProof,
-            libra2_crypto::HashValue,
+            creditchain_crypto::HashValue,
             &TransactionOutput,
         ),
     ) -> Self {
@@ -155,21 +155,21 @@ impl
 impl
     From<(
         u64,
-        libra2_types::transaction::Transaction,
-        libra2_types::transaction::TransactionInfo,
+        creditchain_types::transaction::Transaction,
+        creditchain_types::transaction::TransactionInfo,
         Vec<ContractEvent>,
-        libra2_crypto::HashValue,
-        libra2_types::write_set::WriteSet,
+        creditchain_crypto::HashValue,
+        creditchain_types::write_set::WriteSet,
     )> for TransactionOnChainData
 {
     fn from(
         (version, transaction, info, events, accumulator_root_hash, write_set): (
             u64,
-            libra2_types::transaction::Transaction,
-            libra2_types::transaction::TransactionInfo,
+            creditchain_types::transaction::Transaction,
+            creditchain_types::transaction::TransactionInfo,
             Vec<ContractEvent>,
-            libra2_crypto::HashValue,
-            libra2_types::write_set::WriteSet,
+            creditchain_crypto::HashValue,
+            creditchain_types::write_set::WriteSet,
         ),
     ) -> Self {
         Self {
@@ -199,7 +199,7 @@ pub enum ReplayProtector {
     SequenceNumber(U64),
 }
 
-/// Enum of the different types of transactions in Libra2
+/// Enum of the different types of transactions in CreditChain
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, Union)]
 #[serde(tag = "type", rename_all = "snake_case")]
 #[oai(one_of, discriminator_name = "type", rename_all = "snake_case")]
@@ -469,7 +469,7 @@ pub struct TransactionsBatchSubmissionResult {
 /// Information telling which batch submission transactions failed
 #[derive(Debug, Serialize, Deserialize, Object)]
 pub struct TransactionsBatchSingleSubmissionFailure {
-    pub error: Libra2Error,
+    pub error: CreditChainError,
     /// The index of which transaction failed, same as submission order
     pub transaction_index: usize,
 }
@@ -507,11 +507,11 @@ pub struct UserTransactionRequest {
 }
 
 impl UserTransactionRequest {
-    pub fn replay_protector(&self) -> libra2_types::transaction::ReplayProtector {
+    pub fn replay_protector(&self) -> creditchain_types::transaction::ReplayProtector {
         if let Some(nonce) = self.replay_protection_nonce {
-            libra2_types::transaction::ReplayProtector::Nonce(nonce.0)
+            creditchain_types::transaction::ReplayProtector::Nonce(nonce.0)
         } else {
-            libra2_types::transaction::ReplayProtector::SequenceNumber(self.sequence_number.0)
+            creditchain_types::transaction::ReplayProtector::SequenceNumber(self.sequence_number.0)
         }
     }
 }
@@ -578,8 +578,8 @@ pub struct BlockMetadataTransaction {
     pub failed_proposer_indices: Vec<u32>,
     pub timestamp: U64,
 
-    /// If some, it means the internal txn type is `libra2_types::transaction::Transaction::BlockMetadataExt`.
-    /// Otherwise, it is `libra2_types::transaction::Transaction::BlockMetadata`.
+    /// If some, it means the internal txn type is `creditchain_types::transaction::Transaction::BlockMetadataExt`.
+    /// Otherwise, it is `creditchain_types::transaction::Transaction::BlockMetadata`.
     ///
     /// NOTE: we could have introduced a new LBT txn type to represent the corresponding internal type,
     /// but that is a breaking change to the ecosystem.
@@ -721,7 +721,7 @@ impl ValidatorTransaction {
 
 impl
     From<(
-        libra2_types::validator_txn::ValidatorTransaction,
+        creditchain_types::validator_txn::ValidatorTransaction,
         TransactionInfo,
         Vec<Event>,
         u64,
@@ -729,14 +729,14 @@ impl
 {
     fn from(
         (txn, info, events, timestamp): (
-            libra2_types::validator_txn::ValidatorTransaction,
+            creditchain_types::validator_txn::ValidatorTransaction,
             TransactionInfo,
             Vec<Event>,
             u64,
         ),
     ) -> Self {
         match txn {
-            libra2_types::validator_txn::ValidatorTransaction::DKGResult(dkg_transcript) => {
+            creditchain_types::validator_txn::ValidatorTransaction::DKGResult(dkg_transcript) => {
                 Self::DkgResult(DKGResultTransaction {
                     info,
                     events,
@@ -744,7 +744,7 @@ impl
                     dkg_transcript: dkg_transcript.into(),
                 })
             },
-            libra2_types::validator_txn::ValidatorTransaction::ObservedJWKUpdate(
+            creditchain_types::validator_txn::ValidatorTransaction::ObservedJWKUpdate(
                 quorum_certified_update,
             ) => Self::ObservedJwkUpdate(JWKUpdateTransaction {
                 info,
@@ -766,7 +766,7 @@ pub struct JWKUpdateTransaction {
     pub quorum_certified_update: ExportedQuorumCertifiedUpdate,
 }
 
-/// A more API-friendly representation of the on-chain `libra2_types::jwks::QuorumCertifiedUpdate`.
+/// A more API-friendly representation of the on-chain `creditchain_types::jwks::QuorumCertifiedUpdate`.
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, Object)]
 pub struct ExportedQuorumCertifiedUpdate {
     pub update: ExportedProviderJWKs,
@@ -783,7 +783,7 @@ impl From<QuorumCertifiedUpdate> for ExportedQuorumCertifiedUpdate {
     }
 }
 
-/// A more API-friendly representation of the on-chain `libra2_types::aggregate_signature::AggregateSignature`.
+/// A more API-friendly representation of the on-chain `creditchain_types::aggregate_signature::AggregateSignature`.
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, Object)]
 pub struct ExportedAggregateSignature {
     pub signer_indices: Vec<usize>,
@@ -803,7 +803,7 @@ impl From<AggregateSignature> for ExportedAggregateSignature {
     }
 }
 
-/// A more API-friendly representation of the on-chain `libra2_types::jwks::ProviderJWKs`.
+/// A more API-friendly representation of the on-chain `creditchain_types::jwks::ProviderJWKs`.
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize, Object)]
 pub struct ExportedProviderJWKs {
     pub issuer: String,
@@ -1387,7 +1387,7 @@ impl TryFrom<&MultiEd25519Signature> for TransactionAuthenticator {
 
         Ok(TransactionAuthenticator::multi_ed25519(
             MultiEd25519PublicKey::new(ed25519_public_keys, value.threshold)?,
-            libra2_crypto::multi_ed25519::MultiEd25519Signature::new_with_signatures_and_bitmap(
+            creditchain_crypto::multi_ed25519::MultiEd25519Signature::new_with_signatures_and_bitmap(
                 ed25519_signatures,
                 value.bitmap.inner().try_into()?,
             ),
@@ -1412,7 +1412,7 @@ impl TryFrom<&MultiEd25519Signature> for AccountAuthenticator {
 
         Ok(AccountAuthenticator::multi_ed25519(
             MultiEd25519PublicKey::new(ed25519_public_keys, value.threshold)?,
-            libra2_crypto::multi_ed25519::MultiEd25519Signature::new_with_signatures_and_bitmap(
+            creditchain_crypto::multi_ed25519::MultiEd25519Signature::new_with_signatures_and_bitmap(
                 ed25519_signatures,
                 value.bitmap.inner().try_into()?,
             ),

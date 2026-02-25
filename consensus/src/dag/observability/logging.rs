@@ -1,8 +1,8 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_consensus_types::common::{Author, Round};
-use libra2_logger::Schema;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_logger::Schema;
 use serde::Serialize;
 
 #[derive(Schema)]

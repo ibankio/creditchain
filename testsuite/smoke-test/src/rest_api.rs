@@ -6,17 +6,17 @@ use crate::{
     smoke_test_environment::{new_local_swarm_with_libra2, SwarmBuilder},
     txn_emitter::generate_traffic,
 };
-use libra2_cached_packages::libra2_stdlib;
-use libra2_config::config::GasEstimationConfig;
-use libra2_crypto::ed25519::Ed25519Signature;
-use libra2_forge::{LocalSwarm, NodeExt, Swarm, TransactionType};
-use libra2_global_constants::{DEFAULT_BUCKETS, GAS_UNIT_PRICE};
-use libra2_rest_client::{
-    libra2_api_types::{MoveModuleId, TransactionData, ViewFunction, ViewRequest},
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_config::config::GasEstimationConfig;
+use creditchain_crypto::ed25519::Ed25519Signature;
+use creditchain_forge::{LocalSwarm, NodeExt, Swarm, TransactionType};
+use creditchain_global_constants::{DEFAULT_BUCKETS, GAS_UNIT_PRICE};
+use creditchain_rest_client::{
+    creditchain_api_types::{MoveModuleId, TransactionData, ViewFunction, ViewRequest},
     Client,
 };
-use libra2_sdk::move_types::language_storage::StructTag;
-use libra2_types::{
+use creditchain_sdk::move_types::language_storage::StructTag;
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::{AccountResource, CORE_CODE_ADDRESS},
     on_chain_config::{ExecutionConfigV2, OnChainExecutionConfig, TransactionShufflerType},
@@ -31,7 +31,7 @@ use std::{convert::TryFrom, str::FromStr, sync::Arc, time::Duration};
 #[tokio::test]
 async fn test_get_index() {
     let swarm = new_local_swarm_with_libra2(1).await;
-    let info = swarm.libra2_public_info();
+    let info = swarm.creditchain_public_info();
 
     let resp = reqwest::get(info.url().to_owned()).await.unwrap();
     assert_eq!(reqwest::StatusCode::OK, resp.status());
@@ -46,7 +46,7 @@ async fn test_basic_client() {
         }))
         .build()
         .await;
-    let mut info = swarm.libra2_public_info();
+    let mut info = swarm.creditchain_public_info();
 
     info.client().get_ledger_information().await.unwrap();
 
@@ -65,7 +65,7 @@ async fn test_basic_client() {
 
     let tx = account1.sign_with_transaction_builder(
         info.transaction_factory()
-            .payload(libra2_stdlib::libra2_coin_transfer(account2.address(), 1)),
+            .payload(creditchain_stdlib::creditchain_coin_transfer(account2.address(), 1)),
     );
     let pending_txn = info.client().submit(&tx).await.unwrap().into_inner();
 
@@ -261,7 +261,7 @@ async fn test_bcs() {
         }))
         .build()
         .await;
-    let mut info = swarm.libra2_public_info();
+    let mut info = swarm.creditchain_public_info();
 
     // Create accounts
     let mut local_account = info
@@ -374,7 +374,7 @@ async fn test_bcs() {
         let bcs_txn = transactions_bcs.get(i).unwrap();
         assert_eq!(bcs_txn.version, expected_transaction.version().unwrap());
         let expected_hash =
-            libra2_crypto::HashValue::from(expected_transaction.transaction_info().unwrap().hash);
+            creditchain_crypto::HashValue::from(expected_transaction.transaction_info().unwrap().hash);
 
         let bcs_hash = if let Transaction::UserTransaction(ref txn) = bcs_txn.transaction {
             txn.committed_hash()
@@ -424,7 +424,7 @@ async fn test_bcs() {
 
         assert_eq!(json_txn.version().unwrap(), bcs_txn.version);
         assert_eq!(
-            libra2_crypto::HashValue::from(json_txn.transaction_info().unwrap().hash),
+            creditchain_crypto::HashValue::from(json_txn.transaction_info().unwrap().hash),
             bcs_txn.info.transaction_hash()
         );
     }
@@ -447,7 +447,7 @@ async fn test_bcs() {
 
     let bcs_txn = client.simulate_bcs(&signed_txn).await.unwrap().into_inner();
     assert_eq!(
-        libra2_crypto::HashValue::from(json_txn.info.hash),
+        creditchain_crypto::HashValue::from(json_txn.info.hash),
         bcs_txn.info.transaction_hash()
     );
 
@@ -483,7 +483,7 @@ async fn test_bcs() {
 
     assert_eq!(json_block.block_height.0, bcs_block.block_height);
     assert_eq!(
-        libra2_crypto::HashValue::from(json_block.block_hash),
+        creditchain_crypto::HashValue::from(json_block.block_hash),
         bcs_block.block_hash
     );
 
@@ -493,7 +493,7 @@ async fn test_bcs() {
     let first_bcs_txn = bcs_txns.first().unwrap();
     assert_eq!(first_json_txn.version().unwrap(), first_bcs_txn.version);
     assert_eq!(
-        libra2_crypto::HashValue::from(first_json_txn.transaction_info().unwrap().hash),
+        creditchain_crypto::HashValue::from(first_json_txn.transaction_info().unwrap().hash),
         first_bcs_txn.info.transaction_hash()
     );
 
@@ -514,7 +514,7 @@ async fn test_bcs() {
     assert_eq!(bcs_block.block_height, bcs_block_by_height.block_height);
     assert_eq!(bcs_block.block_hash, bcs_block_by_height.block_hash);
     assert_eq!(
-        libra2_crypto::HashValue::from(json_block_by_height.block_hash),
+        creditchain_crypto::HashValue::from(json_block_by_height.block_hash),
         bcs_block_by_height.block_hash
     );
 
@@ -563,7 +563,7 @@ async fn test_bcs() {
 #[tokio::test]
 async fn test_view_function() {
     let swarm = new_local_swarm_with_libra2(1).await;
-    let info = swarm.libra2_public_info();
+    let info = swarm.creditchain_public_info();
     let client: &Client = info.client();
 
     let address = AccountAddress::ONE;
@@ -571,7 +571,7 @@ async fn test_view_function() {
     // Non-BCS
     let view_request = ViewRequest {
         function: "0x1::coin::is_account_registered".parse().unwrap(),
-        type_arguments: vec!["0x1::libra2_coin::Libra2Coin".parse().unwrap()],
+        type_arguments: vec!["0x1::creditchain_coin::CreditChainCoin".parse().unwrap()],
         arguments: vec![serde_json::Value::String(address.to_hex_literal())],
     };
 
@@ -585,7 +585,7 @@ async fn test_view_function() {
         module: ModuleId::new(address, ident_str!("coin").into()),
         function: ident_str!("is_account_registered").into(),
         ty_args: vec![TypeTag::Struct(Box::new(
-            StructTag::from_str("0x1::libra2_coin::Libra2Coin").unwrap(),
+            StructTag::from_str("0x1::creditchain_coin::CreditChainCoin").unwrap(),
         ))],
         args: vec![bcs::to_bytes(&address).unwrap()],
     };

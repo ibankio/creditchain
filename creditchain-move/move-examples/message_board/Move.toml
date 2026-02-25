@@ -1,0 +1,10 @@
+[package]
+name = "MessageBoard"
+version = "0.0.1"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }
+
+[addresses]
+std = "0x1"
+message_board = "_"

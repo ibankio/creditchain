@@ -59,7 +59,7 @@ settlement, every self-banking transaction ultimately anchors to CreditChain.
 | Execution | Block Executor | Parallel execution with BlockSTM | Production-ready |
 | Smart Contracts | Move VM | Linear type system, resource safety | Production-ready |
 | Storage | RocksDB + JMT | Jellyfish Merkle Tree + Transaction Accumulator | Production-ready |
-| Networking | libra2-network | Noise protocol, multiplexed RPC | Production-ready |
+| Networking | creditchain-network | Noise protocol, multiplexed RPC | Production-ready |
 | API | REST + gRPC | OpenAPI spec, indexer gRPC streaming | Production-ready |
 | State Sync | State Sync v2 | Snapshot + continuous sync | Production-ready |
 
@@ -77,9 +77,9 @@ settlement, every self-banking transaction ultimately anchors to CreditChain.
 ### 3.3 Key Crate Families
 
 ```
-crates/libra2-*         (66 crates)  → Core infrastructure
-libra2-move/libra2-*    (24 crates)  → Move VM and tooling
-libra2-move/framework/  (3 crates)   → Move standard library
+crates/creditchain-*         (66 crates)  → Core infrastructure
+creditchain-move/creditchain-*    (24 crates)  → Move VM and tooling
+creditchain-move/framework/  (3 crates)   → Move standard library
 consensus/              (3 crates)   → BFT consensus
 execution/              (6 crates)   → Block execution
 storage/                (8 crates)   → Persistent storage
@@ -104,11 +104,11 @@ ecosystem/              (20 crates)  → Indexer, NFT, node-checker
 - Transaction accumulator / proof system
 
 #### REBRAND (All 200+ crates)
-- `libra2-*` → `creditchain-*` (crate names, binary names, config keys)
+- `creditchain-*` → `creditchain-*` (crate names, binary names, config keys)
 - Move framework addresses: `0x1` stays but module names update
 - CLI tools: `libra2` CLI → `creditchain` CLI
-- Docker images: `libra2-node` → `creditchain-node`
-- Config files: `libra2-node.yaml` → `creditchain-node.yaml`
+- Docker images: `creditchain-node` → `creditchain-node`
+- Config files: `creditchain-node.yaml` → `creditchain-node.yaml`
 
 #### CUSTOMIZE (CreditChain-Specific)
 - **Genesis**: New chain_id (0xCC01), CCC token, initial validator set
@@ -257,7 +257,7 @@ The CreditChain Move framework extends the standard CreditChain framework with
 financial-grade modules:
 
 ```move
-// Core framework (inherited from libra2-framework)
+// Core framework (inherited from creditchain-framework)
 0x1::creditchain_account      // Account management
 0x1::creditchain_coin         // CCC native token
 0x1::creditchain_governance   // On-chain governance
@@ -458,11 +458,11 @@ CreditChain                    Destination Chain
 | Document | Relationship |
 |----------|-------------|
 | This Doc (01_ARCHITECTURE) | Architecture overview |
-| 02_REBRANDING_GUIDE | CreditChain → CreditChain naming |
-| 03_GENESIS_CONFIG | Chain genesis & token setup |
-| 04_MOVE_MODULES | Custom Move module specs |
-| 05_BRIDGE_SPEC | Cross-chain bridge design |
-| 06_DEPLOYMENT_GUIDE | Node deployment & operations |
+| Internal Rebranding Prompt Pack (`.prompt/`) | Libra2/Aptos legacy naming → CreditChain naming (internal-only) |
+| 02_TOKEN_ECONOMY_REFERENCE | Token economy reference (example-only) |
+| 03_MOVE_MODULES | Custom Move module specs |
+| 04_BRIDGE_SPEC | Cross-chain bridge design |
+| 05_DEPLOYMENT_GUIDE | Node deployment & operations |
 | OpenIBank Doc 24 | CreditChain high-level spec |
 | OpenIBank Doc 54 | CreditChain L1 impl details |
 | OpenIBank Doc 55 | Four Pillars strategy |

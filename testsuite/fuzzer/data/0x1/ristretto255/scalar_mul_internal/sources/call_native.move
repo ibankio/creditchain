@@ -1,5 +1,5 @@
 module poc::scalar_mul_internal {
-    use libra2_std::ristretto255;
+    use creditchain_std::ristretto255;
 
     public entry fun main(_owner:&signer) {
         let s1 = ristretto255::new_scalar_from_u64(3u64);

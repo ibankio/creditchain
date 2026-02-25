@@ -6,9 +6,9 @@
 //! VFN information on chain or PFN information from a file, and has converted
 //! it into a common format that these functions can ingest.
 
-use libra2_logger::{debug, info};
-use libra2_node_checker_lib::CheckSummary;
-use libra2_sdk::{
+use creditchain_logger::{debug, info};
+use creditchain_node_checker_lib::CheckSummary;
+use creditchain_sdk::{
     crypto::{x25519, ValidCryptoMaterialStringExt},
     types::account_address::AccountAddress,
 };

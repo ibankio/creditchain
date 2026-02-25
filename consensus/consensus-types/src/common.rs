@@ -7,13 +7,13 @@ use crate::{
     proof_of_store::{BatchInfo, ProofCache, ProofOfStore},
 };
 use anyhow::ensure;
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{CryptoHash, CryptoHasher},
     HashValue,
 };
-use libra2_crypto_derive::CryptoHasher;
-use libra2_logger::prelude::*;
-use libra2_types::{
+use creditchain_crypto_derive::CryptoHasher;
+use creditchain_logger::prelude::*;
+use creditchain_types::{
     account_address::AccountAddress,
     transaction::{ReplayProtector, SignedTransaction},
     validator_verifier::ValidatorVerifier,

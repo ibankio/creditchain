@@ -11,30 +11,30 @@ use crate::{
         verify_commit_notification,
     },
 };
-use libra2_config::config::{NodeConfig, RoleType, StateSyncDriverConfig};
-use libra2_consensus_notifications::{ConsensusNotificationSender, ConsensusNotifier};
-use libra2_data_client::client::Libra2DataClient;
-use libra2_data_streaming_service::streaming_client::new_streaming_service_client_listener_pair;
-use libra2_db::Libra2DB;
-use libra2_event_notifications::{
+use creditchain_config::config::{NodeConfig, RoleType, StateSyncDriverConfig};
+use creditchain_consensus_notifications::{ConsensusNotificationSender, ConsensusNotifier};
+use creditchain_data_client::client::CreditChainDataClient;
+use creditchain_data_streaming_service::streaming_client::new_streaming_service_client_listener_pair;
+use creditchain_db::CreditChainDB;
+use creditchain_event_notifications::{
     DbBackedOnChainConfig, EventNotificationListener, EventSubscriptionService,
     ReconfigNotificationListener,
 };
-use libra2_executor::chunk_executor::ChunkExecutor;
-use libra2_executor_test_helpers::bootstrap_genesis;
-use libra2_infallible::RwLock;
-use libra2_mempool_notifications::MempoolNotificationListener;
-use libra2_network::application::{interface::NetworkClient, storage::PeersAndMetadata};
-use libra2_storage_interface::DbReaderWriter;
-use libra2_storage_service_client::StorageServiceClient;
-use libra2_storage_service_notifications::StorageServiceNotificationListener;
-use libra2_time_service::TimeService;
-use libra2_types::{
+use creditchain_executor::chunk_executor::ChunkExecutor;
+use creditchain_executor_test_helpers::bootstrap_genesis;
+use creditchain_infallible::RwLock;
+use creditchain_mempool_notifications::MempoolNotificationListener;
+use creditchain_network::application::{interface::NetworkClient, storage::PeersAndMetadata};
+use creditchain_storage_interface::DbReaderWriter;
+use creditchain_storage_service_client::StorageServiceClient;
+use creditchain_storage_service_notifications::StorageServiceNotificationListener;
+use creditchain_time_service::TimeService;
+use creditchain_types::{
     event::EventKey,
     transaction::{Transaction, WriteSetPayload},
     waypoint::Waypoint,
 };
-use libra2_vm::libra2_vm::Libra2VMBlockExecutor;
+use creditchain_vm::creditchain_vm::CreditChainVMBlockExecutor;
 use claims::{assert_err, assert_none};
 use futures::{channel::mpsc::UnboundedSender, FutureExt, SinkExt, StreamExt};
 use ntest::timeout;
@@ -330,17 +330,17 @@ async fn create_driver_for_tests(
     TimeService,
 ) {
     // Initialize the logger for tests
-    libra2_logger::Logger::init_for_testing();
+    creditchain_logger::Logger::init_for_testing();
 
     // Create test libra2 database
-    let db_path = libra2_temppath::TempPath::new();
+    let db_path = creditchain_temppath::TempPath::new();
     db_path.create_as_dir().unwrap();
-    let (_, db_rw) = DbReaderWriter::wrap(Libra2DB::new_for_test(db_path.path()));
+    let (_, db_rw) = DbReaderWriter::wrap(CreditChainDB::new_for_test(db_path.path()));
 
     // Bootstrap the genesis transaction
-    let (genesis, _) = libra2_vm_genesis::test_genesis_change_set_and_validators(Some(1));
+    let (genesis, _) = creditchain_vm_genesis::test_genesis_change_set_and_validators(Some(1));
     let genesis_txn = Transaction::GenesisTransaction(WriteSetPayload::Direct(genesis));
-    bootstrap_genesis::<Libra2VMBlockExecutor>(&db_rw, &genesis_txn).unwrap();
+    bootstrap_genesis::<CreditChainVMBlockExecutor>(&db_rw, &genesis_txn).unwrap();
 
     // Create the event subscription service and subscribe to events and reconfigurations
     let mut event_subscription_service =
@@ -356,16 +356,16 @@ async fn create_driver_for_tests(
 
     // Create consensus and mempool notifiers and listeners
     let (consensus_notifier, consensus_listener) =
-        libra2_consensus_notifications::new_consensus_notifier_listener_pair(5000);
+        creditchain_consensus_notifications::new_consensus_notifier_listener_pair(5000);
     let (mempool_notifier, mempool_listener) =
-        libra2_mempool_notifications::new_mempool_notifier_listener_pair(100);
+        creditchain_mempool_notifications::new_mempool_notifier_listener_pair(100);
 
     // Create the storage service notifier and listener
     let (storage_service_notifier, storage_service_listener) =
-        libra2_storage_service_notifications::new_storage_service_notifier_listener_pair();
+        creditchain_storage_service_notifications::new_storage_service_notifier_listener_pair();
 
     // Create the chunk executor
-    let chunk_executor = Arc::new(ChunkExecutor::<Libra2VMBlockExecutor>::new(db_rw.clone()));
+    let chunk_executor = Arc::new(ChunkExecutor::<CreditChainVMBlockExecutor>::new(db_rw.clone()));
 
     // Create a streaming service client
     let (streaming_service_client, _) = new_streaming_service_client_listener_pair();
@@ -378,8 +378,8 @@ async fn create_driver_for_tests(
         HashMap::new(),
         PeersAndMetadata::new(&[]),
     ));
-    let (libra2_data_client, _) = Libra2DataClient::new(
-        node_config.state_sync.libra2_data_client,
+    let (creditchain_data_client, _) = CreditChainDataClient::new(
+        node_config.state_sync.creditchain_data_client,
         node_config.base.clone(),
         time_service.clone(),
         db_rw.reader.clone(),
@@ -403,7 +403,7 @@ async fn create_driver_for_tests(
             metadata_storage,
             consensus_listener,
             event_subscription_service,
-            libra2_data_client,
+            creditchain_data_client,
             streaming_service_client,
             time_service.clone(),
         );

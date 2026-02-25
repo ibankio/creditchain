@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 use crate::{TransactionGenerator, TransactionGeneratorCreator};
-use libra2_sdk::types::{transaction::SignedTransaction, LocalAccount};
+use creditchain_sdk::types::{transaction::SignedTransaction, LocalAccount};
 use rand::{rngs::StdRng, Rng, SeedableRng};
 use std::sync::{
     atomic::{AtomicUsize, Ordering},

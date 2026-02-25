@@ -9,10 +9,10 @@ use crate::{
     tests::common::{batch_add_signed_txn, TestTransaction},
     QuorumStoreRequest,
 };
-use libra2_config::config::MempoolConfig;
-use libra2_consensus_types::common::RejectedTransactionSummary;
-use libra2_mempool_notifications::MempoolNotificationSender;
-use libra2_types::{
+use creditchain_config::config::MempoolConfig;
+use creditchain_consensus_types::common::RejectedTransactionSummary;
+use creditchain_mempool_notifications::MempoolNotificationSender;
+use creditchain_types::{
     transaction::{ReplayProtector, Transaction},
     vm_status::DiscardedVMStatus,
 };

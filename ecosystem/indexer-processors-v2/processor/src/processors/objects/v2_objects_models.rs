@@ -14,7 +14,7 @@ use crate::{
 use ahash::AHashMap;
 use allocative_derive::Allocative;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{DeleteResource, WriteResource},
+   creditchain_protos::transaction::v1::{DeleteResource, WriteResource},
     postgres::utils::database::{DbContext, DbPoolConnection},
     utils::convert::standardize_address,
 };

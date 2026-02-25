@@ -10,13 +10,13 @@ use crate::{
     quorum_cert::QuorumCert,
     vote_data::VoteData,
 };
-use libra2_crypto::{
+use creditchain_crypto::{
     bls12381,
     ed25519::Ed25519PrivateKey,
     hash::{CryptoHash, HashValue},
     PrivateKey, Uniform,
 };
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     block_info::BlockInfo,
     ledger_info::{generate_ledger_info_with_sig, LedgerInfo},
@@ -45,7 +45,7 @@ prop_compose! {
         Block::new_proposal(
             Payload::empty(false, true),
             round,
-            libra2_infallible::duration_since_epoch().as_micros() as u64,
+            creditchain_infallible::duration_since_epoch().as_micros() as u64,
             parent_qc,
             &signer,
             Vec::new(),
@@ -92,7 +92,7 @@ prop_compose! {
                     block.author().unwrap(),
                     (*block.block_data().failed_authors().unwrap()).clone(),
                     block.round(),
-                    libra2_infallible::duration_since_epoch().as_micros() as u64,
+                    creditchain_infallible::duration_since_epoch().as_micros() as u64,
                     block.quorum_cert().clone(),
                 ),
                 signature: Some(block.signature().unwrap().clone()),

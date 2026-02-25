@@ -7,10 +7,10 @@ use crate::{
     map::{DefaultHashBuilder, LayeredMap},
     metrics::LAYER,
 };
-use libra2_crypto::HashValue;
-use libra2_drop_helper::ArcAsyncDrop;
-use libra2_infallible::Mutex;
-use libra2_metrics_core::IntGaugeHelper;
+use creditchain_crypto::HashValue;
+use creditchain_drop_helper::ArcAsyncDrop;
+use creditchain_infallible::Mutex;
+use creditchain_metrics_core::IntGaugeHelper;
 use std::{marker::PhantomData, sync::Arc};
 
 #[derive(Debug)]

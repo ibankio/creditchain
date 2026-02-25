@@ -37,7 +37,7 @@ use crate::{
                 TokenOwnershipV2,
             },
             v2_token_utils::{
-                Libra2Collection, BurnEvent, FixedSupply, ObjectWithMetadata, PropertyMap, TokenV2,
+                CreditChainCollection, BurnEvent, FixedSupply, ObjectWithMetadata, PropertyMap, TokenV2,
                 TokenV2AggregatedData, TokenV2AggregatedDataMapping, TokenV2Burned, TransferEvent,
                 UnlimitedSupply,
             },
@@ -46,7 +46,7 @@ use crate::{
     schema,
     util::{parse_timestamp, standardize_address, truncate_str},
 };
-use libra2_api_types::{Transaction, TransactionPayload, WriteSetChange};
+use creditchain_api_types::{Transaction, TransactionPayload, WriteSetChange};
 use async_trait::async_trait;
 use diesel::{pg::upsert::excluded, result::Error, ExpressionMethods, PgConnection};
 use field_count::FieldCount;
@@ -68,7 +68,7 @@ impl TokenTransactionProcessor {
         ans_contract_address: Option<String>,
         nft_points_contract: Option<String>,
     ) -> Self {
-        libra2_logger::info!(
+        creditchain_logger::info!(
             ans_contract_address = ans_contract_address,
             "init TokenTransactionProcessor"
         );
@@ -188,7 +188,7 @@ fn insert_to_db(
         Vec<CurrentTokenV2Metadata>,
     ),
 ) -> Result<(), diesel::result::Error> {
-    libra2_logger::trace!(
+    creditchain_logger::trace!(
         name = name,
         start_version = start_version,
         end_version = end_version,
@@ -1098,7 +1098,7 @@ fn parse_v2_token(
                         token_v2_metadata_helper.insert(
                             standardize_address(&wr.address.to_string()),
                             TokenV2AggregatedData {
-                                libra2_collection: None,
+                                creditchain_collection: None,
                                 fixed_supply: None,
                                 object,
                                 unlimited_supply: None,
@@ -1129,10 +1129,10 @@ fn parse_v2_token(
                         {
                             aggregated_data.unlimited_supply = Some(unlimited_supply);
                         }
-                        if let Some(libra2_collection) =
-                            Libra2Collection::from_write_resource(wr, txn_version).unwrap()
+                        if let Some(creditchain_collection) =
+                            CreditChainCollection::from_write_resource(wr, txn_version).unwrap()
                         {
-                            aggregated_data.libra2_collection = Some(libra2_collection);
+                            aggregated_data.creditchain_collection = Some(creditchain_collection);
                         }
                         if let Some(property_map) =
                             PropertyMap::from_write_resource(wr, txn_version).unwrap()

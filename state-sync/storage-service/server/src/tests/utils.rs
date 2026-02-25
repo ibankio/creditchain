@@ -8,17 +8,17 @@ use crate::{
     tests::mock::{MockClient, MockDatabaseReader},
     StorageServiceServer,
 };
-use libra2_config::{
+use creditchain_config::{
     config::StorageServiceConfig,
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, SigningKey, Uniform};
-use libra2_logger::Level;
-use libra2_network::protocols::network::RpcError;
-use libra2_storage_service_notifications::{
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, SigningKey, Uniform};
+use creditchain_logger::Level;
+use creditchain_network::protocols::network::RpcError;
+use creditchain_storage_service_notifications::{
     StorageServiceNotificationSender, StorageServiceNotifier,
 };
-use libra2_storage_service_types::{
+use creditchain_storage_service_types::{
     requests::{
         DataRequest, StateValuesWithProofRequest, StorageServiceRequest,
         SubscribeTransactionOutputsWithProofRequest,
@@ -31,8 +31,8 @@ use libra2_storage_service_types::{
     },
     Epoch, StorageServiceError,
 };
-use libra2_time_service::{MockTimeService, TimeService};
-use libra2_types::{
+use creditchain_time_service::{MockTimeService, TimeService};
+use creditchain_types::{
     account_address::AccountAddress,
     aggregate_signature::AggregateSignature,
     block_info::BlockInfo,
@@ -606,9 +606,9 @@ pub async fn get_transactions_with_proof(
     send_storage_request(mock_client, use_compression, data_request).await
 }
 
-/// Initializes the Libra2 logger for tests
+/// Initializes the CreditChain logger for tests
 pub fn initialize_logger() {
-    libra2_logger::Logger::builder()
+    creditchain_logger::Logger::builder()
         .is_async(false)
         .level(Level::Debug)
         .build();
@@ -672,7 +672,7 @@ pub async fn subscribe_to_transactions_or_outputs(
     stream_id: u64,
     stream_index: u64,
     use_request_v2: bool,
-) -> Receiver<Result<bytes::Bytes, libra2_network::protocols::network::RpcError>> {
+) -> Receiver<Result<bytes::Bytes, creditchain_network::protocols::network::RpcError>> {
     subscribe_to_transactions_or_outputs_for_peer(
         mock_client,
         known_version,

@@ -1,6 +1,6 @@
 [package]
-name = "libra2-transaction-workloads-lib"
-description = "Library for Libra2 transaction workloads"
+name = "creditchain-transaction-workloads-lib"
+description = "Library for CreditChain transaction workloads"
 version = "0.0.1"
 
 # Workspace inherited keys
@@ -13,9 +13,9 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-framework = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-transaction-generator-lib = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-transaction-generator-lib = { workspace = true }
 async-trait = { workspace = true }
 clap = { workspace = true }
 move-binary-format = { workspace = true }

@@ -6,17 +6,17 @@ use crate::{
     success_criteria::{MetricsThreshold, SuccessCriteria, SystemMetricsThreshold},
     *,
 };
-use libra2_config::config::{
+use creditchain_config::config::{
     ExecutionBackpressureGasLimitConfig, ExecutionBackpressureTxnLimitConfig, NodeConfig,
     OverrideNodeConfig,
 };
-use libra2_framework::ReleaseBundle;
+use creditchain_framework::ReleaseBundle;
 use std::{num::NonZeroUsize, sync::Arc};
 
 pub struct ForgeConfig {
     suite_name: Option<String>,
 
-    pub libra2_tests: Vec<Box<dyn Libra2Test>>,
+    pub creditchain_tests: Vec<Box<dyn CreditChainTest>>,
     pub admin_tests: Vec<Box<dyn AdminTest>>,
     pub network_tests: Vec<Box<dyn NetworkTest>>,
 
@@ -65,8 +65,8 @@ impl ForgeConfig {
         Self::default()
     }
 
-    pub fn add_libra2_test<T: Libra2Test + 'static>(mut self, libra2_test: T) -> Self {
-        self.libra2_tests.push(Box::new(libra2_test));
+    pub fn add_creditchain_test<T: CreditChainTest + 'static>(mut self, creditchain_test: T) -> Self {
+        self.creditchain_tests.push(Box::new(creditchain_test));
         self
     }
 
@@ -79,8 +79,8 @@ impl ForgeConfig {
         self
     }
 
-    pub fn with_libra2_tests(mut self, libra2_tests: Vec<Box<dyn Libra2Test>>) -> Self {
-        self.libra2_tests = libra2_tests;
+    pub fn with_creditchain_tests(mut self, creditchain_tests: Vec<Box<dyn CreditChainTest>>) -> Self {
+        self.creditchain_tests = creditchain_tests;
         self
     }
 
@@ -159,7 +159,7 @@ impl ForgeConfig {
 
     /// Builds a function that can be used to override the default helm values for the validator and fullnode.
     /// If a configuration is intended to be set for all nodes, set the value in the default helm values file:
-    /// testsuite/forge/src/backend/k8s/helm-values/libra2-node-default-values.yaml
+    /// testsuite/forge/src/backend/k8s/helm-values/creditchain-node-default-values.yaml
     pub fn build_node_helm_config_fn(&self, retain_debug_logs: bool) -> Option<NodeConfigFn> {
         let validator_override_node_config = self
             .validator_override_node_config_fn
@@ -174,7 +174,7 @@ impl ForgeConfig {
         let validator_resource_override = self.validator_resource_override;
         let fullnode_resource_override = self.fullnode_resource_override;
 
-        // Override specific helm values. See reference: terraform/helm/libra2-node/values.yaml
+        // Override specific helm values. See reference: terraform/helm/creditchain-node/values.yaml
         Some(Arc::new(move |helm_values: &mut serde_yaml::Value| {
             if let Some(override_config) = &validator_override_node_config {
                 helm_values["validator"]["config"] = override_config.get_yaml().unwrap();
@@ -300,7 +300,7 @@ impl ForgeConfig {
     }
 
     pub fn number_of_tests(&self) -> usize {
-        self.admin_tests.len() + self.network_tests.len() + self.libra2_tests.len()
+        self.admin_tests.len() + self.network_tests.len() + self.creditchain_tests.len()
     }
 
     pub fn all_tests(&self) -> Vec<Box<AnyTestRef<'_>>> {
@@ -313,9 +313,9 @@ impl ForgeConfig {
                     .map(|t| Box::new(AnyTestRef::Network(t.as_ref()))),
             )
             .chain(
-                self.libra2_tests
+                self.creditchain_tests
                     .iter()
-                    .map(|t| Box::new(AnyTestRef::Libra2(t.as_ref()))),
+                    .map(|t| Box::new(AnyTestRef::CreditChain(t.as_ref()))),
             )
             .collect()
     }
@@ -338,7 +338,7 @@ impl Default for ForgeConfig {
         };
         Self {
             suite_name: None,
-            libra2_tests: vec![],
+            creditchain_tests: vec![],
             admin_tests: vec![],
             network_tests: vec![],
             initial_validator_count: NonZeroUsize::new(1).unwrap(),

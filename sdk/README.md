@@ -1,6 +1,6 @@
-# libra2-sdk
+# creditchain-sdk
 
-[![libra2-sdk on crates.io](https://img.shields.io/crates/v/libra2-sdk)](https://crates.io/crates/libra2-sdk)
+[![creditchain-sdk on crates.io](https://img.shields.io/crates/v/creditchain-sdk)](https://crates.io/crates/creditchain-sdk)
 [![License](https://img.shields.io/badge/license-Apache-green.svg)](https://github.com/ibankio/creditchain/blob/main/LICENSE)
 
 The official Rust SDK for CreditChain.

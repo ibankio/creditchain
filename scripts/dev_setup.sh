@@ -706,7 +706,7 @@ function install_libdw {
   fi
 }
 
-# this is needed for hdpi crate from libra2-ledger
+# this is needed for hdpi crate from creditchain-ledger
 function install_libudev-dev {
   # Need to install libudev-dev for linux
   if [[ "$(uname)" == "Linux" && "$PACKAGE_MANAGER" != "pacman" ]]; then

@@ -3,14 +3,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::{new_test_context, new_test_context_with_orderless_flags};
-use libra2_api_test_context::{current_function_name, find_value, TestContext};
-use libra2_api_types::{MoveModuleBytecode, MoveResource, MoveStructTag, StateKeyWrapper};
-use libra2_cached_packages::libra2_stdlib;
-use libra2_sdk::types::LIBRA2_COIN_TYPE_STR;
-use libra2_types::{
+use creditchain_api_test_context::{current_function_name, find_value, TestContext};
+use creditchain_api_types::{MoveModuleBytecode, MoveResource, MoveStructTag, StateKeyWrapper};
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_sdk::types::CREDITCHAIN_COIN_TYPE_STR;
+use creditchain_types::{
     account_config::{primary_apt_store, ObjectCoreResource},
     transaction::{EntryFunction, TransactionPayload},
-    Libra2CoinType, CoinType,
+    CreditChainCoinType, CoinType,
 };
 use move_core_types::{
     account_address::AccountAddress,
@@ -101,7 +101,7 @@ async fn test_get_module_with_entry_functions() {
 // Unstable due to framework changes
 #[ignore]
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-async fn test_get_module_libra2_config() {
+async fn test_get_module_creditchain_config() {
     let mut context = new_test_context(current_function_name!());
     let address = "0x1";
 
@@ -266,10 +266,10 @@ async fn test_account_auto_creation() {
     let root_account = context.root_account().await;
     let account = context.gen_account();
     let txn1 = root_account.sign_with_transaction_builder(context.transaction_factory().payload(
-        libra2_stdlib::coin_migrate_to_fungible_store(Libra2CoinType::type_tag()),
+        creditchain_stdlib::coin_migrate_to_fungible_store(CreditChainCoinType::type_tag()),
     ));
     let txn2 = root_account.sign_with_transaction_builder(context.transaction_factory().payload(
-        libra2_stdlib::libra2_account_fungible_transfer_only(account.address(), 10_000_000_000),
+        creditchain_stdlib::creditchain_account_fungible_transfer_only(account.address(), 10_000_000_000),
     ));
     context
         .commit_block(&vec![txn1.clone(), txn2.clone()])
@@ -277,7 +277,7 @@ async fn test_account_auto_creation() {
     let txn = account.sign_with_transaction_builder(
         context
             .transaction_factory()
-            .payload(libra2_stdlib::libra2_account_fungible_transfer_only(
+            .payload(creditchain_stdlib::creditchain_account_fungible_transfer_only(
                 root_account.address(),
                 1,
             ))
@@ -309,14 +309,14 @@ async fn test_get_account_balance(
     let coin_balance_before = context
         .get(&account_balance(
             &root_account.address().to_hex_literal(),
-            LIBRA2_COIN_TYPE_STR,
+            CREDITCHAIN_COIN_TYPE_STR,
         ))
         .await;
     let txn = root_account.sign_with_transaction_builder(
         context
             .transaction_factory()
-            .payload(libra2_stdlib::coin_migrate_to_fungible_store(
-                Libra2CoinType::type_tag(),
+            .payload(creditchain_stdlib::coin_migrate_to_fungible_store(
+                CreditChainCoinType::type_tag(),
             ))
             .expiration_timestamp_secs(context.get_expiration_time())
             .upgrade_payload(
@@ -331,7 +331,7 @@ async fn test_get_account_balance(
     let coin_balance_after = context
         .get(&account_balance(
             &root_account.address().to_hex_literal(),
-            LIBRA2_COIN_TYPE_STR,
+            CREDITCHAIN_COIN_TYPE_STR,
         ))
         .await;
     assert_eq!(coin_balance_before, coin_balance_after);
@@ -379,7 +379,7 @@ async fn test_get_account_balance(
 async fn test_get_account_modules_by_ledger_version_with_context(mut context: TestContext) {
     let initial_ledger_version = u64::from(context.get_latest_ledger_info().ledger_version);
     let payload =
-        libra2_stdlib::publish_module_source("test_module", "module 0xa550c18::test_module {}");
+        creditchain_stdlib::publish_module_source("test_module", "module 0xa550c18::test_module {}");
 
     let root_account = context.root_account().await;
     let txn = root_account.sign_with_transaction_builder(
@@ -477,7 +477,7 @@ async fn account_resource_created_only_by_seq_number_based_txns(
     let named_addresses = vec![("event".to_string(), user_addr)];
     let txn = futures::executor::block_on(async move {
         let path = PathBuf::from(std::env!("CARGO_MANIFEST_DIR"))
-            .join("../libra2-move/move-examples/event");
+            .join("../creditchain-move/move-examples/event");
         TestContext::build_package(path, named_addresses)
     });
     context.publish_package(&mut user, txn).await;
@@ -525,7 +525,7 @@ async fn test_get_core_account_data_not_found() {
     let resp = context.expect_status_code(200).get("/accounts/0xf").await;
     context.check_golden_output(resp);
     context
-        .disable_feature(libra2_types::on_chain_config::FeatureFlag::DEFAULT_ACCOUNT_RESOURCE as u64)
+        .disable_feature(creditchain_types::on_chain_config::FeatureFlag::DEFAULT_ACCOUNT_RESOURCE as u64)
         .await;
     context.expect_status_code(404).get("/accounts/0xf").await;
 }
@@ -546,7 +546,7 @@ async fn test_get_account_resources_with_pagination() {
         .path(&format!("/v1{}", account_resources(address)));
     let resp = context.reply(req).await;
     assert_eq!(resp.status(), 200);
-    assert!(!resp.headers().contains_key("X-Libra2-Cursor"));
+    assert!(!resp.headers().contains_key("X-CreditChain-Cursor"));
     let all_resources: Vec<MoveResource> = serde_json::from_slice(resp.body()).unwrap();
     // We assert there are at least 10 resources. If there aren't, the rest of the
     // test will be wrong.
@@ -563,7 +563,7 @@ async fn test_get_account_resources_with_pagination() {
     assert_eq!(resp.status(), 200);
     let cursor_header = resp
         .headers()
-        .get("X-Libra2-Cursor")
+        .get("X-CreditChain-Cursor")
         .expect("Cursor header was missing");
     let cursor_header = StateKeyWrapper::from_str(cursor_header.to_str().unwrap()).unwrap();
     let resources: Vec<MoveResource> = serde_json::from_slice(resp.body()).unwrap();
@@ -588,7 +588,7 @@ async fn test_get_account_resources_with_pagination() {
     assert_eq!(resp.status(), 200);
     let cursor_header = resp
         .headers()
-        .get("X-Libra2-Cursor")
+        .get("X-CreditChain-Cursor")
         .expect("Cursor header was missing");
     let cursor_header = StateKeyWrapper::from_str(cursor_header.to_str().unwrap()).unwrap();
     let resources: Vec<MoveResource> = serde_json::from_slice(resp.body()).unwrap();
@@ -603,7 +603,7 @@ async fn test_get_account_resources_with_pagination() {
     ));
     let resp = context.reply(req).await;
     assert_eq!(resp.status(), 200);
-    assert!(!resp.headers().contains_key("X-Libra2-Cursor"));
+    assert!(!resp.headers().contains_key("X-CreditChain-Cursor"));
     let resources: Vec<MoveResource> = serde_json::from_slice(resp.body()).unwrap();
     assert_eq!(resources.len(), all_resources.len() - 9);
     assert_eq!(resources, all_resources[9..].to_vec());
@@ -626,7 +626,7 @@ async fn test_get_account_modules_with_pagination() {
         .path(&format!("/v1{}", account_modules(address)));
     let resp = context.reply(req).await;
     assert_eq!(resp.status(), 200);
-    assert!(!resp.headers().contains_key("X-Libra2-Cursor"));
+    assert!(!resp.headers().contains_key("X-CreditChain-Cursor"));
     let all_modules: Vec<MoveModuleBytecode> = serde_json::from_slice(resp.body()).unwrap();
     // We assert there are at least 10 modules. If there aren't, the rest of the
     // test will be wrong.
@@ -642,7 +642,7 @@ async fn test_get_account_modules_with_pagination() {
     assert_eq!(resp.status(), 200);
     let cursor_header = resp
         .headers()
-        .get("X-Libra2-Cursor")
+        .get("X-CreditChain-Cursor")
         .expect("Cursor header was missing");
     let cursor_header = StateKeyWrapper::from_str(cursor_header.to_str().unwrap()).unwrap();
     let modules: Vec<MoveModuleBytecode> = serde_json::from_slice(resp.body()).unwrap();
@@ -659,7 +659,7 @@ async fn test_get_account_modules_with_pagination() {
     assert_eq!(resp.status(), 200);
     let cursor_header = resp
         .headers()
-        .get("X-Libra2-Cursor")
+        .get("X-CreditChain-Cursor")
         .expect("Cursor header was missing");
     let cursor_header = StateKeyWrapper::from_str(cursor_header.to_str().unwrap()).unwrap();
     let modules: Vec<MoveModuleBytecode> = serde_json::from_slice(resp.body()).unwrap();
@@ -674,7 +674,7 @@ async fn test_get_account_modules_with_pagination() {
     ));
     let resp = context.reply(req).await;
     assert_eq!(resp.status(), 200);
-    assert!(!resp.headers().contains_key("X-Libra2-Cursor"));
+    assert!(!resp.headers().contains_key("X-CreditChain-Cursor"));
     let modules: Vec<MoveModuleBytecode> = serde_json::from_slice(resp.body()).unwrap();
     assert_eq!(modules.len(), all_modules.len() - 10);
     assert_eq!(modules, all_modules[10..].to_vec());

@@ -1,9 +1,0 @@
-[package]
-name = "OnChainDice"
-version = "0.0.0"
-
-[addresses]
-module_owner = "_"
-
-[dependencies]
-Libra2Framework = { git = "https://github.com/libra2org/libra2-framework.git", subdir = "libra2-framework", rev = "mainnet" }

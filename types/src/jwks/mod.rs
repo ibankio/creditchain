@@ -12,7 +12,7 @@ use crate::{
     move_utils::as_move_value::AsMoveValue, on_chain_config::OnChainConfig,
 };
 use anyhow::{bail, ensure, Context};
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 use jwk::JWKMoveStruct;
 use move_core_types::{
     ident_str,

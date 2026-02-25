@@ -7,13 +7,13 @@ use crate::{
     NetworkLoadTest,
 };
 use anyhow::Error;
-use libra2_config::config::{NodeConfig, OverrideNodeConfig};
-use libra2_forge::{
+use creditchain_config::config::{NodeConfig, OverrideNodeConfig};
+use creditchain_forge::{
     NetworkContext, NetworkContextSynchronizer, NetworkTest, OverrideNodeConfigFn, Result, Swarm,
     SwarmChaos, SwarmCpuStress, SwarmNetEm, Test,
 };
-use libra2_sdk::move_types::account_address::AccountAddress;
-use libra2_types::PeerId;
+use creditchain_sdk::move_types::account_address::AccountAddress;
+use creditchain_types::PeerId;
 use async_trait::async_trait;
 use itertools::{EitherOrBoth, Itertools};
 use log::info;

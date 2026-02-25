@@ -43,11 +43,11 @@ GRPC_IS_READY_MESSAGE = f"""
 
     - For non-TLS:
         grpcurl -plaintext -d '{{ "starting_version": 0 }}' \\
-            -H "x-libra2-data-authorization:dummy_token" \\
+            -H "x-creditchain-data-authorization:dummy_token" \\
             {GRPC_DATA_SERVICE_NON_TLS_URL} libra2.indexer.v1.RawData/GetTransactions
     - For TLS:
         grpcurl -insecure -d '{{ "starting_version": 0 }}' \\
-            -H "x-libra2-data-authorization:dummy_token" \\
+            -H "x-creditchain-data-authorization:dummy_token" \\
             {GRPC_DATA_SERVICE_TLS_URL} libra2.indexer.v1.RawData/GetTransactions
     ======================================
 """
@@ -242,7 +242,7 @@ def wait_for_indexer_grpc_progress(context: SystemContext) -> None:
                     "-d",
                     '{ "starting_version": 0 }',
                     "-H",
-                    "x-libra2-data-authorization:dummy_token",
+                    "x-creditchain-data-authorization:dummy_token",
                     "-import-path",
                     "protos/proto",
                     "-proto",
@@ -366,7 +366,7 @@ def check_system(context: SystemContext) -> None:
 
 
 def main() -> None:
-    # Change to the root of libra2-core.
+    # Change to the root of creditchain-core.
     abspath = os.path.abspath(__file__)
     dname = os.path.dirname(abspath)
     os.chdir(dname)
@@ -393,7 +393,7 @@ def main() -> None:
     if platform.system() == "Darwin" and platform.processor().startswith("arm"):
         # If we're on an ARM Mac, use the amd64 Redis image. On some ARM Macs the ARM
         # Redis image doesn't work so we use the amd64 image for now. See more here:
-        # https://github.com/libra2org/libra2-core/issues/9878
+        # https://github.com/libra2org/creditchain-core/issues/9878
         if not os.environ.get("REDIS_IMAGE_REPO"):
             os.environ["REDIS_IMAGE_REPO"] = "amd64/redis"
             log.info(

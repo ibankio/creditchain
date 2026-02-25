@@ -7,7 +7,7 @@ use crate::{
     traits::Filterable,
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_protos::transaction::v1::{transaction::TxnData, Transaction};
+use creditchain_protos::transaction::v1::{transaction::TxnData, Transaction};
 use prost::Message;
 use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
@@ -46,31 +46,31 @@ impl From<EventFilter> for BooleanTransactionFilter {
     }
 }
 
-impl From<BooleanTransactionFilter> for libra2_protos::indexer::v1::BooleanTransactionFilter {
+impl From<BooleanTransactionFilter> for creditchain_protos::indexer::v1::BooleanTransactionFilter {
     fn from(boolean_transaction_filter: BooleanTransactionFilter) -> Self {
         match boolean_transaction_filter {
             BooleanTransactionFilter::And(logical_and) => {
-                libra2_protos::indexer::v1::BooleanTransactionFilter {
+                creditchain_protos::indexer::v1::BooleanTransactionFilter {
                     filter: Some(
-                        libra2_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalAnd(
+                        creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalAnd(
                             logical_and.into(),
                         ),
                     ),
                 }
             },
             BooleanTransactionFilter::Or(logical_or) => {
-                libra2_protos::indexer::v1::BooleanTransactionFilter {
+                creditchain_protos::indexer::v1::BooleanTransactionFilter {
                     filter: Some(
-                        libra2_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalOr(
+                        creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalOr(
                             logical_or.into(),
                         ),
                     ),
                 }
             },
             BooleanTransactionFilter::Not(logical_not) => {
-                libra2_protos::indexer::v1::BooleanTransactionFilter {
+                creditchain_protos::indexer::v1::BooleanTransactionFilter {
                     filter: Some(
-                        libra2_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalNot(
+                        creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalNot(
                             // We do not `impl From` for `LogicalNot` because it is a recursive type that only contains a `Box<BooleanTransactionFilter>`
                             Box::new((*logical_not.not).into()),
                         ),
@@ -78,9 +78,9 @@ impl From<BooleanTransactionFilter> for libra2_protos::indexer::v1::BooleanTrans
                 }
             },
             BooleanTransactionFilter::Filter(api_filter) => {
-                libra2_protos::indexer::v1::BooleanTransactionFilter {
+                creditchain_protos::indexer::v1::BooleanTransactionFilter {
                     filter: Some(
-                        libra2_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
+                        creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
                             api_filter.into(),
                         ),
                     ),
@@ -92,7 +92,7 @@ impl From<BooleanTransactionFilter> for libra2_protos::indexer::v1::BooleanTrans
 
 impl BooleanTransactionFilter {
     pub fn new_from_proto(
-        proto_filter: libra2_protos::indexer::v1::BooleanTransactionFilter,
+        proto_filter: creditchain_protos::indexer::v1::BooleanTransactionFilter,
         max_filter_size: Option<usize>,
     ) -> Result<Self> {
         if let Some(max_filter_size) = max_filter_size {
@@ -110,23 +110,23 @@ impl BooleanTransactionFilter {
                 .filter
                 .ok_or(anyhow!("Oneof is not set in BooleanTransactionFilter."))?
             {
-                libra2_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
+                creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
                     api_filter,
                 ) => TryInto::<APIFilter>::try_into(api_filter)?.into(),
-                libra2_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalAnd(
+                creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalAnd(
                     logical_and,
                 ) => BooleanTransactionFilter::And(logical_and.try_into()?),
-                libra2_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalOr(
+                creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalOr(
                     logical_or,
                 ) => BooleanTransactionFilter::Or(logical_or.try_into()?),
-                libra2_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalNot(
+                creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalNot(
                     logical_not,
                 ) => BooleanTransactionFilter::Not(logical_not.try_into()?),
             },
         )
     }
 
-    pub fn into_proto(self) -> libra2_protos::indexer::v1::BooleanTransactionFilter {
+    pub fn into_proto(self) -> creditchain_protos::indexer::v1::BooleanTransactionFilter {
         self.into()
     }
 
@@ -136,8 +136,8 @@ impl BooleanTransactionFilter {
     /// # Example
     ///
     /// ```
-    /// use libra2_transaction_filter::BooleanTransactionFilter;
-    /// use libra2_transaction_filter::filters::{EventFilterBuilder, MoveStructTagFilterBuilder, UserTransactionFilterBuilder};
+    /// use creditchain_transaction_filter::BooleanTransactionFilter;
+    /// use creditchain_transaction_filter::filters::{EventFilterBuilder, MoveStructTagFilterBuilder, UserTransactionFilterBuilder};
     ///
     /// fn example() -> Result<BooleanTransactionFilter, anyhow::Error> {
     ///   // Create a filter for user transactions where the sender is "0x1"
@@ -166,8 +166,8 @@ impl BooleanTransactionFilter {
     /// # Example
     ///
     /// ```
-    /// use libra2_transaction_filter::BooleanTransactionFilter;
-    /// use libra2_transaction_filter::filters::{EventFilterBuilder, MoveStructTagFilterBuilder, UserTransactionFilterBuilder};
+    /// use creditchain_transaction_filter::BooleanTransactionFilter;
+    /// use creditchain_transaction_filter::filters::{EventFilterBuilder, MoveStructTagFilterBuilder, UserTransactionFilterBuilder};
     ///
     /// fn example() -> Result<BooleanTransactionFilter, anyhow::Error> {
     ///   // Create a filter for user transactions where the sender is "0x1"
@@ -196,8 +196,8 @@ impl BooleanTransactionFilter {
     /// # Example
     ///
     /// ```
-    /// use libra2_transaction_filter::BooleanTransactionFilter;
-    /// use libra2_transaction_filter::filters::{EventFilterBuilder, MoveStructTagFilterBuilder, UserTransactionFilterBuilder};
+    /// use creditchain_transaction_filter::BooleanTransactionFilter;
+    /// use creditchain_transaction_filter::filters::{EventFilterBuilder, MoveStructTagFilterBuilder, UserTransactionFilterBuilder};
     ///
     /// fn example() -> Result<BooleanTransactionFilter, anyhow::Error> {
     ///   // Create a filter for user transactions where the sender is "0x1"
@@ -262,10 +262,10 @@ pub struct LogicalAnd {
     and: Vec<BooleanTransactionFilter>,
 }
 
-impl TryFrom<libra2_protos::indexer::v1::LogicalAndFilters> for LogicalAnd {
+impl TryFrom<creditchain_protos::indexer::v1::LogicalAndFilters> for LogicalAnd {
     type Error = anyhow::Error;
 
-    fn try_from(proto_filter: libra2_protos::indexer::v1::LogicalAndFilters) -> Result<Self> {
+    fn try_from(proto_filter: creditchain_protos::indexer::v1::LogicalAndFilters) -> Result<Self> {
         Ok(Self {
             and: proto_filter
                 .filters
@@ -276,9 +276,9 @@ impl TryFrom<libra2_protos::indexer::v1::LogicalAndFilters> for LogicalAnd {
     }
 }
 
-impl From<LogicalAnd> for libra2_protos::indexer::v1::LogicalAndFilters {
+impl From<LogicalAnd> for creditchain_protos::indexer::v1::LogicalAndFilters {
     fn from(logical_and: LogicalAnd) -> Self {
-        libra2_protos::indexer::v1::LogicalAndFilters {
+        creditchain_protos::indexer::v1::LogicalAndFilters {
             filters: logical_and.and.into_iter().map(Into::into).collect(),
         }
     }
@@ -302,10 +302,10 @@ pub struct LogicalOr {
     or: Vec<BooleanTransactionFilter>,
 }
 
-impl TryFrom<libra2_protos::indexer::v1::LogicalOrFilters> for LogicalOr {
+impl TryFrom<creditchain_protos::indexer::v1::LogicalOrFilters> for LogicalOr {
     type Error = anyhow::Error;
 
-    fn try_from(proto_filter: libra2_protos::indexer::v1::LogicalOrFilters) -> Result<Self> {
+    fn try_from(proto_filter: creditchain_protos::indexer::v1::LogicalOrFilters) -> Result<Self> {
         Ok(Self {
             or: proto_filter
                 .filters
@@ -316,9 +316,9 @@ impl TryFrom<libra2_protos::indexer::v1::LogicalOrFilters> for LogicalOr {
     }
 }
 
-impl From<LogicalOr> for libra2_protos::indexer::v1::LogicalOrFilters {
+impl From<LogicalOr> for creditchain_protos::indexer::v1::LogicalOrFilters {
     fn from(logical_or: LogicalOr) -> Self {
-        libra2_protos::indexer::v1::LogicalOrFilters {
+        creditchain_protos::indexer::v1::LogicalOrFilters {
             filters: logical_or.or.into_iter().map(Into::into).collect(),
         }
     }
@@ -342,11 +342,11 @@ pub struct LogicalNot {
     not: Box<BooleanTransactionFilter>,
 }
 
-impl TryFrom<Box<libra2_protos::indexer::v1::BooleanTransactionFilter>> for LogicalNot {
+impl TryFrom<Box<creditchain_protos::indexer::v1::BooleanTransactionFilter>> for LogicalNot {
     type Error = anyhow::Error;
 
     fn try_from(
-        proto_filter: Box<libra2_protos::indexer::v1::BooleanTransactionFilter>,
+        proto_filter: Box<creditchain_protos::indexer::v1::BooleanTransactionFilter>,
     ) -> Result<Self> {
         Ok(Self {
             not: Box::new(BooleanTransactionFilter::new_from_proto(
@@ -377,22 +377,22 @@ pub enum APIFilter {
     EventFilter(EventFilter),
 }
 
-impl TryFrom<libra2_protos::indexer::v1::ApiFilter> for APIFilter {
+impl TryFrom<creditchain_protos::indexer::v1::ApiFilter> for APIFilter {
     type Error = anyhow::Error;
 
-    fn try_from(proto_filter: libra2_protos::indexer::v1::ApiFilter) -> Result<Self> {
+    fn try_from(proto_filter: creditchain_protos::indexer::v1::ApiFilter) -> Result<Self> {
         Ok(
             match proto_filter
                 .filter
                 .ok_or(anyhow!("Oneof is not set in ApiFilter."))?
             {
-                libra2_protos::indexer::v1::api_filter::Filter::TransactionRootFilter(
+                creditchain_protos::indexer::v1::api_filter::Filter::TransactionRootFilter(
                     transaction_root_filter,
                 ) => Into::<TransactionRootFilter>::into(transaction_root_filter).into(),
-                libra2_protos::indexer::v1::api_filter::Filter::UserTransactionFilter(
+                creditchain_protos::indexer::v1::api_filter::Filter::UserTransactionFilter(
                     user_transaction_filter,
                 ) => Into::<UserTransactionFilter>::into(user_transaction_filter).into(),
-                libra2_protos::indexer::v1::api_filter::Filter::EventFilter(event_filter) => {
+                creditchain_protos::indexer::v1::api_filter::Filter::EventFilter(event_filter) => {
                     Into::<EventFilter>::into(event_filter).into()
                 },
             },
@@ -418,30 +418,30 @@ impl From<EventFilter> for APIFilter {
     }
 }
 
-impl From<APIFilter> for libra2_protos::indexer::v1::ApiFilter {
+impl From<APIFilter> for creditchain_protos::indexer::v1::ApiFilter {
     fn from(api_filter: APIFilter) -> Self {
         match api_filter {
             APIFilter::TransactionRootFilter(transaction_root_filter) => {
-                libra2_protos::indexer::v1::ApiFilter {
+                creditchain_protos::indexer::v1::ApiFilter {
                     filter: Some(
-                        libra2_protos::indexer::v1::api_filter::Filter::TransactionRootFilter(
+                        creditchain_protos::indexer::v1::api_filter::Filter::TransactionRootFilter(
                             transaction_root_filter.into(),
                         ),
                     ),
                 }
             },
             APIFilter::UserTransactionFilter(user_transaction_filter) => {
-                libra2_protos::indexer::v1::ApiFilter {
+                creditchain_protos::indexer::v1::ApiFilter {
                     filter: Some(
-                        libra2_protos::indexer::v1::api_filter::Filter::UserTransactionFilter(
+                        creditchain_protos::indexer::v1::api_filter::Filter::UserTransactionFilter(
                             user_transaction_filter.into(),
                         ),
                     ),
                 }
             },
-            APIFilter::EventFilter(event_filter) => libra2_protos::indexer::v1::ApiFilter {
-                filter: Some(libra2_protos::indexer::v1::api_filter::Filter::EventFilter(
-                    libra2_protos::indexer::v1::EventFilter {
+            APIFilter::EventFilter(event_filter) => creditchain_protos::indexer::v1::ApiFilter {
+                filter: Some(creditchain_protos::indexer::v1::api_filter::Filter::EventFilter(
+                    creditchain_protos::indexer::v1::EventFilter {
                         struct_type: event_filter.struct_type.map(Into::into),
                         data_substring_filter: event_filter.data_substring_filter,
                     },
@@ -492,14 +492,14 @@ mod test {
         UserTransactionFilterBuilder, /*UserTransactionPayloadFilterBuilder,*/
     };
 
-    // Disabled for now while we investigate an issue with lz4 in libra2-core:
+    // Disabled for now while we investigate an issue with lz4 in creditchain-core:
     // https://aptos-org.slack.com/archives/C04PF1X2UKY/p1718995777239809?thread_ts=1718969817.705389&cid=C04PF1X2UKY
     /*
     #[test]
     pub fn test_query_parsing() {
         let trf = TransactionRootFilter {
             success: Some(true),
-            txn_type: Some(libra2_protos::transaction::v1::transaction::TransactionType::User),
+            txn_type: Some(creditchain_protos::transaction::v1::transaction::TransactionType::User),
         };
 
         let utf = UserTransactionFilterBuilder::default()
@@ -665,23 +665,23 @@ mod test {
             )),
         ]);
 
-        let expected_proto = libra2_protos::indexer::v1::BooleanTransactionFilter {
+        let expected_proto = creditchain_protos::indexer::v1::BooleanTransactionFilter {
             filter: Some(
-                libra2_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalAnd(
-                    libra2_protos::indexer::v1::LogicalAndFilters {
+                creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalAnd(
+                    creditchain_protos::indexer::v1::LogicalAndFilters {
                         filters: vec![
-                            libra2_protos::indexer::v1::BooleanTransactionFilter {
+                            creditchain_protos::indexer::v1::BooleanTransactionFilter {
                                 filter: Some(
-                                    libra2_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalOr(
-                                        libra2_protos::indexer::v1::LogicalOrFilters {
+                                    creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalOr(
+                                        creditchain_protos::indexer::v1::LogicalOrFilters {
                                             filters: vec![
-                                                libra2_protos::indexer::v1::BooleanTransactionFilter {
+                                                creditchain_protos::indexer::v1::BooleanTransactionFilter {
                                                     filter: Some(
-                                                        libra2_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
-                                                            libra2_protos::indexer::v1::ApiFilter {
+                                                        creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
+                                                            creditchain_protos::indexer::v1::ApiFilter {
                                                                 filter: Some(
-                                                                    libra2_protos::indexer::v1::api_filter::Filter::TransactionRootFilter(
-                                                                        libra2_protos::indexer::v1::TransactionRootFilter {
+                                                                    creditchain_protos::indexer::v1::api_filter::Filter::TransactionRootFilter(
+                                                                        creditchain_protos::indexer::v1::TransactionRootFilter {
                                                                             success: Some(true),
                                                                             transaction_type: None,
                                                                         },
@@ -691,13 +691,13 @@ mod test {
                                                         ),
                                                     ),
                                                 },
-                                                libra2_protos::indexer::v1::BooleanTransactionFilter {
+                                                creditchain_protos::indexer::v1::BooleanTransactionFilter {
                                                     filter: Some(
-                                                        libra2_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
-                                                            libra2_protos::indexer::v1::ApiFilter {
+                                                        creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
+                                                            creditchain_protos::indexer::v1::ApiFilter {
                                                                 filter: Some(
-                                                                    libra2_protos::indexer::v1::api_filter::Filter::UserTransactionFilter(
-                                                                        libra2_protos::indexer::v1::UserTransactionFilter {
+                                                                    creditchain_protos::indexer::v1::api_filter::Filter::UserTransactionFilter(
+                                                                        creditchain_protos::indexer::v1::UserTransactionFilter {
                                                                             sender: Some(
                                                                                 "0x0011".to_string()
                                                                             ),
@@ -714,15 +714,15 @@ mod test {
                                     ),
                                 ),
                             },
-                            libra2_protos::indexer::v1::BooleanTransactionFilter {
+                            creditchain_protos::indexer::v1::BooleanTransactionFilter {
                                 filter: Some(
-                                    libra2_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
-                                        libra2_protos::indexer::v1::ApiFilter {
+                                    creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
+                                        creditchain_protos::indexer::v1::ApiFilter {
                                             filter: Some(
-                                                libra2_protos::indexer::v1::api_filter::Filter::EventFilter(
-                                                    libra2_protos::indexer::v1::EventFilter {
+                                                creditchain_protos::indexer::v1::api_filter::Filter::EventFilter(
+                                                    creditchain_protos::indexer::v1::EventFilter {
                                                         struct_type: Some(
-                                                            libra2_protos::indexer::v1::MoveStructTagFilter {
+                                                            creditchain_protos::indexer::v1::MoveStructTagFilter {
                                                                 address: Some("0x0077".to_string()),
                                                                 module: Some("roulette".to_string()),
                                                                 name: Some("spin".to_string()),
@@ -736,19 +736,19 @@ mod test {
                                     ),
                                 ),
                             },
-                            libra2_protos::indexer::v1::BooleanTransactionFilter {
+                            creditchain_protos::indexer::v1::BooleanTransactionFilter {
                                 filter: Some(
-                                    libra2_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalNot(
+                                    creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::LogicalNot(
                                         Box::new(
-                                            libra2_protos::indexer::v1::BooleanTransactionFilter {
+                                            creditchain_protos::indexer::v1::BooleanTransactionFilter {
                                                 filter: Some(
-                                                    libra2_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
-                                                        libra2_protos::indexer::v1::ApiFilter {
+                                                    creditchain_protos::indexer::v1::boolean_transaction_filter::Filter::ApiFilter(
+                                                        creditchain_protos::indexer::v1::ApiFilter {
                                                             filter: Some(
-                                                                libra2_protos::indexer::v1::api_filter::Filter::EventFilter(
-                                                                    libra2_protos::indexer::v1::EventFilter {
+                                                                creditchain_protos::indexer::v1::api_filter::Filter::EventFilter(
+                                                                    creditchain_protos::indexer::v1::EventFilter {
                                                                         struct_type: Some(
-                                                                            libra2_protos::indexer::v1::MoveStructTagFilter {
+                                                                            creditchain_protos::indexer::v1::MoveStructTagFilter {
                                                                                 address: Some("0x0088".to_string()),
                                                                                 module: None,
                                                                                 name: None,

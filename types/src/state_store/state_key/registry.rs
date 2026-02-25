@@ -9,8 +9,8 @@ use crate::{
     },
 };
 use anyhow::Result;
-use libra2_crypto::{hash::CryptoHasher, HashValue};
-use libra2_infallible::RwLock;
+use creditchain_crypto::{hash::CryptoHasher, HashValue};
+use creditchain_infallible::RwLock;
 use bytes::Bytes;
 use hashbrown::HashMap;
 use move_core_types::{

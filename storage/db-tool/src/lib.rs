@@ -15,12 +15,12 @@ mod tests;
 mod utils;
 
 use anyhow::Result;
-use libra2_db::db_debugger;
-use libra2_logger::info;
+use creditchain_db::db_debugger;
+use creditchain_logger::info;
 use clap::Parser;
 
 #[derive(Parser)]
-#[clap(name = "Libra2 db tool", author, disable_version_flag = true)]
+#[clap(name = "CreditChain db tool", author, disable_version_flag = true)]
 pub enum DBTool {
     #[clap(subcommand)]
     Backup(backup::Command),

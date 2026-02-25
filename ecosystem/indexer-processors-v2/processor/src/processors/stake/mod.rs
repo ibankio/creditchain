@@ -20,7 +20,7 @@ use crate::processors::stake::models::{
 use ahash::AHashMap;
 use libra2_indexer_processor_sdk::{
     libra2_indexer_transaction_stream::utils::time::parse_timestamp,
-   libra2_protos::transaction::v1::{write_set_change::Change, Transaction},
+   creditchain_protos::transaction::v1::{write_set_change::Change, Transaction},
     postgres::utils::database::DbPoolConnection,
     utils::convert::standardize_address,
 };

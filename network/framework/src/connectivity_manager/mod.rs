@@ -35,18 +35,18 @@ use crate::{
     peer_manager::{self, conn_notifs_channel, ConnectionRequestSender, PeerManagerError},
     transport::ConnectionMetadata,
 };
-use libra2_config::{
+use creditchain_config::{
     config::{Peer, PeerRole, PeerSet},
     network_id::NetworkContext,
 };
-use libra2_crypto::x25519;
-use libra2_infallible::RwLock;
-use libra2_logger::prelude::*;
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_num_variants::NumVariants;
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_time_service::{TimeService, TimeServiceTrait};
-use libra2_types::{account_address::AccountAddress, network_address::NetworkAddress, PeerId};
+use creditchain_crypto::x25519;
+use creditchain_infallible::RwLock;
+use creditchain_logger::prelude::*;
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_num_variants::NumVariants;
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_time_service::{TimeService, TimeServiceTrait};
+use creditchain_types::{account_address::AccountAddress, network_address::NetworkAddress, PeerId};
 use futures::{
     channel::oneshot,
     future::{BoxFuture, FutureExt},
@@ -109,7 +109,7 @@ pub struct ConnectivityManager<TBackoff> {
     /// Channel to receive notifications from PeerManager.
     connection_notifs_rx: conn_notifs_channel::Receiver,
     /// Channel over which we receive requests from other actors.
-    requests_rx: libra2_channels::Receiver<ConnectivityRequest>,
+    requests_rx: creditchain_channels::Receiver<ConnectivityRequest>,
     /// Peers queued to be dialed, potentially with some delay. The dial can be canceled by
     /// sending over (or dropping) the associated oneshot sender.
     dial_queue: HashMap<PeerId, oneshot::Sender<()>>,
@@ -353,7 +353,7 @@ where
         seeds: PeerSet,
         connection_reqs_tx: ConnectionRequestSender,
         connection_notifs_rx: conn_notifs_channel::Receiver,
-        requests_rx: libra2_channels::Receiver<ConnectivityRequest>,
+        requests_rx: creditchain_channels::Receiver<ConnectivityRequest>,
         connectivity_check_interval: Duration,
         backoff_strategy: TBackoff,
         max_delay: Duration,

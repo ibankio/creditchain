@@ -10,10 +10,10 @@ use crate::{
     },
     test_utils::{create_vec_signed_transactions, mock_quorum_store_sender::MockQuorumStoreSender},
 };
-use libra2_consensus_types::proof_of_store::{BatchInfo, SignedBatchInfo, SignedBatchInfoMsg};
-use libra2_crypto::HashValue;
-use libra2_executor_types::ExecutorResult;
-use libra2_types::{
+use creditchain_consensus_types::proof_of_store::{BatchInfo, SignedBatchInfo, SignedBatchInfoMsg};
+use creditchain_crypto::HashValue;
+use creditchain_executor_types::ExecutorResult;
+use creditchain_types::{
     quorum_store::BatchId, transaction::SignedTransaction,
     validator_verifier::random_validator_verifier, PeerId,
 };
@@ -46,7 +46,7 @@ impl BatchReader for MockBatchReader {
 
 #[tokio::test(flavor = "multi_thread")]
 async fn test_proof_coordinator_basic() {
-    libra2_logger::Logger::init_for_testing();
+    creditchain_logger::Logger::init_for_testing();
     let (signers, verifier) = random_validator_verifier(4, None, true);
     let (tx, _rx) = channel(100);
     let proof_cache = Cache::builder().build();
@@ -97,7 +97,7 @@ async fn test_proof_coordinator_basic() {
 // This is testing the bad path where some of the signatures in signed batch infos are bad.
 #[tokio::test(flavor = "multi_thread")]
 async fn test_proof_coordinator_with_unverified_signatures() {
-    libra2_logger::Logger::init_for_testing();
+    creditchain_logger::Logger::init_for_testing();
     let (signers, verifier) = random_validator_verifier(10, Some(4), true);
     let verifier = Arc::new(verifier);
     let (tx, _rx) = channel(100);

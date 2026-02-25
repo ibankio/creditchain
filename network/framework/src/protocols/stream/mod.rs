@@ -3,8 +3,8 @@
 
 use crate::protocols::wire::messaging::v1::{MultiplexMessage, NetworkMessage};
 use anyhow::{bail, ensure};
-use libra2_channels::Sender;
-use libra2_id_generator::{IdGenerator, U32IdGenerator};
+use creditchain_channels::Sender;
+use creditchain_id_generator::{IdGenerator, U32IdGenerator};
 use futures_util::SinkExt;
 #[cfg(any(test, feature = "fuzzing"))]
 use proptest_derive::Arbitrary;

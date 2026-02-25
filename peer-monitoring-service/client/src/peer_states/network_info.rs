@@ -6,19 +6,19 @@ use crate::{
     peer_states::{key_value::StateValueInterface, request_tracker::RequestTracker},
     Error, LogEntry, LogEvent, LogSchema,
 };
-use libra2_config::{
+use creditchain_config::{
     config::{BaseConfig, NetworkMonitoringConfig, NodeConfig, RoleType},
     network_id::PeerNetworkId,
 };
-use libra2_infallible::RwLock;
-use libra2_logger::warn;
-use libra2_network::application::metadata::PeerMetadata;
-use libra2_peer_monitoring_service_types::{
+use creditchain_infallible::RwLock;
+use creditchain_logger::warn;
+use creditchain_network::application::metadata::PeerMetadata;
+use creditchain_peer_monitoring_service_types::{
     request::PeerMonitoringServiceRequest,
     response::{NetworkInformationResponse, PeerMonitoringServiceResponse},
     MAX_DISTANCE_FROM_VALIDATORS,
 };
-use libra2_time_service::TimeService;
+use creditchain_time_service::TimeService;
 use std::{
     fmt,
     fmt::{Display, Formatter},
@@ -207,22 +207,22 @@ impl Display for NetworkInfoState {
 #[cfg(test)]
 mod test {
     use crate::peer_states::{key_value::StateValueInterface, network_info::NetworkInfoState};
-    use libra2_config::{
+    use creditchain_config::{
         config::{BaseConfig, NodeConfig, PeerRole, RoleType},
         network_id::{NetworkId, PeerNetworkId},
     };
-    use libra2_netcore::transport::ConnectionOrigin;
-    use libra2_network::{
+    use creditchain_netcore::transport::ConnectionOrigin;
+    use creditchain_network::{
         application::metadata::PeerMetadata,
         protocols::wire::handshake::v1::{MessagingProtocolVersion, ProtocolIdSet},
         transport::{ConnectionId, ConnectionMetadata},
     };
-    use libra2_peer_monitoring_service_types::{
+    use creditchain_peer_monitoring_service_types::{
         request::PeerMonitoringServiceRequest,
         response::{NetworkInformationResponse, PeerMonitoringServiceResponse},
     };
-    use libra2_time_service::TimeService;
-    use libra2_types::{network_address::NetworkAddress, PeerId};
+    use creditchain_time_service::TimeService;
+    use creditchain_types::{network_address::NetworkAddress, PeerId};
     use std::str::FromStr;
 
     // Useful test constants

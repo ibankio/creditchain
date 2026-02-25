@@ -7,8 +7,8 @@ use crate::test_helpers::{
     arb_hash_batch, arb_list_of_hash_batches, test_append_empty_impl, test_append_many_impl,
     MockHashStore, TestAccumulator,
 };
-use libra2_crypto::hash::ACCUMULATOR_PLACEHOLDER_HASH;
-use libra2_types::proof::definition::LeafCount;
+use creditchain_crypto::hash::ACCUMULATOR_PLACEHOLDER_HASH;
+use creditchain_types::proof::definition::LeafCount;
 
 #[test]
 fn test_append_empty_on_empty() {

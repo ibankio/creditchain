@@ -2,14 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::consensus_observer::common::error::Error;
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::{BatchPayload, Payload},
     payload::InlineBatches,
     pipelined_block::PipelinedBlock,
     proof_of_store::{BatchInfo, ProofCache, ProofOfStore},
 };
-use libra2_crypto::{hash::CryptoHash, HashValue};
-use libra2_types::{
+use creditchain_crypto::{hash::CryptoHash, HashValue};
+use creditchain_types::{
     block_info::{BlockInfo, Round},
     epoch_change::Verifier,
     epoch_state::EpochState,
@@ -1037,8 +1037,8 @@ fn verify_batch(
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_bitvec::BitVec;
-    use libra2_consensus_types::{
+    use creditchain_bitvec::BitVec;
+    use creditchain_consensus_types::{
         block::Block,
         block_data::{BlockData, BlockType},
         common::{Author, ProofWithData, ProofWithDataWithTxnLimit},
@@ -1049,8 +1049,8 @@ mod test {
         pipelined_block::OrderedBlockWindow,
         quorum_cert::QuorumCert,
     };
-    use libra2_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, SigningKey, Uniform};
-    use libra2_types::{
+    use creditchain_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, SigningKey, Uniform};
+    use creditchain_types::{
         aggregate_signature::AggregateSignature,
         chain_id::ChainId,
         ledger_info::LedgerInfo,

@@ -152,7 +152,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v3.0.0
         with:
           TOKEN: '${{ steps.secrets.outputs.token }}'
-          repository: 'libra2org/libra2-indexer-processors'
+          repository: 'creditchainorg/creditchain-indexer-processors'
           event-type: 'test-txn-json-change-detected'
           client-payload: '{"commit_hash": "${{ github.sha }}"}'
 

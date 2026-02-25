@@ -4,12 +4,12 @@
 
 #![forbid(unsafe_code)]
 
-use libra2_config::network_id::PeerNetworkId;
-use libra2_network::{
+use creditchain_config::network_id::PeerNetworkId;
+use creditchain_network::{
     application::{interface::NetworkClientInterface, storage::PeersAndMetadata},
     protocols::network::RpcError,
 };
-use libra2_storage_service_types::{
+use creditchain_storage_service_types::{
     requests::StorageServiceRequest, responses::StorageServiceResponse, StorageServiceError,
     StorageServiceMessage,
 };

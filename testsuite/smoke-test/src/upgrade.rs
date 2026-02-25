@@ -5,11 +5,11 @@ use crate::{
     libra2::move_test_helpers, smoke_test_environment::SwarmBuilder,
     utils::check_create_mint_transfer, workspace_builder, workspace_builder::workspace_root,
 };
-use libra2_crypto::ValidCryptoMaterialStringExt;
-use libra2_forge::Swarm;
-use libra2_gas_algebra::GasQuantity;
-use libra2_gas_schedule::{Libra2GasParameters, InitialGasSchedule, ToOnChainGasSchedule};
-use libra2_release_builder::{
+use creditchain_crypto::ValidCryptoMaterialStringExt;
+use creditchain_forge::Swarm;
+use creditchain_gas_algebra::GasQuantity;
+use creditchain_gas_schedule::{CreditChainGasParameters, InitialGasSchedule, ToOnChainGasSchedule};
+use creditchain_release_builder::{
     components::{
         feature_flags::{FeatureFlag, Features},
         framework::FrameworkReleaseConfig,
@@ -18,8 +18,8 @@ use libra2_release_builder::{
     },
     ReleaseEntry,
 };
-use libra2_temppath::TempPath;
-use libra2_types::on_chain_config::{FeatureFlag as Libra2FeatureFlag, OnChainConsensusConfig};
+use creditchain_temppath::TempPath;
+use creditchain_types::on_chain_config::{FeatureFlag as CreditChainFeatureFlag, OnChainConsensusConfig};
 use move_binary_format::file_format_common::VERSION_DEFAULT_LANG_V2;
 use std::{fs, path::PathBuf, process::Command, sync::Arc};
 
@@ -32,31 +32,31 @@ use std::{fs, path::PathBuf, process::Command, sync::Arc};
 /// i.e: The network will be alive after applying the new libra2 framework release.
 async fn test_upgrade_flow() {
     // prebuild tools.
-    let libra2_cli = workspace_builder::get_bin("libra2");
+    let creditchain_cli = workspace_builder::get_bin("creditchain");
 
     let num_nodes = 5;
     let (mut env, _cli, _) = SwarmBuilder::new_local(num_nodes)
-        .with_libra2_testnet()
+        .with_creditchain_testnet()
         .build_with_cli(0)
         .await;
 
-    let url = env.libra2_public_info().url().to_string();
+    let url = env.creditchain_public_info().url().to_string();
     let private_key = env
-        .libra2_public_info()
+        .creditchain_public_info()
         .root_account()
         .private_key()
         .to_encoded_string()
         .unwrap();
 
     // Bump the limit in gas schedule
-    // TODO: Replace this logic with libra2-gas
-    let mut gas_parameters = Libra2GasParameters::initial();
+    // TODO: Replace this logic with creditchain-gas
+    let mut gas_parameters = CreditChainGasParameters::initial();
     gas_parameters.vm.txn.max_transaction_size_in_bytes = GasQuantity::new(100_000_000);
 
-    let gas_schedule = libra2_types::on_chain_config::GasScheduleV2 {
-        feature_version: libra2_gas_schedule::LATEST_GAS_FEATURE_VERSION,
+    let gas_schedule = creditchain_types::on_chain_config::GasScheduleV2 {
+        feature_version: creditchain_gas_schedule::LATEST_GAS_FEATURE_VERSION,
         entries: gas_parameters
-            .to_on_chain_gas_schedule(libra2_gas_schedule::LATEST_GAS_FEATURE_VERSION),
+            .to_on_chain_gas_schedule(creditchain_gas_schedule::LATEST_GAS_FEATURE_VERSION),
     };
 
     let (_, update_gas_script) =
@@ -73,11 +73,11 @@ async fn test_upgrade_flow() {
     let framework_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("..")
         .join("..")
-        .join("libra2-move")
+        .join("creditchain-move")
         .join("framework")
-        .join("libra2-framework");
+        .join("creditchain-framework");
 
-    assert!(Command::new(libra2_cli.as_path())
+    assert!(Command::new(creditchain_cli.as_path())
         .current_dir(workspace_root())
         .args(&vec![
             "move",
@@ -98,14 +98,14 @@ async fn test_upgrade_flow() {
         .unwrap()
         .status
         .success());
-    env.libra2_public_info()
+    env.creditchain_public_info()
         .root_account()
         .increment_sequence_number();
 
     let upgrade_scripts_folder = TempPath::new();
     upgrade_scripts_folder.create_as_dir().unwrap();
 
-    let config = libra2_release_builder::ReleaseConfig {
+    let config = creditchain_release_builder::ReleaseConfig {
         name: "Default".to_string(),
         remote_endpoint: None,
         proposals: vec![
@@ -133,7 +133,7 @@ async fn test_upgrade_flow() {
                 metadata: ProposalMetadata::default(),
                 update_sequence: vec![
                     ReleaseEntry::FeatureFlag(Features {
-                        enabled: Libra2FeatureFlag::default_features()
+                        enabled: CreditChainFeatureFlag::default_features()
                             .into_iter()
                             .map(FeatureFlag::from)
                             .collect(),
@@ -169,12 +169,12 @@ async fn test_upgrade_flow() {
     let framework_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("..")
         .join("..")
-        .join("libra2-move")
+        .join("creditchain-move")
         .join("framework")
-        .join("libra2-framework");
+        .join("creditchain-framework");
 
     for path in scripts.iter() {
-        assert!(Command::new(libra2_cli.as_path())
+        assert!(Command::new(creditchain_cli.as_path())
             .current_dir(workspace_root())
             .args(&vec![
                 "move",
@@ -196,7 +196,7 @@ async fn test_upgrade_flow() {
             .status
             .success());
 
-        env.libra2_public_info()
+        env.creditchain_public_info()
             .root_account()
             .increment_sequence_number();
     }
@@ -207,7 +207,7 @@ async fn test_upgrade_flow() {
     let base_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
     let base_path_v1 = base_dir.join("src/libra2/package_publish_modules_v1/");
 
-    move_test_helpers::publish_package(&mut env.libra2_public_info(), base_path_v1)
+    move_test_helpers::publish_package(&mut env.creditchain_public_info(), base_path_v1)
         .await
         .unwrap();
 
@@ -234,7 +234,7 @@ async fn test_release_validate_tool_multi_step() {
         }))
         .build_with_cli(2)
         .await;
-    let config = libra2_release_builder::ReleaseConfig::default();
+    let config = creditchain_release_builder::ReleaseConfig::default();
 
     let root_key = TempPath::new();
     root_key.create_as_file().unwrap();
@@ -247,7 +247,7 @@ async fn test_release_validate_tool_multi_step() {
     )
     .unwrap();
 
-    let network_config = libra2_release_builder::validate::NetworkConfig {
+    let network_config = creditchain_release_builder::validate::NetworkConfig {
         endpoint: url::Url::parse(&env.chain_info().rest_api_url).unwrap(),
         root_key_path,
         validator_account: env.validators().last().unwrap().peer_id(),
@@ -264,28 +264,28 @@ async fn test_release_validate_tool_multi_step() {
 
     network_config.mint_to_validator(None).await.unwrap();
 
-    libra2_release_builder::validate::validate_config(config, network_config, None)
+    creditchain_release_builder::validate::validate_config(config, network_config, None)
         .await
         .unwrap();
 
-    let root_account = env.libra2_public_info().root_account().address();
+    let root_account = env.creditchain_public_info().root_account().address();
     // Test the module publishing workflow
     let sequence_number = env
-        .libra2_public_info()
+        .creditchain_public_info()
         .client()
         .get_account(root_account)
         .await
         .unwrap()
         .inner()
         .sequence_number;
-    env.libra2_public_info()
+    env.creditchain_public_info()
         .root_account()
         .set_sequence_number(sequence_number);
 
     let base_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
     let base_path_v1 = base_dir.join("src/libra2/package_publish_modules_v1/");
 
-    move_test_helpers::publish_package(&mut env.libra2_public_info(), base_path_v1)
+    move_test_helpers::publish_package(&mut env.creditchain_public_info(), base_path_v1)
         .await
         .unwrap();
 

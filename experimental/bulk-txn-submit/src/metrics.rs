@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_logger::info;
+use creditchain_logger::info;
 use std::{
     sync::{
         atomic::{AtomicBool, AtomicI64, AtomicU64, AtomicUsize},

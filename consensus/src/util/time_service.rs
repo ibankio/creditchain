@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::counters;
-use libra2_logger::prelude::*;
+use creditchain_logger::prelude::*;
 use async_trait::async_trait;
 use futures::{
     future::{AbortHandle, Abortable},
@@ -58,7 +58,7 @@ pub struct SendTask<T>
 where
     T: Send + 'static,
 {
-    sender: Option<libra2_channels::Sender<T>>,
+    sender: Option<creditchain_channels::Sender<T>>,
     message: Option<T>,
 }
 
@@ -67,7 +67,7 @@ where
     T: Send + 'static,
 {
     /// Makes new SendTask for given sender and message and wraps it to Box
-    pub fn make(sender: libra2_channels::Sender<T>, message: T) -> Box<dyn ScheduledTask> {
+    pub fn make(sender: creditchain_channels::Sender<T>, message: T) -> Box<dyn ScheduledTask> {
         Box::new(SendTask {
             sender: Some(sender),
             message: Some(message),
@@ -126,7 +126,7 @@ impl TimeService for ClockTimeService {
     }
 
     fn get_current_timestamp(&self) -> Duration {
-        libra2_infallible::duration_since_epoch()
+        creditchain_infallible::duration_since_epoch()
     }
 
     async fn sleep(&self, t: Duration) {
@@ -139,7 +139,7 @@ async fn test_time_service_abort() {
     use futures::StreamExt;
 
     let time_service = ClockTimeService::new(tokio::runtime::Handle::current());
-    let (tx, mut rx) = libra2_channels::new_test(10);
+    let (tx, mut rx) = creditchain_channels::new_test(10);
     let task1 = SendTask::make(tx.clone(), 1);
     let task2 = SendTask::make(tx.clone(), 2);
     let handle1 = time_service.run_after(Duration::from_millis(100), task1);

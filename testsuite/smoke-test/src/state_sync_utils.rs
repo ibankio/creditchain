@@ -8,13 +8,13 @@ use crate::{
         wait_for_all_nodes, MAX_HEALTHY_WAIT_SECS,
     },
 };
-use libra2_config::config::{BootstrappingMode, NodeConfig, OverrideNodeConfig};
-use libra2_db::Libra2DB;
-use libra2_forge::{LocalNode, LocalSwarm, Node, NodeExt, Swarm};
-use libra2_inspection_service::inspection_client::InspectionClient;
-use libra2_rest_client::Client as RestClient;
-use libra2_sdk::types::PeerId;
-use libra2_storage_interface::DbReader;
+use creditchain_config::config::{BootstrappingMode, NodeConfig, OverrideNodeConfig};
+use creditchain_db::CreditChainDB;
+use creditchain_forge::{LocalNode, LocalSwarm, Node, NodeExt, Swarm};
+use creditchain_inspection_service::inspection_client::InspectionClient;
+use creditchain_rest_client::Client as RestClient;
+use creditchain_sdk::types::PeerId;
+use creditchain_storage_interface::DbReader;
 use move_core_types::account_address::AccountAddress;
 use std::{
     sync::Arc,
@@ -46,10 +46,10 @@ pub async fn create_fullnode(full_node_config: NodeConfig, swarm: &mut LocalSwar
 pub fn enable_consensus_observer(use_consensus_observer: bool, node_config: &mut NodeConfig) {
     if use_consensus_observer {
         match node_config.base.role {
-            libra2_config::config::RoleType::Validator => {
+            creditchain_config::config::RoleType::Validator => {
                 node_config.consensus_observer.publisher_enabled = true;
             },
-            libra2_config::config::RoleType::FullNode => {
+            creditchain_config::config::RoleType::FullNode => {
                 node_config.consensus_observer.observer_enabled = true;
                 node_config.consensus_observer.publisher_enabled = true;
             },
@@ -199,8 +199,8 @@ fn verify_first_ledger_info(node: &mut LocalNode) {
     node.stop();
 
     // Verify that the ledger info exists at version 0
-    let libra2_db = Libra2DB::new_for_test_with_sharding(db_path_buf.as_path(), 1 << 13);
-    libra2_db.get_epoch_ending_ledger_info(0).unwrap();
+    let creditchain_db = CreditChainDB::new_for_test_with_sharding(db_path_buf.as_path(), 1 << 13);
+    creditchain_db.get_epoch_ending_ledger_info(0).unwrap();
 
     // Restart the node
     node.start().unwrap();
@@ -233,20 +233,20 @@ async fn verify_pruning_metrics_after_fast_sync(
     // Fetch the pruning metrics from the node
     let state_merkle_pruner_version = node_inspection_client
         .get_node_metric_i64(
-            "libra2_pruner_versions{pruner_name=state_merkle_pruner,tag=min_readable}",
+            "creditchain_pruner_versions{pruner_name=state_merkle_pruner,tag=min_readable}",
         )
         .await
         .unwrap()
         .unwrap();
     let epoch_snapshot_pruner_version = node_inspection_client
         .get_node_metric_i64(
-            "libra2_pruner_versions{pruner_name=epoch_snapshot_pruner,tag=min_readable}",
+            "creditchain_pruner_versions{pruner_name=epoch_snapshot_pruner,tag=min_readable}",
         )
         .await
         .unwrap()
         .unwrap();
     let ledger_pruner_version = node_inspection_client
-        .get_node_metric_i64("libra2_pruner_versions{pruner_name=ledger_pruner,tag=min_readable}")
+        .get_node_metric_i64("creditchain_pruner_versions{pruner_name=ledger_pruner,tag=min_readable}")
         .await
         .unwrap()
         .unwrap();

@@ -3,7 +3,7 @@
 
 use anyhow::{Context, Result};
 #[cfg(target_os = "linux")]
-use libra2_system_utils::profiling::start_cpu_profiling;
+use creditchain_system_utils::profiling::start_cpu_profiling;
 use backtrace::Backtrace;
 use clap::Parser;
 use figment::{
@@ -202,7 +202,7 @@ where
 
     let metrics_endpoint = warp::path("metrics").map(|| {
         // Metrics encoding.
-        let metrics = libra2_metrics_core::gather();
+        let metrics = creditchain_metrics_core::gather();
         let mut encode_buffer = vec![];
         let encoder = TextEncoder::new();
         // If metrics encoding fails, we want to panic and crash the process.

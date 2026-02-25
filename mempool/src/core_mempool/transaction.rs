@@ -3,8 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{core_mempool::TXN_INDEX_ESTIMATED_BYTES, counters, network::BroadcastPeerPriority};
-use libra2_crypto::HashValue;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_types::{
     account_address::AccountAddress,
     transaction::{ReplayProtector, SignedTransaction},
 };
@@ -153,8 +153,8 @@ mod test {
         core_mempool::{MempoolTransaction, TimelineState},
         network::BroadcastPeerPriority,
     };
-    use libra2_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
-    use libra2_types::{
+    use creditchain_crypto::{ed25519::Ed25519PrivateKey, PrivateKey, SigningKey, Uniform};
+    use creditchain_types::{
         account_address::AccountAddress,
         chain_id::ChainId,
         transaction::{

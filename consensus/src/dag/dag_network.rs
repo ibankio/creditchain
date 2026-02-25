@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::{types::DAGMessage, DAGRpcResult};
-use libra2_consensus_types::common::Author;
-use libra2_reliable_broadcast::RBNetworkSender;
-use libra2_time_service::{Interval, TimeService, TimeServiceTrait};
+use creditchain_consensus_types::common::Author;
+use creditchain_reliable_broadcast::RBNetworkSender;
+use creditchain_time_service::{Interval, TimeService, TimeServiceTrait};
 use async_trait::async_trait;
 use futures::{
     stream::{FusedStream, FuturesUnordered},

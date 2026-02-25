@@ -8,14 +8,14 @@ mod jwk_consensus_per_key;
 mod jwk_consensus_provider_change_mind;
 
 use crate::smoke_test_environment::SwarmBuilder;
-use libra2::{
+use creditchain::{
     common::types::{GasOptions, TransactionSummary},
     test::CliTestFramework,
 };
-use libra2_forge::{NodeExt, Swarm, SwarmExt};
-use libra2_logger::{debug, info};
-use libra2_rest_client::Client;
-use libra2_types::{
+use creditchain_forge::{NodeExt, Swarm, SwarmExt};
+use creditchain_logger::{debug, info};
+use creditchain_rest_client::Client;
+use creditchain_types::{
     jwks::{
         jwk::{JWKMoveStruct, JWK},
         unsupported::UnsupportedJWK,
@@ -34,13 +34,13 @@ pub async fn update_jwk_consensus_config(
     let script = match config {
         OnChainJWKConsensusConfig::Off => r#"
 script {
-    use libra2_framework::libra2_governance;
-    use libra2_framework::jwk_consensus_config;
+    use creditchain_framework::creditchain_governance;
+    use creditchain_framework::jwk_consensus_config;
     fun main(core_resources: &signer) {
-        let framework = libra2_governance::get_signer_testnet_only(core_resources, @0x1);
+        let framework = creditchain_governance::get_signer_testnet_only(core_resources, @0x1);
         let config = jwk_consensus_config::new_off();
         jwk_consensus_config::set_for_next_epoch(&framework, config);
-        libra2_governance::reconfigure(&framework);
+        creditchain_governance::reconfigure(&framework);
     }
 }
 "#
@@ -60,17 +60,17 @@ script {
             format!(
                 r#"
 script {{
-    use libra2_framework::libra2_governance;
-    use libra2_framework::jwk_consensus_config;
+    use creditchain_framework::creditchain_governance;
+    use creditchain_framework::jwk_consensus_config;
     use std::string::utf8;
 
     fun main(core_resources: &signer) {{
-        let framework = libra2_governance::get_signer_testnet_only(core_resources, @0x1);
+        let framework = creditchain_governance::get_signer_testnet_only(core_resources, @0x1);
         let config = jwk_consensus_config::new_v1(vector[
             {provider_lines}
         ]);
         jwk_consensus_config::set_for_next_epoch(&framework, config);
-        libra2_governance::reconfigure(&framework);
+        creditchain_governance::reconfigure(&framework);
     }}
 }}
 "#
@@ -117,10 +117,10 @@ async fn jwk_patching() {
     info!("Insert a JWK.");
     let jwk_patch_script = r#"
 script {
-    use libra2_framework::jwks;
-    use libra2_framework::libra2_governance;
+    use creditchain_framework::jwks;
+    use creditchain_framework::creditchain_governance;
     fun main(core_resources: &signer) {
-        let framework_signer = libra2_governance::get_signer_testnet_only(core_resources, @0000000000000000000000000000000000000000000000000000000000000001);
+        let framework_signer = creditchain_governance::get_signer_testnet_only(core_resources, @0000000000000000000000000000000000000000000000000000000000000001);
         let alice_jwk_0 = jwks::new_unsupported_jwk(b"alice_jwk_id_0", b"alice_jwk_payload_0");
         let patches = vector[
             jwks::new_patch_remove_all(),

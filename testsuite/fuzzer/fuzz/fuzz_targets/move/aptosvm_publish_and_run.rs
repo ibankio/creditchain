@@ -3,9 +3,9 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_language_e2e_tests::{account::Account, executor::FakeExecutor};
-use libra2_transaction_simulation::GENESIS_CHANGE_SET_HEAD;
-use libra2_types::{
+use creditchain_language_e2e_tests::{account::Account, executor::FakeExecutor};
+use creditchain_transaction_simulation::GENESIS_CHANGE_SET_HEAD;
+use creditchain_types::{
     chain_id::ChainId,
     on_chain_config::Features,
     transaction::{
@@ -14,8 +14,8 @@ use libra2_types::{
     },
     write_set::WriteSet,
 };
-use libra2_vm::Libra2VM;
-use libra2_vm_environment::{prod_configs, prod_configs::LATEST_GAS_FEATURE_VERSION};
+use creditchain_vm::CreditChainVM;
+use creditchain_vm_environment::{prod_configs, prod_configs::LATEST_GAS_FEATURE_VERSION};
 use libfuzzer_sys::{fuzz_target, Corpus};
 use move_binary_format::{
     access::ModuleAccess,
@@ -111,7 +111,7 @@ fn run_case(mut input: RunnableState) -> Result<(), Corpus> {
     filter_modules(&input)?;
 
     let verifier_config =
-        prod_configs::libra2_prod_verifier_config(LATEST_GAS_FEATURE_VERSION, &Features::default());
+        prod_configs::creditchain_prod_verifier_config(LATEST_GAS_FEATURE_VERSION, &Features::default());
     let deserializer_config = DeserializerConfig::new(BYTECODE_VERSION, 255);
 
     for m in input.dep_modules.iter_mut() {
@@ -186,7 +186,7 @@ fn run_case(mut input: RunnableState) -> Result<(), Corpus> {
         packages.push(cur)
     }
 
-    Libra2VM::set_concurrency_level_once(FUZZER_CONCURRENCY_LEVEL);
+    CreditChainVM::set_concurrency_level_once(FUZZER_CONCURRENCY_LEVEL);
     let mut vm = FakeExecutor::from_genesis_with_existing_thread_pool(
         &VM_WRITE_SET,
         ChainId::mainnet(),

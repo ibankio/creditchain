@@ -18,8 +18,8 @@ use crate::{
     },
     schema,
 };
-use libra2_api_types::Transaction as APITransaction;
-use libra2_types::{Libra2CoinType, CoinType};
+use creditchain_api_types::Transaction as APITransaction;
+use creditchain_types::{CreditChainCoinType, CoinType};
 use async_trait::async_trait;
 use diesel::{pg::upsert::excluded, result::Error, ExpressionMethods, PgConnection};
 use field_count::FieldCount;
@@ -77,7 +77,7 @@ fn insert_to_db(
     coin_supply: Vec<CoinSupply>,
     account_transactions: Vec<AccountTransaction>,
 ) -> Result<(), diesel::result::Error> {
-    libra2_logger::trace!(
+    creditchain_logger::trace!(
         name = name,
         start_version = start_version,
         end_version = end_version,
@@ -277,10 +277,10 @@ impl TransactionProcessor for CoinTransactionProcessor {
         end_version: u64,
     ) -> Result<ProcessingResult, TransactionProcessingError> {
         let mut conn = self.get_conn();
-        // get libra2_coin info for supply tracking
+        // get creditchain_coin info for supply tracking
         // TODO: This only needs to be fetched once. Need to persist somehow
-        let maybe_libra2_coin_info = &CoinInfoQuery::get_by_coin_type(
-            Libra2CoinType::type_tag().to_canonical_string(),
+        let maybe_creditchain_coin_info = &CoinInfoQuery::get_by_coin_type(
+            CreditChainCoinType::type_tag().to_canonical_string(),
             &mut conn,
         )
         .unwrap();
@@ -301,7 +301,7 @@ impl TransactionProcessor for CoinTransactionProcessor {
                 coin_infos,
                 current_coin_balances,
                 mut coin_supply,
-            ) = CoinActivity::from_transaction(txn, maybe_libra2_coin_info);
+            ) = CoinActivity::from_transaction(txn, maybe_creditchain_coin_info);
             all_coin_activities.append(&mut coin_activities);
             all_coin_balances.append(&mut coin_balances);
             all_coin_supply.append(&mut coin_supply);

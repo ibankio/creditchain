@@ -1,5 +1,5 @@
 [package]
-name = "libra2-secure-net"
+name = "creditchain-secure-net"
 description = "CreditChain's Simple Network Substrate"
 version = "0.1.1"
 
@@ -13,9 +13,9 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-protos = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-protos = { workspace = true }
 bcs = { workspace = true }
 crossbeam-channel = { workspace = true }
 once_cell = { workspace = true }
@@ -26,4 +26,4 @@ tonic = { workspace = true }
 tonic-reflection = { workspace = true }
 
 [dev-dependencies]
-libra2-config = { workspace = true }
+creditchain-config = { workspace = true }

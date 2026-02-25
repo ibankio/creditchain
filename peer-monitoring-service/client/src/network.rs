@@ -5,13 +5,13 @@ use crate::{
     logging::{LogEntry, LogEvent, LogSchema},
     metrics, Error,
 };
-use libra2_config::network_id::PeerNetworkId;
-use libra2_logger::{trace, warn};
-use libra2_network::application::{
+use creditchain_config::network_id::PeerNetworkId;
+use creditchain_logger::{trace, warn};
+use creditchain_network::application::{
     interface::{NetworkClient, NetworkClientInterface},
     storage::PeersAndMetadata,
 };
-use libra2_peer_monitoring_service_types::{
+use creditchain_peer_monitoring_service_types::{
     request::PeerMonitoringServiceRequest, response::PeerMonitoringServiceResponse,
     PeerMonitoringServiceMessage,
 };

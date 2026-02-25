@@ -3,7 +3,7 @@
 
 #![forbid(unsafe_code)]
 
-use libra2_drop_helper::async_concurrent_dropper::AsyncConcurrentDropper;
+use creditchain_drop_helper::async_concurrent_dropper::AsyncConcurrentDropper;
 use once_cell::sync::Lazy;
 
 pub(crate) static DROPPER: Lazy<AsyncConcurrentDropper> =

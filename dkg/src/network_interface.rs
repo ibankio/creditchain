@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::DKGMessage;
-use libra2_config::network_id::{NetworkId, PeerNetworkId};
-use libra2_network::{
+use creditchain_config::network_id::{NetworkId, PeerNetworkId};
+use creditchain_network::{
     application::{error::Error, interface::NetworkClientInterface},
     ProtocolId,
 };
-use libra2_types::PeerId;
+use creditchain_types::PeerId;
 use bytes::Bytes;
 use std::{collections::HashMap, time::Duration};
 

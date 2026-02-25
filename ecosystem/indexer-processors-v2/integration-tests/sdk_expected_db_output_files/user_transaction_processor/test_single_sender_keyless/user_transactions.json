@@ -9,11 +9,11 @@
     "expiration_timestamp_secs": "2024-06-10T15:51:29",
     "gas_unit_price": "100",
     "timestamp": "2024-06-10T15:51:10.170250",
-    "entry_function_id_str": "0x1::libra2_account::transfer_coins",
+    "entry_function_id_str": "0x1::creditchain_account::transfer_coins",
     "replay_protection_nonce": null,
     "epoch": 7324,
     "entry_function_contract_address": "0x0000000000000000000000000000000000000000000000000000000000000001",
-    "entry_function_module_name": "libra2_account",
+    "entry_function_module_name": "creditchain_account",
     "entry_function_function_name": "transfer_coins"
   }
 ]

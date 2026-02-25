@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::Error;
-use libra2_storage_interface::DbReader;
-use libra2_types::ledger_info::LedgerInfo;
+use creditchain_storage_interface::DbReader;
+use creditchain_types::ledger_info::LedgerInfo;
 use std::sync::Arc;
 
-/// The interface into local storage (e.g., the Libra2 DB) used by the peer
+/// The interface into local storage (e.g., the CreditChain DB) used by the peer
 /// monitoring server to handle client requests and responses.
 pub trait StorageReaderInterface: Clone + Send + 'static {
     /// Returns the highest synced epoch and version

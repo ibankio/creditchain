@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{metrics::TIMER, state_store::versioned_state_value::StateUpdateRef};
-use libra2_logger::{sample, sample::SampleRate, warn};
-use libra2_metrics_core::TimerHelper;
-use libra2_types::{
+use creditchain_logger::{sample, sample::SampleRate, warn};
+use creditchain_metrics_core::TimerHelper;
+use creditchain_types::{
     state_store::{state_key::StateKey, NUM_STATE_SHARDS},
     transaction::Version,
     write_set::{BaseStateOp, WriteSet},

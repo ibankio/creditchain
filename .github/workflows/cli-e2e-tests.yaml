@@ -81,7 +81,7 @@ jobs:
       - name: Print local testnet logs on failure
         if: ${{ !inputs.SKIP_JOB && failure() }}
         working-directory: docker/compose/validator-testnet
-        run: docker logs libra2-tools-devnet && docker logs libra2-tools-testnet && docker logs libra2-tools-mainnet
+        run: docker logs creditchain-tools-devnet && docker logs creditchain-tools-testnet && docker logs creditchain-tools-mainnet
 
       # Print out whether the job was skipped.
       - run: echo "Skipping CLI E2E tests!"

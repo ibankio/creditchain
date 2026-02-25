@@ -1,9 +1,9 @@
 {
-    "repoOwner": "libra2",
-    "repoName": "libra2-core",
+    "repoOwner": "creditchain",
+    "repoName": "creditchain-core",
 
     "branchLabelMapping": {
-        "^v(\\d+).(\\d+)$": "libra2-release-v$1.$2"
+        "^v(\\d+).(\\d+)$": "creditchain-release-v$1.$2"
     },
     "commitConflicts": true,
     "prTitle": "[cp][{{targetBranch}}] {{sourcePullRequest.title}}",

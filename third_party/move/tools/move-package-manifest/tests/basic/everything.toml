@@ -17,7 +17,7 @@ language_version = "2.3"
 
 [dependencies]
 foo = { git = "https://github.com/some-org/some-project", rev = "main", subdir = "foo" }
-bar = { libra2 = "mainnet", address = "0x1", version = "0.1.2" }
+bar = { creditchain = "mainnet", address = "0x1", version = "0.1.2" }
 baz = { local = "../baz" }
 
 [dev-dependencies]

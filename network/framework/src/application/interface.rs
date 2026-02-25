@@ -10,9 +10,9 @@ use crate::{
         wire::handshake::v1::{ProtocolId, ProtocolIdSet},
     },
 };
-use libra2_config::network_id::{NetworkId, PeerNetworkId};
-use libra2_logger::{prelude::*, sample, sample::SampleRate};
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_config::network_id::{NetworkId, PeerNetworkId};
+use creditchain_logger::{prelude::*, sample, sample::SampleRate};
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use async_trait::async_trait;
 use bytes::Bytes;
 use itertools::Itertools;

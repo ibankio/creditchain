@@ -4,7 +4,7 @@
 
 use crate::Result;
 use anyhow::{bail, Context};
-use libra2_logger::info;
+use creditchain_logger::info;
 use serde::Deserialize;
 use std::{
     env, fs,
@@ -20,18 +20,18 @@ pub struct Metadata {
     pub workspace_root: PathBuf,
 }
 
-/// at _forge_ compile time, decide what kind of build we will use for `libra2-node`
+/// at _forge_ compile time, decide what kind of build we will use for `creditchain-node`
 pub fn use_release() -> bool {
     option_env!("LOCAL_SWARM_NODE_RELEASE").is_some()
 }
 
-/// at _forge_ compile time, decide to build `libra2-node` only for consensus perf tests
+/// at _forge_ compile time, decide to build `creditchain-node` only for consensus perf tests
 pub fn build_consensus_only_node() -> bool {
     option_env!("CONSENSUS_ONLY_PERF_TEST").is_some()
 }
 
-/// at forge _run_ time, compile `libra2-node` without indexer
-pub fn build_libra2_node_without_indexer() -> bool {
+/// at forge _run_ time, compile `creditchain-node` without indexer
+pub fn build_creditchain_node_without_indexer() -> bool {
     std::env::var("FORGE_BUILD_WITHOUT_INDEXER").is_ok()
 }
 
@@ -47,39 +47,39 @@ pub fn metadata() -> Result<Metadata> {
 }
 
 /// Get the libra2 node binary from the current working directory
-pub fn get_libra2_node_binary_from_worktree() -> Result<(String, PathBuf)> {
+pub fn get_creditchain_node_binary_from_worktree() -> Result<(String, PathBuf)> {
     let metadata = metadata()?;
     let mut revision = git_rev_parse(&metadata, "HEAD")?;
     if git_is_worktree_dirty()? {
         revision.push_str("-dirty");
     }
 
-    let bin_path = cargo_build_libra2_node(&metadata.workspace_root, &metadata.target_directory)?;
+    let bin_path = cargo_build_creditchain_node(&metadata.workspace_root, &metadata.target_directory)?;
 
     Ok((revision, bin_path))
 }
 
-/// This function will attempt to build the libra2-node binary at an arbitrary revision.
+/// This function will attempt to build the creditchain-node binary at an arbitrary revision.
 /// Using the `target/forge` as a working directory it will do the following:
-///     1. Look for a binary named `libra2-node--<revision>`, if it already exists return it
+///     1. Look for a binary named `creditchain-node--<revision>`, if it already exists return it
 ///     2. If the binary doesn't exist check out the revision to `target/forge/revision` by doing
 ///        `git archive --format=tar <revision> | tar x`
 ///     3. Using the `target/forge/target` directory as a cargo artifact directory, build the
-///        binary and then move it to `target/forge/libra2-node--<revision>`
-pub fn get_libra2_node_binary_at_revision(revision: &str) -> Result<(String, PathBuf)> {
+///        binary and then move it to `target/forge/creditchain-node--<revision>`
+pub fn get_creditchain_node_binary_at_revision(revision: &str) -> Result<(String, PathBuf)> {
     let metadata = metadata()?;
     let forge_directory = metadata.target_directory.join("forge");
     let revision = git_rev_parse(&metadata, format!("{}^{{commit}}", revision))?;
     let checkout_dir = forge_directory.join(&revision);
     let forge_target_directory = forge_directory.join("target");
-    let libra2_node_bin = forge_directory.join(format!(
-        "libra2-node--{}{}",
+    let creditchain_node_bin = forge_directory.join(format!(
+        "creditchain-node--{}{}",
         revision,
         env::consts::EXE_SUFFIX
     ));
 
-    if libra2_node_bin.exists() {
-        return Ok((revision, libra2_node_bin));
+    if creditchain_node_bin.exists() {
+        return Ok((revision, creditchain_node_bin));
     }
 
     fs::create_dir_all(&forge_target_directory)?;
@@ -87,13 +87,13 @@ pub fn get_libra2_node_binary_at_revision(revision: &str) -> Result<(String, Pat
     checkout_revision(&metadata, &revision, &checkout_dir)?;
 
     fs::rename(
-        cargo_build_libra2_node(&checkout_dir, &forge_target_directory)?,
-        &libra2_node_bin,
+        cargo_build_creditchain_node(&checkout_dir, &forge_target_directory)?,
+        &creditchain_node_bin,
     )?;
 
     let _ = fs::remove_dir_all(&checkout_dir);
 
-    Ok((revision, libra2_node_bin))
+    Ok((revision, creditchain_node_bin))
 }
 
 fn git_rev_parse<R: AsRef<str>>(metadata: &Metadata, rev: R) -> Result<String> {
@@ -123,7 +123,7 @@ fn git_is_worktree_dirty() -> Result<bool> {
 }
 
 /// Attempt to query the local git repository's remotes for the one that points to the upstream
-/// libra2org/libra2-core repository, falling back to "origin" if unable to locate the remote
+/// libra2org/creditchain-core repository, falling back to "origin" if unable to locate the remote
 pub fn git_get_upstream_remote() -> Result<String> {
     let output = Command::new("sh")
         .arg("-c")
@@ -165,7 +165,7 @@ pub fn git_merge_base<R: AsRef<str>>(rev: R) -> Result<String> {
 }
 
 pub fn cargo_build_common_args() -> Vec<&'static str> {
-    let mut args = if build_libra2_node_without_indexer() {
+    let mut args = if build_creditchain_node_without_indexer() {
         vec!["build", "--features=failpoints,smoke-test"]
     } else {
         vec!["build", "--features=failpoints,indexer,smoke-test"]
@@ -179,7 +179,7 @@ pub fn cargo_build_common_args() -> Vec<&'static str> {
     args
 }
 
-fn cargo_build_libra2_node<D, T>(directory: D, target_directory: T) -> Result<PathBuf>
+fn cargo_build_creditchain_node<D, T>(directory: D, target_directory: T) -> Result<PathBuf>
 where
     D: AsRef<Path>,
     T: AsRef<Path>,
@@ -188,26 +188,26 @@ where
     let directory = directory.as_ref();
 
     let mut args = cargo_build_common_args();
-    // build the libra2-node package directly to avoid feature unification issues
-    args.push("--package=libra2-node");
+    // build the creditchain-node package directly to avoid feature unification issues
+    args.push("--package=creditchain-node");
     info!("Compiling with cargo args: {:?}", args);
     let output = Command::new("cargo")
         .current_dir(directory)
         .env("CARGO_TARGET_DIR", target_directory)
         .args(&args)
         .output()
-        .context("Failed to build libra2-node")?;
+        .context("Failed to build creditchain-node")?;
 
     if output.status.success() {
         let bin_path = target_directory.join(format!(
             "{}/{}{}",
             if use_release() { "release" } else { "debug" },
-            "libra2-node",
+            "creditchain-node",
             env::consts::EXE_SUFFIX
         ));
         if !bin_path.exists() {
             bail!(
-                "Can't find binary libra2-node at expected path {:?}",
+                "Can't find binary creditchain-node at expected path {:?}",
                 bin_path
             );
         }
@@ -217,7 +217,7 @@ where
         io::stderr().write_all(&output.stderr)?;
 
         bail!(
-            "Failed to build libra2-node: 'cd {} && CARGO_TARGET_DIR={} cargo build --bin=libra2-node",
+            "Failed to build creditchain-node: 'cd {} && CARGO_TARGET_DIR={} cargo build --bin=creditchain-node",
             directory.display(),
             target_directory.display(),
         );

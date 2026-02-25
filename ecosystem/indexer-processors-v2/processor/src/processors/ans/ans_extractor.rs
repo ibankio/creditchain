@@ -18,7 +18,7 @@ use crate::{
 };
 use ahash::AHashMap;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{
+   creditchain_protos::transaction::v1::{
         transaction::TxnData, write_set_change::Change as WriteSetChange, Transaction,
     },
     traits::{async_step::AsyncRunType, AsyncStep, NamedStep, Processable},

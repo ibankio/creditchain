@@ -15,7 +15,7 @@ MOVE_PR_NEXTEST_PROFILE="${MOVE_PR_NEXTEST_PROFILE:-smoke-test}"
 
 BASE=$(git rev-parse --show-toplevel)
 
-# This is currently setup for the libra2-core environment. If move is at a different
+# This is currently setup for the creditchain-core environment. If move is at a different
 # location, this need to be changed.
 MOVE_BASE=$BASE/third_party/move
 
@@ -34,7 +34,7 @@ Usage:
 Flags:
     -h   Print this help
     -t   Run tests
-    -i   In addition to -t, run integration tests (Libra2 framework and e2e tests)
+    -i   In addition to -t, run integration tests (CreditChain framework and e2e tests)
     -c   Run xclippy and fmt +nightly
     -g   Run the git checks script (whitespace check). This works
          only for committed clients.
@@ -103,7 +103,7 @@ MOVE_CRATES="\
 
 # This is a list of crates for integration testing.
 MOVE_CRATES_INTEGRATION_TEST="\
-  -p libra2-transactional-test-harness \
+  -p creditchain-transactional-test-harness \
   -p bytecode-verifier-tests \
   -p bytecode-verifier-transactional-tests \
   -p move-cli \
@@ -114,16 +114,16 @@ MOVE_CRATES_INTEGRATION_TEST="\
   -p move-transactional-test-runner \
   -p move-unit-test \
   -p move-vm-transactional-tests \
-  -p libra2-move-stdlib\
+  -p creditchain-move-stdlib\
   -p move-abigen\
   -p move-docgen\
   -p move-stdlib\
   -p move-table-extension\
   -p move-vm-integration-tests\
-  -p libra2-move-examples\
+  -p creditchain-move-examples\
   -p e2e-move-tests\
-  -p libra2-framework\
-  -p libra2-api\
+  -p creditchain-framework\
+  -p creditchain-api\
 "
 
 if [ ! -z "$CHECK" ]; then
@@ -153,7 +153,7 @@ if [ ! -z "$GEN_ARTIFACTS" ]; then
     # Add hoc treatment
     (
         cd $BASE
-        cargo build $CARGO_OP_PARAMS -p libra2-cached-packages
+        cargo build $CARGO_OP_PARAMS -p creditchain-cached-packages
     )
 fi
 

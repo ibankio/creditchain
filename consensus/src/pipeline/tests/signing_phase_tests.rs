@@ -17,9 +17,9 @@ use crate::{
     },
     test_utils::consensus_runtime,
 };
-use libra2_crypto::HashValue;
-use libra2_safety_rules::Error;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_safety_rules::Error;
+use creditchain_types::{
     aggregate_signature::AggregateSignature,
     block_info::BlockInfo,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},

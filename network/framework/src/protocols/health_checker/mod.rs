@@ -35,12 +35,12 @@ use crate::{
     },
     ProtocolId,
 };
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::network_id::{NetworkContext, PeerNetworkId};
-use libra2_logger::prelude::*;
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_time_service::{TimeService, TimeServiceTrait};
-use libra2_types::PeerId;
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::network_id::{NetworkContext, PeerNetworkId};
+use creditchain_logger::prelude::*;
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_time_service::{TimeService, TimeServiceTrait};
+use creditchain_types::PeerId;
 use bytes::Bytes;
 use futures::{
     channel::oneshot,
@@ -72,7 +72,7 @@ pub fn health_checker_network_config() -> NetworkApplicationConfig {
     let network_service_config = NetworkServiceConfig::new(
         direct_send_protocols,
         rpc_protocols,
-        libra2_channel::Config::new(NETWORK_CHANNEL_SIZE)
+        creditchain_channel::Config::new(NETWORK_CHANNEL_SIZE)
             .queue_style(QueueStyle::LIFO)
             .counters(&counters::PENDING_HEALTH_CHECKER_NETWORK_EVENTS),
     );

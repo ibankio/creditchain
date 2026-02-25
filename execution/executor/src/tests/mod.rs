@@ -7,16 +7,16 @@ use crate::{
     db_bootstrapper::{generate_waypoint, maybe_bootstrap},
     workflow::{do_get_execution_output::DoGetExecutionOutput, ApplyExecutionOutput},
 };
-use libra2_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, SigningKey, Uniform};
-use libra2_db::Libra2DB;
-use libra2_executor_types::{
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, HashValue, PrivateKey, SigningKey, Uniform};
+use creditchain_db::CreditChainDB;
+use creditchain_executor_types::{
     BlockExecutorTrait, ChunkExecutorTrait, TransactionReplayer, VerifyExecutionMode,
 };
-use libra2_storage_interface::{
+use creditchain_storage_interface::{
     state_store::state_view::cached_state_view::CachedStateView, DbReaderWriter, LedgerSummary,
     Result,
 };
-use libra2_types::{
+use creditchain_types::{
     account_address::AccountAddress,
     aggregate_signature::AggregateSignature,
     block_executor::{
@@ -40,7 +40,7 @@ use libra2_types::{
     },
     write_set::{WriteOp, WriteSet, WriteSetMut},
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use itertools::Itertools;
 use mock_vm::{
     encode_mint_transaction, encode_reconfiguration_transaction, encode_transfer_transaction,
@@ -77,17 +77,17 @@ fn execute_and_commit_block(
 }
 
 struct TestExecutor {
-    _path: libra2_temppath::TempPath,
+    _path: creditchain_temppath::TempPath,
     db: DbReaderWriter,
     executor: BlockExecutor<MockVM>,
 }
 
 impl TestExecutor {
     fn new() -> TestExecutor {
-        let path = libra2_temppath::TempPath::new();
+        let path = creditchain_temppath::TempPath::new();
         path.create_as_dir().unwrap();
-        let db = DbReaderWriter::new(Libra2DB::new_for_test(path.path()));
-        let genesis = libra2_vm_genesis::test_genesis_transaction();
+        let db = DbReaderWriter::new(CreditChainDB::new_for_test(path.path()));
+        let genesis = creditchain_vm_genesis::test_genesis_transaction();
         let waypoint = generate_waypoint::<MockVM>(&db, &genesis).unwrap();
         maybe_bootstrap::<MockVM>(&db, &genesis, waypoint).unwrap();
         let executor = BlockExecutor::new(db.clone());

@@ -1,9 +1,0 @@
-[package]
-name = "RingDeque"
-version = "0.0.0"
-
-[dependencies]
-Libra2Framework = { local = "../../framework/libra2-framework" }
-
-[addresses]
-ring_deque = "_"

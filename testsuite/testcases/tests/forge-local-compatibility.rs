@@ -2,12 +2,12 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_forge::{forge_main, ForgeConfig, InitialVersion, LocalFactory, Options, Result};
-use libra2_testcases::compatibility_test::SimpleValidatorUpgrade;
+use creditchain_forge::{forge_main, ForgeConfig, InitialVersion, LocalFactory, Options, Result};
+use creditchain_testcases::compatibility_test::SimpleValidatorUpgrade;
 use std::num::NonZeroUsize;
 
 fn main() -> Result<()> {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
 
     let tests = ForgeConfig::default()
         .with_initial_validator_count(NonZeroUsize::new(4).unwrap())

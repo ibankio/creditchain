@@ -13,16 +13,16 @@ use crate::{
     utils,
     utils::{OutputFallbackHandler, SpeculativeStreamState, PENDING_DATA_LOG_FREQ_SECS},
 };
-use libra2_config::config::BootstrappingMode;
-use libra2_data_client::global_summary::GlobalDataSummary;
-use libra2_data_streaming_service::{
+use creditchain_config::config::BootstrappingMode;
+use creditchain_data_client::global_summary::GlobalDataSummary;
+use creditchain_data_streaming_service::{
     data_notification::{DataNotification, DataPayload, NotificationId},
     data_stream::DataStreamListener,
     streaming_client::{DataStreamingClient, NotificationAndFeedback, NotificationFeedback},
 };
-use libra2_logger::{prelude::*, sample::SampleRate};
-use libra2_storage_interface::DbReader;
-use libra2_types::{
+use creditchain_logger::{prelude::*, sample::SampleRate};
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{
     epoch_change::Verifier,
     epoch_state::EpochState,
     ledger_info::LedgerInfoWithSignatures,
@@ -312,7 +312,7 @@ pub struct Bootstrapper<MetadataStorage, StorageSyncer, StreamingClient> {
     // The component used to sync state values (if downloading states)
     state_value_syncer: StateValueSyncer,
 
-    // The client through which to stream data from the Libra2 network
+    // The client through which to stream data from the CreditChain network
     streaming_client: StreamingClient,
 
     // The interface to read from storage

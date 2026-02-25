@@ -20,14 +20,14 @@ use crate::{
     },
     utils::OutputFallbackHandler,
 };
-use libra2_config::config::BootstrappingMode;
-use libra2_data_client::global_summary::GlobalDataSummary;
-use libra2_data_streaming_service::{
+use creditchain_config::config::BootstrappingMode;
+use creditchain_data_client::global_summary::GlobalDataSummary;
+use creditchain_data_streaming_service::{
     data_notification::{DataNotification, DataPayload, NotificationId},
     streaming_client::{NotificationAndFeedback, NotificationFeedback},
 };
-use libra2_time_service::TimeService;
-use libra2_types::{
+use creditchain_time_service::TimeService;
+use creditchain_types::{
     transaction::{TransactionOutputListWithProofV2, Version},
     waypoint::Waypoint,
 };
@@ -1594,7 +1594,7 @@ fn create_bootstrapper(
     OutputFallbackHandler,
 ) {
     // Initialize the logger for tests
-    libra2_logger::Logger::init_for_testing();
+    creditchain_logger::Logger::init_for_testing();
 
     // Create the mock storage synchronizer
     let mock_storage_synchronizer = create_ready_storage_synchronizer(expect_reset_executor);
@@ -1648,7 +1648,7 @@ fn create_bootstrapper_with_storage(
     expect_reset_executor: bool,
 ) -> Bootstrapper<MockMetadataStorage, MockStorageSynchronizer, MockStreamingClient> {
     // Initialize the logger for tests
-    libra2_logger::Logger::init_for_testing();
+    creditchain_logger::Logger::init_for_testing();
 
     // Create the mock storage synchronizer
     let mock_storage_synchronizer = create_ready_storage_synchronizer(expect_reset_executor);

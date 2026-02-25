@@ -15,8 +15,8 @@ use crate::{
     DbReader,
 };
 use anyhow::Result;
-use libra2_metrics_core::{IntCounterHelper, TimerHelper};
-use libra2_types::{
+use creditchain_metrics_core::{IntCounterHelper, TimerHelper};
+use creditchain_types::{
     state_store::{
         hot_state::THotStateSlot, state_key::StateKey, state_slot::StateSlot,
         state_storage_usage::StateStorageUsage, state_value::StateValue, StateViewId,

@@ -1,0 +1,10 @@
+[package]
+name = 'guild'
+version = '1.0.0'
+
+[addresses]
+guild = "_"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }
+CreditChainTokenObjects = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-token-objects", rev = "mainnet" }

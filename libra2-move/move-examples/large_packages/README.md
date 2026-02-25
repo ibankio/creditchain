@@ -1,1 +1,0 @@
-# Moved to libra2-move/framework/libra2-experimental/doc/large_packages.md

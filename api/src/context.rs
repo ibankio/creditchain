@@ -12,22 +12,22 @@ use crate::{
     },
 };
 use anyhow::{anyhow, bail, ensure, format_err, Context as AnyhowContext, Result};
-use libra2_api_types::{
-    transaction::ReplayProtector, Libra2ErrorCode, AsConverter, BcsBlock, GasEstimation, LedgerInfo,
+use creditchain_api_types::{
+    transaction::ReplayProtector, CreditChainErrorCode, AsConverter, BcsBlock, GasEstimation, LedgerInfo,
     ResourceGroup, TransactionOnChainData, TransactionSummary,
 };
-use libra2_config::config::{GasEstimationConfig, NodeConfig, RoleType};
-use libra2_crypto::HashValue;
-use libra2_gas_schedule::{Libra2GasParameters, FromOnChainGasSchedule};
-use libra2_logger::{error, info, Schema};
-use libra2_mempool::{MempoolClientRequest, MempoolClientSender, SubmissionStatus};
-use libra2_storage_interface::{
+use creditchain_config::config::{GasEstimationConfig, NodeConfig, RoleType};
+use creditchain_crypto::HashValue;
+use creditchain_gas_schedule::{CreditChainGasParameters, FromOnChainGasSchedule};
+use creditchain_logger::{error, info, Schema};
+use creditchain_mempool::{MempoolClientRequest, MempoolClientSender, SubmissionStatus};
+use creditchain_storage_interface::{
     state_store::state_view::db_state_view::{
         DbStateView, DbStateViewAtVersion, LatestDbStateCheckpointView,
     },
-    Libra2DbError, DbReader, Order, MAX_REQUEST_LIMIT,
+    CreditChainDbError, DbReader, Order, MAX_REQUEST_LIMIT,
 };
-use libra2_types::{
+use creditchain_types::{
     access_path::{AccessPath, Path},
     account_address::AccountAddress,
     account_config::{AccountResource, NewBlockEvent},
@@ -165,7 +165,7 @@ impl Context {
         self.db
             .latest_state_checkpoint_view()
             .context("Failed to read latest state checkpoint from DB")
-            .map_err(|e| E::internal_with_code(e, Libra2ErrorCode::InternalError, ledger_info))
+            .map_err(|e| E::internal_with_code(e, CreditChainErrorCode::InternalError, ledger_info))
     }
 
     pub fn feature_enabled(&self, feature: FeatureFlag) -> Result<bool> {
@@ -185,7 +185,7 @@ impl Context {
         let state_view = self
             .state_view_at_version(requested_ledger_version)
             .map_err(|err| {
-                E::internal_with_code(err, Libra2ErrorCode::InternalError, &latest_ledger_info)
+                E::internal_with_code(err, CreditChainErrorCode::InternalError, &latest_ledger_info)
             })?;
 
         Ok((latest_ledger_info, requested_ledger_version, state_view))
@@ -238,7 +238,7 @@ impl Context {
         self.db
             .get_first_viable_block()
             .context("Failed to retrieve oldest block information")
-            .map_err(|e| E::service_unavailable_with_code_no_info(e, Libra2ErrorCode::InternalError))
+            .map_err(|e| E::service_unavailable_with_code_no_info(e, CreditChainErrorCode::InternalError))
     }
 
     pub fn get_latest_storage_ledger_info<E: ServiceUnavailableError>(
@@ -248,7 +248,7 @@ impl Context {
             .get_latest_ledger_info_with_signatures()
             .context("Failed to retrieve latest ledger info")
             .map_err(|e| {
-                E::service_unavailable_with_code_no_info(e, Libra2ErrorCode::InternalError)
+                E::service_unavailable_with_code_no_info(e, CreditChainErrorCode::InternalError)
             })?;
 
         let (oldest_version, oldest_block_height) = self.get_oldest_version_and_block_height()?;
@@ -257,7 +257,7 @@ impl Context {
             .get_block_info_by_version(ledger_info.ledger_info().version())
             .context("Failed to retrieve latest block information")
             .map_err(|e| {
-                E::service_unavailable_with_code_no_info(e, Libra2ErrorCode::InternalError)
+                E::service_unavailable_with_code_no_info(e, CreditChainErrorCode::InternalError)
             })?;
 
         Ok(LedgerInfo::new(
@@ -325,7 +325,7 @@ impl Context {
                 if let Some(mut latest_version) = indexer_reader
                     .get_latest_internal_indexer_ledger_version()
                     .map_err(|err| {
-                        E::service_unavailable_with_code_no_info(err, Libra2ErrorCode::InternalError)
+                        E::service_unavailable_with_code_no_info(err, CreditChainErrorCode::InternalError)
                     })?
                 {
                     // The internal indexer version can be ahead of the storage committed version since it syncs to db's latest synced version
@@ -338,7 +338,7 @@ impl Context {
                         .map_err(|_| {
                             E::service_unavailable_with_code_no_info(
                                 "Failed to get block",
-                                Libra2ErrorCode::InternalError,
+                                CreditChainErrorCode::InternalError,
                             )
                         })?;
                     let (oldest_version, oldest_block_height) =
@@ -356,7 +356,7 @@ impl Context {
                     // Indexer doesn't have data yet as DB is boostrapping.
                     return Err(E::service_unavailable_with_code_no_info(
                         "DB is bootstrapping",
-                        Libra2ErrorCode::InternalError,
+                        CreditChainErrorCode::InternalError,
                     ));
                 }
             }
@@ -364,7 +364,7 @@ impl Context {
 
         Err(E::service_unavailable_with_code_no_info(
             "Indexer reader doesn't exist",
-            Libra2ErrorCode::InternalError,
+            CreditChainErrorCode::InternalError,
         ))
     }
 
@@ -388,7 +388,7 @@ impl Context {
     ) -> Result<Option<Vec<u8>>, E> {
         self.get_state_value(state_key, version)
             .context("Failed to retrieve state value")
-            .map_err(|e| E::internal_with_code(e, Libra2ErrorCode::InternalError, ledger_info))
+            .map_err(|e| E::internal_with_code(e, CreditChainErrorCode::InternalError, ledger_info))
     }
 
     pub fn get_resource<T: MoveResource>(
@@ -412,7 +412,7 @@ impl Context {
         self.get_resource(address, version)
             .context("Failed to read account resource.")
             .map_err(|err| {
-                E::internal_with_code(err, Libra2ErrorCode::InternalError, latest_ledger_info)
+                E::internal_with_code(err, CreditChainErrorCode::InternalError, latest_ledger_info)
             })
     }
 
@@ -430,7 +430,7 @@ impl Context {
                         T::struct_identifier(),
                         address,
                     ),
-                    Libra2ErrorCode::ResourceNotFound,
+                    CreditChainErrorCode::ResourceNotFound,
                     latest_ledger_info,
                 )
             })
@@ -623,7 +623,7 @@ impl Context {
         self.db
             .get_block_timestamp(version)
             .context("Failed to retrieve block timestamp")
-            .map_err(|err| E::internal_with_code(err, Libra2ErrorCode::InternalError, ledger_info))
+            .map_err(|err| E::internal_with_code(err, CreditChainErrorCode::InternalError, ledger_info))
     }
 
     pub fn get_block_by_height<E: StdApiError>(
@@ -700,7 +700,7 @@ impl Context {
             .hash()
             .context("Failed to parse block hash")
             .map_err(|err| {
-                E::internal_with_code(err, Libra2ErrorCode::InternalError, latest_ledger_info)
+                E::internal_with_code(err, CreditChainErrorCode::InternalError, latest_ledger_info)
             })?;
         let block_timestamp = new_block_event.proposed_time();
 
@@ -716,7 +716,7 @@ impl Context {
                     .map_err(|err| {
                         E::internal_with_code(
                             err,
-                            Libra2ErrorCode::InternalError,
+                            CreditChainErrorCode::InternalError,
                             latest_ledger_info,
                         )
                     })?,
@@ -740,14 +740,14 @@ impl Context {
         ledger_info: &LedgerInfo,
         data: Vec<TransactionOnChainData>,
         mut timestamp: u64,
-    ) -> Result<Vec<libra2_api_types::Transaction>, E> {
+    ) -> Result<Vec<creditchain_api_types::Transaction>, E> {
         if data.is_empty() {
             return Ok(vec![]);
         }
 
         let state_view = self.latest_state_view_poem(ledger_info)?;
         let converter = state_view.as_converter(self.db.clone(), self.indexer_reader.clone());
-        let txns: Vec<libra2_api_types::Transaction> = data
+        let txns: Vec<creditchain_api_types::Transaction> = data
             .into_iter()
             .map(|t| {
                 // Update the timestamp if the next block occurs
@@ -762,7 +762,7 @@ impl Context {
             .collect::<Result<_, anyhow::Error>>()
             .context("Failed to convert transaction data from storage")
             .map_err(|err| {
-                E::internal_with_code(err, Libra2ErrorCode::InternalError, ledger_info)
+                E::internal_with_code(err, CreditChainErrorCode::InternalError, ledger_info)
             })?;
 
         Ok(txns)
@@ -772,14 +772,14 @@ impl Context {
         &self,
         ledger_info: &LedgerInfo,
         data: Vec<TransactionOnChainData>,
-    ) -> Result<Vec<libra2_api_types::Transaction>, E> {
+    ) -> Result<Vec<creditchain_api_types::Transaction>, E> {
         if data.is_empty() {
             return Ok(vec![]);
         }
 
         let state_view = self.latest_state_view_poem(ledger_info)?;
         let converter = state_view.as_converter(self.db.clone(), self.indexer_reader.clone());
-        let txns: Vec<libra2_api_types::Transaction> = data
+        let txns: Vec<creditchain_api_types::Transaction> = data
             .into_iter()
             .map(|t| {
                 let timestamp = self.db.get_block_timestamp(t.version)?;
@@ -789,7 +789,7 @@ impl Context {
             .collect::<Result<_, anyhow::Error>>()
             .context("Failed to convert transaction data from storage")
             .map_err(|err| {
-                E::internal_with_code(err, Libra2ErrorCode::InternalError, ledger_info)
+                E::internal_with_code(err, CreditChainErrorCode::InternalError, ledger_info)
             })?;
 
         Ok(txns)
@@ -799,12 +799,12 @@ impl Context {
         &self,
         ledger_info: &LedgerInfo,
         data: Vec<IndexedTransactionSummary>,
-    ) -> Result<Vec<libra2_api_types::TransactionSummary>, E> {
+    ) -> Result<Vec<creditchain_api_types::TransactionSummary>, E> {
         if data.is_empty() {
             return Ok(vec![]);
         }
 
-        let txn_summaries: Vec<libra2_api_types::TransactionSummary> = data
+        let txn_summaries: Vec<creditchain_api_types::TransactionSummary> = data
             .into_iter()
             .map(|t| {
                 Ok(TransactionSummary {
@@ -812,10 +812,10 @@ impl Context {
                     version: t.version().into(),
                     transaction_hash: t.transaction_hash().into(),
                     replay_protector: match t.replay_protector() {
-                        libra2_types::transaction::ReplayProtector::Nonce(nonce) => {
+                        creditchain_types::transaction::ReplayProtector::Nonce(nonce) => {
                             ReplayProtector::Nonce(nonce.into())
                         },
-                        libra2_types::transaction::ReplayProtector::SequenceNumber(seq_num) => {
+                        creditchain_types::transaction::ReplayProtector::SequenceNumber(seq_num) => {
                             ReplayProtector::SequenceNumber(seq_num.into())
                         },
                     },
@@ -824,7 +824,7 @@ impl Context {
             .collect::<Result<_, anyhow::Error>>()
             .context("Failed to convert transaction summary data from storage")
             .map_err(|err| {
-                E::internal_with_code(err, Libra2ErrorCode::InternalError, ledger_info)
+                E::internal_with_code(err, CreditChainErrorCode::InternalError, ledger_info)
             })?;
         Ok(txn_summaries)
     }
@@ -911,7 +911,7 @@ impl Context {
                 .as_ref()
                 .ok_or_else(|| anyhow!("Indexer reader is None"))
                 .map_err(|err| {
-                    E::internal_with_code(err, Libra2ErrorCode::InternalError, ledger_info)
+                    E::internal_with_code(err, CreditChainErrorCode::InternalError, ledger_info)
                 })?
                 .get_account_ordered_transactions(
                     address,
@@ -920,12 +920,12 @@ impl Context {
                     true,
                     ledger_version,
                 )
-                .map_err(|e| Libra2DbError::Other(e.to_string()))
+                .map_err(|e| CreditChainDbError::Other(e.to_string()))
         };
         let txns = txns_res
             .context("Failed to retrieve account transactions")
             .map_err(|err| {
-                E::internal_with_code(err, Libra2ErrorCode::InternalError, ledger_info)
+                E::internal_with_code(err, CreditChainErrorCode::InternalError, ledger_info)
             })?;
         txns.into_inner()
             .into_iter()
@@ -935,7 +935,7 @@ impl Context {
             })
             .collect::<Result<Vec<_>>>()
             .context("Failed to parse account transactions")
-            .map_err(|err| E::internal_with_code(err, Libra2ErrorCode::InternalError, ledger_info))
+            .map_err(|err| E::internal_with_code(err, CreditChainErrorCode::InternalError, ledger_info))
     }
 
     pub fn get_account_transaction_summaries<E: NotFoundError + InternalError>(
@@ -956,7 +956,7 @@ impl Context {
                 ledger_version,
             )
             .context("Failed to retrieve account transaction summaries")
-            .map_err(|err| E::internal_with_code(err, Libra2ErrorCode::InternalError, ledger_info))
+            .map_err(|err| E::internal_with_code(err, CreditChainErrorCode::InternalError, ledger_info))
     }
 
     pub fn get_transaction_by_hash(
@@ -1463,7 +1463,7 @@ impl Context {
     pub fn get_gas_schedule<E: InternalError>(
         &self,
         ledger_info: &LedgerInfo,
-    ) -> Result<(u64, Libra2GasParameters), E> {
+    ) -> Result<(u64, CreditChainGasParameters), E> {
         // If it's the same epoch, used the cached results
         {
             let cache = self.gas_schedule_cache.read().unwrap();
@@ -1499,7 +1499,7 @@ impl Context {
                 .db
                 .state_view_at_version(Some(ledger_info.version()))
                 .map_err(|e| {
-                    E::internal_with_code(e, Libra2ErrorCode::InternalError, ledger_info)
+                    E::internal_with_code(e, CreditChainErrorCode::InternalError, ledger_info)
                 })?;
 
             let gas_schedule_params = {
@@ -1507,7 +1507,7 @@ impl Context {
                     GasScheduleV2::fetch_config(&state_view).and_then(|gas_schedule| {
                         let feature_version = gas_schedule.feature_version;
                         let gas_schedule = gas_schedule.into_btree_map();
-                        Libra2GasParameters::from_on_chain_gas_schedule(
+                        CreditChainGasParameters::from_on_chain_gas_schedule(
                             &gas_schedule,
                             feature_version,
                         )
@@ -1518,12 +1518,12 @@ impl Context {
                     None => GasSchedule::fetch_config(&state_view)
                         .and_then(|gas_schedule| {
                             let gas_schedule = gas_schedule.into_btree_map();
-                            Libra2GasParameters::from_on_chain_gas_schedule(&gas_schedule, 0).ok()
+                            CreditChainGasParameters::from_on_chain_gas_schedule(&gas_schedule, 0).ok()
                         })
                         .ok_or_else(|| {
                             E::internal_with_code(
                                 "Failed to retrieve gas schedule",
-                                Libra2ErrorCode::InternalError,
+                                CreditChainErrorCode::InternalError,
                                 ledger_info,
                             )
                         }),
@@ -1569,7 +1569,7 @@ impl Context {
                 .db
                 .state_view_at_version(Some(ledger_info.version()))
                 .map_err(|e| {
-                    E::internal_with_code(e, Libra2ErrorCode::InternalError, ledger_info)
+                    E::internal_with_code(e, CreditChainErrorCode::InternalError, ledger_info)
                 })?;
 
             let execution_onchain_config = OnChainExecutionConfig::fetch_config(&state_view)
@@ -1625,7 +1625,7 @@ impl Context {
 
 pub struct GasScheduleCache {
     last_updated_epoch: Option<u64>,
-    gas_schedule_params: Option<Libra2GasParameters>,
+    gas_schedule_params: Option<CreditChainGasParameters>,
 }
 
 pub struct GasEstimationCache {
@@ -1651,7 +1651,7 @@ where
 {
     tokio::task::spawn_blocking(func)
         .await
-        .map_err(|err| E::internal_with_code_no_info(err, Libra2ErrorCode::InternalError))?
+        .map_err(|err| E::internal_with_code_no_info(err, CreditChainErrorCode::InternalError))?
 }
 
 #[derive(Schema)]

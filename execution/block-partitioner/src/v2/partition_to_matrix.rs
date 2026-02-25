@@ -8,8 +8,8 @@ use crate::v2::{
     types::{PrePartitionedTxnIdx, SenderIdx},
     PartitionerV2,
 };
-use libra2_logger::trace;
-use libra2_types::block_executor::partitioner::{RoundId, TxnIndex};
+use creditchain_logger::trace;
+use creditchain_types::block_executor::partitioner::{RoundId, TxnIndex};
 use dashmap::DashMap;
 use rayon::{
     iter::ParallelIterator,

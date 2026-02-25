@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::metrics::TIMER;
-use libra2_block_executor::counters::{
+use creditchain_block_executor::counters::{
     self as block_executor_counters, GasType, BLOCK_EXECUTOR_INNER_EXECUTE_BLOCK,
 };
-use libra2_executor::metrics::{
+use creditchain_executor::metrics::{
     COMMIT_BLOCKS, GET_BLOCK_EXECUTION_OUTPUT_BY_EXECUTING, OTHER_TIMERS,
     PROCESSED_TXNS_OUTPUT_SIZE, UPDATE_LEDGER,
 };
-use libra2_logger::info;
-use libra2_metrics_core::Histogram;
+use creditchain_logger::info;
+use creditchain_metrics_core::Histogram;
 use move_core_types::language_storage::StructTag;
 use std::{
     collections::{BTreeMap, HashMap},

@@ -11,7 +11,7 @@ edition = "2021"
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-framework = { workspace = true, optional = true }
+creditchain-framework = { workspace = true, optional = true }
 clap = { workspace = true, features = ["derive"] }
 either = { workspace = true }
 legacy-move-compiler = { workspace = true }
@@ -53,4 +53,4 @@ harness = false
 
 [features]
 failpoints = ['move-vm-runtime/failpoints']
-fuzzing = ["arbitrary", "dearbitrary", "libra2-framework", "bcs"]
+fuzzing = ["arbitrary", "dearbitrary", "creditchain-framework", "bcs"]

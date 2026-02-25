@@ -12,11 +12,11 @@ use crate::{
     transaction::Version,
     validator_verifier::{ValidatorVerifier, VerifyError},
 };
-use libra2_crypto::{
+use creditchain_crypto::{
     bls12381,
     hash::{CryptoHash, HashValue},
 };
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 use derivative::Derivative;
 #[cfg(any(test, feature = "fuzzing"))]
 use proptest_derive::Arbitrary;
@@ -550,7 +550,7 @@ use crate::aggregate_signature::{AggregateSignature, PartialSignatures};
 use crate::validator_verifier::generate_validator_verifier;
 #[cfg(any(test, feature = "fuzzing"))]
 use crate::validator_verifier::random_validator_verifier;
-use libra2_bitvec::BitVec;
+use creditchain_bitvec::BitVec;
 use itertools::Itertools;
 #[cfg(any(test, feature = "fuzzing"))]
 use proptest::prelude::*;

@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::dag::observability::counters;
-use libra2_infallible::duration_since_epoch;
-use libra2_metrics_core::HistogramVec;
+use creditchain_infallible::duration_since_epoch;
+use creditchain_metrics_core::HistogramVec;
 use std::time::Duration;
 
 #[derive(strum_macros::AsRefStr)]

@@ -1,0 +1,11 @@
+[package]
+name = "raffle"
+version = "0.0.1"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }
+CreditChainStdlib = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-stdlib", rev = "mainnet" }
+
+
+[addresses]
+raffle = "_"

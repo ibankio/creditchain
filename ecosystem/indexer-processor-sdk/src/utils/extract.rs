@@ -7,7 +7,7 @@ use super::{
     convert::{deserialize_from_string, standardize_address, truncate_str},
     property_map::{PropertyMap, TokenObjectPropertyMap},
 };
-use libra2_protos::transaction::v1::{
+use creditchain_protos::transaction::v1::{
     multisig_transaction_payload::Payload as MultisigPayloadType,
     transaction_payload::{self, Payload as PayloadType},
     write_set::WriteSet as WriteSetType,
@@ -371,13 +371,13 @@ mod tests {
     #[test]
     fn test_deserialize_string_from_bcs() {
         let test_struct = TypeInfoMock {
-            module_name: String::from("0x6170746f735f636f696e"),
-            struct_name: String::from("0x4170746f73436f696e"),
+            module_name: String::from("0x637265646974636861696e5f636f696e"),
+            struct_name: String::from("0x437265646974436861696e436f696e"),
         };
         let val = serde_json::to_string(&test_struct).unwrap();
         let d: TypeInfoMock = serde_json::from_str(val.as_str()).unwrap();
-        assert_eq!(d.module_name.as_str(), "libra2_coin");
-        assert_eq!(d.struct_name.as_str(), "Libra2Coin");
+        assert_eq!(d.module_name.as_str(), "creditchain_coin");
+        assert_eq!(d.struct_name.as_str(), "CreditChainCoin");
     }
 
     #[test]

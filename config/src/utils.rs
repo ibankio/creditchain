@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::config::NodeConfig;
-use libra2_crypto::_once_cell::sync::Lazy;
-use libra2_logger::prelude::*;
-use libra2_types::{
+use creditchain_crypto::_once_cell::sync::Lazy;
+use creditchain_logger::prelude::*;
+use creditchain_types::{
     network_address::{NetworkAddress, Protocol},
     transaction::Transaction,
 };

@@ -8,15 +8,15 @@ use crate::metrics::{
     PROCESSED_VERSIONS_COUNT_PER_PROCESSOR, SHORT_CONNECTION_COUNT,
 };
 use anyhow::{Context, Result};
-use libra2_indexer_grpc_utils::{
+use creditchain_indexer_grpc_utils::{
     cache_operator::{CacheBatchGetStatus, CacheCoverageStatus, CacheOperator},
     chunk_transactions,
     compression_util::{CacheEntry, StorageFormat},
     config::IndexerGrpcFileStoreConfig,
     constants::{
         IndexerGrpcRequestMetadata, GRPC_AUTH_TOKEN_HEADER, GRPC_REQUEST_NAME_HEADER,
-        MESSAGE_SIZE_LIMIT, REQUEST_HEADER_LIBRA2_APPLICATION_NAME, REQUEST_HEADER_LIBRA2_EMAIL,
-        REQUEST_HEADER_LIBRA2_IDENTIFIER, REQUEST_HEADER_LIBRA2_IDENTIFIER_TYPE,
+        MESSAGE_SIZE_LIMIT, REQUEST_HEADER_CREDITCHAIN_APPLICATION_NAME, REQUEST_HEADER_CREDITCHAIN_EMAIL,
+        REQUEST_HEADER_CREDITCHAIN_IDENTIFIER, REQUEST_HEADER_CREDITCHAIN_IDENTIFIER_TYPE,
     },
     counters::{log_grpc_step, IndexerGrpcStep, NUM_MULTI_FETCH_OVERLAPPED_VERSIONS},
     file_store_operator::FileStoreOperator,
@@ -24,12 +24,12 @@ use libra2_indexer_grpc_utils::{
     time_diff_since_pb_timestamp_in_secs,
     types::RedisUrl,
 };
-use libra2_moving_average::MovingAverage;
-use libra2_protos::{
+use creditchain_moving_average::MovingAverage;
+use creditchain_protos::{
     indexer::v1::{raw_data_server::RawData, GetTransactionsRequest, TransactionsResponse},
     transaction::v1::{transaction::TxnData, Transaction},
 };
-use libra2_transaction_filter::{BooleanTransactionFilter, Filterable};
+use creditchain_transaction_filter::{BooleanTransactionFilter, Filterable};
 use futures::Stream;
 use prost::Message;
 use redis::Client;
@@ -64,7 +64,7 @@ const RESPONSE_CHANNEL_SEND_TIMEOUT: Duration = Duration::from_secs(120);
 
 const SHORT_CONNECTION_DURATION_IN_SECS: u64 = 10;
 
-const RESPONSE_HEADER_LIBRA2_CONNECTION_ID_HEADER: &str = "x-aptos-connection-id";
+const RESPONSE_HEADER_CREDITCHAIN_CONNECTION_ID_HEADER: &str = "x-aptos-connection-id";
 const SERVICE_TYPE: &str = "data_service";
 
 // Number of times to retry fetching a given txn block from the stores
@@ -217,7 +217,7 @@ impl RawData for RawDataServerWrapper {
         let mut response = Response::new(Box::pin(output_stream) as Self::GetTransactionsStream);
 
         response.metadata_mut().insert(
-            RESPONSE_HEADER_LIBRA2_CONNECTION_ID_HEADER,
+            RESPONSE_HEADER_CREDITCHAIN_CONNECTION_ID_HEADER,
             tonic::metadata::MetadataValue::from_str(&request_metadata.request_connection_id)
                 .unwrap(),
         );
@@ -856,13 +856,13 @@ fn get_request_metadata(
     let request_metadata_pairs = vec![
         (
             "request_identifier_type",
-            REQUEST_HEADER_LIBRA2_IDENTIFIER_TYPE,
+            REQUEST_HEADER_CREDITCHAIN_IDENTIFIER_TYPE,
         ),
-        ("request_identifier", REQUEST_HEADER_LIBRA2_IDENTIFIER),
-        ("request_email", REQUEST_HEADER_LIBRA2_EMAIL),
+        ("request_identifier", REQUEST_HEADER_CREDITCHAIN_IDENTIFIER),
+        ("request_email", REQUEST_HEADER_CREDITCHAIN_EMAIL),
         (
             "request_application_name",
-            REQUEST_HEADER_LIBRA2_APPLICATION_NAME,
+            REQUEST_HEADER_CREDITCHAIN_APPLICATION_NAME,
         ),
         ("request_token", GRPC_AUTH_TOKEN_HEADER),
         ("processor_name", GRPC_REQUEST_NAME_HEADER),
@@ -1003,14 +1003,14 @@ fn strip_transactions(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use libra2_protos::transaction::v1::{
+    use creditchain_protos::transaction::v1::{
         transaction::TxnData,
         transaction_payload::{ExtraConfig, Payload},
         EntryFunctionId, EntryFunctionPayload, Event, ExtraConfigV1, MoveModuleId, Signature,
         Transaction, TransactionInfo, TransactionPayload, UserTransaction, UserTransactionRequest,
         WriteSetChange,
     };
-    use libra2_transaction_filter::{
+    use creditchain_transaction_filter::{
         boolean_transaction_filter::APIFilter, filters::UserTransactionFilterBuilder,
         EntryFunctionFilterBuilder, UserTransactionPayloadFilterBuilder,
     };

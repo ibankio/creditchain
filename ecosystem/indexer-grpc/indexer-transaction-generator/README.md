@@ -7,25 +7,25 @@ This tool is to generate transactions for testing purposes.
 Under the root folder, i.e., `creditchain`, run the follow command. This will default to importing transactions for all networks.
 
 ```bash
-cargo run -p libra2-indexer-transaction-generator -- --testing-folder ecosystem/indexer-grpc/indexer-transaction-generator/imported_transactions --output-folder ecosystem/indexer-grpc/indexer-test-transactions/src
+cargo run -p creditchain-indexer-transaction-generator -- --testing-folder ecosystem/indexer-grpc/indexer-transaction-generator/imported_transactions --output-folder ecosystem/indexer-grpc/indexer-test-transactions/src
 ```
 
 You can optionally specify the mode, e.g. for script mode
 
 ```bash
-cargo run -p libra2-indexer-transaction-generator -- --testing-folder ecosystem/indexer-grpc/indexer-transaction-generator/imported_transactions --output-folder ecosystem/indexer-grpc/indexer-test-transactions/src --mode script
+cargo run -p creditchain-indexer-transaction-generator -- --testing-folder ecosystem/indexer-grpc/indexer-transaction-generator/imported_transactions --output-folder ecosystem/indexer-grpc/indexer-test-transactions/src --mode script
 ```
 
 Or network, e.g. mainnet
 
 ```bash
-cargo run -p libra2-indexer-transaction-generator -- --testing-folder ecosystem/indexer-grpc/indexer-transaction-generator/imported_transactions --output-folder ecosystem/indexer-grpc/indexer-test-transactions/src --network mainnet
+cargo run -p creditchain-indexer-transaction-generator -- --testing-folder ecosystem/indexer-grpc/indexer-transaction-generator/imported_transactions --output-folder ecosystem/indexer-grpc/indexer-test-transactions/src --network mainnet
 ```
 
 Or testnet
 
 ```bash
-cargo run -p libra2-indexer-transaction-generator -- --testing-folder ecosystem/indexer-grpc/indexer-transaction-generator/imported_transactions --output-folder ecosystem/indexer-grpc/indexer-test-transactions/src --network testnet
+cargo run -p creditchain-indexer-transaction-generator -- --testing-folder ecosystem/indexer-grpc/indexer-transaction-generator/imported_transactions --output-folder ecosystem/indexer-grpc/indexer-test-transactions/src --network testnet
 ```
 
 ### Config overview
@@ -71,7 +71,7 @@ the actual account address will be allocated by the account manager.
 
 The accounts in `testing_accounts.yaml` will be used to run scripted transactions. 
 They are persisted in the config so each scripted transaction's generated output stays consistent between 
-`libra2-indexer-transaction-generator` runs. You can generate more testing accounts using 
+`creditchain-indexer-transaction-generator` runs. You can generate more testing accounts using 
 CreditChain CLI by running `libra2 init --profile local`. 
 
 TODO: account manager handles address as script argument.

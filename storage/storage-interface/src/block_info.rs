@@ -1,8 +1,8 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_crypto::hash::HashValue;
-use libra2_types::{
+use creditchain_crypto::hash::HashValue;
+use creditchain_types::{
     account_address::AccountAddress, account_config::NewBlockEvent, transaction::Version,
 };
 use serde::{Deserialize, Serialize};

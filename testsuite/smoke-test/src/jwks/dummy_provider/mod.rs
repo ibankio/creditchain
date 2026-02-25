@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_infallible::RwLock;
+use creditchain_infallible::RwLock;
 use hyper::{
     service::{make_service_fn, service_fn},
     Body, Request, Response, Server,

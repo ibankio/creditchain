@@ -32,25 +32,25 @@ use crate::{
     network_interface::CommitMessage,
     pipeline::{execution_client::TExecutionClient, pipeline_builder::PipelineBuilder},
 };
-use libra2_channels::{libra2_channel, libra2_channel::Receiver, message_queues::QueueStyle};
-use libra2_config::{
+use creditchain_channels::{creditchain_channel, creditchain_channel::Receiver, message_queues::QueueStyle};
+use creditchain_config::{
     config::{ConsensusObserverConfig, NodeConfig},
     network_id::PeerNetworkId,
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     pipeline, pipelined_block::PipelinedBlock, vote_data::VoteData,
     wrapped_ledger_info::WrappedLedgerInfo,
 };
-use libra2_crypto::{bls12381, Genesis};
-use libra2_event_notifications::{DbBackedOnChainConfig, ReconfigNotificationListener};
-use libra2_infallible::Mutex;
-use libra2_logger::{debug, error, info, warn};
-use libra2_network::{
+use creditchain_crypto::{bls12381, Genesis};
+use creditchain_event_notifications::{DbBackedOnChainConfig, ReconfigNotificationListener};
+use creditchain_infallible::Mutex;
+use creditchain_logger::{debug, error, info, warn};
+use creditchain_network::{
     application::interface::NetworkClient, protocols::wire::handshake::v1::ProtocolId,
 };
-use libra2_storage_interface::DbReader;
-use libra2_time_service::TimeService;
-use libra2_types::{
+use creditchain_storage_interface::DbReader;
+use creditchain_time_service::TimeService;
+use creditchain_types::{
     block_info::Round, epoch_state::EpochState, ledger_info::LedgerInfoWithSignatures,
     validator_signer::ValidatorSigner,
 };
@@ -1064,7 +1064,7 @@ impl ConsensusObserver {
         let signer = Arc::new(ValidatorSigner::new(AccountAddress::ZERO, sk.clone()));
         let dummy_signer = Arc::new(DagCommitSigner::new(signer.clone()));
         let (_, rand_msg_rx) =
-            libra2_channel::new::<AccountAddress, IncomingRandGenRequest>(QueueStyle::FIFO, 1, None);
+            creditchain_channel::new::<AccountAddress, IncomingRandGenRequest>(QueueStyle::FIFO, 1, None);
         self.execution_client
             .start_epoch(
                 sk,

@@ -6,7 +6,7 @@
 
 ## Quickstart
 ```bash
-pnpm add libra2-node-checker-client
+pnpm add creditchain-node-checker-client
 ```
 
 You can also use `yarn` or `npm`.
@@ -53,7 +53,7 @@ cargo run -p libra2 -- node run-local-testnet --faucet-port 8081 --force-restart
 
 Run a local Node Health Checker:
 ```
-cargo run -p libra2-node-checker -- server run --baseline-node-config-paths ecosystem/node-checker/configuration_examples/local_testnet.yaml --listen-address 0.0.0.0
+cargo run -p creditchain-node-checker -- server run --baseline-node-config-paths ecosystem/node-checker/configuration_examples/local_testnet.yaml --listen-address 0.0.0.0
 ```
 
 Run the tests:
@@ -89,8 +89,8 @@ pnpm test
 ## References
 
 [repo]: https://github.com/ibankio/creditchain
-[npm-image-version]: https://img.shields.io/npm/v/libra2-node-checker-client.svg
-[npm-image-downloads]: https://img.shields.io/npm/dm/libra2-node-checker-client.svg
-[npm-url]: https://npmjs.org/package/libra2-node-checker-client
+[npm-image-version]: https://img.shields.io/npm/v/creditchain-node-checker-client.svg
+[npm-image-downloads]: https://img.shields.io/npm/dm/creditchain-node-checker-client.svg
+[npm-url]: https://npmjs.org/package/creditchain-node-checker-client
 [community-image]: https://img.shields.io/badge/community-discussions-blue
 [community-url]: https://github.com/ibankio/creditchain/discussions

@@ -10,7 +10,7 @@ use crate::{
         TreeInserter,
     },
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     block::{
         block_test_utils::{
             self, certificate_for_genesis, gen_test_certificate, placeholder_certificate_for_block,
@@ -22,8 +22,8 @@ use libra2_consensus_types::{
     vote::Vote,
     vote_data::VoteData,
 };
-use libra2_crypto::{HashValue, PrivateKey};
-use libra2_types::{
+use creditchain_crypto::{HashValue, PrivateKey};
+use creditchain_types::{
     validator_signer::ValidatorSigner, validator_verifier::random_validator_verifier,
 };
 use proptest::prelude::*;
@@ -275,7 +275,7 @@ async fn test_path_from_root() {
 
 #[tokio::test]
 async fn test_insert_vote() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     // Set up enough different authors to support different votes for the same block.
     let (signers, validator_verifier) = random_validator_verifier(11, Some(10), false);
     let my_signer = signers[10].clone();

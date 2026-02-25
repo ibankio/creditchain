@@ -15,12 +15,12 @@ runs:
 
     # Check the VM features
     - name: Check VM features
-      run: cargo test --profile ci --locked --features check-vm-features -p libra2-node
+      run: cargo test --profile ci --locked --features check-vm-features -p creditchain-node
       shell: bash
 
     # Run the rust doc tests
     - name: Run rust doc tests
-      run: cargo test --profile ci --locked --doc --workspace --exclude libra2-node-checker
+      run: cargo test --profile ci --locked --doc --workspace --exclude creditchain-node-checker
       shell: bash
 
     # Run a postgres database
@@ -37,8 +37,8 @@ runs:
           --locked \
           --workspace \
           --exclude smoke-test \
-          --exclude libra2-testcases \
-          --exclude libra2-keyless-circuit \
+          --exclude creditchain-testcases \
+          --exclude creditchain-keyless-circuit \
           --retries 3 \
           --no-fail-fast \
           --message-format libtest-json > nextest_output.json || python3 .github/actions/rust-unit-tests/nextest_summary.py nextest_output.json "$GITHUB_STEP_SUMMARY" -f

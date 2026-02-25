@@ -3,20 +3,20 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::driver::DriverConfiguration;
-use libra2_config::config::{ConsensusObserverConfig, RoleType, StateSyncDriverConfig};
-use libra2_crypto::{
+use creditchain_config::config::{ConsensusObserverConfig, RoleType, StateSyncDriverConfig};
+use creditchain_crypto::{
     ed25519::{Ed25519PrivateKey, Ed25519Signature},
     HashValue, PrivateKey, Uniform,
 };
-use libra2_data_client::global_summary::GlobalDataSummary;
-use libra2_data_streaming_service::{
+use creditchain_data_client::global_summary::GlobalDataSummary;
+use creditchain_data_streaming_service::{
     data_notification::DataNotification, data_stream::DataStreamListener, streaming_client::Epoch,
 };
-use libra2_event_notifications::EventNotificationListener;
-use libra2_mempool_notifications::{CommittedTransaction, MempoolNotificationListener};
-use libra2_storage_service_notifications::StorageServiceNotificationListener;
-use libra2_storage_service_types::responses::CompleteDataRange;
-use libra2_types::{
+use creditchain_event_notifications::EventNotificationListener;
+use creditchain_mempool_notifications::{CommittedTransaction, MempoolNotificationListener};
+use creditchain_storage_service_notifications::StorageServiceNotificationListener;
+use creditchain_storage_service_types::responses::CompleteDataRange;
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::NEW_EPOCH_EVENT_V2_MOVE_TYPE_TAG,
     aggregate_signature::AggregateSignature,

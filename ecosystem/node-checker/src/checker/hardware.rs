@@ -14,12 +14,12 @@ use crate::{
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 
-// TODO: Use the keys in crates/libra2-telemetry/src/system_information.rs
+// TODO: Use the keys in crates/creditchain-telemetry/src/system_information.rs
 const CPU_COUNT_KEY: &str = "cpu_count";
 const MEMORY_TOTAL_KEY: &str = "memory_total";
 
 const NODE_REQUIREMENTS_DOC_LINK: &str =
-    "https://docs.libra2.org/nodes/validator-node/operator/node-requirements";
+    "https://docs.creditchain.io/nodes/validator-node/operator/node-requirements";
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]

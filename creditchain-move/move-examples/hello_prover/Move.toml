@@ -1,0 +1,10 @@
+[package]
+name = "hello_prover"
+version = "0.0.0"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework/", rev = "main" }
+
+[addresses]
+
+

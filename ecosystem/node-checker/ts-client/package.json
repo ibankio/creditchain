@@ -1,6 +1,6 @@
 {
-  "name": "libra2-node-checker-client",
-  "description": "Generated client for the Libra2 Node Health Checker",
+  "name": "creditchain-node-checker-client",
+  "description": "Generated client for the CreditChain Node Health Checker",
   "license": "Apache-2.0",
   "engines": {
     "node": ">=11.0.0"
@@ -17,15 +17,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/libra2org/libra2-core.git"
+    "url": "https://github.com/creditchainorg/creditchain-core.git"
   },
-  "homepage": "https://github.com/libra2org/libra2-core",
+  "homepage": "https://github.com/creditchainorg/creditchain-core",
   "bugs": {
-    "url": "https://github.com/libra2org/libra2-core/issues"
+    "url": "https://github.com/creditchainorg/creditchain-core/issues"
   },
-  "author": "libra2.org",
+  "author": "creditchain.org",
   "keywords": [
-    "Libra2",
+    "CreditChain",
     "CreditChain Research Team",
     "Node Health Checker"
   ],

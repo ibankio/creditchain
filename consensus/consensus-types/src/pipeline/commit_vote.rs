@@ -4,9 +4,9 @@
 
 use crate::common::{Author, Round};
 use anyhow::{ensure, Context};
-use libra2_crypto::{bls12381, CryptoMaterialError};
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_types::{
+use creditchain_crypto::{bls12381, CryptoMaterialError};
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_types::{
     block_info::BlockInfo,
     ledger_info::{LedgerInfo, SignatureWithStatus},
     validator_signer::ValidatorSigner,

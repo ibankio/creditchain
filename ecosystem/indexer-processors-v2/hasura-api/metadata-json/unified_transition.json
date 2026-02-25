@@ -125,7 +125,7 @@
             ],
             "array_relationships": [
               {
-                "name": "libra2_names",
+                "name": "creditchain_names",
                 "using": {
                   "manual_configuration": {
                     "column_mapping": {
@@ -133,7 +133,7 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }
@@ -471,7 +471,7 @@
             },
             "object_relationships": [
               {
-                "name": "libra2_name",
+                "name": "creditchain_name",
                 "using": {
                   "manual_configuration": {
                     "column_mapping": {
@@ -479,7 +479,7 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }
@@ -597,7 +597,7 @@
             ],
             "array_relationships": [
               {
-                "name": "libra2_names_owner",
+                "name": "creditchain_names_owner",
                 "using": {
                   "manual_configuration": {
                     "column_mapping": {
@@ -605,14 +605,14 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }
                 }
               },
               {
-                "name": "libra2_names_to",
+                "name": "creditchain_names_to",
                 "using": {
                   "manual_configuration": {
                     "column_mapping": {
@@ -620,7 +620,7 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }
@@ -1105,7 +1105,7 @@
           },
           {
             "table": {
-              "name": "current_libra2_names",
+              "name": "current_creditchain_names",
               "schema": "public"
             },
             "object_relationships": [
@@ -1119,7 +1119,7 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }
@@ -1483,7 +1483,7 @@
             },
             "array_relationships": [
               {
-                "name": "operator_libra2_name",
+                "name": "operator_creditchain_name",
                 "using": {
                   "manual_configuration": {
                     "column_mapping": {
@@ -1491,7 +1491,7 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }
@@ -1545,7 +1545,7 @@
             },
             "object_relationships": [
               {
-                "name": "libra2_name",
+                "name": "creditchain_name",
                 "using": {
                   "manual_configuration": {
                     "column_mapping": {
@@ -1553,7 +1553,7 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }
@@ -2035,7 +2035,7 @@
             ],
             "array_relationships": [
               {
-                "name": "owner_libra2_names",
+                "name": "owner_creditchain_names",
                 "using": {
                   "manual_configuration": {
                     "column_mapping": {
@@ -2043,7 +2043,7 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }
@@ -2306,7 +2306,7 @@
             ],
             "array_relationships": [
               {
-                "name": "libra2_names_from",
+                "name": "creditchain_names_from",
                 "using": {
                   "manual_configuration": {
                     "column_mapping": {
@@ -2314,14 +2314,14 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }
                 }
               },
               {
-                "name": "libra2_names_to",
+                "name": "creditchain_names_to",
                 "using": {
                   "manual_configuration": {
                     "column_mapping": {
@@ -2329,7 +2329,7 @@
                     },
                     "insertion_order": null,
                     "remote_table": {
-                      "name": "current_libra2_names",
+                      "name": "current_creditchain_names",
                       "schema": "public"
                     }
                   }

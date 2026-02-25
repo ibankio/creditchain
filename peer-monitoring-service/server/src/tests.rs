@@ -8,15 +8,15 @@ use crate::{
     PeerMonitoringServiceNetworkEvents, PeerMonitoringServiceServer, MAX_DISTANCE_FROM_VALIDATORS,
     PEER_MONITORING_SERVER_VERSION,
 };
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::{
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::{
     config::{BaseConfig, NodeConfig, PeerMonitoringServiceConfig, PeerRole, RoleType},
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_crypto::HashValue;
-use libra2_logger::Level;
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_network::{
+use creditchain_crypto::HashValue;
+use creditchain_logger::Level;
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_network::{
     application::{
         interface::NetworkServiceEvents, metadata::ConnectionState, storage::PeersAndMetadata,
     },
@@ -29,7 +29,7 @@ use libra2_network::{
     },
     transport::{ConnectionId, ConnectionMetadata},
 };
-use libra2_peer_monitoring_service_types::{
+use creditchain_peer_monitoring_service_types::{
     request::{LatencyPingRequest, PeerMonitoringServiceRequest},
     response::{
         NetworkInformationResponse, NodeInformationResponse, PeerMonitoringServiceResponse,
@@ -37,9 +37,9 @@ use libra2_peer_monitoring_service_types::{
     },
     PeerMonitoringMetadata, PeerMonitoringServiceError, PeerMonitoringServiceMessage,
 };
-use libra2_storage_interface::{DbReader, LedgerSummary, Order};
-use libra2_time_service::{MockTimeService, TimeService};
-use libra2_types::{
+use creditchain_storage_interface::{DbReader, LedgerSummary, Order};
+use creditchain_time_service::{MockTimeService, TimeService};
+use creditchain_types::{
     account_address::AccountAddress,
     aggregate_signature::AggregateSignature,
     block_info::BlockInfo,
@@ -423,12 +423,12 @@ async fn verify_network_information(
 /// metadata expected by the peer monitoring service.
 fn transform_connection_metadata(
     expected_peers: BTreeMap<PeerNetworkId, ConnectionMetadata>,
-) -> BTreeMap<PeerNetworkId, libra2_peer_monitoring_service_types::response::ConnectionMetadata> {
+) -> BTreeMap<PeerNetworkId, creditchain_peer_monitoring_service_types::response::ConnectionMetadata> {
     expected_peers
         .into_iter()
         .map(|(peer_id, metadata)| {
             let connection_metadata =
-                libra2_peer_monitoring_service_types::response::ConnectionMetadata::new(
+                creditchain_peer_monitoring_service_types::response::ConnectionMetadata::new(
                     metadata.addr,
                     metadata.remote_peer_id,
                     metadata.role,
@@ -455,7 +455,7 @@ async fn verify_node_information(
     // Verify the response is correct
     let expected_response =
         PeerMonitoringServiceResponse::NodeInformation(NodeInformationResponse {
-            build_information: libra2_build_info::get_build_information(),
+            build_information: creditchain_build_info::get_build_information(),
             highest_synced_epoch,
             highest_synced_version,
             ledger_timestamp_usecs,
@@ -469,7 +469,7 @@ async fn verify_node_information(
 /// mock client requests to a peer monitoring service server.
 struct MockClient {
     peer_manager_notifiers:
-        HashMap<NetworkId, libra2_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>>,
+        HashMap<NetworkId, creditchain_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>>,
 }
 
 impl MockClient {
@@ -500,7 +500,7 @@ impl MockClient {
         let mut network_and_events = HashMap::new();
         let mut peer_manager_notifiers = HashMap::new();
         for network_id in network_ids {
-            let queue_cfg = libra2_channel::Config::new(
+            let queue_cfg = creditchain_channel::Config::new(
                 peer_monitoring_config.max_network_channel_size as usize,
             )
             .queue_style(QueueStyle::FIFO)
@@ -586,9 +586,9 @@ impl MockClient {
     }
 }
 
-/// Initializes the Libra2 logger for tests
+/// Initializes the CreditChain logger for tests
 pub fn initialize_logger() {
-    libra2_logger::Logger::builder()
+    creditchain_logger::Logger::builder()
         .is_async(false)
         .level(Level::Debug)
         .build();
@@ -616,7 +616,7 @@ pub fn create_mock_db_reader() -> MockDatabaseReader {
 // mock test crate to be shared across the codebase.
 mod database_mock {
     use super::*;
-    use libra2_storage_interface::Result;
+    use creditchain_storage_interface::Result;
 
     mock! {
         pub DatabaseReader {}

@@ -1,23 +1,23 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_config::{
+use creditchain_config::{
     config::NodeConfig,
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_logger::{
+use creditchain_logger::{
     debug, info,
     prelude::{sample, SampleRate},
     warn,
 };
-use libra2_metrics_core::{register_int_counter_vec, IntCounter, IntCounterVec};
-use libra2_network::{
+use creditchain_metrics_core::{register_int_counter_vec, IntCounter, IntCounterVec};
+use creditchain_network::{
     application::interface::{NetworkClient, NetworkClientInterface, NetworkServiceEvents},
     peer_manager::ConnectionNotification,
     protocols::{network::Event, rpc::error::RpcError, wire::handshake::v1::ProtocolId},
 };
-use libra2_time_service::{TimeService, TimeServiceTrait};
-use libra2_types::{account_address::AccountAddress, PeerId};
+use creditchain_time_service::{TimeService, TimeServiceTrait};
+use creditchain_types::{account_address::AccountAddress, PeerId};
 use bytes::Bytes;
 use futures::{
     channel::oneshot::Sender,
@@ -53,7 +53,7 @@ pub struct NetbenchDataReply {
 /// Counter for pending network events to the network benchmark service (server-side)
 pub static PENDING_NETBENCH_NETWORK_EVENTS: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_netbench_pending_network_events",
+        "creditchain_netbench_pending_network_events",
         "Counters for pending network events for benchmarking",
         &["state"]
     )
@@ -566,9 +566,9 @@ pub struct SendRecord {
     pub bytes_sent: usize,
 }
 
-pub static LIBRA2_NETWORK_BENCHMARK_DIRECT_MESSAGES: Lazy<IntCounterVec> = Lazy::new(|| {
+pub static CREDITCHAIN_NETWORK_BENCHMARK_DIRECT_MESSAGES: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_network_benchmark_direct_messages",
+        "creditchain_network_benchmark_direct_messages",
         "Number of net benchmark direct messages",
         &["state"]
     )
@@ -576,14 +576,14 @@ pub static LIBRA2_NETWORK_BENCHMARK_DIRECT_MESSAGES: Lazy<IntCounterVec> = Lazy:
 });
 
 fn direct_messages(state_label: &'static str) {
-    LIBRA2_NETWORK_BENCHMARK_DIRECT_MESSAGES
+    CREDITCHAIN_NETWORK_BENCHMARK_DIRECT_MESSAGES
         .with_label_values(&[state_label])
         .inc();
 }
 
-pub static LIBRA2_NETWORK_BENCHMARK_DIRECT_BYTES: Lazy<IntCounterVec> = Lazy::new(|| {
+pub static CREDITCHAIN_NETWORK_BENCHMARK_DIRECT_BYTES: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_network_benchmark_direct_bytes",
+        "creditchain_network_benchmark_direct_bytes",
         "Number of net benchmark direct bytes",
         &["state"]
     )
@@ -591,14 +591,14 @@ pub static LIBRA2_NETWORK_BENCHMARK_DIRECT_BYTES: Lazy<IntCounterVec> = Lazy::ne
 });
 
 fn direct_bytes(state_label: &'static str, byte_count: u64) {
-    LIBRA2_NETWORK_BENCHMARK_DIRECT_BYTES
+    CREDITCHAIN_NETWORK_BENCHMARK_DIRECT_BYTES
         .with_label_values(&[state_label])
         .inc_by(byte_count);
 }
 
-pub static LIBRA2_NETWORK_BENCHMARK_DIRECT_MICROS: Lazy<IntCounterVec> = Lazy::new(|| {
+pub static CREDITCHAIN_NETWORK_BENCHMARK_DIRECT_MICROS: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_network_benchmark_direct_micros",
+        "creditchain_network_benchmark_direct_micros",
         "Number of net benchmark direct micros",
         &["state"]
     )
@@ -606,14 +606,14 @@ pub static LIBRA2_NETWORK_BENCHMARK_DIRECT_MICROS: Lazy<IntCounterVec> = Lazy::n
 });
 
 fn direct_micros(state_label: &'static str, micros: u64) {
-    LIBRA2_NETWORK_BENCHMARK_DIRECT_MICROS
+    CREDITCHAIN_NETWORK_BENCHMARK_DIRECT_MICROS
         .with_label_values(&[state_label])
         .inc_by(micros);
 }
 
-pub static LIBRA2_NETWORK_BENCHMARK_RPC_MESSAGES: Lazy<IntCounterVec> = Lazy::new(|| {
+pub static CREDITCHAIN_NETWORK_BENCHMARK_RPC_MESSAGES: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_network_benchmark_rpc_messages",
+        "creditchain_network_benchmark_rpc_messages",
         "Number of net benchmark RPC messages",
         &["state"]
     )
@@ -621,14 +621,14 @@ pub static LIBRA2_NETWORK_BENCHMARK_RPC_MESSAGES: Lazy<IntCounterVec> = Lazy::ne
 });
 
 fn rpc_messages(state_label: &'static str) {
-    LIBRA2_NETWORK_BENCHMARK_RPC_MESSAGES
+    CREDITCHAIN_NETWORK_BENCHMARK_RPC_MESSAGES
         .with_label_values(&[state_label])
         .inc();
 }
 
-pub static LIBRA2_NETWORK_BENCHMARK_RPC_BYTES: Lazy<IntCounterVec> = Lazy::new(|| {
+pub static CREDITCHAIN_NETWORK_BENCHMARK_RPC_BYTES: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_network_benchmark_rpc_bytes",
+        "creditchain_network_benchmark_rpc_bytes",
         "Number of net benchmark RPC bytes transferred",
         &["state"]
     )
@@ -636,12 +636,12 @@ pub static LIBRA2_NETWORK_BENCHMARK_RPC_BYTES: Lazy<IntCounterVec> = Lazy::new(|
 });
 
 pub fn rpc_bytes(state_label: &'static str) -> IntCounter {
-    LIBRA2_NETWORK_BENCHMARK_RPC_BYTES.with_label_values(&[state_label])
+    CREDITCHAIN_NETWORK_BENCHMARK_RPC_BYTES.with_label_values(&[state_label])
 }
 
-pub static LIBRA2_NETWORK_BENCHMARK_RPC_MICROS: Lazy<IntCounterVec> = Lazy::new(|| {
+pub static CREDITCHAIN_NETWORK_BENCHMARK_RPC_MICROS: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_network_benchmark_rpc_micros",
+        "creditchain_network_benchmark_rpc_micros",
         "Number of net benchmark RPC microseconds used (hint: divide by _messages)",
         &["state"]
     )
@@ -649,5 +649,5 @@ pub static LIBRA2_NETWORK_BENCHMARK_RPC_MICROS: Lazy<IntCounterVec> = Lazy::new(
 });
 
 pub fn rpc_micros(state_label: &'static str) -> IntCounter {
-    LIBRA2_NETWORK_BENCHMARK_RPC_MICROS.with_label_values(&[state_label])
+    CREDITCHAIN_NETWORK_BENCHMARK_RPC_MICROS.with_label_values(&[state_label])
 }

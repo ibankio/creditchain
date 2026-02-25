@@ -1,0 +1,9 @@
+[package]
+name = "Examples"
+version = "1.0.0"
+
+[addresses]
+rewards_pool = "_"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }

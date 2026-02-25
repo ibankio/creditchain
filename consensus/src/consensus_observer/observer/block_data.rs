@@ -18,16 +18,16 @@ use crate::{
     pipeline::pipeline_builder::PipelineBuilder,
     state_replication::StateComputerCommitCallBackType,
 };
-use libra2_config::config::ConsensusObserverConfig;
-use libra2_consensus_types::{
+use creditchain_config::config::ConsensusObserverConfig;
+use creditchain_consensus_types::{
     pipelined_block::{PipelineFutures, PipelinedBlock},
     wrapped_ledger_info::WrappedLedgerInfo,
 };
-use libra2_executor_types::state_compute_result::StateComputeResult;
-use libra2_infallible::Mutex;
-use libra2_logger::{info, warn};
-use libra2_storage_interface::DbReader;
-use libra2_types::{
+use creditchain_executor_types::state_compute_result::StateComputeResult;
+use creditchain_infallible::Mutex;
+use creditchain_logger::{info, warn};
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{
     block_info::{BlockInfo, Round},
     epoch_state::EpochState,
     ledger_info::LedgerInfoWithSignatures,
@@ -166,7 +166,7 @@ impl ObserverBlockData {
     pub fn get_ordered_block(
         &self,
         epoch: u64,
-        round: libra2_consensus_types::common::Round,
+        round: creditchain_consensus_types::common::Round,
     ) -> Option<OrderedBlock> {
         self.ordered_block_store.get_ordered_block(epoch, round)
     }
@@ -325,7 +325,7 @@ impl ObserverBlockData {
     pub fn verify_payload_signatures(
         &mut self,
         epoch_state: &EpochState,
-    ) -> Vec<libra2_consensus_types::common::Round> {
+    ) -> Vec<creditchain_consensus_types::common::Round> {
         self.block_payload_store
             .verify_payload_signatures(epoch_state)
     }
@@ -361,15 +361,15 @@ mod test {
         network::observer_message::{BlockPayload, BlockTransactionPayload, OrderedBlock},
         observer::execution_pool::ObservedOrderedBlock,
     };
-    use libra2_config::network_id::PeerNetworkId;
-    use libra2_consensus_types::{
+    use creditchain_config::network_id::PeerNetworkId;
+    use creditchain_consensus_types::{
         block::Block,
         block_data::{BlockData, BlockType},
         pipelined_block::{OrderedBlockWindow, PipelinedBlock},
         quorum_cert::QuorumCert,
     };
-    use libra2_crypto::HashValue;
-    use libra2_types::{
+    use creditchain_crypto::HashValue;
+    use creditchain_types::{
         aggregate_signature::AggregateSignature, block_info::BlockInfo, ledger_info::LedgerInfo,
         transaction::Version, validator_verifier::ValidatorVerifier,
     };
@@ -843,7 +843,7 @@ mod test {
             // Create an ordered block
             let blocks = vec![pipelined_block];
             let ordered_proof =
-                create_ledger_info(epoch, i as libra2_consensus_types::common::Round);
+                create_ledger_info(epoch, i as creditchain_consensus_types::common::Round);
             let ordered_block = OrderedBlock::new(blocks, ordered_proof);
 
             // Create an observed ordered block
@@ -876,7 +876,7 @@ mod test {
     /// Creates and returns a new ledger info with the specified epoch and round
     fn create_ledger_info(
         epoch: u64,
-        round: libra2_consensus_types::common::Round,
+        round: creditchain_consensus_types::common::Round,
     ) -> LedgerInfoWithSignatures {
         LedgerInfoWithSignatures::new(
             LedgerInfo::new(

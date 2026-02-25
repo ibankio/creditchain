@@ -1,5 +1,5 @@
 [package]
-name = "libra2-dkg-runtime"
+name = "creditchain-dkg-runtime"
 description = "CreditChain DKG runtime"
 version = "0.1.0"
 
@@ -14,24 +14,24 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-bounded-executor = { workspace = true }
-libra2-channels = { workspace = true }
-libra2-config = { workspace = true }
-libra2-consensus-types = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-crypto-derive = { workspace = true }
-libra2-enum-conversion-derive = { workspace = true }
-libra2-event-notifications = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-network = { workspace = true }
-libra2-reliable-broadcast = { workspace = true }
-libra2-runtimes = { workspace = true }
-libra2-safety-rules = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-types = { workspace = true }
-libra2-validator-transaction-pool = { workspace = true }
+creditchain-bounded-executor = { workspace = true }
+creditchain-channels = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-consensus-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-crypto-derive = { workspace = true }
+creditchain-enum-conversion-derive = { workspace = true }
+creditchain-event-notifications = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-network = { workspace = true }
+creditchain-reliable-broadcast = { workspace = true }
+creditchain-runtimes = { workspace = true }
+creditchain-safety-rules = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-validator-transaction-pool = { workspace = true }
 async-trait = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
@@ -47,7 +47,7 @@ tokio = { workspace = true }
 tokio-retry = { workspace = true }
 
 [dev-dependencies]
-libra2-types = { workspace = true, features = ["testing"] }
+creditchain-types = { workspace = true, features = ["testing"] }
 
 [features]
 smoke-test = []

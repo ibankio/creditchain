@@ -2,7 +2,7 @@ use crate::processors::account_transactions::{
     account_transactions_model::PostgresAccountTransaction, parse_account_transactions,
 };
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::Transaction,
+   creditchain_protos::transaction::v1::Transaction,
     traits::{async_step::AsyncRunType, AsyncStep, NamedStep, Processable},
     types::transaction_context::TransactionContext,
     utils::errors::ProcessorError,

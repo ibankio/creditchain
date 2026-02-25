@@ -3,8 +3,8 @@
 
 use super::proposer_election::ProposerElection;
 use crate::liveness::cached_proposer_election::CachedProposerElection;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_infallible::Mutex;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_infallible::Mutex;
 use std::{cell::Cell, sync::Arc};
 
 struct MockProposerElection {

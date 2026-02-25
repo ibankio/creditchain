@@ -13,17 +13,17 @@ import yaml
 FAST_SYNC_BOOTSTRAPPING_MODE = "DownloadLatestStates" # The bootstrapping string for fast sync
 FULLNODE_CONFIG_NAME = "public_full_node.yaml" # Relative to the CreditChain repo
 FULLNODE_CONFIG_TEMPLATE_PATH = "config/src/config/test_data/public_full_node.yaml" # Relative to the CreditChain repo
-GENESIS_BLOB_PATH = "https://github.com/libra2org/libra2-networks/main/{network}/genesis.blob" # Location inside the libra2-networks repo
+GENESIS_BLOB_PATH = "https://github.com/libra2org/creditchain-networks/main/{network}/genesis.blob" # Location inside the creditchain-networks repo
 LOCAL_METRICS_ENDPOINT = "http://127.0.0.1:9101/json_metrics" # The json metrics endpoint running on the local host
 LOCAL_METRICS_ENDPOINT_TEXT = "http://127.0.0.1:9101/metrics" # The text metrics endpoint running on the local host
 LOCAL_REST_ENDPOINT = "http://127.0.0.1:8080/v1" # The rest endpoint running on the local host
 LEDGER_VERSION_API_STRING = "ledger_version" # The string to fetch the ledger version from the REST API
-LEDGER_VERSION_METRICS_STRING = "libra2_state_sync_version.synced" # The string to fetch the ledger version from the metrics API
+LEDGER_VERSION_METRICS_STRING = "creditchain_state_sync_version.synced" # The string to fetch the ledger version from the metrics API
 MAX_TIME_BETWEEN_SYNC_INCREASES_SECS = 1800 # The number of seconds after which to fail if the node isn't syncing
 REMOTE_REST_ENDPOINTS = "https://fullnode.{network}.libra2.org/v1" # The remote rest endpoint
 SYNCING_DELTA_VERSIONS = 20000 # The number of versions to sync beyond the highest known at the job start
-SYNCED_STATES_METRICS_STRING = "libra2_state_sync_version.synced_states" # The string to fetch the synced states from the metrics API
-WAYPOINT_FILE_PATH = "https://github.com/libra2org/libra2-networks/main/{network}/waypoint.txt" # Location inside the libra2-networks repo
+SYNCED_STATES_METRICS_STRING = "creditchain_state_sync_version.synced_states" # The string to fetch the synced states from the metrics API
+WAYPOINT_FILE_PATH = "https://github.com/libra2org/creditchain-networks/main/{network}/waypoint.txt" # Location inside the creditchain-networks repo
 
 def print_error_and_exit(error):
   """Prints the given error and exits the process"""
@@ -225,7 +225,7 @@ def spawn_fullnode(git_ref, network, bootstrapping_mode, continuous_syncing_mode
 
   # Start the fullnode
   node_log_file = open(node_log_file_path, "w")
-  process_handle = subprocess.Popen(["cargo", "run", "-p", "libra2-node", "--release", "--", "-f", FULLNODE_CONFIG_NAME], stdout=node_log_file, stderr=node_log_file)
+  process_handle = subprocess.Popen(["cargo", "run", "-p", "creditchain-node", "--release", "--", "-f", FULLNODE_CONFIG_NAME], stdout=node_log_file, stderr=node_log_file)
 
   # Return the process handle
   return process_handle

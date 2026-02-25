@@ -1,5 +1,5 @@
 [package]
-name = "libra2-db-tool"
+name = "creditchain-db-tool"
 version = "0.1.1"
 
 # Workspace inherited keys
@@ -13,18 +13,18 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-backup-cli = { workspace = true }
-libra2-block-executor = { workspace = true }
-libra2-config = { workspace = true }
-libra2-db = { workspace = true, features = ["db-debugger"] }
-libra2-db-indexer = { workspace = true }
-libra2-executor = { workspace = true }
-libra2-executor-types = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
+creditchain-backup-cli = { workspace = true }
+creditchain-block-executor = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-db = { workspace = true, features = ["db-debugger"] }
+creditchain-db-indexer = { workspace = true }
+creditchain-executor = { workspace = true }
+creditchain-executor-types = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
 bcs = { workspace = true }
 clap = { workspace = true }
 itertools = { workspace = true }
@@ -33,7 +33,7 @@ serde_json = { workspace = true }
 tokio = { workspace = true }
 
 [dev-dependencies]
-libra2-backup-cli = { workspace = true, features = ["testing"] }
-libra2-backup-service = { workspace = true }
-libra2-executor-test-helpers = { workspace = true }
-libra2-indexer-grpc-table-info = { workspace = true }
+creditchain-backup-cli = { workspace = true, features = ["testing"] }
+creditchain-backup-service = { workspace = true }
+creditchain-executor-test-helpers = { workspace = true }
+creditchain-indexer-grpc-table-info = { workspace = true }

@@ -8,7 +8,7 @@ use crate::{
     ReadSecretListResponse, ReadSecretMetadata, ReadSecretResponse, RenewTokenAuth,
     RenewTokenResponse, SealStatusResponse, Signature, SignatureResponse,
 };
-use libra2_types::proptest_types::arb_json_value;
+use creditchain_types::proptest_types::arb_json_value;
 use proptest::prelude::*;
 use serde_json::Value;
 use ureq::Response;

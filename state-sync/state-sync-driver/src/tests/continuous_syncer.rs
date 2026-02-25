@@ -18,18 +18,18 @@ use crate::{
     },
     utils::OutputFallbackHandler,
 };
-use libra2_config::config::ContinuousSyncingMode;
-use libra2_consensus_notifications::{
+use creditchain_config::config::ContinuousSyncingMode;
+use creditchain_consensus_notifications::{
     ConsensusSyncDurationNotification, ConsensusSyncTargetNotification,
 };
-use libra2_data_streaming_service::{
+use creditchain_data_streaming_service::{
     data_notification::{DataNotification, DataPayload, NotificationId},
     streaming_client::{NotificationAndFeedback, NotificationFeedback},
 };
-use libra2_infallible::Mutex;
-use libra2_storage_service_types::Epoch;
-use libra2_time_service::TimeService;
-use libra2_types::transaction::{
+use creditchain_infallible::Mutex;
+use creditchain_storage_service_types::Epoch;
+use creditchain_time_service::TimeService;
+use creditchain_types::transaction::{
     TransactionOutputListWithProof, TransactionOutputListWithProofV2, Version,
 };
 use claims::assert_matches;
@@ -796,7 +796,7 @@ fn create_continuous_syncer(
     OutputFallbackHandler,
 ) {
     // Initialize the logger for tests
-    libra2_logger::Logger::init_for_testing();
+    creditchain_logger::Logger::init_for_testing();
 
     // Create the mock storage synchronizer
     let mock_storage_synchronizer = create_ready_storage_synchronizer(expect_reset_executor);

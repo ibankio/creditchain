@@ -3,13 +3,13 @@
 
 use crate::{smoke_test_environment::SwarmBuilder, utils::get_on_chain_resource};
 use anyhow::bail;
-use libra2::common::types::GasOptions;
-use libra2_config::config::{OverrideNodeConfig, PersistableConfig};
-use libra2_crypto::{bls12381, Uniform};
-use libra2_forge::{NodeExt, Swarm, SwarmExt};
-use libra2_logger::info;
-use libra2_rest_client::Client;
-use libra2_types::{
+use creditchain::common::types::GasOptions;
+use creditchain_config::config::{OverrideNodeConfig, PersistableConfig};
+use creditchain_crypto::{bls12381, Uniform};
+use creditchain_forge::{NodeExt, Swarm, SwarmExt};
+use creditchain_logger::info;
+use creditchain_rest_client::Client;
+use creditchain_types::{
     on_chain_config::{ConfigurationResource, OnChainRandomnessConfig, ValidatorSet},
     validator_verifier::ValidatorVerifier,
 };
@@ -121,7 +121,7 @@ async fn consensus_key_rotation() {
     info!("Update on-chain. Retry is needed in case randomness is enabled.");
     swarm
         .chain_info()
-        .into_libra2_public_info()
+        .into_creditchain_public_info()
         .mint(operator_addr, 99999999999)
         .await
         .unwrap();

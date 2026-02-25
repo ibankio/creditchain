@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Result;
-use libra2_config::config::RocksdbConfig;
-use libra2_db_indexer_schemas::schema::{column_families, internal_indexer_column_families};
-use libra2_rocksdb_options::gen_rocksdb_options;
-use libra2_schemadb::DB;
+use creditchain_config::config::RocksdbConfig;
+use creditchain_db_indexer_schemas::schema::{column_families, internal_indexer_column_families};
+use creditchain_rocksdb_options::gen_rocksdb_options;
+use creditchain_schemadb::DB;
 use std::{mem, path::Path};
 
 const INTERNAL_INDEXER_DB_NAME: &str = "internal_indexer_db";

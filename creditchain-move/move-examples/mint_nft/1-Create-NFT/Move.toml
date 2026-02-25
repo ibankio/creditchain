@@ -1,0 +1,10 @@
+[package]
+name = "Examples"
+version = "0.0.0"
+
+[dependencies]
+CreditChainFramework = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-framework", rev = "mainnet" }
+CreditChainToken = { git = "https://github.com/creditchainorg/creditchain-framework.git", subdir = "creditchain-token", rev = "mainnet" }
+
+[addresses]
+creditchain_framework = "0x1"

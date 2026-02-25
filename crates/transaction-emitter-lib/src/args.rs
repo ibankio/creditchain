@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{bail, format_err, Result};
-use libra2_config::keys::ConfigKey;
-use libra2_crypto::{ed25519::Ed25519PrivateKey, encoding_type::EncodingType};
-use libra2_sdk::types::chain_id::ChainId;
-use libra2_transaction_generator_lib::AccountType;
+use creditchain_config::keys::ConfigKey;
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, encoding_type::EncodingType};
+use creditchain_sdk::types::chain_id::ChainId;
+use creditchain_transaction_generator_lib::AccountType;
 use clap::{ArgGroup, Parser};
 use serde::{Deserialize, Serialize};
 use std::{

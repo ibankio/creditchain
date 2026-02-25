@@ -25,7 +25,7 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}
 
-      - name: Determine next version and update libra2-node/Cargo.toml
+      - name: Determine next version and update creditchain-node/Cargo.toml
         uses: actions/github-script@v6
         id: determine-version
         with:
@@ -35,7 +35,7 @@ jobs:
 
             // Read Cargo.toml
             const fs = require("fs");
-            const cargoFilePath = "libra2-node/Cargo.toml";
+            const cargoFilePath = "creditchain-node/Cargo.toml";
             const cargoContent = fs.readFileSync(cargoFilePath, "utf8");
 
             // Extract and update the version
@@ -90,7 +90,7 @@ jobs:
 
       - name: Update Cargo.lock
         run: |
-          cargo update -p libra2-node
+          cargo update -p creditchain-node
 
       - name: Create Pull Request
         id: create-pr
@@ -100,9 +100,9 @@ jobs:
           branch: update-version-${{ github.run_id }}
           base: ${{ github.event.inputs.branch }}
           title: "[${{ steps.determine-version.outputs.releaseBranch }}] Bump version to ${{ steps.determine-version.outputs.newVersion }}"
-          body: "This PR bumps the libra2-node version to ${{ steps.determine-version.outputs.newVersion }} in ${{ steps.determine-version.outputs.releaseBranch }}."
+          body: "This PR bumps the creditchain-node version to ${{ steps.determine-version.outputs.newVersion }} in ${{ steps.determine-version.outputs.releaseBranch }}."
           commit-message: "[${{ steps.determine-version.outputs.releaseBranch }}] Bump version to ${{ steps.determine-version.outputs.newVersion }}"
-          add-paths: "libra2-node/Cargo.toml, Cargo.lock"
+          add-paths: "creditchain-node/Cargo.toml, Cargo.lock"
       - name: Log PR URL
         if: ${{ steps.create-pr.outputs.pull-request-number }}
         run: |

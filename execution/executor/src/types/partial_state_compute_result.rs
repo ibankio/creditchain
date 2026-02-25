@@ -4,11 +4,11 @@
 #![forbid(unsafe_code)]
 
 use anyhow::{Context, Result};
-use libra2_executor_types::{
+use creditchain_executor_types::{
     execution_output::ExecutionOutput, state_checkpoint_output::StateCheckpointOutput,
     state_compute_result::StateComputeResult, LedgerUpdateOutput,
 };
-use libra2_storage_interface::{
+use creditchain_storage_interface::{
     state_store::{state::LedgerState, state_summary::LedgerStateSummary},
     LedgerSummary,
 };

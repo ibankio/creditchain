@@ -5,14 +5,14 @@
 //! Integration tests for validator_network.
 
 use crate::builder::NetworkBuilder;
-use libra2_channels::libra2_channel;
-use libra2_config::{
+use creditchain_channels::creditchain_channel;
+use creditchain_config::{
     config::{Peer, PeerRole, PeerSet, RoleType, NETWORK_CHANNEL_SIZE},
     network_id::{NetworkContext, NetworkId, PeerNetworkId},
 };
-use libra2_crypto::{test_utils::TEST_SEED, x25519, Uniform};
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_network::{
+use creditchain_crypto::{test_utils::TEST_SEED, x25519, Uniform};
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_network::{
     application::{interface::NetworkClient, storage::PeersAndMetadata},
     peer_manager::{builder::AuthenticationMode, ConnectionNotification},
     protocols::network::{
@@ -20,8 +20,8 @@ use libra2_network::{
     },
     ProtocolId,
 };
-use libra2_time_service::TimeService;
-use libra2_types::{chain_id::ChainId, network_address::NetworkAddress, PeerId};
+use creditchain_time_service::TimeService;
+use creditchain_types::{chain_id::ChainId, network_address::NetworkAddress, PeerId};
 use futures::executor::block_on;
 use maplit::hashmap;
 use rand::{rngs::StdRng, SeedableRng};
@@ -44,7 +44,7 @@ pub fn dummy_network_config() -> NetworkApplicationConfig {
     let network_service_config = NetworkServiceConfig::new(
         direct_send_protocols,
         rpc_protocls,
-        libra2_channel::Config::new(NETWORK_CHANNEL_SIZE),
+        creditchain_channel::Config::new(NETWORK_CHANNEL_SIZE),
     );
     NetworkApplicationConfig::new(network_client_config, network_service_config)
 }

@@ -1,5 +1,5 @@
 [package]
-name = "libra2-memsocket"
+name = "creditchain-memsocket"
 description = "CreditChain memsocket"
 version = "0.1.1"
 
@@ -13,7 +13,7 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-infallible = { workspace = true }
+creditchain-infallible = { workspace = true }
 bytes = { workspace = true }
 futures = { workspace = true }
 once_cell = { workspace = true }

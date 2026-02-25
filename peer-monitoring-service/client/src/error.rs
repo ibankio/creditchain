@@ -1,8 +1,8 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_network::protocols::network::RpcError;
-use libra2_peer_monitoring_service_types::{
+use creditchain_network::protocols::network::RpcError;
+use creditchain_peer_monitoring_service_types::{
     response::UnexpectedResponseError, PeerMonitoringServiceError,
 };
 use thiserror::Error;
@@ -15,7 +15,7 @@ pub enum Error {
     #[error("Error from remote monitoring service: {0}")]
     PeerMonitoringServiceError(#[from] PeerMonitoringServiceError),
 
-    #[error("Libra2 network rpc error: {0}")]
+    #[error("CreditChain network rpc error: {0}")]
     RpcError(#[from] RpcError),
 
     #[error("Unexpected error encountered: {0}")]
@@ -34,8 +34,8 @@ impl Error {
     }
 }
 
-impl From<libra2_network::application::error::Error> for Error {
-    fn from(error: libra2_network::application::error::Error) -> Self {
+impl From<creditchain_network::application::error::Error> for Error {
+    fn from(error: creditchain_network::application::error::Error) -> Self {
         Error::NetworkError(error.to_string())
     }
 }

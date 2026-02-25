@@ -4,8 +4,8 @@
 use crate::consensus_observer::network::observer_message::{
     ConsensusObserverMessage, ConsensusObserverResponse,
 };
-use libra2_config::network_id::{NetworkId, PeerNetworkId};
-use libra2_network::{
+use creditchain_config::network_id::{NetworkId, PeerNetworkId};
+use creditchain_network::{
     application::interface::NetworkServiceEvents,
     protocols::{
         network::{Event, RpcError},

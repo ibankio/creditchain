@@ -10,7 +10,7 @@ use crate::{
 };
 use allocative_derive::Allocative;
 use anyhow::Result;
-use libra2_indexer_processor_sdk::libra2_protos::transaction::v1::Signature as SignaturePb;
+use libra2_indexer_processor_sdk::creditchain_protos::transaction::v1::Signature as SignaturePb;
 use field_count::FieldCount;
 use parquet_derive::ParquetRecordWriter;
 use serde::{Deserialize, Serialize};

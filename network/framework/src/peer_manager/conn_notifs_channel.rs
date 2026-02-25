@@ -10,21 +10,21 @@
 //! and `conn_notifs_channel::Sender` which behave similarly to existing mpsc data structures.
 
 use crate::peer_manager::ConnectionNotification;
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_types::PeerId;
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_types::PeerId;
 
-pub type Sender = libra2_channel::Sender<PeerId, ConnectionNotification>;
-pub type Receiver = libra2_channel::Receiver<PeerId, ConnectionNotification>;
+pub type Sender = creditchain_channel::Sender<PeerId, ConnectionNotification>;
+pub type Receiver = creditchain_channel::Receiver<PeerId, ConnectionNotification>;
 
 pub fn new() -> (Sender, Receiver) {
-    libra2_channel::new(QueueStyle::LIFO, 1, None)
+    creditchain_channel::new(QueueStyle::LIFO, 1, None)
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
     use crate::transport::ConnectionMetadata;
-    use libra2_config::network_id::NetworkId;
+    use creditchain_config::network_id::NetworkId;
     use futures::{executor::block_on, future::FutureExt, stream::StreamExt};
 
     fn send_new_peer(sender: &mut Sender, connection: ConnectionMetadata) {

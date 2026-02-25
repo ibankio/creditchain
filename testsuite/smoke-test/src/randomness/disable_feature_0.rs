@@ -6,9 +6,9 @@ use crate::{
     smoke_test_environment::SwarmBuilder,
     utils::get_on_chain_resource,
 };
-use libra2_forge::{Node, Swarm, SwarmExt};
-use libra2_logger::{debug, info};
-use libra2_types::{
+use creditchain_forge::{Node, Swarm, SwarmExt};
+use creditchain_logger::{debug, info};
+use creditchain_types::{
     dkg::DKGState, on_chain_config::OnChainRandomnessConfig, randomness::PerBlockRandomness,
 };
 use std::{sync::Arc, time::Duration};
@@ -38,7 +38,7 @@ async fn disable_feature_0() {
     let decrypt_key_map = decrypt_key_map(&swarm);
 
     let client_endpoint = swarm.validators().nth(1).unwrap().rest_api_endpoint();
-    let client = libra2_rest_client::Client::new(client_endpoint.clone());
+    let client = creditchain_rest_client::Client::new(client_endpoint.clone());
 
     swarm
         .wait_for_all_nodes_to_catchup_to_epoch(3, Duration::from_secs(epoch_duration_secs * 2))

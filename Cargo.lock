@@ -190,6 +190,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "android-tzdata"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e999941b234f3131b00bc13c22d06e8c5ff726d1b6318ac7eb276997bbb4fef0"
+
+[[package]]
 name = "android_system_properties"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -554,6 +560,99 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50"
 
 [[package]]
+name = "arrow-array"
+version = "53.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7845c32b41f7053e37a075b3c2f29c6f5ea1b3ca6e5df7a2d325ee6e1b4a63cf"
+dependencies = [
+ "ahash 0.8.12",
+ "arrow-buffer",
+ "arrow-data",
+ "arrow-schema",
+ "chrono",
+ "half 2.6.0",
+ "hashbrown 0.15.5",
+ "num 0.4.3",
+]
+
+[[package]]
+name = "arrow-buffer"
+version = "53.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5b5c681a99606f3316f2a99d9c8b6fa3aad0b1d34d8f6d7a1b471893940219d8"
+dependencies = [
+ "bytes",
+ "half 2.6.0",
+ "num 0.4.3",
+]
+
+[[package]]
+name = "arrow-cast"
+version = "53.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6365f8527d4f87b133eeb862f9b8093c009d41a210b8f101f91aa2392f61daac"
+dependencies = [
+ "arrow-array",
+ "arrow-buffer",
+ "arrow-data",
+ "arrow-schema",
+ "arrow-select",
+ "atoi",
+ "base64 0.22.1",
+ "chrono",
+ "half 2.6.0",
+ "lexical-core",
+ "num 0.4.3",
+ "ryu",
+]
+
+[[package]]
+name = "arrow-data"
+version = "53.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cd962fc3bf7f60705b25bcaa8eb3318b2545aa1d528656525ebdd6a17a6cd6fb"
+dependencies = [
+ "arrow-buffer",
+ "arrow-schema",
+ "half 2.6.0",
+ "num 0.4.3",
+]
+
+[[package]]
+name = "arrow-ipc"
+version = "53.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c3527365b24372f9c948f16e53738eb098720eea2093ae73c7af04ac5e30a39b"
+dependencies = [
+ "arrow-array",
+ "arrow-buffer",
+ "arrow-cast",
+ "arrow-data",
+ "arrow-schema",
+ "flatbuffers",
+]
+
+[[package]]
+name = "arrow-schema"
+version = "53.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "35b0f9c0c3582dd55db0f136d3b44bfa0189df07adcf7dc7f2f2e74db0f52eb8"
+
+[[package]]
+name = "arrow-select"
+version = "53.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "92fc337f01635218493c23da81a364daf38c694b05fc20569c3193c11c561984"
+dependencies = [
+ "ahash 0.8.12",
+ "arrow-array",
+ "arrow-buffer",
+ "arrow-data",
+ "arrow-schema",
+ "num 0.4.3",
+]
+
+[[package]]
 name = "ascii-canvas"
 version = "3.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -812,6 +911,15 @@ dependencies = [
  "futures",
  "pharos",
  "rustc_version",
+]
+
+[[package]]
+name = "atoi"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f28d99ec8bfea296261ca1af174f24225171fea9664ba9003cbebee704810528"
+dependencies = [
+ "num-traits",
 ]
 
 [[package]]
@@ -1479,13 +1587,34 @@ dependencies = [
 
 [[package]]
 name = "brotli"
+version = "7.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cc97b8f16f944bba54f0433f07e30be199b6dc2bd25937444bbad560bcea29bd"
+dependencies = [
+ "alloc-no-stdlib",
+ "alloc-stdlib",
+ "brotli-decompressor 4.0.3",
+]
+
+[[package]]
+name = "brotli"
 version = "8.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4bd8b9603c7aa97359dbd97ecf258968c95f3adddd6db2f7e7a5bef101c84560"
 dependencies = [
  "alloc-no-stdlib",
  "alloc-stdlib",
- "brotli-decompressor",
+ "brotli-decompressor 5.0.0",
+]
+
+[[package]]
+name = "brotli-decompressor"
+version = "4.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a334ef7c9e23abf0ce748e8cd309037da93e606ad52eb372e4ce327a0dcfbdfd"
+dependencies = [
+ "alloc-no-stdlib",
+ "alloc-stdlib",
 ]
 
 [[package]]
@@ -1846,16 +1975,17 @@ checksum = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
 
 [[package]]
 name = "chrono"
-version = "0.4.42"
+version = "0.4.39"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "145052bdd345b87320e369255277e3fb5152762ad123a901ef5c262dd38fe8d2"
+checksum = "7e36cc9d416881d2e24f9a963be5fb1cd90966419ac844274161d10488b3e825"
 dependencies = [
+ "android-tzdata",
  "iana-time-zone",
  "js-sys",
  "num-traits",
  "serde",
  "wasm-bindgen",
- "windows-link 0.2.0",
+ "windows-targets 0.52.6",
 ]
 
 [[package]]
@@ -2224,12 +2354,12 @@ version = "0.4.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "485abf41ac0c8047c07c87c72c8fb3eb5197f6e9d7ded615dfd1a00ae00a0f64"
 dependencies = [
- "brotli",
+ "brotli 8.0.2",
  "compression-core",
  "flate2",
  "memchr",
  "zstd 0.13.3",
- "zstd-safe 7.2.4",
+ "zstd-safe 7.2.1",
 ]
 
 [[package]]
@@ -2521,6 +2651,4565 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9481c1c90cbf2ac953f07c8d4a58aa3945c425b7185c9154d67a65e4230da511"
 dependencies = [
  "cfg-if",
+]
+
+[[package]]
+name = "creditchain"
+version = "7.7.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "backoff",
+ "base64 0.13.1",
+ "bcs 0.1.4",
+ "bollard",
+ "chrono",
+ "clap 4.5.48",
+ "clap_complete",
+ "colored",
+ "creditchain-api-types",
+ "creditchain-backup-cli",
+ "creditchain-bitvec",
+ "creditchain-build-info",
+ "creditchain-cached-packages",
+ "creditchain-cli-common",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-faucet-core",
+ "creditchain-framework",
+ "creditchain-gas-profiling",
+ "creditchain-gas-schedule",
+ "creditchain-genesis",
+ "creditchain-github-client",
+ "creditchain-global-constants",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-keygen",
+ "creditchain-ledger",
+ "creditchain-localnet",
+ "creditchain-logger",
+ "creditchain-move-debugger",
+ "creditchain-network-checker",
+ "creditchain-node",
+ "creditchain-rest-client",
+ "creditchain-sdk",
+ "creditchain-storage-interface",
+ "creditchain-telemetry",
+ "creditchain-temppath",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "creditchain-vm-genesis",
+ "creditchain-vm-logging",
+ "creditchain-vm-types",
+ "creditchain-workspace-server",
+ "dashmap 7.0.0-rc2",
+ "diesel",
+ "diesel-async",
+ "dirs 5.0.1",
+ "futures",
+ "hex",
+ "indoc",
+ "itertools 0.13.0",
+ "jemallocator",
+ "legacy-move-compiler",
+ "libra2-indexer-processor-sdk",
+ "maplit",
+ "move-binary-format",
+ "move-bytecode-source-map",
+ "move-cli",
+ "move-command-line-common",
+ "move-compiler-v2",
+ "move-core-types",
+ "move-coverage",
+ "move-disassembler",
+ "move-ir-types",
+ "move-linter",
+ "move-model",
+ "move-package",
+ "move-prover-boogie-backend",
+ "move-symbol-pool",
+ "move-unit-test",
+ "move-vm-runtime",
+ "open",
+ "pathsearch",
+ "poem",
+ "processor",
+ "rand 0.7.3",
+ "regex",
+ "reqwest 0.11.27",
+ "self_update",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "set_env",
+ "shadow-rs",
+ "tempfile",
+ "thiserror 1.0.69",
+ "tokio",
+ "toml 0.7.8",
+ "tracing",
+ "tracing-subscriber 0.3.20",
+ "url",
+]
+
+[[package]]
+name = "creditchain-abstract-gas-usage"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-gas-algebra",
+ "creditchain-gas-meter",
+ "creditchain-gas-schedule",
+ "creditchain-vm-types",
+ "move-binary-format",
+]
+
+[[package]]
+name = "creditchain-accumulator"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-crypto",
+ "creditchain-types",
+ "proptest",
+ "rand 0.7.3",
+]
+
+[[package]]
+name = "creditchain-admin-service"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "creditchain-config",
+ "creditchain-consensus",
+ "creditchain-crypto",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-mempool",
+ "creditchain-runtimes",
+ "creditchain-storage-interface",
+ "creditchain-system-utils",
+ "creditchain-types",
+ "futures-channel",
+ "http 0.2.12",
+ "hyper 0.14.32",
+ "sha256",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-aggregator"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "claims",
+ "creditchain-types",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-types",
+ "once_cell",
+ "test-case",
+]
+
+[[package]]
+name = "creditchain-api"
+version = "0.2.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-api-test-context",
+ "creditchain-api-types",
+ "creditchain-bcs-utils",
+ "creditchain-build-info",
+ "creditchain-cached-packages",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-framework",
+ "creditchain-gas-meter",
+ "creditchain-gas-schedule",
+ "creditchain-global-constants",
+ "creditchain-logger",
+ "creditchain-mempool",
+ "creditchain-metrics-core",
+ "creditchain-move-stdlib",
+ "creditchain-proptest-helpers",
+ "creditchain-runtimes",
+ "creditchain-sdk",
+ "creditchain-storage-interface",
+ "creditchain-transaction-filters",
+ "creditchain-types",
+ "creditchain-vm",
+ "fail",
+ "futures",
+ "hex",
+ "itertools 0.13.0",
+ "mime",
+ "mini-moka",
+ "move-core-types",
+ "move-package",
+ "num_cpus",
+ "once_cell",
+ "passkey-types",
+ "paste",
+ "percent-encoding",
+ "poem",
+ "poem-openapi",
+ "proptest",
+ "rand 0.7.3",
+ "regex",
+ "reqwest 0.11.27",
+ "rstest",
+ "serde",
+ "serde_json",
+ "tokio",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-api-test-context"
+version = "0.2.0"
+dependencies = [
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-api",
+ "creditchain-api-types",
+ "creditchain-cached-packages",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-executor",
+ "creditchain-executor-types",
+ "creditchain-framework",
+ "creditchain-genesis",
+ "creditchain-indexer-grpc-table-info",
+ "creditchain-mempool",
+ "creditchain-mempool-notifications",
+ "creditchain-sdk",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-logging",
+ "creditchain-vm-validator",
+ "goldenfile",
+ "hyper 0.14.32",
+ "rand 0.7.3",
+ "regex",
+ "serde_json",
+ "tokio",
+ "warp",
+ "warp-reverse-proxy",
+]
+
+[[package]]
+name = "creditchain-api-tester"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-api-types",
+ "creditchain-cached-packages",
+ "creditchain-framework",
+ "creditchain-logger",
+ "creditchain-push-metrics",
+ "creditchain-rest-client",
+ "creditchain-sdk",
+ "creditchain-types",
+ "futures",
+ "move-core-types",
+ "once_cell",
+ "prometheus",
+ "rand 0.7.3",
+ "serde",
+ "serde_json",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-api-types"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-logger",
+ "creditchain-openapi",
+ "creditchain-resource-viewer",
+ "creditchain-storage-interface",
+ "creditchain-types",
+ "creditchain-vm",
+ "hex",
+ "indoc",
+ "move-binary-format",
+ "move-core-types",
+ "once_cell",
+ "poem",
+ "poem-openapi",
+ "poem-openapi-derive",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "creditchain-backup-cli"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "bcs 0.1.4",
+ "bytes",
+ "clap 4.5.48",
+ "creditchain-backup-service",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-db-indexer-schemas",
+ "creditchain-executor",
+ "creditchain-executor-test-helpers",
+ "creditchain-executor-types",
+ "creditchain-indexer-grpc-table-info",
+ "creditchain-infallible",
+ "creditchain-jellyfish-merkle",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-proptest-helpers",
+ "creditchain-push-metrics",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "csv",
+ "futures",
+ "itertools 0.13.0",
+ "move-binary-format",
+ "move-bytecode-verifier",
+ "num_cpus",
+ "once_cell",
+ "pin-project 1.1.10",
+ "proptest",
+ "rand 0.7.3",
+ "regex",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-io-timeout",
+ "tokio-stream",
+ "tokio-util 0.7.16",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-backup-service"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-runtimes",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "hyper 0.14.32",
+ "once_cell",
+ "reqwest 0.11.27",
+ "serde",
+ "tokio",
+ "tokio-stream",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-bcs-utils"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "hex",
+]
+
+[[package]]
+name = "creditchain-bitvec"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "proptest",
+ "proptest-derive",
+ "serde",
+ "serde_bytes",
+ "serde_json",
+]
+
+[[package]]
+name = "creditchain-block-executor"
+version = "0.1.1"
+dependencies = [
+ "ambassador",
+ "anyhow",
+ "arc-swap",
+ "bcs 0.1.4",
+ "bytes",
+ "cfg-if",
+ "claims",
+ "concurrent-queue",
+ "creditchain-aggregator",
+ "creditchain-crypto",
+ "creditchain-drop-helper",
+ "creditchain-gas-schedule",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-mvhashmap",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm-environment",
+ "creditchain-vm-logging",
+ "creditchain-vm-types",
+ "criterion",
+ "crossbeam",
+ "derivative",
+ "fail",
+ "hashbrown 0.14.5",
+ "itertools 0.13.0",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-runtime",
+ "move-vm-types",
+ "num_cpus",
+ "once_cell",
+ "parking_lot 0.12.4",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "rayon",
+ "scopeguard",
+ "test-case",
+]
+
+[[package]]
+name = "creditchain-block-partitioner"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-crypto",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-types",
+ "criterion",
+ "dashmap 7.0.0-rc2",
+ "itertools 0.13.0",
+ "jemallocator",
+ "move-core-types",
+ "once_cell",
+ "rand 0.7.3",
+ "rayon",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-bounded-executor"
+version = "0.1.1"
+dependencies = [
+ "futures",
+ "rustversion",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-build-info"
+version = "0.1.1"
+dependencies = [
+ "shadow-rs",
+]
+
+[[package]]
+name = "creditchain-cached-packages"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "creditchain-framework",
+ "creditchain-package-builder",
+ "creditchain-types",
+ "move-core-types",
+ "once_cell",
+ "proptest",
+ "proptest-derive",
+]
+
+[[package]]
+name = "creditchain-cargo-cli"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "camino",
+ "chrono",
+ "clap 4.5.48",
+ "clap-verbosity-flag",
+ "determinator",
+ "env_logger 0.10.2",
+ "guppy",
+ "log",
+ "reqwest 0.11.27",
+ "url",
+]
+
+[[package]]
+name = "creditchain-channels"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-infallible",
+ "creditchain-metrics-core",
+ "creditchain-types",
+ "futures",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-cli-common"
+version = "1.0.0"
+dependencies = [
+ "anstyle",
+ "clap 4.5.48",
+ "clap_complete",
+]
+
+[[package]]
+name = "creditchain-collections"
+version = "0.1.1"
+
+[[package]]
+name = "creditchain-comparison-testing"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-block-executor",
+ "creditchain-framework",
+ "creditchain-language-e2e-tests",
+ "creditchain-rest-client",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-validator-interface",
+ "creditchain-vm",
+ "futures",
+ "itertools 0.13.0",
+ "legacy-move-compiler",
+ "move-binary-format",
+ "move-core-types",
+ "move-model",
+ "move-package",
+ "rocksdb",
+ "serde",
+ "tempfile",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-compression"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "creditchain-crypto",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-types",
+ "lz4",
+ "once_cell",
+ "rand 0.7.3",
+ "serde",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-config"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "arr_macro",
+ "bcs 0.1.4",
+ "byteorder",
+ "cfg-if",
+ "creditchain-crypto",
+ "creditchain-global-constants",
+ "creditchain-logger",
+ "creditchain-secure-storage",
+ "creditchain-short-hex-str",
+ "creditchain-temppath",
+ "creditchain-transaction-filters",
+ "creditchain-types",
+ "get_if_addrs",
+ "maplit",
+ "num_cpus",
+ "poem-openapi",
+ "rand 0.7.3",
+ "serde",
+ "serde_json",
+ "serde_merge",
+ "serde_yaml 0.8.26",
+ "strum 0.27.2",
+ "strum_macros 0.27.2",
+ "tempfile",
+ "thiserror 1.0.69",
+ "url",
+]
+
+[[package]]
+name = "creditchain-consensus"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "bcs 0.1.4",
+ "byteorder",
+ "bytes",
+ "chrono",
+ "claims",
+ "clap 4.5.48",
+ "creditchain-bitvec",
+ "creditchain-bounded-executor",
+ "creditchain-cached-packages",
+ "creditchain-channels",
+ "creditchain-collections",
+ "creditchain-config",
+ "creditchain-consensus-notifications",
+ "creditchain-consensus-types",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-dkg",
+ "creditchain-enum-conversion-derive",
+ "creditchain-event-notifications",
+ "creditchain-executor",
+ "creditchain-executor-test-helpers",
+ "creditchain-executor-types",
+ "creditchain-experimental-runtimes",
+ "creditchain-fallible",
+ "creditchain-infallible",
+ "creditchain-keygen",
+ "creditchain-logger",
+ "creditchain-mempool",
+ "creditchain-metrics-core",
+ "creditchain-netcore",
+ "creditchain-network",
+ "creditchain-peer-monitoring-service-types",
+ "creditchain-reliable-broadcast",
+ "creditchain-runtimes",
+ "creditchain-safety-rules",
+ "creditchain-schemadb",
+ "creditchain-secure-storage",
+ "creditchain-short-hex-str",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-time-service",
+ "creditchain-transaction-filters",
+ "creditchain-types",
+ "creditchain-validator-transaction-pool",
+ "creditchain-vm",
+ "creditchain-vm-validator",
+ "dashmap 7.0.0-rc2",
+ "enum_dispatch",
+ "fail",
+ "futures",
+ "futures-channel",
+ "hex",
+ "itertools 0.13.0",
+ "lru",
+ "maplit",
+ "mini-moka",
+ "mirai-annotations",
+ "mockall",
+ "move-core-types",
+ "num-derive",
+ "num-traits",
+ "once_cell",
+ "ordered-float 3.9.2",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "rayon",
+ "scopeguard",
+ "serde",
+ "serde_bytes",
+ "serde_json",
+ "sha3 0.9.1",
+ "strum 0.27.2",
+ "strum_macros 0.27.2",
+ "tempfile",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-retry",
+ "tokio-stream",
+]
+
+[[package]]
+name = "creditchain-consensus-notifications"
+version = "0.1.1"
+dependencies = [
+ "async-trait",
+ "claims",
+ "creditchain-crypto",
+ "creditchain-runtimes",
+ "creditchain-types",
+ "futures",
+ "move-core-types",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-consensus-types"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "creditchain-bitvec",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-executor-types",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-short-hex-str",
+ "creditchain-types",
+ "derivative",
+ "fail",
+ "futures",
+ "itertools 0.13.0",
+ "mini-moka",
+ "mirai-annotations",
+ "once_cell",
+ "proptest",
+ "rand 0.7.3",
+ "rayon",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-crash-handler"
+version = "0.1.1"
+dependencies = [
+ "backtrace",
+ "creditchain-logger",
+ "move-core-types",
+ "serde",
+ "toml 0.7.8",
+]
+
+[[package]]
+name = "creditchain-crypto"
+version = "0.0.4"
+dependencies = [
+ "aes-gcm",
+ "anyhow",
+ "arbitrary",
+ "ark-bls12-381",
+ "ark-bn254",
+ "ark-ec",
+ "ark-ff",
+ "ark-groth16",
+ "ark-serialize",
+ "ark-std",
+ "base64 0.13.1",
+ "bcs 0.1.4",
+ "bitvec 1.0.1",
+ "blake2",
+ "blake2-rfc",
+ "blst",
+ "bulletproofs",
+ "byteorder",
+ "bytes",
+ "creditchain-crypto-derive",
+ "criterion",
+ "curve25519-dalek 3.2.0",
+ "curve25519-dalek-ng",
+ "digest 0.9.0",
+ "ed25519-dalek 1.0.1",
+ "ff",
+ "hex",
+ "hkdf",
+ "libsecp256k1",
+ "merlin",
+ "more-asserts",
+ "neptune",
+ "num-bigint 0.3.3",
+ "num-integer",
+ "once_cell",
+ "p256",
+ "poseidon-ark",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "rand_core 0.5.1",
+ "ring 0.16.20",
+ "serde",
+ "serde-name",
+ "serde_bytes",
+ "serde_json",
+ "sha2 0.10.9",
+ "sha2 0.9.9",
+ "sha3 0.9.1",
+ "signature 2.2.0",
+ "static_assertions",
+ "thiserror 1.0.69",
+ "tiny-keccak",
+ "trybuild",
+ "typenum",
+ "x25519-dalek",
+]
+
+[[package]]
+name = "creditchain-crypto-derive"
+version = "0.0.4"
+dependencies = [
+ "anyhow",
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "creditchain-data-client"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "arc-swap",
+ "async-trait",
+ "bcs 0.1.4",
+ "claims",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-id-generator",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-netcore",
+ "creditchain-network",
+ "creditchain-peer-monitoring-service-types",
+ "creditchain-storage-interface",
+ "creditchain-storage-service-client",
+ "creditchain-storage-service-server",
+ "creditchain-storage-service-types",
+ "creditchain-time-service",
+ "creditchain-types",
+ "dashmap 7.0.0-rc2",
+ "futures",
+ "itertools 0.13.0",
+ "maplit",
+ "mockall",
+ "ordered-float 3.9.2",
+ "rand 0.8.5",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-data-streaming-service"
+version = "0.1.0"
+dependencies = [
+ "arc-swap",
+ "async-trait",
+ "claims",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-data-client",
+ "creditchain-id-generator",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-storage-service-types",
+ "creditchain-time-service",
+ "creditchain-types",
+ "enum_dispatch",
+ "futures",
+ "once_cell",
+ "rand 0.7.3",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-stream",
+]
+
+[[package]]
+name = "creditchain-db"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "arc-swap",
+ "arr_macro",
+ "bcs 0.1.4",
+ "byteorder",
+ "claims",
+ "clap 4.5.48",
+ "creditchain-accumulator",
+ "creditchain-block-executor",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-db-indexer",
+ "creditchain-db-indexer-schemas",
+ "creditchain-executor-types",
+ "creditchain-experimental-runtimes",
+ "creditchain-infallible",
+ "creditchain-jellyfish-merkle",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-proptest-helpers",
+ "creditchain-resource-viewer",
+ "creditchain-rocksdb-options",
+ "creditchain-schemadb",
+ "creditchain-scratchpad",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "crossbeam-channel",
+ "dashmap 7.0.0-rc2",
+ "either",
+ "hex",
+ "indicatif 0.15.0",
+ "itertools 0.13.0",
+ "lru",
+ "move-core-types",
+ "once_cell",
+ "ouroboros",
+ "owo-colors",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "rayon",
+ "serde",
+ "static_assertions",
+ "status-line",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-db-indexer"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-config",
+ "creditchain-db-indexer-schemas",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-proptest-helpers",
+ "creditchain-resource-viewer",
+ "creditchain-rocksdb-options",
+ "creditchain-schemadb",
+ "creditchain-storage-interface",
+ "creditchain-types",
+ "dashmap 7.0.0-rc2",
+ "move-core-types",
+ "once_cell",
+ "rand 0.7.3",
+]
+
+[[package]]
+name = "creditchain-db-indexer-schemas"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "byteorder",
+ "creditchain-crypto",
+ "creditchain-proptest-helpers",
+ "creditchain-schemadb",
+ "creditchain-storage-interface",
+ "creditchain-types",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-db-tool"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-backup-cli",
+ "creditchain-backup-service",
+ "creditchain-block-executor",
+ "creditchain-config",
+ "creditchain-db",
+ "creditchain-db-indexer",
+ "creditchain-executor",
+ "creditchain-executor-test-helpers",
+ "creditchain-executor-types",
+ "creditchain-indexer-grpc-table-info",
+ "creditchain-logger",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "creditchain-vm",
+ "itertools 0.13.0",
+ "rayon",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-debugger"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "clap 4.5.48",
+ "creditchain-consensus",
+ "creditchain-db-tool",
+ "creditchain-logger",
+ "creditchain-move-debugger",
+ "creditchain-push-metrics",
+ "jemallocator",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-dkg"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "blst",
+ "blstrs",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-runtimes",
+ "criterion",
+ "ff",
+ "group",
+ "hex",
+ "merlin",
+ "more-asserts",
+ "num-bigint 0.3.3",
+ "num-integer",
+ "num-traits",
+ "num_cpus",
+ "once_cell",
+ "pairing",
+ "rand 0.7.3",
+ "rand_core 0.5.1",
+ "rayon",
+ "serde",
+ "serde_bytes",
+ "sha3 0.9.1",
+ "static_assertions",
+]
+
+[[package]]
+name = "creditchain-dkg-runtime"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-bounded-executor",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-consensus-types",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-enum-conversion-derive",
+ "creditchain-event-notifications",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-network",
+ "creditchain-reliable-broadcast",
+ "creditchain-runtimes",
+ "creditchain-safety-rules",
+ "creditchain-time-service",
+ "creditchain-types",
+ "creditchain-validator-transaction-pool",
+ "fail",
+ "futures",
+ "futures-channel",
+ "futures-util",
+ "move-core-types",
+ "once_cell",
+ "rand 0.7.3",
+ "serde",
+ "tokio",
+ "tokio-retry",
+]
+
+[[package]]
+name = "creditchain-drop-helper"
+version = "0.1.1"
+dependencies = [
+ "creditchain-infallible",
+ "creditchain-metrics-core",
+ "once_cell",
+ "rayon",
+ "threadpool",
+]
+
+[[package]]
+name = "creditchain-dynamic-transaction-composer"
+version = "0.1.5"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "creditchain-types",
+ "e2e-move-tests",
+ "getrandom 0.2.16",
+ "move-binary-format",
+ "move-bytecode-verifier",
+ "move-core-types",
+ "serde",
+ "serde_bytes",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+]
+
+[[package]]
+name = "creditchain-enum-conversion-derive"
+version = "0.0.4"
+dependencies = [
+ "anyhow",
+ "quote",
+ "syn 1.0.109",
+ "trybuild",
+]
+
+[[package]]
+name = "creditchain-event-notifications"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "claims",
+ "creditchain-channels",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-executor-test-helpers",
+ "creditchain-id-generator",
+ "creditchain-infallible",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-genesis",
+ "futures",
+ "move-binary-format",
+ "move-core-types",
+ "serde",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-executor"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "arr_macro",
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-block-executor",
+ "creditchain-cached-packages",
+ "creditchain-config",
+ "creditchain-consensus-types",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-db-indexer",
+ "creditchain-drop-helper",
+ "creditchain-executor-service",
+ "creditchain-executor-test-helpers",
+ "creditchain-executor-types",
+ "creditchain-experimental-runtimes",
+ "creditchain-indexer-grpc-table-info",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-sdk",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-genesis",
+ "criterion",
+ "fail",
+ "itertools 0.13.0",
+ "move-core-types",
+ "once_cell",
+ "proptest",
+ "rand 0.7.3",
+ "rayon",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-executor-benchmark"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "bcs 0.1.4",
+ "bytes",
+ "chrono",
+ "clap 4.5.48",
+ "creditchain-aggregator",
+ "creditchain-block-executor",
+ "creditchain-block-partitioner",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-executor",
+ "creditchain-executor-service",
+ "creditchain-executor-types",
+ "creditchain-experimental-ptx-executor",
+ "creditchain-experimental-runtimes",
+ "creditchain-genesis",
+ "creditchain-infallible",
+ "creditchain-jellyfish-merkle",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-mvhashmap",
+ "creditchain-node-resource-metrics",
+ "creditchain-profiler",
+ "creditchain-push-metrics",
+ "creditchain-sdk",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-transaction-generator-lib",
+ "creditchain-transaction-workloads-lib",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "creditchain-vm-logging",
+ "creditchain-vm-types",
+ "dashmap 7.0.0-rc2",
+ "derivative",
+ "indicatif 0.15.0",
+ "itertools 0.13.0",
+ "jemallocator",
+ "move-core-types",
+ "move-vm-types",
+ "num_cpus",
+ "once_cell",
+ "rand 0.7.3",
+ "rayon",
+ "serde",
+ "thread_local",
+ "tokio",
+ "toml 0.7.8",
+]
+
+[[package]]
+name = "creditchain-executor-service"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-block-executor",
+ "creditchain-block-partitioner",
+ "creditchain-config",
+ "creditchain-infallible",
+ "creditchain-keygen",
+ "creditchain-language-e2e-tests",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-node-resource-metrics",
+ "creditchain-push-metrics",
+ "creditchain-secure-net",
+ "creditchain-storage-interface",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm",
+ "crossbeam-channel",
+ "ctrlc",
+ "dashmap 7.0.0-rc2",
+ "itertools 0.13.0",
+ "num_cpus",
+ "once_cell",
+ "rayon",
+ "serde",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-executor-test-helpers"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-cached-packages",
+ "creditchain-config",
+ "creditchain-consensus-types",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-executor",
+ "creditchain-executor-types",
+ "creditchain-sdk",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-genesis",
+ "move-core-types",
+ "rand 0.7.3",
+]
+
+[[package]]
+name = "creditchain-executor-types"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "creditchain-crypto",
+ "creditchain-drop-helper",
+ "creditchain-infallible",
+ "creditchain-metrics-core",
+ "creditchain-scratchpad",
+ "creditchain-secure-net",
+ "creditchain-storage-interface",
+ "creditchain-types",
+ "criterion",
+ "derive_more 0.99.20",
+ "itertools 0.13.0",
+ "once_cell",
+ "ouroboros",
+ "rayon",
+ "serde",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-experimental-bulk-txn-submit"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "chrono",
+ "clap 4.5.48",
+ "creditchain-config",
+ "creditchain-logger",
+ "creditchain-sdk",
+ "creditchain-transaction-emitter-lib",
+ "creditchain-transaction-generator-lib",
+ "futures",
+ "rand 0.7.3",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-experimental-hexy"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-crypto",
+ "creditchain-experimental-layered-map",
+ "creditchain-infallible",
+ "creditchain-metrics-core",
+ "criterion",
+ "itertools 0.13.0",
+ "jemallocator",
+ "once_cell",
+ "proptest",
+ "rand 0.7.3",
+]
+
+[[package]]
+name = "creditchain-experimental-layered-map"
+version = "0.1.1"
+dependencies = [
+ "ahash 0.8.12",
+ "anyhow",
+ "bitvec 1.0.1",
+ "creditchain-crypto",
+ "creditchain-drop-helper",
+ "creditchain-infallible",
+ "creditchain-metrics-core",
+ "creditchain-schemadb",
+ "creditchain-temppath",
+ "criterion",
+ "itertools 0.13.0",
+ "jemallocator",
+ "once_cell",
+ "proptest",
+ "rand 0.7.3",
+ "rocksdb",
+]
+
+[[package]]
+name = "creditchain-experimental-ptx-executor"
+version = "0.1.1"
+dependencies = [
+ "creditchain-block-executor",
+ "creditchain-experimental-runtimes",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "creditchain-vm-logging",
+ "creditchain-vm-types",
+ "hashbrown 0.14.5",
+ "move-core-types",
+ "once_cell",
+ "rayon",
+]
+
+[[package]]
+name = "creditchain-experimental-runtimes"
+version = "0.1.1"
+dependencies = [
+ "core_affinity",
+ "creditchain-runtimes",
+ "libc",
+ "num_cpus",
+ "once_cell",
+ "rayon",
+]
+
+[[package]]
+name = "creditchain-fallible"
+version = "0.1.1"
+dependencies = [
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-faucet-cli"
+version = "2.0.2"
+dependencies = [
+ "anyhow",
+ "clap 4.5.48",
+ "creditchain-faucet-core",
+ "creditchain-logger",
+ "creditchain-sdk",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-faucet-core"
+version = "2.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "captcha",
+ "clap 4.5.48",
+ "creditchain-config",
+ "creditchain-faucet-metrics-server",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-sdk",
+ "deadpool-redis",
+ "enum_dispatch",
+ "firebase-token",
+ "futures",
+ "hex",
+ "ipnet",
+ "iprange",
+ "lru",
+ "once_cell",
+ "poem",
+ "poem-openapi",
+ "rand 0.7.3",
+ "redis",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-faucet-metrics-server"
+version = "2.0.1"
+dependencies = [
+ "anyhow",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "once_cell",
+ "poem",
+ "prometheus",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-faucet-service"
+version = "2.0.2"
+dependencies = [
+ "anyhow",
+ "clap 4.5.48",
+ "creditchain-faucet-core",
+ "creditchain-logger",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-fn-check-client"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "clap 4.5.48",
+ "creditchain-logger",
+ "creditchain-node-checker",
+ "creditchain-sdk",
+ "env_logger 0.10.2",
+ "futures",
+ "gcp-bigquery-client",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-forge"
+version = "0.0.0"
+dependencies = [
+ "again",
+ "anyhow",
+ "async-trait",
+ "chrono",
+ "clap 4.5.48",
+ "creditchain",
+ "creditchain-cached-packages",
+ "creditchain-cli-common",
+ "creditchain-config",
+ "creditchain-db",
+ "creditchain-framework",
+ "creditchain-genesis",
+ "creditchain-global-constants",
+ "creditchain-infallible",
+ "creditchain-inspection-service",
+ "creditchain-logger",
+ "creditchain-rest-client",
+ "creditchain-retrier",
+ "creditchain-runtimes",
+ "creditchain-sdk",
+ "creditchain-short-hex-str",
+ "creditchain-state-sync-driver",
+ "creditchain-transaction-emitter-lib",
+ "creditchain-transaction-generator-lib",
+ "creditchain-transaction-workloads-lib",
+ "either",
+ "futures",
+ "hex",
+ "hyper 0.14.32",
+ "itertools 0.13.0",
+ "json-patch",
+ "k8s-openapi",
+ "kube",
+ "log",
+ "num_cpus",
+ "once_cell",
+ "prometheus-http-query",
+ "quick-junit",
+ "rand 0.7.3",
+ "regex",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "serde_merge",
+ "serde_yaml 0.8.26",
+ "sugars",
+ "tempfile",
+ "termcolor",
+ "thiserror 1.0.69",
+ "tokio",
+ "url",
+ "uuid 1.18.1",
+]
+
+[[package]]
+name = "creditchain-forge-cli"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "chrono",
+ "clap 4.5.48",
+ "creditchain-cached-packages",
+ "creditchain-config",
+ "creditchain-forge",
+ "creditchain-global-constants",
+ "creditchain-logger",
+ "creditchain-rest-client",
+ "creditchain-sdk",
+ "creditchain-testcases",
+ "env_logger 0.10.2",
+ "futures",
+ "jemallocator",
+ "once_cell",
+ "rand 0.7.3",
+ "random_word",
+ "reqwest 0.11.27",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "sugars",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-framework"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "ark-bls12-381",
+ "ark-bn254",
+ "ark-ec",
+ "ark-ff",
+ "ark-serialize",
+ "ark-std",
+ "bcs 0.1.4",
+ "better_any",
+ "blake2-rfc",
+ "bulletproofs",
+ "byteorder",
+ "claims",
+ "clap 4.5.48",
+ "codespan-reporting",
+ "creditchain-aggregator",
+ "creditchain-crypto",
+ "creditchain-gas-algebra",
+ "creditchain-gas-meter",
+ "creditchain-gas-schedule",
+ "creditchain-move-stdlib",
+ "creditchain-native-interface",
+ "creditchain-sdk-builder",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-types",
+ "curve25519-dalek-ng",
+ "either",
+ "flate2",
+ "hex",
+ "itertools 0.13.0",
+ "legacy-move-compiler",
+ "libsecp256k1",
+ "log",
+ "merlin",
+ "move-binary-format",
+ "move-cli",
+ "move-command-line-common",
+ "move-compiler-v2",
+ "move-core-types",
+ "move-docgen",
+ "move-model",
+ "move-package",
+ "move-prover",
+ "move-prover-boogie-backend",
+ "move-prover-bytecode-pipeline",
+ "move-prover-lab",
+ "move-stackless-bytecode",
+ "move-unit-test",
+ "move-vm-runtime",
+ "move-vm-types",
+ "num-traits",
+ "once_cell",
+ "rand 0.7.3",
+ "rand_core 0.5.1",
+ "ripemd",
+ "serde",
+ "serde_bytes",
+ "sha2 0.10.9",
+ "sha2 0.9.9",
+ "sha3 0.9.1",
+ "siphasher 0.3.11",
+ "smallvec",
+ "tempfile",
+ "tiny-keccak",
+ "toml 0.7.8",
+]
+
+[[package]]
+name = "creditchain-gas-algebra"
+version = "0.0.1"
+dependencies = [
+ "either",
+ "move-core-types",
+]
+
+[[package]]
+name = "creditchain-gas-calibration"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-abstract-gas-usage",
+ "creditchain-cached-packages",
+ "creditchain-framework",
+ "creditchain-gas-algebra",
+ "creditchain-gas-schedule",
+ "creditchain-language-e2e-tests",
+ "creditchain-types",
+ "float-cmp",
+ "move-binary-format",
+ "move-core-types",
+ "move-ir-compiler",
+ "nalgebra",
+ "walkdir",
+]
+
+[[package]]
+name = "creditchain-gas-meter"
+version = "0.1.1"
+dependencies = [
+ "creditchain-gas-algebra",
+ "creditchain-gas-schedule",
+ "creditchain-logger",
+ "creditchain-types",
+ "creditchain-vm-types",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-types",
+]
+
+[[package]]
+name = "creditchain-gas-profiling"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-gas-algebra",
+ "creditchain-gas-meter",
+ "creditchain-gas-schedule",
+ "creditchain-types",
+ "creditchain-vm-types",
+ "handlebars",
+ "inferno",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-types",
+ "regex",
+ "serde_json",
+ "smallvec",
+]
+
+[[package]]
+name = "creditchain-gas-schedule"
+version = "0.1.1"
+dependencies = [
+ "creditchain-gas-algebra",
+ "creditchain-global-constants",
+ "move-core-types",
+ "move-vm-types",
+ "paste",
+ "rand 0.7.3",
+]
+
+[[package]]
+name = "creditchain-gas-schedule-updator"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-framework",
+ "creditchain-gas-schedule",
+ "creditchain-package-builder",
+ "creditchain-types",
+ "move-core-types",
+ "move-model",
+ "tempfile",
+]
+
+[[package]]
+name = "creditchain-genesis"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "creditchain-cached-packages",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-executor",
+ "creditchain-framework",
+ "creditchain-keygen",
+ "creditchain-logger",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-genesis",
+ "rand 0.7.3",
+ "serde",
+ "serde_yaml 0.8.26",
+]
+
+[[package]]
+name = "creditchain-github-client"
+version = "0.1.1"
+dependencies = [
+ "base64 0.13.1",
+ "creditchain-proxy",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+ "ureq",
+]
+
+[[package]]
+name = "creditchain-global-constants"
+version = "0.1.1"
+
+[[package]]
+name = "creditchain-id-generator"
+version = "0.1.1"
+
+[[package]]
+name = "creditchain-indexer"
+version = "0.0.2"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "bcs 0.1.4",
+ "bigdecimal",
+ "chrono",
+ "creditchain-api",
+ "creditchain-api-test-context",
+ "creditchain-api-types",
+ "creditchain-bitvec",
+ "creditchain-config",
+ "creditchain-logger",
+ "creditchain-mempool",
+ "creditchain-metrics-core",
+ "creditchain-runtimes",
+ "creditchain-storage-interface",
+ "creditchain-types",
+ "diesel",
+ "diesel_migrations",
+ "field_count",
+ "futures",
+ "hex",
+ "once_cell",
+ "serde",
+ "serde_json",
+ "sha2 0.9.9",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-cache-worker"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "clap 4.5.48",
+ "creditchain-config",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-metrics-core",
+ "creditchain-moving-average",
+ "creditchain-protos",
+ "futures",
+ "futures-core",
+ "jemallocator",
+ "once_cell",
+ "prost 0.13.5",
+ "redis",
+ "reqwest 0.11.27",
+ "serde",
+ "tempfile",
+ "tokio",
+ "tonic 0.12.3",
+ "tracing",
+ "url",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-data-service"
+version = "1.0.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "clap 4.5.48",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-metrics-core",
+ "creditchain-moving-average",
+ "creditchain-protos",
+ "creditchain-transaction-filter",
+ "futures",
+ "jemallocator",
+ "once_cell",
+ "prost 0.13.5",
+ "redis",
+ "rstest",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tokio-stream",
+ "tonic 0.12.3",
+ "tonic-reflection",
+ "tracing",
+ "uuid 1.18.1",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-data-service-v2"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "build_html",
+ "clap 4.5.48",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-metrics-core",
+ "creditchain-protos",
+ "creditchain-transaction-filter",
+ "dashmap 7.0.0-rc2",
+ "futures",
+ "jemallocator",
+ "once_cell",
+ "prost 0.13.5",
+ "rand 0.7.3",
+ "serde",
+ "tokio",
+ "tokio-scoped",
+ "tokio-stream",
+ "tonic 0.12.3",
+ "tonic-reflection",
+ "tracing",
+ "uuid 1.18.1",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-file-checker"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "clap 4.5.48",
+ "cloud-storage",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-metrics-core",
+ "jemallocator",
+ "once_cell",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-file-store"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "clap 4.5.48",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-metrics-core",
+ "creditchain-moving-average",
+ "futures",
+ "jemallocator",
+ "once_cell",
+ "redis",
+ "serde",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-file-store-backfiller"
+version = "1.0.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "clap 4.5.48",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-protos",
+ "futures",
+ "jemallocator",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tonic 0.12.3",
+ "tracing",
+ "url",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-fullnode"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "bytes",
+ "chrono",
+ "creditchain-api",
+ "creditchain-api-test-context",
+ "creditchain-api-types",
+ "creditchain-bitvec",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-executor",
+ "creditchain-executor-types",
+ "creditchain-framework",
+ "creditchain-genesis",
+ "creditchain-global-constants",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-logger",
+ "creditchain-mempool",
+ "creditchain-mempool-notifications",
+ "creditchain-metrics-core",
+ "creditchain-moving-average",
+ "creditchain-proptest-helpers",
+ "creditchain-protos",
+ "creditchain-runtimes",
+ "creditchain-sdk",
+ "creditchain-secure-storage",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-validator",
+ "futures",
+ "goldenfile",
+ "hex",
+ "hyper 0.14.32",
+ "itertools 0.13.0",
+ "move-core-types",
+ "once_cell",
+ "rand 0.7.3",
+ "regex",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tokio-stream",
+ "tonic 0.12.3",
+ "tonic-reflection",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-in-memory-cache-benchmark"
+version = "0.1.2"
+dependencies = [
+ "anyhow",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-protos",
+ "futures",
+ "jemallocator",
+ "lazy_static",
+ "once_cell",
+ "redis",
+ "redis-test",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-manager"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "build_html",
+ "clap 4.5.48",
+ "creditchain-config",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-metrics-core",
+ "creditchain-protos",
+ "dashmap 7.0.0-rc2",
+ "futures",
+ "jemallocator",
+ "once_cell",
+ "prost 0.13.5",
+ "rand 0.7.3",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tokio-scoped",
+ "tonic 0.12.3",
+ "tracing",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-server-framework"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "backtrace",
+ "clap 4.5.48",
+ "creditchain-metrics-core",
+ "creditchain-system-utils",
+ "figment",
+ "prometheus",
+ "serde",
+ "tempfile",
+ "tokio",
+ "toml 0.7.8",
+ "tracing",
+ "tracing-subscriber 0.3.20",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-table-info"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "creditchain-api",
+ "creditchain-api-types",
+ "creditchain-config",
+ "creditchain-db-indexer",
+ "creditchain-indexer-grpc-fullnode",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-logger",
+ "creditchain-mempool",
+ "creditchain-metrics-core",
+ "creditchain-runtimes",
+ "creditchain-storage-interface",
+ "creditchain-types",
+ "flate2",
+ "futures",
+ "google-cloud-storage",
+ "hyper 0.14.32",
+ "itertools 0.13.0",
+ "once_cell",
+ "rocksdb",
+ "serde",
+ "serde_json",
+ "tar",
+ "tempfile",
+ "tokio",
+ "tokio-stream",
+ "tokio-util 0.7.16",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-utils"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "backoff",
+ "base64 0.13.1",
+ "build_html",
+ "bytesize",
+ "chrono",
+ "cloud-storage",
+ "creditchain-metrics-core",
+ "creditchain-protos",
+ "creditchain-transaction-filter",
+ "dashmap 7.0.0-rc2",
+ "futures",
+ "itertools 0.13.0",
+ "lz4",
+ "once_cell",
+ "prometheus",
+ "prost 0.13.5",
+ "redis",
+ "redis-test",
+ "ripemd",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tokio-util 0.7.16",
+ "tonic 0.12.3",
+ "tracing",
+ "url",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-indexer-grpc-v2-file-store-backfiller"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "clap 4.5.48",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-protos",
+ "futures",
+ "jemallocator",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tokio-scoped",
+ "tonic 0.12.3",
+ "tracing",
+ "url",
+]
+
+[[package]]
+name = "creditchain-indexer-test-transactions"
+version = "1.0.1"
+dependencies = [
+ "creditchain-protos",
+ "serde_json",
+]
+
+[[package]]
+name = "creditchain-indexer-transaction-generator"
+version = "1.0.1"
+dependencies = [
+ "anyhow",
+ "clap 4.5.48",
+ "creditchain",
+ "creditchain-config",
+ "creditchain-faucet-core",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-protos",
+ "futures",
+ "itertools 0.13.0",
+ "rand 0.7.3",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "tempfile",
+ "tokio",
+ "tokio-stream",
+ "toml 0.7.8",
+ "tonic 0.12.3",
+ "url",
+]
+
+[[package]]
+name = "creditchain-infallible"
+version = "0.1.1"
+
+[[package]]
+name = "creditchain-inspection-service"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "assert_approx_eq",
+ "creditchain-build-info",
+ "creditchain-config",
+ "creditchain-data-client",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-network",
+ "creditchain-runtimes",
+ "creditchain-storage-interface",
+ "creditchain-storage-service-client",
+ "creditchain-telemetry",
+ "creditchain-time-service",
+ "futures",
+ "hyper 0.14.32",
+ "once_cell",
+ "prometheus",
+ "reqwest 0.11.27",
+ "rusty-fork",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-jellyfish-merkle"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "arr_macro",
+ "bcs 0.1.4",
+ "byteorder",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-db",
+ "creditchain-experimental-runtimes",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-storage-interface",
+ "creditchain-types",
+ "itertools 0.13.0",
+ "num-derive",
+ "num-traits",
+ "once_cell",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "rayon",
+ "serde",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-jwk-consensus"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "bytes",
+ "creditchain-bitvec",
+ "creditchain-bounded-executor",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-consensus-types",
+ "creditchain-crypto",
+ "creditchain-enum-conversion-derive",
+ "creditchain-event-notifications",
+ "creditchain-infallible",
+ "creditchain-jwk-utils",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-network",
+ "creditchain-reliable-broadcast",
+ "creditchain-runtimes",
+ "creditchain-safety-rules",
+ "creditchain-time-service",
+ "creditchain-types",
+ "creditchain-validator-transaction-pool",
+ "futures",
+ "futures-channel",
+ "futures-util",
+ "move-core-types",
+ "once_cell",
+ "serde",
+ "tokio",
+ "tokio-retry",
+]
+
+[[package]]
+name = "creditchain-jwk-utils"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "creditchain-types",
+ "http 0.2.12",
+ "move-core-types",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-keygen"
+version = "0.1.1"
+dependencies = [
+ "creditchain-crypto",
+ "creditchain-types",
+ "rand 0.7.3",
+]
+
+[[package]]
+name = "creditchain-keyless-pepper-common"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "ark-bls12-381",
+ "ark-ec",
+ "ark-ff",
+ "ark-serialize",
+ "ark-std",
+ "bcs 0.1.4",
+ "blstrs",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-dkg",
+ "creditchain-types",
+ "derivation-path",
+ "ed25519-dalek 1.0.1",
+ "hex",
+ "hmac 0.12.1",
+ "jsonwebtoken 8.3.0",
+ "once_cell",
+ "rand 0.7.3",
+ "regex",
+ "serde",
+ "serde-big-array",
+ "sha2 0.10.9",
+]
+
+[[package]]
+name = "creditchain-keyless-pepper-example-client-rust"
+version = "0.1.1"
+dependencies = [
+ "ark-bls12-381",
+ "ark-serialize",
+ "bcs 0.1.4",
+ "creditchain-crypto",
+ "creditchain-infallible",
+ "creditchain-keyless-pepper-common",
+ "creditchain-types",
+ "firestore",
+ "hex",
+ "reqwest 0.11.27",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-keyless-pepper-service"
+version = "0.1.1"
+dependencies = [
+ "aes-gcm",
+ "anyhow",
+ "ark-bls12-381",
+ "ark-bn254",
+ "ark-ec",
+ "ark-ff",
+ "ark-groth16",
+ "ark-serialize",
+ "bcs 0.1.4",
+ "creditchain-crypto",
+ "creditchain-infallible",
+ "creditchain-inspection-service",
+ "creditchain-keyless-pepper-common",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-types",
+ "dashmap 7.0.0-rc2",
+ "firestore",
+ "hex",
+ "hyper 0.14.32",
+ "jsonwebtoken 8.3.0",
+ "jwt",
+ "once_cell",
+ "rand 0.7.3",
+ "regex",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "sha3 0.9.1",
+ "tokio",
+ "uuid 1.18.1",
+]
+
+[[package]]
+name = "creditchain-language-e2e-tests"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-abstract-gas-usage",
+ "creditchain-bitvec",
+ "creditchain-block-executor",
+ "creditchain-cached-packages",
+ "creditchain-crypto",
+ "creditchain-framework",
+ "creditchain-gas-algebra",
+ "creditchain-gas-meter",
+ "creditchain-gas-profiling",
+ "creditchain-gas-schedule",
+ "creditchain-keygen",
+ "creditchain-proptest-helpers",
+ "creditchain-rest-client",
+ "creditchain-temppath",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-validator-interface",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "creditchain-vm-genesis",
+ "creditchain-vm-logging",
+ "creditchain-vm-types",
+ "goldenfile",
+ "move-binary-format",
+ "move-command-line-common",
+ "move-core-types",
+ "move-ir-compiler",
+ "move-model",
+ "move-vm-runtime",
+ "move-vm-types",
+ "num_cpus",
+ "once_cell",
+ "petgraph 0.5.1",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "rayon",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-ledger"
+version = "0.2.1"
+dependencies = [
+ "creditchain-crypto",
+ "creditchain-types",
+ "hex",
+ "ledger-apdu",
+ "ledger-transport-hid",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-localnet"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bollard",
+ "creditchain-indexer-grpc-utils",
+ "creditchain-protos",
+ "creditchain-rest-client",
+ "diesel",
+ "diesel-async",
+ "dirs 5.0.1",
+ "futures",
+ "processor",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tonic 0.12.3",
+ "tracing",
+ "version-compare",
+]
+
+[[package]]
+name = "creditchain-log-derive"
+version = "0.1.1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "creditchain-logger"
+version = "0.1.1"
+dependencies = [
+ "backtrace",
+ "chrono",
+ "console-subscriber",
+ "creditchain-infallible",
+ "creditchain-log-derive",
+ "creditchain-node-identity",
+ "erased-serde 0.3.31",
+ "futures",
+ "hostname",
+ "once_cell",
+ "pretty_assertions",
+ "prometheus",
+ "serde",
+ "serde_json",
+ "strum 0.27.2",
+ "strum_macros 0.27.2",
+ "tokio",
+ "tracing",
+ "tracing-subscriber 0.3.20",
+]
+
+[[package]]
+name = "creditchain-memory-usage-tracker"
+version = "0.1.1"
+dependencies = [
+ "creditchain-gas-algebra",
+ "creditchain-gas-meter",
+ "creditchain-types",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-types",
+]
+
+[[package]]
+name = "creditchain-mempool"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "creditchain-bounded-executor",
+ "creditchain-channels",
+ "creditchain-compression",
+ "creditchain-config",
+ "creditchain-consensus-types",
+ "creditchain-crypto",
+ "creditchain-event-notifications",
+ "creditchain-id-generator",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-mempool-notifications",
+ "creditchain-metrics-core",
+ "creditchain-netcore",
+ "creditchain-network",
+ "creditchain-peer-monitoring-service-types",
+ "creditchain-runtimes",
+ "creditchain-short-hex-str",
+ "creditchain-storage-interface",
+ "creditchain-time-service",
+ "creditchain-transaction-filters",
+ "creditchain-types",
+ "creditchain-vm-validator",
+ "enum_dispatch",
+ "fail",
+ "futures",
+ "itertools 0.13.0",
+ "maplit",
+ "num_cpus",
+ "once_cell",
+ "proptest",
+ "rand 0.7.3",
+ "rayon",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-stream",
+]
+
+[[package]]
+name = "creditchain-mempool-notifications"
+version = "0.1.1"
+dependencies = [
+ "async-trait",
+ "claims",
+ "creditchain-crypto",
+ "creditchain-types",
+ "futures",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-memsocket"
+version = "0.1.1"
+dependencies = [
+ "bytes",
+ "creditchain-infallible",
+ "futures",
+ "once_cell",
+]
+
+[[package]]
+name = "creditchain-metrics-core"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "claims",
+ "prometheus",
+]
+
+[[package]]
+name = "creditchain-move-debugger"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-block-executor",
+ "creditchain-consensus",
+ "creditchain-crypto",
+ "creditchain-gas-profiling",
+ "creditchain-logger",
+ "creditchain-rest-client",
+ "creditchain-types",
+ "creditchain-validator-interface",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "creditchain-vm-logging",
+ "creditchain-vm-types",
+ "itertools 0.13.0",
+ "regex",
+ "reqwest 0.11.27",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-move-e2e-benchmark"
+version = "0.1.1"
+dependencies = [
+ "clap 4.5.48",
+ "creditchain-language-e2e-tests",
+ "creditchain-logger",
+ "creditchain-transaction-generator-lib",
+ "creditchain-transaction-workloads-lib",
+ "creditchain-types",
+ "rand 0.7.3",
+ "serde_json",
+]
+
+[[package]]
+name = "creditchain-move-examples"
+version = "0.1.0"
+dependencies = [
+ "clap 4.5.48",
+ "creditchain-framework",
+ "creditchain-gas-schedule",
+ "creditchain-types",
+ "creditchain-vm",
+ "move-cli",
+ "move-model",
+ "move-package",
+ "move-prover",
+ "move-unit-test",
+ "move-vm-runtime",
+ "tempfile",
+]
+
+[[package]]
+name = "creditchain-move-stdlib"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "creditchain-gas-schedule",
+ "creditchain-native-interface",
+ "creditchain-types",
+ "dir-diff",
+ "file_diff",
+ "move-cli",
+ "move-core-types",
+ "move-package",
+ "move-unit-test",
+ "move-vm-runtime",
+ "move-vm-types",
+ "sha2 0.9.9",
+ "sha3 0.9.1",
+ "smallvec",
+ "tempfile",
+]
+
+[[package]]
+name = "creditchain-moving-average"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+]
+
+[[package]]
+name = "creditchain-mvhashmap"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bytes",
+ "claims",
+ "concurrent-queue",
+ "creditchain-aggregator",
+ "creditchain-infallible",
+ "creditchain-types",
+ "creditchain-vm-types",
+ "crossbeam",
+ "dashmap 7.0.0-rc2",
+ "equivalent",
+ "fail",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-runtime",
+ "move-vm-types",
+ "num_cpus",
+ "proptest",
+ "proptest-derive",
+ "rayon",
+ "serde",
+ "test-case",
+]
+
+[[package]]
+name = "creditchain-native-interface"
+version = "0.1.1"
+dependencies = [
+ "creditchain-gas-algebra",
+ "creditchain-gas-schedule",
+ "creditchain-types",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-runtime",
+ "move-vm-types",
+ "smallvec",
+]
+
+[[package]]
+name = "creditchain-netcore"
+version = "0.1.1"
+dependencies = [
+ "bytes",
+ "creditchain-memsocket",
+ "creditchain-proxy",
+ "creditchain-types",
+ "futures",
+ "pin-project 1.1.10",
+ "serde",
+ "tokio",
+ "tokio-util 0.7.16",
+ "url",
+]
+
+[[package]]
+name = "creditchain-network"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "arc-swap",
+ "async-trait",
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-bitvec",
+ "creditchain-channels",
+ "creditchain-compression",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-id-generator",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-memsocket",
+ "creditchain-metrics-core",
+ "creditchain-netcore",
+ "creditchain-num-variants",
+ "creditchain-peer-monitoring-service-types",
+ "creditchain-proptest-helpers",
+ "creditchain-short-hex-str",
+ "creditchain-time-service",
+ "creditchain-types",
+ "futures",
+ "futures-util",
+ "hex",
+ "itertools 0.13.0",
+ "maplit",
+ "once_cell",
+ "ordered-float 3.9.2",
+ "pin-project 1.1.10",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "rand 0.8.5",
+ "rand_core 0.5.1",
+ "serde",
+ "serde_bytes",
+ "serde_json",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-retry",
+ "tokio-stream",
+ "tokio-util 0.7.16",
+]
+
+[[package]]
+name = "creditchain-network-benchmark"
+version = "0.1.1"
+dependencies = [
+ "async-channel 1.9.0",
+ "bytes",
+ "creditchain-config",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-network",
+ "creditchain-time-service",
+ "creditchain-types",
+ "futures",
+ "once_cell",
+ "rand 0.7.3",
+ "serde",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-network-builder"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-event-notifications",
+ "creditchain-logger",
+ "creditchain-netcore",
+ "creditchain-network",
+ "creditchain-network-discovery",
+ "creditchain-time-service",
+ "creditchain-types",
+ "futures",
+ "maplit",
+ "rand 0.7.3",
+ "serde",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-network-checker"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "clap 4.5.48",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-logger",
+ "creditchain-network",
+ "creditchain-types",
+ "futures",
+ "serde",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-network-discovery"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-event-notifications",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-netcore",
+ "creditchain-network",
+ "creditchain-rest-client",
+ "creditchain-short-hex-str",
+ "creditchain-temppath",
+ "creditchain-time-service",
+ "creditchain-types",
+ "futures",
+ "once_cell",
+ "rand 0.7.3",
+ "serde_yaml 0.8.26",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-nft-metadata-crawler"
+version = "0.1.1"
+dependencies = [
+ "ahash 0.8.12",
+ "anyhow",
+ "async-trait",
+ "axum 0.7.9",
+ "backoff",
+ "bytes",
+ "chrono",
+ "clap 4.5.48",
+ "creditchain-indexer-grpc-server-framework",
+ "creditchain-metrics-core",
+ "diesel",
+ "diesel_migrations",
+ "enum_dispatch",
+ "field_count",
+ "futures",
+ "google-cloud-storage",
+ "image",
+ "once_cell",
+ "rayon",
+ "regex",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "sha256",
+ "tokio",
+ "tracing",
+ "url",
+]
+
+[[package]]
+name = "creditchain-node"
+version = "0.0.0-main"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-admin-service",
+ "creditchain-api",
+ "creditchain-backup-service",
+ "creditchain-build-info",
+ "creditchain-cached-packages",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-consensus",
+ "creditchain-consensus-notifications",
+ "creditchain-crash-handler",
+ "creditchain-crypto",
+ "creditchain-data-client",
+ "creditchain-data-streaming-service",
+ "creditchain-db",
+ "creditchain-db-indexer",
+ "creditchain-dkg-runtime",
+ "creditchain-event-notifications",
+ "creditchain-executor",
+ "creditchain-framework",
+ "creditchain-genesis",
+ "creditchain-indexer",
+ "creditchain-indexer-grpc-fullnode",
+ "creditchain-indexer-grpc-table-info",
+ "creditchain-infallible",
+ "creditchain-inspection-service",
+ "creditchain-jwk-consensus",
+ "creditchain-logger",
+ "creditchain-mempool",
+ "creditchain-mempool-notifications",
+ "creditchain-network",
+ "creditchain-network-benchmark",
+ "creditchain-network-builder",
+ "creditchain-node-identity",
+ "creditchain-peer-monitoring-service-client",
+ "creditchain-peer-monitoring-service-server",
+ "creditchain-peer-monitoring-service-types",
+ "creditchain-runtimes",
+ "creditchain-state-sync-driver",
+ "creditchain-storage-interface",
+ "creditchain-storage-service-client",
+ "creditchain-storage-service-notifications",
+ "creditchain-storage-service-server",
+ "creditchain-storage-service-types",
+ "creditchain-telemetry",
+ "creditchain-temppath",
+ "creditchain-time-service",
+ "creditchain-types",
+ "creditchain-validator-transaction-pool",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "either",
+ "fail",
+ "futures",
+ "hex",
+ "jemallocator",
+ "num_cpus",
+ "rand 0.7.3",
+ "rayon",
+ "rlimit",
+ "rstack-self",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "tokio",
+ "ureq",
+ "url",
+]
+
+[[package]]
+name = "creditchain-node-checker"
+version = "0.1.2"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "clap 4.5.48",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-logger",
+ "creditchain-network-checker",
+ "creditchain-rest-client",
+ "creditchain-sdk",
+ "creditchain-transaction-emitter-lib",
+ "creditchain-transaction-workloads-lib",
+ "futures",
+ "once_cell",
+ "poem",
+ "poem-openapi",
+ "prometheus-parse",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "thiserror 1.0.69",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-node-identity"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "claims",
+ "creditchain-types",
+ "once_cell",
+]
+
+[[package]]
+name = "creditchain-node-resource-metrics"
+version = "0.1.0"
+dependencies = [
+ "cfg-if",
+ "creditchain-build-info",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "once_cell",
+ "procfs",
+ "prometheus",
+ "rlimit",
+ "sysinfo",
+]
+
+[[package]]
+name = "creditchain-num-variants"
+version = "0.1.1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "creditchain-openapi"
+version = "0.1.0"
+dependencies = [
+ "percent-encoding",
+ "poem",
+ "poem-openapi",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "creditchain-openapi-spec-generator"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap 4.5.48",
+ "creditchain-api",
+ "creditchain-config",
+ "creditchain-mempool",
+ "creditchain-storage-interface",
+ "creditchain-types",
+]
+
+[[package]]
+name = "creditchain-package-builder"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "creditchain-framework",
+ "itertools 0.13.0",
+ "move-command-line-common",
+ "move-package",
+ "tempfile",
+]
+
+[[package]]
+name = "creditchain-peer-monitoring-service-client"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "creditchain-build-info",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-id-generator",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-netcore",
+ "creditchain-network",
+ "creditchain-peer-monitoring-service-server",
+ "creditchain-peer-monitoring-service-types",
+ "creditchain-time-service",
+ "creditchain-types",
+ "enum_dispatch",
+ "futures",
+ "maplit",
+ "once_cell",
+ "rand 0.7.3",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-stream",
+]
+
+[[package]]
+name = "creditchain-peer-monitoring-service-server"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "bytes",
+ "claims",
+ "creditchain-bounded-executor",
+ "creditchain-build-info",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-netcore",
+ "creditchain-network",
+ "creditchain-peer-monitoring-service-types",
+ "creditchain-storage-interface",
+ "creditchain-time-service",
+ "creditchain-types",
+ "futures",
+ "maplit",
+ "mockall",
+ "once_cell",
+ "rand 0.7.3",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-peer-monitoring-service-types"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "creditchain-config",
+ "creditchain-types",
+ "serde",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-profiler"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "backtrace",
+ "jemalloc-sys",
+ "jemallocator",
+ "pprof",
+ "regex",
+]
+
+[[package]]
+name = "creditchain-proptest-helpers"
+version = "0.1.1"
+dependencies = [
+ "crossbeam",
+ "proptest",
+ "proptest-derive",
+]
+
+[[package]]
+name = "creditchain-protos"
+version = "1.3.2"
+dependencies = [
+ "pbjson",
+ "prost 0.13.5",
+ "serde",
+ "tonic 0.12.3",
+]
+
+[[package]]
+name = "creditchain-proxy"
+version = "0.1.0"
+dependencies = [
+ "ipnet",
+]
+
+[[package]]
+name = "creditchain-push-metrics"
+version = "0.1.1"
+dependencies = [
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "rand 0.7.3",
+ "ureq",
+ "url",
+]
+
+[[package]]
+name = "creditchain-rate-limiter"
+version = "0.1.0"
+dependencies = [
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "futures",
+ "pin-project 1.1.10",
+ "tokio",
+ "tokio-util 0.7.16",
+]
+
+[[package]]
+name = "creditchain-release-builder"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain",
+ "creditchain-build-info",
+ "creditchain-crypto",
+ "creditchain-framework",
+ "creditchain-gas-profiling",
+ "creditchain-gas-schedule",
+ "creditchain-gas-schedule-updator",
+ "creditchain-genesis",
+ "creditchain-infallible",
+ "creditchain-keygen",
+ "creditchain-language-e2e-tests",
+ "creditchain-move-debugger",
+ "creditchain-rest-client",
+ "creditchain-temppath",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "creditchain-vm-logging",
+ "creditchain-vm-types",
+ "futures",
+ "git2 0.16.1",
+ "handlebars",
+ "hex",
+ "move-binary-format",
+ "move-bytecode-verifier",
+ "move-core-types",
+ "move-model",
+ "move-vm-runtime",
+ "move-vm-types",
+ "once_cell",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "sha3 0.9.1",
+ "strum 0.27.2",
+ "strum_macros 0.27.2",
+ "tokio",
+ "url",
+ "walkdir",
+]
+
+[[package]]
+name = "creditchain-reliable-broadcast"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "bytes",
+ "claims",
+ "creditchain-bounded-executor",
+ "creditchain-consensus-types",
+ "creditchain-enum-conversion-derive",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-time-service",
+ "creditchain-types",
+ "futures",
+ "futures-channel",
+ "tokio",
+ "tokio-retry",
+]
+
+[[package]]
+name = "creditchain-replay-benchmark"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "claims",
+ "clap 4.5.48",
+ "colored",
+ "creditchain-block-executor",
+ "creditchain-crypto",
+ "creditchain-framework",
+ "creditchain-gas-schedule",
+ "creditchain-logger",
+ "creditchain-move-debugger",
+ "creditchain-push-metrics",
+ "creditchain-rest-client",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "move-core-types",
+ "parking_lot 0.12.4",
+ "rand 0.7.3",
+ "serde",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-resource-viewer"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "move-binary-format",
+ "move-bytecode-utils",
+ "move-core-types",
+ "move-resource-viewer",
+]
+
+[[package]]
+name = "creditchain-rest-client"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "bytes",
+ "clap 4.5.48",
+ "creditchain-api-types",
+ "creditchain-crypto",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-types",
+ "hex",
+ "move-core-types",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-retrier"
+version = "0.1.0"
+dependencies = [
+ "creditchain-logger",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-rocksdb-options"
+version = "0.1.1"
+dependencies = [
+ "creditchain-config",
+ "rocksdb",
+]
+
+[[package]]
+name = "creditchain-rosetta"
+version = "0.0.2"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-cached-packages",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-global-constants",
+ "creditchain-logger",
+ "creditchain-node",
+ "creditchain-rest-client",
+ "creditchain-runtimes",
+ "creditchain-sdk",
+ "creditchain-types",
+ "creditchain-warp-webserver",
+ "futures",
+ "hex",
+ "itertools 0.13.0",
+ "move-core-types",
+ "once_cell",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "tokio",
+ "url",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-rosetta-cli"
+version = "0.0.2"
+dependencies = [
+ "anyhow",
+ "clap 4.5.48",
+ "creditchain",
+ "creditchain-logger",
+ "creditchain-rosetta",
+ "creditchain-types",
+ "serde",
+ "serde_json",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-runtimes"
+version = "0.1.1"
+dependencies = [
+ "rayon",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-safety-rules"
+version = "0.1.0"
+dependencies = [
+ "claims",
+ "creditchain-config",
+ "creditchain-consensus-types",
+ "creditchain-crypto",
+ "creditchain-global-constants",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-proptest-helpers",
+ "creditchain-secure-net",
+ "creditchain-secure-storage",
+ "creditchain-types",
+ "creditchain-vault-client",
+ "criterion",
+ "hex",
+ "once_cell",
+ "proptest",
+ "rand 0.7.3",
+ "rusty-fork",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-schemadb"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "byteorder",
+ "creditchain-drop-helper",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "dunce",
+ "once_cell",
+ "proptest",
+ "rand 0.7.3",
+ "rocksdb",
+]
+
+[[package]]
+name = "creditchain-scratchpad"
+version = "0.1.0"
+dependencies = [
+ "bitvec 1.0.1",
+ "creditchain-crypto",
+ "creditchain-drop-helper",
+ "creditchain-infallible",
+ "creditchain-metrics-core",
+ "creditchain-types",
+ "creditchain-vm",
+ "criterion",
+ "dashmap 7.0.0-rc2",
+ "itertools 0.13.0",
+ "jemallocator",
+ "once_cell",
+ "proptest",
+ "rand 0.7.3",
+ "rayon",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-sdk"
+version = "0.0.4"
+dependencies = [
+ "anyhow",
+ "base64 0.13.1",
+ "bcs 0.1.4",
+ "creditchain-cached-packages",
+ "creditchain-crypto",
+ "creditchain-global-constants",
+ "creditchain-ledger",
+ "creditchain-rest-client",
+ "creditchain-types",
+ "ed25519-dalek-bip32",
+ "hex",
+ "lazy_static",
+ "move-core-types",
+ "once_cell",
+ "rand 0.7.3",
+ "rand_core 0.5.1",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "tiny-bip39",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-sdk-builder"
+version = "0.2.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-cached-packages",
+ "creditchain-framework",
+ "creditchain-types",
+ "heck 0.4.1",
+ "move-core-types",
+ "once_cell",
+ "serde-generate",
+ "serde-reflection",
+ "serde_yaml 0.8.26",
+ "tempfile",
+ "textwrap 0.15.2",
+ "which",
+]
+
+[[package]]
+name = "creditchain-secure-net"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "creditchain-config",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-protos",
+ "crossbeam-channel",
+ "once_cell",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+ "tonic 0.12.3",
+ "tonic-reflection",
+]
+
+[[package]]
+name = "creditchain-secure-storage"
+version = "0.1.1"
+dependencies = [
+ "base64 0.13.1",
+ "bcs 0.1.4",
+ "chrono",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-temppath",
+ "creditchain-time-service",
+ "creditchain-vault-client",
+ "enum_dispatch",
+ "rand 0.7.3",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-short-hex-str"
+version = "0.1.1"
+dependencies = [
+ "hex",
+ "mirai-annotations",
+ "proptest",
+ "serde",
+ "static_assertions",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-speculative-state-helper"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "claims",
+ "creditchain-infallible",
+ "crossbeam",
+ "parking_lot 0.12.4",
+ "proptest",
+ "proptest-derive",
+ "rayon",
+]
+
+[[package]]
+name = "creditchain-state-sync-driver"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "bcs 0.1.4",
+ "claims",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-consensus-notifications",
+ "creditchain-crypto",
+ "creditchain-data-client",
+ "creditchain-data-streaming-service",
+ "creditchain-db",
+ "creditchain-event-notifications",
+ "creditchain-executor",
+ "creditchain-executor-test-helpers",
+ "creditchain-executor-types",
+ "creditchain-genesis",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-mempool-notifications",
+ "creditchain-metrics-core",
+ "creditchain-network",
+ "creditchain-runtimes",
+ "creditchain-schemadb",
+ "creditchain-storage-interface",
+ "creditchain-storage-service-client",
+ "creditchain-storage-service-notifications",
+ "creditchain-storage-service-types",
+ "creditchain-temppath",
+ "creditchain-time-service",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-genesis",
+ "futures",
+ "mockall",
+ "move-core-types",
+ "ntest",
+ "once_cell",
+ "rand 0.7.3",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-stream",
+]
+
+[[package]]
+name = "creditchain-storage-interface"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "arr_macro",
+ "bcs 0.1.4",
+ "creditchain-crypto",
+ "creditchain-experimental-layered-map",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-scratchpad",
+ "creditchain-secure-net",
+ "creditchain-types",
+ "dashmap 7.0.0-rc2",
+ "derive_more 0.99.20",
+ "itertools 0.13.0",
+ "lru",
+ "once_cell",
+ "parking_lot 0.12.4",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "rayon",
+ "serde",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-storage-service-client"
+version = "0.1.1"
+dependencies = [
+ "creditchain-config",
+ "creditchain-network",
+ "creditchain-storage-service-types",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-storage-service-notifications"
+version = "0.1.1"
+dependencies = [
+ "async-trait",
+ "claims",
+ "creditchain-channels",
+ "creditchain-crypto",
+ "futures",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-storage-service-server"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "arc-swap",
+ "bcs 0.1.4",
+ "bytes",
+ "claims",
+ "creditchain-bitvec",
+ "creditchain-channels",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-netcore",
+ "creditchain-network",
+ "creditchain-storage-interface",
+ "creditchain-storage-service-notifications",
+ "creditchain-storage-service-types",
+ "creditchain-time-service",
+ "creditchain-types",
+ "dashmap 7.0.0-rc2",
+ "futures",
+ "maplit",
+ "mini-moka",
+ "mockall",
+ "once_cell",
+ "rand 0.7.3",
+ "serde",
+ "thiserror 1.0.69",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-storage-service-types"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "claims",
+ "creditchain-compression",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-time-service",
+ "creditchain-types",
+ "num-traits",
+ "proptest",
+ "rand 0.7.3",
+ "serde",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-system-utils"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "async-mutex",
+ "creditchain-profiler",
+ "http 0.2.12",
+ "hyper 0.14.32",
+ "lazy_static",
+ "mime",
+ "pprof",
+ "regex",
+ "rstack-self",
+ "tokio",
+ "tracing",
+ "url",
+]
+
+[[package]]
+name = "creditchain-table-natives"
+version = "0.1.1"
+dependencies = [
+ "better_any",
+ "bytes",
+ "creditchain-gas-schedule",
+ "creditchain-native-interface",
+ "move-binary-format",
+ "move-core-types",
+ "move-table-extension",
+ "move-vm-runtime",
+ "move-vm-types",
+ "sha3 0.9.1",
+ "smallvec",
+]
+
+[[package]]
+name = "creditchain-telemetry"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-api",
+ "creditchain-config",
+ "creditchain-consensus",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-mempool",
+ "creditchain-metrics-core",
+ "creditchain-network",
+ "creditchain-node-resource-metrics",
+ "creditchain-runtimes",
+ "creditchain-state-sync-driver",
+ "creditchain-telemetry-service",
+ "creditchain-types",
+ "flate2",
+ "futures",
+ "httpmock",
+ "once_cell",
+ "prometheus",
+ "rand 0.7.3",
+ "rand_core 0.5.1",
+ "reqwest 0.11.27",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "serde",
+ "serde_json",
+ "sysinfo",
+ "tokio",
+ "tokio-stream",
+ "url",
+ "uuid 1.18.1",
+]
+
+[[package]]
+name = "creditchain-telemetry-service"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "base64 0.13.1",
+ "bcs 0.1.4",
+ "chrono",
+ "claims",
+ "clap 4.5.48",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-rest-client",
+ "creditchain-types",
+ "debug-ignore",
+ "flate2",
+ "futures",
+ "gcp-bigquery-client",
+ "httpmock",
+ "jsonwebtoken 8.3.0",
+ "once_cell",
+ "prometheus",
+ "rand 0.7.3",
+ "rand_core 0.5.1",
+ "reqwest 0.11.27",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "thiserror 1.0.69",
+ "tokio",
+ "tracing",
+ "url",
+ "uuid 1.18.1",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-temppath"
+version = "0.1.1"
+dependencies = [
+ "hex",
+ "rand 0.7.3",
+]
+
+[[package]]
+name = "creditchain-testcases"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "assert_approx_eq",
+ "async-trait",
+ "bcs 0.1.4",
+ "creditchain",
+ "creditchain-config",
+ "creditchain-forge",
+ "creditchain-global-constants",
+ "creditchain-keygen",
+ "creditchain-logger",
+ "creditchain-release-builder",
+ "creditchain-rest-client",
+ "creditchain-runtimes",
+ "creditchain-sdk",
+ "creditchain-temppath",
+ "creditchain-types",
+ "csv",
+ "futures",
+ "hex",
+ "itertools 0.13.0",
+ "log",
+ "rand 0.7.3",
+ "reqwest 0.11.27",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-time-service"
+version = "0.1.1"
+dependencies = [
+ "creditchain-infallible",
+ "enum_dispatch",
+ "futures",
+ "pin-project 1.1.10",
+ "thiserror 1.0.69",
+ "tokio",
+ "tokio-test",
+]
+
+[[package]]
+name = "creditchain-transaction-benchmarks"
+version = "0.1.1"
+dependencies = [
+ "clap 4.5.48",
+ "creditchain-bitvec",
+ "creditchain-block-executor",
+ "creditchain-block-partitioner",
+ "creditchain-crypto",
+ "creditchain-language-e2e-tests",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-node-resource-metrics",
+ "creditchain-push-metrics",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-logging",
+ "criterion",
+ "criterion-cpu-time",
+ "num_cpus",
+ "proptest",
+]
+
+[[package]]
+name = "creditchain-transaction-emitter"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "clap 4.5.48",
+ "creditchain-global-constants",
+ "creditchain-logger",
+ "creditchain-sdk",
+ "creditchain-transaction-emitter-lib",
+ "creditchain-transaction-workloads-lib",
+ "futures",
+ "rand 0.7.3",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-transaction-emitter-lib"
+version = "0.0.1"
+dependencies = [
+ "again",
+ "anyhow",
+ "async-trait",
+ "base64 0.13.1",
+ "clap 4.5.48",
+ "creditchain-config",
+ "creditchain-crypto",
+ "creditchain-global-constants",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-rest-client",
+ "creditchain-sdk",
+ "creditchain-transaction-generator-lib",
+ "creditchain-types",
+ "futures",
+ "hex",
+ "itertools 0.13.0",
+ "log",
+ "once_cell",
+ "rand 0.7.3",
+ "rand_core 0.5.1",
+ "reqwest 0.11.27",
+ "serde",
+ "serde_json",
+ "tokio",
+ "url",
+]
+
+[[package]]
+name = "creditchain-transaction-filter"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-protos",
+ "derivative",
+ "derive_builder",
+ "lz4",
+ "memchr",
+ "once_cell",
+ "prost 0.13.5",
+ "serde",
+ "serde_json",
+ "serde_yaml 0.8.26",
+ "thiserror 1.0.69",
+]
+
+[[package]]
+name = "creditchain-transaction-filters"
+version = "0.1.1"
+dependencies = [
+ "creditchain-crypto",
+ "creditchain-types",
+ "move-core-types",
+ "rand 0.7.3",
+ "serde",
+ "serde_yaml 0.8.26",
+]
+
+[[package]]
+name = "creditchain-transaction-generator-lib"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "clap 4.5.48",
+ "creditchain-framework",
+ "creditchain-infallible",
+ "creditchain-logger",
+ "creditchain-sdk",
+ "log",
+ "move-binary-format",
+ "move-package",
+ "once_cell",
+ "rand 0.7.3",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-transaction-simulation"
+version = "0.0.2"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "bytes",
+ "creditchain-crypto",
+ "creditchain-keygen",
+ "creditchain-types",
+ "creditchain-vm-genesis",
+ "move-binary-format",
+ "move-core-types",
+ "once_cell",
+ "parking_lot 0.12.4",
+ "proptest",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-transaction-workloads-lib"
+version = "0.0.1"
+dependencies = [
+ "async-trait",
+ "clap 4.5.48",
+ "creditchain-framework",
+ "creditchain-sdk",
+ "creditchain-transaction-generator-lib",
+ "move-binary-format",
+ "once_cell",
+ "rand 0.7.3",
+ "rand_core 0.5.1",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-transactional-test-harness"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "codespan-reporting",
+ "creditchain-api-types",
+ "creditchain-block-executor",
+ "creditchain-cached-packages",
+ "creditchain-crypto",
+ "creditchain-framework",
+ "creditchain-gas-schedule",
+ "creditchain-resource-viewer",
+ "creditchain-storage-interface",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "creditchain-vm-genesis",
+ "creditchain-vm-types",
+ "datatest-stable",
+ "hex",
+ "move-binary-format",
+ "move-bytecode-verifier",
+ "move-command-line-common",
+ "move-compiler-v2",
+ "move-core-types",
+ "move-model",
+ "move-symbol-pool",
+ "move-transactional-test-runner",
+ "move-vm-runtime",
+ "move-vm-types",
+ "once_cell",
+ "serde_json",
+ "tempfile",
+]
+
+[[package]]
+name = "creditchain-types"
+version = "0.0.4"
+dependencies = [
+ "ahash 0.8.12",
+ "anyhow",
+ "arbitrary",
+ "ark-bn254",
+ "ark-ec",
+ "ark-ff",
+ "ark-groth16",
+ "ark-relations",
+ "ark-serialize",
+ "ark-std",
+ "async-trait",
+ "base64 0.13.1",
+ "bcs 0.1.4",
+ "bytes",
+ "chrono",
+ "chrono-tz 0.10.4",
+ "ciborium",
+ "claims",
+ "coset",
+ "creditchain-bitvec",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-dkg",
+ "creditchain-infallible",
+ "creditchain-proptest-helpers",
+ "criterion",
+ "dashmap 7.0.0-rc2",
+ "derivative",
+ "derive_more 0.99.20",
+ "fixed",
+ "fxhash",
+ "hashbrown 0.14.5",
+ "hex",
+ "itertools 0.13.0",
+ "jsonwebtoken 8.3.0",
+ "lru",
+ "move-binary-format",
+ "move-core-types",
+ "move-model",
+ "move-table-extension",
+ "move-vm-types",
+ "num-bigint 0.3.3",
+ "num-derive",
+ "num-traits",
+ "once_cell",
+ "p256",
+ "passkey-authenticator",
+ "passkey-client",
+ "passkey-types",
+ "poem-openapi",
+ "poem-openapi-derive",
+ "proptest",
+ "proptest-derive",
+ "quick_cache",
+ "rand 0.7.3",
+ "rayon",
+ "ref-cast",
+ "reqwest 0.11.27",
+ "ring 0.16.20",
+ "rsa 0.9.8",
+ "serde",
+ "serde-big-array",
+ "serde_bytes",
+ "serde_json",
+ "serde_with",
+ "serde_yaml 0.8.26",
+ "strum 0.27.2",
+ "strum_macros 0.27.2",
+ "thiserror 1.0.69",
+ "tokio",
+ "tracing",
+ "url",
+]
+
+[[package]]
+name = "creditchain-validator-interface"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "async-recursion",
+ "async-trait",
+ "bcs 0.1.4",
+ "creditchain-api-types",
+ "creditchain-config",
+ "creditchain-db",
+ "creditchain-framework",
+ "creditchain-rest-client",
+ "creditchain-storage-interface",
+ "creditchain-types",
+ "lru",
+ "move-core-types",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-validator-transaction-pool"
+version = "0.1.1"
+dependencies = [
+ "creditchain-channels",
+ "creditchain-crypto",
+ "creditchain-infallible",
+ "creditchain-types",
+ "futures-util",
+ "tokio",
+]
+
+[[package]]
+name = "creditchain-vault-client"
+version = "0.1.1"
+dependencies = [
+ "base64 0.13.1",
+ "chrono",
+ "creditchain-crypto",
+ "creditchain-proptest-helpers",
+ "creditchain-types",
+ "native-tls",
+ "once_cell",
+ "proptest",
+ "serde",
+ "serde_json",
+ "thiserror 1.0.69",
+ "ureq",
+]
+
+[[package]]
+name = "creditchain-vm"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "ark-bn254",
+ "ark-groth16",
+ "bcs 0.1.4",
+ "bytes",
+ "claims",
+ "creditchain-aggregator",
+ "creditchain-block-executor",
+ "creditchain-block-partitioner",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-experimental-runtimes",
+ "creditchain-framework",
+ "creditchain-gas-algebra",
+ "creditchain-gas-meter",
+ "creditchain-gas-schedule",
+ "creditchain-infallible",
+ "creditchain-keygen",
+ "creditchain-language-e2e-tests",
+ "creditchain-logger",
+ "creditchain-memory-usage-tracker",
+ "creditchain-metrics-core",
+ "creditchain-mvhashmap",
+ "creditchain-native-interface",
+ "creditchain-table-natives",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm-environment",
+ "creditchain-vm-logging",
+ "creditchain-vm-types",
+ "crossbeam-channel",
+ "derive_more 0.99.20",
+ "fail",
+ "futures",
+ "hex",
+ "itertools 0.13.0",
+ "move-binary-format",
+ "move-core-types",
+ "move-unit-test",
+ "move-vm-metrics",
+ "move-vm-runtime",
+ "move-vm-types",
+ "num_cpus",
+ "once_cell",
+ "ouroboros",
+ "proptest",
+ "rand 0.7.3",
+ "rand_core 0.5.1",
+ "rayon",
+ "serde",
+ "test-case",
+]
+
+[[package]]
+name = "creditchain-vm-benchmarks"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-cached-packages",
+ "creditchain-framework",
+ "creditchain-language-e2e-tests",
+ "creditchain-types",
+ "move-binary-format",
+ "move-core-types",
+]
+
+[[package]]
+name = "creditchain-vm-environment"
+version = "0.0.2"
+dependencies = [
+ "bcs 0.1.4",
+ "creditchain-framework",
+ "creditchain-gas-algebra",
+ "creditchain-gas-schedule",
+ "creditchain-move-stdlib",
+ "creditchain-native-interface",
+ "creditchain-table-natives",
+ "creditchain-types",
+ "creditchain-vm-types",
+ "move-binary-format",
+ "move-bytecode-verifier",
+ "move-core-types",
+ "move-vm-runtime",
+ "move-vm-types",
+ "once_cell",
+ "serde",
+ "sha3 0.9.1",
+]
+
+[[package]]
+name = "creditchain-vm-genesis"
+version = "0.1.1"
+dependencies = [
+ "bcs 0.1.4",
+ "bytes",
+ "claims",
+ "creditchain-cached-packages",
+ "creditchain-crypto",
+ "creditchain-framework",
+ "creditchain-gas-schedule",
+ "creditchain-proptest-helpers",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-types",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-runtime",
+ "move-vm-types",
+ "once_cell",
+ "proptest",
+ "proptest-derive",
+ "rand 0.7.3",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-vm-logging"
+version = "0.1.1"
+dependencies = [
+ "arc-swap",
+ "creditchain-crypto",
+ "creditchain-logger",
+ "creditchain-metrics-core",
+ "creditchain-speculative-state-helper",
+ "creditchain-types",
+ "once_cell",
+ "serde",
+]
+
+[[package]]
+name = "creditchain-vm-profiling"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "clap 4.5.48",
+ "creditchain-block-executor",
+ "creditchain-cached-packages",
+ "creditchain-gas-schedule",
+ "creditchain-move-stdlib",
+ "creditchain-native-interface",
+ "creditchain-table-natives",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm",
+ "glob",
+ "move-binary-format",
+ "move-core-types",
+ "move-ir-compiler",
+ "move-vm-runtime",
+ "move-vm-test-utils",
+ "move-vm-types",
+ "once_cell",
+ "smallvec",
+]
+
+[[package]]
+name = "creditchain-vm-types"
+version = "0.0.2"
+dependencies = [
+ "ambassador",
+ "anyhow",
+ "bcs 0.1.4",
+ "bytes",
+ "claims",
+ "creditchain-aggregator",
+ "creditchain-gas-algebra",
+ "creditchain-gas-schedule",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm",
+ "either",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-runtime",
+ "move-vm-types",
+ "rand 0.7.3",
+ "serde",
+ "test-case",
+]
+
+[[package]]
+name = "creditchain-vm-validator"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "creditchain-cached-packages",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-executor-test-helpers",
+ "creditchain-gas-schedule",
+ "creditchain-logger",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "creditchain-vm-genesis",
+ "creditchain-vm-logging",
+ "fail",
+ "move-binary-format",
+ "move-core-types",
+ "move-vm-runtime",
+ "move-vm-types",
+ "rand 0.7.3",
+]
+
+[[package]]
+name = "creditchain-warp-webserver"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bcs 0.1.4",
+ "creditchain-api-types",
+ "creditchain-config",
+ "creditchain-logger",
+ "hyper 0.14.32",
+ "serde",
+ "serde_json",
+ "warp",
+]
+
+[[package]]
+name = "creditchain-workspace-server"
+version = "0.1.1"
+dependencies = [
+ "anyhow",
+ "bollard",
+ "clap 4.5.48",
+ "creditchain-cached-packages",
+ "creditchain-config",
+ "creditchain-faucet-core",
+ "creditchain-localnet",
+ "creditchain-node",
+ "creditchain-types",
+ "diesel",
+ "diesel-async",
+ "futures",
+ "libra2-indexer-processor-sdk",
+ "maplit",
+ "processor",
+ "rand 0.7.3",
+ "tempfile",
+ "tokio",
+ "tokio-util 0.7.16",
+ "url",
+ "uuid 1.18.1",
 ]
 
 [[package]]
@@ -3572,23 +8261,23 @@ dependencies = [
  "anyhow",
  "bcs 0.1.4",
  "claims",
+ "creditchain-cached-packages",
+ "creditchain-crypto",
+ "creditchain-framework",
+ "creditchain-gas-algebra",
+ "creditchain-gas-profiling",
+ "creditchain-gas-schedule",
+ "creditchain-language-e2e-tests",
+ "creditchain-package-builder",
+ "creditchain-rest-client",
+ "creditchain-transaction-generator-lib",
+ "creditchain-transaction-simulation",
+ "creditchain-transaction-workloads-lib",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
+ "creditchain-vm-types",
  "hex",
- "libra2-cached-packages",
- "libra2-crypto",
- "libra2-framework",
- "libra2-gas-algebra",
- "libra2-gas-profiling",
- "libra2-gas-schedule",
- "libra2-language-e2e-tests",
- "libra2-package-builder",
- "libra2-rest-client",
- "libra2-transaction-generator-lib",
- "libra2-transaction-simulation",
- "libra2-transaction-workloads-lib",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "libra2-vm-types",
  "move-binary-format",
  "move-core-types",
  "move-model",
@@ -4463,6 +9152,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1d674e81391d1e1ab681a28d99df07927c6d4aa5b027d7da16ba32d1d21ecd99"
 
 [[package]]
+name = "flatbuffers"
+version = "24.12.23"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4f1baf0dbf96932ec9a3038d57900329c015b0bfb7b63d904f3bc27e2b02a096"
+dependencies = [
+ "bitflags 1.3.2",
+ "rustc_version",
+]
+
+[[package]]
 name = "flate2"
 version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4746,12 +9445,12 @@ dependencies = [
  "base64 0.21.7",
  "bcs 0.1.4",
  "clap 4.5.48",
+ "creditchain-framework",
+ "creditchain-language-e2e-tests",
+ "creditchain-types",
  "csv",
  "dearbitrary",
  "hex",
- "libra2-framework",
- "libra2-language-e2e-tests",
- "libra2-types",
  "move-binary-format",
  "move-core-types",
  "move-model",
@@ -4768,17 +9467,17 @@ dependencies = [
  "arbitrary",
  "base64 0.13.1",
  "bcs 0.1.4",
+ "creditchain-cached-packages",
+ "creditchain-consensus",
+ "creditchain-crypto",
+ "creditchain-framework",
+ "creditchain-language-e2e-tests",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-environment",
  "fuzzer",
  "libfuzzer-sys",
- "libra2-cached-packages",
- "libra2-consensus",
- "libra2-crypto",
- "libra2-framework",
- "libra2-language-e2e-tests",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
  "move-binary-format",
  "move-bytecode-verifier",
  "move-core-types",
@@ -4863,14 +9562,14 @@ version = "0.1.0"
 dependencies = [
  "bcs 0.1.4",
  "clap 4.5.48",
- "libra2-api-types",
- "libra2-config",
- "libra2-consensus",
- "libra2-consensus-types",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-network",
- "libra2-types",
+ "creditchain-api-types",
+ "creditchain-config",
+ "creditchain-consensus",
+ "creditchain-consensus-types",
+ "creditchain-crypto",
+ "creditchain-crypto-derive",
+ "creditchain-network",
+ "creditchain-types",
  "move-core-types",
  "rand 0.7.3",
  "serde",
@@ -6374,6 +11073,29 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8bb03732005da905c88227371639bf1ad885cc712789c011c31c5fb3ab3ccf02"
 
 [[package]]
+name = "integration-tests"
+version = "1.0.0"
+dependencies = [
+ "ahash 0.8.12",
+ "anyhow",
+ "assert-json-diff",
+ "bigdecimal",
+ "chrono",
+ "creditchain-indexer-test-transactions",
+ "diesel",
+ "field_count",
+ "futures",
+ "libra2-indexer-processor-sdk",
+ "processor",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "tokio",
+ "tonic 0.12.3",
+ "url",
+]
+
+[[package]]
 name = "internment"
 version = "0.5.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6863,17 +11585,17 @@ name = "language-e2e-testsuite"
 version = "0.1.0"
 dependencies = [
  "claims",
+ "creditchain-cached-packages",
+ "creditchain-crypto",
+ "creditchain-gas-algebra",
+ "creditchain-gas-schedule",
+ "creditchain-language-e2e-tests",
+ "creditchain-logger",
+ "creditchain-transaction-simulation",
+ "creditchain-types",
+ "creditchain-vm",
+ "creditchain-vm-genesis",
  "fail",
- "libra2-cached-packages",
- "libra2-crypto",
- "libra2-gas-algebra",
- "libra2-gas-schedule",
- "libra2-language-e2e-tests",
- "libra2-logger",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-genesis",
  "move-binary-format",
  "move-bytecode-verifier",
  "move-core-types",
@@ -6968,6 +11690,63 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "db13adb97ab515a3691f56e4dbab09283d0b86cb45abd991d8634a9d6f501760"
 
 [[package]]
+name = "lexical-core"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7d8d125a277f807e55a77304455eb7b1cb52f2b18c143b60e766c120bd64a594"
+dependencies = [
+ "lexical-parse-float",
+ "lexical-parse-integer",
+ "lexical-util",
+ "lexical-write-float",
+ "lexical-write-integer",
+]
+
+[[package]]
+name = "lexical-parse-float"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "52a9f232fbd6f550bc0137dcb5f99ab674071ac2d690ac69704593cb4abbea56"
+dependencies = [
+ "lexical-parse-integer",
+ "lexical-util",
+]
+
+[[package]]
+name = "lexical-parse-integer"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a7a039f8fb9c19c996cd7b2fcce303c1b2874fe1aca544edc85c4a5f8489b34"
+dependencies = [
+ "lexical-util",
+]
+
+[[package]]
+name = "lexical-util"
+version = "1.0.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2604dd126bb14f13fb5d1bd6a66155079cb9fa655b37f875b3a742c705dbed17"
+
+[[package]]
+name = "lexical-write-float"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "50c438c87c013188d415fbabbb1dceb44249ab81664efbd31b14ae55dabb6361"
+dependencies = [
+ "lexical-util",
+ "lexical-write-integer",
+]
+
+[[package]]
+name = "lexical-write-integer"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "409851a618475d2d5796377cad353802345cba92c867d9fbcde9cf4eac4e14df"
+dependencies = [
+ "lexical-util",
+]
+
+[[package]]
 name = "libc"
 version = "0.2.176"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -7024,2217 +11803,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "libra2"
-version = "7.7.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "backoff",
- "base64 0.13.1",
- "bcs 0.1.4",
- "bollard",
- "chrono",
- "clap 4.5.48",
- "clap_complete",
- "colored",
- "dashmap 7.0.0-rc2",
- "diesel",
- "diesel-async",
- "dirs 5.0.1",
- "futures",
- "hex",
- "indoc",
- "itertools 0.13.0",
- "jemallocator",
- "legacy-move-compiler",
- "libra2-api-types",
- "libra2-backup-cli",
- "libra2-bitvec",
- "libra2-build-info",
- "libra2-cached-packages",
- "libra2-cli-common",
- "libra2-config",
- "libra2-crypto",
- "libra2-faucet-core",
- "libra2-framework",
- "libra2-gas-profiling",
- "libra2-gas-schedule",
- "libra2-genesis",
- "libra2-github-client",
- "libra2-global-constants",
- "libra2-indexer-grpc-server-framework",
- "libra2-indexer-processor-sdk",
- "libra2-keygen",
- "libra2-ledger",
- "libra2-localnet",
- "libra2-logger",
- "libra2-move-debugger",
- "libra2-network-checker",
- "libra2-node",
- "libra2-rest-client",
- "libra2-sdk",
- "libra2-storage-interface",
- "libra2-telemetry",
- "libra2-temppath",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "libra2-vm-genesis",
- "libra2-vm-logging",
- "libra2-vm-types",
- "libra2-workspace-server",
- "maplit",
- "move-binary-format",
- "move-bytecode-source-map",
- "move-cli",
- "move-command-line-common",
- "move-compiler-v2",
- "move-core-types",
- "move-coverage",
- "move-disassembler",
- "move-ir-types",
- "move-linter",
- "move-model",
- "move-package",
- "move-prover-boogie-backend",
- "move-symbol-pool",
- "move-unit-test",
- "move-vm-runtime",
- "open",
- "pathsearch",
- "poem",
- "processor",
- "rand 0.7.3",
- "regex",
- "reqwest 0.11.27",
- "self_update",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "set_env",
- "shadow-rs",
- "tempfile",
- "thiserror 1.0.69",
- "tokio",
- "toml 0.7.8",
- "tracing",
- "tracing-subscriber 0.3.20",
- "url",
-]
-
-[[package]]
-name = "libra2-abstract-gas-usage"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "libra2-gas-algebra",
- "libra2-gas-meter",
- "libra2-gas-schedule",
- "libra2-vm-types",
- "move-binary-format",
-]
-
-[[package]]
-name = "libra2-accumulator"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "libra2-crypto",
- "libra2-types",
- "proptest",
- "rand 0.7.3",
-]
-
-[[package]]
-name = "libra2-admin-service"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "futures-channel",
- "http 0.2.12",
- "hyper 0.14.32",
- "libra2-config",
- "libra2-consensus",
- "libra2-crypto",
- "libra2-infallible",
- "libra2-logger",
- "libra2-mempool",
- "libra2-runtimes",
- "libra2-storage-interface",
- "libra2-system-utils",
- "libra2-types",
- "sha256",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-aggregator"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "claims",
- "libra2-types",
- "move-binary-format",
- "move-core-types",
- "move-vm-types",
- "once_cell",
- "test-case",
-]
-
-[[package]]
-name = "libra2-api"
-version = "0.2.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "bytes",
- "fail",
- "futures",
- "hex",
- "itertools 0.13.0",
- "libra2-api-test-context",
- "libra2-api-types",
- "libra2-bcs-utils",
- "libra2-build-info",
- "libra2-cached-packages",
- "libra2-config",
- "libra2-crypto",
- "libra2-framework",
- "libra2-gas-meter",
- "libra2-gas-schedule",
- "libra2-global-constants",
- "libra2-logger",
- "libra2-mempool",
- "libra2-metrics-core",
- "libra2-move-stdlib",
- "libra2-proptest-helpers",
- "libra2-runtimes",
- "libra2-sdk",
- "libra2-storage-interface",
- "libra2-transaction-filters",
- "libra2-types",
- "libra2-vm",
- "mime",
- "mini-moka",
- "move-core-types",
- "move-package",
- "num_cpus",
- "once_cell",
- "passkey-types",
- "paste",
- "percent-encoding",
- "poem",
- "poem-openapi",
- "proptest",
- "rand 0.7.3",
- "regex",
- "reqwest 0.11.27",
- "rstest",
- "serde",
- "serde_json",
- "tokio",
- "warp",
-]
-
-[[package]]
-name = "libra2-api-test-context"
-version = "0.2.0"
-dependencies = [
- "bcs 0.1.4",
- "bytes",
- "goldenfile",
- "hyper 0.14.32",
- "libra2-api",
- "libra2-api-types",
- "libra2-cached-packages",
- "libra2-config",
- "libra2-crypto",
- "libra2-db",
- "libra2-executor",
- "libra2-executor-types",
- "libra2-framework",
- "libra2-genesis",
- "libra2-indexer-grpc-table-info",
- "libra2-mempool",
- "libra2-mempool-notifications",
- "libra2-sdk",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-logging",
- "libra2-vm-validator",
- "rand 0.7.3",
- "regex",
- "serde_json",
- "tokio",
- "warp",
- "warp-reverse-proxy",
-]
-
-[[package]]
-name = "libra2-api-tester"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "futures",
- "libra2-api-types",
- "libra2-cached-packages",
- "libra2-framework",
- "libra2-logger",
- "libra2-push-metrics",
- "libra2-rest-client",
- "libra2-sdk",
- "libra2-types",
- "move-core-types",
- "once_cell",
- "prometheus",
- "rand 0.7.3",
- "serde",
- "serde_json",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-api-types"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "bcs 0.1.4",
- "bytes",
- "hex",
- "indoc",
- "libra2-config",
- "libra2-crypto",
- "libra2-logger",
- "libra2-openapi",
- "libra2-resource-viewer",
- "libra2-storage-interface",
- "libra2-types",
- "libra2-vm",
- "move-binary-format",
- "move-core-types",
- "once_cell",
- "poem",
- "poem-openapi",
- "poem-openapi-derive",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "libra2-backup-cli"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "bcs 0.1.4",
- "bytes",
- "clap 4.5.48",
- "csv",
- "futures",
- "itertools 0.13.0",
- "libra2-backup-service",
- "libra2-config",
- "libra2-crypto",
- "libra2-db",
- "libra2-db-indexer-schemas",
- "libra2-executor",
- "libra2-executor-test-helpers",
- "libra2-executor-types",
- "libra2-indexer-grpc-table-info",
- "libra2-infallible",
- "libra2-jellyfish-merkle",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-proptest-helpers",
- "libra2-push-metrics",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "move-binary-format",
- "move-bytecode-verifier",
- "num_cpus",
- "once_cell",
- "pin-project 1.1.10",
- "proptest",
- "rand 0.7.3",
- "regex",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "thiserror 1.0.69",
- "tokio",
- "tokio-io-timeout",
- "tokio-stream",
- "tokio-util 0.7.16",
- "warp",
-]
-
-[[package]]
-name = "libra2-backup-service"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "bytes",
- "hyper 0.14.32",
- "libra2-config",
- "libra2-crypto",
- "libra2-db",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-runtimes",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "once_cell",
- "reqwest 0.11.27",
- "serde",
- "tokio",
- "tokio-stream",
- "warp",
-]
-
-[[package]]
-name = "libra2-bcs-utils"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "hex",
-]
-
-[[package]]
-name = "libra2-bitvec"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "proptest",
- "proptest-derive",
- "serde",
- "serde_bytes",
- "serde_json",
-]
-
-[[package]]
-name = "libra2-block-executor"
-version = "0.1.1"
-dependencies = [
- "ambassador",
- "anyhow",
- "arc-swap",
- "bcs 0.1.4",
- "bytes",
- "cfg-if",
- "claims",
- "concurrent-queue",
- "criterion",
- "crossbeam",
- "derivative",
- "fail",
- "hashbrown 0.14.5",
- "itertools 0.13.0",
- "libra2-aggregator",
- "libra2-crypto",
- "libra2-drop-helper",
- "libra2-gas-schedule",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-mvhashmap",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm-environment",
- "libra2-vm-logging",
- "libra2-vm-types",
- "move-binary-format",
- "move-core-types",
- "move-vm-runtime",
- "move-vm-types",
- "num_cpus",
- "once_cell",
- "parking_lot 0.12.4",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "rayon",
- "scopeguard",
- "test-case",
-]
-
-[[package]]
-name = "libra2-block-partitioner"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "clap 4.5.48",
- "criterion",
- "dashmap 7.0.0-rc2",
- "itertools 0.13.0",
- "jemallocator",
- "libra2-crypto",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-types",
- "move-core-types",
- "once_cell",
- "rand 0.7.3",
- "rayon",
- "serde",
-]
-
-[[package]]
-name = "libra2-bounded-executor"
-version = "0.1.1"
-dependencies = [
- "futures",
- "rustversion",
- "tokio",
-]
-
-[[package]]
-name = "libra2-build-info"
-version = "0.1.1"
-dependencies = [
- "shadow-rs",
-]
-
-[[package]]
-name = "libra2-cached-packages"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "libra2-framework",
- "libra2-package-builder",
- "libra2-types",
- "move-core-types",
- "once_cell",
- "proptest",
- "proptest-derive",
-]
-
-[[package]]
-name = "libra2-cargo-cli"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "camino",
- "chrono",
- "clap 4.5.48",
- "clap-verbosity-flag",
- "determinator",
- "env_logger 0.10.2",
- "guppy",
- "log",
- "reqwest 0.11.27",
- "url",
-]
-
-[[package]]
-name = "libra2-channels"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "futures",
- "libra2-infallible",
- "libra2-metrics-core",
- "libra2-types",
- "tokio",
-]
-
-[[package]]
-name = "libra2-cli-common"
-version = "1.0.0"
-dependencies = [
- "anstyle",
- "clap 4.5.48",
- "clap_complete",
-]
-
-[[package]]
-name = "libra2-collections"
-version = "0.1.1"
-
-[[package]]
-name = "libra2-comparison-testing"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "futures",
- "itertools 0.13.0",
- "legacy-move-compiler",
- "libra2-block-executor",
- "libra2-framework",
- "libra2-language-e2e-tests",
- "libra2-rest-client",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-validator-interface",
- "libra2-vm",
- "move-binary-format",
- "move-core-types",
- "move-model",
- "move-package",
- "rocksdb",
- "serde",
- "tempfile",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-compression"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "libra2-crypto",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-types",
- "lz4",
- "once_cell",
- "rand 0.7.3",
- "serde",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-config"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "arr_macro",
- "bcs 0.1.4",
- "byteorder",
- "cfg-if",
- "get_if_addrs",
- "libra2-crypto",
- "libra2-global-constants",
- "libra2-logger",
- "libra2-secure-storage",
- "libra2-short-hex-str",
- "libra2-temppath",
- "libra2-transaction-filters",
- "libra2-types",
- "maplit",
- "num_cpus",
- "poem-openapi",
- "rand 0.7.3",
- "serde",
- "serde_json",
- "serde_merge",
- "serde_yaml 0.8.26",
- "strum 0.27.2",
- "strum_macros 0.27.2",
- "tempfile",
- "thiserror 1.0.69",
- "url",
-]
-
-[[package]]
-name = "libra2-consensus"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "bcs 0.1.4",
- "byteorder",
- "bytes",
- "chrono",
- "claims",
- "clap 4.5.48",
- "dashmap 7.0.0-rc2",
- "enum_dispatch",
- "fail",
- "futures",
- "futures-channel",
- "hex",
- "itertools 0.13.0",
- "libra2-bitvec",
- "libra2-bounded-executor",
- "libra2-cached-packages",
- "libra2-channels",
- "libra2-collections",
- "libra2-config",
- "libra2-consensus-notifications",
- "libra2-consensus-types",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-dkg",
- "libra2-enum-conversion-derive",
- "libra2-event-notifications",
- "libra2-executor",
- "libra2-executor-test-helpers",
- "libra2-executor-types",
- "libra2-experimental-runtimes",
- "libra2-fallible",
- "libra2-infallible",
- "libra2-keygen",
- "libra2-logger",
- "libra2-mempool",
- "libra2-metrics-core",
- "libra2-netcore",
- "libra2-network",
- "libra2-peer-monitoring-service-types",
- "libra2-reliable-broadcast",
- "libra2-runtimes",
- "libra2-safety-rules",
- "libra2-schemadb",
- "libra2-secure-storage",
- "libra2-short-hex-str",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-time-service",
- "libra2-transaction-filters",
- "libra2-types",
- "libra2-validator-transaction-pool",
- "libra2-vm",
- "libra2-vm-validator",
- "lru",
- "maplit",
- "mini-moka",
- "mirai-annotations",
- "mockall",
- "move-core-types",
- "num-derive",
- "num-traits",
- "once_cell",
- "ordered-float 3.9.2",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "rayon",
- "scopeguard",
- "serde",
- "serde_bytes",
- "serde_json",
- "sha3 0.9.1",
- "strum 0.27.2",
- "strum_macros 0.27.2",
- "tempfile",
- "thiserror 1.0.69",
- "tokio",
- "tokio-retry",
- "tokio-stream",
-]
-
-[[package]]
-name = "libra2-consensus-notifications"
-version = "0.1.1"
-dependencies = [
- "async-trait",
- "claims",
- "futures",
- "libra2-crypto",
- "libra2-runtimes",
- "libra2-types",
- "move-core-types",
- "serde",
- "thiserror 1.0.69",
- "tokio",
-]
-
-[[package]]
-name = "libra2-consensus-types"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "derivative",
- "fail",
- "futures",
- "itertools 0.13.0",
- "libra2-bitvec",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-executor-types",
- "libra2-infallible",
- "libra2-logger",
- "libra2-short-hex-str",
- "libra2-types",
- "mini-moka",
- "mirai-annotations",
- "once_cell",
- "proptest",
- "rand 0.7.3",
- "rayon",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "libra2-crash-handler"
-version = "0.1.1"
-dependencies = [
- "backtrace",
- "libra2-logger",
- "move-core-types",
- "serde",
- "toml 0.7.8",
-]
-
-[[package]]
-name = "libra2-crypto"
-version = "0.0.4"
-dependencies = [
- "aes-gcm",
- "anyhow",
- "arbitrary",
- "ark-bls12-381",
- "ark-bn254",
- "ark-ec",
- "ark-ff",
- "ark-groth16",
- "ark-serialize",
- "ark-std",
- "base64 0.13.1",
- "bcs 0.1.4",
- "bitvec 1.0.1",
- "blake2",
- "blake2-rfc",
- "blst",
- "bulletproofs",
- "byteorder",
- "bytes",
- "criterion",
- "curve25519-dalek 3.2.0",
- "curve25519-dalek-ng",
- "digest 0.9.0",
- "ed25519-dalek 1.0.1",
- "ff",
- "hex",
- "hkdf",
- "libra2-crypto-derive",
- "libsecp256k1",
- "merlin",
- "more-asserts",
- "neptune",
- "num-bigint 0.3.3",
- "num-integer",
- "once_cell",
- "p256",
- "poseidon-ark",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "rand_core 0.5.1",
- "ring 0.16.20",
- "serde",
- "serde-name",
- "serde_bytes",
- "serde_json",
- "sha2 0.10.9",
- "sha2 0.9.9",
- "sha3 0.9.1",
- "signature 2.2.0",
- "static_assertions",
- "thiserror 1.0.69",
- "tiny-keccak",
- "trybuild",
- "typenum",
- "x25519-dalek",
-]
-
-[[package]]
-name = "libra2-crypto-derive"
-version = "0.0.4"
-dependencies = [
- "anyhow",
- "proc-macro2",
- "quote",
- "syn 1.0.109",
-]
-
-[[package]]
-name = "libra2-data-client"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "arc-swap",
- "async-trait",
- "bcs 0.1.4",
- "claims",
- "dashmap 7.0.0-rc2",
- "futures",
- "itertools 0.13.0",
- "libra2-channels",
- "libra2-config",
- "libra2-crypto",
- "libra2-id-generator",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-netcore",
- "libra2-network",
- "libra2-peer-monitoring-service-types",
- "libra2-storage-interface",
- "libra2-storage-service-client",
- "libra2-storage-service-server",
- "libra2-storage-service-types",
- "libra2-time-service",
- "libra2-types",
- "maplit",
- "mockall",
- "ordered-float 3.9.2",
- "rand 0.8.5",
- "serde",
- "thiserror 1.0.69",
- "tokio",
-]
-
-[[package]]
-name = "libra2-data-streaming-service"
-version = "0.1.0"
-dependencies = [
- "arc-swap",
- "async-trait",
- "claims",
- "enum_dispatch",
- "futures",
- "libra2-channels",
- "libra2-config",
- "libra2-crypto",
- "libra2-data-client",
- "libra2-id-generator",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-storage-service-types",
- "libra2-time-service",
- "libra2-types",
- "once_cell",
- "rand 0.7.3",
- "serde",
- "thiserror 1.0.69",
- "tokio",
- "tokio-stream",
-]
-
-[[package]]
-name = "libra2-db"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "arc-swap",
- "arr_macro",
- "bcs 0.1.4",
- "byteorder",
- "claims",
- "clap 4.5.48",
- "crossbeam-channel",
- "dashmap 7.0.0-rc2",
- "either",
- "hex",
- "indicatif 0.15.0",
- "itertools 0.13.0",
- "libra2-accumulator",
- "libra2-block-executor",
- "libra2-config",
- "libra2-crypto",
- "libra2-db-indexer",
- "libra2-db-indexer-schemas",
- "libra2-executor-types",
- "libra2-experimental-runtimes",
- "libra2-infallible",
- "libra2-jellyfish-merkle",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-proptest-helpers",
- "libra2-resource-viewer",
- "libra2-rocksdb-options",
- "libra2-schemadb",
- "libra2-scratchpad",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "lru",
- "move-core-types",
- "once_cell",
- "ouroboros",
- "owo-colors",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "rayon",
- "serde",
- "static_assertions",
- "status-line",
- "tokio",
-]
-
-[[package]]
-name = "libra2-db-indexer"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "bytes",
- "dashmap 7.0.0-rc2",
- "libra2-config",
- "libra2-db-indexer-schemas",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-proptest-helpers",
- "libra2-resource-viewer",
- "libra2-rocksdb-options",
- "libra2-schemadb",
- "libra2-storage-interface",
- "libra2-types",
- "move-core-types",
- "once_cell",
- "rand 0.7.3",
-]
-
-[[package]]
-name = "libra2-db-indexer-schemas"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "byteorder",
- "libra2-crypto",
- "libra2-proptest-helpers",
- "libra2-schemadb",
- "libra2-storage-interface",
- "libra2-types",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "serde",
-]
-
-[[package]]
-name = "libra2-db-tool"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "itertools 0.13.0",
- "libra2-backup-cli",
- "libra2-backup-service",
- "libra2-block-executor",
- "libra2-config",
- "libra2-db",
- "libra2-db-indexer",
- "libra2-executor",
- "libra2-executor-test-helpers",
- "libra2-executor-types",
- "libra2-indexer-grpc-table-info",
- "libra2-logger",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "libra2-vm",
- "rayon",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "libra2-debugger"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "clap 4.5.48",
- "jemallocator",
- "libra2-consensus",
- "libra2-db-tool",
- "libra2-logger",
- "libra2-move-debugger",
- "libra2-push-metrics",
- "tokio",
-]
-
-[[package]]
-name = "libra2-dkg"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "blst",
- "blstrs",
- "criterion",
- "ff",
- "group",
- "hex",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-runtimes",
- "merlin",
- "more-asserts",
- "num-bigint 0.3.3",
- "num-integer",
- "num-traits",
- "num_cpus",
- "once_cell",
- "pairing",
- "rand 0.7.3",
- "rand_core 0.5.1",
- "rayon",
- "serde",
- "serde_bytes",
- "sha3 0.9.1",
- "static_assertions",
-]
-
-[[package]]
-name = "libra2-dkg-runtime"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "async-trait",
- "bcs 0.1.4",
- "bytes",
- "fail",
- "futures",
- "futures-channel",
- "futures-util",
- "libra2-bounded-executor",
- "libra2-channels",
- "libra2-config",
- "libra2-consensus-types",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-enum-conversion-derive",
- "libra2-event-notifications",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-network",
- "libra2-reliable-broadcast",
- "libra2-runtimes",
- "libra2-safety-rules",
- "libra2-time-service",
- "libra2-types",
- "libra2-validator-transaction-pool",
- "move-core-types",
- "once_cell",
- "rand 0.7.3",
- "serde",
- "tokio",
- "tokio-retry",
-]
-
-[[package]]
-name = "libra2-drop-helper"
-version = "0.1.1"
-dependencies = [
- "libra2-infallible",
- "libra2-metrics-core",
- "once_cell",
- "rayon",
- "threadpool",
-]
-
-[[package]]
-name = "libra2-dynamic-transaction-composer"
-version = "0.1.5"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "e2e-move-tests",
- "getrandom 0.2.16",
- "libra2-types",
- "move-binary-format",
- "move-bytecode-verifier",
- "move-core-types",
- "serde",
- "serde_bytes",
- "wasm-bindgen",
- "wasm-bindgen-futures",
-]
-
-[[package]]
-name = "libra2-enum-conversion-derive"
-version = "0.0.4"
-dependencies = [
- "anyhow",
- "quote",
- "syn 1.0.109",
- "trybuild",
-]
-
-[[package]]
-name = "libra2-event-notifications"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "claims",
- "futures",
- "libra2-channels",
- "libra2-crypto",
- "libra2-db",
- "libra2-executor-test-helpers",
- "libra2-id-generator",
- "libra2-infallible",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-genesis",
- "move-binary-format",
- "move-core-types",
- "serde",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-executor"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "arr_macro",
- "bcs 0.1.4",
- "bytes",
- "criterion",
- "fail",
- "itertools 0.13.0",
- "libra2-block-executor",
- "libra2-cached-packages",
- "libra2-config",
- "libra2-consensus-types",
- "libra2-crypto",
- "libra2-db",
- "libra2-db-indexer",
- "libra2-drop-helper",
- "libra2-executor-service",
- "libra2-executor-test-helpers",
- "libra2-executor-types",
- "libra2-experimental-runtimes",
- "libra2-indexer-grpc-table-info",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-sdk",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-genesis",
- "move-core-types",
- "once_cell",
- "proptest",
- "rand 0.7.3",
- "rayon",
- "serde",
-]
-
-[[package]]
-name = "libra2-executor-benchmark"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "bcs 0.1.4",
- "bytes",
- "chrono",
- "clap 4.5.48",
- "dashmap 7.0.0-rc2",
- "derivative",
- "indicatif 0.15.0",
- "itertools 0.13.0",
- "jemallocator",
- "libra2-aggregator",
- "libra2-block-executor",
- "libra2-block-partitioner",
- "libra2-config",
- "libra2-crypto",
- "libra2-db",
- "libra2-executor",
- "libra2-executor-service",
- "libra2-executor-types",
- "libra2-experimental-ptx-executor",
- "libra2-experimental-runtimes",
- "libra2-genesis",
- "libra2-infallible",
- "libra2-jellyfish-merkle",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-mvhashmap",
- "libra2-node-resource-metrics",
- "libra2-profiler",
- "libra2-push-metrics",
- "libra2-sdk",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-transaction-generator-lib",
- "libra2-transaction-workloads-lib",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "libra2-vm-logging",
- "libra2-vm-types",
- "move-core-types",
- "move-vm-types",
- "num_cpus",
- "once_cell",
- "rand 0.7.3",
- "rayon",
- "serde",
- "thread_local",
- "tokio",
- "toml 0.7.8",
-]
-
-[[package]]
-name = "libra2-executor-service"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "clap 4.5.48",
- "crossbeam-channel",
- "ctrlc",
- "dashmap 7.0.0-rc2",
- "itertools 0.13.0",
- "libra2-block-executor",
- "libra2-block-partitioner",
- "libra2-config",
- "libra2-infallible",
- "libra2-keygen",
- "libra2-language-e2e-tests",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-node-resource-metrics",
- "libra2-push-metrics",
- "libra2-secure-net",
- "libra2-storage-interface",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm",
- "num_cpus",
- "once_cell",
- "rayon",
- "serde",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-executor-test-helpers"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "libra2-cached-packages",
- "libra2-config",
- "libra2-consensus-types",
- "libra2-crypto",
- "libra2-db",
- "libra2-executor",
- "libra2-executor-types",
- "libra2-sdk",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-genesis",
- "move-core-types",
- "rand 0.7.3",
-]
-
-[[package]]
-name = "libra2-executor-types"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "criterion",
- "derive_more 0.99.20",
- "itertools 0.13.0",
- "libra2-crypto",
- "libra2-drop-helper",
- "libra2-infallible",
- "libra2-metrics-core",
- "libra2-scratchpad",
- "libra2-secure-net",
- "libra2-storage-interface",
- "libra2-types",
- "once_cell",
- "ouroboros",
- "rayon",
- "serde",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-experimental-bulk-txn-submit"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "chrono",
- "clap 4.5.48",
- "futures",
- "libra2-config",
- "libra2-logger",
- "libra2-sdk",
- "libra2-transaction-emitter-lib",
- "libra2-transaction-generator-lib",
- "rand 0.7.3",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "libra2-experimental-hexy"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "criterion",
- "itertools 0.13.0",
- "jemallocator",
- "libra2-crypto",
- "libra2-experimental-layered-map",
- "libra2-infallible",
- "libra2-metrics-core",
- "once_cell",
- "proptest",
- "rand 0.7.3",
-]
-
-[[package]]
-name = "libra2-experimental-layered-map"
-version = "0.1.1"
-dependencies = [
- "ahash 0.8.12",
- "anyhow",
- "bitvec 1.0.1",
- "criterion",
- "itertools 0.13.0",
- "jemallocator",
- "libra2-crypto",
- "libra2-drop-helper",
- "libra2-infallible",
- "libra2-metrics-core",
- "libra2-schemadb",
- "libra2-temppath",
- "once_cell",
- "proptest",
- "rand 0.7.3",
- "rocksdb",
-]
-
-[[package]]
-name = "libra2-experimental-ptx-executor"
-version = "0.1.1"
-dependencies = [
- "hashbrown 0.14.5",
- "libra2-block-executor",
- "libra2-experimental-runtimes",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "libra2-vm-logging",
- "libra2-vm-types",
- "move-core-types",
- "once_cell",
- "rayon",
-]
-
-[[package]]
-name = "libra2-experimental-runtimes"
-version = "0.1.1"
-dependencies = [
- "core_affinity",
- "libc",
- "libra2-runtimes",
- "num_cpus",
- "once_cell",
- "rayon",
-]
-
-[[package]]
-name = "libra2-fallible"
-version = "0.1.1"
-dependencies = [
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-faucet-cli"
-version = "2.0.2"
-dependencies = [
- "anyhow",
- "clap 4.5.48",
- "libra2-faucet-core",
- "libra2-logger",
- "libra2-sdk",
- "tokio",
-]
-
-[[package]]
-name = "libra2-faucet-core"
-version = "2.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "captcha",
- "clap 4.5.48",
- "deadpool-redis",
- "enum_dispatch",
- "firebase-token",
- "futures",
- "hex",
- "ipnet",
- "iprange",
- "libra2-config",
- "libra2-faucet-metrics-server",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-sdk",
- "lru",
- "once_cell",
- "poem",
- "poem-openapi",
- "rand 0.7.3",
- "redis",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "tokio",
-]
-
-[[package]]
-name = "libra2-faucet-metrics-server"
-version = "2.0.1"
-dependencies = [
- "anyhow",
- "libra2-logger",
- "libra2-metrics-core",
- "once_cell",
- "poem",
- "prometheus",
- "serde",
-]
-
-[[package]]
-name = "libra2-faucet-service"
-version = "2.0.2"
-dependencies = [
- "anyhow",
- "clap 4.5.48",
- "libra2-faucet-core",
- "libra2-logger",
- "tokio",
-]
-
-[[package]]
-name = "libra2-fn-check-client"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "clap 4.5.48",
- "env_logger 0.10.2",
- "futures",
- "gcp-bigquery-client",
- "libra2-logger",
- "libra2-node-checker",
- "libra2-sdk",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "libra2-forge"
-version = "0.0.0"
-dependencies = [
- "again",
- "anyhow",
- "async-trait",
- "chrono",
- "clap 4.5.48",
- "either",
- "futures",
- "hex",
- "hyper 0.14.32",
- "itertools 0.13.0",
- "json-patch",
- "k8s-openapi",
- "kube",
- "libra2",
- "libra2-cached-packages",
- "libra2-cli-common",
- "libra2-config",
- "libra2-db",
- "libra2-framework",
- "libra2-genesis",
- "libra2-global-constants",
- "libra2-infallible",
- "libra2-inspection-service",
- "libra2-logger",
- "libra2-rest-client",
- "libra2-retrier",
- "libra2-runtimes",
- "libra2-sdk",
- "libra2-short-hex-str",
- "libra2-state-sync-driver",
- "libra2-transaction-emitter-lib",
- "libra2-transaction-generator-lib",
- "libra2-transaction-workloads-lib",
- "log",
- "num_cpus",
- "once_cell",
- "prometheus-http-query",
- "quick-junit",
- "rand 0.7.3",
- "regex",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "serde_merge",
- "serde_yaml 0.8.26",
- "sugars",
- "tempfile",
- "termcolor",
- "thiserror 1.0.69",
- "tokio",
- "url",
- "uuid 1.18.1",
-]
-
-[[package]]
-name = "libra2-forge-cli"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "chrono",
- "clap 4.5.48",
- "env_logger 0.10.2",
- "futures",
- "jemallocator",
- "libra2-cached-packages",
- "libra2-config",
- "libra2-forge",
- "libra2-global-constants",
- "libra2-logger",
- "libra2-rest-client",
- "libra2-sdk",
- "libra2-testcases",
- "once_cell",
- "rand 0.7.3",
- "random_word",
- "reqwest 0.11.27",
- "serde_json",
- "serde_yaml 0.8.26",
- "sugars",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-framework"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "ark-bls12-381",
- "ark-bn254",
- "ark-ec",
- "ark-ff",
- "ark-serialize",
- "ark-std",
- "bcs 0.1.4",
- "better_any",
- "blake2-rfc",
- "bulletproofs",
- "byteorder",
- "claims",
- "clap 4.5.48",
- "codespan-reporting",
- "curve25519-dalek-ng",
- "either",
- "flate2",
- "hex",
- "itertools 0.13.0",
- "legacy-move-compiler",
- "libra2-aggregator",
- "libra2-crypto",
- "libra2-gas-algebra",
- "libra2-gas-meter",
- "libra2-gas-schedule",
- "libra2-move-stdlib",
- "libra2-native-interface",
- "libra2-sdk-builder",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-types",
- "libsecp256k1",
- "log",
- "merlin",
- "move-binary-format",
- "move-cli",
- "move-command-line-common",
- "move-compiler-v2",
- "move-core-types",
- "move-docgen",
- "move-model",
- "move-package",
- "move-prover",
- "move-prover-boogie-backend",
- "move-prover-bytecode-pipeline",
- "move-prover-lab",
- "move-stackless-bytecode",
- "move-unit-test",
- "move-vm-runtime",
- "move-vm-types",
- "num-traits",
- "once_cell",
- "rand 0.7.3",
- "rand_core 0.5.1",
- "ripemd",
- "serde",
- "serde_bytes",
- "sha2 0.10.9",
- "sha2 0.9.9",
- "sha3 0.9.1",
- "siphasher 0.3.11",
- "smallvec",
- "tempfile",
- "tiny-keccak",
- "toml 0.7.8",
-]
-
-[[package]]
-name = "libra2-gas-algebra"
-version = "0.0.1"
-dependencies = [
- "either",
- "move-core-types",
-]
-
-[[package]]
-name = "libra2-gas-calibration"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "float-cmp",
- "libra2-abstract-gas-usage",
- "libra2-cached-packages",
- "libra2-framework",
- "libra2-gas-algebra",
- "libra2-gas-schedule",
- "libra2-language-e2e-tests",
- "libra2-types",
- "move-binary-format",
- "move-core-types",
- "move-ir-compiler",
- "nalgebra",
- "walkdir",
-]
-
-[[package]]
-name = "libra2-gas-meter"
-version = "0.1.1"
-dependencies = [
- "libra2-gas-algebra",
- "libra2-gas-schedule",
- "libra2-logger",
- "libra2-types",
- "libra2-vm-types",
- "move-binary-format",
- "move-core-types",
- "move-vm-types",
-]
-
-[[package]]
-name = "libra2-gas-profiling"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "handlebars",
- "inferno",
- "libra2-gas-algebra",
- "libra2-gas-meter",
- "libra2-gas-schedule",
- "libra2-types",
- "libra2-vm-types",
- "move-binary-format",
- "move-core-types",
- "move-vm-types",
- "regex",
- "serde_json",
- "smallvec",
-]
-
-[[package]]
-name = "libra2-gas-schedule"
-version = "0.1.1"
-dependencies = [
- "libra2-gas-algebra",
- "libra2-global-constants",
- "move-core-types",
- "move-vm-types",
- "paste",
- "rand 0.7.3",
-]
-
-[[package]]
-name = "libra2-gas-schedule-updator"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "libra2-framework",
- "libra2-gas-schedule",
- "libra2-package-builder",
- "libra2-types",
- "move-core-types",
- "move-model",
- "tempfile",
-]
-
-[[package]]
-name = "libra2-genesis"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "libra2-cached-packages",
- "libra2-config",
- "libra2-crypto",
- "libra2-db",
- "libra2-executor",
- "libra2-framework",
- "libra2-keygen",
- "libra2-logger",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-genesis",
- "rand 0.7.3",
- "serde",
- "serde_yaml 0.8.26",
-]
-
-[[package]]
-name = "libra2-github-client"
-version = "0.1.1"
-dependencies = [
- "base64 0.13.1",
- "libra2-proxy",
- "serde",
- "serde_json",
- "thiserror 1.0.69",
- "ureq",
-]
-
-[[package]]
-name = "libra2-global-constants"
-version = "0.1.1"
-
-[[package]]
-name = "libra2-id-generator"
-version = "0.1.1"
-
-[[package]]
-name = "libra2-indexer"
-version = "0.0.2"
-dependencies = [
- "anyhow",
- "async-trait",
- "bcs 0.1.4",
- "bigdecimal",
- "chrono",
- "diesel",
- "diesel_migrations",
- "field_count",
- "futures",
- "hex",
- "libra2-api",
- "libra2-api-test-context",
- "libra2-api-types",
- "libra2-bitvec",
- "libra2-config",
- "libra2-logger",
- "libra2-mempool",
- "libra2-metrics-core",
- "libra2-runtimes",
- "libra2-storage-interface",
- "libra2-types",
- "once_cell",
- "serde",
- "serde_json",
- "sha2 0.9.9",
- "tokio",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-cache-worker"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "clap 4.5.48",
- "futures",
- "futures-core",
- "jemallocator",
- "libra2-config",
- "libra2-indexer-grpc-server-framework",
- "libra2-indexer-grpc-utils",
- "libra2-metrics-core",
- "libra2-moving-average",
- "libra2-protos",
- "once_cell",
- "prost 0.13.5",
- "redis",
- "reqwest 0.11.27",
- "serde",
- "tempfile",
- "tokio",
- "tonic 0.12.3",
- "tracing",
- "url",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-data-service"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "async-trait",
- "clap 4.5.48",
- "futures",
- "jemallocator",
- "libra2-indexer-grpc-server-framework",
- "libra2-indexer-grpc-utils",
- "libra2-metrics-core",
- "libra2-moving-average",
- "libra2-protos",
- "libra2-transaction-filter",
- "once_cell",
- "prost 0.13.5",
- "redis",
- "rstest",
- "serde",
- "serde_json",
- "tokio",
- "tokio-stream",
- "tonic 0.12.3",
- "tonic-reflection",
- "tracing",
- "uuid 1.18.1",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-data-service-v2"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "build_html",
- "clap 4.5.48",
- "dashmap 7.0.0-rc2",
- "futures",
- "jemallocator",
- "libra2-indexer-grpc-server-framework",
- "libra2-indexer-grpc-utils",
- "libra2-metrics-core",
- "libra2-protos",
- "libra2-transaction-filter",
- "once_cell",
- "prost 0.13.5",
- "rand 0.7.3",
- "serde",
- "tokio",
- "tokio-scoped",
- "tokio-stream",
- "tonic 0.12.3",
- "tonic-reflection",
- "tracing",
- "uuid 1.18.1",
- "warp",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-file-checker"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "clap 4.5.48",
- "cloud-storage",
- "jemallocator",
- "libra2-indexer-grpc-server-framework",
- "libra2-indexer-grpc-utils",
- "libra2-metrics-core",
- "once_cell",
- "serde",
- "serde_json",
- "tokio",
- "tracing",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-file-store"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "clap 4.5.48",
- "futures",
- "jemallocator",
- "libra2-indexer-grpc-server-framework",
- "libra2-indexer-grpc-utils",
- "libra2-metrics-core",
- "libra2-moving-average",
- "once_cell",
- "redis",
- "serde",
- "tokio",
- "tracing",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-file-store-backfiller"
-version = "1.0.0"
-dependencies = [
- "anyhow",
- "async-trait",
- "clap 4.5.48",
- "futures",
- "jemallocator",
- "libra2-indexer-grpc-server-framework",
- "libra2-indexer-grpc-utils",
- "libra2-protos",
- "serde",
- "serde_json",
- "tokio",
- "tonic 0.12.3",
- "tracing",
- "url",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-fullnode"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "bytes",
- "chrono",
- "futures",
- "goldenfile",
- "hex",
- "hyper 0.14.32",
- "itertools 0.13.0",
- "libra2-api",
- "libra2-api-test-context",
- "libra2-api-types",
- "libra2-bitvec",
- "libra2-config",
- "libra2-crypto",
- "libra2-db",
- "libra2-executor",
- "libra2-executor-types",
- "libra2-framework",
- "libra2-genesis",
- "libra2-global-constants",
- "libra2-indexer-grpc-utils",
- "libra2-logger",
- "libra2-mempool",
- "libra2-mempool-notifications",
- "libra2-metrics-core",
- "libra2-moving-average",
- "libra2-proptest-helpers",
- "libra2-protos",
- "libra2-runtimes",
- "libra2-sdk",
- "libra2-secure-storage",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-validator",
- "move-core-types",
- "once_cell",
- "rand 0.7.3",
- "regex",
- "serde",
- "serde_json",
- "tokio",
- "tokio-stream",
- "tonic 0.12.3",
- "tonic-reflection",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-in-memory-cache-benchmark"
-version = "0.1.2"
-dependencies = [
- "anyhow",
- "futures",
- "jemallocator",
- "lazy_static",
- "libra2-indexer-grpc-utils",
- "libra2-protos",
- "once_cell",
- "redis",
- "redis-test",
- "tokio",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-manager"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "build_html",
- "clap 4.5.48",
- "dashmap 7.0.0-rc2",
- "futures",
- "jemallocator",
- "libra2-config",
- "libra2-indexer-grpc-server-framework",
- "libra2-indexer-grpc-utils",
- "libra2-metrics-core",
- "libra2-protos",
- "once_cell",
- "prost 0.13.5",
- "rand 0.7.3",
- "serde",
- "serde_json",
- "tokio",
- "tokio-scoped",
- "tonic 0.12.3",
- "tracing",
- "warp",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-server-framework"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "backtrace",
- "clap 4.5.48",
- "figment",
- "libra2-metrics-core",
- "libra2-system-utils",
- "prometheus",
- "serde",
- "tempfile",
- "tokio",
- "toml 0.7.8",
- "tracing",
- "tracing-subscriber 0.3.20",
- "warp",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-table-info"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "flate2",
- "futures",
- "google-cloud-storage",
- "hyper 0.14.32",
- "itertools 0.13.0",
- "libra2-api",
- "libra2-api-types",
- "libra2-config",
- "libra2-db-indexer",
- "libra2-indexer-grpc-fullnode",
- "libra2-indexer-grpc-utils",
- "libra2-logger",
- "libra2-mempool",
- "libra2-metrics-core",
- "libra2-runtimes",
- "libra2-storage-interface",
- "libra2-types",
- "once_cell",
- "rocksdb",
- "serde",
- "serde_json",
- "tar",
- "tempfile",
- "tokio",
- "tokio-stream",
- "tokio-util 0.7.16",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-utils"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "backoff",
- "base64 0.13.1",
- "build_html",
- "bytesize",
- "chrono",
- "cloud-storage",
- "dashmap 7.0.0-rc2",
- "futures",
- "itertools 0.13.0",
- "libra2-metrics-core",
- "libra2-protos",
- "libra2-transaction-filter",
- "lz4",
- "once_cell",
- "prometheus",
- "prost 0.13.5",
- "redis",
- "redis-test",
- "ripemd",
- "serde",
- "serde_json",
- "tokio",
- "tokio-util 0.7.16",
- "tonic 0.12.3",
- "tracing",
- "url",
- "warp",
-]
-
-[[package]]
-name = "libra2-indexer-grpc-v2-file-store-backfiller"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "clap 4.5.48",
- "futures",
- "jemallocator",
- "libra2-indexer-grpc-server-framework",
- "libra2-indexer-grpc-utils",
- "libra2-protos",
- "serde",
- "serde_json",
- "tokio",
- "tokio-scoped",
- "tonic 0.12.3",
- "tracing",
- "url",
-]
-
-[[package]]
 name = "libra2-indexer-processor-sdk"
 version = "0.1.0"
 dependencies = [
@@ -9248,6 +11816,8 @@ dependencies = [
  "bigdecimal",
  "chrono",
  "clap 4.5.48",
+ "creditchain-protos",
+ "creditchain-system-utils",
  "derive_builder",
  "diesel",
  "diesel-async",
@@ -9260,8 +11830,6 @@ dependencies = [
  "instrumented-channel",
  "kanal",
  "libra2-indexer-transaction-stream",
- "libra2-protos",
- "libra2-system-utils",
  "mockall",
  "native-tls",
  "num_cpus",
@@ -9290,49 +11858,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "libra2-indexer-test-transactions"
-version = "1.0.1"
-dependencies = [
- "libra2-protos",
- "serde_json",
-]
-
-[[package]]
-name = "libra2-indexer-transaction-generator"
-version = "1.0.1"
-dependencies = [
- "anyhow",
- "clap 4.5.48",
- "futures",
- "itertools 0.13.0",
- "libra2",
- "libra2-config",
- "libra2-faucet-core",
- "libra2-indexer-grpc-utils",
- "libra2-protos",
- "rand 0.7.3",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "tempfile",
- "tokio",
- "tokio-stream",
- "toml 0.7.8",
- "tonic 0.12.3",
- "url",
-]
-
-[[package]]
 name = "libra2-indexer-transaction-stream"
 version = "0.1.1"
 dependencies = [
  "anyhow",
  "chrono",
+ "creditchain-moving-average",
+ "creditchain-protos",
+ "creditchain-transaction-filter",
  "futures-util",
  "idxsample",
- "libra2-moving-average",
- "libra2-protos",
- "libra2-transaction-filter",
  "once_cell",
  "prometheus",
  "prost 0.13.5",
@@ -9341,2321 +11876,6 @@ dependencies = [
  "tonic 0.12.3",
  "tracing",
  "url",
-]
-
-[[package]]
-name = "libra2-infallible"
-version = "0.1.1"
-
-[[package]]
-name = "libra2-inspection-service"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "assert_approx_eq",
- "futures",
- "hyper 0.14.32",
- "libra2-build-info",
- "libra2-config",
- "libra2-data-client",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-network",
- "libra2-runtimes",
- "libra2-storage-interface",
- "libra2-storage-service-client",
- "libra2-telemetry",
- "libra2-time-service",
- "once_cell",
- "prometheus",
- "reqwest 0.11.27",
- "rusty-fork",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "libra2-jellyfish-merkle"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "arr_macro",
- "bcs 0.1.4",
- "byteorder",
- "itertools 0.13.0",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-db",
- "libra2-experimental-runtimes",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-storage-interface",
- "libra2-types",
- "num-derive",
- "num-traits",
- "once_cell",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "rayon",
- "serde",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-jwk-consensus"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "bytes",
- "futures",
- "futures-channel",
- "futures-util",
- "libra2-bitvec",
- "libra2-bounded-executor",
- "libra2-channels",
- "libra2-config",
- "libra2-consensus-types",
- "libra2-crypto",
- "libra2-enum-conversion-derive",
- "libra2-event-notifications",
- "libra2-infallible",
- "libra2-jwk-utils",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-network",
- "libra2-reliable-broadcast",
- "libra2-runtimes",
- "libra2-safety-rules",
- "libra2-time-service",
- "libra2-types",
- "libra2-validator-transaction-pool",
- "move-core-types",
- "once_cell",
- "serde",
- "tokio",
- "tokio-retry",
-]
-
-[[package]]
-name = "libra2-jwk-utils"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "http 0.2.12",
- "libra2-types",
- "move-core-types",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "libra2-keygen"
-version = "0.1.1"
-dependencies = [
- "libra2-crypto",
- "libra2-types",
- "rand 0.7.3",
-]
-
-[[package]]
-name = "libra2-keyless-pepper-common"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "ark-bls12-381",
- "ark-ec",
- "ark-ff",
- "ark-serialize",
- "ark-std",
- "bcs 0.1.4",
- "blstrs",
- "derivation-path",
- "ed25519-dalek 1.0.1",
- "hex",
- "hmac 0.12.1",
- "jsonwebtoken 8.3.0",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-dkg",
- "libra2-types",
- "once_cell",
- "rand 0.7.3",
- "regex",
- "serde",
- "serde-big-array",
- "sha2 0.10.9",
-]
-
-[[package]]
-name = "libra2-keyless-pepper-example-client-rust"
-version = "0.1.1"
-dependencies = [
- "ark-bls12-381",
- "ark-serialize",
- "bcs 0.1.4",
- "firestore",
- "hex",
- "libra2-crypto",
- "libra2-infallible",
- "libra2-keyless-pepper-common",
- "libra2-types",
- "reqwest 0.11.27",
- "serde_json",
- "tokio",
-]
-
-[[package]]
-name = "libra2-keyless-pepper-service"
-version = "0.1.1"
-dependencies = [
- "aes-gcm",
- "anyhow",
- "ark-bls12-381",
- "ark-bn254",
- "ark-ec",
- "ark-ff",
- "ark-groth16",
- "ark-serialize",
- "bcs 0.1.4",
- "dashmap 7.0.0-rc2",
- "firestore",
- "hex",
- "hyper 0.14.32",
- "jsonwebtoken 8.3.0",
- "jwt",
- "libra2-crypto",
- "libra2-infallible",
- "libra2-inspection-service",
- "libra2-keyless-pepper-common",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-types",
- "once_cell",
- "rand 0.7.3",
- "regex",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "sha3 0.9.1",
- "tokio",
- "uuid 1.18.1",
-]
-
-[[package]]
-name = "libra2-language-e2e-tests"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "bytes",
- "goldenfile",
- "libra2-abstract-gas-usage",
- "libra2-bitvec",
- "libra2-block-executor",
- "libra2-cached-packages",
- "libra2-crypto",
- "libra2-framework",
- "libra2-gas-algebra",
- "libra2-gas-meter",
- "libra2-gas-profiling",
- "libra2-gas-schedule",
- "libra2-keygen",
- "libra2-proptest-helpers",
- "libra2-rest-client",
- "libra2-temppath",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-validator-interface",
- "libra2-vm",
- "libra2-vm-environment",
- "libra2-vm-genesis",
- "libra2-vm-logging",
- "libra2-vm-types",
- "move-binary-format",
- "move-command-line-common",
- "move-core-types",
- "move-ir-compiler",
- "move-model",
- "move-vm-runtime",
- "move-vm-types",
- "num_cpus",
- "once_cell",
- "petgraph 0.5.1",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "rayon",
- "serde",
-]
-
-[[package]]
-name = "libra2-ledger"
-version = "0.2.1"
-dependencies = [
- "hex",
- "ledger-apdu",
- "ledger-transport-hid",
- "libra2-crypto",
- "libra2-types",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-localnet"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "bollard",
- "diesel",
- "diesel-async",
- "dirs 5.0.1",
- "futures",
- "libra2-indexer-grpc-utils",
- "libra2-protos",
- "libra2-rest-client",
- "processor",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "tokio",
- "tonic 0.12.3",
- "tracing",
- "version-compare",
-]
-
-[[package]]
-name = "libra2-log-derive"
-version = "0.1.1"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 1.0.109",
-]
-
-[[package]]
-name = "libra2-logger"
-version = "0.1.1"
-dependencies = [
- "backtrace",
- "chrono",
- "console-subscriber",
- "erased-serde 0.3.31",
- "futures",
- "hostname",
- "libra2-infallible",
- "libra2-log-derive",
- "libra2-node-identity",
- "once_cell",
- "pretty_assertions",
- "prometheus",
- "serde",
- "serde_json",
- "strum 0.27.2",
- "strum_macros 0.27.2",
- "tokio",
- "tracing",
- "tracing-subscriber 0.3.20",
-]
-
-[[package]]
-name = "libra2-memory-usage-tracker"
-version = "0.1.1"
-dependencies = [
- "libra2-gas-algebra",
- "libra2-gas-meter",
- "libra2-types",
- "move-binary-format",
- "move-core-types",
- "move-vm-types",
-]
-
-[[package]]
-name = "libra2-mempool"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "enum_dispatch",
- "fail",
- "futures",
- "itertools 0.13.0",
- "libra2-bounded-executor",
- "libra2-channels",
- "libra2-compression",
- "libra2-config",
- "libra2-consensus-types",
- "libra2-crypto",
- "libra2-event-notifications",
- "libra2-id-generator",
- "libra2-infallible",
- "libra2-logger",
- "libra2-mempool-notifications",
- "libra2-metrics-core",
- "libra2-netcore",
- "libra2-network",
- "libra2-peer-monitoring-service-types",
- "libra2-runtimes",
- "libra2-short-hex-str",
- "libra2-storage-interface",
- "libra2-time-service",
- "libra2-transaction-filters",
- "libra2-types",
- "libra2-vm-validator",
- "maplit",
- "num_cpus",
- "once_cell",
- "proptest",
- "rand 0.7.3",
- "rayon",
- "serde",
- "thiserror 1.0.69",
- "tokio",
- "tokio-stream",
-]
-
-[[package]]
-name = "libra2-mempool-notifications"
-version = "0.1.1"
-dependencies = [
- "async-trait",
- "claims",
- "futures",
- "libra2-crypto",
- "libra2-types",
- "serde",
- "thiserror 1.0.69",
- "tokio",
-]
-
-[[package]]
-name = "libra2-memsocket"
-version = "0.1.1"
-dependencies = [
- "bytes",
- "futures",
- "libra2-infallible",
- "once_cell",
-]
-
-[[package]]
-name = "libra2-metrics-core"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "claims",
- "prometheus",
-]
-
-[[package]]
-name = "libra2-move-debugger"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "itertools 0.13.0",
- "libra2-block-executor",
- "libra2-consensus",
- "libra2-crypto",
- "libra2-gas-profiling",
- "libra2-logger",
- "libra2-rest-client",
- "libra2-types",
- "libra2-validator-interface",
- "libra2-vm",
- "libra2-vm-environment",
- "libra2-vm-logging",
- "libra2-vm-types",
- "regex",
- "reqwest 0.11.27",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-move-e2e-benchmark"
-version = "0.1.1"
-dependencies = [
- "clap 4.5.48",
- "libra2-language-e2e-tests",
- "libra2-logger",
- "libra2-transaction-generator-lib",
- "libra2-transaction-workloads-lib",
- "libra2-types",
- "rand 0.7.3",
- "serde_json",
-]
-
-[[package]]
-name = "libra2-move-examples"
-version = "0.1.0"
-dependencies = [
- "clap 4.5.48",
- "libra2-framework",
- "libra2-gas-schedule",
- "libra2-types",
- "libra2-vm",
- "move-cli",
- "move-model",
- "move-package",
- "move-prover",
- "move-unit-test",
- "move-vm-runtime",
- "tempfile",
-]
-
-[[package]]
-name = "libra2-move-stdlib"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "dir-diff",
- "file_diff",
- "libra2-gas-schedule",
- "libra2-native-interface",
- "libra2-types",
- "move-cli",
- "move-core-types",
- "move-package",
- "move-unit-test",
- "move-vm-runtime",
- "move-vm-types",
- "sha2 0.9.9",
- "sha3 0.9.1",
- "smallvec",
- "tempfile",
-]
-
-[[package]]
-name = "libra2-moving-average"
-version = "0.1.0"
-dependencies = [
- "chrono",
-]
-
-[[package]]
-name = "libra2-mvhashmap"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bytes",
- "claims",
- "concurrent-queue",
- "crossbeam",
- "dashmap 7.0.0-rc2",
- "equivalent",
- "fail",
- "libra2-aggregator",
- "libra2-infallible",
- "libra2-types",
- "libra2-vm-types",
- "move-binary-format",
- "move-core-types",
- "move-vm-runtime",
- "move-vm-types",
- "num_cpus",
- "proptest",
- "proptest-derive",
- "rayon",
- "serde",
- "test-case",
-]
-
-[[package]]
-name = "libra2-native-interface"
-version = "0.1.1"
-dependencies = [
- "libra2-gas-algebra",
- "libra2-gas-schedule",
- "libra2-types",
- "move-binary-format",
- "move-core-types",
- "move-vm-runtime",
- "move-vm-types",
- "smallvec",
-]
-
-[[package]]
-name = "libra2-netcore"
-version = "0.1.1"
-dependencies = [
- "bytes",
- "futures",
- "libra2-memsocket",
- "libra2-proxy",
- "libra2-types",
- "pin-project 1.1.10",
- "serde",
- "tokio",
- "tokio-util 0.7.16",
- "url",
-]
-
-[[package]]
-name = "libra2-network"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "arc-swap",
- "async-trait",
- "bcs 0.1.4",
- "bytes",
- "futures",
- "futures-util",
- "hex",
- "itertools 0.13.0",
- "libra2-bitvec",
- "libra2-channels",
- "libra2-compression",
- "libra2-config",
- "libra2-crypto",
- "libra2-id-generator",
- "libra2-infallible",
- "libra2-logger",
- "libra2-memsocket",
- "libra2-metrics-core",
- "libra2-netcore",
- "libra2-num-variants",
- "libra2-peer-monitoring-service-types",
- "libra2-proptest-helpers",
- "libra2-short-hex-str",
- "libra2-time-service",
- "libra2-types",
- "maplit",
- "once_cell",
- "ordered-float 3.9.2",
- "pin-project 1.1.10",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "rand 0.8.5",
- "rand_core 0.5.1",
- "serde",
- "serde_bytes",
- "serde_json",
- "thiserror 1.0.69",
- "tokio",
- "tokio-retry",
- "tokio-stream",
- "tokio-util 0.7.16",
-]
-
-[[package]]
-name = "libra2-network-benchmark"
-version = "0.1.1"
-dependencies = [
- "async-channel 1.9.0",
- "bytes",
- "futures",
- "libra2-config",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-network",
- "libra2-time-service",
- "libra2-types",
- "once_cell",
- "rand 0.7.3",
- "serde",
- "tokio",
-]
-
-[[package]]
-name = "libra2-network-builder"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "futures",
- "libra2-channels",
- "libra2-config",
- "libra2-crypto",
- "libra2-event-notifications",
- "libra2-logger",
- "libra2-netcore",
- "libra2-network",
- "libra2-network-discovery",
- "libra2-time-service",
- "libra2-types",
- "maplit",
- "rand 0.7.3",
- "serde",
- "tokio",
-]
-
-[[package]]
-name = "libra2-network-checker"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "clap 4.5.48",
- "futures",
- "libra2-config",
- "libra2-crypto",
- "libra2-logger",
- "libra2-network",
- "libra2-types",
- "serde",
- "tokio",
-]
-
-[[package]]
-name = "libra2-network-discovery"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "futures",
- "libra2-channels",
- "libra2-config",
- "libra2-crypto",
- "libra2-event-notifications",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-netcore",
- "libra2-network",
- "libra2-rest-client",
- "libra2-short-hex-str",
- "libra2-temppath",
- "libra2-time-service",
- "libra2-types",
- "once_cell",
- "rand 0.7.3",
- "serde_yaml 0.8.26",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-nft-metadata-crawler"
-version = "0.1.1"
-dependencies = [
- "ahash 0.8.12",
- "anyhow",
- "async-trait",
- "axum 0.7.9",
- "backoff",
- "bytes",
- "chrono",
- "clap 4.5.48",
- "diesel",
- "diesel_migrations",
- "enum_dispatch",
- "field_count",
- "futures",
- "google-cloud-storage",
- "image",
- "libra2-indexer-grpc-server-framework",
- "libra2-metrics-core",
- "once_cell",
- "rayon",
- "regex",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "sha256",
- "tokio",
- "tracing",
- "url",
-]
-
-[[package]]
-name = "libra2-node"
-version = "0.0.0-main"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "either",
- "fail",
- "futures",
- "hex",
- "jemallocator",
- "libra2-admin-service",
- "libra2-api",
- "libra2-backup-service",
- "libra2-build-info",
- "libra2-cached-packages",
- "libra2-channels",
- "libra2-config",
- "libra2-consensus",
- "libra2-consensus-notifications",
- "libra2-crash-handler",
- "libra2-crypto",
- "libra2-data-client",
- "libra2-data-streaming-service",
- "libra2-db",
- "libra2-db-indexer",
- "libra2-dkg-runtime",
- "libra2-event-notifications",
- "libra2-executor",
- "libra2-framework",
- "libra2-genesis",
- "libra2-indexer",
- "libra2-indexer-grpc-fullnode",
- "libra2-indexer-grpc-table-info",
- "libra2-infallible",
- "libra2-inspection-service",
- "libra2-jwk-consensus",
- "libra2-logger",
- "libra2-mempool",
- "libra2-mempool-notifications",
- "libra2-network",
- "libra2-network-benchmark",
- "libra2-network-builder",
- "libra2-node-identity",
- "libra2-peer-monitoring-service-client",
- "libra2-peer-monitoring-service-server",
- "libra2-peer-monitoring-service-types",
- "libra2-runtimes",
- "libra2-state-sync-driver",
- "libra2-storage-interface",
- "libra2-storage-service-client",
- "libra2-storage-service-notifications",
- "libra2-storage-service-server",
- "libra2-storage-service-types",
- "libra2-telemetry",
- "libra2-temppath",
- "libra2-time-service",
- "libra2-types",
- "libra2-validator-transaction-pool",
- "libra2-vm",
- "libra2-vm-environment",
- "num_cpus",
- "rand 0.7.3",
- "rayon",
- "rlimit",
- "rstack-self",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "tokio",
- "ureq",
- "url",
-]
-
-[[package]]
-name = "libra2-node-checker"
-version = "0.1.2"
-dependencies = [
- "anyhow",
- "async-trait",
- "clap 4.5.48",
- "futures",
- "libra2-config",
- "libra2-crypto",
- "libra2-logger",
- "libra2-network-checker",
- "libra2-rest-client",
- "libra2-sdk",
- "libra2-transaction-emitter-lib",
- "libra2-transaction-workloads-lib",
- "once_cell",
- "poem",
- "poem-openapi",
- "prometheus-parse",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "thiserror 1.0.69",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-node-identity"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "claims",
- "libra2-types",
- "once_cell",
-]
-
-[[package]]
-name = "libra2-node-resource-metrics"
-version = "0.1.0"
-dependencies = [
- "cfg-if",
- "libra2-build-info",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "once_cell",
- "procfs",
- "prometheus",
- "rlimit",
- "sysinfo",
-]
-
-[[package]]
-name = "libra2-num-variants"
-version = "0.1.1"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 1.0.109",
-]
-
-[[package]]
-name = "libra2-openapi"
-version = "0.1.0"
-dependencies = [
- "percent-encoding",
- "poem",
- "poem-openapi",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "libra2-openapi-spec-generator"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "clap 4.5.48",
- "libra2-api",
- "libra2-config",
- "libra2-mempool",
- "libra2-storage-interface",
- "libra2-types",
-]
-
-[[package]]
-name = "libra2-package-builder"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "itertools 0.13.0",
- "libra2-framework",
- "move-command-line-common",
- "move-package",
- "tempfile",
-]
-
-[[package]]
-name = "libra2-peer-monitoring-service-client"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "enum_dispatch",
- "futures",
- "libra2-build-info",
- "libra2-channels",
- "libra2-config",
- "libra2-id-generator",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-netcore",
- "libra2-network",
- "libra2-peer-monitoring-service-server",
- "libra2-peer-monitoring-service-types",
- "libra2-time-service",
- "libra2-types",
- "maplit",
- "once_cell",
- "rand 0.7.3",
- "serde",
- "serde_json",
- "thiserror 1.0.69",
- "tokio",
- "tokio-stream",
-]
-
-[[package]]
-name = "libra2-peer-monitoring-service-server"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "bytes",
- "claims",
- "futures",
- "libra2-bounded-executor",
- "libra2-build-info",
- "libra2-channels",
- "libra2-config",
- "libra2-crypto",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-netcore",
- "libra2-network",
- "libra2-peer-monitoring-service-types",
- "libra2-storage-interface",
- "libra2-time-service",
- "libra2-types",
- "maplit",
- "mockall",
- "once_cell",
- "rand 0.7.3",
- "serde",
- "thiserror 1.0.69",
- "tokio",
-]
-
-[[package]]
-name = "libra2-peer-monitoring-service-types"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "libra2-config",
- "libra2-types",
- "serde",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-profiler"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "backtrace",
- "jemalloc-sys",
- "jemallocator",
- "pprof",
- "regex",
-]
-
-[[package]]
-name = "libra2-proptest-helpers"
-version = "0.1.1"
-dependencies = [
- "crossbeam",
- "proptest",
- "proptest-derive",
-]
-
-[[package]]
-name = "libra2-protos"
-version = "1.3.2"
-dependencies = [
- "pbjson",
- "prost 0.13.5",
- "serde",
- "tonic 0.12.3",
-]
-
-[[package]]
-name = "libra2-proxy"
-version = "0.1.0"
-dependencies = [
- "ipnet",
-]
-
-[[package]]
-name = "libra2-push-metrics"
-version = "0.1.1"
-dependencies = [
- "libra2-logger",
- "libra2-metrics-core",
- "rand 0.7.3",
- "ureq",
- "url",
-]
-
-[[package]]
-name = "libra2-rate-limiter"
-version = "0.1.0"
-dependencies = [
- "futures",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "pin-project 1.1.10",
- "tokio",
- "tokio-util 0.7.16",
-]
-
-[[package]]
-name = "libra2-release-builder"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "futures",
- "git2 0.16.1",
- "handlebars",
- "hex",
- "libra2",
- "libra2-build-info",
- "libra2-crypto",
- "libra2-framework",
- "libra2-gas-profiling",
- "libra2-gas-schedule",
- "libra2-gas-schedule-updator",
- "libra2-genesis",
- "libra2-infallible",
- "libra2-keygen",
- "libra2-language-e2e-tests",
- "libra2-move-debugger",
- "libra2-rest-client",
- "libra2-temppath",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "libra2-vm-logging",
- "libra2-vm-types",
- "move-binary-format",
- "move-bytecode-verifier",
- "move-core-types",
- "move-model",
- "move-vm-runtime",
- "move-vm-types",
- "once_cell",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "sha3 0.9.1",
- "strum 0.27.2",
- "strum_macros 0.27.2",
- "tokio",
- "url",
- "walkdir",
-]
-
-[[package]]
-name = "libra2-reliable-broadcast"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "bytes",
- "claims",
- "futures",
- "futures-channel",
- "libra2-bounded-executor",
- "libra2-consensus-types",
- "libra2-enum-conversion-derive",
- "libra2-infallible",
- "libra2-logger",
- "libra2-time-service",
- "libra2-types",
- "tokio",
- "tokio-retry",
-]
-
-[[package]]
-name = "libra2-replay-benchmark"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "claims",
- "clap 4.5.48",
- "colored",
- "libra2-block-executor",
- "libra2-crypto",
- "libra2-framework",
- "libra2-gas-schedule",
- "libra2-logger",
- "libra2-move-debugger",
- "libra2-push-metrics",
- "libra2-rest-client",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "move-core-types",
- "parking_lot 0.12.4",
- "rand 0.7.3",
- "serde",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-resource-viewer"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "move-binary-format",
- "move-bytecode-utils",
- "move-core-types",
- "move-resource-viewer",
-]
-
-[[package]]
-name = "libra2-rest-client"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "bytes",
- "clap 4.5.48",
- "hex",
- "libra2-api-types",
- "libra2-crypto",
- "libra2-infallible",
- "libra2-logger",
- "libra2-types",
- "move-core-types",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "thiserror 1.0.69",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-retrier"
-version = "0.1.0"
-dependencies = [
- "libra2-logger",
- "tokio",
-]
-
-[[package]]
-name = "libra2-rocksdb-options"
-version = "0.1.1"
-dependencies = [
- "libra2-config",
- "rocksdb",
-]
-
-[[package]]
-name = "libra2-rosetta"
-version = "0.0.2"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "futures",
- "hex",
- "itertools 0.13.0",
- "libra2-cached-packages",
- "libra2-config",
- "libra2-crypto",
- "libra2-global-constants",
- "libra2-logger",
- "libra2-node",
- "libra2-rest-client",
- "libra2-runtimes",
- "libra2-sdk",
- "libra2-types",
- "libra2-warp-webserver",
- "move-core-types",
- "once_cell",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "tokio",
- "url",
- "warp",
-]
-
-[[package]]
-name = "libra2-rosetta-cli"
-version = "0.0.2"
-dependencies = [
- "anyhow",
- "clap 4.5.48",
- "libra2",
- "libra2-logger",
- "libra2-rosetta",
- "libra2-types",
- "serde",
- "serde_json",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-runtimes"
-version = "0.1.1"
-dependencies = [
- "rayon",
- "tokio",
-]
-
-[[package]]
-name = "libra2-safety-rules"
-version = "0.1.0"
-dependencies = [
- "claims",
- "criterion",
- "hex",
- "libra2-config",
- "libra2-consensus-types",
- "libra2-crypto",
- "libra2-global-constants",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-proptest-helpers",
- "libra2-secure-net",
- "libra2-secure-storage",
- "libra2-types",
- "libra2-vault-client",
- "once_cell",
- "proptest",
- "rand 0.7.3",
- "rusty-fork",
- "serde",
- "serde_json",
- "tempfile",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-schemadb"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "byteorder",
- "dunce",
- "libra2-drop-helper",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-storage-interface",
- "libra2-temppath",
- "once_cell",
- "proptest",
- "rand 0.7.3",
- "rocksdb",
-]
-
-[[package]]
-name = "libra2-scratchpad"
-version = "0.1.0"
-dependencies = [
- "bitvec 1.0.1",
- "criterion",
- "dashmap 7.0.0-rc2",
- "itertools 0.13.0",
- "jemallocator",
- "libra2-crypto",
- "libra2-drop-helper",
- "libra2-infallible",
- "libra2-metrics-core",
- "libra2-types",
- "libra2-vm",
- "once_cell",
- "proptest",
- "rand 0.7.3",
- "rayon",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-sdk"
-version = "0.0.4"
-dependencies = [
- "anyhow",
- "base64 0.13.1",
- "bcs 0.1.4",
- "ed25519-dalek-bip32",
- "hex",
- "lazy_static",
- "libra2-cached-packages",
- "libra2-crypto",
- "libra2-global-constants",
- "libra2-ledger",
- "libra2-rest-client",
- "libra2-types",
- "move-core-types",
- "once_cell",
- "rand 0.7.3",
- "rand_core 0.5.1",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "tiny-bip39",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-sdk-builder"
-version = "0.2.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "heck 0.4.1",
- "libra2-cached-packages",
- "libra2-framework",
- "libra2-types",
- "move-core-types",
- "once_cell",
- "serde-generate",
- "serde-reflection",
- "serde_yaml 0.8.26",
- "tempfile",
- "textwrap 0.15.2",
- "which",
-]
-
-[[package]]
-name = "libra2-secure-net"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "crossbeam-channel",
- "libra2-config",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-protos",
- "once_cell",
- "serde",
- "thiserror 1.0.69",
- "tokio",
- "tonic 0.12.3",
- "tonic-reflection",
-]
-
-[[package]]
-name = "libra2-secure-storage"
-version = "0.1.1"
-dependencies = [
- "base64 0.13.1",
- "bcs 0.1.4",
- "chrono",
- "enum_dispatch",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-infallible",
- "libra2-logger",
- "libra2-temppath",
- "libra2-time-service",
- "libra2-vault-client",
- "rand 0.7.3",
- "serde",
- "serde_json",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-short-hex-str"
-version = "0.1.1"
-dependencies = [
- "hex",
- "mirai-annotations",
- "proptest",
- "serde",
- "static_assertions",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-speculative-state-helper"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "claims",
- "crossbeam",
- "libra2-infallible",
- "parking_lot 0.12.4",
- "proptest",
- "proptest-derive",
- "rayon",
-]
-
-[[package]]
-name = "libra2-state-sync-driver"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "bcs 0.1.4",
- "claims",
- "futures",
- "libra2-channels",
- "libra2-config",
- "libra2-consensus-notifications",
- "libra2-crypto",
- "libra2-data-client",
- "libra2-data-streaming-service",
- "libra2-db",
- "libra2-event-notifications",
- "libra2-executor",
- "libra2-executor-test-helpers",
- "libra2-executor-types",
- "libra2-genesis",
- "libra2-infallible",
- "libra2-logger",
- "libra2-mempool-notifications",
- "libra2-metrics-core",
- "libra2-network",
- "libra2-runtimes",
- "libra2-schemadb",
- "libra2-storage-interface",
- "libra2-storage-service-client",
- "libra2-storage-service-notifications",
- "libra2-storage-service-types",
- "libra2-temppath",
- "libra2-time-service",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-genesis",
- "mockall",
- "move-core-types",
- "ntest",
- "once_cell",
- "rand 0.7.3",
- "serde",
- "thiserror 1.0.69",
- "tokio",
- "tokio-stream",
-]
-
-[[package]]
-name = "libra2-storage-interface"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "arr_macro",
- "bcs 0.1.4",
- "dashmap 7.0.0-rc2",
- "derive_more 0.99.20",
- "itertools 0.13.0",
- "libra2-crypto",
- "libra2-experimental-layered-map",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-scratchpad",
- "libra2-secure-net",
- "libra2-types",
- "lru",
- "once_cell",
- "parking_lot 0.12.4",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "rayon",
- "serde",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-storage-service-client"
-version = "0.1.1"
-dependencies = [
- "libra2-config",
- "libra2-network",
- "libra2-storage-service-types",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-storage-service-notifications"
-version = "0.1.1"
-dependencies = [
- "async-trait",
- "claims",
- "futures",
- "libra2-channels",
- "libra2-crypto",
- "serde",
- "thiserror 1.0.69",
- "tokio",
-]
-
-[[package]]
-name = "libra2-storage-service-server"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "arc-swap",
- "bcs 0.1.4",
- "bytes",
- "claims",
- "dashmap 7.0.0-rc2",
- "futures",
- "libra2-bitvec",
- "libra2-channels",
- "libra2-config",
- "libra2-crypto",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-netcore",
- "libra2-network",
- "libra2-storage-interface",
- "libra2-storage-service-notifications",
- "libra2-storage-service-types",
- "libra2-time-service",
- "libra2-types",
- "maplit",
- "mini-moka",
- "mockall",
- "once_cell",
- "rand 0.7.3",
- "serde",
- "thiserror 1.0.69",
- "tokio",
-]
-
-[[package]]
-name = "libra2-storage-service-types"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "claims",
- "libra2-compression",
- "libra2-config",
- "libra2-crypto",
- "libra2-time-service",
- "libra2-types",
- "num-traits",
- "proptest",
- "rand 0.7.3",
- "serde",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-system-utils"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "async-mutex",
- "http 0.2.12",
- "hyper 0.14.32",
- "lazy_static",
- "libra2-profiler",
- "mime",
- "pprof",
- "regex",
- "rstack-self",
- "tokio",
- "tracing",
- "url",
-]
-
-[[package]]
-name = "libra2-table-natives"
-version = "0.1.1"
-dependencies = [
- "better_any",
- "bytes",
- "libra2-gas-schedule",
- "libra2-native-interface",
- "move-binary-format",
- "move-core-types",
- "move-table-extension",
- "move-vm-runtime",
- "move-vm-types",
- "sha3 0.9.1",
- "smallvec",
-]
-
-[[package]]
-name = "libra2-telemetry"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "flate2",
- "futures",
- "httpmock",
- "libra2-api",
- "libra2-config",
- "libra2-consensus",
- "libra2-crypto",
- "libra2-db",
- "libra2-infallible",
- "libra2-logger",
- "libra2-mempool",
- "libra2-metrics-core",
- "libra2-network",
- "libra2-node-resource-metrics",
- "libra2-runtimes",
- "libra2-state-sync-driver",
- "libra2-telemetry-service",
- "libra2-types",
- "once_cell",
- "prometheus",
- "rand 0.7.3",
- "rand_core 0.5.1",
- "reqwest 0.11.27",
- "reqwest-middleware",
- "reqwest-retry",
- "serde",
- "serde_json",
- "sysinfo",
- "tokio",
- "tokio-stream",
- "url",
- "uuid 1.18.1",
-]
-
-[[package]]
-name = "libra2-telemetry-service"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "base64 0.13.1",
- "bcs 0.1.4",
- "chrono",
- "claims",
- "clap 4.5.48",
- "debug-ignore",
- "flate2",
- "futures",
- "gcp-bigquery-client",
- "httpmock",
- "jsonwebtoken 8.3.0",
- "libra2-config",
- "libra2-crypto",
- "libra2-infallible",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-rest-client",
- "libra2-types",
- "once_cell",
- "prometheus",
- "rand 0.7.3",
- "rand_core 0.5.1",
- "reqwest 0.11.27",
- "reqwest-middleware",
- "reqwest-retry",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "thiserror 1.0.69",
- "tokio",
- "tracing",
- "url",
- "uuid 1.18.1",
- "warp",
-]
-
-[[package]]
-name = "libra2-temppath"
-version = "0.1.1"
-dependencies = [
- "hex",
- "rand 0.7.3",
-]
-
-[[package]]
-name = "libra2-testcases"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "assert_approx_eq",
- "async-trait",
- "bcs 0.1.4",
- "csv",
- "futures",
- "hex",
- "itertools 0.13.0",
- "libra2",
- "libra2-config",
- "libra2-forge",
- "libra2-global-constants",
- "libra2-keygen",
- "libra2-logger",
- "libra2-release-builder",
- "libra2-rest-client",
- "libra2-runtimes",
- "libra2-sdk",
- "libra2-temppath",
- "libra2-types",
- "log",
- "rand 0.7.3",
- "reqwest 0.11.27",
- "tokio",
-]
-
-[[package]]
-name = "libra2-time-service"
-version = "0.1.1"
-dependencies = [
- "enum_dispatch",
- "futures",
- "libra2-infallible",
- "pin-project 1.1.10",
- "thiserror 1.0.69",
- "tokio",
- "tokio-test",
-]
-
-[[package]]
-name = "libra2-transaction-benchmarks"
-version = "0.1.1"
-dependencies = [
- "clap 4.5.48",
- "criterion",
- "criterion-cpu-time",
- "libra2-bitvec",
- "libra2-block-executor",
- "libra2-block-partitioner",
- "libra2-crypto",
- "libra2-language-e2e-tests",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-node-resource-metrics",
- "libra2-push-metrics",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-logging",
- "num_cpus",
- "proptest",
-]
-
-[[package]]
-name = "libra2-transaction-emitter"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "clap 4.5.48",
- "futures",
- "libra2-global-constants",
- "libra2-logger",
- "libra2-sdk",
- "libra2-transaction-emitter-lib",
- "libra2-transaction-workloads-lib",
- "rand 0.7.3",
- "tokio",
-]
-
-[[package]]
-name = "libra2-transaction-emitter-lib"
-version = "0.0.1"
-dependencies = [
- "again",
- "anyhow",
- "async-trait",
- "base64 0.13.1",
- "clap 4.5.48",
- "futures",
- "hex",
- "itertools 0.13.0",
- "libra2-config",
- "libra2-crypto",
- "libra2-global-constants",
- "libra2-infallible",
- "libra2-logger",
- "libra2-rest-client",
- "libra2-sdk",
- "libra2-transaction-generator-lib",
- "libra2-types",
- "log",
- "once_cell",
- "rand 0.7.3",
- "rand_core 0.5.1",
- "reqwest 0.11.27",
- "serde",
- "serde_json",
- "tokio",
- "url",
-]
-
-[[package]]
-name = "libra2-transaction-filter"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "derivative",
- "derive_builder",
- "libra2-protos",
- "lz4",
- "memchr",
- "once_cell",
- "prost 0.13.5",
- "serde",
- "serde_json",
- "serde_yaml 0.8.26",
- "thiserror 1.0.69",
-]
-
-[[package]]
-name = "libra2-transaction-filters"
-version = "0.1.1"
-dependencies = [
- "libra2-crypto",
- "libra2-types",
- "move-core-types",
- "rand 0.7.3",
- "serde",
- "serde_yaml 0.8.26",
-]
-
-[[package]]
-name = "libra2-transaction-generator-lib"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "async-trait",
- "clap 4.5.48",
- "libra2-framework",
- "libra2-infallible",
- "libra2-logger",
- "libra2-sdk",
- "log",
- "move-binary-format",
- "move-package",
- "once_cell",
- "rand 0.7.3",
- "serde",
-]
-
-[[package]]
-name = "libra2-transaction-simulation"
-version = "0.0.2"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "bytes",
- "libra2-crypto",
- "libra2-keygen",
- "libra2-types",
- "libra2-vm-genesis",
- "move-binary-format",
- "move-core-types",
- "once_cell",
- "parking_lot 0.12.4",
- "proptest",
- "serde",
-]
-
-[[package]]
-name = "libra2-transaction-workloads-lib"
-version = "0.0.1"
-dependencies = [
- "async-trait",
- "clap 4.5.48",
- "libra2-framework",
- "libra2-sdk",
- "libra2-transaction-generator-lib",
- "move-binary-format",
- "once_cell",
- "rand 0.7.3",
- "rand_core 0.5.1",
- "serde",
-]
-
-[[package]]
-name = "libra2-transactional-test-harness"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "codespan-reporting",
- "datatest-stable",
- "hex",
- "libra2-api-types",
- "libra2-block-executor",
- "libra2-cached-packages",
- "libra2-crypto",
- "libra2-framework",
- "libra2-gas-schedule",
- "libra2-resource-viewer",
- "libra2-storage-interface",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "libra2-vm-genesis",
- "libra2-vm-types",
- "move-binary-format",
- "move-bytecode-verifier",
- "move-command-line-common",
- "move-compiler-v2",
- "move-core-types",
- "move-model",
- "move-symbol-pool",
- "move-transactional-test-runner",
- "move-vm-runtime",
- "move-vm-types",
- "once_cell",
- "serde_json",
- "tempfile",
-]
-
-[[package]]
-name = "libra2-types"
-version = "0.0.4"
-dependencies = [
- "ahash 0.8.12",
- "anyhow",
- "arbitrary",
- "ark-bn254",
- "ark-ec",
- "ark-ff",
- "ark-groth16",
- "ark-relations",
- "ark-serialize",
- "ark-std",
- "async-trait",
- "base64 0.13.1",
- "bcs 0.1.4",
- "bytes",
- "chrono",
- "chrono-tz 0.10.4",
- "ciborium",
- "claims",
- "coset",
- "criterion",
- "dashmap 7.0.0-rc2",
- "derivative",
- "derive_more 0.99.20",
- "fixed",
- "fxhash",
- "hashbrown 0.14.5",
- "hex",
- "itertools 0.13.0",
- "jsonwebtoken 8.3.0",
- "libra2-bitvec",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-dkg",
- "libra2-infallible",
- "libra2-proptest-helpers",
- "lru",
- "move-binary-format",
- "move-core-types",
- "move-model",
- "move-table-extension",
- "move-vm-types",
- "num-bigint 0.3.3",
- "num-derive",
- "num-traits",
- "once_cell",
- "p256",
- "passkey-authenticator",
- "passkey-client",
- "passkey-types",
- "poem-openapi",
- "poem-openapi-derive",
- "proptest",
- "proptest-derive",
- "quick_cache",
- "rand 0.7.3",
- "rayon",
- "ref-cast",
- "reqwest 0.11.27",
- "ring 0.16.20",
- "rsa 0.9.8",
- "serde",
- "serde-big-array",
- "serde_bytes",
- "serde_json",
- "serde_with",
- "serde_yaml 0.8.26",
- "strum 0.27.2",
- "strum_macros 0.27.2",
- "thiserror 1.0.69",
- "tokio",
- "tracing",
- "url",
-]
-
-[[package]]
-name = "libra2-validator-interface"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "async-recursion",
- "async-trait",
- "bcs 0.1.4",
- "libra2-api-types",
- "libra2-config",
- "libra2-db",
- "libra2-framework",
- "libra2-rest-client",
- "libra2-storage-interface",
- "libra2-types",
- "lru",
- "move-core-types",
- "tokio",
-]
-
-[[package]]
-name = "libra2-validator-transaction-pool"
-version = "0.1.1"
-dependencies = [
- "futures-util",
- "libra2-channels",
- "libra2-crypto",
- "libra2-infallible",
- "libra2-types",
- "tokio",
-]
-
-[[package]]
-name = "libra2-vault-client"
-version = "0.1.1"
-dependencies = [
- "base64 0.13.1",
- "chrono",
- "libra2-crypto",
- "libra2-proptest-helpers",
- "libra2-types",
- "native-tls",
- "once_cell",
- "proptest",
- "serde",
- "serde_json",
- "thiserror 1.0.69",
- "ureq",
-]
-
-[[package]]
-name = "libra2-vm"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "ark-bn254",
- "ark-groth16",
- "bcs 0.1.4",
- "bytes",
- "claims",
- "crossbeam-channel",
- "derive_more 0.99.20",
- "fail",
- "futures",
- "hex",
- "itertools 0.13.0",
- "libra2-aggregator",
- "libra2-block-executor",
- "libra2-block-partitioner",
- "libra2-crypto",
- "libra2-crypto-derive",
- "libra2-experimental-runtimes",
- "libra2-framework",
- "libra2-gas-algebra",
- "libra2-gas-meter",
- "libra2-gas-schedule",
- "libra2-infallible",
- "libra2-keygen",
- "libra2-language-e2e-tests",
- "libra2-logger",
- "libra2-memory-usage-tracker",
- "libra2-metrics-core",
- "libra2-mvhashmap",
- "libra2-native-interface",
- "libra2-table-natives",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm-environment",
- "libra2-vm-logging",
- "libra2-vm-types",
- "move-binary-format",
- "move-core-types",
- "move-unit-test",
- "move-vm-metrics",
- "move-vm-runtime",
- "move-vm-types",
- "num_cpus",
- "once_cell",
- "ouroboros",
- "proptest",
- "rand 0.7.3",
- "rand_core 0.5.1",
- "rayon",
- "serde",
- "test-case",
-]
-
-[[package]]
-name = "libra2-vm-benchmarks"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "clap 4.5.48",
- "libra2-cached-packages",
- "libra2-framework",
- "libra2-language-e2e-tests",
- "libra2-types",
- "move-binary-format",
- "move-core-types",
-]
-
-[[package]]
-name = "libra2-vm-environment"
-version = "0.0.2"
-dependencies = [
- "bcs 0.1.4",
- "libra2-framework",
- "libra2-gas-algebra",
- "libra2-gas-schedule",
- "libra2-move-stdlib",
- "libra2-native-interface",
- "libra2-table-natives",
- "libra2-types",
- "libra2-vm-types",
- "move-binary-format",
- "move-bytecode-verifier",
- "move-core-types",
- "move-vm-runtime",
- "move-vm-types",
- "once_cell",
- "serde",
- "sha3 0.9.1",
-]
-
-[[package]]
-name = "libra2-vm-genesis"
-version = "0.1.1"
-dependencies = [
- "bcs 0.1.4",
- "bytes",
- "claims",
- "libra2-cached-packages",
- "libra2-crypto",
- "libra2-framework",
- "libra2-gas-schedule",
- "libra2-proptest-helpers",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-types",
- "move-binary-format",
- "move-core-types",
- "move-vm-runtime",
- "move-vm-types",
- "once_cell",
- "proptest",
- "proptest-derive",
- "rand 0.7.3",
- "serde",
-]
-
-[[package]]
-name = "libra2-vm-logging"
-version = "0.1.1"
-dependencies = [
- "arc-swap",
- "libra2-crypto",
- "libra2-logger",
- "libra2-metrics-core",
- "libra2-speculative-state-helper",
- "libra2-types",
- "once_cell",
- "serde",
-]
-
-[[package]]
-name = "libra2-vm-profiling"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "clap 4.5.48",
- "glob",
- "libra2-block-executor",
- "libra2-cached-packages",
- "libra2-gas-schedule",
- "libra2-move-stdlib",
- "libra2-native-interface",
- "libra2-table-natives",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm",
- "move-binary-format",
- "move-core-types",
- "move-ir-compiler",
- "move-vm-runtime",
- "move-vm-test-utils",
- "move-vm-types",
- "once_cell",
- "smallvec",
-]
-
-[[package]]
-name = "libra2-vm-types"
-version = "0.0.2"
-dependencies = [
- "ambassador",
- "anyhow",
- "bcs 0.1.4",
- "bytes",
- "claims",
- "either",
- "libra2-aggregator",
- "libra2-gas-algebra",
- "libra2-gas-schedule",
- "libra2-transaction-simulation",
- "libra2-types",
- "libra2-vm",
- "move-binary-format",
- "move-core-types",
- "move-vm-runtime",
- "move-vm-types",
- "rand 0.7.3",
- "serde",
- "test-case",
-]
-
-[[package]]
-name = "libra2-vm-validator"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "fail",
- "libra2-cached-packages",
- "libra2-crypto",
- "libra2-db",
- "libra2-executor-test-helpers",
- "libra2-gas-schedule",
- "libra2-logger",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-types",
- "libra2-vm",
- "libra2-vm-environment",
- "libra2-vm-genesis",
- "libra2-vm-logging",
- "move-binary-format",
- "move-core-types",
- "move-vm-runtime",
- "move-vm-types",
- "rand 0.7.3",
-]
-
-[[package]]
-name = "libra2-warp-webserver"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bcs 0.1.4",
- "hyper 0.14.32",
- "libra2-api-types",
- "libra2-config",
- "libra2-logger",
- "serde",
- "serde_json",
- "warp",
-]
-
-[[package]]
-name = "libra2-workspace-server"
-version = "0.1.1"
-dependencies = [
- "anyhow",
- "bollard",
- "clap 4.5.48",
- "diesel",
- "diesel-async",
- "futures",
- "libra2-cached-packages",
- "libra2-config",
- "libra2-faucet-core",
- "libra2-indexer-processor-sdk",
- "libra2-localnet",
- "libra2-node",
- "libra2-types",
- "maplit",
- "processor",
- "rand 0.7.3",
- "tempfile",
- "tokio",
- "tokio-util 0.7.16",
- "url",
- "uuid 1.18.1",
 ]
 
 [[package]]
@@ -12713,12 +12933,12 @@ name = "move-package-cache"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "creditchain-framework",
+ "creditchain-rest-client",
  "fs2",
  "futures",
  "git2 0.16.1",
  "hex",
- "libra2-framework",
- "libra2-rest-client",
  "move-core-types",
  "percent-encoding",
  "tempfile",
@@ -12960,12 +13180,12 @@ dependencies = [
  "arbitrary",
  "bcs 0.1.4",
  "clap 4.5.48",
+ "creditchain-framework",
  "datatest-stable",
  "dearbitrary",
  "difference",
  "either",
  "legacy-move-compiler",
- "libra2-framework",
  "move-asm",
  "move-binary-format",
  "move-bytecode-source-map",
@@ -13871,7 +14091,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap 4.5.48",
- "libra2-transaction-generator-lib",
+ "creditchain-transaction-generator-lib",
 ]
 
 [[package]]
@@ -14002,31 +14222,42 @@ dependencies = [
 
 [[package]]
 name = "parquet"
-version = "52.2.0"
+version = "53.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e977b9066b4d3b03555c22bdc442f3fadebd96a39111249113087d0edb2691cd"
+checksum = "2f8cf58b29782a7add991f655ff42929e31a7859f5319e53db9e39a714cb113c"
 dependencies = [
  "ahash 0.8.12",
+ "arrow-array",
+ "arrow-buffer",
+ "arrow-cast",
+ "arrow-data",
+ "arrow-ipc",
+ "arrow-schema",
+ "arrow-select",
+ "base64 0.22.1",
+ "brotli 7.0.0",
  "bytes",
  "chrono",
- "futures",
+ "flate2",
  "half 2.6.0",
- "hashbrown 0.14.5",
+ "hashbrown 0.15.5",
  "lz4_flex",
  "num 0.4.3",
  "num-bigint 0.4.6",
  "paste",
  "seq-macro",
+ "snap",
  "thrift",
- "tokio",
  "twox-hash 1.6.3",
+ "zstd 0.13.3",
+ "zstd-sys",
 ]
 
 [[package]]
 name = "parquet_derive"
-version = "52.2.0"
+version = "53.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6e57262f900bc3e93755be67e0fc4e2fcdae416b563472528e413c6e0a52ee81"
+checksum = "a8a6a70e8ee504da797f192a2f7cf9ce61262a1026794f7cdf988daefa5d0814"
 dependencies = [
  "parquet",
  "proc-macro2",
@@ -15092,7 +15323,6 @@ dependencies = [
 [[package]]
 name = "processor"
 version = "0.1.0"
-source = "git+https://github.com/libra2org/libra2-indexer-processors-v2.git#eee14561a18ef9f381097ba4621ee0d773e725f1"
 dependencies = [
  "ahash 0.8.12",
  "allocative",
@@ -15118,7 +15348,7 @@ dependencies = [
  "google-cloud-storage",
  "hex",
  "hyper 0.14.32",
- "itertools 0.12.1",
+ "itertools 0.13.0",
  "jemallocator",
  "lazy_static",
  "libra2-indexer-processor-sdk",
@@ -15135,9 +15365,9 @@ dependencies = [
  "regex",
  "serde",
  "serde_json",
- "sha2 0.10.9",
- "sha3 0.10.8",
- "strum 0.24.1",
+ "sha2 0.9.9",
+ "sha3 0.9.1",
+ "strum 0.27.2",
  "tiny-keccak",
  "tokio",
  "tokio-postgres",
@@ -17465,6 +17695,45 @@ dependencies = [
  "anyhow",
  "base64 0.13.1",
  "bcs 0.1.4",
+ "creditchain",
+ "creditchain-api-types",
+ "creditchain-backup-cli",
+ "creditchain-bitvec",
+ "creditchain-cached-packages",
+ "creditchain-config",
+ "creditchain-consensus",
+ "creditchain-crypto",
+ "creditchain-db",
+ "creditchain-db-indexer",
+ "creditchain-db-indexer-schemas",
+ "creditchain-dkg",
+ "creditchain-faucet-core",
+ "creditchain-forge",
+ "creditchain-framework",
+ "creditchain-gas-algebra",
+ "creditchain-gas-schedule",
+ "creditchain-genesis",
+ "creditchain-global-constants",
+ "creditchain-indexer",
+ "creditchain-indexer-grpc-table-info",
+ "creditchain-infallible",
+ "creditchain-inspection-service",
+ "creditchain-keygen",
+ "creditchain-logger",
+ "creditchain-move-debugger",
+ "creditchain-release-builder",
+ "creditchain-rest-client",
+ "creditchain-rosetta",
+ "creditchain-schemadb",
+ "creditchain-sdk",
+ "creditchain-secure-storage",
+ "creditchain-storage-interface",
+ "creditchain-temppath",
+ "creditchain-time-service",
+ "creditchain-transaction-filters",
+ "creditchain-types",
+ "creditchain-vault-client",
+ "creditchain-vm",
  "diesel",
  "digest 0.9.0",
  "ethers",
@@ -17472,45 +17741,6 @@ dependencies = [
  "hex",
  "hyper 0.14.32",
  "itertools 0.13.0",
- "libra2",
- "libra2-api-types",
- "libra2-backup-cli",
- "libra2-bitvec",
- "libra2-cached-packages",
- "libra2-config",
- "libra2-consensus",
- "libra2-crypto",
- "libra2-db",
- "libra2-db-indexer",
- "libra2-db-indexer-schemas",
- "libra2-dkg",
- "libra2-faucet-core",
- "libra2-forge",
- "libra2-framework",
- "libra2-gas-algebra",
- "libra2-gas-schedule",
- "libra2-genesis",
- "libra2-global-constants",
- "libra2-indexer",
- "libra2-indexer-grpc-table-info",
- "libra2-infallible",
- "libra2-inspection-service",
- "libra2-keygen",
- "libra2-logger",
- "libra2-move-debugger",
- "libra2-release-builder",
- "libra2-rest-client",
- "libra2-rosetta",
- "libra2-schemadb",
- "libra2-sdk",
- "libra2-secure-storage",
- "libra2-storage-interface",
- "libra2-temppath",
- "libra2-time-service",
- "libra2-transaction-filters",
- "libra2-types",
- "libra2-vault-client",
- "libra2-vm",
  "move-binary-format",
  "move-core-types",
  "num_cpus",
@@ -17560,6 +17790,12 @@ dependencies = [
  "quote",
  "syn 1.0.109",
 ]
+
+[[package]]
+name = "snap"
+version = "1.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b6b67fb9a61334225b5b790716f609cd58395f895b3fe8b328786812a40bc3b"
 
 [[package]]
 name = "socket2"
@@ -17774,15 +18010,6 @@ dependencies = [
 
 [[package]]
 name = "strum"
-version = "0.24.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "063e6045c0e62079840579a7e47a355ae92f60eb74daaf156fb1e84ba164e63f"
-dependencies = [
- "strum_macros 0.24.3",
-]
-
-[[package]]
-name = "strum"
 version = "0.25.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "290d54ea6f91c969195bdbcd7442c8c2a2ba87da8bf60a7ee86a235d4bc1e125"
@@ -17806,19 +18033,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "af23d6f6c1a224baef9d3f61e287d2761385a5b88fdab4eb4c6f11aeb54c4bcf"
 dependencies = [
  "strum_macros 0.27.2",
-]
-
-[[package]]
-name = "strum_macros"
-version = "0.24.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e385be0d24f186b4ce2f9982191e7101bb737312ad61c1f2f984f34bcf85d59"
-dependencies = [
- "heck 0.4.1",
- "proc-macro2",
- "quote",
- "rustversion",
- "syn 1.0.109",
 ]
 
 [[package]]
@@ -20642,7 +20856,7 @@ version = "0.13.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e91ee311a569c327171651566e07972200e76fcfe2242a4fa446149a3881c08a"
 dependencies = [
- "zstd-safe 7.2.4",
+ "zstd-safe 7.2.1",
 ]
 
 [[package]]
@@ -20657,20 +20871,19 @@ dependencies = [
 
 [[package]]
 name = "zstd-safe"
-version = "7.2.4"
+version = "7.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f49c4d5f0abb602a93fb8736af2a4f4dd9512e36f7f570d66e65ff867ed3b9d"
+checksum = "54a3ab4db68cea366acc5c897c7b4d4d1b8994a9cd6e6f841f8964566a419059"
 dependencies = [
  "zstd-sys",
 ]
 
 [[package]]
 name = "zstd-sys"
-version = "2.0.16+zstd.1.5.7"
+version = "2.0.13+zstd.1.5.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "91e19ebc2adc8f83e43039e79776e3fda8ca919132d68a1fed6a5faca2683748"
+checksum = "38ff0f21cfee8f97d94cef41359e0c89aa6113028ab0291aa8ca0038995a95aa"
 dependencies = [
- "bindgen 0.72.1",
  "cc",
  "pkg-config",
 ]

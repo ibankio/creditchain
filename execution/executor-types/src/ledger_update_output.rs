@@ -4,9 +4,9 @@
 #![forbid(unsafe_code)]
 
 use anyhow::{ensure, Result};
-use libra2_crypto::HashValue;
-use libra2_drop_helper::DropHelper;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_drop_helper::DropHelper;
+use creditchain_types::{
     proof::accumulator::InMemoryTransactionAccumulator,
     transaction::{TransactionInfo, Version},
 };

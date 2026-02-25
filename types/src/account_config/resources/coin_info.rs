@@ -68,7 +68,7 @@ impl<C: CoinType> CoinInfoResource<C> {
             integer: None,
         };
         Self {
-            name: "Libra2Coin".to_string().into_bytes(),
+            name: "CreditChainCoin".to_string().into_bytes(),
             symbol: "LBT".to_string().into_bytes(),
             decimals: 8,
             supply: Some(aggregator),

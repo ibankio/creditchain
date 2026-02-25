@@ -13,7 +13,7 @@ outputs:
   is-creditchain:
     description: "Whether the calling repository is CreditChain"
     value: ${{ steps.determine-repo.outputs.is-creditchain }}
-  is-libra2-core:
+  is-creditchain-core:
     description: "Legacy alias for compatibility with older workflows"
     value: ${{ steps.determine-repo.outputs.is-creditchain }}
 runs:

@@ -3,7 +3,7 @@
 
 //! Helpers related to dealing with dates and times.
 
-use libra2_protos::util::timestamp::Timestamp;
+use creditchain_protos::util::timestamp::Timestamp;
 use chrono::Utc;
 
 /// 9999-12-31 23:59:59, this is the max supported by Google BigQuery.

@@ -3,7 +3,7 @@
 
 #![allow(dead_code)]
 
-use libra2_types::keyless::{AnyKeylessPublicKey, EphemeralCertificate};
+use creditchain_types::keyless::{AnyKeylessPublicKey, EphemeralCertificate};
 use arbitrary::Arbitrary;
 use fuzzer::UserAccount;
 use serde::{Deserialize, Serialize};
@@ -121,8 +121,8 @@ pub struct TransactionState {
 }
 
 pub(crate) mod miscellaneous {
-    use libra2_crypto::{ed25519::ed25519_keys::Ed25519PrivateKey, PrivateKey, Uniform};
-    use libra2_types::{
+    use creditchain_crypto::{ed25519::ed25519_keys::Ed25519PrivateKey, PrivateKey, Uniform};
+    use creditchain_types::{
         jwks::rsa::INSECURE_TEST_RSA_KEY_PAIR,
         keyless::{Configuration, OpenIdSig, Pepper},
         transaction::authenticator::EphemeralPublicKey,

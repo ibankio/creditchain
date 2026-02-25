@@ -5,11 +5,11 @@ use crate::{
     metrics::{NUM_TXNS, TIMER},
     pipeline::ExecuteBlockMessage,
 };
-use libra2_block_partitioner::{BlockPartitioner, PartitionerConfig};
-use libra2_crypto::HashValue;
-use libra2_experimental_runtimes::thread_manager::optimal_min_len;
-use libra2_logger::info;
-use libra2_types::{
+use creditchain_block_partitioner::{BlockPartitioner, PartitionerConfig};
+use creditchain_crypto::HashValue;
+use creditchain_experimental_runtimes::thread_manager::optimal_min_len;
+use creditchain_logger::info;
+use creditchain_types::{
     block_executor::partitioner::{ExecutableBlock, ExecutableTransactions},
     transaction::{signature_verified_transaction::SignatureVerifiedTransaction, Transaction},
 };

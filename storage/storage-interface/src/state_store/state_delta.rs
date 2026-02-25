@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::state_store::state::State;
-use libra2_experimental_layered_map::LayeredMap;
-use libra2_types::{
+use creditchain_experimental_layered_map::LayeredMap;
+use creditchain_types::{
     state_store::{
         hot_state::HOT_STATE_MAX_ITEMS_PER_SHARD, state_key::StateKey, state_slot::StateSlot,
         NUM_STATE_SHARDS,

@@ -2,8 +2,8 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_consensus_types::{common::Round, safety_data::SafetyData};
-use libra2_types::waypoint::Waypoint;
+use creditchain_consensus_types::{common::Round, safety_data::SafetyData};
+use creditchain_types::waypoint::Waypoint;
 use serde::{Deserialize, Serialize};
 use std::fmt::{Display, Formatter};
 

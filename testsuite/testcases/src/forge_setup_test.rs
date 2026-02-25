@@ -3,8 +3,8 @@
 
 use crate::generate_traffic;
 use anyhow::Context;
-use libra2_config::config::OverrideNodeConfig;
-use libra2_forge::{NetworkContextSynchronizer, NetworkTest, Result, Test};
+use creditchain_config::config::OverrideNodeConfig;
+use creditchain_forge::{NetworkContextSynchronizer, NetworkTest, Result, Test};
 use async_trait::async_trait;
 use log::info;
 use rand::{
@@ -14,7 +14,7 @@ use rand::{
 };
 use std::{ops::DerefMut, thread, time::Duration};
 
-const STATE_SYNC_VERSION_COUNTER_NAME: &str = "libra2_state_sync_version";
+const STATE_SYNC_VERSION_COUNTER_NAME: &str = "creditchain_state_sync_version";
 
 pub struct ForgeSetupTest;
 

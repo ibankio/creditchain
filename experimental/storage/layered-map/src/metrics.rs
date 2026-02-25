@@ -3,14 +3,14 @@
 
 #![forbid(unsafe_code)]
 
-use libra2_metrics_core::{
+use creditchain_metrics_core::{
     exponential_buckets, register_histogram_vec, register_int_gauge_vec, HistogramVec, IntGaugeVec,
 };
 use once_cell::sync::Lazy;
 
 pub static TIMER: Lazy<HistogramVec> = Lazy::new(|| {
     register_histogram_vec!(
-        "libra2_layered_map_timer_seconds",
+        "creditchain_layered_map_timer_seconds",
         "Various timers for performance analysis.",
         &["use_case", "event"],
         exponential_buckets(/*start=*/ 1e-6, /*factor=*/ 2.0, /*count=*/ 22).unwrap(),
@@ -20,7 +20,7 @@ pub static TIMER: Lazy<HistogramVec> = Lazy::new(|| {
 
 pub static LAYER: Lazy<IntGaugeVec> = Lazy::new(|| {
     register_int_gauge_vec!(
-        "libra2_layered_map_layer",
+        "creditchain_layered_map_layer",
         "Various generations to help debugging.",
         &["use_case", "event"],
     )

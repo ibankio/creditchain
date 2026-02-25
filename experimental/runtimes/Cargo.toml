@@ -1,5 +1,5 @@
 [package]
-name = "libra2-experimental-runtimes"
+name = "creditchain-experimental-runtimes"
 description = "Simple runtime spawning utilities"
 version = "0.1.1"
 
@@ -13,7 +13,7 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-runtimes = { workspace = true }
+creditchain-runtimes = { workspace = true }
 core_affinity = { workspace = true }
 libc = { workspace = true }
 num_cpus = { workspace = true }

@@ -1,5 +1,5 @@
 [package]
-name = "libra2-accumulator"
+name = "creditchain-accumulator"
 description = "CreditChain merkle tree accumulator"
 version = "0.1.1"
 
@@ -14,15 +14,15 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-types = { workspace = true }
 proptest = { workspace = true, optional = true }
 
 [dev-dependencies]
-libra2-crypto = { workspace = true, features = ["fuzzing"] }
+creditchain-crypto = { workspace = true, features = ["fuzzing"] }
 proptest = { workspace = true }
 rand = { workspace = true }
 
 [features]
 default = []
-fuzzing = ["proptest", "libra2-crypto/fuzzing", "libra2-types/fuzzing"]
+fuzzing = ["proptest", "creditchain-crypto/fuzzing", "creditchain-types/fuzzing"]

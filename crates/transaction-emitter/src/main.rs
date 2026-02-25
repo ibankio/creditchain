@@ -5,11 +5,11 @@
 mod diag;
 
 use anyhow::{Context, Result};
-use libra2_logger::{Level, Logger};
-use libra2_transaction_emitter_lib::{
+use creditchain_logger::{Level, Logger};
+use creditchain_transaction_emitter_lib::{
     create_accounts_command, emit_transactions, Cluster, ClusterArgs, CreateAccountsArgs, EmitArgs,
 };
-use libra2_transaction_workloads_lib::args::EmitWorkloadArgs;
+use creditchain_transaction_workloads_lib::args::EmitWorkloadArgs;
 use clap::{Parser, Subcommand};
 use diag::diag;
 

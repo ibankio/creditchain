@@ -7,11 +7,11 @@ use crate::{
     test_utils::{naive_smt::NaiveSmt, proof_reader::ProofReader},
     SparseMerkleTree,
 };
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{CryptoHash, SPARSE_MERKLE_PLACEHOLDER_HASH},
     HashValue,
 };
-use libra2_types::state_store::state_value::StateValue;
+use creditchain_types::state_store::state_value::StateValue;
 use proptest::{
     collection::{hash_set, vec},
     prelude::*,

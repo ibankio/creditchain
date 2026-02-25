@@ -3,13 +3,13 @@
 
 use super::round_state::NewRoundReason;
 use crate::counters;
-use libra2_collections::BoundedVecDeque;
-use libra2_consensus_types::{
+use creditchain_collections::BoundedVecDeque;
+use creditchain_consensus_types::{
     common::Author, payload_pull_params::OptQSPayloadPullParams, round_timeout::RoundTimeoutReason,
 };
-use libra2_infallible::Mutex;
-use libra2_logger::warn;
-use libra2_short_hex_str::AsShortHexStr;
+use creditchain_infallible::Mutex;
+use creditchain_logger::warn;
+use creditchain_short_hex_str::AsShortHexStr;
 use std::{collections::HashSet, sync::Arc};
 
 pub trait TPastProposalStatusTracker: Send + Sync {
@@ -164,9 +164,9 @@ impl TOptQSPullParamsProvider for OptQSPullParamsProvider {
 mod tests {
     use super::ExponentialWindowFailureTracker;
     use crate::liveness::round_state::NewRoundReason;
-    use libra2_bitvec::BitVec;
-    use libra2_consensus_types::round_timeout::RoundTimeoutReason;
-    use libra2_types::validator_verifier::random_validator_verifier;
+    use creditchain_bitvec::BitVec;
+    use creditchain_consensus_types::round_timeout::RoundTimeoutReason;
+    use creditchain_types::validator_verifier::random_validator_verifier;
 
     #[test]
     fn test_exponential_window_failure_tracker() {

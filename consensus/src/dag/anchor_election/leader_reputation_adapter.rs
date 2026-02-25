@@ -13,12 +13,12 @@ use crate::{
         proposer_election::ProposerElection,
     },
 };
-use libra2_bitvec::BitVec;
-use libra2_collections::BoundedVecDeque;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_crypto::HashValue;
-use libra2_infallible::Mutex;
-use libra2_types::account_config::NewBlockEvent;
+use creditchain_bitvec::BitVec;
+use creditchain_collections::BoundedVecDeque;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_crypto::HashValue;
+use creditchain_infallible::Mutex;
+use creditchain_types::account_config::NewBlockEvent;
 use move_core_types::account_address::AccountAddress;
 use std::{collections::HashMap, sync::Arc};
 

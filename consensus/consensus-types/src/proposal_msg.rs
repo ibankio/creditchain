@@ -4,8 +4,8 @@
 
 use crate::{block::Block, common::Author, proof_of_store::ProofCache, sync_info::SyncInfo};
 use anyhow::{anyhow, ensure, format_err, Context, Result};
-use libra2_short_hex_str::AsShortHexStr;
-use libra2_types::validator_verifier::ValidatorVerifier;
+use creditchain_short_hex_str::AsShortHexStr;
+use creditchain_types::validator_verifier::ValidatorVerifier;
 use serde::{Deserialize, Serialize};
 use std::fmt;
 

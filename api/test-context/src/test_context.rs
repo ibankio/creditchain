@@ -2,40 +2,40 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::{golden_output::GoldenOutputs, pretty};
-use libra2_api::{attach_poem_to_runtime, BasicError, Context};
-use libra2_api_types::{
-    mime_types, HexEncodedBytes, TransactionOnChainData, X_LIBRA2_CHAIN_ID,
-    X_LIBRA2_LEDGER_TIMESTAMP, X_LIBRA2_LEDGER_VERSION,
+use creditchain_api::{attach_poem_to_runtime, BasicError, Context};
+use creditchain_api_types::{
+    mime_types, HexEncodedBytes, TransactionOnChainData, X_CREDITCHAIN_CHAIN_ID,
+    X_CREDITCHAIN_LEDGER_TIMESTAMP, X_CREDITCHAIN_LEDGER_VERSION,
 };
-use libra2_cached_packages::libra2_stdlib;
-use libra2_config::{
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_config::{
     config::{
         NodeConfig, RocksdbConfigs, StorageDirPaths, BUFFERED_STATE_TARGET_ITEMS_FOR_TEST,
         DEFAULT_MAX_NUM_NODES_PER_LRU_CACHE_SHARD, NO_OP_STORAGE_PRUNER_CONFIG,
     },
     keys::ConfigKey,
 };
-use libra2_crypto::{ed25519::Ed25519PrivateKey, hash::HashValue, SigningKey};
-use libra2_db::Libra2DB;
-use libra2_executor::{block_executor::BlockExecutor, db_bootstrapper};
-use libra2_executor_types::BlockExecutorTrait;
-use libra2_framework::{BuildOptions, BuiltPackage};
-use libra2_indexer_grpc_table_info::internal_indexer_db_service::MockInternalIndexerDBService;
-use libra2_mempool::mocks::MockSharedMempool;
-use libra2_mempool_notifications::MempoolNotificationSender;
-use libra2_sdk::{
+use creditchain_crypto::{ed25519::Ed25519PrivateKey, hash::HashValue, SigningKey};
+use creditchain_db::CreditChainDB;
+use creditchain_executor::{block_executor::BlockExecutor, db_bootstrapper};
+use creditchain_executor_types::BlockExecutorTrait;
+use creditchain_framework::{BuildOptions, BuiltPackage};
+use creditchain_indexer_grpc_table_info::internal_indexer_db_service::MockInternalIndexerDBService;
+use creditchain_mempool::mocks::MockSharedMempool;
+use creditchain_mempool_notifications::MempoolNotificationSender;
+use creditchain_sdk::{
     bcs,
     transaction_builder::TransactionFactory,
     types::{
-        account_config::libra2_test_root_address, get_apt_primary_store_address,
+        account_config::creditchain_test_root_address, get_apt_primary_store_address,
         transaction::SignedTransaction, AccountKey, LocalAccount,
     },
 };
-use libra2_storage_interface::{
+use creditchain_storage_interface::{
     state_store::state_view::db_state_view::DbStateView, DbReaderWriter,
 };
-use libra2_temppath::TempPath;
-use libra2_types::{
+use creditchain_temppath::TempPath;
+use creditchain_types::{
     account_address::{create_multisig_account_address, AccountAddress},
     aggregate_signature::AggregateSignature,
     block_executor::config::BlockExecutorConfigFromOnchain,
@@ -50,8 +50,8 @@ use libra2_types::{
         TransactionPayload, TransactionStatus, Version,
     },
 };
-use libra2_vm::libra2_vm::Libra2VMBlockExecutor;
-use libra2_vm_validator::vm_validator::PooledVMValidator;
+use creditchain_vm::creditchain_vm::CreditChainVMBlockExecutor;
+use creditchain_vm_validator::vm_validator::PooledVMValidator;
 use bytes::Bytes;
 use hyper::{HeaderMap, Response};
 use rand::{Rng, SeedableRng};
@@ -129,14 +129,14 @@ pub fn new_test_context_inner(
 ) -> TestContext {
     // Speculative logging uses a global variable and when many instances use it together, they
     // panic, so we disable this to run tests.
-    libra2_vm_logging::disable_speculative_logging();
+    creditchain_vm_logging::disable_speculative_logging();
     let tmp_dir = TempPath::new();
     tmp_dir.create_as_dir().unwrap();
 
     let mut rng = ::rand::rngs::StdRng::from_seed([0u8; 32]);
-    let builder = libra2_genesis::builder::Builder::new(
+    let builder = creditchain_genesis::builder::Builder::new(
         tmp_dir.path(),
-        libra2_cached_packages::head_release_bundle().clone(),
+        creditchain_cached_packages::head_release_bundle().clone(),
     )
     .unwrap()
     .with_init_genesis_config(Some(Arc::new(|genesis_config| {
@@ -149,7 +149,7 @@ pub fn new_test_context_inner(
     let validator_owner = validator_identity.account_address.unwrap();
     let (sender, recver) = channel::<(Instant, Version)>((Instant::now(), 0 as Version));
     let (db, db_rw) = if use_db_with_indexer {
-        let mut libra2_db = Libra2DB::new_for_test_with_indexer(
+        let mut creditchain_db = CreditChainDB::new_for_test_with_indexer(
             &tmp_dir,
             node_config.storage.rocksdb_configs.enable_storage_sharding,
         );
@@ -157,11 +157,11 @@ pub fn new_test_context_inner(
             .indexer_db_config
             .is_internal_indexer_db_enabled()
         {
-            libra2_db.add_version_update_subscriber(sender).unwrap();
+            creditchain_db.add_version_update_subscriber(sender).unwrap();
         }
-        DbReaderWriter::wrap(libra2_db)
+        DbReaderWriter::wrap(creditchain_db)
     } else {
-        let mut libra2_db = Libra2DB::open(
+        let mut creditchain_db = CreditChainDB::open(
             StorageDirPaths::from_path(&tmp_dir),
             false,                       /* readonly */
             NO_OP_STORAGE_PRUNER_CONFIG, /* pruner */
@@ -182,11 +182,11 @@ pub fn new_test_context_inner(
             .indexer_db_config
             .is_internal_indexer_db_enabled()
         {
-            libra2_db.add_version_update_subscriber(sender).unwrap();
+            creditchain_db.add_version_update_subscriber(sender).unwrap();
         }
-        DbReaderWriter::wrap(libra2_db)
+        DbReaderWriter::wrap(creditchain_db)
     };
-    let ret = db_bootstrapper::maybe_bootstrap::<Libra2VMBlockExecutor>(
+    let ret = db_bootstrapper::maybe_bootstrap::<CreditChainVMBlockExecutor>(
         &db_rw,
         &genesis,
         genesis_waypoint,
@@ -226,7 +226,7 @@ pub fn new_test_context_inner(
         rng,
         root_key,
         validator_owner,
-        Box::new(BlockExecutor::<Libra2VMBlockExecutor>::new(db_rw)),
+        Box::new(BlockExecutor::<CreditChainVMBlockExecutor>::new(db_rw)),
         mempool,
         db,
         test_name,
@@ -241,7 +241,7 @@ pub struct TestContext {
     pub context: Context,
     pub validator_owner: AccountAddress,
     pub mempool: Arc<MockSharedMempool>,
-    pub db: Arc<Libra2DB>,
+    pub db: Arc<CreditChainDB>,
     pub rng: rand::rngs::StdRng,
     root_key: ConfigKey<Ed25519PrivateKey>,
     executor: Arc<dyn BlockExecutorTrait>,
@@ -262,7 +262,7 @@ impl TestContext {
         validator_owner: AccountAddress,
         executor: Box<dyn BlockExecutorTrait>,
         mempool: MockSharedMempool,
-        db: Arc<Libra2DB>,
+        db: Arc<CreditChainDB>,
         test_name: String,
         api_specific_config: ApiSpecificConfig,
         use_txn_payload_v2_format: bool,
@@ -388,9 +388,9 @@ impl TestContext {
     pub async fn root_account(&self) -> LocalAccount {
         // Fetch the actual root account's sequence number in case it has been used to sign
         // transactions before.
-        let root_sequence_number = self.get_sequence_number(libra2_test_root_address()).await;
+        let root_sequence_number = self.get_sequence_number(creditchain_test_root_address()).await;
         LocalAccount::new(
-            libra2_test_root_address(),
+            creditchain_test_root_address(),
             self.root_key.private_key(),
             root_sequence_number,
         )
@@ -400,10 +400,10 @@ impl TestContext {
         // This function executes the following script as the root account:
         // script {
         //   fun main(root: &signer, feature: u64) {
-        //     let libra2_framework = libra2_framework::libra2_governance::get_signer_testnet_only(root, @0x1);
-        //     std::features::change_feature_flags_for_next_epoch(&libra2_framework, vector[feature], vector[]);
-        //     libra2_framework::libra2_governance::reconfigure(&libra2_framework);
-        //     std::features::on_new_epoch(&libra2_framework);
+        //     let creditchain_framework = creditchain_framework::creditchain_governance::get_signer_testnet_only(root, @0x1);
+        //     std::features::change_feature_flags_for_next_epoch(&creditchain_framework, vector[feature], vector[]);
+        //     creditchain_framework::creditchain_governance::reconfigure(&creditchain_framework);
+        //     std::features::on_new_epoch(&creditchain_framework);
         //   }
         // }
         let mut root = self.root_account().await;
@@ -420,10 +420,10 @@ impl TestContext {
         // This function executes the following script as the root account:
         // script {
         //   fun main(root: &signer, feature: u64) {
-        //     let libra2_framework = libra2_framework::libra2_governance::get_signer_testnet_only(root, @0x1);
-        //     std::features::change_feature_flags_for_next_epoch(&libra2_framework, vector[], vector[feature]);
-        //     libra2_framework::libra2_governance::reconfigure(&libra2_framework);
-        //     std::features::on_new_epoch(&libra2_framework);
+        //     let creditchain_framework = creditchain_framework::creditchain_governance::get_signer_testnet_only(root, @0x1);
+        //     std::features::change_feature_flags_for_next_epoch(&creditchain_framework, vector[], vector[feature]);
+        //     creditchain_framework::creditchain_governance::reconfigure(&creditchain_framework);
+        //     std::features::on_new_epoch(&creditchain_framework);
         //   }
         // }
         let mut root = self.root_account().await;
@@ -482,12 +482,12 @@ impl TestContext {
     pub async fn api_create_account(&mut self) -> LocalAccount {
         let root = &mut self.root_account().await;
         let account = self.gen_account();
-        self.api_execute_libra2_account_transfer(root, account.address(), TRANSFER_AMOUNT)
+        self.api_execute_creditchain_account_transfer(root, account.address(), TRANSFER_AMOUNT)
             .await;
         account
     }
 
-    pub async fn api_execute_libra2_account_transfer(
+    pub async fn api_execute_creditchain_account_transfer(
         &mut self,
         sender: &mut LocalAccount,
         receiver: AccountAddress,
@@ -495,7 +495,7 @@ impl TestContext {
     ) {
         self.api_execute_entry_function(
             sender,
-            "0x1::libra2_account::transfer",
+            "0x1::creditchain_account::transfer",
             json!([]),
             json!([receiver.to_hex_literal(), amount.to_string()]),
         )
@@ -800,11 +800,11 @@ impl TestContext {
             .into_inner()
     }
 
-    pub fn get_latest_ledger_info(&self) -> libra2_api_types::LedgerInfo {
+    pub fn get_latest_ledger_info(&self) -> creditchain_api_types::LedgerInfo {
         self.context.get_latest_ledger_info::<BasicError>().unwrap()
     }
 
-    pub fn get_latest_storage_ledger_info(&self) -> libra2_api_types::LedgerInfo {
+    pub fn get_latest_storage_ledger_info(&self) -> creditchain_api_types::LedgerInfo {
         self.context
             .get_latest_storage_ledger_info::<BasicError>()
             .unwrap()
@@ -856,7 +856,7 @@ impl TestContext {
         let code = package.extract_code();
         let metadata = package.extract_metadata().unwrap();
 
-        libra2_stdlib::code_publish_package_txn(bcs::to_bytes(&metadata).unwrap(), code)
+        creditchain_stdlib::code_publish_package_txn(bcs::to_bytes(&metadata).unwrap(), code)
     }
 
     pub async fn publish_package(
@@ -967,7 +967,7 @@ impl TestContext {
                 account,
                 "0x1",
                 "coin",
-                "CoinStore<0x1::libra2_coin::Libra2Coin>",
+                "CoinStore<0x1::creditchain_coin::CreditChainCoin>",
             )
             .await;
         let coin = coin_balance_option.map(|x| {
@@ -1323,13 +1323,13 @@ impl TestContext {
 
         if self.expect_status_code < 300 {
             let ledger_info = self.get_latest_ledger_info();
-            assert_eq!(headers[X_LIBRA2_CHAIN_ID], "4");
+            assert_eq!(headers[X_CREDITCHAIN_CHAIN_ID], "4");
             assert_eq!(
-                headers[X_LIBRA2_LEDGER_VERSION],
+                headers[X_CREDITCHAIN_LEDGER_VERSION],
                 ledger_info.version().to_string()
             );
             assert_eq!(
-                headers[X_LIBRA2_LEDGER_TIMESTAMP],
+                headers[X_CREDITCHAIN_LEDGER_TIMESTAMP],
                 ledger_info.timestamp().to_string()
             );
         }

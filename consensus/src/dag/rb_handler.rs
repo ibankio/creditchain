@@ -18,11 +18,11 @@ use crate::{
     util::is_vtxn_expected,
 };
 use anyhow::{bail, ensure, Context};
-use libra2_config::config::DagPayloadConfig;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_infallible::Mutex;
-use libra2_logger::{debug, error};
-use libra2_types::{
+use creditchain_config::config::DagPayloadConfig;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_infallible::Mutex;
+use creditchain_logger::{debug, error};
+use creditchain_types::{
     epoch_state::EpochState,
     on_chain_config::{OnChainJWKConsensusConfig, OnChainRandomnessConfig, ValidatorTxnConfig},
     validator_signer::ValidatorSigner,

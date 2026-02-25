@@ -2,20 +2,20 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_cached_packages::libra2_stdlib;
-use libra2_crypto::{hash::CryptoHash, PrivateKey};
-use libra2_executor_test_helpers::{
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_crypto::{hash::CryptoHash, PrivateKey};
+use creditchain_executor_test_helpers::{
     gen_block_id, gen_ledger_info_with_sigs, get_test_signed_transaction,
     integration_test_impl::{
         create_db_and_executor, test_execution_with_storage_impl, verify_committed_txn_status,
     },
 };
-use libra2_executor_types::BlockExecutorTrait;
-use libra2_storage_interface::state_store::state_view::db_state_view::DbStateViewAtVersion;
-use libra2_types::{
-    account_config::{libra2_test_root_address, AccountResource, CORE_CODE_ADDRESS},
+use creditchain_executor_types::BlockExecutorTrait;
+use creditchain_storage_interface::state_store::state_view::db_state_view::DbStateViewAtVersion;
+use creditchain_types::{
+    account_config::{creditchain_test_root_address, AccountResource, CORE_CODE_ADDRESS},
     block_metadata::BlockMetadata,
-    on_chain_config::{Libra2Version, OnChainConfig, ValidatorSet},
+    on_chain_config::{CreditChainVersion, OnChainConfig, ValidatorSet},
     state_store::{state_key::StateKey, MoveResourceExt},
     test_helpers::transaction_test_helpers::TEST_BLOCK_EXECUTOR_ONCHAIN_CONFIG,
     transaction::{
@@ -29,9 +29,9 @@ use std::sync::Arc;
 
 #[test]
 fn test_genesis() {
-    let path = libra2_temppath::TempPath::new();
+    let path = creditchain_temppath::TempPath::new();
     path.create_as_dir().unwrap();
-    let genesis = libra2_vm_genesis::test_genesis_transaction();
+    let genesis = creditchain_vm_genesis::test_genesis_transaction();
     let (_, db, _executor, waypoint) = create_db_and_executor(path.path(), &genesis, false);
 
     let trusted_state = TrustedState::from_epoch_waypoint(waypoint);
@@ -43,7 +43,7 @@ fn test_genesis() {
 
     let account_resource_path =
         StateKey::resource_typed::<AccountResource>(&CORE_CODE_ADDRESS).unwrap();
-    let (libra2_framework_account_resource, state_proof) = db
+    let (creditchain_framework_account_resource, state_proof) = db
         .reader
         .get_state_value_with_proof_by_version(&account_resource_path, 0)
         .unwrap();
@@ -60,7 +60,7 @@ fn test_genesis() {
         .verify(
             txn_info.state_checkpoint_hash().unwrap(),
             account_resource_path.hash(),
-            libra2_framework_account_resource.as_ref(),
+            creditchain_framework_account_resource.as_ref(),
         )
         .unwrap();
 }
@@ -71,10 +71,10 @@ fn test_reconfiguration() {
     // When executing a transaction emits a validator set change,
     // storage should propagate the new validator set
 
-    let path = libra2_temppath::TempPath::new();
+    let path = creditchain_temppath::TempPath::new();
     path.create_as_dir().unwrap();
-    let (genesis, validators) = libra2_vm_genesis::test_genesis_change_set_and_validators(Some(1));
-    let genesis_key = &libra2_vm_genesis::GENESIS_KEYPAIR.0;
+    let (genesis, validators) = creditchain_vm_genesis::test_genesis_change_set_and_validators(Some(1));
+    let genesis_key = &creditchain_vm_genesis::GENESIS_KEYPAIR.0;
     let genesis_txn = Transaction::GenesisTransaction(WriteSetPayload::Direct(genesis));
     let (_, db, executor, _waypoint) = create_db_and_executor(path.path(), &genesis_txn, false);
     let parent_block_id = executor.committed_block_id();
@@ -107,11 +107,11 @@ fn test_reconfiguration() {
 
     // txn1 = give the validator some money so they can send a tx
     let txn1 = get_test_signed_transaction(
-        libra2_test_root_address(),
+        creditchain_test_root_address(),
         /* sequence_number = */ 0,
         genesis_key.clone(),
         genesis_key.public_key(),
-        Some(libra2_stdlib::libra2_coin_mint(validator_account, 1_000_000)),
+        Some(creditchain_stdlib::creditchain_coin_mint(validator_account, 1_000_000)),
     );
     // txn2 = a dummy block prologue to bump the timer.
     let txn2 = Transaction::BlockMetadata(BlockMetadata::new(
@@ -126,19 +126,19 @@ fn test_reconfiguration() {
 
     // txn3 = set the libra2 version for next epoch
     let txn3 = get_test_signed_transaction(
-        libra2_test_root_address(),
+        creditchain_test_root_address(),
         /* sequence_number = */ 1,
         genesis_key.clone(),
         genesis_key.public_key(),
-        Some(libra2_stdlib::version_set_for_next_epoch(42)),
+        Some(creditchain_stdlib::version_set_for_next_epoch(42)),
     );
 
     let txn4 = get_test_signed_transaction(
-        libra2_test_root_address(),
+        creditchain_test_root_address(),
         2,
         genesis_key.clone(),
         genesis_key.public_key(),
-        Some(libra2_stdlib::libra2_governance_force_end_epoch_test_only()),
+        Some(creditchain_stdlib::creditchain_governance_force_end_epoch_test_only()),
     );
 
     let txn_block = into_signature_verified_block(vec![txn1, txn2, txn3, txn4]);
@@ -177,7 +177,7 @@ fn test_reconfiguration() {
         .unwrap();
 
     assert_eq!(
-        Libra2Version::fetch_config(&db_state_view).unwrap().major,
+        CreditChainVersion::fetch_config(&db_state_view).unwrap().major,
         42
     );
 }

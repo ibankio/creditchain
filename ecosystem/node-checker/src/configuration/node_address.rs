@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{anyhow, bail, Context, Result};
-use libra2_crypto::x25519;
-use libra2_rest_client::Client as Libra2RestClient;
-use libra2_sdk::types::network_address::NetworkAddress;
+use creditchain_crypto::x25519;
+use creditchain_rest_client::Client as CreditChainRestClient;
+use creditchain_sdk::types::network_address::NetworkAddress;
 use reqwest::cookie::Jar;
 use serde::{Deserialize, Serialize};
 use std::{sync::Arc, time::Duration};
@@ -104,14 +104,14 @@ impl NodeAddress {
         }
     }
 
-    pub fn get_api_client(&self, timeout: Duration) -> Result<Libra2RestClient> {
+    pub fn get_api_client(&self, timeout: Duration) -> Result<CreditChainRestClient> {
         let client = reqwest::ClientBuilder::new()
             .timeout(timeout)
             .cookie_provider(self.cookie_store.clone())
             .build()
             .unwrap();
 
-        Ok(Libra2RestClient::from((client, self.get_api_url()?)))
+        Ok(CreditChainRestClient::from((client, self.get_api_url()?)))
     }
 
     /// Gets the NodeAddress as a NetworkAddress. If the URL is a domain name,
@@ -140,7 +140,7 @@ impl NodeAddress {
             );
         }
         if socket_addrs.len() > 1 {
-            libra2_logger::warn!(
+            creditchain_logger::warn!(
                 "NodeAddress {} resolved to multiple SocketAddrs, but we're only checking the first one: {:?}",
                 self.url,
                 socket_addrs,

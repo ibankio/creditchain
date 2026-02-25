@@ -1,0 +1,13 @@
+[package]
+name = "CreditChainTokenObjects"
+version = "1.0.0"
+
+[addresses]
+std = "0x1"
+creditchain_std = "0x1"
+creditchain_framework = "0x1"
+creditchain_token_objects = "0x4"
+
+[dependencies]
+MoveStdlib = { local = "../move-stdlib" }
+CreditChainFramework = { local = "../creditchain-framework"}

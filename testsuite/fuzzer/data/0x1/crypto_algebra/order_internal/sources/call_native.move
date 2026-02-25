@@ -1,6 +1,6 @@
 module poc::order_internal {
-    use libra2_std::crypto_algebra;
-    use libra2_std::bls12381_algebra::G1;
+    use creditchain_std::crypto_algebra;
+    use creditchain_std::bls12381_algebra::G1;
     use std::vector;
 
     public entry fun main(_owner: &signer) {

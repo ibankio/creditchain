@@ -3,10 +3,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::pipeline::{CommitBlockMessage, LedgerUpdateMessage};
-use libra2_executor::block_executor::BlockExecutor;
-use libra2_executor_types::BlockExecutorTrait;
-use libra2_infallible::Mutex;
-use libra2_vm::VMBlockExecutor;
+use creditchain_executor::block_executor::BlockExecutor;
+use creditchain_executor_types::BlockExecutorTrait;
+use creditchain_infallible::Mutex;
+use creditchain_vm::VMBlockExecutor;
 use move_core_types::language_storage::StructTag;
 use std::{
     collections::BTreeMap,

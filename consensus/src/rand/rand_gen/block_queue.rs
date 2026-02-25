@@ -5,9 +5,9 @@ use crate::{
     block_storage::tracing::{observe_block, BlockStage},
     pipeline::buffer_manager::OrderedBlocks,
 };
-use libra2_consensus_types::{common::Round, pipelined_block::PipelinedBlock};
-use libra2_reliable_broadcast::DropGuard;
-use libra2_types::randomness::{FullRandMetadata, Randomness};
+use creditchain_consensus_types::{common::Round, pipelined_block::PipelinedBlock};
+use creditchain_reliable_broadcast::DropGuard;
+use creditchain_types::randomness::{FullRandMetadata, Randomness};
 use std::{
     collections::{BTreeMap, HashMap},
     sync::Arc,
@@ -161,7 +161,7 @@ mod tests {
         block_queue::{BlockQueue, QueueItem},
         test_utils::create_ordered_blocks,
     };
-    use libra2_types::randomness::Randomness;
+    use creditchain_types::randomness::Randomness;
     use std::collections::HashSet;
 
     #[test]

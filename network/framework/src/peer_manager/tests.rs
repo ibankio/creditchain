@@ -22,17 +22,17 @@ use crate::{
     ProtocolId,
 };
 use anyhow::anyhow;
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::{
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::{
     config::{PeerRole, MAX_INBOUND_CONNECTIONS},
     network_id::{NetworkContext, NetworkId},
 };
-use libra2_memsocket::MemorySocket;
-use libra2_netcore::transport::{
+use creditchain_memsocket::MemorySocket;
+use creditchain_netcore::transport::{
     boxed::BoxedTransport, memory::MemoryTransport, ConnectionOrigin, TransportExt,
 };
-use libra2_time_service::TimeService;
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_time_service::TimeService;
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use bytes::Bytes;
 use futures::{channel::oneshot, io::AsyncWriteExt, stream::StreamExt};
 use std::error::Error;
@@ -87,14 +87,14 @@ fn build_test_peer_manager(
         BoxedTransport<Connection<MemorySocket>, impl std::error::Error + Sync + Send + 'static>,
         MemorySocket,
     >,
-    libra2_channel::Sender<(PeerId, ProtocolId), PeerManagerRequest>,
-    libra2_channel::Sender<PeerId, ConnectionRequest>,
+    creditchain_channel::Sender<(PeerId, ProtocolId), PeerManagerRequest>,
+    creditchain_channel::Sender<PeerId, ConnectionRequest>,
     conn_notifs_channel::Receiver,
 ) {
     let (peer_manager_request_tx, peer_manager_request_rx) =
-        libra2_channel::new(QueueStyle::FIFO, 1, None);
-    let (connection_reqs_tx, connection_reqs_rx) = libra2_channel::new(QueueStyle::FIFO, 1, None);
-    let (hello_tx, _hello_rx) = libra2_channel::new(QueueStyle::FIFO, 1, None);
+        creditchain_channel::new(QueueStyle::FIFO, 1, None);
+    let (connection_reqs_tx, connection_reqs_rx) = creditchain_channel::new(QueueStyle::FIFO, 1, None);
+    let (hello_tx, _hello_rx) = creditchain_channel::new(QueueStyle::FIFO, 1, None);
     let (conn_status_tx, conn_status_rx) = conn_notifs_channel::new();
 
     let network_id = NetworkId::Validator;
@@ -247,7 +247,7 @@ fn create_connection<TSocket: transport::TSocket>(
 
 #[test]
 fn peer_manager_simultaneous_dial_two_inbound() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     let runtime = ::tokio::runtime::Runtime::new().unwrap();
 
     // Create a list of ordered PeerIds so we can ensure how PeerIds will be compared.
@@ -297,7 +297,7 @@ fn peer_manager_simultaneous_dial_two_inbound() {
 
 #[test]
 fn peer_manager_simultaneous_dial_inbound_outbound_remote_id_larger() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     let runtime = ::tokio::runtime::Runtime::new().unwrap();
 
     // Create a list of ordered PeerIds so we can ensure how PeerIds will be compared.
@@ -348,7 +348,7 @@ fn peer_manager_simultaneous_dial_inbound_outbound_remote_id_larger() {
 
 #[test]
 fn peer_manager_simultaneous_dial_inbound_outbound_own_id_larger() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     let runtime = ::tokio::runtime::Runtime::new().unwrap();
 
     // Create a list of ordered PeerIds so we can ensure how PeerIds will be compared.
@@ -399,7 +399,7 @@ fn peer_manager_simultaneous_dial_inbound_outbound_own_id_larger() {
 
 #[test]
 fn peer_manager_simultaneous_dial_outbound_inbound_remote_id_larger() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     let runtime = ::tokio::runtime::Runtime::new().unwrap();
 
     // Create a list of ordered PeerIds so we can ensure how PeerIds will be compared.
@@ -450,7 +450,7 @@ fn peer_manager_simultaneous_dial_outbound_inbound_remote_id_larger() {
 
 #[test]
 fn peer_manager_simultaneous_dial_outbound_inbound_own_id_larger() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     let runtime = ::tokio::runtime::Runtime::new().unwrap();
 
     // Create a list of ordered PeerIds so we can ensure how PeerIds will be compared.
@@ -501,7 +501,7 @@ fn peer_manager_simultaneous_dial_outbound_inbound_own_id_larger() {
 
 #[test]
 fn peer_manager_simultaneous_dial_two_outbound() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     let runtime = ::tokio::runtime::Runtime::new().unwrap();
 
     // Create a list of ordered PeerIds so we can ensure how PeerIds will be compared.
@@ -592,7 +592,7 @@ fn peer_manager_simultaneous_dial_disconnect_event() {
 
 #[test]
 fn test_dial_disconnect() {
-    ::libra2_logger::Logger::init_for_testing();
+    ::creditchain_logger::Logger::init_for_testing();
     let runtime = ::tokio::runtime::Runtime::new().unwrap();
 
     // Create a list of ordered PeerIds so we can ensure how PeerIds will be compared.

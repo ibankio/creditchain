@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::smoke_test_environment::SwarmBuilder;
-use libra2_cached_packages::libra2_stdlib;
-use libra2_crypto::SigningKey;
-use libra2_forge::Swarm;
-use libra2_sdk::types::{AccountKey, LocalAccount};
-use libra2_types::function_info::FunctionInfo;
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_crypto::SigningKey;
+use creditchain_forge::Swarm;
+use creditchain_sdk::types::{AccountKey, LocalAccount};
+use creditchain_types::function_info::FunctionInfo;
 use ethers::{
     core::rand::rngs::OsRng,
     signers::{LocalWallet, Signer},
@@ -93,7 +93,7 @@ fn bytes_to_base58(bytes: &[u8]) -> String {
 #[tokio::test(flavor = "multi_thread", worker_threads = 1)]
 async fn test_solana_derivable_account() {
     let swarm = SwarmBuilder::new_local(1).with_libra2().build().await;
-    let mut info = swarm.libra2_public_info();
+    let mut info = swarm.creditchain_public_info();
 
     let function_info = FunctionInfo::new(
         AccountAddress::ONE,
@@ -103,7 +103,7 @@ async fn test_solana_derivable_account() {
 
     let account_key = AccountKey::generate(&mut thread_rng());
     let base58_public_key = bytes_to_base58(&account_key.public_key().to_bytes());
-    let domain = "libra2.org";
+    let domain = "creditchain.io";
     let account_identity = bcs::to_bytes(&SIWSAbstractPublicKey {
         base58_public_key: base58_public_key.clone(),
         domain: domain.to_string(),
@@ -114,10 +114,10 @@ async fn test_solana_derivable_account() {
         function_info,
         account_identity,
         Arc::new(move |x: &[u8]| {
-            let function_name = "0x1::libra2_account::create_account";
+            let function_name = "0x1::creditchain_account::create_account";
             let digest = format!("0x{}", hex::encode(x));
             let message = format!(
-                "{} wants you to sign in with your Solana account:\n{}\n\nPlease confirm you explicitly initiated this request from {}. You are approving to execute transaction {} on Libra2 blockchain (local).\n\nNonce: {}",
+                "{} wants you to sign in with your Solana account:\n{}\n\nPlease confirm you explicitly initiated this request from {}. You are approving to execute transaction {} on CreditChain blockchain (local).\n\nNonce: {}",
                 domain,
                 base58_public_key,
                 domain,
@@ -142,7 +142,7 @@ async fn test_solana_derivable_account() {
         vec![],
         Some(&info.root_account()),
         info.transaction_factory()
-            .payload(libra2_stdlib::libra2_account_create_account(
+            .payload(creditchain_stdlib::creditchain_account_create_account(
                 AccountAddress::random(),
             )),
     );
@@ -155,7 +155,7 @@ async fn test_solana_derivable_account() {
 #[tokio::test(flavor = "multi_thread", worker_threads = 1)]
 async fn test_ethereum_derivable_account() {
     let swarm = SwarmBuilder::new_local(1).with_libra2().build().await;
-    let mut info = swarm.libra2_public_info();
+    let mut info = swarm.creditchain_public_info();
 
     let function_info = FunctionInfo::new(
         AccountAddress::ONE,
@@ -168,7 +168,7 @@ async fn test_ethereum_derivable_account() {
     let address: Address = wallet.address();
     let address_str = format!("0x{}", hex::encode(address.as_bytes()));
 
-    let domain = "libra2.org";
+    let domain = "creditchain.io";
     let account_identity = bcs::to_bytes(&SIWEAbstractPublicKey {
         ethereum_address: address_str.as_bytes().to_vec(),
         domain: domain.as_bytes().to_vec(),
@@ -182,10 +182,10 @@ async fn test_ethereum_derivable_account() {
         account_identity,
         Arc::new({
             move |x: &[u8]| {
-                let function_name = "0x1::libra2_account::create_account";
+                let function_name = "0x1::creditchain_account::create_account";
                 let digest = format!("0x{}", hex::encode(x));
                 let message_body = format!(
-                    "{} wants you to sign in with your Ethereum account:\n{}\n\nPlease confirm you explicitly initiated this request from {}. You are approving to execute transaction {} on Libra2 blockchain (local).\n\nURI: {}://{}\nVersion: 1\nChain ID: {}\nNonce: {}\nIssued At: {}",
+                    "{} wants you to sign in with your Ethereum account:\n{}\n\nPlease confirm you explicitly initiated this request from {}. You are approving to execute transaction {} on CreditChain blockchain (local).\n\nURI: {}://{}\nVersion: 1\nChain ID: {}\nNonce: {}\nIssued At: {}",
                     domain,
                     address_str,
                     domain,
@@ -222,7 +222,7 @@ async fn test_ethereum_derivable_account() {
         vec![],
         Some(&info.root_account()),
         info.transaction_factory()
-            .payload(libra2_stdlib::libra2_account_create_account(
+            .payload(creditchain_stdlib::creditchain_account_create_account(
                 AccountAddress::random(),
             )),
     );

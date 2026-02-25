@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{block::Block, vote_data::VoteData};
-use libra2_crypto::hash::{TransactionAccumulatorHasher, ACCUMULATOR_PLACEHOLDER_HASH};
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
-use libra2_types::{
+use creditchain_crypto::hash::{TransactionAccumulatorHasher, ACCUMULATOR_PLACEHOLDER_HASH};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_types::{
     epoch_state::EpochState,
     proof::{accumulator::InMemoryTransactionAccumulator, AccumulatorExtensionProof},
 };

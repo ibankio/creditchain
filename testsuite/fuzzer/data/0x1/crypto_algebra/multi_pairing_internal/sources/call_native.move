@@ -1,10 +1,10 @@
 module poc::multi_pairing_internal {
     use std::vector;
-    use libra2_std::crypto_algebra::{
+    use creditchain_std::crypto_algebra::{
         Element,
         one, from_u64, scalar_mul, pairing, multi_pairing, add, eq, zero
     };
-    use libra2_std::bls12381_algebra::{G1, G2, Gt, Fr};
+    use creditchain_std::bls12381_algebra::{G1, G2, Gt, Fr};
 
     public entry fun main(_owner: &signer) {
         let p = one<G1>();

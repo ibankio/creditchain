@@ -1,0 +1,16 @@
+[package]
+name = "CreditChainFramework"
+version = "1.0.0"
+
+[addresses]
+std = "0x1"
+creditchain_std = "0x1"
+creditchain_framework = "0x1"
+creditchain_fungible_asset = "0xA"
+creditchain_token = "0x3"
+core_resources = "0xA550C18"
+vm_reserved = "0x0"
+
+[dependencies]
+CreditChainStdlib = { local = "../creditchain-stdlib" }
+MoveStdlib = { local = "../move-stdlib" }

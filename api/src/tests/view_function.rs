@@ -4,10 +4,10 @@
 use super::{
     new_test_context, new_test_context_with_config, new_test_context_with_orderless_flags,
 };
-use libra2_api_test_context::{current_function_name, TestContext};
-use libra2_cached_packages::libra2_stdlib;
-use libra2_config::config::{NodeConfig, ViewFilter, ViewFunctionId};
-use libra2_types::account_address::AccountAddress;
+use creditchain_api_test_context::{current_function_name, TestContext};
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_config::config::{NodeConfig, ViewFilter, ViewFunctionId};
+use creditchain_types::account_address::AccountAddress;
 use rstest::rstest;
 use serde_json::{json, Value};
 use std::{path::PathBuf, str::FromStr};
@@ -16,7 +16,7 @@ fn build_coin_balance_request(address: &AccountAddress) -> Value {
     json!({
         "function":"0x1::coin::balance",
         "arguments": vec![address.to_string()],
-        "type_arguments": vec!["0x1::libra2_coin::Libra2Coin"],
+        "type_arguments": vec!["0x1::creditchain_coin::CreditChainCoin"],
     })
 }
 
@@ -25,7 +25,7 @@ fn build_coin_decimals_request() -> Value {
     json!({
         "function":"0x1::coin::decimals",
         "arguments": arguments,
-        "type_arguments": vec!["0x1::libra2_coin::Libra2Coin"],
+        "type_arguments": vec!["0x1::creditchain_coin::CreditChainCoin"],
     })
 }
 
@@ -91,7 +91,7 @@ async fn test_view_gas_used_header(
     // Confirm the gas used header is present.
     assert!(
         resp.headers()
-            .get("X-Libra2-Gas-Used")
+            .get("X-CreditChain-Gas-Used")
             .unwrap()
             .to_str()
             .unwrap()
@@ -266,7 +266,7 @@ async fn test_view_error_type_resolution_error(
             json!({
                 "function":"0x1::coin::is_account_registered",
                 "arguments": vec![AccountAddress::random().to_string()],
-                "type_arguments": ["0x1::libra2_coin::NewCoin"], // Does not exist
+                "type_arguments": ["0x1::creditchain_coin::NewCoin"], // Does not exist
             }),
         )
         .await;
@@ -288,7 +288,7 @@ async fn test_view_does_not_exist() {
         .post(
             "/view",
             json!({
-                "function":"0x1::libra2_account::fake_function",
+                "function":"0x1::creditchain_account::fake_function",
                 "arguments": vec![owner.address().to_string()],
                 "type_arguments": [],
             }),
@@ -327,7 +327,7 @@ async fn test_simple_view_invalid(
         .post(
             "/view",
             json!({
-                "function":"0x1::libra2_account::assert_account_exists",
+                "function":"0x1::creditchain_account::assert_account_exists",
                 "arguments": vec![owner.address().to_string()],
                 "type_arguments": [],
             }),
@@ -369,7 +369,7 @@ async fn test_versioned_simple_view(
             json!({
                 "function":"0x1::coin::balance",
                 "arguments": vec![owner.address().to_string()],
-                "type_arguments": vec!["0x1::libra2_coin::Libra2Coin"],
+                "type_arguments": vec!["0x1::creditchain_coin::CreditChainCoin"],
             }),
         )
         .await;
@@ -391,7 +391,7 @@ async fn test_view_tuple(use_txn_payload_v2_format: bool, use_orderless_transact
         use_txn_payload_v2_format,
         use_orderless_transactions,
     );
-    let payload = libra2_stdlib::publish_module_source(
+    let payload = creditchain_stdlib::publish_module_source(
         "test_module",
         r#"
         module 0xa550c18::test_module {

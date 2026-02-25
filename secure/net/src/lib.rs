@@ -19,8 +19,8 @@
 pub mod grpc_network_service;
 pub mod network_controller;
 
-use libra2_logger::{info, trace, warn, Schema};
-use libra2_metrics_core::{register_int_counter_vec, IntCounterVec};
+use creditchain_logger::{info, trace, warn, Schema};
+use creditchain_metrics_core::{register_int_counter_vec, IntCounterVec};
 use once_cell::sync::Lazy;
 use serde::Serialize;
 use std::{
@@ -82,7 +82,7 @@ impl NetworkMode {
 
 static EVENT_COUNTER: Lazy<IntCounterVec> = Lazy::new(|| {
     register_int_counter_vec!(
-        "libra2_secure_net_events",
+        "creditchain_secure_net_events",
         "Outcome of secure net events",
         &["service", "mode", "method", "result"]
     )
@@ -516,7 +516,7 @@ impl NetworkStream {
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_config::utils;
+    use creditchain_config::utils;
     use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
     /// Read, Write, Connect timeout in milliseconds.

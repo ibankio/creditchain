@@ -12,7 +12,7 @@
 //! [`Transport`]: crate::transport::Transport
 //! [`TransportExt`]: crate::transport::TransportExt
 
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use futures::{future::Future, stream::Stream};
 use serde::{Deserialize, Serialize};
 use std::fmt;

@@ -10,13 +10,13 @@ use crate::consensus_observer::{
         },
     },
 };
-use libra2_channels::{
-    libra2_channel,
-    libra2_channel::{Receiver, Sender},
+use creditchain_channels::{
+    creditchain_channel,
+    creditchain_channel::{Receiver, Sender},
     message_queues::QueueStyle,
 };
-use libra2_config::{config::ConsensusObserverConfig, network_id::PeerNetworkId};
-use libra2_logger::{error, info, warn};
+use creditchain_config::{config::ConsensusObserverConfig, network_id::PeerNetworkId};
+use creditchain_logger::{error, info, warn};
 use futures::StreamExt;
 
 /// A simple struct that holds a message to be sent to the consensus observer
@@ -91,14 +91,14 @@ impl ConsensusObserverNetworkHandler {
         Receiver<(), ConsensusPublisherNetworkMessage>,
     ) {
         // Create a channel for sending consensus observer messages
-        let (observer_message_sender, observer_message_receiver) = libra2_channel::new(
+        let (observer_message_sender, observer_message_receiver) = creditchain_channel::new(
             QueueStyle::FIFO,
             consensus_observer_config.max_network_channel_size as usize,
             None,
         );
 
         // Create a channel for sending consensus publisher messages
-        let (publisher_message_sender, publisher_message_receiver) = libra2_channel::new(
+        let (publisher_message_sender, publisher_message_receiver) = creditchain_channel::new(
             QueueStyle::FIFO,
             consensus_observer_config.max_network_channel_size as usize,
             None,
@@ -245,13 +245,13 @@ mod test {
             ConsensusObserverDirectSend, ConsensusObserverMessage, ConsensusObserverRequest,
         },
     };
-    use libra2_channels::{libra2_channel, libra2_channel::Receiver, message_queues::QueueStyle};
-    use libra2_config::{
+    use creditchain_channels::{creditchain_channel, creditchain_channel::Receiver, message_queues::QueueStyle};
+    use creditchain_config::{
         config::ConsensusObserverConfig,
         network_id::{NetworkId, PeerNetworkId},
     };
-    use libra2_crypto::HashValue;
-    use libra2_network::{
+    use creditchain_crypto::HashValue;
+    use creditchain_network::{
         application::{
             interface::{NetworkClient, NetworkServiceEvents},
             storage::PeersAndMetadata,
@@ -268,7 +268,7 @@ mod test {
         },
         transport::ConnectionMetadata,
     };
-    use libra2_types::{
+    use creditchain_types::{
         aggregate_signature::AggregateSignature,
         block_info::BlockInfo,
         ledger_info::{LedgerInfo, LedgerInfoWithSignatures},
@@ -571,10 +571,10 @@ mod test {
         wait_and_verify_no_message(&mut publisher_message_receiver).await;
     }
 
-    /// Creates and returns a single Libra2 channel
-    fn create_libra2_channel<K: Eq + Hash + Clone, T>(
-    ) -> (libra2_channel::Sender<K, T>, libra2_channel::Receiver<K, T>) {
-        libra2_channel::new(QueueStyle::FIFO, 10, None)
+    /// Creates and returns a single CreditChain channel
+    fn create_creditchain_channel<K: Eq + Hash + Clone, T>(
+    ) -> (creditchain_channel::Sender<K, T>, creditchain_channel::Receiver<K, T>) {
+        creditchain_channel::new(QueueStyle::FIFO, 10, None)
     }
 
     /// Creates a network sender and events for testing (using the specified network IDs)
@@ -583,8 +583,8 @@ mod test {
     ) -> (
         HashMap<NetworkId, NetworkSender<ConsensusObserverMessage>>,
         NetworkServiceEvents<ConsensusObserverMessage>,
-        HashMap<NetworkId, libra2_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>>,
-        HashMap<NetworkId, libra2_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>>,
+        HashMap<NetworkId, creditchain_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>>,
+        HashMap<NetworkId, creditchain_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>>,
     ) {
         let mut network_senders = HashMap::new();
         let mut network_and_events = HashMap::new();
@@ -593,10 +593,10 @@ mod test {
 
         for network_id in network_ids {
             // Create the peer manager and connection channels
-            let (inbound_request_sender, inbound_request_receiver) = create_libra2_channel();
-            let (outbound_request_sender, outbound_request_receiver) = create_libra2_channel();
+            let (inbound_request_sender, inbound_request_receiver) = create_creditchain_channel();
+            let (outbound_request_sender, outbound_request_receiver) = create_creditchain_channel();
             let (connection_outbound_sender, _connection_outbound_receiver) =
-                create_libra2_channel();
+                create_creditchain_channel();
 
             // Create the network sender and events
             let network_sender = NetworkSender::new(
@@ -710,11 +710,11 @@ mod test {
     /// it to the appropriate receiver (observer or publisher).
     async fn wait_for_handler_processing(
         expected_peer_network_id: PeerNetworkId,
-        observer_message_receiver: &mut libra2_channel::Receiver<
+        observer_message_receiver: &mut creditchain_channel::Receiver<
             (),
             ConsensusObserverNetworkMessage,
         >,
-        publisher_message_receiver: &mut libra2_channel::Receiver<
+        publisher_message_receiver: &mut creditchain_channel::Receiver<
             (),
             ConsensusPublisherNetworkMessage,
         >,
@@ -758,11 +758,11 @@ mod test {
         expected_peer_network_id: PeerNetworkId,
         outbound_request_receivers: &mut HashMap<
             NetworkId,
-            libra2_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>,
+            creditchain_channel::Receiver<(PeerId, ProtocolId), PeerManagerRequest>,
         >,
         inbound_request_senders: &mut HashMap<
             NetworkId,
-            libra2_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>,
+            creditchain_channel::Sender<(PeerId, ProtocolId), ReceivedMessage>,
         >,
         expected_direct_send_protocol: Option<ProtocolId>,
         expected_rpc_protocol: Option<ProtocolId>,

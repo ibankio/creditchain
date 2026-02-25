@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::leader_reputation::{
-    extract_epoch_to_proposers_impl, Libra2DBBackend, ProposerAndVoterHeuristic,
+    extract_epoch_to_proposers_impl, CreditChainDBBackend, ProposerAndVoterHeuristic,
 };
 use crate::liveness::{
     leader_reputation::{
@@ -11,13 +11,13 @@ use crate::liveness::{
     },
     proposer_election::{choose_index, ProposerElection},
 };
-use libra2_bitvec::BitVec;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_crypto::{bls12381, HashValue};
-use libra2_infallible::Mutex;
-use libra2_keygen::KeyGen;
-use libra2_storage_interface::DbReader;
-use libra2_types::{
+use creditchain_bitvec::BitVec;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_crypto::{bls12381, HashValue};
+use creditchain_infallible::Mutex;
+use creditchain_keygen::KeyGen;
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{
     account_address::AccountAddress,
     account_config::{new_block_event_key, NewBlockEvent},
     contract_event::{ContractEvent, EventWithVersion},
@@ -87,8 +87,8 @@ fn test_aggregation_indices_to_authors_out_of_index() {
 struct Example1 {
     validators0: Vec<Author>,
     validators1: Vec<Author>,
-    libra2_db: Arc<MockDbReader>,
-    backend: Libra2DBBackend,
+    creditchain_db: Arc<MockDbReader>,
+    backend: CreditChainDBBackend,
 }
 
 impl Example1 {
@@ -101,13 +101,13 @@ impl Example1 {
         let mut validators1: Vec<Author> = validators0[..3].to_vec();
         validators1.push(sorted_validators[4]);
 
-        let libra2_db = Arc::new(MockDbReader::new());
-        let backend = Libra2DBBackend::new(window_size, 0, libra2_db.clone());
+        let creditchain_db = Arc::new(MockDbReader::new());
+        let backend = CreditChainDBBackend::new(window_size, 0, creditchain_db.clone());
 
         Self {
             validators0,
             validators1,
-            libra2_db,
+            creditchain_db,
             backend,
         }
     }
@@ -117,26 +117,26 @@ impl Example1 {
     }
 
     fn step1(&mut self) {
-        self.libra2_db
+        self.creditchain_db
             .add_event_with_data(self.validators0[0], vec![1, 2], vec![3]);
-        self.libra2_db
+        self.creditchain_db
             .add_event_with_data(self.validators0[0], vec![1, 2], vec![]);
-        self.libra2_db
+        self.creditchain_db
             .add_event_with_data(self.validators0[1], vec![0, 2], vec![2]);
-        self.libra2_db
+        self.creditchain_db
             .add_event_with_data(self.validators0[2], vec![0, 1], vec![]);
     }
 
     fn step2(&mut self) {
-        self.libra2_db
+        self.creditchain_db
             .add_event_with_data(self.validators0[3], vec![0, 1], vec![1]);
-        self.libra2_db
+        self.creditchain_db
             .add_event_with_data(self.validators0[3], vec![0, 1], vec![1]);
     }
 
     fn step3(&mut self) {
-        self.libra2_db.new_epoch();
-        self.libra2_db
+        self.creditchain_db.new_epoch();
+        self.creditchain_db
             .add_event_with_data(self.validators1[3], vec![0, 1], vec![0]);
     }
 }
@@ -309,19 +309,19 @@ fn test_api(use_root_hash: bool) {
     let total_weights: u128 = expected_weights.iter().sum();
 
     let mut selected = [0; 5].to_vec();
-    let libra2_db = Arc::new(MockDbReader::new());
+    let creditchain_db = Arc::new(MockDbReader::new());
 
     for epoch in 1..1000 {
-        libra2_db.new_epoch();
+        creditchain_db.new_epoch();
         assert_eq!(
             (epoch, 1),
-            libra2_db.add_event_with_data(proposers[0], vec![1, 2], vec![])
+            creditchain_db.add_event_with_data(proposers[0], vec![1, 2], vec![])
         );
         assert_eq!(
             (epoch, 2),
-            libra2_db.add_event_with_data(proposers[0], vec![3], vec![])
+            creditchain_db.add_event_with_data(proposers[0], vec![3], vec![])
         );
-        let backend = Arc::new(Libra2DBBackend::new(1, 4, libra2_db.clone()));
+        let backend = Arc::new(CreditChainDBBackend::new(1, 4, creditchain_db.clone()));
         let leader_reputation = LeaderReputation::new(
             epoch,
             HashMap::from([(epoch, proposers.clone())]),
@@ -345,7 +345,7 @@ fn test_api(use_root_hash: bool) {
 
         let state = if use_root_hash {
             [
-                libra2_db.get_accumulator_root_hash(0).unwrap().to_vec(),
+                creditchain_db.get_accumulator_root_hash(0).unwrap().to_vec(),
                 epoch.to_le_bytes().to_vec(),
                 round.to_le_bytes().to_vec(),
             ]
@@ -487,7 +487,7 @@ impl DbReader for MockDbReader {
     fn get_latest_block_events(
         &self,
         num_events: usize,
-    ) -> libra2_storage_interface::Result<Vec<EventWithVersion>> {
+    ) -> creditchain_storage_interface::Result<Vec<EventWithVersion>> {
         *self.fetched.lock() += 1;
         let events = self.events.lock();
         // println!("Events {:?}", *events);
@@ -500,7 +500,7 @@ impl DbReader for MockDbReader {
     }
 
     /// Returns the latest version, error on on non-bootstrapped DB.
-    fn get_latest_ledger_info_version(&self) -> libra2_storage_interface::Result<Version> {
+    fn get_latest_ledger_info_version(&self) -> creditchain_storage_interface::Result<Version> {
         let version = *self.idx.lock();
         let mut to_add = self.to_add_event_after_call.lock();
         if let Some((epoch, round)) = *to_add {
@@ -515,21 +515,21 @@ impl DbReader for MockDbReader {
     fn get_accumulator_root_hash(
         &self,
         _version: Version,
-    ) -> libra2_storage_interface::Result<HashValue> {
+    ) -> creditchain_storage_interface::Result<HashValue> {
         Ok(HashValue::zero())
     }
 }
 
 #[test]
 fn backend_wrapper_test() {
-    let libra2_db = Arc::new(MockDbReader::new());
-    let backend = Libra2DBBackend::new(3, 3, libra2_db.clone());
+    let creditchain_db = Arc::new(MockDbReader::new());
+    let backend = CreditChainDBBackend::new(3, 3, creditchain_db.clone());
 
-    libra2_db.add_event(0, 1);
-    libra2_db.new_epoch();
-    libra2_db.skip_rounds(1);
+    creditchain_db.add_event(0, 1);
+    creditchain_db.new_epoch();
+    creditchain_db.skip_rounds(1);
     for i in 2..6 {
-        libra2_db.add_event(1, i);
+        creditchain_db.add_event(1, i);
     }
     let mut fetch_count = 0;
 
@@ -544,7 +544,7 @@ fn backend_wrapper_test() {
         if to_fetch {
             fetch_count += 1;
         }
-        assert_eq!(fetch_count, libra2_db.fetched(), "At round {}", round);
+        assert_eq!(fetch_count, creditchain_db.fetched(), "At round {}", round);
     };
 
     assert_history(6, vec![5, 4, 3], true);
@@ -556,23 +556,23 @@ fn backend_wrapper_test() {
     assert_history(6, vec![5, 4, 3], false);
 
     // as soon as history change, we fetch again
-    libra2_db.add_event(1, 6);
+    creditchain_db.add_event(1, 6);
     assert_history(6, vec![6, 5, 4], true);
-    libra2_db.add_event(1, 7);
+    creditchain_db.add_event(1, 7);
     assert_history(6, vec![6, 5, 4], false);
-    libra2_db.add_event(1, 8);
+    creditchain_db.add_event(1, 8);
     assert_history(6, vec![6, 5, 4], false);
 
     assert_history(9, vec![8, 7, 6], true);
-    libra2_db.skip_rounds(1);
-    libra2_db.add_event(1, 10);
+    creditchain_db.skip_rounds(1);
+    creditchain_db.add_event(1, 10);
     // we need to refetch, as we don't know if round that arrived is for 9 or not.
     assert_history(9, vec![8, 7, 6], true);
     assert_history(9, vec![8, 7, 6], false);
-    libra2_db.add_event(1, 11);
+    creditchain_db.add_event(1, 11);
     // since we already saw round 10, and are asking for round 9, no need to fetch again.
     assert_history(9, vec![8, 7, 6], false);
-    libra2_db.add_event(1, 12);
+    creditchain_db.add_event(1, 12);
     assert_history(9, vec![8, 7, 6], false);
 
     // last time we fetched, we saw 10, so we don't need to fetch for 10
@@ -582,21 +582,21 @@ fn backend_wrapper_test() {
     assert_history(12, vec![12, 11, 10], false);
 
     // since history include target round, unrelated transaction don't require refresh
-    libra2_db.add_another_transaction();
+    creditchain_db.add_another_transaction();
     assert_history(12, vec![12, 11, 10], false);
 
     // since history doesn't include target round, any unrelated transaction requires refresh
     assert_history(13, vec![12, 11, 10], true);
-    libra2_db.add_another_transaction();
+    creditchain_db.add_another_transaction();
     assert_history(13, vec![12, 11, 10], true);
     assert_history(13, vec![12, 11, 10], false);
-    libra2_db.add_another_transaction();
+    creditchain_db.add_another_transaction();
     assert_history(13, vec![12, 11, 10], true);
     assert_history(13, vec![12, 11, 10], false);
 
     // check for race condition
-    libra2_db.add_another_transaction();
-    libra2_db.add_event_after_call(1, 13);
+    creditchain_db.add_another_transaction();
+    creditchain_db.add_event_after_call(1, 13);
     // in the first we add event after latest_db_version is fetched, as a race.
     // Second one should know that there is nothing new.
     assert_history(14, vec![13, 12, 11], true);
@@ -605,17 +605,17 @@ fn backend_wrapper_test() {
 
 #[test]
 fn backend_test_cross_epoch() {
-    let libra2_db = Arc::new(MockDbReader::new());
-    let backend = Libra2DBBackend::new(3, 3, libra2_db.clone());
+    let creditchain_db = Arc::new(MockDbReader::new());
+    let backend = CreditChainDBBackend::new(3, 3, creditchain_db.clone());
 
-    libra2_db.add_event(0, 1);
-    libra2_db.new_epoch();
-    libra2_db.add_event(1, 1);
-    libra2_db.add_event(1, 2);
-    libra2_db.add_event(1, 3);
-    libra2_db.new_epoch();
-    libra2_db.add_event(2, 1);
-    libra2_db.add_event(2, 2);
+    creditchain_db.add_event(0, 1);
+    creditchain_db.new_epoch();
+    creditchain_db.add_event(1, 1);
+    creditchain_db.add_event(1, 2);
+    creditchain_db.add_event(1, 3);
+    creditchain_db.new_epoch();
+    creditchain_db.add_event(2, 1);
+    creditchain_db.add_event(2, 2);
 
     let mut fetch_count = 0;
 
@@ -630,14 +630,14 @@ fn backend_test_cross_epoch() {
         if to_fetch {
             fetch_count += 1;
         }
-        assert_eq!(fetch_count, libra2_db.fetched(), "At round {}", round);
+        assert_eq!(fetch_count, creditchain_db.fetched(), "At round {}", round);
     };
 
     assert_history(2, 2, vec![(2, 2), (2, 1), (1, 3)], true);
     assert_history(2, 1, vec![(2, 1), (1, 3), (1, 2)], false);
 
-    libra2_db.new_epoch();
-    libra2_db.add_event(3, 1);
+    creditchain_db.new_epoch();
+    creditchain_db.add_event(3, 1);
 
     assert_history(3, 2, vec![(3, 1), (2, 2), (2, 1)], true);
 }

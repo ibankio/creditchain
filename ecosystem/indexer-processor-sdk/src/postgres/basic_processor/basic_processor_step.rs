@@ -8,7 +8,7 @@ use crate::{
     utils::errors::ProcessorError,
 };
 use anyhow::Result;
-use libra2_protos::transaction::v1::Transaction;
+use creditchain_protos::transaction::v1::Transaction;
 use async_trait::async_trait;
 
 // Basic process step that runs a process function on each transaction

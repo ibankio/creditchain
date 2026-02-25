@@ -6,16 +6,16 @@ use crate::{
     tests::{new_test_context, TestContext},
 };
 
-use libra2_api_test_context::current_function_name;
-use libra2_framework::extended_checks;
-use libra2_protos::extractor::v1::{
+use creditchain_api_test_context::current_function_name;
+use creditchain_framework::extended_checks;
+use creditchain_protos::extractor::v1::{
     transaction::{TransactionType, TxnData},
     transaction_payload::{Payload, Type as PayloadType},
     write_set_change::Change::WriteTableItem,
     Transaction as TransactionPB,
 };
 
-use libra2_sdk::types::{account_config::libra2_test_root_address, LocalAccount};
+use creditchain_sdk::types::{account_config::creditchain_test_root_address, LocalAccount};
 
 use move_core_types::{account_address::AccountAddress, value::MoveValue};
 use move_package::BuildConfig;
@@ -38,7 +38,7 @@ async fn test_genesis_works() {
     if let TxnData::Genesis(txn) = txn.txn_data.unwrap() {
         assert_eq!(
             txn.events[0].key.clone().unwrap().account_address,
-            libra2_test_root_address().to_string()
+            creditchain_test_root_address().to_string()
         );
     }
 }

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #![no_main]
-use libra2_types::transaction::SignedTransaction;
+use creditchain_types::transaction::SignedTransaction;
 use arbitrary::Arbitrary;
 use libfuzzer_sys::fuzz_target;
 

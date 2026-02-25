@@ -2,14 +2,14 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     pipelined_block::{ExecutionSummary, PipelinedBlock},
     quorum_cert::QuorumCert,
     sync_info::SyncInfo,
     timeout_2chain::TwoChainTimeoutCertificate,
     wrapped_ledger_info::WrappedLedgerInfo,
 };
-use libra2_crypto::HashValue;
+use creditchain_crypto::HashValue;
 pub use block_store::{
     sync_manager::{BlockRetriever, NeedFetchResult},
     BlockStore,

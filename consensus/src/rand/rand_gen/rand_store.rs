@@ -9,9 +9,9 @@ use crate::{
     },
 };
 use anyhow::ensure;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_logger::warn;
-use libra2_types::randomness::{FullRandMetadata, RandMetadata, Randomness};
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_logger::warn;
+use creditchain_types::randomness::{FullRandMetadata, RandMetadata, Randomness};
 use itertools::Either;
 use std::collections::{BTreeMap, HashMap, HashSet};
 
@@ -338,13 +338,13 @@ mod tests {
         test_utils::{create_ordered_blocks, create_share, create_share_for_round},
         types::{MockShare, PathType, RandConfig},
     };
-    use libra2_consensus_types::common::Author;
-    use libra2_crypto::{bls12381, HashValue, Uniform};
-    use libra2_dkg::{
+    use creditchain_consensus_types::common::Author;
+    use creditchain_crypto::{bls12381, HashValue, Uniform};
+    use creditchain_dkg::{
         pvss::{traits::Transcript, Player, WeightedConfig},
         weighted_vuf::traits::WeightedVUF,
     };
-    use libra2_types::{
+    use creditchain_types::{
         dkg::{real_dkg::maybe_dk_from_bls_sk, DKGSessionMetadata, DKGTrait, DefaultDKG},
         on_chain_config::OnChainRandomnessConfig,
         randomness::{FullRandMetadata, RandKeys, WvufPP, WVUF},

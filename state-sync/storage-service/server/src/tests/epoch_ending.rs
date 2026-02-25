@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::tests::{mock, mock::MockClient, utils};
-use libra2_bitvec::BitVec;
-use libra2_config::config::StorageServiceConfig;
-use libra2_crypto::HashValue;
-use libra2_storage_service_types::{
+use creditchain_bitvec::BitVec;
+use creditchain_config::config::StorageServiceConfig;
+use creditchain_crypto::HashValue;
+use creditchain_storage_service_types::{
     requests::{DataRequest, EpochEndingLedgerInfoRequest, StorageServiceRequest},
     responses::DataResponse,
     Epoch, StorageServiceError,
 };
-use libra2_types::{
+use creditchain_types::{
     aggregate_signature::AggregateSignature,
     block_info::BlockInfo,
     epoch_change::EpochChangeProof,

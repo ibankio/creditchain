@@ -1,5 +1,5 @@
 [package]
-name = "libra2-proxy"
+name = "creditchain-proxy"
 description = "CreditChain proxy"
 version = "0.1.0"
 

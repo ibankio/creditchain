@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::monitor;
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::{TransactionInProgress, TransactionSummary},
     proof_of_store::BatchInfo,
 };
-use libra2_logger::prelude::*;
-use libra2_mempool::{QuorumStoreRequest, QuorumStoreResponse};
-use libra2_types::{quorum_store::BatchId, transaction::SignedTransaction, PeerId};
+use creditchain_logger::prelude::*;
+use creditchain_mempool::{QuorumStoreRequest, QuorumStoreResponse};
+use creditchain_types::{quorum_store::BatchId, transaction::SignedTransaction, PeerId};
 use chrono::Utc;
 use futures::channel::{mpsc::Sender, oneshot};
 use std::{

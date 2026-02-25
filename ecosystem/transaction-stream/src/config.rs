@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::utils::additional_headers::AdditionalHeaders;
-use libra2_transaction_filter::BooleanTransactionFilter;
+use creditchain_transaction_filter::BooleanTransactionFilter;
 use serde::{Deserialize, Serialize};
 use std::time::Duration;
 use url::Url;

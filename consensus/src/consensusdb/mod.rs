@@ -8,11 +8,11 @@ mod schema;
 
 use crate::error::DbError;
 use anyhow::Result;
-use libra2_consensus_types::{block::Block, quorum_cert::QuorumCert};
-use libra2_crypto::HashValue;
-use libra2_logger::prelude::*;
-use libra2_schemadb::{batch::SchemaBatch, schema::Schema, Options, DB, DEFAULT_COLUMN_FAMILY_NAME};
-use libra2_storage_interface::Libra2DbError;
+use creditchain_consensus_types::{block::Block, quorum_cert::QuorumCert};
+use creditchain_crypto::HashValue;
+use creditchain_logger::prelude::*;
+use creditchain_schemadb::{batch::SchemaBatch, schema::Schema, Options, DB, DEFAULT_COLUMN_FAMILY_NAME};
+use creditchain_storage_interface::CreditChainDbError;
 pub use schema::{
     block::BlockSchema,
     dag::{CertifiedNodeSchema, DagVoteSchema, NodeSchema},
@@ -202,7 +202,7 @@ impl ConsensusDB {
     pub fn get_all<S: Schema>(&self) -> Result<Vec<(S::Key, S::Value)>, DbError> {
         let mut iter = self.db.iter::<S>()?;
         iter.seek_to_first();
-        Ok(iter.collect::<Result<Vec<(S::Key, S::Value)>, Libra2DbError>>()?)
+        Ok(iter.collect::<Result<Vec<(S::Key, S::Value)>, CreditChainDbError>>()?)
     }
 
     pub fn get<S: Schema>(&self, key: &S::Key) -> Result<Option<S::Value>, DbError> {

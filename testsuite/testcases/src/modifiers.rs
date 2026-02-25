@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{multi_region_network_test::chunk_peers, LoadDestination, NetworkLoadTest};
-use libra2_forge::{
+use creditchain_forge::{
     GroupCpuStress, NetworkContext, NetworkContextSynchronizer, NetworkTest, Swarm, SwarmChaos,
     SwarmCpuStress, SwarmExt, Test,
 };
-use libra2_types::PeerId;
+use creditchain_types::PeerId;
 use async_trait::async_trait;
 use log::info;
 use rand::Rng;
@@ -33,7 +33,7 @@ async fn add_execution_delay(
         );
         validator
             .set_failpoint(
-                "libra2_vm::execution::user_transaction".to_string(),
+                "creditchain_vm::execution::user_transaction".to_string(),
                 format!(
                     "{}%delay({})",
                     sleep_percentage, config.inject_delay_per_transaction_ms
@@ -59,7 +59,7 @@ async fn remove_execution_delay(
     for (name, validator) in validators {
         validator
             .set_failpoint(
-                "libra2_vm::execution::block_metadata".to_string(),
+                "creditchain_vm::execution::block_metadata".to_string(),
                 "off".to_string(),
             )
             .await

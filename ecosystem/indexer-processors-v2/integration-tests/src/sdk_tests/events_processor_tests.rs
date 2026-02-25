@@ -54,11 +54,11 @@ mod tests {
         },
     };
     use libra2_indexer_processor_sdk::{
-       libra2_protos::transaction::v1::Transaction,
+       creditchain_protos::transaction::v1::Transaction,
         testing_framework::{cli_parser::get_test_config, database::TestDatabase},
         traits::processor_trait::ProcessorTrait,
     };
-    use libra2_indexer_test_transactions::json_transactions::generated_transactions::{
+    use creditchain_indexer_test_transactions::json_transactions::generated_transactions::{
         IMPORTED_DEVNET_TXNS_78753831_TOKEN_V1_MINT_TRANSFER_WITH_V2_EVENTS,
         IMPORTED_DEVNET_TXNS_78753832_TOKEN_V2_MINT_TRANSFER_WITH_V2_EVENTS,
         IMPORTED_MAINNET_TXNS_554229017_EVENTS_WITH_NO_EVENT_SIZE_INFO,

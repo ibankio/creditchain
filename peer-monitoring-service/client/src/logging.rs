@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::Error;
-use libra2_config::network_id::PeerNetworkId;
-use libra2_logger::Schema;
-use libra2_peer_monitoring_service_types::request::PeerMonitoringServiceRequest;
+use creditchain_config::network_id::PeerNetworkId;
+use creditchain_logger::Schema;
+use creditchain_peer_monitoring_service_types::request::PeerMonitoringServiceRequest;
 use serde::Serialize;
 
 #[derive(Schema)]

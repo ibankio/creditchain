@@ -1,5 +1,5 @@
 [package]
-name = "libra2-executor-service"
+name = "creditchain-executor-service"
 description = "CreditChain executor service"
 version = "0.1.1"
 
@@ -13,21 +13,21 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-block-executor = { workspace = true }
-libra2-block-partitioner = { workspace = true }
-libra2-config = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-keygen = { workspace = true }
-libra2-language-e2e-tests = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-node-resource-metrics = { workspace = true }
-libra2-push-metrics =  { workspace = true }
-libra2-secure-net = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-transaction-simulation = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
+creditchain-block-executor = { workspace = true }
+creditchain-block-partitioner = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-keygen = { workspace = true }
+creditchain-language-e2e-tests = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-node-resource-metrics = { workspace = true }
+creditchain-push-metrics =  { workspace = true }
+creditchain-secure-net = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-transaction-simulation = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
 bcs = { workspace = true }
 clap = { workspace = true }
 crossbeam-channel = { workspace = true }
@@ -41,5 +41,5 @@ serde = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
-libra2-language-e2e-tests = { workspace = true }
-libra2-vm = { workspace = true }
+creditchain-language-e2e-tests = { workspace = true }
+creditchain-vm = { workspace = true }

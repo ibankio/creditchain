@@ -61,7 +61,7 @@ class CreateArgs:
         str
     ]  # workspace to create the validator keys & genesis artifacts. Will use a tempfile if not provided
     framework_path: str  # path to the compiled move framework #TODO make this more customizable
-    libra2_cli_path: str  # path to libra2 CLI
+    creditchain_cli_path: str  # path to libra2 CLI
     dry_run: bool  # whether it is a dry run or not
     name: str  # the namespace to create the testnet
 
@@ -479,7 +479,7 @@ async def generate_genesis(
     # Run genesis
     system_context.shell.run(
         [
-            args.libra2_cli_path,
+            args.creditchain_cli_path,
             "genesis",
             "generate-genesis",
             "--local-repository-dir",
@@ -558,7 +558,7 @@ async def generate_keys_and_configuration(
     # Generate validator keys
     await system_context.shell.gen_run(
         [
-            args.libra2_cli_path,
+            args.creditchain_cli_path,
             "genesis",
             "generate-keys",
             "--output-dir",
@@ -571,7 +571,7 @@ async def generate_keys_and_configuration(
     # Generate validator identities
     await system_context.shell.gen_run(
         [
-            args.libra2_cli_path,
+            args.creditchain_cli_path,
             "genesis",
             "set-validator-configuration",
             "--owner-public-identity-file",
@@ -927,7 +927,7 @@ async def create_node_stateful_sets(
     )
 
     volume4: client.V1Volume = client.V1Volume(
-        name=util.LIBRA2_DATA_NAME,
+        name=util.CREDITCHAIN_DATA_NAME,
         persistent_volume_claim=client.V1PersistentVolumeClaimVolumeSource(
             claim_name=util.type_specific_name(
                 vfn_validator_node_pair_name, type, "pvc"
@@ -936,7 +936,7 @@ async def create_node_stateful_sets(
     )
 
     volume_mount4: client.V1VolumeMount = client.V1VolumeMount(
-        name=util.LIBRA2_DATA_NAME, mount_path=util.LIBRA2_DATA_DIR
+        name=util.CREDITCHAIN_DATA_NAME, mount_path=util.CREDITCHAIN_DATA_DIR
     )
 
     #
@@ -945,7 +945,7 @@ async def create_node_stateful_sets(
         name=util.type_specific_name(vfn_validator_node_pair_name, type),
         image=image,
         command=[
-            "/usr/local/bin/libra2-node",
+            "/usr/local/bin/creditchain-node",
             "-f",
             f"/opt/libra2/etc/{type.value}.yaml",
         ],

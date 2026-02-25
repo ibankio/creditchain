@@ -1,5 +1,5 @@
 base:
-    data_dir: "/opt/libra2/data"
+    data_dir: "/opt/creditchain/data"
     role: "validator"
     waypoint:
         from_storage:

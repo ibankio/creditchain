@@ -9,7 +9,7 @@ use crate::{
     util::{hash_str, truncate_str},
 };
 use anyhow::{Context, Result};
-use libra2_api_types::{deserialize_from_string, MoveType, WriteResource};
+use creditchain_api_types::{deserialize_from_string, MoveType, WriteResource};
 use bigdecimal::BigDecimal;
 use serde::{Deserialize, Serialize};
 

@@ -1,5 +1,5 @@
 [package]
-name = "libra2-indexer-grpc-server-framework"
+name = "creditchain-indexer-grpc-server-framework"
 description = "Indexer gRPC server framework library."
 version = "1.0.1"
 
@@ -14,7 +14,7 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-metrics-core = { workspace = true }
+creditchain-metrics-core = { workspace = true }
 async-trait = { workspace = true }
 backtrace = { workspace = true }
 clap = { workspace = true }
@@ -29,4 +29,4 @@ tracing-subscriber = { workspace = true }
 warp = { workspace = true }
 
 [target.'cfg(target_os = "linux")'.dependencies]
-libra2-system-utils = { workspace = true }
+creditchain-system-utils = { workspace = true }

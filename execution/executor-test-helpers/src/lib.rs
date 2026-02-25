@@ -4,15 +4,15 @@
 
 pub mod integration_test_impl;
 
-use libra2_config::config::NodeConfig;
-use libra2_crypto::{
+use creditchain_config::config::NodeConfig;
+use creditchain_crypto::{
     ed25519::{Ed25519PrivateKey, Ed25519PublicKey},
     HashValue,
 };
-use libra2_executor::db_bootstrapper::{generate_waypoint, maybe_bootstrap};
-use libra2_executor_types::state_compute_result::StateComputeResult;
-use libra2_storage_interface::DbReaderWriter;
-use libra2_types::{
+use creditchain_executor::db_bootstrapper::{generate_waypoint, maybe_bootstrap};
+use creditchain_executor_types::state_compute_result::StateComputeResult;
+use creditchain_storage_interface::DbReaderWriter;
+use creditchain_types::{
     account_address::AccountAddress,
     block_info::BlockInfo,
     ledger_info::{generate_ledger_info_with_sig, LedgerInfo, LedgerInfoWithSignatures},
@@ -21,7 +21,7 @@ use libra2_types::{
     validator_signer::ValidatorSigner,
     waypoint::Waypoint,
 };
-use libra2_vm::VMBlockExecutor;
+use creditchain_vm::VMBlockExecutor;
 use std::sync::Arc;
 
 /// Helper function for test to blindly bootstrap without waypoint.

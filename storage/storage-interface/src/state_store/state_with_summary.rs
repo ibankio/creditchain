@@ -5,9 +5,9 @@ use crate::state_store::{
     state::{LedgerState, State},
     state_summary::{LedgerStateSummary, StateSummary},
 };
-use libra2_crypto::HashValue;
-use libra2_scratchpad::SparseMerkleTree;
-use libra2_types::{state_store::state_storage_usage::StateStorageUsage, transaction::Version};
+use creditchain_crypto::HashValue;
+use creditchain_scratchpad::SparseMerkleTree;
+use creditchain_types::{state_store::state_storage_usage::StateStorageUsage, transaction::Version};
 use derive_more::{Deref, DerefMut};
 
 #[derive(Clone, Debug, Deref)]

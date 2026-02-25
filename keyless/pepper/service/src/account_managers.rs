@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_logger::info;
+use creditchain_logger::info;
 use once_cell::sync::Lazy;
 use regex::Regex;
 use std::{
@@ -27,7 +27,7 @@ use std::{
 /// ACCOUNT_MANAGER_2B_ISSUER=https://accounts.facebook.com \
 /// ACCOUNT_MANAGER_2B_AUD=9876543210 \
 /// VUF_KEY_SEED_HEX=ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff \
-/// cargo run -p libra2-keyless-pepper-service
+/// cargo run -p creditchain-keyless-pepper-service
 /// ```
 pub static ACCOUNT_MANAGERS: Lazy<HashSet<(String, String)>> = Lazy::new(|| {
     let re_issuer = Regex::new(r"ACCOUNT_MANAGER_(\w+)_ISSUER").unwrap();

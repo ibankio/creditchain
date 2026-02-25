@@ -9,18 +9,18 @@ use crate::{
     DKGMessage,
 };
 use anyhow::{anyhow, Result};
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-use libra2_config::config::{ReliableBroadcastConfig, SafetyRulesConfig};
-use libra2_event_notifications::{
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+use creditchain_config::config::{ReliableBroadcastConfig, SafetyRulesConfig};
+use creditchain_event_notifications::{
     EventNotification, EventNotificationListener, ReconfigNotification,
     ReconfigNotificationListener,
 };
-use libra2_logger::{debug, error, info, warn};
-use libra2_network::{application::interface::NetworkClient, protocols::network::Event};
-use libra2_reliable_broadcast::ReliableBroadcast;
-use libra2_safety_rules::{safety_rules_manager::storage, PersistentSafetyStorage};
-use libra2_types::{
+use creditchain_logger::{debug, error, info, warn};
+use creditchain_network::{application::interface::NetworkClient, protocols::network::Event};
+use creditchain_reliable_broadcast::ReliableBroadcast;
+use creditchain_safety_rules::{safety_rules_manager::storage, PersistentSafetyStorage};
+use creditchain_types::{
     account_address::AccountAddress,
     dkg::{DKGStartEvent, DKGState, DefaultDKG},
     epoch_state::EpochState,
@@ -29,7 +29,7 @@ use libra2_types::{
         OnChainRandomnessConfig, RandomnessConfigMoveStruct, RandomnessConfigSeqNum, ValidatorSet,
     },
 };
-use libra2_validator_transaction_pool::VTxnPoolState;
+use creditchain_validator_transaction_pool::VTxnPoolState;
 use futures::StreamExt;
 use futures_channel::oneshot;
 use std::{sync::Arc, time::Duration};
@@ -46,13 +46,13 @@ pub struct EpochManager<P: OnChainConfigProvider> {
 
     // Msgs to DKG manager
     dkg_rpc_msg_tx:
-        Option<libra2_channel::Sender<AccountAddress, (AccountAddress, IncomingRpcRequest)>>,
+        Option<creditchain_channel::Sender<AccountAddress, (AccountAddress, IncomingRpcRequest)>>,
     dkg_manager_close_tx: Option<oneshot::Sender<oneshot::Sender<()>>>,
-    dkg_start_event_tx: Option<libra2_channel::Sender<(), DKGStartEvent>>,
+    dkg_start_event_tx: Option<creditchain_channel::Sender<(), DKGStartEvent>>,
     vtxn_pool: VTxnPoolState,
 
     // Network utils
-    self_sender: libra2_channels::Sender<Event<DKGMessage>>,
+    self_sender: creditchain_channels::Sender<Event<DKGMessage>>,
     network_sender: DKGNetworkClient<NetworkClient<DKGMessage>>,
     rb_config: ReliableBroadcastConfig,
 
@@ -68,7 +68,7 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
         my_addr: AccountAddress,
         reconfig_events: ReconfigNotificationListener<P>,
         dkg_start_events: EventNotificationListener,
-        self_sender: libra2_channels::Sender<Event<DKGMessage>>,
+        self_sender: creditchain_channels::Sender<Event<DKGMessage>>,
         network_sender: DKGNetworkClient<NetworkClient<DKGMessage>>,
         vtxn_pool: VTxnPoolState,
         rb_config: ReliableBroadcastConfig,
@@ -214,17 +214,17 @@ impl<P: OnChainConfigProvider> EpochManager<P> {
                     .max_delay(Duration::from_millis(
                         self.rb_config.backoff_policy_max_delay_ms,
                     )),
-                libra2_time_service::TimeService::real(),
+                creditchain_time_service::TimeService::real(),
                 Duration::from_millis(self.rb_config.rpc_timeout_ms),
                 BoundedExecutor::new(8, tokio::runtime::Handle::current()),
             );
             let agg_trx_producer = AggTranscriptProducer::new(rb);
 
             let (dkg_start_event_tx, dkg_start_event_rx) =
-                libra2_channel::new(QueueStyle::KLAST, 1, None);
+                creditchain_channel::new(QueueStyle::KLAST, 1, None);
             self.dkg_start_event_tx = Some(dkg_start_event_tx);
 
-            let (dkg_rpc_msg_tx, dkg_rpc_msg_rx) = libra2_channel::new::<
+            let (dkg_rpc_msg_tx, dkg_rpc_msg_rx) = creditchain_channel::new::<
                 AccountAddress,
                 (AccountAddress, IncomingRpcRequest),
             >(QueueStyle::FIFO, 100, None);

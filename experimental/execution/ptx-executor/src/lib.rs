@@ -21,11 +21,11 @@ use crate::{
     analyzer::PtxAnalyzer, finalizer::PtxFinalizer, metrics::TIMER, runner::PtxRunner,
     scheduler::PtxScheduler, sorter::PtxSorter, state_reader::PtxStateReader,
 };
-use libra2_block_executor::txn_provider::{default::DefaultTxnProvider, TxnProvider};
-use libra2_experimental_runtimes::thread_manager::THREAD_MANAGER;
-use libra2_infallible::Mutex;
-use libra2_metrics_core::TimerHelper;
-use libra2_types::{
+use creditchain_block_executor::txn_provider::{default::DefaultTxnProvider, TxnProvider};
+use creditchain_experimental_runtimes::thread_manager::THREAD_MANAGER;
+use creditchain_infallible::Mutex;
+use creditchain_metrics_core::TimerHelper;
+use creditchain_types::{
     block_executor::{
         config::BlockExecutorConfigFromOnchain, partitioner::PartitionedTransactions,
         transaction_slice_metadata::TransactionSliceMetadata,
@@ -36,9 +36,9 @@ use libra2_types::{
         TransactionOutput,
     },
 };
-use libra2_vm::{
+use creditchain_vm::{
     sharded_block_executor::{executor_client::ExecutorClient, ShardedBlockExecutor},
-    Libra2VM, VMBlockExecutor,
+    CreditChainVM, VMBlockExecutor,
 };
 use move_core_types::vm_status::VMStatus;
 use std::{
@@ -62,7 +62,7 @@ impl VMBlockExecutor for PtxBlockExecutor {
     ) -> Result<BlockOutput<StateKey, TransactionOutput>, VMStatus> {
         let _timer = TIMER.timer_with(&["block_total"]);
 
-        let concurrency_level = Libra2VM::get_concurrency_level();
+        let concurrency_level = CreditChainVM::get_concurrency_level();
         // 1. Analyze: annotate read / write sets.
         // 2. Sort: build dependency graph by remembering the latest writes for each key.
         // 3. Schedule: send readily runnable transactions to the runner.

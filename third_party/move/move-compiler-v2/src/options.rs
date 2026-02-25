@@ -13,7 +13,7 @@ use legacy_move_compiler::{
     command_line as cli,
     shared::{
         move_compiler_warn_of_deprecation_use_env_var,
-        warn_of_deprecation_use_in_libra2_libs_env_var,
+        warn_of_deprecation_use_in_creditchain_libs_env_var,
     },
 };
 use move_command_line_common::env::{bool_to_str, read_env_var};
@@ -102,12 +102,12 @@ pub struct Options {
            default_value=bool_to_str(move_compiler_warn_of_deprecation_use_env_var()))]
     pub warn_deprecated: bool,
 
-    /// Show warnings about use of deprecated usage in the Libra2 libraries,
+    /// Show warnings about use of deprecated usage in the CreditChain libraries,
     /// which we should generally not bother users with.
     /// Note that current value of this constant is "Wdeprecation-aptos"
-    #[clap(hide(true), long = cli::WARN_OF_DEPRECATION_USE_IN_LIBRA2_LIBS_FLAG,
-           default_value=bool_to_str(warn_of_deprecation_use_in_libra2_libs_env_var()))]
-    pub warn_of_deprecation_use_in_libra2_libs: bool,
+    #[clap(hide(true), long = cli::WARN_OF_DEPRECATION_USE_IN_CREDITCHAIN_LIBS_FLAG,
+           default_value=bool_to_str(warn_of_deprecation_use_in_creditchain_libs_env_var()))]
+    pub warn_of_deprecation_use_in_creditchain_libs: bool,
 
     /// Show warnings about unused functions, fields, constants, etc.
     /// Note that the current value of this constant is "Wunused"
@@ -232,9 +232,9 @@ impl Options {
         }
     }
 
-    pub fn set_warn_of_deprecation_use_in_libra2_libs(self, value: bool) -> Self {
+    pub fn set_warn_of_deprecation_use_in_creditchain_libs(self, value: bool) -> Self {
         Self {
-            warn_of_deprecation_use_in_libra2_libs: value,
+            warn_of_deprecation_use_in_creditchain_libs: value,
             ..self
         }
     }

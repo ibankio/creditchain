@@ -12,22 +12,22 @@ mod metrics;
 pub mod utils;
 
 use crate::db::INDEX_DB_NAME;
-use libra2_config::config::RocksdbConfig;
-use libra2_db_indexer_schemas::{
+use creditchain_config::config::RocksdbConfig;
+use creditchain_db_indexer_schemas::{
     metadata::{MetadataKey, MetadataValue},
     schema::{
         column_families, indexer_metadata::IndexerMetadataSchema, table_info::TableInfoSchema,
     },
 };
-use libra2_logger::warn;
-use libra2_resource_viewer::{AnnotatedMoveValue, Libra2ValueAnnotator};
-use libra2_rocksdb_options::gen_rocksdb_options;
-use libra2_schemadb::{batch::SchemaBatch, DB};
-use libra2_storage_interface::{
+use creditchain_logger::warn;
+use creditchain_resource_viewer::{AnnotatedMoveValue, CreditChainValueAnnotator};
+use creditchain_rocksdb_options::gen_rocksdb_options;
+use creditchain_schemadb::{batch::SchemaBatch, DB};
+use creditchain_storage_interface::{
     db_ensure, db_other_bail, state_store::state_view::db_state_view::DbStateViewAtVersion,
-    Libra2DbError, DbReader, Result,
+    CreditChainDbError, DbReader, Result,
 };
-use libra2_types::{
+use creditchain_types::{
     access_path::Path,
     account_address::AccountAddress,
     state_store::{
@@ -87,13 +87,13 @@ impl Indexer {
     ) -> Result<()> {
         let last_version = first_version + write_sets.len() as Version;
         let state_view = db_reader.state_view_at_version(Some(last_version))?;
-        let annotator = Libra2ValueAnnotator::new(&state_view);
+        let annotator = CreditChainValueAnnotator::new(&state_view);
         self.index_with_annotator(&annotator, first_version, write_sets)
     }
 
     pub fn index_with_annotator<R: StateView>(
         &self,
-        annotator: &Libra2ValueAnnotator<R>,
+        annotator: &CreditChainValueAnnotator<R>,
         first_version: Version,
         write_sets: &[&WriteSet],
     ) -> Result<()> {
@@ -126,12 +126,12 @@ impl Indexer {
         match table_info_parser.finish(&mut batch) {
             Ok(_) => {},
             Err(err) => {
-                libra2_logger::error!(first_version = first_version, end_version = end_version, error = ?&err);
+                creditchain_logger::error!(first_version = first_version, end_version = end_version, error = ?&err);
                 write_sets
                     .iter()
                     .enumerate()
                     .for_each(|(i, write_set)| {
-                        libra2_logger::error!(version = first_version as usize + i, write_set = ?write_set);
+                        creditchain_logger::error!(version = first_version as usize + i, write_set = ?write_set);
                     });
                 db_other_bail!("Failed to parse table info: {:?}", err);
             },
@@ -157,13 +157,13 @@ impl Indexer {
 
 struct TableInfoParser<'a, R> {
     indexer: &'a Indexer,
-    annotator: &'a Libra2ValueAnnotator<'a, R>,
+    annotator: &'a CreditChainValueAnnotator<'a, R>,
     result: HashMap<TableHandle, TableInfo>,
     pending_on: HashMap<TableHandle, Vec<Bytes>>,
 }
 
 impl<'a, R: StateView> TableInfoParser<'a, R> {
-    pub fn new(indexer: &'a Indexer, annotator: &'a Libra2ValueAnnotator<R>) -> Self {
+    pub fn new(indexer: &'a Indexer, annotator: &'a CreditChainValueAnnotator<R>) -> Self {
         Self {
             indexer,
             annotator,

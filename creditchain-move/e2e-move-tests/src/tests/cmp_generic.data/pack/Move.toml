@@ -1,0 +1,6 @@
+[package]
+name = "generic_cmp"
+version = "0.0.0"
+
+[dependencies]
+CreditChainFramework = { local = "../../../../../framework/creditchain-framework" }

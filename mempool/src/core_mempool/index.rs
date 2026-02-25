@@ -9,10 +9,10 @@ use crate::{
     logging::{LogEntry, LogSchema},
     shared_mempool::types::{MultiBucketTimelineIndexIds, TimelineIndexIdentifier},
 };
-use libra2_consensus_types::common::TransactionSummary;
-use libra2_crypto::HashValue;
-use libra2_logger::error;
-use libra2_types::{account_address::AccountAddress, transaction::ReplayProtector};
+use creditchain_consensus_types::common::TransactionSummary;
+use creditchain_crypto::HashValue;
+use creditchain_logger::error;
+use creditchain_types::{account_address::AccountAddress, transaction::ReplayProtector};
 use rand::seq::SliceRandom;
 use std::{
     cmp::Ordering,

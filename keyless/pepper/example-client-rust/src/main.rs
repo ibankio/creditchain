@@ -1,15 +1,15 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_crypto::ed25519::{Ed25519PrivateKey, Ed25519PublicKey};
-use libra2_infallible::duration_since_epoch;
-use libra2_keyless_pepper_common::{
+use creditchain_crypto::ed25519::{Ed25519PrivateKey, Ed25519PublicKey};
+use creditchain_infallible::duration_since_epoch;
+use creditchain_keyless_pepper_common::{
     account_recovery_db::AccountRecoveryDbEntry,
     jwt,
     vuf::{self, VUF},
     PepperInput, PepperRequest, PepperResponse, PepperV0VufPubKey, SignatureResponse,
 };
-use libra2_types::{
+use creditchain_types::{
     keyless::{Configuration, OpenIdSig},
     transaction::authenticator::EphemeralPublicKey,
 };

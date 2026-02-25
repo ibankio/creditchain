@@ -1,8 +1,8 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_executor_service::process_executor_service::ProcessExecutorService;
-use libra2_logger::info;
+use creditchain_executor_service::process_executor_service::ProcessExecutorService;
+use creditchain_logger::info;
 use clap::Parser;
 use std::net::SocketAddr;
 
@@ -26,7 +26,7 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    libra2_logger::Logger::new().init();
+    creditchain_logger::Logger::new().init();
 
     let (tx, rx) = crossbeam_channel::unbounded();
     ctrlc::set_handler(move || {

@@ -5,13 +5,13 @@
 use super::{
     realistic_environment::realistic_env_sweep_wrap, ungrouped::background_traffic_for_sweep,
 };
-use libra2_forge::{
+use creditchain_forge::{
     args::TransactionTypeArg,
     prometheus_metrics::LatencyBreakdownSlice,
     success_criteria::{LatencyBreakdownThreshold, SuccessCriteria},
     ForgeConfig,
 };
-use libra2_testcases::{
+use creditchain_testcases::{
     load_vs_perf_benchmark::{LoadVsPerfBenchmark, TransactionWorkload, Workloads},
     performance_test::PerformanceBenchmark,
 };

@@ -41,9 +41,9 @@
       "icon": "external link",
       "includeVars": true,
       "keepTime": true,
-      "tags": ["libra2-core"],
+      "tags": ["creditchain-core"],
       "targetBlank": true,
-      "title": "libra2 core ",
+      "title": "creditchain core ",
       "type": "dashboards"
     }
   ],
@@ -691,7 +691,7 @@
   ],
   "schemaVersion": 37,
   "style": "dark",
-  "tags": ["libra2-core"],
+  "tags": ["creditchain-core"],
   "templating": {
     "list": [
       {

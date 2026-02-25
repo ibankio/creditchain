@@ -3,7 +3,7 @@
 
 use crate::watcher::{unhexlify_api_bytes, ExternalResource};
 use anyhow::{anyhow, Result};
-use libra2_infallible::RwLock;
+use creditchain_infallible::RwLock;
 use ark_bn254::{Bn254, G1Affine, G2Affine};
 use ark_groth16::{PreparedVerifyingKey, VerifyingKey};
 use ark_serialize::CanonicalDeserialize;
@@ -22,7 +22,7 @@ pub struct VKeyData {
 
 /// On-chain representation of a VK.
 ///
-/// https://fullnode.testnet.libra2.org/v1/accounts/0x1/resource/0x1::keyless_account::Groth16VerificationKey
+/// https://fullnode.testnet.creditchain.io/v1/accounts/0x1/resource/0x1::keyless_account::Groth16VerificationKey
 #[derive(Serialize, Deserialize, Clone, Debug, Default, PartialEq)]
 pub struct OnChainGroth16VerificationKey {
     /// Some type info returned by node API.

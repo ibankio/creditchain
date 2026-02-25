@@ -6,7 +6,7 @@ use crate::{
     token_workflow::TokenWorkflowKind,
     EntryPoints, OrderBookState,
 };
-use libra2_transaction_generator_lib::{TransactionType, WorkflowProgress};
+use creditchain_transaction_generator_lib::{TransactionType, WorkflowProgress};
 use clap::{Parser, ValueEnum};
 use serde::{Deserialize, Serialize};
 

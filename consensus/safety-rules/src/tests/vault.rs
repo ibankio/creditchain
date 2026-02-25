@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{tests::suite, PersistentSafetyStorage, SafetyRulesManager};
-use libra2_secure_storage::{KVStorage, Storage, VaultStorage};
-use libra2_types::validator_signer::ValidatorSigner;
-use libra2_vault_client::dev::{self, ROOT_TOKEN};
+use creditchain_secure_storage::{KVStorage, Storage, VaultStorage};
+use creditchain_types::validator_signer::ValidatorSigner;
+use creditchain_vault_client::dev::{self, ROOT_TOKEN};
 
 /// A test for verifying VaultStorage properly supports the SafetyRule backend.  This test
 /// depends on running Vault, which can be done by using the provided docker run script in

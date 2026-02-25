@@ -35,8 +35,8 @@ spec:
             {{- end }}
             imagePullPolicy: {{ .Values.backup.image.pullPolicy }}
             command:
-            - /usr/local/bin/libra2-debugger
-            - libra2-db
+            - /usr/local/bin/creditchain-debugger
+            - creditchain-db
             - backup-maintenance
             - compact
             - --state-snapshot-file-compact-factor
@@ -49,7 +49,7 @@ spec:
             - /tmp/aptos-backup-compaction-metadata
             - --command-adapter-config
             # use the same config with the backup sts
-            - /opt/libra2/etc/{{ .Values.backup.config.location }}.yaml
+            - /opt/creditchain/etc/{{ .Values.backup.config.location }}.yaml
             env:
             - name: RUST_LOG
               value: "info"
@@ -69,7 +69,7 @@ spec:
             {{- toYaml .resources | nindent 14 }}
             volumeMounts:
             - name: backup-config
-              mountPath: /opt/libra2/etc
+              mountPath: /opt/creditchain/etc
             - name: tmp
               mountPath: /tmp
             securityContext:

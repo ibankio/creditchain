@@ -3,11 +3,11 @@ module 0xABCD::token_v1 {
     use std::signer;
     use std::string::{Self, String};
     use std::vector;
-    use libra2_token::token::{Self, Token, TokenId, TokenDataId};
-    use libra2_std::table::{Self, Table};
-    use libra2_framework::account;
+    use creditchain_token::token::{Self, Token, TokenId, TokenDataId};
+    use creditchain_std::table::{Self, Table};
+    use creditchain_framework::account;
     use std::option::{Self, Option};
-    use libra2_std::string_utils::{to_string};
+    use creditchain_std::string_utils::{to_string};
 
     //
     //  Code for minting Token V1

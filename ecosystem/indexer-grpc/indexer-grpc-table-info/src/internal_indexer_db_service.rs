@@ -3,15 +3,15 @@
 
 use crate::metrics::INDEXER_DB_LATENCY;
 use anyhow::Result;
-use libra2_config::config::{internal_indexer_db_config::InternalIndexerDBConfig, NodeConfig};
-use libra2_db_indexer::{
+use creditchain_config::config::{internal_indexer_db_config::InternalIndexerDBConfig, NodeConfig};
+use creditchain_db_indexer::{
     db_indexer::{DBIndexer, InternalIndexerDB},
     db_ops::open_internal_indexer_db,
     indexer_reader::IndexerReaders,
 };
-use libra2_indexer_grpc_utils::counters::{log_grpc_step, IndexerGrpcStep};
-use libra2_storage_interface::DbReader;
-use libra2_types::{indexer::indexer_db_reader::IndexerReader, transaction::Version};
+use creditchain_indexer_grpc_utils::counters::{log_grpc_step, IndexerGrpcStep};
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{indexer::indexer_db_reader::IndexerReader, transaction::Version};
 use std::{
     path::{Path, PathBuf},
     sync::Arc,

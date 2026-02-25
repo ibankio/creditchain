@@ -1,6 +1,6 @@
 module poc::double_internal {
-    use libra2_std::crypto_algebra::{Self};
-    use libra2_std::bls12381_algebra::{G1};
+    use creditchain_std::crypto_algebra::{Self};
+    use creditchain_std::bls12381_algebra::{G1};
 
     public entry fun main(_owner: &signer) {
         let p = crypto_algebra::one<G1>();

@@ -15,6 +15,6 @@ runs:
       shell: bash
       run: |
         mkdir -p "${{ inputs.destination_directory }}"
-        RUSTFLAGS="--cfg tokio_unstable" cargo install --locked --git https://github.com/ibankio/creditchain.git --profile cli libra2
-        cp "$HOME/.cargo/bin/libra2" "${{ inputs.destination_directory }}/creditchain"
+        RUSTFLAGS="--cfg tokio_unstable" cargo install --locked --git https://github.com/ibankio/creditchain.git --profile cli creditchain
+        cp "$HOME/.cargo/bin/creditchain" "${{ inputs.destination_directory }}/creditchain"
         chmod +x "${{ inputs.destination_directory }}/creditchain"

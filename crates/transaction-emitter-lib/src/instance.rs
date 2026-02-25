@@ -1,12 +1,12 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_rest_client::{libra2_api_types, Libra2BaseUrl, Client as RestClient};
+use creditchain_rest_client::{creditchain_api_types, CreditChainBaseUrl, Client as RestClient};
 use reqwest::Url;
 use std::fmt;
 
 // Custom header value to identify the client
-const X_LIBRA2_CLIENT_VALUE: &str = "libra2-transaction-emitter";
+const X_CREDITCHAIN_CLIENT_VALUE: &str = "creditchain-transaction-emitter";
 
 #[derive(Clone)]
 pub struct Instance {
@@ -44,8 +44,8 @@ impl Instance {
     }
 
     pub fn rest_client(&self) -> RestClient {
-        let client = RestClient::builder(Libra2BaseUrl::Custom(self.api_url()))
-            .header(libra2_api_types::X_LIBRA2_CLIENT, X_LIBRA2_CLIENT_VALUE)
+        let client = RestClient::builder(CreditChainBaseUrl::Custom(self.api_url()))
+            .header(creditchain_api_types::X_CREDITCHAIN_CLIENT, X_CREDITCHAIN_CLIENT_VALUE)
             .expect("Failed to initialize REST Client instance");
 
         // add the API key if it is provided

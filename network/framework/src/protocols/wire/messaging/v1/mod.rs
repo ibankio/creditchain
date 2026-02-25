@@ -2,11 +2,11 @@
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-//! This module defines the Libra2Net v1 message types, how they are
+//! This module defines the CreditChainNet v1 message types, how they are
 //! serialized/deserialized, and provides a `Sink` and `Stream` implementation
 //! for sending `NetworkMessage`s over an abstract IO object (presumably a socket).
 //!
-//! The [Libra2Net Specification](https://github.com/libra2org/libra2-core/blob/main/documentation/specifications/network/messaging-v1.md)
+//! The [CreditChainNet Specification](https://github.com/libra2org/libra2-core/blob/main/documentation/specifications/network/messaging-v1.md)
 //! describes in greater detail how these messages are sent and received
 //! over-the-wire.
 

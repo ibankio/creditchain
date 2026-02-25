@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::Result;
-use libra2_types::{
+use creditchain_types::{
     contract_event::ContractEvent,
     transaction::{PersistedAuxiliaryInfo, Transaction, TransactionInfo, Version},
     write_set::{TransactionWrite, WriteSet},

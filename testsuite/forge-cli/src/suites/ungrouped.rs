@@ -13,26 +13,26 @@ use super::{
     },
 };
 use anyhow::Result;
-use libra2_cached_packages::libra2_stdlib;
-use libra2_config::config::{ConsensusConfig, MempoolConfig, NodeConfig};
-use libra2_forge::{
+use creditchain_cached_packages::creditchain_stdlib;
+use creditchain_config::config::{ConsensusConfig, MempoolConfig, NodeConfig};
+use creditchain_forge::{
     args::TransactionTypeArg,
     emitter::NumAccountsMode,
     success_criteria::{
         LatencyType, MetricsThreshold, StateProgressThreshold, SuccessCriteria,
         SystemMetricsThreshold,
     },
-    AdminContext, AdminTest, Libra2Context, Libra2Test, EmitJobMode, EmitJobRequest, ForgeConfig,
+    AdminContext, AdminTest, CreditChainContext, CreditChainTest, EmitJobMode, EmitJobRequest, ForgeConfig,
     NetworkContext, NetworkContextSynchronizer, NetworkTest, NodeResourceOverride, Test,
     WorkflowProgress,
 };
-use libra2_logger::info;
-use libra2_rest_client::Client as RestClient;
-use libra2_sdk::{
+use creditchain_logger::info;
+use creditchain_rest_client::Client as RestClient;
+use creditchain_sdk::{
     move_types::account_address::AccountAddress,
     types::on_chain_config::{OnChainConsensusConfig, OnChainExecutionConfig},
 };
-use libra2_testcases::{
+use creditchain_testcases::{
     self,
     consensus_reliability_tests::ChangingWorkingQuorumTest,
     forge_setup_test::ForgeSetupTest,
@@ -169,25 +169,25 @@ pub static RELIABLE_REAL_ENV_PROGRESS_THRESHOLD: Lazy<StateProgressThreshold> =
 pub fn run_forever() -> ForgeConfig {
     ForgeConfig::default()
         .add_admin_test(GetMetadata)
-        .with_genesis_module_bundle(libra2_cached_packages::head_release_bundle().clone())
-        .add_libra2_test(RunForever)
+        .with_genesis_module_bundle(creditchain_cached_packages::head_release_bundle().clone())
+        .add_creditchain_test(RunForever)
 }
 
 pub fn local_test_suite() -> ForgeConfig {
     ForgeConfig::default()
-        .add_libra2_test(FundAccount)
-        .add_libra2_test(TransferCoins)
+        .add_creditchain_test(FundAccount)
+        .add_creditchain_test(TransferCoins)
         .add_admin_test(GetMetadata)
         .add_network_test(RestartValidator)
         .add_network_test(EmitTransaction)
-        .with_genesis_module_bundle(libra2_cached_packages::head_release_bundle().clone())
+        .with_genesis_module_bundle(creditchain_cached_packages::head_release_bundle().clone())
 }
 
 pub fn k8s_test_suite() -> ForgeConfig {
     ForgeConfig::default()
         .with_initial_validator_count(NonZeroUsize::new(30).unwrap())
-        .add_libra2_test(FundAccount)
-        .add_libra2_test(TransferCoins)
+        .add_creditchain_test(FundAccount)
+        .add_creditchain_test(TransferCoins)
         .add_admin_test(GetMetadata)
         .add_network_test(EmitTransaction)
         .add_network_test(FrameworkUpgrade)
@@ -415,7 +415,7 @@ fn background_emit_request(high_gas_price: bool) -> EmitJobRequest {
         .num_accounts_mode(NumAccountsMode::TransactionsPerAccount(1))
         .mode(EmitJobMode::ConstTps { tps: 10 });
     if high_gas_price {
-        result = result.gas_price(5 * libra2_global_constants::GAS_UNIT_PRICE);
+        result = result.gas_price(5 * creditchain_global_constants::GAS_UNIT_PRICE);
     }
     result
 }
@@ -555,7 +555,7 @@ pub(crate) fn single_cluster_test(
         .with_emit_job(
             EmitJobRequest::default()
                 .mode(EmitJobMode::ConstTps { tps: 10 })
-                .gas_price(5 * libra2_global_constants::GAS_UNIT_PRICE),
+                .gas_price(5 * creditchain_global_constants::GAS_UNIT_PRICE),
         )
         .with_success_criteria(success_criteria)
         .with_validator_resource_override(resource_override)
@@ -810,7 +810,7 @@ pub fn optimize_state_sync_for_throughput(node_config: &mut NodeConfig, max_chun
     let max_chunk_bytes = 40 * 1024 * 1024; // 10x the current limit (to prevent execution fallback)
 
     // Update the chunk sizes for the data client
-    let data_client_config = &mut node_config.state_sync.libra2_data_client;
+    let data_client_config = &mut node_config.state_sync.creditchain_data_client;
     data_client_config.max_transaction_chunk_size = max_chunk_size;
     data_client_config.max_transaction_output_chunk_size = max_chunk_size;
 
@@ -994,8 +994,8 @@ impl Test for RunForever {
 }
 
 #[async_trait::async_trait]
-impl Libra2Test for RunForever {
-    async fn run<'t>(&self, _ctx: &mut Libra2Context<'t>) -> Result<()> {
+impl CreditChainTest for RunForever {
+    async fn run<'t>(&self, _ctx: &mut CreditChainContext<'t>) -> Result<()> {
         println!("The network has been deployed. Hit Ctrl+C to kill this, otherwise it will run forever.");
         let keep_running = Arc::new(AtomicBool::new(true));
         while keep_running.load(Ordering::Acquire) {
@@ -1019,7 +1019,7 @@ impl AdminTest for GetMetadata {
     fn run(&self, ctx: &mut AdminContext<'_>) -> Result<()> {
         let client = ctx.rest_client();
         let runtime = Runtime::new().unwrap();
-        runtime.block_on(client.get_libra2_version()).unwrap();
+        runtime.block_on(client.get_creditchain_version()).unwrap();
         runtime.block_on(client.get_ledger_information()).unwrap();
 
         Ok(())
@@ -1050,8 +1050,8 @@ impl Test for FundAccount {
 }
 
 #[async_trait::async_trait]
-impl Libra2Test for FundAccount {
-    async fn run<'t>(&self, ctx: &mut Libra2Context<'t>) -> Result<()> {
+impl CreditChainTest for FundAccount {
+    async fn run<'t>(&self, ctx: &mut CreditChainContext<'t>) -> Result<()> {
         let client = ctx.client();
 
         let account = ctx.random_account();
@@ -1074,8 +1074,8 @@ impl Test for TransferCoins {
 }
 
 #[async_trait::async_trait]
-impl Libra2Test for TransferCoins {
-    async fn run<'t>(&self, ctx: &mut Libra2Context<'t>) -> Result<()> {
+impl CreditChainTest for TransferCoins {
+    async fn run<'t>(&self, ctx: &mut CreditChainContext<'t>) -> Result<()> {
         let client = ctx.client();
         let payer = ctx.random_account();
         let payee = ctx.random_account();
@@ -1085,8 +1085,8 @@ impl Libra2Test for TransferCoins {
         check_account_balance(&client, payer.address(), 10000).await?;
 
         let transfer_txn = payer.sign_with_transaction_builder(
-            ctx.libra2_transaction_factory()
-                .payload(libra2_stdlib::libra2_coin_transfer(payee.address(), 10)),
+            ctx.creditchain_transaction_factory()
+                .payload(creditchain_stdlib::creditchain_coin_transfer(payee.address(), 10)),
         );
         client.submit_and_wait(&transfer_txn).await?;
         check_account_balance(&client, payee.address(), 10).await?;

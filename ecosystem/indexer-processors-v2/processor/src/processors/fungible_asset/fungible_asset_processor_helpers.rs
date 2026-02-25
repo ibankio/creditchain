@@ -28,7 +28,7 @@ use crate::{
 };
 use ahash::AHashMap;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{transaction::TxnData, write_set_change::Change, Transaction},
+   creditchain_protos::transaction::v1::{transaction::TxnData, write_set_change::Change, Transaction},
     utils::{convert::standardize_address, extract::get_entry_function_from_user_request},
 };
 use chrono::NaiveDateTime;

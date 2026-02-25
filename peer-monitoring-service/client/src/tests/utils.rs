@@ -7,15 +7,15 @@ use crate::{
     tests::mock::MockMonitoringServer,
     PeerMonitorState, PeerMonitoringServiceClient, PeerState,
 };
-use libra2_config::{
+use creditchain_config::{
     config::{
         LatencyMonitoringConfig, NetworkMonitoringConfig, NodeConfig, NodeMonitoringConfig,
         PeerMonitoringServiceConfig, PeerRole,
     },
     network_id::{NetworkId, PeerNetworkId},
 };
-use libra2_network::application::{interface::NetworkClient, storage::PeersAndMetadata};
-use libra2_peer_monitoring_service_types::{
+use creditchain_network::application::{interface::NetworkClient, storage::PeersAndMetadata};
+use creditchain_peer_monitoring_service_types::{
     request::{LatencyPingRequest, PeerMonitoringServiceRequest},
     response::{
         ConnectionMetadata, LatencyPingResponse, NetworkInformationResponse,
@@ -23,8 +23,8 @@ use libra2_peer_monitoring_service_types::{
     },
     PeerMonitoringServiceMessage,
 };
-use libra2_time_service::{MockTimeService, TimeService, TimeServiceTrait};
-use libra2_types::{network_address::NetworkAddress, PeerId};
+use creditchain_time_service::{MockTimeService, TimeService, TimeServiceTrait};
+use creditchain_types::{network_address::NetworkAddress, PeerId};
 use maplit::btreemap;
 use rand::{rngs::OsRng, Rng};
 use std::{
@@ -321,7 +321,7 @@ pub fn create_random_network_info_response() -> NetworkInformationResponse {
 /// Creates a new network info response with random values
 pub fn create_random_node_info_response() -> NodeInformationResponse {
     // Create the random values
-    let build_information = libra2_build_info::get_build_information();
+    let build_information = creditchain_build_info::get_build_information();
     let highest_synced_epoch = get_random_u64();
     let highest_synced_version = get_random_u64();
     let ledger_timestamp_usecs = get_random_u64();

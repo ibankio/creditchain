@@ -163,7 +163,7 @@ impl Options {
                 Arg::new("aptos")
                     .long("aptos")
                     .action(SetTrue)
-                    .help("configures the prover to use Libra2 natives")
+                    .help("configures the prover to use CreditChain natives")
             )
             .arg(
                 Arg::new("compiler-v2")
@@ -716,10 +716,10 @@ impl Options {
             options.backend.z3_trace_file = Some(format!("{}.z3log", fun_name));
         }
 
-        if matches.get_flag("libra2") {
+        if matches.get_flag("creditchain") {
             options.backend.custom_natives = Some(CustomNativeOptions {
                 template_bytes: include_bytes!(
-                    "../../../../libra2-move/framework/src/libra2-natives.bpl"
+                    "../../../../creditchain-move/framework/src/creditchain-natives.bpl"
                 )
                 .to_vec(),
                 module_instance_names: options::custom_native_options(),

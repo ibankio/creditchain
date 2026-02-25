@@ -90,10 +90,10 @@ CREATE OPTIONS:
     - Pass **`true`** if you would like to run genesis without deploying on Kubernetes (K8S). All Kubernetes YAML files will be dumped to the workspace. If you don’t provide a workspace, all the YAML files will be dumped to a tmp folder.
     - Default: **`False`**
     - Example: **`-dry-run true`**
-1. **`-libra2-cli-path`**:
+1. **`-creditchain-cli-path`**:
     - The path to the CreditChain CLI if it is not in your $PATH variable.
     - Default: **`aptos`**
-    - Example: **`-libra2-cli-path /path/to/aptos`**
+    - Example: **`-creditchain-cli-path /path/to/aptos`**
 2. **`-name`**:
     - Name for the testnet. The default is a randomly generated name. The name will automatically have “pangu-” appended to it.
     - Example: **`-name MyTestnet`**

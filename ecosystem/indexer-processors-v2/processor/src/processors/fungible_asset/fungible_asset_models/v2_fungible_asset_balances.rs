@@ -34,9 +34,9 @@ use crate::{
 use ahash::AHashMap;
 use allocative_derive::Allocative;
 use libra2_indexer_processor_sdk::{
-   libra2_protos::transaction::v1::{DeleteResource, WriteResource},
+   creditchain_protos::transaction::v1::{DeleteResource, WriteResource},
     utils::{
-        constants::{LIBRA2_COIN_TYPE_STR, LBT_METADATA_ADDRESS_HEX, LBT_METADATA_ADDRESS_RAW},
+        constants::{CREDITCHAIN_COIN_TYPE_STR, LBT_METADATA_ADDRESS_HEX, LBT_METADATA_ADDRESS_RAW},
         convert::{hex_to_raw_bytes, sha3_256, standardize_address},
     },
 };
@@ -88,7 +88,7 @@ pub struct CurrentUnifiedFungibleAssetBalance {
 }
 
 pub fn get_paired_metadata_address(coin_type_name: &str) -> String {
-    if coin_type_name == LIBRA2_COIN_TYPE_STR {
+    if coin_type_name == CREDITCHAIN_COIN_TYPE_STR {
         LBT_METADATA_ADDRESS_HEX.clone()
     } else {
         let mut preimage = LBT_METADATA_ADDRESS_RAW.to_vec();
@@ -630,7 +630,7 @@ mod tests {
     #[test]
     fn test_paired_metadata_address() {
         assert_eq!(
-            get_paired_metadata_address("0x1::libra2_coin::Libra2Coin"),
+            get_paired_metadata_address("0x1::creditchain_coin::CreditChainCoin"),
             *LBT_METADATA_ADDRESS_HEX
         );
         assert_eq!(get_paired_metadata_address("0x66c34778730acbb120cefa57a3d98fd21e0c8b3a51e9baee530088b2e444e94c::moon_coin::MoonCoin"), "0xf772c28c069aa7e4417d85d771957eb3c5c11b5bf90b1965cda23b899ebc0384");

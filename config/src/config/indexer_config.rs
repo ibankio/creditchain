@@ -4,8 +4,8 @@
 use crate::config::{
     config_optimizer::ConfigOptimizer, node_config_loader::NodeType, Error, NodeConfig,
 };
-use libra2_logger::warn;
-use libra2_types::chain_id::ChainId;
+use creditchain_logger::warn;
+use creditchain_types::chain_id::ChainId;
 use serde::{Deserialize, Serialize};
 use serde_yaml::Value;
 use std::fmt::{Debug, Formatter};

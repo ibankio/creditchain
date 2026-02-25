@@ -3,7 +3,7 @@ name = 'complex'
 version = '1.0.0'
 
 [dependencies]
-Libra2Framework = { local = "../../../../libra2-move/framework/libra2-framework" }
+CreditChainFramework = { local = "../../../../creditchain-move/framework/creditchain-framework" }
 
 [addresses]
 publisher_address = "0xABCD"

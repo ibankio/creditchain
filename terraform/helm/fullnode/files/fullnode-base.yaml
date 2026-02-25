@@ -1,10 +1,10 @@
 base:
   role: "full_node"
   waypoint:
-    from_file: "/opt/libra2/genesis/waypoint.txt"
+    from_file: "/opt/creditchain/genesis/waypoint.txt"
 
 execution:
-  genesis_file_location: "/opt/libra2/genesis/genesis.blob"
+  genesis_file_location: "/opt/creditchain/genesis/genesis.blob"
 
 full_node_networks:
 - network_id: "public"
@@ -23,9 +23,9 @@ full_node_networks:
   {{- end }}
 
   # be backwards compatible with the old seeds config
-  {{- if (get $.Values.libra2_chains $.Values.chain.name).seeds}}
+  {{- if (get $.Values.creditchain_chains $.Values.chain.name).seeds}}
   seeds:
-    {{- (get $.Values.libra2_chains $.Values.chain.name).seeds | default dict | toYaml | nindent 6 }}
+    {{- (get $.Values.creditchain_chains $.Values.chain.name).seeds | default dict | toYaml | nindent 6 }}
   {{- else }}
   {{ with .seeds }}
   seeds:

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{LoadDestination, NetworkLoadTest};
-use libra2_forge::{
+use creditchain_forge::{
     GroupNetworkBandwidth, NetworkContext, NetworkContextSynchronizer, NetworkTest, SwarmChaos,
     SwarmNetworkBandwidth, Test,
 };

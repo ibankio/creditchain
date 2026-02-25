@@ -15,8 +15,8 @@ use crate::{
     },
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_logger::prelude::*;
-use libra2_types::{
+use creditchain_logger::prelude::*;
+use creditchain_types::{
     epoch_change::Verifier,
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},
     transaction::Version,

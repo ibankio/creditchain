@@ -3,8 +3,8 @@ name = "pack_token_objects"
 version = "0.0.0"
 
 [dependencies]
-Libra2Framework = { local = "../../../../../libra2-move/framework/libra2-framework" }
-Libra2TokenObjects = { local = "../../../../../libra2-move/framework/libra2-token-objects" }
+CreditChainFramework = { local = "../../../../../creditchain-move/framework/creditchain-framework" }
+CreditChainTokenObjects = { local = "../../../../../creditchain-move/framework/creditchain-token-objects" }
 
 [addresses]
 addr = "_"

@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::quorum_store::direct_mempool_quorum_store::DirectMempoolQuorumStore;
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::PayloadFilter,
     request_response::{GetPayloadCommand, GetPayloadRequest, GetPayloadResponse},
     utils::PayloadTxnsSize,
 };
-use libra2_mempool::{QuorumStoreRequest, QuorumStoreResponse};
+use creditchain_mempool::{QuorumStoreRequest, QuorumStoreResponse};
 use futures::{
     channel::{mpsc, oneshot},
     StreamExt,
@@ -38,7 +38,7 @@ async fn test_block_request_no_txns() {
             return_non_full: true,
             filter: PayloadFilter::DirectMempool(vec![]),
             callback: consensus_callback,
-            block_timestamp: libra2_infallible::duration_since_epoch(),
+            block_timestamp: creditchain_infallible::duration_since_epoch(),
             maybe_optqs_payload_pull_params: None,
         }))
         .unwrap();

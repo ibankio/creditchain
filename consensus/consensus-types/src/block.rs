@@ -9,10 +9,10 @@ use crate::{
     quorum_cert::QuorumCert,
 };
 use anyhow::{bail, ensure, format_err, Result};
-use libra2_bitvec::BitVec;
-use libra2_crypto::{bls12381, hash::CryptoHash, HashValue};
-use libra2_infallible::duration_since_epoch;
-use libra2_types::{
+use creditchain_bitvec::BitVec;
+use creditchain_crypto::{bls12381, hash::CryptoHash, HashValue};
+use creditchain_infallible::duration_since_epoch;
+use creditchain_types::{
     account_address::AccountAddress,
     block_info::BlockInfo,
     block_metadata::BlockMetadata,

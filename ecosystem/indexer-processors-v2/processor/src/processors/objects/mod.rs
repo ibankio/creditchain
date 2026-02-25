@@ -18,7 +18,7 @@ use crate::{
 use ahash::AHashMap;
 use libra2_indexer_processor_sdk::{
     libra2_indexer_transaction_stream::utils::time::parse_timestamp,
-   libra2_protos::transaction::v1::{write_set_change::Change, Transaction},
+   creditchain_protos::transaction::v1::{write_set_change::Change, Transaction},
     postgres::utils::database::DbContext,
     utils::convert::standardize_address,
 };
@@ -58,7 +58,7 @@ pub async fn process_objects(
                         fungible_asset_store: None,
                         // The following structs are unused in this processor
                         fungible_asset_metadata: None,
-                        libra2_collection: None,
+                        creditchain_collection: None,
                         fixed_supply: None,
                         unlimited_supply: None,
                         concurrent_supply: None,

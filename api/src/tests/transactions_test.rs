@@ -4,23 +4,23 @@
 
 use super::new_test_context;
 use crate::tests::{new_test_context_with_config, new_test_context_with_orderless_flags};
-use libra2_api_test_context::{assert_json, current_function_name, pretty, TestContext};
-use libra2_config::config::{GasEstimationStaticOverride, NodeConfig, TransactionFilterConfig};
-use libra2_crypto::{
+use creditchain_api_test_context::{assert_json, current_function_name, pretty, TestContext};
+use creditchain_config::config::{GasEstimationStaticOverride, NodeConfig, TransactionFilterConfig};
+use creditchain_crypto::{
     ed25519::{Ed25519PrivateKey, Ed25519Signature},
     multi_ed25519::{MultiEd25519PrivateKey, MultiEd25519PublicKey},
     PrivateKey, SigningKey, Uniform,
 };
-use libra2_sdk::types::{AccountKey, LocalAccount};
-use libra2_transaction_filters::transaction_filter::TransactionFilter;
-use libra2_types::{
+use creditchain_sdk::types::{AccountKey, LocalAccount};
+use creditchain_transaction_filters::transaction_filter::TransactionFilter;
+use creditchain_types::{
     account_address::AccountAddress,
-    account_config::libra2_test_root_address,
+    account_config::creditchain_test_root_address,
     transaction::{
         authenticator::{AuthenticationKey, TransactionAuthenticator},
         EntryFunction, ReplayProtector, Script, SignedTransaction,
     },
-    utility_coin::{Libra2CoinType, CoinType},
+    utility_coin::{CreditChainCoinType, CoinType},
 };
 use move_core_types::{
     identifier::Identifier,
@@ -39,7 +39,7 @@ async fn test_deserialize_genesis_transaction() {
     let resp = context.get("/transactions/by_version/0").await;
     // TODO: serde_json::from_value doesn't work here, either make it work
     // or remove the ability to do that.
-    libra2_api_types::Transaction::parse_from_json(Some(resp)).unwrap();
+    creditchain_api_types::Transaction::parse_from_json(Some(resp)).unwrap();
 }
 
 // Unstable due to framework changes
@@ -944,7 +944,7 @@ async fn test_signing_message_with_entry_function_payload(
     let txn = context.create_user_account(&account).await;
     let payload = json!({
         "type": "entry_function_payload",
-        "function": "0x1::libra2_account::create_account",
+        "function": "0x1::creditchain_account::create_account",
         "type_arguments": [],
         "arguments": [
             account.address().to_hex_literal(), // new_account_address
@@ -1343,7 +1343,7 @@ async fn test_get_txn_execute_failed_by_invalid_entry_function_address(
         "0x1222",
         "Coin",
         "transfer",
-        vec![Libra2CoinType::type_tag()],
+        vec![CreditChainCoinType::type_tag()],
         vec![
             bcs::to_bytes(&AccountAddress::from_hex_literal("0xdd").unwrap()).unwrap(),
             bcs::to_bytes(&1u64).unwrap(),
@@ -1378,7 +1378,7 @@ async fn test_get_txn_execute_failed_by_invalid_entry_function_module_name(
         "0x1",
         "CoinInvalid",
         "transfer",
-        vec![Libra2CoinType::type_tag()],
+        vec![CreditChainCoinType::type_tag()],
         vec![
             bcs::to_bytes(&AccountAddress::from_hex_literal("0xdd").unwrap()).unwrap(),
             bcs::to_bytes(&1u64).unwrap(),
@@ -1413,7 +1413,7 @@ async fn test_get_txn_execute_failed_by_invalid_entry_function_name(
         "0x1",
         "Coin",
         "transfer_invalid",
-        vec![Libra2CoinType::type_tag()],
+        vec![CreditChainCoinType::type_tag()],
         vec![
             bcs::to_bytes(&AccountAddress::from_hex_literal("0xdd").unwrap()).unwrap(),
             bcs::to_bytes(&1u64).unwrap(),
@@ -1448,7 +1448,7 @@ async fn test_get_txn_execute_failed_by_invalid_entry_function_arguments(
         "0x1",
         "Coin",
         "transfer",
-        vec![Libra2CoinType::type_tag()],
+        vec![CreditChainCoinType::type_tag()],
         vec![
             bcs::to_bytes(&AccountAddress::from_hex_literal("0xdd").unwrap()).unwrap(),
             bcs::to_bytes(&1u8).unwrap(), // invalid type
@@ -1483,7 +1483,7 @@ async fn test_get_txn_execute_failed_by_missing_entry_function_arguments(
         "0x1",
         "Coin",
         "transfer",
-        vec![Libra2CoinType::type_tag()],
+        vec![CreditChainCoinType::type_tag()],
         vec![
             bcs::to_bytes(&AccountAddress::from_hex_literal("0xdd").unwrap()).unwrap(),
             // missing arguments
@@ -1521,7 +1521,7 @@ async fn test_get_txn_execute_failed_by_entry_function_validation(
         "0x1",
         "Coin",
         "transfer",
-        vec![Libra2CoinType::type_tag()],
+        vec![CreditChainCoinType::type_tag()],
         vec![
             bcs::to_bytes(&AccountAddress::from_hex_literal("0xdd").unwrap()).unwrap(),
             bcs::to_bytes(&123u64).unwrap(), // exceed limit, account balance is 0.
@@ -1557,7 +1557,7 @@ async fn test_get_txn_execute_failed_by_entry_function_invalid_module_name(
         "0x1",
         "coin",
         "transfer::what::what",
-        vec![Libra2CoinType::type_tag()],
+        vec![CreditChainCoinType::type_tag()],
         vec![
             bcs::to_bytes(&AccountAddress::from_hex_literal("0xdd").unwrap()).unwrap(),
             bcs::to_bytes(&123u64).unwrap(), // exceed limit, account balance is 0.
@@ -1593,7 +1593,7 @@ async fn test_get_txn_execute_failed_by_entry_function_invalid_function_name(
         "0x1",
         "coin::coin",
         "transfer",
-        vec![Libra2CoinType::type_tag()],
+        vec![CreditChainCoinType::type_tag()],
         vec![
             bcs::to_bytes(&AccountAddress::from_hex_literal("0xdd").unwrap()).unwrap(),
             bcs::to_bytes(&123u64).unwrap(), // exceed limit, account balance is 0.
@@ -2315,7 +2315,7 @@ async fn test_simulation_failure_with_move_abort_error_rendering(
         .entry_function(EntryFunction::new(
             ModuleId::new(
                 AccountAddress::from_hex_literal("0x1").unwrap(),
-                Identifier::new("libra2_account").unwrap(),
+                Identifier::new("creditchain_account").unwrap(),
             ),
             Identifier::new("transfer").unwrap(),
             vec![],
@@ -2375,7 +2375,7 @@ async fn test_simulation_failure_with_detail_error(
                 Identifier::new("MemeCoin").unwrap(),
             ),
             Identifier::new("transfer").unwrap(),
-            vec![Libra2CoinType::type_tag()],
+            vec![CreditChainCoinType::type_tag()],
             vec![
                 bcs::to_bytes(&AccountAddress::from_hex_literal("0xdd").unwrap()).unwrap(),
                 bcs::to_bytes(&1u64).unwrap(),
@@ -2529,7 +2529,7 @@ async fn test_simulation_filter_allow_sender(
 
     // Allow the root sender only.
     let transaction_filter = TransactionFilter::empty()
-        .add_sender_filter(true, libra2_test_root_address())
+        .add_sender_filter(true, creditchain_test_root_address())
         .add_all_filter(false);
     let transaction_filter_config = TransactionFilterConfig::new(true, transaction_filter);
     node_config.transaction_filters.api_filter = transaction_filter_config;

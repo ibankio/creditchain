@@ -24,5 +24,5 @@ url = { workspace = true }
 
 move-core-types = { workspace = true }
 
-libra2-framework = { workspace = true }
-libra2-rest-client = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-rest-client = { workspace = true }

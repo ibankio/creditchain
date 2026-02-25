@@ -23,13 +23,13 @@ use crate::{
     },
     test_utils::MockPayloadManager as MockPayloadClient,
 };
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_config::config::DagPayloadConfig;
-use libra2_consensus_types::common::{Author, Round};
-use libra2_infallible::Mutex;
-use libra2_reliable_broadcast::{RBNetworkSender, ReliableBroadcast};
-use libra2_time_service::TimeService;
-use libra2_types::{
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_config::config::DagPayloadConfig;
+use creditchain_consensus_types::common::{Author, Round};
+use creditchain_infallible::Mutex;
+use creditchain_reliable_broadcast::{RBNetworkSender, ReliableBroadcast};
+use creditchain_time_service::TimeService;
+use creditchain_types::{
     epoch_state::EpochState,
     ledger_info::{generate_ledger_info_with_sig, LedgerInfo, LedgerInfoWithSignatures},
     validator_signer::ValidatorSigner,
@@ -160,7 +160,7 @@ fn setup(
         validators,
         network_sender.clone(),
         ExponentialBackoff::from_millis(10),
-        libra2_time_service::TimeService::mock(),
+        creditchain_time_service::TimeService::mock(),
         Duration::from_millis(500),
         BoundedExecutor::new(2, Handle::current()),
     ));
@@ -236,7 +236,7 @@ async fn test_certified_node_handler() {
 
 #[tokio::test]
 async fn test_dag_driver_drop() {
-    libra2_logger::Logger::init_for_testing();
+    creditchain_logger::Logger::init_for_testing();
 
     let (signers, validator_verifier) = random_validator_verifier(4, None, false);
     let (tx, rx) = oneshot::channel();

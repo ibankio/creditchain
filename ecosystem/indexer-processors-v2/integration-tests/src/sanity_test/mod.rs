@@ -1,7 +1,7 @@
 mod sanity_tests;
 
 use crate::sdk_tests::run_processor_test;
-use libra2_indexer_testing_framework::sdk_test_context::SdkTestContext;
+use creditchain_indexer_testing_framework::sdk_test_context::SdkTestContext;
 use diesel::PgConnection;
 use processor::processors::{
     account_transactions_processor::AccountTransactionsProcessor, ans_processor::AnsProcessor,

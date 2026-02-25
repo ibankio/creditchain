@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{LoadDestination, NetworkLoadTest};
-use libra2_forge::{
+use creditchain_forge::{
     GroupNetEm, NetworkContext, NetworkContextSynchronizer, NetworkTest, Swarm, SwarmChaos,
     SwarmNetEm, Test,
 };
-use libra2_types::PeerId;
+use creditchain_types::PeerId;
 use async_trait::async_trait;
 use itertools::{self, EitherOrBoth, Itertools};
 use log::info;
@@ -380,12 +380,12 @@ impl NetworkTest for MultiRegionNetworkEmulationTest {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use libra2_types::account_address::AccountAddress;
+    use creditchain_types::account_address::AccountAddress;
     use std::vec;
 
     #[test]
     fn test_create_multi_region_swarm_network_chaos() {
-        libra2_logger::Logger::new().init();
+        creditchain_logger::Logger::new().init();
 
         // Create a config with 8 peers and multiple regions
         let all_peers: Vec<_> = (0..8).map(|_| vec![PeerId::random()]).collect();

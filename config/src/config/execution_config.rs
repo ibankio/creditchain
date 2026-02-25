@@ -7,7 +7,7 @@ use crate::config::{
     config_optimizer::ConfigOptimizer, config_sanitizer::ConfigSanitizer,
     node_config_loader::NodeType, utils::RootPath, Error, NodeConfig,
 };
-use libra2_types::{chain_id::ChainId, transaction::Transaction, waypoint::Waypoint};
+use creditchain_types::{chain_id::ChainId, transaction::Transaction, waypoint::Waypoint};
 use serde::{Deserialize, Serialize};
 use serde_yaml::Value;
 use std::{
@@ -230,8 +230,8 @@ impl ConfigOptimizer for ExecutionConfig {
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_temppath::TempPath;
-    use libra2_types::{
+    use creditchain_temppath::TempPath;
+    use creditchain_types::{
         transaction::{ChangeSet, Transaction, WriteSetPayload},
         write_set::WriteSetMut,
     };

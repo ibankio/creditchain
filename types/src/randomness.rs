@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use crate::{block_info::Round, on_chain_config::OnChainConfig};
-use libra2_crypto::HashValue;
-use libra2_crypto_derive::SilentDebug;
-use libra2_dkg::{weighted_vuf, weighted_vuf::traits::WeightedVUF};
+use creditchain_crypto::HashValue;
+use creditchain_crypto_derive::SilentDebug;
+use creditchain_dkg::{weighted_vuf, weighted_vuf::traits::WeightedVUF};
 use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
 

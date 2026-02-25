@@ -4,10 +4,10 @@
 
 use crate::{Result, Version};
 use anyhow::anyhow;
-use libra2_config::{config::NodeConfig, network_id::NetworkId};
-use libra2_inspection_service::inspection_client::InspectionClient;
-use libra2_rest_client::{Libra2BaseUrl, Client as RestClient};
-use libra2_sdk::types::PeerId;
+use creditchain_config::{config::NodeConfig, network_id::NetworkId};
+use creditchain_inspection_service::inspection_client::InspectionClient;
+use creditchain_rest_client::{CreditChainBaseUrl, Client as RestClient};
+use creditchain_sdk::types::PeerId;
 use std::{
     collections::HashMap,
     time::{Duration, Instant},
@@ -155,7 +155,7 @@ pub trait NodeExt: Node {
 
     /// Return REST API client of this Node
     fn rest_client_with_timeout(&self, timeout: Duration) -> RestClient {
-        RestClient::builder(Libra2BaseUrl::Custom(self.rest_api_endpoint()))
+        RestClient::builder(CreditChainBaseUrl::Custom(self.rest_api_endpoint()))
             .timeout(timeout)
             .build()
     }
@@ -219,7 +219,7 @@ pub trait NodeExt: Node {
         if let Some(direction) = direction {
             map.insert("direction".to_string(), direction.to_string());
         }
-        self.get_metric_with_fields_i64("libra2_connections", map)
+        self.get_metric_with_fields_i64("creditchain_connections", map)
             .await
     }
 

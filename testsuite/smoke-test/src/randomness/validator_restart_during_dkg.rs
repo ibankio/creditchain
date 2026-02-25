@@ -6,10 +6,10 @@ use crate::{
     smoke_test_environment::SwarmBuilder,
     utils::get_on_chain_resource,
 };
-use libra2_forge::{NodeExt, SwarmExt};
-use libra2_logger::{debug, info};
-use libra2_rest_client::Client;
-use libra2_types::{dkg::DKGState, on_chain_config::OnChainRandomnessConfig};
+use creditchain_forge::{NodeExt, SwarmExt};
+use creditchain_logger::{debug, info};
+use creditchain_rest_client::Client;
+use creditchain_types::{dkg::DKGState, on_chain_config::OnChainRandomnessConfig};
 use futures::future::join_all;
 use std::{sync::Arc, time::Duration};
 
@@ -64,8 +64,8 @@ async fn validator_restart_during_dkg() {
             )
         })
         .collect::<Vec<_>>();
-    let libra2_results = join_all(tasks).await;
-    debug!("libra2_results={:?}", libra2_results);
+    let creditchain_results = join_all(tasks).await;
+    debug!("creditchain_results={:?}", creditchain_results);
 
     info!("Restart nodes after they panic.");
     for (node_idx, node) in swarm

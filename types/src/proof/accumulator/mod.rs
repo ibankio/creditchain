@@ -20,7 +20,7 @@ pub mod mock;
 use super::MerkleTreeInternalNode;
 use crate::proof::definition::{LeafCount, MAX_ACCUMULATOR_LEAVES};
 use anyhow::{ensure, format_err, Result};
-use libra2_crypto::{
+use creditchain_crypto::{
     hash::{
         CryptoHash, CryptoHasher, EventAccumulatorHasher, TransactionAccumulatorHasher,
         ACCUMULATOR_PLACEHOLDER_HASH,

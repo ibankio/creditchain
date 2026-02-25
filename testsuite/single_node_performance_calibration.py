@@ -78,7 +78,7 @@ def main():
             """
         github.job.name = "single-node-performance"
         | github.workflow.head_branch = "{branch}"
-        | "grep_json_libra2_move_vm_perf"
+        | "grep_json_creditchain_move_vm_perf"
         | parseJson(message)
         """.format(
                 branch=args.branch
@@ -87,7 +87,7 @@ def main():
             else """
         github.job.name = "execution-performance / single-node-performance"
         | github.workflow.head_branch = "main"
-        | "grep_json_libra2_move_vm_perf"
+        | "grep_json_creditchain_move_vm_perf"
         | parseJson(message)
         """
         )
@@ -122,7 +122,7 @@ def main():
             else:
                 return line.split(", ")
 
-        output_file_name = "libra2-move/e2e-benchmark/data/calibration_values.tsv"
+        output_file_name = "creditchain-move/e2e-benchmark/data/calibration_values.tsv"
 
     else:
         prefix = (

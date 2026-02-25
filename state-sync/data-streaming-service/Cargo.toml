@@ -1,5 +1,5 @@
 [package]
-name = "libra2-data-streaming-service"
+name = "creditchain-data-streaming-service"
 description = "The data streaming service that sends data notifications to clients"
 version = "0.1.0"
 
@@ -13,16 +13,16 @@ repository = { workspace = true }
 rust-version = { workspace = true }
 
 [dependencies]
-libra2-channels = { workspace = true }
-libra2-config = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-data-client = { workspace = true }
-libra2-id-generator = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-types = { workspace = true }
+creditchain-channels = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-data-client = { workspace = true }
+creditchain-id-generator = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-types = { workspace = true }
 arc-swap = { workspace = true }
 async-trait = { workspace = true }
 enum_dispatch = { workspace = true }
@@ -34,9 +34,9 @@ tokio = { workspace = true }
 tokio-stream = { workspace = true }
 
 [dev-dependencies]
-libra2-storage-service-types = { workspace = true }
-libra2-time-service = { workspace = true, features = ["testing"] }
-libra2-types = { workspace = true, features = ["fuzzing"] }
+creditchain-storage-service-types = { workspace = true }
+creditchain-time-service = { workspace = true, features = ["testing"] }
+creditchain-types = { workspace = true, features = ["fuzzing"] }
 claims = { workspace = true }
 rand = { workspace = true }
 tokio = { workspace = true }

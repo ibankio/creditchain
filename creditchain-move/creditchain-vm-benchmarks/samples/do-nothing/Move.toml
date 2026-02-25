@@ -1,0 +1,6 @@
+[package]
+name = 'do-nothing'
+version = '1.0.0'
+[dependencies]
+CreditChainFramework = { local = "../../../framework/creditchain-framework" }
+CreditChainStdlib = { local = "../../../framework/creditchain-stdlib" }

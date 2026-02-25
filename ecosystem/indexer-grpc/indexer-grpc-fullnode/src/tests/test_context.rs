@@ -1,18 +1,18 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_config::config::NodeConfig;
-use libra2_crypto::{hash::HashValue, SigningKey};
-use libra2_mempool::mocks::MockSharedMempool;
-use libra2_protos::extractor::v1::Transaction as TransactionPB;
-use libra2_sdk::{
+use creditchain_config::config::NodeConfig;
+use creditchain_crypto::{hash::HashValue, SigningKey};
+use creditchain_mempool::mocks::MockSharedMempool;
+use creditchain_protos::extractor::v1::Transaction as TransactionPB;
+use creditchain_sdk::{
     transaction_builder::TransactionFactory,
     types::{
-        account_config::libra2_test_root_address, transaction::SignedTransaction, LocalAccount,
+        account_config::creditchain_test_root_address, transaction::SignedTransaction, LocalAccount,
     },
 };
-use libra2_temppath::TempPath;
-use libra2_types::{
+use creditchain_temppath::TempPath;
+use creditchain_types::{
     account_address::AccountAddress,
     block_info::BlockInfo,
     block_metadata::BlockMetadata,
@@ -20,19 +20,19 @@ use libra2_types::{
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures},
     transaction::{Transaction, TransactionStatus},
 };
-use libra2_vm::Libra2VM;
-use libra2db::Libra2DB;
+use creditchain_vm::CreditChainVM;
+use creditchaindb::CreditChainDB;
 use executor::{block_executor::BlockExecutor, db_bootstrapper};
 use executor_types::BlockExecutorTrait;
 use mempool_notifications::MempoolNotificationSender;
 use storage_interface::DbReaderWriter;
 
 use crate::tests::{golden_output::GoldenOutputs, pretty};
-use libra2_api::{context::Context, index};
-use libra2_api_types::HexEncodedBytes;
-use libra2_config::keys::ConfigKey;
-use libra2_crypto::ed25519::Ed25519PrivateKey;
-use libra2_types::aggregated_signature::AggregatedSignature;
+use creditchain_api::{context::Context, index};
+use creditchain_api_types::HexEncodedBytes;
+use creditchain_config::keys::ConfigKey;
+use creditchain_crypto::ed25519::Ed25519PrivateKey;
+use creditchain_types::aggregated_signature::AggregatedSignature;
 use bytes::Bytes;
 use hyper::Response;
 use rand::SeedableRng;
@@ -45,7 +45,7 @@ pub fn new_test_context(test_name: &str, fake_start_time_usecs: u64) -> TestCont
     tmp_dir.create_as_dir().unwrap();
 
     let mut rng = ::rand::rngs::StdRng::from_seed([0u8; 32]);
-    let builder = libra2_genesis::builder::Builder::new(
+    let builder = creditchain_genesis::builder::Builder::new(
         tmp_dir.path(),
         framework::head_release_bundle().clone(),
     )
@@ -59,9 +59,9 @@ pub fn new_test_context(test_name: &str, fake_start_time_usecs: u64) -> TestCont
     let (validator_identity, _, _) = validators[0].get_key_objects(None).unwrap();
     let validator_owner = validator_identity.account_address.unwrap();
 
-    let (db, db_rw) = DbReaderWriter::wrap(Libra2DB::new_for_test_with_indexer(&tmp_dir));
+    let (db, db_rw) = DbReaderWriter::wrap(CreditChainDB::new_for_test_with_indexer(&tmp_dir));
     let ret =
-        db_bootstrapper::maybe_bootstrap::<Libra2VM>(&db_rw, &genesis, genesis_waypoint).unwrap();
+        db_bootstrapper::maybe_bootstrap::<CreditChainVM>(&db_rw, &genesis, genesis_waypoint).unwrap();
     assert!(ret);
 
     let mempool = MockSharedMempool::new_in_runtime(&db_rw, VMValidator::new(db.clone()));
@@ -76,7 +76,7 @@ pub fn new_test_context(test_name: &str, fake_start_time_usecs: u64) -> TestCont
         rng,
         root_key,
         validator_owner,
-        Box::new(BlockExecutor::<Libra2VM>::new(db_rw)),
+        Box::new(BlockExecutor::<CreditChainVM>::new(db_rw)),
         mempool,
         db,
         test_name.to_string(),
@@ -90,7 +90,7 @@ pub struct TestContext {
     pub context: Context,
     pub validator_owner: AccountAddress,
     pub mempool: Arc<MockSharedMempool>,
-    pub db: Arc<Libra2DB>,
+    pub db: Arc<CreditChainDB>,
     rng: rand::rngs::StdRng,
     root_key: ConfigKey<Ed25519PrivateKey>,
     executor: Arc<dyn BlockExecutorTrait>,
@@ -110,7 +110,7 @@ impl TestContext {
         validator_owner: AccountAddress,
         executor: Box<dyn BlockExecutorTrait>,
         mempool: MockSharedMempool,
-        db: Arc<Libra2DB>,
+        db: Arc<CreditChainDB>,
         test_name: String,
         fake_time_usecs: u64,
     ) -> Self {
@@ -137,7 +137,7 @@ impl TestContext {
     }
 
     pub fn root_account(&self) -> LocalAccount {
-        LocalAccount::new(libra2_test_root_address(), self.root_key.private_key(), 0)
+        LocalAccount::new(creditchain_test_root_address(), self.root_key.private_key(), 0)
     }
 
     pub fn gen_account(&mut self) -> LocalAccount {

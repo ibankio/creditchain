@@ -1,5 +1,5 @@
 module poc::write_module_event_to_store {
-    use libra2_framework::event;
+    use creditchain_framework::event;
 
     #[event]
     struct MyEvent has drop, store {

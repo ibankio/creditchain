@@ -6,14 +6,14 @@ use crate::{
     metadata_storage::database_schema::{MetadataKey, MetadataSchema, MetadataValue},
 };
 use anyhow::{anyhow, Result};
-use libra2_logger::prelude::*;
-use libra2_schemadb::{
+use creditchain_logger::prelude::*;
+use creditchain_schemadb::{
     batch::SchemaBatch,
     define_schema,
     schema::{KeyCodec, ValueCodec},
     ColumnFamilyName, Options, DB,
 };
-use libra2_types::ledger_info::LedgerInfoWithSignatures;
+use creditchain_types::ledger_info::LedgerInfoWithSignatures;
 use serde::{Deserialize, Serialize};
 use std::{path::Path, sync::Arc, time::Instant};
 

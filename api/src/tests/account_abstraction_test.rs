@@ -3,13 +3,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::new_test_context_with_orderless_flags;
-use libra2_api_test_context::{current_function_name, TestContext};
-use libra2_crypto::{
+use creditchain_api_test_context::{current_function_name, TestContext};
+use creditchain_crypto::{
     bls12381::{PrivateKey, PublicKey},
     test_utils::KeyPair,
     SigningKey, Uniform,
 };
-use libra2_types::{
+use creditchain_types::{
     function_info::FunctionInfo,
     transaction::{EntryFunction, TransactionStatus},
 };
@@ -46,7 +46,7 @@ async fn test_account_abstraction_single_signer(
     let named_addresses = vec![("aa".to_string(), user_addr)];
     let txn = futures::executor::block_on(async move {
         let path = PathBuf::from(std::env!("CARGO_MANIFEST_DIR"))
-            .join("../libra2-move/move-examples/account_abstraction/bls12381_single_key");
+            .join("../creditchain-move/move-examples/account_abstraction/bls12381_single_key");
         TestContext::build_package(path, named_addresses)
     });
     context.publish_package(&mut account, txn).await;
@@ -163,7 +163,7 @@ async fn test_account_abstraction_multi_agent_with_abstracted_sender(
     let named_addresses = vec![("aa".to_string(), a_addr)];
     let txn = futures::executor::block_on(async move {
         let path = PathBuf::from(std::env!("CARGO_MANIFEST_DIR"))
-            .join("../libra2-move/move-examples/account_abstraction/bls12381_single_key");
+            .join("../creditchain-move/move-examples/account_abstraction/bls12381_single_key");
         TestContext::build_package(path, named_addresses)
     });
     context.publish_package(&mut a, txn).await;

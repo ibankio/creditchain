@@ -3,9 +3,9 @@
 
 #![allow(clippy::non_canonical_partial_ord_impl)]
 
-use libra2_crypto::HashValue;
-use libra2_proptest_helpers::ValueGenerator;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_proptest_helpers::ValueGenerator;
+use creditchain_types::{
     access_path::AccessPath,
     account_config::AccountResource,
     state_store::state_key::{inner::StateKeyInner, registry::StateKeyRegistry, StateKey},

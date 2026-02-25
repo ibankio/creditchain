@@ -9,10 +9,10 @@ use crate::consensus_observer::{
     network::observer_message::OrderedBlock,
     observer::{execution_pool::ObservedOrderedBlock, payload_store::BlockPayloadStore},
 };
-use libra2_config::{config::ConsensusObserverConfig, network_id::PeerNetworkId};
-use libra2_crypto::HashValue;
-use libra2_logger::{error, info, warn};
-use libra2_types::block_info::Round;
+use creditchain_config::{config::ConsensusObserverConfig, network_id::PeerNetworkId};
+use creditchain_crypto::HashValue;
+use creditchain_logger::{error, info, warn};
+use creditchain_types::block_info::Round;
 use std::{
     collections::{btree_map::Entry, BTreeMap},
     sync::Arc,
@@ -318,15 +318,15 @@ mod test {
         network::observer_message::{BlockPayload, BlockTransactionPayload},
         observer::payload_store::BlockPayloadStore,
     };
-    use libra2_consensus_types::{
+    use creditchain_consensus_types::{
         block::Block,
         block_data::{BlockData, BlockType},
         pipelined_block::{OrderedBlockWindow, PipelinedBlock},
         quorum_cert::QuorumCert,
     };
-    use libra2_crypto::HashValue;
-    use libra2_infallible::Mutex;
-    use libra2_types::{
+    use creditchain_crypto::HashValue;
+    use creditchain_infallible::Mutex;
+    use creditchain_types::{
         aggregate_signature::AggregateSignature,
         block_info::BlockInfo,
         ledger_info::{LedgerInfo, LedgerInfoWithSignatures},

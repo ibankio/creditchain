@@ -6,9 +6,9 @@ use crate::tests::{
     common::TestTransaction,
     test_framework::{test_transaction, MempoolNode, MempoolTestFrameworkBuilder},
 };
-use libra2_config::network_id::PeerNetworkId;
-use libra2_netcore::transport::ConnectionOrigin;
-use libra2_network::{
+use creditchain_config::network_id::PeerNetworkId;
+use creditchain_netcore::transport::ConnectionOrigin;
+use creditchain_network::{
     testutils::{
         test_framework::TestFramework,
         test_node::{
@@ -19,7 +19,7 @@ use libra2_network::{
     transport::ConnectionMetadata,
     ProtocolId,
 };
-use libra2_types::transaction::ReplayProtector;
+use creditchain_types::transaction::ReplayProtector;
 use once_cell::sync::Lazy;
 use std::time::Duration;
 

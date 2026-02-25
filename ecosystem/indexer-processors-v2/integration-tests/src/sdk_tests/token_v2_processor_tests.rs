@@ -64,7 +64,7 @@ mod sdk_token_v2_processor_tests {
     use libra2_indexer_processor_sdk::testing_framework::{
         cli_parser::get_test_config, database::TestDatabase,
     };
-    use libra2_indexer_test_transactions::json_transactions::generated_transactions::{
+    use creditchain_indexer_test_transactions::json_transactions::generated_transactions::{
         IMPORTED_DEVNET_TXNS_19922017_TOKEN_V1_OFFER_CLAIM,
         IMPORTED_DEVNET_TXNS_78753831_TOKEN_V1_MINT_TRANSFER_WITH_V2_EVENTS,
         IMPORTED_DEVNET_TXNS_78753832_TOKEN_V2_MINT_TRANSFER_WITH_V2_EVENTS,
@@ -89,10 +89,10 @@ mod sdk_token_v2_processor_tests {
     /**
     * This test includes processing for the following:
     * - Resources
-    *      - 0x4::libra2_token::Libra2Collection
+    *      - 0x4::creditchain_token::CreditChainCollection
     *      - 0x4::collection::Collection
     *      - 0x4::collection::ConcurrentSupply
-    *      - 0x4::libra2_token::Libra2Token
+    *      - 0x4::creditchain_token::CreditChainToken
     *      - 0x4::property_map::PropertyMap
     *      - 0x4::token::Token
 
@@ -100,10 +100,10 @@ mod sdk_token_v2_processor_tests {
     *      - 0x4::collection::Mint
     */
     #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-    async fn test_token_v2_concurrent_libra2_mint() {
+    async fn test_token_v2_concurrent_creditchain_mint() {
         process_single_transaction(
             IMPORTED_MAINNET_TXNS_999930475_TOKEN_V2_CONCURRENT_MINT,
-            Some("test_token_v2_concurrent_libra2_mint".to_string()),
+            Some("test_token_v2_concurrent_creditchain_mint".to_string()),
         )
         .await;
     }
@@ -148,10 +148,10 @@ mod sdk_token_v2_processor_tests {
     /**
     * This test includes processing for the following:
     * - Resources
-    *      - 0x4::libra2_token::Libra2Collection
+    *      - 0x4::creditchain_token::CreditChainCollection
     *      - 0x4::collection::Collection
     *      - 0x4::collection::FixedSupply
-    *      - 0x4::libra2_token::Libra2Token
+    *      - 0x4::creditchain_token::CreditChainToken
     *      - 0x4::property_map::PropertyMap
     *      - 0x4::token::Token
 
@@ -171,10 +171,10 @@ mod sdk_token_v2_processor_tests {
     /**
     * This test includes processing for the following:
     * - Resources
-    *      - 0x4::libra2_token::Libra2Collection
+    *      - 0x4::creditchain_token::CreditChainCollection
     *      - 0x4::collection::Collection
     *      - 0x4::collection::FixedSupply
-    *      - 0x4::libra2_token::Libra2Token
+    *      - 0x4::creditchain_token::CreditChainToken
     *      - 0x4::property_map::PropertyMap
     *      - 0x4::token::Token
 
@@ -193,7 +193,7 @@ mod sdk_token_v2_processor_tests {
     /**
     * This test includes processing for the following:
     * - Resources
-    *      - 0x4::libra2_token::Libra2Collection
+    *      - 0x4::creditchain_token::CreditChainCollection
     *      - 0x4::collection::Collection
     *      - 0x4::collection::ConcurrentSupply
     * - Events

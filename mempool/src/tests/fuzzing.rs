@@ -7,18 +7,18 @@ use crate::{
     network::{BroadcastPeerPriority, MempoolSyncMsg},
     shared_mempool::{tasks, types::SharedMempool},
 };
-use libra2_config::{
+use creditchain_config::{
     config::{NodeConfig, NodeType},
     network_id::NetworkId,
 };
-use libra2_infallible::{Mutex, RwLock};
-use libra2_network::{
+use creditchain_infallible::{Mutex, RwLock};
+use creditchain_network::{
     application::{interface::NetworkClient, storage::PeersAndMetadata},
     protocols::wire::handshake::v1::ProtocolId::MempoolDirectSend,
 };
-use libra2_storage_interface::mock::MockDbReaderWriter;
-use libra2_types::transaction::SignedTransaction;
-use libra2_vm_validator::mocks::mock_vm_validator::MockVMValidator;
+use creditchain_storage_interface::mock::MockDbReaderWriter;
+use creditchain_types::transaction::SignedTransaction;
+use creditchain_vm_validator::mocks::mock_vm_validator::MockVMValidator;
 use proptest::{
     arbitrary::any,
     prelude::*,

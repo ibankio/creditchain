@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "libra2-genesis.fullname" . }}-layout-e{{ .Values.chain.era }}
+  name: {{ include "creditchain-genesis.fullname" . }}-layout-e{{ .Values.chain.era }}
   labels:
-    {{- include "libra2-genesis.labels" . | nindent 4 }}
+    {{- include "creditchain-genesis.labels" . | nindent 4 }}
 data:
   layout.yaml: |-
     ---
@@ -39,9 +39,9 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "libra2-genesis.fullname" . }}-script
+  name: {{ include "creditchain-genesis.fullname" . }}-script
   labels:
-    {{- include "libra2-genesis.labels" . | nindent 4 }}
+    {{- include "creditchain-genesis.labels" . | nindent 4 }}
 data:
   genesis.sh: |-
 {{ .Files.Get "files/genesis.sh" | indent 4 }}
@@ -51,9 +51,9 @@ data:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ include "libra2-genesis.fullname" . }}
+  name: {{ include "creditchain-genesis.fullname" . }}
   labels:
-    {{- include "libra2-genesis.labels" . | nindent 4 }}
+    {{- include "creditchain-genesis.labels" . | nindent 4 }}
 rules:
 - apiGroups: [""]
   verbs: ["list", "create", "delete"]
@@ -64,16 +64,16 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ include "libra2-genesis.fullname" . }}
+  name: {{ include "creditchain-genesis.fullname" . }}
   labels:
-    {{- include "libra2-genesis.labels" . | nindent 4 }}
+    {{- include "creditchain-genesis.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ include "libra2-genesis.fullname" . }}
+  name: {{ include "creditchain-genesis.fullname" . }}
 subjects:
 - kind: ServiceAccount
-  name: {{ include "libra2-genesis.serviceAccountName" . }}
+  name: {{ include "creditchain-genesis.serviceAccountName" . }}
 
 ---
 
@@ -81,15 +81,15 @@ subjects:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "libra2-genesis.fullname" . }}-e{{ .Values.chain.era }}
+  name: {{ include "creditchain-genesis.fullname" . }}-e{{ .Values.chain.era }}
   labels:
-    {{- include "libra2-genesis.labels" . | nindent 4 }}
+    {{- include "creditchain-genesis.labels" . | nindent 4 }}
     app.kubernetes.io/name: genesis
 spec:
   template:
     metadata:
       labels:
-        {{- include "libra2-genesis.selectorLabels" . | nindent 8 }}
+        {{- include "creditchain-genesis.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/name: genesis
     spec:
       restartPolicy: Never
@@ -186,13 +186,13 @@ spec:
       volumes:
       - name: layout
         configMap:
-          name: {{ include "libra2-genesis.fullname" . }}-layout-e{{ .Values.chain.era }}
+          name: {{ include "creditchain-genesis.fullname" . }}-layout-e{{ .Values.chain.era }}
       - name: script
         configMap:
-          name: {{ include "libra2-genesis.fullname" . }}-script
+          name: {{ include "creditchain-genesis.fullname" . }}-script
       - name: tmp
         emptyDir: {}
-      serviceAccountName: {{ include "libra2-genesis.serviceAccountName" . }}
+      serviceAccountName: {{ include "creditchain-genesis.serviceAccountName" . }}
       {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{.Values.imagePullSecret}}

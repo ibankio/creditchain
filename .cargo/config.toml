@@ -28,7 +28,7 @@ xclippy = [
   "-Aclippy::obfuscated-if-else",
   "-Aclippy::unnecessary-map-or",
 ]
-x = "run --package libra2-cargo-cli --bin libra2-cargo-cli --"
+x = "run --package creditchain-cargo-cli --bin creditchain-cargo-cli --"
 
 [build]
 rustflags = ["--cfg", "tokio_unstable", "-C", "force-frame-pointers=yes", "-C", "force-unwind-tables=yes"]

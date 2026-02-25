@@ -3,12 +3,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use super::ungrouped::changing_working_quorum_test_helper;
-use libra2_config::config::{BootstrappingMode, ContinuousSyncingMode, StateSyncConfig};
-use libra2_forge::{
+use creditchain_config::config::{BootstrappingMode, ContinuousSyncingMode, StateSyncConfig};
+use creditchain_forge::{
     args::TransactionTypeArg, success_criteria::SuccessCriteria, EmitJobMode, EmitJobRequest,
     ForgeConfig,
 };
-use libra2_testcases::{
+use creditchain_testcases::{
     consensus_reliability_tests::ChangingWorkingQuorumTest,
     state_sync_performance::{
         StateSyncFullnodeFastSyncPerformance, StateSyncFullnodePerformance,

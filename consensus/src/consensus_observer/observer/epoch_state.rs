@@ -11,11 +11,11 @@ use crate::{
         ConsensusObserverPayloadManager, DirectMempoolPayloadManager, TPayloadManager,
     },
 };
-use libra2_config::config::NodeConfig;
-use libra2_event_notifications::{DbBackedOnChainConfig, ReconfigNotificationListener};
-use libra2_infallible::Mutex;
-use libra2_logger::{error, info, warn};
-use libra2_types::{
+use creditchain_config::config::NodeConfig;
+use creditchain_event_notifications::{DbBackedOnChainConfig, ReconfigNotificationListener};
+use creditchain_infallible::Mutex;
+use creditchain_logger::{error, info, warn};
+use creditchain_types::{
     epoch_state::EpochState,
     on_chain_config::{
         OnChainConsensusConfig, OnChainExecutionConfig, OnChainRandomnessConfig,
@@ -84,7 +84,7 @@ impl ObserverEpochState {
     pub async fn wait_for_epoch_start(
         &mut self,
         block_payloads: Arc<
-            Mutex<BTreeMap<(u64, libra2_consensus_types::common::Round), BlockPayloadStatus>>,
+            Mutex<BTreeMap<(u64, creditchain_consensus_types::common::Round), BlockPayloadStatus>>,
         >,
     ) -> (
         Arc<dyn TPayloadManager>,
@@ -221,8 +221,8 @@ async fn extract_on_chain_configs(
 #[cfg(test)]
 mod test {
     use super::*;
-    use libra2_channels::{libra2_channel, message_queues::QueueStyle};
-    use libra2_event_notifications::ReconfigNotification;
+    use creditchain_channels::{creditchain_channel, message_queues::QueueStyle};
+    use creditchain_event_notifications::ReconfigNotification;
 
     #[test]
     fn test_simple_epoch_state() {
@@ -251,11 +251,11 @@ mod test {
 
     /// Creates and returns a reconfig notifier and listener
     fn create_reconfig_notifier_and_listener() -> (
-        libra2_channel::Sender<(), ReconfigNotification<DbBackedOnChainConfig>>,
+        creditchain_channel::Sender<(), ReconfigNotification<DbBackedOnChainConfig>>,
         ReconfigNotificationListener<DbBackedOnChainConfig>,
     ) {
         let (notification_sender, notification_receiver) =
-            libra2_channel::new(QueueStyle::LIFO, 1, None);
+            creditchain_channel::new(QueueStyle::LIFO, 1, None);
         let reconfig_notification_listener = ReconfigNotificationListener {
             notification_receiver,
         };

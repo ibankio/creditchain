@@ -1,6 +1,6 @@
 module poc::one_internal {
-    use libra2_std::crypto_algebra::{from_u64, one, eq, mul, scalar_mul};
-    use libra2_std::bls12381_algebra::{Fr, G1};
+    use creditchain_std::crypto_algebra::{from_u64, one, eq, mul, scalar_mul};
+    use creditchain_std::bls12381_algebra::{Fr, G1};
 
     public entry fun main(_owner: &signer) {
         let o_fr = one<Fr>();

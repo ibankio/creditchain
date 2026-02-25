@@ -23,9 +23,9 @@ spec:
     spec:
       containers:
       - command:
-        - /usr/local/bin/libra2-node
+        - /usr/local/bin/creditchain-node
         - -f
-        - /opt/libra2/etc/pfn.yaml
+        - /opt/creditchain/etc/pfn.yaml
         image: pfn-image
         name: pfn-name-pfn
         ports:
@@ -38,19 +38,19 @@ spec:
             cpu: pfn-cpu
             memory: pfn-memory
         volumeMounts:
-        - mountPath: /opt/libra2/etc
-          name: libra2-config
-        - mountPath: /opt/libra2/genesis
+        - mountPath: /opt/creditchain/etc
+          name: creditchain-config
+        - mountPath: /opt/creditchain/genesis
           name: genesis-config
-        - mountPath: /opt/libra2/data
-          name: libra2-data
+        - mountPath: /opt/creditchain/data
+          name: creditchain-data
       volumes:
       - configMap:
           name: pfn-name-pfn-configmap
-        name: libra2-config
+        name: creditchain-config
       - configMap:
           name: genesis-artifiact-configmap-pangu
         name: genesis-config
-      - name: libra2-data
+      - name: creditchain-data
         persistentVolumeClaim:
           claimName: pfn-name-pfn-pvc

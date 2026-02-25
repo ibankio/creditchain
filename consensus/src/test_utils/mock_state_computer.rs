@@ -7,8 +7,8 @@ use crate::{
     transaction_deduper::TransactionDeduper, transaction_shuffler::TransactionShuffler,
 };
 use anyhow::{anyhow, Result};
-use libra2_crypto::HashValue;
-use libra2_types::{
+use creditchain_crypto::HashValue;
+use creditchain_types::{
     block_executor::config::BlockExecutorConfigFromOnchain, epoch_state::EpochState,
     ledger_info::LedgerInfoWithSignatures,
 };

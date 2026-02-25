@@ -1,7 +1,7 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
 
-use libra2_infallible::Mutex;
+use creditchain_infallible::Mutex;
 use hyper::{Body, Request};
 use move_core_types::account_address::AccountAddress;
 use std::{collections::HashSet, str::FromStr};

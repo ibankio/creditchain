@@ -4,7 +4,7 @@
 use crate::{
     pre_partition::PrePartitioner, v2::counters::BLOCK_PARTITIONING_SECONDS, BlockPartitioner,
 };
-use libra2_types::{
+use creditchain_types::{
     block_executor::partitioner::{PartitionedTransactions, RoundId},
     transaction::analyzed_transaction::AnalyzedTransaction,
 };

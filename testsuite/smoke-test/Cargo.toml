@@ -14,37 +14,37 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2 = { workspace = true, features = ["fuzzing"] }
-libra2-api-types = { workspace = true }
-libra2-bitvec = { path = "../../crates/libra2-bitvec" }
-libra2-cached-packages = { workspace = true }
-libra2-config = { workspace = true, features = ["smoke-test"] }
-libra2-consensus = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-db = { workspace = true }
-libra2-db-indexer-schemas = { workspace = true }
-libra2-dkg = { workspace = true }
-libra2-faucet-core = { workspace = true }
-libra2-forge = { workspace = true }
-libra2-framework = { workspace = true }
-libra2-gas-algebra = { workspace = true }
-libra2-gas-schedule = { workspace = true, features = ["testing"] }
-libra2-global-constants = { workspace = true }
-libra2-indexer = { workspace = true }
-libra2-indexer-grpc-table-info = { workspace = true }
-libra2-inspection-service = { workspace = true }
-libra2-keygen = { workspace = true }
-libra2-move-debugger = { workspace = true }
-libra2-release-builder = { workspace = true }
-libra2-rest-client = { workspace = true }
-libra2-rosetta = { workspace = true }
-libra2-schemadb = { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-temppath = { workspace = true }
-libra2-transaction-filters = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
+creditchain = { workspace = true, features = ["fuzzing"] }
+creditchain-api-types = { workspace = true }
+creditchain-bitvec = { path = "../../crates/creditchain-bitvec" }
+creditchain-cached-packages = { workspace = true }
+creditchain-config = { workspace = true, features = ["smoke-test"] }
+creditchain-consensus = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-db-indexer-schemas = { workspace = true }
+creditchain-dkg = { workspace = true }
+creditchain-faucet-core = { workspace = true }
+creditchain-forge = { workspace = true }
+creditchain-framework = { workspace = true }
+creditchain-gas-algebra = { workspace = true }
+creditchain-gas-schedule = { workspace = true, features = ["testing"] }
+creditchain-global-constants = { workspace = true }
+creditchain-indexer = { workspace = true }
+creditchain-indexer-grpc-table-info = { workspace = true }
+creditchain-inspection-service = { workspace = true }
+creditchain-keygen = { workspace = true }
+creditchain-move-debugger = { workspace = true }
+creditchain-release-builder = { workspace = true }
+creditchain-rest-client = { workspace = true }
+creditchain-rosetta = { workspace = true }
+creditchain-schemadb = { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-temppath = { workspace = true }
+creditchain-transaction-filters = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
 bcs = { workspace = true }
 diesel = { workspace = true, features = [
     "chrono",
@@ -67,14 +67,14 @@ url = { workspace = true }
 walkdir = { workspace = true }
 
 [dev-dependencies]
-libra2-backup-cli = { workspace = true }
-libra2-db-indexer = { workspace = true, features = ["fuzzing"] }
-libra2-genesis = { workspace = true }
-libra2-infallible = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-secure-storage = { workspace = true }
-libra2-time-service = { workspace = true }
-libra2-vault-client = { workspace = true }
+creditchain-backup-cli = { workspace = true }
+creditchain-db-indexer = { workspace = true, features = ["fuzzing"] }
+creditchain-genesis = { workspace = true }
+creditchain-infallible = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-secure-storage = { workspace = true }
+creditchain-time-service = { workspace = true }
+creditchain-vault-client = { workspace = true }
 base64 = { workspace = true }
 futures = { workspace = true }
 itertools = { workspace = true }

@@ -6,8 +6,8 @@ use crate::{
     dag::anchor_election::CommitHistory,
     liveness::{leader_reputation::VotingPowerRatio, proposal_generator::ChainHealthBackoffConfig},
 };
-use libra2_config::config::ChainHealthBackoffValues;
-use libra2_consensus_types::common::Round;
+use creditchain_config::config::ChainHealthBackoffValues;
+use creditchain_consensus_types::common::Round;
 use std::{sync::Arc, time::Duration};
 
 pub trait TChainHealth: Send + Sync {

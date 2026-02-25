@@ -8,7 +8,7 @@ datatest_stable::harness!(
     parse_move_example_manifests,
     {
         Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("../../../../libra2-move/move-examples")
+            .join("../../../../creditchain-move/move-examples")
             .display()
     },
     r"\bMove\.toml$"

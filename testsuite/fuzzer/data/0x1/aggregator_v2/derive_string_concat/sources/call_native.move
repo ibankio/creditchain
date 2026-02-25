@@ -1,5 +1,5 @@
 module poc::derive_string_concat {
-    use libra2_framework::aggregator_v2;
+    use creditchain_framework::aggregator_v2;
     use std::string;
 
     public entry fun main(_owner: &signer) {

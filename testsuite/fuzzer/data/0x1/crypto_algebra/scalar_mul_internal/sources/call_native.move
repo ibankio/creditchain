@@ -1,6 +1,6 @@
 module poc::scalar_mul_internal {
-    use libra2_std::crypto_algebra::{Self, Element};
-    use libra2_std::bls12381_algebra::{G1, Fr};
+    use creditchain_std::crypto_algebra::{Self, Element};
+    use creditchain_std::bls12381_algebra::{G1, Fr};
 
     public entry fun main(_owner: &signer) {
         let g1_element: Element<G1> = crypto_algebra::one<G1>();

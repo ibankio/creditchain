@@ -11,7 +11,7 @@ use crate::{
 };
 use libra2_indexer_processor_sdk::{
     libra2_indexer_transaction_stream::utils::time::parse_timestamp,
-   libra2_protos::transaction::v1::{transaction::TxnData, Transaction},
+   creditchain_protos::transaction::v1::{transaction::TxnData, Transaction},
 };
 use tracing::warn;
 

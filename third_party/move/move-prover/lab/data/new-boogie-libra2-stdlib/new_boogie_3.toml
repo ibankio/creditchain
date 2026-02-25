@@ -1,15 +1,15 @@
 move_named_address_values = [
     "std=0x1",
-    "libra2_std=0x1",
-    "libra2_framework=0x1",
-    "libra2_token=0x3",
+    "creditchain_std=0x1",
+    "creditchain_framework=0x1",
+    "creditchain_token=0x3",
     "core_resources=0xA550C18",
     "vm_reserved=0x0",
     "Extensions=0x1",
     "vm=0x0",
-    "libra2_fungible_asset=0xA"
+    "creditchain_fungible_asset=0xA"
 ]
 move_deps = [
-    "../../../../../../libra2-move/framework/move-stdlib/sources",
-    "../../../../../../libra2-move/framework/libra2-stdlib/sources",
+    "../../../../../../creditchain-move/framework/move-stdlib/sources",
+    "../../../../../../creditchain-move/framework/creditchain-stdlib/sources",
 ]

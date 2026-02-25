@@ -36,7 +36,7 @@ use crate::{
 use ahash::{AHashMap, AHashSet};
 use libra2_indexer_processor_sdk::{
     libra2_indexer_transaction_stream::utils::time::parse_timestamp,
-   libra2_protos::transaction::v1::{transaction::TxnData, write_set_change::Change, Transaction},
+   creditchain_protos::transaction::v1::{transaction::TxnData, write_set_change::Change, Transaction},
     postgres::utils::database::DbContext,
     utils::{convert::standardize_address, extract::get_entry_function_from_user_request},
 };
@@ -162,8 +162,8 @@ pub async fn parse_v2_token(
                                 V2TokenResource::UnlimitedSupply(unlimited_supply) => {
                                     aggregated_data.unlimited_supply = Some(unlimited_supply);
                                 },
-                                V2TokenResource::Libra2Collection(libra2_collection) => {
-                                    aggregated_data.libra2_collection = Some(libra2_collection);
+                                V2TokenResource::CreditChainCollection(creditchain_collection) => {
+                                    aggregated_data.creditchain_collection = Some(creditchain_collection);
                                 },
                                 V2TokenResource::PropertyMapModel(property_map) => {
                                     aggregated_data.property_map = Some(property_map);

@@ -9,8 +9,8 @@
 //! Votes are automatically dropped when the structure goes out of scope.
 
 use crate::counters;
-use libra2_bitvec::BitVec;
-use libra2_consensus_types::{
+use creditchain_bitvec::BitVec;
+use creditchain_consensus_types::{
     common::Author,
     quorum_cert::QuorumCert,
     round_timeout::{RoundTimeout, RoundTimeoutReason},
@@ -19,9 +19,9 @@ use libra2_consensus_types::{
     },
     vote::Vote,
 };
-use libra2_crypto::{bls12381, hash::CryptoHash, HashValue};
-use libra2_logger::prelude::*;
-use libra2_types::{
+use creditchain_crypto::{bls12381, hash::CryptoHash, HashValue};
+use creditchain_logger::prelude::*;
+use creditchain_types::{
     ledger_info::{LedgerInfo, LedgerInfoWithSignatures, SignatureAggregator},
     validator_verifier::{ValidatorVerifier, VerifyError},
 };
@@ -562,11 +562,11 @@ impl fmt::Display for PendingVotes {
 #[cfg(test)]
 mod tests {
     use super::{PendingVotes, VoteReceptionResult, VoteStatus};
-    use libra2_consensus_types::{
+    use creditchain_consensus_types::{
         block::block_test_utils::certificate_for_genesis, vote::Vote, vote_data::VoteData,
     };
-    use libra2_crypto::{bls12381, hash::CryptoHash, HashValue};
-    use libra2_types::{
+    use creditchain_crypto::{bls12381, hash::CryptoHash, HashValue};
+    use creditchain_types::{
         aggregate_signature::PartialSignatures, block_info::BlockInfo, ledger_info::LedgerInfo,
         validator_verifier::random_validator_verifier,
     };
@@ -589,7 +589,7 @@ mod tests {
     #[test]
     /// Verify that votes are properly aggregated to QC based on their LedgerInfo digest
     fn test_qc_aggregation() {
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         // set up 4 validators
         let (signers, validator_verifier) = random_validator_verifier(4, Some(2), false);
@@ -659,7 +659,7 @@ mod tests {
 
     #[test]
     fn test_qc_aggregation_with_unverified_votes() {
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         // set up 4 validators
         let (signers, validator_verifier) = random_validator_verifier(7, Some(3), false);
@@ -791,7 +791,7 @@ mod tests {
 
     #[test]
     fn test_2chain_tc_aggregation() {
-        ::libra2_logger::Logger::init_for_testing();
+        ::creditchain_logger::Logger::init_for_testing();
 
         // set up 4 validators
         let (signers, validator_verifier) = random_validator_verifier(4, None, false);

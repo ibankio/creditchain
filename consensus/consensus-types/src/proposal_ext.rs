@@ -5,7 +5,7 @@ use crate::{
     common::{Author, Payload, Round},
     quorum_cert::QuorumCert,
 };
-use libra2_types::validator_txn::ValidatorTransaction;
+use creditchain_types::validator_txn::ValidatorTransaction;
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Clone, Debug, PartialEq, Eq)]

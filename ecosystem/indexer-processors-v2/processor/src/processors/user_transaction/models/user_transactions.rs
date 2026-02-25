@@ -20,7 +20,7 @@ use allocative::Allocative;
 use anyhow::Result;
 use libra2_indexer_processor_sdk::{
     libra2_indexer_transaction_stream::utils::time::parse_timestamp,
-   libra2_protos::{
+   creditchain_protos::{
         transaction::v1::{
             TransactionInfo, UserTransaction as UserTransactionPB, UserTransactionRequest,
         },

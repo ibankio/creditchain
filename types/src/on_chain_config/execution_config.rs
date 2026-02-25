@@ -141,7 +141,7 @@ impl OnChainConfig for OnChainExecutionConfig {
 
     /// The Move resource is
     /// ```ignore
-    /// struct Libra2ExecutionConfig has copy, drop, store {
+    /// struct CreditChainExecutionConfig has copy, drop, store {
     ///    config: vector<u8>,
     /// }
     /// ```

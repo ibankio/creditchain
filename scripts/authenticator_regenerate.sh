@@ -23,7 +23,7 @@ cd $repodir
   echo
   echo "Regenerating serde-reflection to track type changes over time (in `pwd`)"
   cargo run -p generate-format -- --corpus api --record
-  cargo run -p generate-format -- --corpus libra2 --record
+  cargo run -p generate-format -- --corpus creditchain --record
   cargo run -p generate-format -- --corpus consensus --record
   cargo run -p generate-format -- --corpus network --record
   cargo run -p generate-format -- --corpus move-abi --record
@@ -33,8 +33,8 @@ cd $repodir
   echo
   echo "Regenerating CreditChain Node APIs (in `pwd`)"
   # CreditChain Node API
-  cargo run -p libra2-openapi-spec-generator -- -f yaml -o api/doc/spec.yaml
-  cargo run -p libra2-openapi-spec-generator -- -f json -o api/doc/spec.json
+  cargo run -p creditchain-openapi-spec-generator -- -f yaml -o api/doc/spec.yaml
+  cargo run -p creditchain-openapi-spec-generator -- -f json -o api/doc/spec.json
 )
 
 echo

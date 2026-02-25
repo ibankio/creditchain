@@ -1,8 +1,8 @@
 // Copyright © CreditChain Research Team
 // SPDX-License-Identifier: Apache-2.0
-use libra2_secure_net::network_controller::{Message, NetworkController};
-use libra2_types::block_executor::partitioner::{RoundId, ShardId, MAX_ALLOWED_PARTITIONING_ROUNDS};
-use libra2_vm::sharded_block_executor::{
+use creditchain_secure_net::network_controller::{Message, NetworkController};
+use creditchain_types::block_executor::partitioner::{RoundId, ShardId, MAX_ALLOWED_PARTITIONING_ROUNDS};
+use creditchain_vm::sharded_block_executor::{
     cross_shard_client::CrossShardClient, messages::CrossShardMsg,
 };
 use crossbeam_channel::{Receiver, Sender};

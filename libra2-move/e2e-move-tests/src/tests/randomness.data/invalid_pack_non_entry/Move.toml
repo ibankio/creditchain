@@ -1,7 +1,0 @@
-[package]
-name = "randomness_invalid_test_non_entry"
-version = "0.0.0"
-
-[dependencies]
-Libra2Framework = { local = "../../../../../framework/libra2-framework" }
-Libra2Stdlib = { local = "../../../../../framework/libra2-stdlib" }

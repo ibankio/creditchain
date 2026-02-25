@@ -1,5 +1,5 @@
 module poc::scalar_invert_internal {
-    use libra2_std::ristretto255::{Self, Scalar};
+    use creditchain_std::ristretto255::{Self, Scalar};
     use std::option::{Self};
 
     public entry fun main(_owner: &signer) {

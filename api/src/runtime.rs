@@ -19,11 +19,11 @@ use crate::{
     view_function::ViewFunctionApi,
 };
 use anyhow::{anyhow, Context as AnyhowContext};
-use libra2_config::config::{ApiConfig, NodeConfig};
-use libra2_logger::info;
-use libra2_mempool::MempoolClientSender;
-use libra2_storage_interface::DbReader;
-use libra2_types::{chain_id::ChainId, indexer::indexer_db_reader::IndexerReader};
+use creditchain_config::config::{ApiConfig, NodeConfig};
+use creditchain_logger::info;
+use creditchain_mempool::MempoolClientSender;
+use creditchain_storage_interface::DbReader;
+use creditchain_types::{chain_id::ChainId, indexer::indexer_db_reader::IndexerReader};
 use futures::channel::oneshot;
 use poem::{
     handler,
@@ -49,7 +49,7 @@ pub fn bootstrap(
     port_tx: Option<oneshot::Sender<u16>>,
 ) -> anyhow::Result<Runtime> {
     let max_runtime_workers = get_max_runtime_workers(&config.api);
-    let runtime = libra2_runtimes::spawn_named_runtime("api".into(), Some(max_runtime_workers));
+    let runtime = creditchain_runtimes::spawn_named_runtime("api".into(), Some(max_runtime_workers));
 
     let context = Context::new(chain_id, db, mp_sender, config.clone(), indexer_reader);
 
@@ -155,9 +155,9 @@ pub fn get_api_service(
         .name("CreditChain Research Team")
         .url("https://github.com/libra2org/libra2-core");
 
-    OpenApiService::new(apis, "Libra2 Node API", version.trim())
+    OpenApiService::new(apis, "CreditChain Node API", version.trim())
         .server("/v1")
-        .description("The Libra2 Node API is a RESTful API for client applications to interact with the Libra2 blockchain.")
+        .description("The CreditChain Node API is a RESTful API for client applications to interact with the CreditChain blockchain.")
         .license(license)
         .contact(contact)
         .external_document("https://github.com/libra2org/libra2-core")
@@ -272,7 +272,7 @@ pub fn attach_poem_to_runtime(
 async fn root_handler() -> Html<&'static str> {
     let response = "<html>
 <head>
-    <title>Libra2 Node API</title>
+    <title>CreditChain Node API</title>
 </head>
 <body>
     <p>
@@ -299,9 +299,9 @@ fn get_max_runtime_workers(api_config: &ApiConfig) -> usize {
 mod tests {
     use super::bootstrap;
     use crate::runtime::get_max_runtime_workers;
-    use libra2_api_test_context::{new_test_context, TestContext};
-    use libra2_config::config::{ApiConfig, NodeConfig};
-    use libra2_types::chain_id::ChainId;
+    use creditchain_api_test_context::{new_test_context, TestContext};
+    use creditchain_config::config::{ApiConfig, NodeConfig};
+    use creditchain_types::chain_id::ChainId;
     use std::time::Duration;
 
     // TODO: Unignore this when I figure out why this only works when being

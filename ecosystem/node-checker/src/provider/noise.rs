@@ -10,11 +10,11 @@ use super::{
     CommonProviderConfig,
 };
 use anyhow::Result;
-use libra2_network_checker::{
+use creditchain_network_checker::{
     args::{CheckEndpointArgs, HandshakeArgs, NodeAddressArgs},
     check_endpoint::check_endpoint,
 };
-use libra2_sdk::types::{chain_id::ChainId, network_address::NetworkAddress};
+use creditchain_sdk::types::{chain_id::ChainId, network_address::NetworkAddress};
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;

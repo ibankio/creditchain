@@ -6,13 +6,13 @@ use crate::{
     stream_coordinator::IndexerStreamCoordinator,
     ServiceContext,
 };
-use libra2_indexer_grpc_utils::{
+use creditchain_indexer_grpc_utils::{
     counters::{log_grpc_step_fullnode, IndexerGrpcStep},
     timestamp_now_proto,
 };
-use libra2_logger::{error, info};
-use libra2_moving_average::MovingAverage;
-use libra2_protos::{
+use creditchain_logger::{error, info};
+use creditchain_moving_average::MovingAverage;
+use creditchain_protos::{
     indexer::v1::FullnodeInfo,
     internal::fullnode::v1::{
         fullnode_data_server::FullnodeData, stream_status::StatusType,
@@ -164,7 +164,7 @@ impl FullnodeData for FullnodeDataService {
                         }
                     },
                     Err(_) => {
-                        libra2_logger::warn!("[Indexer Fullnode] Unable to send end batch status");
+                        creditchain_logger::warn!("[Indexer Fullnode] Unable to send end batch status");
                         break;
                     },
                 }

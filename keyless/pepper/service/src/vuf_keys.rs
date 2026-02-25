@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 use anyhow::{anyhow, ensure};
-use libra2_keyless_pepper_common::{
+use creditchain_keyless_pepper_common::{
     vuf::{bls12381_g1_bls::Bls12381G1Bls, VUF},
     PepperV0VufPubKey,
 };
-use libra2_logger::warn;
+use creditchain_logger::warn;
 use ark_ec::CurveGroup;
 use ark_ff::PrimeField;
 use ark_serialize::{CanonicalDeserialize, CanonicalSerialize};

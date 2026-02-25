@@ -20,7 +20,7 @@ use crate::{
     write_set::{HotStateOp, WriteSet},
 };
 use anyhow::{ensure, format_err, Context, Error, Result};
-use libra2_crypto::{
+use creditchain_crypto::{
     ed25519::*,
     hash::CryptoHash,
     multi_ed25519::{MultiEd25519PublicKey, MultiEd25519Signature},
@@ -28,7 +28,7 @@ use libra2_crypto::{
     traits::{signing_message, SigningKey},
     CryptoMaterialError, HashValue,
 };
-use libra2_crypto_derive::{BCSCryptoHash, CryptoHasher};
+use creditchain_crypto_derive::{BCSCryptoHash, CryptoHasher};
 #[cfg(any(test, feature = "fuzzing"))]
 use proptest_derive::Arbitrary;
 use rand::Rng;
@@ -195,7 +195,7 @@ pub struct RawTransaction {
     /// in the future to indicate that a transaction does not expire.
     expiration_timestamp_secs: u64,
 
-    /// Chain ID of the Libra2 network this transaction is intended for.
+    /// Chain ID of the CreditChain network this transaction is intended for.
     chain_id: ChainId,
 }
 
@@ -2816,7 +2816,7 @@ pub enum Transaction {
     ///       transaction types we had in our codebase.
     UserTransaction(SignedTransaction),
 
-    /// Transaction that applies a WriteSet to the current storage, it's applied manually via libra2-db-bootstrapper.
+    /// Transaction that applies a WriteSet to the current storage, it's applied manually via creditchain-db-bootstrapper.
     GenesisTransaction(WriteSetPayload),
 
     /// Transaction to update the block metadata resource at the beginning of a block,

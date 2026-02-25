@@ -10,15 +10,15 @@ use crate::{
     },
     ProofRead,
 };
-use libra2_crypto::{hash::SPARSE_MERKLE_PLACEHOLDER_HASH, HashValue};
-use libra2_types::proof::{definition::NodeInProof, SparseMerkleLeafNode, SparseMerkleProofExt};
-use libra2_vm::Libra2VM;
+use creditchain_crypto::{hash::SPARSE_MERKLE_PLACEHOLDER_HASH, HashValue};
+use creditchain_types::proof::{definition::NodeInProof, SparseMerkleLeafNode, SparseMerkleProofExt};
+use creditchain_vm::CreditChainVM;
 use once_cell::sync::Lazy;
 use std::cmp::Ordering;
 
 static POOL: Lazy<rayon::ThreadPool> = Lazy::new(|| {
     rayon::ThreadPoolBuilder::new()
-        .num_threads(Libra2VM::get_num_proof_reading_threads())
+        .num_threads(CreditChainVM::get_num_proof_reading_threads())
         .thread_name(|index| format!("smt_update_{}", index))
         .build()
         .unwrap()

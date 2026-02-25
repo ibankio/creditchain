@@ -23,19 +23,19 @@ use crate::{
     txn_notifier::MempoolNotifier,
     util::time_service::ClockTimeService,
 };
-use libra2_bounded_executor::BoundedExecutor;
-use libra2_channels::libra2_channel::Receiver;
-use libra2_config::config::NodeConfig;
-use libra2_consensus_notifications::ConsensusNotificationSender;
-use libra2_event_notifications::{DbBackedOnChainConfig, ReconfigNotificationListener};
-use libra2_executor::block_executor::BlockExecutor;
-use libra2_logger::prelude::*;
-use libra2_mempool::QuorumStoreRequest;
-use libra2_network::application::interface::{NetworkClient, NetworkServiceEvents};
-use libra2_storage_interface::DbReaderWriter;
-use libra2_time_service::TimeService;
-use libra2_validator_transaction_pool::VTxnPoolState;
-use libra2_vm::libra2_vm::Libra2VMBlockExecutor;
+use creditchain_bounded_executor::BoundedExecutor;
+use creditchain_channels::creditchain_channel::Receiver;
+use creditchain_config::config::NodeConfig;
+use creditchain_consensus_notifications::ConsensusNotificationSender;
+use creditchain_event_notifications::{DbBackedOnChainConfig, ReconfigNotificationListener};
+use creditchain_executor::block_executor::BlockExecutor;
+use creditchain_logger::prelude::*;
+use creditchain_mempool::QuorumStoreRequest;
+use creditchain_network::application::interface::{NetworkClient, NetworkServiceEvents};
+use creditchain_storage_interface::DbReaderWriter;
+use creditchain_time_service::TimeService;
+use creditchain_validator_transaction_pool::VTxnPoolState;
+use creditchain_vm::creditchain_vm::CreditChainVMBlockExecutor;
 use futures::channel::mpsc;
 use move_core_types::account_address::AccountAddress;
 use std::{collections::HashMap, sync::Arc};
@@ -49,13 +49,13 @@ pub fn start_consensus(
     network_service_events: NetworkServiceEvents<ConsensusMsg>,
     state_sync_notifier: Arc<dyn ConsensusNotificationSender>,
     consensus_to_mempool_sender: mpsc::Sender<QuorumStoreRequest>,
-    libra2_db: DbReaderWriter,
+    creditchain_db: DbReaderWriter,
     reconfig_events: ReconfigNotificationListener<DbBackedOnChainConfig>,
     vtxn_pool: VTxnPoolState,
     consensus_publisher: Option<Arc<ConsensusPublisher>>,
 ) -> (Runtime, Arc<StorageWriteProxy>, Arc<QuorumStoreDB>) {
-    let runtime = libra2_runtimes::spawn_named_runtime("consensus".into(), None);
-    let storage = Arc::new(StorageWriteProxy::new(node_config, libra2_db.reader.clone()));
+    let runtime = creditchain_runtimes::spawn_named_runtime("consensus".into(), None);
+    let storage = Arc::new(StorageWriteProxy::new(node_config, creditchain_db.reader.clone()));
     let quorum_store_db = Arc::new(QuorumStoreDB::new(node_config.storage.dir()));
 
     let txn_notifier = Arc::new(MempoolNotifier::new(
@@ -64,7 +64,7 @@ pub fn start_consensus(
     ));
 
     let execution_proxy = ExecutionProxy::new(
-        Arc::new(BlockExecutor::<Libra2VMBlockExecutor>::new(libra2_db)),
+        Arc::new(BlockExecutor::<CreditChainVMBlockExecutor>::new(creditchain_db)),
         txn_notifier,
         state_sync_notifier,
         node_config.transaction_filters.execution_filter.clone(),
@@ -74,9 +74,9 @@ pub fn start_consensus(
     let time_service = Arc::new(ClockTimeService::new(runtime.handle().clone()));
 
     let (timeout_sender, timeout_receiver) =
-        libra2_channels::new(1_024, &counters::PENDING_ROUND_TIMEOUTS);
+        creditchain_channels::new(1_024, &counters::PENDING_ROUND_TIMEOUTS);
     let (self_sender, self_receiver) =
-        libra2_channels::new_unbounded(&counters::PENDING_SELF_MESSAGES);
+        creditchain_channels::new_unbounded(&counters::PENDING_SELF_MESSAGES);
     let consensus_network_client = ConsensusNetworkClient::new(network_client);
     let bounded_executor = BoundedExecutor::new(
         node_config.consensus.num_bounded_executor_tasks as usize,
@@ -108,7 +108,7 @@ pub fn start_consensus(
         quorum_store_db.clone(),
         reconfig_events,
         bounded_executor,
-        libra2_time_service::TimeService::real(),
+        creditchain_time_service::TimeService::real(),
         vtxn_pool,
         rand_storage,
         consensus_publisher,
@@ -134,12 +134,12 @@ pub fn start_consensus_observer(
     consensus_publisher: Option<Arc<ConsensusPublisher>>,
     state_sync_notifier: Arc<dyn ConsensusNotificationSender>,
     consensus_to_mempool_sender: mpsc::Sender<QuorumStoreRequest>,
-    libra2_db: DbReaderWriter,
+    creditchain_db: DbReaderWriter,
     reconfig_events: Option<ReconfigNotificationListener<DbBackedOnChainConfig>>,
 ) {
     // Create the (dummy) consensus network client
     let (self_sender, _self_receiver) =
-        libra2_channels::new_unbounded(&counters::PENDING_SELF_MESSAGES);
+        creditchain_channels::new_unbounded(&counters::PENDING_SELF_MESSAGES);
     let consensus_network_client = ConsensusNetworkClient::new(NetworkClient::new(
         vec![],
         vec![],
@@ -156,7 +156,7 @@ pub fn start_consensus_observer(
             node_config.consensus.mempool_executed_txn_timeout_ms,
         ));
         let execution_proxy = ExecutionProxy::new(
-            Arc::new(BlockExecutor::<Libra2VMBlockExecutor>::new(libra2_db.clone())),
+            Arc::new(BlockExecutor::<CreditChainVMBlockExecutor>::new(creditchain_db.clone())),
             txn_notifier,
             state_sync_notifier,
             node_config.transaction_filters.execution_filter.clone(),
@@ -189,7 +189,7 @@ pub fn start_consensus_observer(
     let consensus_observer = ConsensusObserver::new(
         node_config.clone(),
         consensus_observer_client,
-        libra2_db.reader.clone(),
+        creditchain_db.reader.clone(),
         execution_client,
         state_sync_notification_sender,
         reconfig_events,

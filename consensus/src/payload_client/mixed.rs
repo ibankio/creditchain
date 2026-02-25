@@ -5,12 +5,12 @@ use crate::{
     error::QuorumStoreError,
     payload_client::{user::UserPayloadClient, PayloadClient},
 };
-use libra2_consensus_types::{
+use creditchain_consensus_types::{
     common::Payload, payload_pull_params::PayloadPullParameters, utils::PayloadTxnsSize,
 };
-use libra2_logger::debug;
-use libra2_types::{on_chain_config::ValidatorTxnConfig, validator_txn::ValidatorTransaction};
-use libra2_validator_transaction_pool::TransactionFilter;
+use creditchain_logger::debug;
+use creditchain_types::{on_chain_config::ValidatorTxnConfig, validator_txn::ValidatorTransaction};
+use creditchain_validator_transaction_pool::TransactionFilter;
 use fail::fail_point;
 use std::{cmp::min, sync::Arc, time::Instant};
 
@@ -38,7 +38,7 @@ impl MixedPayloadClient {
     /// When enabled in smoke tests, generate 2 random validator transactions, 1 valid, 1 invalid.
     fn extra_test_only_vtxns(&self) -> Vec<ValidatorTransaction> {
         fail_point!("mixed_payload_client::extra_test_only_vtxns", |_| {
-            use libra2_types::dkg::{DKGTranscript, DKGTranscriptMetadata};
+            use creditchain_types::dkg::{DKGTranscript, DKGTranscriptMetadata};
             use move_core_types::account_address::AccountAddress;
 
             vec![ValidatorTransaction::DKGResult(DKGTranscript {
@@ -109,12 +109,12 @@ mod tests {
     use crate::payload_client::{
         mixed::MixedPayloadClient, user, validator::DummyValidatorTxnClient, PayloadClient,
     };
-    use libra2_consensus_types::{
+    use creditchain_consensus_types::{
         common::{Payload, PayloadFilter},
         payload_pull_params::PayloadPullParameters,
     };
-    use libra2_types::{on_chain_config::ValidatorTxnConfig, validator_txn::ValidatorTransaction};
-    use libra2_validator_transaction_pool as vtxn_pool;
+    use creditchain_types::{on_chain_config::ValidatorTxnConfig, validator_txn::ValidatorTransaction};
+    use creditchain_validator_transaction_pool as vtxn_pool;
     use std::{collections::HashSet, sync::Arc, time::Duration};
 
     #[tokio::test]
@@ -151,7 +151,7 @@ mod tests {
                     false,
                     0,
                     0.,
-                    libra2_infallible::duration_since_epoch(),
+                    creditchain_infallible::duration_since_epoch(),
                 ),
                 vtxn_pool::TransactionFilter::PendingTxnHashSet(HashSet::new()),
             )
@@ -178,7 +178,7 @@ mod tests {
                     false,
                     0,
                     0.,
-                    libra2_infallible::duration_since_epoch(),
+                    creditchain_infallible::duration_since_epoch(),
                 ),
                 vtxn_pool::TransactionFilter::PendingTxnHashSet(HashSet::new()),
             )
@@ -205,7 +205,7 @@ mod tests {
                     false,
                     0,
                     0.,
-                    libra2_infallible::duration_since_epoch(),
+                    creditchain_infallible::duration_since_epoch(),
                 ),
                 vtxn_pool::TransactionFilter::PendingTxnHashSet(HashSet::new()),
             )
@@ -232,7 +232,7 @@ mod tests {
                     false,
                     0,
                     0.,
-                    libra2_infallible::duration_since_epoch(),
+                    creditchain_infallible::duration_since_epoch(),
                 ),
                 vtxn_pool::TransactionFilter::PendingTxnHashSet(HashSet::new()),
             )
@@ -277,7 +277,7 @@ mod tests {
                     false,
                     0,
                     0.,
-                    libra2_infallible::duration_since_epoch(),
+                    creditchain_infallible::duration_since_epoch(),
                 ),
                 vtxn_pool::TransactionFilter::PendingTxnHashSet(HashSet::new()),
             )

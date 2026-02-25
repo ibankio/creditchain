@@ -7,12 +7,12 @@ use crate::{
     utils::create_and_fund_account,
 };
 use anyhow::ensure;
-use libra2_forge::{
+use creditchain_forge::{
     args::TransactionTypeArg, emitter::NumAccountsMode, AccountType, EmitJobMode, EmitJobRequest,
     EntryPoints, NodeExt, Result, Swarm, TransactionType, TxnEmitter, TxnStats, WorkflowProgress,
 };
-use libra2_sdk::{transaction_builder::TransactionFactory, types::PeerId};
-use libra2_types::keyless::test_utils::{get_sample_esk, get_sample_exp_date, get_sample_jwt_token};
+use creditchain_sdk::{transaction_builder::TransactionFactory, types::PeerId};
+use creditchain_types::keyless::test_utils::{get_sample_esk, get_sample_exp_date, get_sample_jwt_token};
 use once_cell::sync::Lazy;
 use rand::{rngs::OsRng, SeedableRng};
 use std::{sync::Arc, time::Duration};
@@ -193,7 +193,7 @@ async fn test_keyless_txn_emmitter() {
     let (_tw_sk, _config, _jwk, root_idx) =
         spawn_network_and_execute_gov_proposals(&mut swarm, &mut cli).await;
 
-    remove_training_wheels(&mut cli, &mut swarm.libra2_public_info(), root_idx).await;
+    remove_training_wheels(&mut cli, &mut swarm.creditchain_public_info(), root_idx).await;
 
     let all_validators = swarm.validators().map(|v| v.peer_id()).collect::<Vec<_>>();
 

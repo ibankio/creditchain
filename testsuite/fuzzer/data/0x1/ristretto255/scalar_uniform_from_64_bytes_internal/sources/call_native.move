@@ -1,5 +1,5 @@
 module poc::scalar_uniform_from_64_bytes_internal {
-    use libra2_std::ristretto255::{Self};
+    use creditchain_std::ristretto255::{Self};
     use std::option::{Self};
 
     public entry fun main(_owner: &signer) {

@@ -11,8 +11,8 @@ use crate::{
     storage::FileHandle,
 };
 use anyhow::{anyhow, ensure, Result};
-use libra2_infallible::duration_since_epoch;
-use libra2_types::transaction::Version;
+use creditchain_infallible::duration_since_epoch;
+use creditchain_types::transaction::Version;
 use itertools::Itertools;
 use std::{fmt, str::FromStr};
 

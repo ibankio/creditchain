@@ -26,11 +26,11 @@ use crate::{
     },
     PeerState,
 };
-use libra2_config::{
+use creditchain_config::{
     config::{NodeConfig, PeerRole},
     network_id::NetworkId,
 };
-use libra2_time_service::TimeServiceTrait;
+use creditchain_time_service::TimeServiceTrait;
 use std::cmp::min;
 
 #[tokio::test(flavor = "multi_thread")]

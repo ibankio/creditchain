@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This script ensures that libra2-cached-packages has been built correctly.
+# This script ensures that creditchain-cached-packages has been built correctly.
 #
 # If you want to run this from anywhere in CreditChain, try adding the wrapper
 # script to your path:
@@ -23,13 +23,13 @@ fi
 set -e
 set -x
 
-# Ensure that libra2-cached-packages have been built correctly.
+# Ensure that creditchain-cached-packages have been built correctly.
 unset SKIP_FRAMEWORK_BUILD
-cargo build -p libra2-cached-packages
+cargo build -p creditchain-cached-packages
 if [ -n "$CHECK_ARG" ]; then
-    if [ -n "$(git status --porcelain -uno libra2-move)" ]; then
+    if [ -n "$(git status --porcelain -uno creditchain-move)" ]; then
       git diff
-      echo "There are unstaged changes after running 'cargo build -p libra2-cached-packages'! Are you sure libra2-cached-packages is up-to-date?"
+      echo "There are unstaged changes after running 'cargo build -p creditchain-cached-packages'! Are you sure creditchain-cached-packages is up-to-date?"
       exit 1
     fi
 fi

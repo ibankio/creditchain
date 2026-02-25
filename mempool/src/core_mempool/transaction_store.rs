@@ -18,10 +18,10 @@ use crate::{
         MempoolSenderBucket, MultiBucketTimelineIndexIds, TimelineIndexIdentifier,
     },
 };
-use libra2_config::config::MempoolConfig;
-use libra2_crypto::HashValue;
-use libra2_logger::{prelude::*, Level};
-use libra2_types::{
+use creditchain_config::config::MempoolConfig;
+use creditchain_crypto::HashValue;
+use creditchain_logger::{prelude::*, Level};
+use creditchain_types::{
     account_address::AccountAddress,
     mempool_status::{MempoolStatus, MempoolStatusCode},
     transaction::{ReplayProtector, SignedTransaction},
@@ -648,7 +648,7 @@ impl TransactionStore {
             txns.clear();
             txns.append(&mut active);
 
-            let mut rm_txns = match libra2_logger::enabled!(Level::Trace) {
+            let mut rm_txns = match creditchain_logger::enabled!(Level::Trace) {
                 true => TxnsLog::new(),
                 false => TxnsLog::new_with_max(10),
             };
@@ -725,7 +725,7 @@ impl TransactionStore {
             }
             self.index_remove(&txn_to_remove);
 
-            if libra2_logger::enabled!(Level::Trace) {
+            if creditchain_logger::enabled!(Level::Trace) {
                 let mut txns_log = TxnsLog::new();
                 txns_log.add(
                     txn_to_remove.get_sender(),
@@ -808,7 +808,7 @@ impl TransactionStore {
                     } else {
                         batch.push((
                             txn.txn.clone(),
-                            libra2_infallible::duration_since_epoch_at(
+                            creditchain_infallible::duration_since_epoch_at(
                                 &txn.insertion_info.ready_time,
                             )
                             .as_millis() as u64,
@@ -860,7 +860,7 @@ impl TransactionStore {
                     .map(|txn| {
                         (
                             txn.txn.clone(),
-                            libra2_infallible::duration_since_epoch_at(
+                            creditchain_infallible::duration_since_epoch_at(
                                 &txn.insertion_info.ready_time,
                             )
                             .as_millis() as u64,
@@ -934,7 +934,7 @@ impl TransactionStore {
         gc_txns.sort_by_key(|key| (key.address, key.replay_protector));
         let mut gc_iter = gc_txns.iter().peekable();
 
-        let mut gc_txns_log = match libra2_logger::enabled!(Level::Trace) {
+        let mut gc_txns_log = match creditchain_logger::enabled!(Level::Trace) {
             true => TxnsLog::new(),
             false => TxnsLog::new_with_max(10),
         };

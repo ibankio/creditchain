@@ -1,5 +1,5 @@
 [package]
-name = "libra2-executor-benchmark"
+name = "creditchain-executor-benchmark"
 description = "CreditChain executor benchmark"
 version = "0.1.1"
 
@@ -14,34 +14,34 @@ rust-version = { workspace = true }
 
 [dependencies]
 anyhow = { workspace = true }
-libra2-aggregator = { workspace = true }
-libra2-block-executor = { workspace = true }
-libra2-block-partitioner = { workspace = true }
-libra2-config = { workspace = true }
-libra2-crypto = { workspace = true }
-libra2-db = { workspace = true }
-libra2-executor = { workspace = true }
-libra2-executor-service = { workspace = true }
-libra2-executor-types = { workspace = true }
-libra2-experimental-ptx-executor = { workspace = true }
-libra2-experimental-runtimes = { workspace = true }
-libra2-genesis = { workspace = true, features = ["testing"] }
-libra2-infallible = { workspace = true }
-libra2-jellyfish-merkle = { workspace = true }
-libra2-logger = { workspace = true }
-libra2-metrics-core = { workspace = true }
-libra2-mvhashmap = { workspace = true }
-libra2-node-resource-metrics = { workspace = true }
-libra2-push-metrics =  { workspace = true }
-libra2-sdk = { workspace = true }
-libra2-storage-interface = { workspace = true }
-libra2-transaction-generator-lib = { workspace = true }
-libra2-transaction-workloads-lib = { workspace = true }
-libra2-types = { workspace = true }
-libra2-vm = { workspace = true }
-libra2-vm-environment = { workspace = true }
-libra2-vm-logging = { workspace = true }
-libra2-vm-types = { workspace = true }
+creditchain-aggregator = { workspace = true }
+creditchain-block-executor = { workspace = true }
+creditchain-block-partitioner = { workspace = true }
+creditchain-config = { workspace = true }
+creditchain-crypto = { workspace = true }
+creditchain-db = { workspace = true }
+creditchain-executor = { workspace = true }
+creditchain-executor-service = { workspace = true }
+creditchain-executor-types = { workspace = true }
+creditchain-experimental-ptx-executor = { workspace = true }
+creditchain-experimental-runtimes = { workspace = true }
+creditchain-genesis = { workspace = true, features = ["testing"] }
+creditchain-infallible = { workspace = true }
+creditchain-jellyfish-merkle = { workspace = true }
+creditchain-logger = { workspace = true }
+creditchain-metrics-core = { workspace = true }
+creditchain-mvhashmap = { workspace = true }
+creditchain-node-resource-metrics = { workspace = true }
+creditchain-push-metrics =  { workspace = true }
+creditchain-sdk = { workspace = true }
+creditchain-storage-interface = { workspace = true }
+creditchain-transaction-generator-lib = { workspace = true }
+creditchain-transaction-workloads-lib = { workspace = true }
+creditchain-types = { workspace = true }
+creditchain-vm = { workspace = true }
+creditchain-vm-environment = { workspace = true }
+creditchain-vm-logging = { workspace = true }
+creditchain-vm-types = { workspace = true }
 async-trait = { workspace = true }
 bcs = { workspace = true }
 bytes = { workspace = true }
@@ -63,15 +63,15 @@ tokio = { workspace = true }
 toml = { workspace = true }
 
 [target.'cfg(unix)'.dependencies]
-libra2-profiler = { workspace = true }
+creditchain-profiler = { workspace = true }
 jemallocator = { version = "0.5.0", features = [
     "profiling",
     "unprefixed_malloc_on_supported_platforms",
 ] }
 
 [dev-dependencies]
-libra2-temppath = { workspace = true }
+creditchain-temppath = { workspace = true }
 
 [features]
 default = []
-fuzzing = ["libra2-config/fuzzing", "libra2-crypto/fuzzing", "libra2-types/fuzzing"]
+fuzzing = ["creditchain-config/fuzzing", "creditchain-crypto/fuzzing", "creditchain-types/fuzzing"]
