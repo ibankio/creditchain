@@ -1,4 +1,4 @@
-// Copyright © A-p-t-o-s Foundation
+// Copyright © CreditChain Research Team
 // Parts of the project are originally copyright © Meta Platforms, Inc.
 // SPDX-License-Identifier: Apache-2.0
 
@@ -87,7 +87,7 @@ impl AccountPublicKey {
 /// encodes the logic to operate on and verify operations on any CreditChain account.
 ///
 /// TODO: This is pleistocene-age code must be brought up to speed, since our accounts are not just Ed25519-based.
-#[derive(Debug, Clone, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq)]
 pub struct Account {
     addr: AccountAddress,
     /// The current private key for this account.
@@ -96,6 +96,18 @@ pub struct Account {
     pub privkey: Ed25519PrivateKey,
     /// The current public key for this account.
     pub pubkey: AccountPublicKey,
+}
+
+impl Clone for Account {
+    fn clone(&self) -> Self {
+        Self {
+            addr: self.addr,
+            // Ed25519 private keys are intentionally non-Clone by default.
+            // Reconstruct from bytes when an in-memory account clone is needed for tests/simulation.
+            privkey: Ed25519PrivateKey::try_from(&self.privkey.to_bytes()[..]).unwrap(),
+            pubkey: self.pubkey.clone(),
+        }
+    }
 }
 
 impl Account {
@@ -177,7 +189,7 @@ impl Account {
         Account {
             addr: address,
             pubkey: AccountPublicKey::Ed25519(GENESIS_KEYPAIR.1.clone()),
-            privkey: GENESIS_KEYPAIR.0.clone(),
+            privkey: Ed25519PrivateKey::try_from(&GENESIS_KEYPAIR.0.to_bytes()[..]).unwrap(),
         }
     }
 

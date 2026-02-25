@@ -106,7 +106,7 @@ pub struct ProposalMetadata {
 }
 
 fn default_url() -> String {
-    "https://github.com/libra2org/libra2-core".to_string()
+    "https://github.com/ibankio/creditchain".to_string()
 }
 
 #[derive(Serialize, Deserialize, Clone, Copy, Eq, PartialEq)]

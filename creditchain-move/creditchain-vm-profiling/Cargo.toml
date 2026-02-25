@@ -1,8 +1,8 @@
 [package]
 name = "creditchain-vm-profiling"
 version = "0.1.1"
-authors = ["CreditChain Team <research@creditchain.io>"]
-repository = "https://github.com/libra2org/libra2-core"
+authors = ["CreditChain Research Team <research@creditchain.io>"]
+repository = "https://github.com/ibankio/creditchain"
 homepage = "https://creditchain.io"
 license = "Apache-2.0"
 publish = false
@@ -40,8 +40,8 @@ path  = "src/main.rs"
 
 [[bin]]
 name = "run-move"
-path = "src/bins/run_move.rs"
+path = "src/bins/profile_move_bin.rs"
 
 [[bin]]
 name = "run-creditchain-p2p"
-path = "src/bins/run_creditchain_p2p.rs"
+path = "src/bins/profile_creditchain_p2p_bin.rs"

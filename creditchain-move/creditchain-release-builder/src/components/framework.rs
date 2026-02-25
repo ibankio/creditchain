@@ -30,7 +30,7 @@ pub fn generate_upgrade_proposals(
         "only multi-step proposals can have a next execution hash"
     );
 
-    const CREDITCHAIN_GIT_PATH: &str = "https://github.com/libra2org/libra2-core.git";
+    const CREDITCHAIN_GIT_PATH: &str = "https://github.com/ibankio/creditchain.git";
 
     // NOTE: This is skipping 0x7 (creditchain-experimental package) which is only meant to be released
     // to devnet (or local testnet) via the genesis process and never released/upgraded in testnet

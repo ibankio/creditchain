@@ -45,7 +45,7 @@ impl Corpus {
     pub fn get_registry(self) -> Registry {
         let result = match self {
             Corpus::API => api::get_registry(),
-            Corpus::CreditChain => libra2::get_registry(),
+            Corpus::CreditChain => creditchain::get_registry(),
             Corpus::Consensus => consensus::get_registry(),
             Corpus::Network => network::get_registry(),
             Corpus::MoveABI => move_abi::get_registry(),
@@ -62,7 +62,7 @@ impl Corpus {
     pub fn output_file(self) -> Option<&'static str> {
         match self {
             Corpus::API => api::output_file(),
-            Corpus::CreditChain => libra2::output_file(),
+            Corpus::CreditChain => creditchain::output_file(),
             Corpus::Consensus => consensus::output_file(),
             Corpus::Network => network::output_file(),
             Corpus::MoveABI => move_abi::output_file(),

@@ -39,7 +39,7 @@ use tokio::sync::RwLock;
 // Default max in mempool is 20.
 const MAX_NUM_OUTSTANDING_TRANSACTIONS: u64 = 15;
 
-const DEFAULT_KEY_FILE_PATH: &str = "/opt/libra2/etc/mint.key";
+const DEFAULT_KEY_FILE_PATH: &str = "/opt/creditchain/etc/mint.key";
 
 /// This defines configuration for any Funder that needs to interact with a real
 /// blockchain API. This includes the MintFunder and the TransferFunder currently.

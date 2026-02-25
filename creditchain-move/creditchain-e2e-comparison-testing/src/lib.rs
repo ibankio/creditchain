@@ -292,7 +292,7 @@ fn get_creditchain_dir(package_name: &str) -> Option<&str> {
 }
 
 async fn download_creditchain_packages(path: &Path) -> anyhow::Result<()> {
-    let git_url = "https://github.com/libra2org/libra2-core";
+    let git_url = "https://github.com/ibankio/creditchain";
     let tmp_dir = TempDir::new()?;
     Command::new("git")
         .args(["clone", git_url, tmp_dir.path().to_str().unwrap()])

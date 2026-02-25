@@ -123,12 +123,12 @@ fn git_is_worktree_dirty() -> Result<bool> {
 }
 
 /// Attempt to query the local git repository's remotes for the one that points to the upstream
-/// libra2org/creditchain-core repository, falling back to "origin" if unable to locate the remote
+/// ibankio/creditchain repository, falling back to "origin" if unable to locate the remote
 pub fn git_get_upstream_remote() -> Result<String> {
     let output = Command::new("sh")
         .arg("-c")
         .arg(
-            "git remote -v | grep \"https://github.com/libra2org/libra2-core.* (fetch)\" | cut -f1",
+            "git remote -v | grep \"https://github.com/ibankio/creditchain.* (fetch)\" | cut -f1",
         )
         .output()
         .context("Failed to get upstream remote")?;

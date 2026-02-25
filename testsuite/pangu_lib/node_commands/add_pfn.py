@@ -232,7 +232,7 @@ def _create_pfn_statefulset_object(
         command=[
             "/usr/local/bin/creditchain-node",
             "-f",
-            f"/opt/libra2/etc/{util.NodeType.PFN.value}.yaml",
+            f"/opt/creditchain/etc/{util.NodeType.PFN.value}.yaml",
         ],
         volume_mounts=[volume_mount1, volume_mount2, volume_mount3],
         ports=[

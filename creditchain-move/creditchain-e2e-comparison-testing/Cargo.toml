@@ -1,9 +1,9 @@
 [package]
 name = "creditchain-comparison-testing"
 version = "0.1.0"
-authors = ["CreditChain Team <research@creditchain.io>"]
+authors = ["CreditChain Research Team <research@creditchain.io>"]
 description = "A tool to perform comparison testing on the compiler"
-repository = "https://github.com/libra2org/libra2-core"
+repository = "https://github.com/ibankio/creditchain"
 homepage = "https://creditchain.io"
 license = "Apache-2.0"
 publish = false

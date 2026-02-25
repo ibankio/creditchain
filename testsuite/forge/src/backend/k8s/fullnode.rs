@@ -48,16 +48,16 @@ const FULLNODE_CONFIG_MAP_KEY: &str = "fullnode.yaml";
 
 // the path where the genesis is mounted in the validator
 const GENESIS_CONFIG_VOLUME_NAME: &str = "genesis-config";
-const GENESIS_CONFIG_VOLUME_PATH: &str = "/opt/libra2/genesis";
+const GENESIS_CONFIG_VOLUME_PATH: &str = "/opt/creditchain/genesis";
 const GENESIS_CONFIG_WRITABLE_VOLUME_NAME: &str = "writable-genesis";
 
 // the path where the config file is mounted in the fullnode
-const creditchain_config_VOLUME_NAME: &str = "creditchain-config";
-const creditchain_config_VOLUME_PATH: &str = "/opt/libra2/etc";
+const CREDITCHAIN_CONFIG_VOLUME_NAME: &str = "creditchain-config";
+const CREDITCHAIN_CONFIG_VOLUME_PATH: &str = "/opt/creditchain/etc";
 
 // the path where the data volume is mounted in the fullnode
 const CREDITCHAIN_DATA_VOLUME_NAME: &str = "creditchain-data";
-const CREDITCHAIN_DATA_VOLUME_PATH: &str = "/opt/libra2/data";
+const CREDITCHAIN_DATA_VOLUME_PATH: &str = "/opt/creditchain/data";
 
 /// Derive the fullnode image from the validator image. They will share the same image repo (validator), but not necessarily the version (image tag)
 fn get_fullnode_image_from_validator_image(
@@ -172,12 +172,12 @@ fn create_fullnode_container(
         args: Some(vec![
             "/usr/local/bin/creditchain-node".to_string(),
             "-f".to_string(),
-            format!("/opt/libra2/etc/{}", FULLNODE_CONFIG_MAP_KEY),
+            format!("/opt/creditchain/etc/{}", FULLNODE_CONFIG_MAP_KEY),
         ]),
         volume_mounts: Some(vec![
             VolumeMount {
-                mount_path: creditchain_config_VOLUME_PATH.to_string(),
-                name: creditchain_config_VOLUME_NAME.to_string(),
+                mount_path: CREDITCHAIN_CONFIG_VOLUME_PATH.to_string(),
+                name: CREDITCHAIN_CONFIG_VOLUME_NAME.to_string(),
                 ..VolumeMount::default()
             },
             VolumeMount {
@@ -211,7 +211,7 @@ fn create_fullnode_volumes(
             ..Volume::default()
         },
         Volume {
-            name: creditchain_config_VOLUME_NAME.to_string(),
+            name: CREDITCHAIN_CONFIG_VOLUME_NAME.to_string(),
             config_map: Some(ConfigMapVolumeSource {
                 name: Some(fullnode_node_config_config_map_name),
                 ..ConfigMapVolumeSource::default()
@@ -586,12 +586,12 @@ mod tests {
                             command: Some(vec![
                                 "/usr/local/bin/creditchain-node".to_string(),
                                 "-f".to_string(),
-                                "/opt/libra2/etc/validator.yaml".to_string(),
+                                "/opt/creditchain/etc/validator.yaml".to_string(),
                             ]),
                             volume_mounts: Some(vec![
                                 VolumeMount {
-                                    mount_path: creditchain_config_VOLUME_PATH.to_string(),
-                                    name: creditchain_config_VOLUME_NAME.to_string(),
+                                    mount_path: CREDITCHAIN_CONFIG_VOLUME_PATH.to_string(),
+                                    name: CREDITCHAIN_CONFIG_VOLUME_NAME.to_string(),
                                     ..VolumeMount::default()
                                 },
                                 VolumeMount {
