@@ -22,10 +22,26 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref || github.ref }}
+
+      - name: Check required cloud secrets
+        id: check-cloud-secrets
+        shell: bash
+        env:
+          GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          GCP_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}
+        run: |
+          if [[ -z "${GCP_WORKLOAD_IDENTITY_PROVIDER}" || -z "${GCP_SERVICE_ACCOUNT_EMAIL}" ]]; then
+            echo "can-run=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping archive storage provision because required GCP secrets are not configured." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "can-run=true" >> "$GITHUB_OUTPUT"
+          fi
       
       # Authenticate to Google Cloud the project is aptos-ci
       - name: Authenticate to Google Cloud
         id: auth
+        if: steps.check-cloud-secrets.outputs.can-run == 'true'
+        continue-on-error: true
         uses: "google-github-actions/auth@v2"
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
@@ -35,6 +51,7 @@ jobs:
 
       # This is required since we need to switch from aptos-ci to aptos-devinfra-0
       - name: Setup Credentials  
+        if: steps.check-cloud-secrets.outputs.can-run == 'true' && steps.auth.outcome == 'success'
         run: |
           echo "GOOGLE_APPLICATION_CREDENTIALS=${{ steps.auth.outputs.credentials_file_path }}" >> $GITHUB_ENV
           echo "CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE=${{ steps.auth.outputs.credentials_file_path }}" >> $GITHUB_ENV 
@@ -42,20 +59,28 @@ jobs:
           echo "CLOUDSDK_AUTH_ACCESS_TOKEN=${{ steps.auth.outputs.access_token }}" >> $GITHUB_ENV
       
       - name: Set up Cloud SDK
+        if: steps.check-cloud-secrets.outputs.can-run == 'true' && steps.auth.outcome == 'success'
         uses: "google-github-actions/setup-gcloud@v2"
         with:
           install_components: "kubectl, gke-gcloud-auth-plugin"
       
       - name: "Setup GCloud Project"
+        if: steps.check-cloud-secrets.outputs.can-run == 'true' && steps.auth.outcome == 'success'
         shell: bash
         run: gcloud config set project aptos-devinfra-0
       
       - uses: ./.github/actions/python-setup
+        if: steps.check-cloud-secrets.outputs.can-run == 'true' && steps.auth.outcome == 'success'
         with:
           pyproject_directory: testsuite/replay-verify
 
       - name: "Provision Storage"
+        if: steps.check-cloud-secrets.outputs.can-run == 'true' && steps.auth.outcome == 'success'
         env:
           GOOGLE_CLOUD_PROJECT: aptos-devinfra-0
         run: cd testsuite/replay-verify && poetry run python archive_disk_utils.py --network ${{ inputs.NETWORK }}
+      
+      - name: Skip when cloud auth fails
+        if: steps.check-cloud-secrets.outputs.can-run == 'true' && steps.auth.outcome != 'success'
+        run: echo "Skipping archive storage provision because cloud authentication failed." >> "$GITHUB_STEP_SUMMARY"
         

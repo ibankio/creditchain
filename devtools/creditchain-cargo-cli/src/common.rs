@@ -412,41 +412,96 @@ fn recompute_merge_base_metadata(
     local_dir_path: &String,
     local_metadata_file_path: &String,
 ) -> Option<CargoMetadata> {
-    // Clone the creditchain-core repository to the local directory
+    // Clone the local repository to the target directory.
+    // This avoids network/auth dependencies when recomputing metadata in CI.
     debug!(
-        "Cloning creditchain-core repository to local directory: {:?}",
+        "Cloning local creditchain repository to directory: {:?}",
         local_dir_path
     );
+    if let Err(error) = fs::create_dir_all(local_dir_path) {
+        warn!(
+            "Failed to create metadata directory: {:?}. Error: {:?}",
+            local_dir_path, error
+        );
+        return None;
+    }
+
     let clone_directory = format!("{}/creditchain-core", local_dir_path);
-    Command::new("git")
+    if let Err(error) = fs::remove_dir_all(clone_directory.clone()) {
+        if error.kind() != std::io::ErrorKind::NotFound {
+            warn!(
+                "Failed to clean old clone directory: {:?}. Error: {:?}",
+                clone_directory, error
+            );
+        }
+    }
+
+    let source_repository = workspace_dir();
+    let clone_output = Command::new("git")
         .arg("clone")
-        .arg("--depth")
-        .arg("500") // Clone the last 500 commits to ensure the merge base is included
-        .arg("https://github.com/creditchainorg/creditchain.git")
+        .arg("--no-checkout")
+        .arg(source_repository.clone())
         .arg(clone_directory.clone())
         .output()
         .expect("failed to execute git clone");
+    if !clone_output.status.success() {
+        warn!(
+            "Failed to clone local repository: {:?}. stderr: {}",
+            source_repository,
+            String::from_utf8_lossy(&clone_output.stderr)
+        );
+        return None;
+    }
 
     // Check out the merge base commit for the creditchain-core clone
     debug!(
         "Checking out merge base commit for creditchain-core clone: {:?}",
         merge_base
     );
-    Command::new("git")
+    let checkout_output = Command::new("git")
         .current_dir(clone_directory.clone())
         .arg("checkout")
         .arg(merge_base)
         .output()
         .expect("failed to execute git checkout");
+    if !checkout_output.status.success() {
+        warn!(
+            "Failed to checkout merge base in cloned repository. merge_base: {:?}, stderr: {}",
+            merge_base,
+            String::from_utf8_lossy(&checkout_output.stderr)
+        );
+        if let Err(error) = fs::remove_dir_all(clone_directory.clone()) {
+            warn!(
+                "Error deleting creditchain-core clone directory: {:?}. Error: {:?}",
+                clone_directory, error
+            );
+        }
+        return None;
+    }
 
     // Recompute the metadata for the merge base commit
-    let output = Command::new("cargo")
+    let metadata_output = Command::new("cargo")
         .current_dir(clone_directory.clone())
         .arg("metadata")
         .arg("--all-features")
         .output()
         .expect("failed to execute cargo metadata");
-    let output = parse_string_from_output(output);
+    if !metadata_output.status.success() {
+        warn!(
+            "Failed to run cargo metadata on merge base {:?}. stderr: {}",
+            merge_base,
+            String::from_utf8_lossy(&metadata_output.stderr)
+        );
+        if let Err(error) = fs::remove_dir_all(clone_directory.clone()) {
+            warn!(
+                "Error deleting creditchain-core clone directory: {:?}. Error: {:?}",
+                clone_directory, error
+            );
+        }
+        return None;
+    }
+
+    let output = parse_string_from_output(metadata_output);
 
     // Parse the metadata from the output
     let cargo_metadata = parse_cargo_metadata(&output);
@@ -457,7 +512,10 @@ fn recompute_merge_base_metadata(
     }
 
     // Delete the creditchain-core clone
-    debug!("Deleting creditchain-core clone directory: {:?}", clone_directory);
+    debug!(
+        "Deleting creditchain-core clone directory: {:?}",
+        clone_directory
+    );
     if let Err(error) = fs::remove_dir_all(clone_directory.clone()) {
         warn!(
             "Error deleting creditchain-core clone directory: {:?}. Error: {:?}",
