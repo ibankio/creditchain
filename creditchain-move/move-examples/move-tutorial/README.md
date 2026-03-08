@@ -7,7 +7,7 @@ slug: "move-tutorial"
 
 Welcome to the CreditChain Move Tutorial! This is the original Move language and tools tutorial, independent of a particular network, adapted to use CreditChain tooling. Here you will learn basic usage of the Move language and tools for compiling, testing, and verifying Move.
 
-This tutorial does not teach you how to use the existing [CreditChain Move frameworks](https://aptos.dev/reference/move) or how to run code on the CreditChain network. See the [CreditChain developer documentation](https://aptos.dev/tutorials/) for those instructions.
+This tutorial does not teach you how to use the existing [CreditChain Move frameworks](https://aptos.dev/build/smart-contracts) or how to run code on the CreditChain network. See the [CreditChain developer documentation](https://aptos.dev/tutorials/) for those instructions.
 
 There are nine steps in total:
 
@@ -35,7 +35,7 @@ You should obtain a copy of the content of the directory in which this `README.m
 step_1 step_2 step_2_sol step_3 ...
 ```
 
-You also need a recent version of the [CreditChain CLI](https://docs.creditchain.org/tools/creditchain-cli/install-cli/). This tutorial is written using the following version:
+You also need a recent version of the CreditChain CLI. If you are building it from this repository, start with the [`../../../scripts/cli/minimal_cli_build.sh`](../../../scripts/cli/minimal_cli_build.sh) helper. This tutorial is written using the following version:
 
 ```shell
 > libra2 --version
@@ -67,13 +67,13 @@ module 0xCAFE::basic_coin {
 ```
 
 This is defining a Move
-[module](https://docs.creditchain.org/move/book/modules-and-scripts/). Modules are the
+[module](https://aptos.dev/build/smart-contracts/book/modules-and-scripts). Modules are the
 building blocks of Move code, and are defined with a specific address -- the
 address that the module can be published under. In this case, the `basic_coin`
 module can be published only under `0xCAFE`.
 
 Let's now take a look at the next part of this file where we define a
-[struct](https://docs.creditchain.org/move/book/structs-and-resources)
+[struct](https://aptos.dev/build/smart-contracts/book/structs-and-resources)
 to represent a `Coin` with a given `value`:
 
 ```
@@ -100,7 +100,7 @@ module 0xCAFE::basic_coin {
 ```
 
 Let us take a look at this function and what it is saying:
-* It takes a [`&signer`](https://docs.creditchain.org/move/book/signer) reference ('`&`') -- an
+* It takes a [`&signer`](https://aptos.dev/build/smart-contracts/book/signer) reference ('`&`') -- an
   unforgeable token that represents control over a particular address, and
   a `value` to mint.
 * It creates a `Coin` with the given value and stores it under the
@@ -120,11 +120,11 @@ libra2 move compile
     libra2 move init --name <pkg_name>
     ```
 * Move code can also live in a number of other places. See the [Move
-  book](https://docs.creditchain.org/move/book/packages) for more information on the
+  book](https://aptos.dev/build/smart-contracts/book/packages) for more information on the
   Move package system.
-* More information on the `Move.toml` file can also be found in the [Package](https://docs.creditchain.org/move/book/packages#movetoml) section of the Move book.
+* More information on the `Move.toml` file can also be found in the [Package](https://aptos.dev/build/smart-contracts/book/packages#movetoml) section of the Move book.
 * Move also supports the idea of [named
-  addresses](https://docs.creditchain.org/move/book/address#named-addresses); Named
+  addresses](https://aptos.dev/build/smart-contracts/book/address#named-addresses); Named
   addresses are a way to parameterize Move source code so that you can compile
   the module using different values for `named_addr` to get different bytecode
   that you can deploy, depending on what address(es) you control. They are used quite frequently, and can be defined in the `Move.toml` file in the `[addresses]` section, like so:
@@ -132,9 +132,9 @@ libra2 move compile
     [addresses]
     Somenamed_address = "0xC0FFEE"
     ```
-* [Structures](https://docs.creditchain.org/move/book/structs-and-resources) in Move
+* [Structures](https://aptos.dev/build/smart-contracts/book/structs-and-resources) in Move
   can be given different
-  [abilities](https://docs.creditchain.org/move/book/abilities) that describe what
+  [abilities](https://aptos.dev/build/smart-contracts/book/abilities) that describe what
   can be done with that type. There are four different abilities:
     - `copy`: Allows values of types with this ability to be copied.
     - `drop`: Allows values of types with this ability to be popped/dropped.
@@ -145,12 +145,12 @@ libra2 move compile
     in global storage and, because it has no other abilities, it cannot be
     copied, dropped, or stored as a non-key value in storage. So you can't copy
     coins, and you also can't lose coins by accident!
-* [Functions](https://docs.creditchain.org/move/book/functions) are default
+* [Functions](https://aptos.dev/build/smart-contracts/book/functions) are default
     private, and can also be `public`,
-    [`public(friend)`](https://docs.creditchain.org/move/book/friends).
+    [`public(friend)`](https://aptos.dev/build/smart-contracts/book/friends).
     A function marked as `entry` can be called as a transaction.
 * `move_to` is one of the [five different global storage
-  operators](https://docs.creditchain.org/move/book/global-storage-operators).
+  operators](https://aptos.dev/build/smart-contracts/book/global-storage-operators).
 </details>
 
 ## Step 2: Adding unit tests to my first Move module<span id="Step2"><span>
@@ -196,7 +196,7 @@ assertion fails the unit test will fail.
 <details>
 <summary>Advanced concepts and exercises</summary>
 
-* There are a number of [test-related annotations](https://docs.creditchain.org/move/book/unit-testing#testing-annotations-their-meaning-and-usage) that are worth exploring.
+* There are a number of [test-related annotations](https://aptos.dev/build/smart-contracts/book/unit-testing#testing-annotations-their-meaning-and-usage) that are worth exploring.
   You'll see some of these used in Step 5.
 
 #### Exercises
@@ -233,7 +233,7 @@ assertion fails the unit test will fail.
 In this section, we are going to design a module implementing a basic coin and balance interface, where coins can
 be minted and transferred between balances held under different addresses. 
 
-> NOTE: The coin and balance interfaces are for illustration of Move concepts only. CreditChain uses a different, richer [coin type](https://aptos.dev/reference/move?branch=mainnet&page=creditchain-framework/doc/coin.md) contained in the CreditChain framework.
+> NOTE: The coin and balance interfaces are for illustration of Move concepts only. CreditChain uses a different, richer [coin type](../../framework/creditchain-framework/doc/coin.md) contained in the CreditChain framework.
 
 The signatures of the public Move function are the following:
 
@@ -291,7 +291,7 @@ method directly from a transaction, you'll want to change its signature to:
 ```
 public entry fun transfer(from: signer, to: address, amount: u64) acquires Balance { ... }
 ```
-Read more on Move function [visibilities](https://docs.creditchain.org/move/book/functions#visibility).
+Read more on Move function [visibilities](https://aptos.dev/build/smart-contracts/book/functions#visibility).
 </details>
 <details>
 <summary>Comparison with Ethereum/Solidity</summary>
@@ -348,7 +348,7 @@ is false, then abort the transaction with `<abort_code>`. Here `MODULE_OWNER` an
 defined at the beginning of the module. The standard library's [`error`] module also defines common error categories we can use.
 
 It is important to note that Move is transactional in its execution -- so
-if an [abort](https://docs.creditchain.org/move/book/abort-and-assert) is raised no unwinding of state
+if an [abort](https://aptos.dev/build/smart-contracts/book/abort-and-assert) is raised no unwinding of state
 needs to be performed, as no changes from that transaction will be persisted to the blockchain.
 
 [`error` module]: https://github.com/ibankio/creditchain/blob/main/creditchain-move/framework/move-stdlib/sources/error.move
@@ -385,7 +385,7 @@ fun withdraw(addr: address, amount: u64) : Coin acquires Balance {
 }
 ```
 At the beginning of the method, we assert that the withdrawing account has enough balance. We then use `borrow_global_mut`
-to get a mutable reference to the global storage, and `&mut` is used to create a mutable [reference](https://docs.creditchain.org/move/book/references) to a field of a
+to get a mutable reference to the global storage, and `&mut` is used to create a mutable [reference](https://aptos.dev/build/smart-contracts/book/references) to a field of a
 struct. We then modify the balance through this mutable reference and return a new coin with the withdrawn amount.
 </details>
 
@@ -446,7 +446,7 @@ The solution to this exercise can be found in [`step_5_sol`](./step_5_sol).
 ## Step 6: Making my `basic_coin` module generic<span id="Step6"><span>
 
 In Move, we can use
-[generics](https://docs.creditchain.org/move/book/generics)
+[generics](https://aptos.dev/build/smart-contracts/book/generics)
 to define functions and structs over different input data types. Generics are a great
 building block for library code. In this section, we are going to make our simple
 `basic_coin` module generic so that it can serve as a library module to be used by
@@ -487,21 +487,21 @@ In definitions of both `Coin` and `Balance`, we declare the type parameter `Coin
 to be phantom because `CoinType` is not used in the struct definition or is only used as a phantom type
 parameter.
 
-Read more about [phantom type](https://docs.creditchain.org/move/book/generics#phantom-type-parameters) parameters in the CreditChain Move Book.
+Read more about [phantom type](https://aptos.dev/build/smart-contracts/book/generics#phantom-type-parameters) parameters in the CreditChain Move Book.
 </details>
 
 ## Step 7:  Use the Move Prover
     
-> NOTE: Before running the Move Prover, ensure that the [Move Prover](https://docs.creditchain.org/tools/creditchain-cli/install-cli/install-move-prover) and associated tools are installed.
+> NOTE: Before running the Move Prover, ensure that the [Move Prover setup guide](../../framework/FRAMEWORK-PROVER-GUIDE.md) and associated tools are installed.
 
 Smart contracts deployed on the blockchain may manipulate high-value assets. As a technique that uses strict
 mathematical methods to describe behavior and reason correctness of computer systems, formal verification
 has been used in blockchains to prevent bugs in smart contracts. The
-[Move Prover](https://docs.creditchain.org/move/prover/move-prover)
+[Move Prover](https://aptos.dev/build/smart-contracts/prover/prover-guide)
 is an evolving formal verification tool for smart contracts written in the Move language. The user can employ the 
-[Move Prover](https://github.com/move-language/move/blob/main/language/move-prover/doc/user/prover-guide.md) to specify
+[Move Prover](https://aptos.dev/build/smart-contracts/prover/prover-guide) to specify
 functional properties of smart contracts
-using the [Move Specification Language (MSL)](https://github.com/move-language/move/blob/main/language/move-prover/doc/user/spec-lang.md)
+using the [Move Specification Language (MSL)](https://aptos.dev/build/smart-contracts/prover/spec-lang)
 and then use the prover to automatically check them statically.
 To illustrate how the prover is used, we have added the following code snippet to
 the [basic_coin.move](./step_7/basic_coin/sources/basic_coin.move):
@@ -580,7 +580,7 @@ As we can see here, a spec block can contain let bindings that introduce names f
 In general, if a function has more than one `aborts_if` condition, those conditions are or-ed with each other. By default, if a user wants to specify aborts conditions, all possible conditions need to be listed. Otherwise, the Move Prover will generate a verification error. However, if `pragma aborts_if_is_partial` is defined in the spec block, the combined aborts condition (the or-ed individual conditions) only *imply* that the function aborts. 
 
 Refer to the
-[MSL](https://github.com/move-language/move/blob/main/language/move-prover/doc/user/spec-lang.md) document for more information.
+[MSL](https://aptos.dev/build/smart-contracts/prover/spec-lang) document for more information.
 
 The next step is to define functional properties, which are described in the two `ensures` clauses below. First, by using the `let post` binding, `balance_post` represents the balance of `addr` after the execution, which should be equal to `balance - amount`. Then, the return value (denoted as `result`) should be a coin with value `amount`.
 

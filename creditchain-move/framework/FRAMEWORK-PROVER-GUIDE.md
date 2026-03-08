@@ -2,7 +2,7 @@ This guide gives some hints to troubleshoot issues when using the prover for spe
 
 ## Installation
 
-Please refer to the [doc](https://docs.creditchain.org/tools/creditchain-cli/install-cli/install-move-prover/).
+Please refer to the [developer setup script](../../scripts/dev_setup.sh) and install the prover dependencies with the `-y` option.
 
 ## Timeout
 
@@ -37,5 +37,5 @@ you could use the command `cargo test --release -p creditchain-framework -- --sk
 
 ## Specification guide
 
-Please refer to the [Move Prover Book](https://aptos.dev/guides/prover-guides/move-prover)
+Please refer to the [Move Prover guide](https://aptos.dev/build/smart-contracts/prover/prover-guide)
 for detailed introduction on how to write specifications and use Move Prover.

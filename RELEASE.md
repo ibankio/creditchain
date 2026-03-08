@@ -20,14 +20,14 @@
 All current development occurs on the `main` branch. All new feature developments have a feature flag to gate it off during development. Feature flags are turned on *after* the development is complete and passes Governance.
 
 ### devnet branch
-The `devnet` branch is created on the `main` branch every week. It is used to deploy devnet and allows authorized operators and internal teams to evaluate the latest CreditChain node binary and framework changes. Follow release updates in [CreditChain Discussions](https://github.com/ibankio/creditchain/discussions).
+The `devnet` branch is created on the `main` branch every week. It is used to deploy devnet and allows authorized operators and internal teams to evaluate the latest CreditChain node binary and framework changes. Follow release updates in the project release notes and release pages.
 
 ### creditchain-release-v*X.Y* release branches
 These are release branches based on CreditChain release planning timeline. They are created off
 the `main` branch every 1-2 months.
 
 ### creditchain-node-v*X.Y.Z* release tag
-The CreditChain node release tags are created for validator/fullnode deployment of the given release branch. The minor number *Z* will increment when a new hot-fix release is required on the release branch. The matching container images are published in [CreditChain packages](https://github.com/ibankio/creditchain/pkgs/container).
+The CreditChain node release tags are created for validator/fullnode deployment of the given release branch. The minor number *Z* will increment when a new hot-fix release is required on the release branch. The matching container images are published alongside the release automation for the corresponding tag.
 
 ### creditchain-framework-v*X.Y.Z* release tag
 The CreditChain framework release tags are created to facilitate the on-chain framework upgrade of the given release branch. The minor number *Z* will increment when a new hot-fix release or a new framework update is required on this release branch.
@@ -48,7 +48,7 @@ The CreditChain CLI release tags are created to track CLI versions for the commu
 * [day 24] Proposals executed on-chain if passed voting.
 
 ## Release Announcement
-* Each network release will be announced on [CreditChain Discussions](https://github.com/ibankio/creditchain/discussions) and in release notes.
+* Each network release will be announced in release notes and the corresponding release page.
 * When a release is ready to deploy, a [Github release page](https://github.com/ibankio/creditchain/releases) will be created in this repo as well. You can search for the most recent release version titled with "[Mainnet]" for production usage.
 
 ## How we test each release at CreditChain

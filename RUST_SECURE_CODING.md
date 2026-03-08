@@ -97,7 +97,7 @@ Do not rely on `Drop` trait in security material treatment after the use, use [z
 
 ### Send and Sync Traits
 
-Be cautious with manual implementations of `Send` and `Sync` traits [[Rustbook: typesystem]](https://anssi-fr.github.io/rust-guide/06_typesystem.html#send-and-sync-traits) [[Rustbook: send and sync]](https://doc.rust-lang.org/nomicon/send-and-sync.html).
+Be cautious with manual implementations of `Send` and `Sync` traits [[Rustbook: typesystem]](https://anssi-fr.github.io/rust-guide/standard.html#send-and-sync-traits) [[Rustbook: send and sync]](https://doc.rust-lang.org/nomicon/send-and-sync.html).
 Both traits are _unsafe traits_, i.e., the Rust compiler does not verify in any way that they are implemented correctly. The danger is real: an incorrect implementation may lead to **undefined behavior**.
 
 In the majority of scenarios, manual implementation is unnecessary. In Rust, nearly all primitive types intrinsically implement Send and Sync traits, and for a significant proportion of compound types, the Rust compiler automatically derives these implementations.

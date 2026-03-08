@@ -22,13 +22,27 @@ jobs:
       - name: Link Checker
         id: lychee
         uses: lycheeverse/lychee-action@v1.5.4
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --accept 200,429
+            './*.md'
+            './docs/**/*.md'
+            './creditchain-move/framework/FRAMEWORK-PROVER-GUIDE.md'
+            './creditchain-move/move-examples/**/*.md'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Create Issue From File
         if: env.lychee_exit_code != 0
+        continue-on-error: true
         uses: peter-evans/create-issue-from-file@v4
         with:
           title: Link Checker Report
           content-filepath: ./lychee/out.md
           labels: report, automated issue
+
+      - name: Fail on broken links
+        if: env.lychee_exit_code != 0
+        run: exit "$lychee_exit_code"

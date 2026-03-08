@@ -15,7 +15,7 @@ Once the LBT threshold is met within the liquidity pair, the reserves are moved 
 
 ## This resource contains:
 * (Dispatchable) Fungible Assets.
-* Reusing stored signer vars (w/ [objects](https://docs.creditchain.org/move/move-on-aptos/objects/)).
+* Reusing stored signer vars (w/ [objects](https://aptos.dev/build/smart-contracts/object/using-objects)).
 * External third party dependencies.
 * E2E testing (w/ object deployments, LBT creation).
 * Using `rev` to specify feature branches ([Dispatchable FA](https://github.com/ibankio/creditchain/commit/bbf569abd260d94bc30fe96da297d2aecb193644)).
@@ -104,19 +104,17 @@ libra2 move test --dev
 ```
 
 ## Example testnet deployments
-[Bonding Curve Launchpad](https://explorer.creditchain.org/account/0x0bb954c7dda5fa777cb34d2e35f593ddc4749f1ab260017ee75d1d216a551841/transactions?network=testnet)
-
-[Swap DEX](https://explorer.creditchain.org/account/0xe26bbe169db47aaa32349d253891af42134e1f6b64fef63f60105ec9ab6b240f/transactions?network=testnet?)
-
-[Swap Deployer](https://explorer.creditchain.org/account/0x4d51c99abff19bfb5ca3065f1e71dfc066c38e334def24dbac2b2a38bee8b946?network=testnet)
+- Bonding Curve Launchpad: `0x0bb954c7dda5fa777cb34d2e35f593ddc4749f1ab260017ee75d1d216a551841`
+- Swap DEX: `0xe26bbe169db47aaa32349d253891af42134e1f6b64fef63f60105ec9ab6b240f`
+- Swap Deployer: `0x4d51c99abff19bfb5ca3065f1e71dfc066c38e334def24dbac2b2a38bee8b946`
 
 
 ## How to deploy:
 0. **Note:** Since the `swap` module we're relying on as a third party DEX isn't on-chain, you'll need to first:
-    * Deploy the `swap` module on-chain. Or, if you're on the testnet, you can use the [already-deployed `swap` smart contract](https://explorer.creditchain.org/account/0xe26bbe169db47aaa32349d253891af42134e1f6b64fef63f60105ec9ab6b240f/transactions?network=testnet?).
+    * Deploy the `swap` module on-chain. Or, if you're on the testnet, you can use the already-deployed `swap` smart contract at `0xe26bbe169db47aaa32349d253891af42134e1f6b64fef63f60105ec9ab6b240f`.
     * Rely on a different DEX for the token graduation.
 
-From there, you can follow the [object code deployment](https://preview.libra2.dev/en/build/smart-contracts/learn-move/advanced-guides/object-code-deployment) steps to deploy and set up the smart contract.
+From there, you can follow the [object deployment documentation](https://aptos.dev/build/smart-contracts/object/creating-objects) to deploy and set up the smart contract.
 
 ### Testnet deployment
 Deploy the `bonding_curve_launchpad` to the testnet referencing the already-deployed `swap` smart contract:

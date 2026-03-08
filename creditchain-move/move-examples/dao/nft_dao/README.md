@@ -1,5 +1,5 @@
 # NFT DAO V0 Eng Design Doc
-PR: https://github.com/ibankio/creditchain/pull/5918
+PR: #5918
 
 ## Motivation
 
@@ -86,7 +86,7 @@ create_proposal(
     - arg_names: “dst”, “amount”
     - arg_values: bcs_serialized values, please refer to TS SDK function. You need to provide original values in TS and arg_types to get the serialized values
     
-    [creditchain-core/property_map_serde.ts at main · ibankio/creditchain](https://github.com/ibankio/creditchain/blob/main/ecosystem/typescript/sdk/src/utils/property_map_serde.ts#L48)
+    [property map serde helper](../../../../ecosystem/indexer-processor-sdk/src/utils/property_map.rs)
     
     - arg_types: “address”, “u64”
 

@@ -412,6 +412,24 @@ fn recompute_merge_base_metadata(
     local_dir_path: &String,
     local_metadata_file_path: &String,
 ) -> Option<CargoMetadata> {
+    let current_head = Command::new("git")
+        .arg("rev-parse")
+        .arg("HEAD")
+        .output()
+        .map(parse_string_from_output)
+        .ok();
+    if current_head.as_deref() == Some(merge_base) {
+        debug!(
+            "Merge base matches HEAD, recomputing metadata from the current checkout: {:?}",
+            merge_base
+        );
+        return recompute_metadata_for_directory(
+            &workspace_dir(),
+            merge_base,
+            local_metadata_file_path,
+        );
+    }
+
     // Clone the local repository to the target directory.
     // This avoids network/auth dependencies when recomputing metadata in CI.
     debug!(
@@ -460,6 +478,13 @@ fn recompute_merge_base_metadata(
     );
     let checkout_output = Command::new("git")
         .current_dir(clone_directory.clone())
+        .env("GIT_LFS_SKIP_SMUDGE", "1")
+        .arg("-c")
+        .arg("filter.lfs.smudge=")
+        .arg("-c")
+        .arg("filter.lfs.process=")
+        .arg("-c")
+        .arg("filter.lfs.required=false")
         .arg("checkout")
         .arg(merge_base)
         .output()
@@ -479,37 +504,8 @@ fn recompute_merge_base_metadata(
         return None;
     }
 
-    // Recompute the metadata for the merge base commit
-    let metadata_output = Command::new("cargo")
-        .current_dir(clone_directory.clone())
-        .arg("metadata")
-        .arg("--all-features")
-        .output()
-        .expect("failed to execute cargo metadata");
-    if !metadata_output.status.success() {
-        warn!(
-            "Failed to run cargo metadata on merge base {:?}. stderr: {}",
-            merge_base,
-            String::from_utf8_lossy(&metadata_output.stderr)
-        );
-        if let Err(error) = fs::remove_dir_all(clone_directory.clone()) {
-            warn!(
-                "Error deleting creditchain-core clone directory: {:?}. Error: {:?}",
-                clone_directory, error
-            );
-        }
-        return None;
-    }
-
-    let output = parse_string_from_output(metadata_output);
-
-    // Parse the metadata from the output
-    let cargo_metadata = parse_cargo_metadata(&output);
-
-    // If the metadata was successfully parsed, write it to the local directory
-    if cargo_metadata.is_some() {
-        write_metadata_locally(local_metadata_file_path, output);
-    }
+    let cargo_metadata =
+        recompute_metadata_for_directory(&clone_directory, merge_base, local_metadata_file_path);
 
     // Delete the creditchain-core clone
     debug!(
@@ -524,6 +520,37 @@ fn recompute_merge_base_metadata(
     }
 
     // Return the metadata
+    cargo_metadata
+}
+
+fn recompute_metadata_for_directory(
+    repository_directory: &str,
+    merge_base: &str,
+    local_metadata_file_path: &String,
+) -> Option<CargoMetadata> {
+    let metadata_output = Command::new("cargo")
+        .current_dir(repository_directory)
+        .arg("metadata")
+        .arg("--all-features")
+        .output()
+        .expect("failed to execute cargo metadata");
+    if !metadata_output.status.success() {
+        warn!(
+            "Failed to run cargo metadata in {:?} for merge base {:?}. stderr: {}",
+            repository_directory,
+            merge_base,
+            String::from_utf8_lossy(&metadata_output.stderr)
+        );
+        return None;
+    }
+
+    let output = parse_string_from_output(metadata_output);
+    let cargo_metadata = parse_cargo_metadata(&output);
+
+    if cargo_metadata.is_some() {
+        write_metadata_locally(local_metadata_file_path, output);
+    }
+
     cargo_metadata
 }
 
