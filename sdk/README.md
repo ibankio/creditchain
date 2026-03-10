@@ -1,22 +1,39 @@
-# creditchain-sdk
+# CreditChain Rust SDK
 
-[![creditchain-sdk on crates.io](https://img.shields.io/crates/v/creditchain-sdk)](https://crates.io/crates/creditchain-sdk)
-[![License](https://img.shields.io/badge/license-Apache-green.svg)](https://github.com/ibankio/creditchain/blob/main/LICENSE)
+The `sdk/` workspace contains the Rust SDK for CreditChain. It is the native
+developer surface inside this repository for applications, services, and tools
+that need to read chain state, build transactions, sign payloads, and submit
+operations from Rust.
 
-The official Rust SDK for CreditChain.
+## Scope
 
-## Usage
+Key modules include:
 
-This SDK provides all the necessary components for building on top of the CreditChain Blockchain. Some of the important modules are:
+- `client`: REST client and network access helpers
+- `crypto`: signing and verification primitives
+- `transaction_builder`: helpers for constructing transactions
+- `types`: on-chain data structures and transaction types
+- `examples/`: sample Rust integrations
 
-* `client` - Includes a [REST client](https://github.com/ibankio/creditchain/tree/main/docs) implementation
-* `crypto` - Types used for signing and verifying
-* `transaction_builder` - Includes helpers for constructing transactions
-* `types` - Includes types for CreditChain on-chain data structures
+## Positioning
 
-## Installing Rust SDK
-Please refer to [Rust SDK Doc](https://github.com/ibankio/creditchain/tree/main/docs) for details on how to install the Rust SDK.
+This README documents the Rust SDK that ships inside the main protocol
+repository.
 
-## License
+For JavaScript and TypeScript applications, the official public SDK is
+`creditchain-ts-sdk` in the separate SDK repository. Its public-facing guidance
+is captured in
+[`../docs/08_TYPESCRIPT_SDK_GUIDE.md`](../docs/08_TYPESCRIPT_SDK_GUIDE.md).
 
-CreditChain Core is licensed as [Apache 2.0](https://github.com/ibankio/creditchain/blob/main/LICENSE).
+## Typical Use Cases
+
+- backend services that need direct Rust integration
+- tooling for operators and automation
+- transaction builders, signers, and local network utilities
+- integration tests and performance tooling
+
+## Related Docs
+
+- [`../api/README.md`](../api/README.md)
+- [`../docs/08_TYPESCRIPT_SDK_GUIDE.md`](../docs/08_TYPESCRIPT_SDK_GUIDE.md)
+- [`../README.md`](../README.md)

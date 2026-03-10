@@ -1,11 +1,33 @@
-# CreditChain Dashboard Templates
+# CreditChain Dashboards
 
-The dashboard templates are loaded as ConfigMap in compressed binary format because of the ConfigMap size limit.
+The `dashboards/` directory contains Grafana dashboards used to operate
+CreditChain infrastructure. These dashboards support validator operators,
+fullnode operators, SRE teams, and explorer support workflows.
 
-To update the dashboard template, you should update the content of the `.json` file and then gzip them into the binary file: `gzip -fkn *.json`
+## Contents
 
-Symlink this directory to anywhere you need dashboards.
+- dashboard JSON source files
+- gzipped binary variants used when packaging dashboards into Kubernetes
+  ConfigMaps
 
-## Updating dashboards
+## Update Workflow
 
-This directory is automatically synced with the CreditChain Labs central Grafana service. A Github Action will periodically scan that Grafana and create a PR to update the dashboards in this repository.
+Edit the `.json` source files, then regenerate the compressed artifacts:
+
+```bash
+cd dashboards
+gzip -fkn *.json
+```
+
+## Deployment Notes
+
+- These files are intended to be mounted or synced into Grafana deployments.
+- Compressed variants are used to stay within ConfigMap size limits.
+- Dashboard changes should track major node, API, indexer, or Creditscan
+  operational changes.
+
+## Related Docs
+
+- [`../docs/05_DEPLOYMENT_AND_OPERATIONS.md`](../docs/05_DEPLOYMENT_AND_OPERATIONS.md)
+- [`../api/README.md`](../api/README.md)
+- [`../storage/README.md`](../storage/README.md)

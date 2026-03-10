@@ -1,33 +1,56 @@
-# CreditChain Node API
+# CreditChain API
 
-This module provides a REST API for client applications to query the CreditChain blockchain.
+The `api/` workspace exposes the public data plane for CreditChain nodes. It is
+the primary interface used by wallets, services, Creditscan, and SDK clients to
+read chain state, submit transactions, and inspect network health.
 
-See spec source:
-- [YAML in doc/spec.yaml](doc/spec.yaml).
-- [JSON in doc/spec.json](doc/spec.json).
-- [HTML in doc/spec.html](doc/spec.html).
+## What Lives Here
 
-## Regenerating docs / code based on API changes
-With our API setup, the spec files (`api/doc/spec.yaml` / `api/doc/spec.json`) are generated from the API in code. We have CI that ensures that all of these are updated together. As such, if you want to make a change to the API, do it in this order.
+- `src/`: REST handlers, routing, and request/response logic
+- `types/`: shared API-facing data structures
+- `doc/`: generated OpenAPI spec artifacts and rendered documentation
+- `openapi-spec-generator/`: tooling used to generate the canonical spec files
 
-![API + spec + TS SDK generation diagram](doc/api_spec_ts_sdk_diagram.png)
+## Responsibilities
 
-This process updates the docs at:
-- https://fullnode.devnet.creditchain.org/v1/spec#/ (and testnet / mainnet, based on the API rollout schedule)
+- expose the `/v1` REST surface for accounts, transactions, events, tables, and metadata
+- publish health and readiness endpoints for operators
+- generate the OpenAPI contract used by docs and downstream client tooling
+- provide a stable public interface for Creditscan and external integrations
 
-All commands here are relative to the root of `creditchain`.
+Creditscan uses the node REST API for basic chain views such as ledger metadata,
+blocks, transactions, and account-level reads. Richer historical and analytics
+views still require the indexer stack described in
+[`docs/07_CREDITSCAN_BROWSER_GUIDE.md`](../docs/07_CREDITSCAN_BROWSER_GUIDE.md).
 
-1. Make your changes to the API code, i.e. the code in `api/src/`.
-2. Regenerate the API spec `.yaml` and `.json` files by running these commands from the root of `creditchain`:
-```
+## Change Workflow
+
+If the API changes, update the implementation first and then regenerate the
+specification files from the repository root:
+
+```bash
 cargo run -p creditchain-openapi-spec-generator -- -f yaml -o api/doc/spec.yaml
 cargo run -p creditchain-openapi-spec-generator -- -f json -o api/doc/spec.json
 ```
 
-### Sanity checks
-Double check that the spec looks good by running these commands and then visit http://127.0.0.1:8888/spec.html.
-```
-cd api/
+To preview the rendered spec locally:
+
+```bash
+cd api
 make serve
 ```
 
+Then open `http://127.0.0.1:8888/spec.html`.
+
+## Production Notes
+
+- Public REST traffic should terminate on fullnodes, not directly on validators.
+- API versioning must stay aligned with SDK and explorer release expectations.
+- Breaking response changes should be reflected in docs and communicated with the
+  Creditscan and `creditchain-ts-sdk` maintainers.
+
+## Related Docs
+
+- [`../docs/01_CREDITCHAIN_ARCHITECTURE.md`](../docs/01_CREDITCHAIN_ARCHITECTURE.md)
+- [`../docs/05_DEPLOYMENT_AND_OPERATIONS.md`](../docs/05_DEPLOYMENT_AND_OPERATIONS.md)
+- [`../docs/07_CREDITSCAN_BROWSER_GUIDE.md`](../docs/07_CREDITSCAN_BROWSER_GUIDE.md)

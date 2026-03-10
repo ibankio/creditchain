@@ -1,19 +1,42 @@
-# Testsuites
+# CreditChain Testsuite
 
-This directory contains a mix of test utilities written in both Python and Rust
-* Forge - a unified cluster-testing framework for orchestrating both local swarm and large-scale kubernetes based CreditChain workloads
-* Forge Wrapper - a set of Python utilities to schedule and manage Forge jobs on supported kubernetes clusters
-* Testcases - Forge test cases
-* Verify - Python utilities used to invoke replay-verify and module-verify workflows
+The `testsuite/` workspace contains the main integration, resilience, replay,
+and performance testing harnesses for CreditChain.
 
-## Debugging
-If you run into an issue like this:
-```
+## Directory Map
+
+- `forge/`: cluster orchestration and end-to-end network testing
+- `forge-cli/`: CLI entrypoints for Forge workflows
+- `smoke-test/`: high-signal regression coverage for common node flows
+- `loadtest-k6/`: load generation and performance scenarios
+- `fuzzer/`: fuzzing entrypoints
+- `replay-verify/`: historical replay verification utilities
+- `benchmark-workloads/`: reusable benchmark definitions
+- `test_framework/`, `testcases/`, `verify_core/`: shared test logic and suites
+
+## What This Covers
+
+- local devnet validation
+- large-scale cluster testing
+- performance and throughput measurement
+- regression testing for protocol, API, and operational changes
+- replay-based confidence checks for ledger correctness
+
+## Practical Notes
+
+If Docker tooling fails on Apple Silicon with an error like:
+
+```text
 no match for platform in manifest: not found
 ```
 
-It is likely because you're on an ARM machine. Try running your command with `DOCKER_DEFAULT_PLATFORM=linux/amd64`, e.g.
-```
-DOCKER_DEFAULT_PLATFORM=linux/amd64 poetry run python indexer_grpc_local.py start
+run the affected workflow with:
+
+```bash
+DOCKER_DEFAULT_PLATFORM=linux/amd64 ...
 ```
 
+## Related Docs
+
+- [`../docs/05_DEPLOYMENT_AND_OPERATIONS.md`](../docs/05_DEPLOYMENT_AND_OPERATIONS.md)
+- [`../docs/07_CREDITSCAN_BROWSER_GUIDE.md`](../docs/07_CREDITSCAN_BROWSER_GUIDE.md)
